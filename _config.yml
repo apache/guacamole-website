@@ -11,7 +11,7 @@ collections:
     # All Apache Guacamole releases
     releases:
         output: true
-        permalink: /release/release-notes-:title
+        permalink: /releases/:title/
 
     # Pseudo-pages describing direct links to other pages (possibly external)
     links:
