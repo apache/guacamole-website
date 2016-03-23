@@ -25,7 +25,8 @@ Unless you already know that you need a *very* specific version (your custom or 
         <th>Summary</th>
         <th>Release Date</th>
     </tr>
-    {% for release in site.releases %}
+    {% assign releases = site.releases | sort: 'date' %}
+    {% for release in releases reversed %}
         {% if release.title %}
             <tr>
                 <td><a href="{{ release.url | prepend: site.baseurl }}">{{ release.title }}</a></td>
