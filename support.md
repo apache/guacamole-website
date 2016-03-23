@@ -2,6 +2,9 @@
 layout: page 
 title: Help / Support
 permalink: /support/
+
+menu-title:  Help / Support
+menu-weight: 5
 ---
 
 If you need (or wish to provide) help with Guacamole, there are [forums](https://sourceforge.net/p/guacamole/discussion/) on the [SourceForge project page](http://sourceforge.net/projects/guacamole/). You will need to register a username with SourceForge to use the forums. There is also an IRC channel on freenode.net dedicated to Guacamole support: #guacamole-help.

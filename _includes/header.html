@@ -5,9 +5,13 @@
     <h1><a href="/">Guacamole</a></h1>
     <div id="navigation">
         <ul class="menu">
-            {% for page in site.pages %}
-                {% if page.title %}
-                    <li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+            {% assign menu_pages = site.pages | sort: 'menu-weight') %}
+            {% for page in menu_pages %}
+                {% if page.menu-title %}
+                    <li><a href="{{ page.url | prepend: site.baseurl }}"
+                        {% if page.menu-class %}
+                            class="{{ page.menu-class }}"
+                        {% endif %}>{{ page.menu-title }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
