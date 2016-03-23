@@ -460,7 +460,7 @@ div#links .view-content {
     padding: 1em;
 }
 
-.view-releases table {
+table.releases {
     background: #FFFFFA;
     border-collapse: collapse;
     border: 1px solid rgba(0, 0, 0, 0.5);
@@ -470,7 +470,7 @@ div#links .view-content {
     margin-bottom: 4em;
 }
 
-.view-releases table th {
+table.releases th {
     margin: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -484,11 +484,11 @@ div#links .view-content {
     opacity: 0.5;
 }
 
-.view-releases table tr.odd {
+table.releases tr:nth-child(even) {
     background: rgba(0, 0, 0, 0.1);
 }
 
-.view-releases table td {
+table.releases td {
     margin: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;

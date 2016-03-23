@@ -15,4 +15,20 @@ Which version should I download?
 
 Unless you already know that you need a *very* specific version (your custom or third-party extensions use an older version of the Guacamole API, for example), **you should always download the most recent release**. Guacamole development is very active, and recent releases will contain bug fixes and performance improvements that will be absent in older releases.
 
+<table class="releases">
+    <tr>
+        <th>Version</th>
+        <th>Summary</th>
+        <th>Release Date</th>
+    </tr>
+    {% for release in site.releases %}
+        {% if release.title %}
+            <tr>
+                <td><a href="{{ release.url | prepend: site.baseurl }}">{{ release.title }}</a></td>
+                <td>{{ release.summary }}</td>
+                <td>{{ release.date | date: "%Y-%m-%d" }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
 

@@ -5,3 +5,18 @@ title: Apache Guacamole
 # Build settings
 markdown: kramdown
 
+# Custom collections
+collections:
+
+    # All Apache Guacamole releases
+    releases:
+        output: true
+        permalink: /release/release-notes-:title
+
+# Site-wide defaults
+defaults:
+
+    # All releases should use the "release" layout
+    - scope:  { type: releases }
+      values: { layout: release }
+
