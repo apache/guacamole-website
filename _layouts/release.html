@@ -3,6 +3,30 @@ layout: default
 permalink: /release/release-notes-:title
 ---
 
+<div id="links">
+
+    <!-- Compatible extensions -->
+    {% include link-list.html
+        title="Compatible extensions"
+        entries=page.extensions %}
+
+    <!-- Binary .war -->
+    {% include link-list.html
+        title="Web application (.war)"
+        entries=page.binary-war %}
+
+    <!-- Source archives -->
+    {% include link-list.html
+        title="Source"
+        entries=page.source-archives %}
+
+    <!-- Documentation -->
+    {% include link-list.html
+        title="Release documentation"
+        entries=page.documentation %}
+
+</div>
+
 <h1>Guacamole {{ page.title }}</h1>
 
 {{ content }}

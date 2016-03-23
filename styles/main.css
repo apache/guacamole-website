@@ -456,8 +456,10 @@ div#links h2 {
     opacity: 0.5;
 }
 
-div#links .view-content {
+div#links ul {
+    margin: 0;
     padding: 1em;
+    list-style: none;
 }
 
 table.releases {

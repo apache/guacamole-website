@@ -1,0 +1,10 @@
+{% if include.entries != empty %}
+    {% if include.title %}
+        <h2>{{ include.title }}</h2>
+    {% endif %}
+    <ul>
+        {% for entry in include.entries %}
+            <li><a href="{{ entry[1] | prepend: site.baseurl }}">{{ entry[0] }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
