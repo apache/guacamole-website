@@ -1,0 +1,877 @@
+body {
+
+    color: black;
+    background: white;
+
+    font-family: 'FreeSans', 'Liberation Sans', 'Arial', 'Helvetica', sans-serif;
+    text-rendering: optimizeLegibility;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+/* Green links */
+a[href]         { color: #080; }
+a[href]:visited { color: #884; }
+
+div#header {
+    color: black;
+    background: rgb(139, 168, 116);
+}
+
+
+div#header, div#footer {
+    text-align: center;
+}
+
+div#header > * {
+    vertical-align: middle;
+}
+
+#header h1 {
+    display: inline-block;
+    text-align: left;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin: 0.25em 0;
+}
+
+#header h1 a[href] {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#header div.logo {
+    display: inline-block;
+}
+
+#header .logo img {
+    max-height: 3em;
+    margin: 0.5em;
+}
+
+.hook {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.hook {
+    text-align: center;
+}
+
+.hook > * {
+    margin: 2em;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.hook img {
+    max-width: 50%;
+    width: 7cm;
+}
+
+div#page {
+    background: white;
+    color: black;
+}
+
+div#content {
+
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 32cm;
+    padding: 1em;
+
+}
+
+.latest {
+    font-weight: bold;
+}
+
+.irc {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.book-title {
+    font-style: italic;
+}
+
+.promotion #book-pic {
+    margin: 0.5em;
+    text-align: center;
+}
+
+img.book-pic {
+
+    box-shadow: 0.25em 0.25em 0.5em rgba(0, 0, 0, 0.5);
+    max-width: 1in;
+    float: right;
+    margin: 1em;
+
+    padding-right: 0.03in;
+    background: url('/images/book-pages.png');
+}
+
+h2 {
+    font-size: 1.75em;
+    font-weight: lighter;
+    margin-top: 2em;
+}
+
+table.downloads {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.downloads th,
+table.downloads td {
+    border: 1px solid silver;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+div#navigation {
+    text-align: center;
+    font-size: 0.9em;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#navigation ul {
+    padding: 0;
+    margin: 0;
+}
+
+#navigation li a[href="#download"] {
+    font-weight: bold;
+}
+
+#navigation li {
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    white-space: nowrap;
+}
+
+#navigation a[href] {
+    color: black;
+    text-shadow: rgba(255, 255, 255, 0.8) 1px 1px;
+    text-decoration: none;
+}
+
+#navigation li a {
+    display: inline-block;
+    padding: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+#navigation li a:hover {
+    color: black;
+    background-color: white;
+    text-decoration: underline;
+}
+
+#navigation a.download,
+#navigation a.github,
+#navigation a.sponsors {
+    padding-left: 2em;
+    font-weight: bold;
+
+    -moz-background-position: 0.5em center;
+    -webkit-background-position: 0.5em center;
+    background-position: 0.5em center;
+    -moz-background-size: 1em;
+    -webkit-background-size: 1em;
+    background-size: 1em;
+    background-repeat: no-repeat;
+}
+
+#navigation a.download {
+    background-image: url('/images/guac-download.png');
+}
+
+#navigation a.github {
+    background-image: url('/images/github-mark.png');
+}
+
+#navigation a.sponsors {
+    background-image: url('/images/guac-sponsors.png');
+}
+
+.main {
+    text-align: center;
+}
+
+.main > * {
+    text-align: left;
+    vertical-align: top;
+}
+
+.section {
+    padding: 1.5cm 2.5cm;
+    background-repeat: no-repeat;
+}
+
+.section h2 {
+    margin: 1em 0;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.section h2 ~ h2 {
+    margin-top: 1.5cm;
+}
+
+.section.guac-description {
+
+    position: relative;
+    padding-right: 8.5cm;
+    border-right: 2.5cm solid transparent;
+
+    -moz-background-position:    right center;
+    -webkit-background-position: right center;
+    background-position:         right center;
+
+    min-height: 8.5cm;
+    -moz-background-size:    6cm;
+    -webkit-background-size: 6cm;
+    background-size:         6cm;
+
+    background-image: url('/images/html5-color.png');
+
+}
+
+.section.guac-description .attribution {
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+
+    width: 6cm;
+    margin-top: 3cm;
+    padding-top: 1em;
+
+    text-align: center;
+    font-size: 0.75em;
+    font-style: italic;
+
+}
+
+
+.section.support {
+
+    padding-top: 0;
+    padding-left: 13.5cm;
+    margin-bottom: -3em;
+
+    -moz-background-position:    3cm bottom;
+    -webkit-background-position: 3cm bottom;
+    background-position:         3cm bottom;
+
+    min-height: 5cm;
+    -moz-background-size:    7.5cm;
+    -webkit-background-size: 7.5cm;
+    background-size:         7.5cm;
+
+    background-image: url('/images/official-glyptodon-logo.png');
+
+}
+
+p {
+    line-height: 1.5;
+    text-align: justify;
+}
+
+div#footer {
+    text-align: center;
+    background: black;
+    color: white;
+    font-size: 0.9em;
+    padding-top: 1em;
+    margin-top: 2em;
+}
+
+#footer .block-menu {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    width: 6cm;
+    max-width: 30%;
+    padding: 0.5cm;
+}
+
+#footer .block-menu h2 {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+#footer .block-menu {
+    display: inline-block;
+}
+
+#footer .copyright {
+    margin: 0;
+    opacity: 0.8;
+    font-style: italic;
+    text-align: right;
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+
+#footer a[href] {
+    text-decoration: none;
+    color: white;
+}
+
+#footer ul {
+    text-align: left;
+    min-width: 10%;
+    padding: 0;
+}
+
+#footer li {
+    list-style-type: none;
+}
+
+#footer img.glyptodon {
+    max-height: 1em;
+    vertical-align: baseline;
+}
+
+.social-buttons {
+    padding: 0.5em;
+    text-align: right;
+}
+
+.social-button {
+    display: inline-block;
+    margin: 0.25em;
+    vertical-align: top;
+}
+
+.download-panel {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.download-panel a[href] {
+    text-decoration: none;
+}
+
+div.button {
+
+    display: inline-block;
+    margin: 1em;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+    font-size: 1.25em;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: inset  1px  1px 0 rgba(255, 255, 255, 0.25),
+                inset -1px -1px 0 rgba(0,   0,   0,   0.25);
+    -moz-box-shadow: inset  1px  1px 0 rgba(255, 255, 255, 0.25),
+                     inset -1px -1px 0 rgba(0,   0,   0,   0.25);
+    -webkit-box-shadow: inset  1px  1px 0 rgba(255, 255, 255, 0.25),
+                        inset -1px -1px 0 rgba(0,   0,   0,   0.25);
+    height: 32px;
+    padding: 10px;
+    color: white;
+
+}
+
+div.button > * {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.download-panel {
+    display: inline-block;
+}
+
+.download-panel .button {
+    display: block;
+}
+
+div.button .title {
+    line-height: 32px;
+    margin-left: 42px;
+}
+
+/* Demo video */
+.demo {
+    display: inline-block;
+    position: relative;
+    width: 15cm;
+    max-width: 80%;
+    border: 1px solid black;
+}
+
+.demo img.thumbnail {
+    width: 600px;
+    max-width: 100%;
+}
+
+.demo iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div#links {
+    float: right;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: #FFFFFA;
+    margin-left: 2em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+div#links h2 {
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1em;
+    font-style: oblique;
+    background: black;
+    color: white;
+    opacity: 0.5;
+}
+
+div#links .view-content {
+    padding: 1em;
+}
+
+.view-releases table {
+    background: #FFFFFA;
+    border-collapse: collapse;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4em;
+    margin-bottom: 4em;
+}
+
+.view-releases table th {
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1em;
+    font-weight: normal;
+    font-style: oblique;
+    background: black;
+    color: white;
+    opacity: 0.5;
+}
+
+.view-releases table tr.odd {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.view-releases table td {
+    margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.not-found {
+
+    min-height: 500px;
+    text-align: center;
+    text-shadow: 1px 1px white;
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.not-found .error-icon, .not-found .error-description {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.not-found .error-description {
+    text-align: left;
+    max-width: 50%;
+    width: 800px;
+    margin-left: 1em;
+}
+
+.not-found .error-icon {
+    max-width: 30%;
+    width: 250px;
+}
+
+.not-found .error-icon img {
+    width: 100%;
+}
+
+.not-found .error-description h2 {
+    margin-top: 0;
+}
+
+/* Drupal system management */
+
+#user-login {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    background: #FFD;
+    width: 10cm;
+    max-width: 100%;
+    text-align: left;
+    font-size: 0.8em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user-login label {
+    font-weight: bold;
+}
+
+#user-login input[type='text'],
+#user-login input[type='password'] {
+    width: 100%;
+}
+
+#user-login .form-item,
+#user-login .form-actions {
+    margin: 1em;
+}
+
+#user-login .description {
+    font-style: italic;
+}
+
+.profile {
+    max-width: 100%;
+    margin: 0 auto;
+    font-size: 0.8em;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: #EFE;
+    padding: 1em;
+    border-radius: 3px;
+    width: 16cm;
+}
+
+/*
+ * Sponsors
+ */
+
+.sponsored-by {
+    background: white;
+    color: black;
+    padding: 1em;
+}
+
+.sponsored-by h2 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.sponsor {
+    display: inline-block;
+    margin: 1em;
+}
+
+.sponsor .logo {
+    padding: 1em;
+    display: inline-block;
+}
+
+.platinum .sponsor .logo,
+.gold .sponsor .logo,
+.silver .sponsor .logo,
+.bronze .sponsor .logo {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.platinum .sponsor {
+    display: table;
+}
+
+.platinum .sponsor .sponsor-section {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 1em;
+}
+
+.sponsored-by .sponsor .logo img,
+.platinum .sponsor .logo img,
+.gold .sponsor .logo img {
+    max-width:  256px;
+    max-height: 192px;
+}
+
+.silver .sponsor .logo img {
+    max-width:  160px;
+    max-height: 120px;
+}
+
+.bronze .sponsor .logo img {
+    max-width:  100px;
+    max-height: 75px;
+}
+
+.sponsor-page .sponsor-profile {
+    float: right;
+    margin: 2em;
+}
+
+.sponsor-page .sponsor-profile img {
+    max-width: 320px;
+    width: 100%;
+}
+
+table.benefits {
+    border-collapse: collapse;
+    margin: 2em auto;
+}
+
+table.benefits th,
+table.benefits td {
+    margin: 0;
+    padding: 1em;
+}
+
+table.benefits tbody td {
+    border: 1px solid #CCC;
+    text-align: center;
+}
+
+table.benefits th .level {
+    font-weight: bold;
+}
+
+table.benefits th .description{
+    font-weight: normal;
+}
+
+table.benefits tbody tr:nth-child(even) {
+    background: #F5F5F5;
+}
+
+table.benefits tbody th,
+table.benefits tbody th p {
+    text-align: left;
+    font-weight: normal;
+}
+
+table.benefits thead td,
+table.benefits thead th,
+table.benefits thead td p,
+table.benefits thead th p {
+    text-align: center;
+}
+
+table.benefits p {
+    margin: 0;
+}
+
+/* Donation section */
+
+form.standalone {
+    display: block;
+    margin: 2em;
+    text-align: center;
+}
+
+#donate {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: center;
+    padding: 1em;
+    background: #FFFAE2;
+    margin-top: 2em;
+    position: relative;
+    padding-left: 10em;
+}
+
+#donate::after {
+    content: ' ';
+    display: block;
+    width: 10em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/images/guac-sponsors.png');
+    background-repeat: no-repeat;
+    -webkit-background-size: 50%;
+       -moz-background-size: 50%;
+            background-size: 50%;
+    -webkit-background-position: center;
+       -moz-background-position: center;
+            background-position: center;
+    opacity: 0.25;
+}
+
+#donate h2 {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+input.donate {
+
+    display: inline-block;
+    padding: 0.5em 1em;
+
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 0.25em;
+
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+                inset -1px -1px 1px rgba(0, 0, 0, 0.125);
+
+    background: rgb(84, 140, 226);
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
+    background-image:    -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
+    background-image:         linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
+    background-repeat: repeat, no-repeat;
+    -webkit-background-position: 0%, 0.55em center;
+       -moz-background-position: 0%, 0.55em center;
+            background-position: 0%, 0.55em center;
+    -webkit-background-size: auto, 1.1em;
+       -moz-background-size: auto, 1.1em;
+            background-size: auto, 1.1em;
+
+    position: relative;
+    padding-left: 2em;
+
+}
+
+/* Quote button */
+
+#contact-us {
+    text-align: center;
+}
+
+#contact-us a {
+
+    display: inline-block;
+    padding: 0.5em 1em;
+
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 0.25em;
+
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
+                inset -1px -1px 1px rgba(0, 0, 0, 0.125);
+
+    background: rgb(84, 140, 226);
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
+    background-image:    -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
+    background-image:         linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
+    background-repeat: repeat, no-repeat;
+    -webkit-background-position: 0%, 0.55em center;
+       -moz-background-position: 0%, 0.55em center;
+            background-position: 0%, 0.55em center;
+    -webkit-background-size: auto, 1.1em;
+       -moz-background-size: auto, 1.1em;
+            background-size: auto, 1.1em;
+
+    position: relative;
+    padding-left: 2em;
+
+}
+
+/* Style appropriately for printing */
+@media print {
+
+    div#header {
+        background: inherit;
+    }
+
+    #navigation, #footer, .social-buttons, .hook{
+        display: none;
+    }
+
+    .section   {
+        display: block;
+        max-width: none;
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        margin-top: 1em;
+        margin-bottom: 0.75em;
+        text-decoration: underline;
+    }
+
+    #donate, #links {
+        display: none;
+    }
+
+}
+
+/* Expand sections when screen too small */
+@media screen and (max-width: 30cm) {
+    #footer .block-menu { max-width: 100%; width: 4cm; }
+}
+
+@media screen and (max-width: 18cm) {
+    div#footer { padding-top: 0; }
+    #footer .block-menu { display: none; }
+    .not-found .error-icon { float: right; }
+    .not-found .error-description { max-width: 80%; display: block; }
+    #donate { padding-left: 1em; }
+    #donate::after { display: none; }
+}
+
+@media screen and (max-width: 25cm) {
+
+    .section.guac-description {
+        padding: 1em;
+        border: none;
+        background: none;
+        min-height: 0;
+    }
+
+    .section.guac-description .attribution {
+        display: none;
+    }
+
+    .section.support {
+        padding: 1em;
+        padding-bottom: 5cm;
+        -moz-background-position:    center bottom;
+        -webkit-background-position: center bottom;
+        background-position:         center bottom;
+        border: none;
+    }
+
+}
+
