@@ -2,6 +2,9 @@
 layout: page 
 title: Open Source
 permalink: /open-source/
+
+menu-title:  Contributing
+menu-weight: 6
 ---
 
 Guacamole is an open source project. It is entirely free in every sense (under the [MIT license](http://opensource.org/licenses/MIT)), and will always be so. It is supported by [Glyptodon LLC](http://glyptodon.org/), the company that formed out of Guacamole's creation, through donations to the project from the community, and by corporate sponsors that fund changes for the benefit of the community.

@@ -13,6 +13,10 @@ collections:
         output: true
         permalink: /release/release-notes-:title
 
+    # Pseudo-pages describing direct links to other pages (possibly external)
+    links:
+        output: false
+
 # Site-wide defaults
 defaults:
 
