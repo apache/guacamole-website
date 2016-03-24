@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 3. Configuring Guacamole</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="installing-guacamole.html" title="Chapter 2. Installing Guacamole" /><link rel="next" href="mysql-auth.html" title="Chapter 4. MySQL authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Configuring Guacamole</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="installing-guacamole.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="mysql-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" title="Chapter 3. Configuring Guacamole" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="configuring-guacamole"></a>Chapter 3. Configuring Guacamole</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="configuring-guacamole.html#guacamole-home"><code class="varname">GUACAMOLE_HOME</code></a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#initial-setup"><code class="filename">guacamole.properties</code></a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#idp410128">Should I use WebSocket?</a></span></dt></dl></dd><dt><span class="section"><a href="configuring-guacamole.html#basic-auth">Using the default authentication</a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#user-mapping"><code class="filename">user-mapping.xml</code></a></span></dt></dl></dd><dt><span class="section"><a href="configuring-guacamole.html#vnc">VNC</a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#adding-vnc">Adding a VNC connection</a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#idp526544">Which VNC server?</a></span></dt></dl></dd><dt><span class="section"><a href="configuring-guacamole.html#rdp">RDP</a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#idp558320">Adding an RDP connection</a></span></dt></dl></dd><dt><span class="section"><a href="configuring-guacamole.html#ssh">SSH</a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#idp720816">Adding an SSH connection</a></span></dt></dl></dd></dl></div>
+
+    
+    <p>After installing Guacamole, it will be minimally configured to use the default
+        authentication, which reads all users and connections from a single, monolithic
+            <code class="filename">user-mapping.xml</code> file. You can modify this configuration if you
+        need to use a different authentication module (such as the MySQL authentication, which is
+        discussed in a separate chapter) or if you need to veer from the defaults.</p>
+    <p>Guacamole's configuration consists of two main pieces: a directory
+        referred to as <code class="varname">GUACAMOLE_HOME</code>, which is the primary
+        search location for configuration files, and
+            <code class="filename">guacamole.properties</code>, the main configuration
+        file used by Guacamole and its extensions.</p>
+    <div class="section" title="GUACAMOLE_HOME"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="guacamole-home"></a><code class="varname">GUACAMOLE_HOME</code></h2></div></div></div>
+        
+        <a id="idp366528" class="indexterm"></a>
+        <p>Guacamole reads files from its own configuration directory by default, resorting to
+            the classpath only when this directory cannot be found. When locating this directory,
+            Guacamole will try, in order:</p>
+        <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+                <p>The directory specified within the system property
+                        <span class="property">guacamole.home</span>.</p>
+            </li><li class="listitem">
+                <p>The directory specified within the environment variable
+                        <code class="varname">GUACAMOLE_HOME</code>.</p>
+            </li><li class="listitem">
+                <p>The directory <code class="filename">.guacamole</code>, located
+                    within the home directory of the user running the servlet
+                    container.</p>
+            </li></ol></div>
+        <p>This directory will be referred to as
+                <code class="varname">GUACAMOLE_HOME</code> elsewhere in the
+            documentation.</p>
+        <p>Guacamole uses <code class="varname">GUACAMOLE_HOME</code> as the primary
+            search location for configuration file like
+                <code class="filename">guacamole.properties</code>.</p>
+    </div>
+
+    <div class="section" title="guacamole.properties"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="initial-setup"></a><code class="filename">guacamole.properties</code></h2></div></div></div>
+        
+        <a id="idp375776" class="indexterm"></a>
+        <a id="idp376672" class="indexterm"></a>
+        <p>The Guacamole web application uses one main configuration file called
+                <code class="filename">guacamole.properties</code>. This file is the common location for all
+            configuration properties read by Guacamole or any extension of Guacamole, including
+            authentication providers.</p>
+        <p>In previous releases, this file had to be in the classpath of your servlet container.
+            Now, the location of <code class="filename">guacamole.properties</code> can be explicitly defined
+            with environment variables or system properties, and the classpath is only used as a
+            last resort. When searching for <code class="filename">guacamole.properties</code>, Guacamole
+            will check, in order:</p>
+        <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+                <p>Within <code class="varname">GUACAMOLE_HOME</code>, as defined above.</p>
+            </li><li class="listitem">
+                <p>The classpath of the servlet container.</p>
+            </li></ol></div>
+        <p>At the bare minimum, the <code class="filename">guacamole.properties</code> file provides five
+            basic properties: </p>
+        <div class="variablelist"><dl><dt><span class="term"><a id="idp383856" class="indexterm"></a><em class="parameter"><code>guacd-host</code></em></span></dt><dd>
+                    <p>The host the Guacamole proxy daemon (<span class="package">guacd</span>) is
+                        listening on. This is most likely localhost. </p>
+                </dd><dt><span class="term"><a id="idp386544" class="indexterm"></a><em class="parameter"><code>guacd-port</code></em></span></dt><dd>
+                    <p>The port the Guacamole proxy daemon (<span class="package">guacd</span>) is
+                        listening on. This is port 4822 by default. </p>
+                </dd><dt><span class="term"><a id="idp389328" class="indexterm"></a><em class="parameter"><code>guacd-ssl</code></em></span></dt><dd>
+                    <p>If set to "true", requires SSL/TLS encryption between the web application
+                        and guacd. This property is not required. By default, communication between
+                        the web application and guacd will be unencrypted.</p>
+                    <p>Note that if you enable this option, you must also configure guacd to use
+                        SSL via command line options. These options are documented in the manpage of
+                        guacd. You will need an SSL certificate and private key.</p>
+                </dd><dt><span class="term"><a id="idp392656" class="indexterm"></a><em class="parameter"><code>auth-provider</code></em></span></dt><dd>
+                    <p>The authentication provider to use when authenticating. Normally, this
+                        will be set to <code class="classname">BasicFileAuthenticationProvider</code> which
+                        is the default authentication provider provided with Guacamole. </p>
+                </dd><dt><span class="term"><a id="idp396048" class="indexterm"></a><em class="parameter"><code>lib-directory</code></em></span></dt><dd>
+                    <p>The directory to load extensions to Guacamole from. If you wish to use a
+                        custom authentication provider or custom hooks, the
+                            <code class="filename">.jar</code> file and all dependencies must be placed in
+                        the directory specified here. </p>
+                </dd><dt><span class="term"><a id="idp399040" class="indexterm"></a><em class="parameter"><code>event-listeners</code></em></span></dt><dd>
+                    <p>A comma-delimited list of event listeners which should be loaded and
+                        installed such that they are informed of Guacamole-related events. These
+                        classes must be in the classpath, preferably by having their corresponding
+                            <code class="filename">.jar</code> files placed within the directory specified by
+                        the <span class="property">lib-directory</span> property.</p>
+                </dd><dt><span class="term"><a id="idp402944" class="indexterm"></a><a id="idp403728" class="indexterm"></a><em class="parameter"><code>enable-websocket</code></em></span></dt><dd>
+                    <p><code class="constant">true</code> if WebSocket support should be enabled,
+                            <code class="constant">false</code> (or simply leave the property out)
+                        otherwise.</p>
+                    <p>WebSocket is supported in Guacamole for Tomcat 7 and Jetty 8. Note that if
+                        Tomcat is used, it must be version 7.0.37 or newer. Older versions of Tomcat
+                        are only supported for HTTP. Guacamole does not yet support Tomcat 8 for
+                        WebSocket.</p>
+                </dd></dl></div>
+        <div class="example"><a id="idp407664"></a><p class="title"><strong>Example 3.1. Minimal <code class="filename">guacamole.properties</code></strong></p><div class="example-contents">
+            
+            <a id="guacamole.properties"></a><pre xml:lang="en" class="programlisting" lang="en"># Hostname and port of guacamole proxy
+guacd-hostname: localhost
+guacd-port:     4822
+
+# Location to read extra .jar's from
+lib-directory:  /var/lib/guacamole/classpath
+
+# Authentication provider class
+auth-provider: net.sourceforge.guacamole.net.basic.BasicFileAuthenticationProvider
+
+# Properties used by BasicFileAuthenticationProvider
+basic-user-mapping: /etc/guacamole/user-mapping.xml</pre>
+        </div></div><br class="example-break" />
+        <div class="section" title="Should I use WebSocket?"><div class="titlepage"><div><div><h3 class="title"><a id="idp410128"></a>Should I use WebSocket?</h3></div></div></div>
+            
+            <a id="idp408688" class="indexterm"></a>
+            <p>Yes, if you can.</p>
+            <p>WebSocket has performance benefits and a much lower overhead on the client, so
+                enabling WebSocket is beneficial if you know your servlet container supports it. In
+                the event that Guacamole cannot connect using WebSocket, it will immediately and
+                transparently fall back to using HTTP. If things are regularly not working as
+                expected, and you suspect it's the WebSocket support, you can always disable it by
+                editing <code class="filename">guacamole.properties</code>.</p>
+            <p>When eventually WebSocket is widely supported across servlet containers and
+                network hardware, it will likely be enabled by default.</p>
+        </div>
+    </div>
+    <div class="section" title="Using the default authentication"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="basic-auth"></a>Using the default authentication</h2></div></div></div>
+        
+        <a id="idp415120" class="indexterm"></a>
+        <p>Guacamole's default authentication module is simple and consists
+            of a mapping of usernames to configurations. This authentication
+            module comes with Guacamole and simply reads usernames and passwords
+            from an XML file. If you wish to use this authentication mechanism,
+            you must ensure the <span class="property">auth-provider</span> property is
+            set to the fully-qualified name of
+                <code class="classname">BasicFileAuthenticationProvider</code><sup>[<a id="idp417472" href="#ftn.idp417472" class="footnote">1</a>]</sup>This is the case within the example
+                <code class="filename">guacamole.properties</code> file shown above, and
+            in the <code class="filename">guacamole.properties</code> file included with
+            Guacamole. Unless you have already tried another authentication
+            module, you will not need to edit this value yourself if you are
+            using the configuration files that come with Guacamole.</p>
+        <p>There are other authentication modules available. The Guacamole
+            project now provides a MySQL-backed authentication module with extra
+            features (like the ability to manage connections and users from the
+            web interface), and other authentication modules can be created
+            using the extension API provided along with the Guacamole web
+            application, <span class="package">guacamole-ext</span>.</p>
+        <div class="section" title="user-mapping.xml"><div class="titlepage"><div><div><h3 class="title"><a id="user-mapping"></a><code class="filename">user-mapping.xml</code></h3></div></div></div>
+            
+            <a id="idp421264" class="indexterm"></a>
+            <p>The default authentication provider used by Guacamole reads
+                all username, password, and configuration information from a
+                file called the "user mapping" (typically named
+                    <code class="filename">user-mapping.xml</code>). An example of this
+                file is included with Guacamole, and looks something like
+                this:</p>
+            <pre class="programlisting">&lt;user-mapping&gt;
+	
+    &lt;!-- Per-user authentication and config information --&gt;
+    &lt;authorize username="USERNAME" password="PASSWORD"&gt;
+        &lt;protocol&gt;vnc&lt;/protocol&gt;
+        &lt;param name="hostname"&gt;localhost&lt;/param&gt;
+        &lt;param name="port"&gt;5900&lt;/param&gt;
+        &lt;param name="password"&gt;VNCPASS&lt;/param&gt;
+    &lt;/authorize&gt;
+
+    &lt;!-- Another user, but using md5 to hash the password
+         (example below uses the md5 hash of "PASSWORD") --&gt;
+    &lt;authorize 
+            username="USERNAME2"
+            password="319f4d26e3c536b5dd871bb2c52e3178"
+            encoding="md5"&gt;
+
+        &lt;!-- First authorized connection --&gt;
+        &lt;connection name="localhost"&gt;
+            &lt;protocol&gt;vnc&lt;/protocol&gt;
+            &lt;param name="hostname"&gt;localhost&lt;/param&gt;
+            &lt;param name="port"&gt;5901&lt;/param&gt;
+            &lt;param name="password"&gt;VNCPASS&lt;/param&gt;
+        &lt;/connection&gt;
+
+        &lt;!-- Second authorized connection --&gt;
+        &lt;connection name="otherhost"&gt;
+            &lt;protocol&gt;vnc&lt;/protocol&gt;
+            &lt;param name="hostname"&gt;otherhost&lt;/param&gt;
+            &lt;param name="port"&gt;5900&lt;/param&gt;
+            &lt;param name="password"&gt;VNCPASS&lt;/param&gt;
+        &lt;/connection&gt;
+
+    &lt;/authorize&gt;
+
+&lt;/user-mapping&gt;</pre>
+            <p>Each user is specified with a corresponding
+                    <code class="code">&lt;authorize&gt;</code> tag. This tag contains all
+                authorized connections for that user, each denoted with a
+                    <code class="code">&lt;connection&gt;</code> tag. Each
+                    <code class="code">&lt;connection&gt;</code> tag contains a corresponding
+                protocol and set of protocol-specific parameters, specified with
+                the <code class="code">&lt;protocol&gt;</code> and <code class="code">&lt;param&gt;</code> tags
+                respectively.</p>
+            <div class="section" title="Adding users"><div class="titlepage"><div><div><h4 class="title"><a id="user-setup"></a>Adding users</h4></div></div></div>
+                
+                <a id="idp430576" class="indexterm"></a>
+                <p>When using
+                        <code class="classname">BasicFileAuthenticationProvider</code>,
+                    username/password pairs are specified with
+                        <code class="code">&lt;authorize&gt;</code> tags, which each have a
+                        <code class="code">username</code> and <code class="code">password</code>
+                    attribute. Each <code class="code">&lt;authorize&gt;</code> tag authorizes a
+                    specific username/password pair to access all connections
+                    within the tag:</p>
+                <pre class="programlisting">&lt;authorize username="<em class="replaceable"><code>USER</code></em>" password="<em class="replaceable"><code>PASS</code></em>"&gt;
+    ...
+&lt;/authorize&gt;</pre>
+                <p>In the example above, the password would be listed in
+                    plaintext. If you don't want to do this, you can also
+                    specify your password hashed with MD5:</p>
+                <pre class="programlisting">&lt;authorize username="<em class="replaceable"><code>USER</code></em>"
+           password="<em class="replaceable"><code>319f4d26e3c536b5dd871bb2c52e3178</code></em>"
+           encoding="md5"&gt;
+    ...
+&lt;/authorize&gt;</pre>
+                <p>After modifying user-mapping.xml, the file will be
+                    automatically reread by Guacamole, and your changes will
+                    take effect immediately. The newly-added user will be able
+                    to log in - no restart of the servlet container is
+                    needed.</p>
+            </div>
+            <div class="section" title="Adding connections to a user"><div class="titlepage"><div><div><h4 class="title"><a id="connection-setup"></a>Adding connections to a user</h4></div></div></div>
+                
+                <a id="idp440000" class="indexterm"></a>
+                <p>To specify a connection within an
+                        <code class="code">&lt;authorize&gt;</code> tag, you can either list a
+                    single protocol and set of parameters (specified with a
+                        <code class="code">&lt;protocol&gt;</code> tag and any number of
+                        <code class="code">&lt;param&gt;</code> tags), in which case that user
+                    will have access to only one connection named "DEFAULT", or
+                    you can specify one or more connections with one or more
+                        <code class="code">&lt;connection&gt;</code> tags, each of which can be
+                    named and contains a <code class="code">&lt;protocol&gt;</code> tag and any
+                    number of <code class="code">&lt;param&gt;</code> tags.</p>
+            </div>
+        </div>
+    </div>
+    <div class="section" title="VNC"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="vnc"></a>VNC</h2></div></div></div>
+        
+        <a id="idp446400" class="indexterm"></a>
+        <p>The VNC protocol is the simplest and first protocol supported by Guacamole. Although
+            generally not as fast as RDP, many VNC servers are adequate, and VNC over Guacamole
+            tends to be faster than VNC by itself due to decreased bandwidth usage.</p>
+        <p>VNC support for Guacamole is provided by the <span class="package">libguac-client-vnc</span>
+            library, installed by default.</p>
+        <div class="table"><a id="vnc-parameters"></a><p class="title"><strong>Table 3.1. VNC configuration parameters</strong></p><div class="table-contents">
+            
+            <a id="idp450352" class="indexterm"></a>
+            <table summary="VNC configuration parameters" border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><em class="parameter"><code>hostname</code></em></td><td>
+                            <p><a id="idp458464" class="indexterm"></a>The hostname or IP address of the VNC server Guacamole
+                                should connect to.</p>
+                        </td></tr><tr><td><em class="parameter"><code>port</code></em></td><td>
+                            <p><a id="idp461648" class="indexterm"></a>The port the VNC server is listening on, usually 5900 or
+                                5900 + <em class="replaceable"><code>display number</code></em>. For example, if
+                                your VNC server is serving display number 1 (sometimes written as
+                                    <code class="constant">:1</code>), your port number here would be
+                                5901.</p>
+                        </td></tr><tr><td><em class="parameter"><code>password</code></em></td><td>
+                            <p><a id="idp465664" class="indexterm"></a>The password to use when attempting authentication, if
+                                any. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>read-only</code></em></td><td>
+                            <p><a id="idp469376" class="indexterm"></a>Whether this connection should be read-only. If set to
+                                "true", no input will be accepted on the connection at all. Users
+                                will only see the desktop and whatever other users using that same
+                                desktop are doing. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>swap-red-blue</code></em></td><td>
+                            <p>If the colors of your display appear wrong (blues appear orange or
+                                red, etc.), it may be that your VNC server is sending image data
+                                incorrectly, and the red and blue components of each color are
+                                swapped. If this is the case, set this parameter to "true" to work
+                                around the problem. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>color-depth</code></em></td><td>
+                            <p><a id="idp475360" class="indexterm"></a>The color depth to request, in bits-per-pixel. This
+                                parameter is optional. If specified, this must be either 8, 16, 24,
+                                or 32. Regardless of what value is chosen here, if a particular
+                                update uses less than 256 colors, Guacamole will always send that
+                                update as a 256-color PNG.</p>
+                        </td></tr><tr><td><em class="parameter"><code>cursor</code></em></td><td>
+                            <p><a id="idp478960" class="indexterm"></a>If set to "remote", the mouse pointer will be rendered
+                                remotely, and the local position of the mouse pointer will be
+                                indicated by a small dot.</p>
+                        </td></tr><tr><td><em class="parameter"><code>autoretry</code></em></td><td>
+                            <p><a id="idp482368" class="indexterm"></a>The number of times to retry connecting before giving up
+                                and returning an error. In the case of a reverse connection, this is
+                                the number of times the connection process is allowed to time
+                                out.</p>
+                        </td></tr><tr><td><em class="parameter"><code>encodings</code></em></td><td>
+                            <p><a id="idp485856" class="indexterm"></a>A space-delimited list of VNC encodings to use. The
+                                format of this parameter is dictated by libvncclient and thus
+                                doesn't really follow the form of other Guacamole parameters. This
+                                parameter is optional, and <span class="package">libguac-client-vnc</span>
+                                will use any supported encoding by default.</p>
+                            <p>Beware that this parameter is intended to be replaced with
+                                individual, encoding-specific parameters in a future release.</p>
+                        </td></tr><tr><td><em class="parameter"><code>dest-host</code></em></td><td><a id="idp487264" class="indexterm"></a><a id="idp490240" class="indexterm"></a><a id="idp491568" class="indexterm"></a>The destination host to request when connecting to a VNC
+                            proxy such as UltraVNC Repeater. This is only necessary if the VNC proxy
+                            in use requires the connecting user to specify which VNC server to
+                            connect to. If the VNC proxy automatically connects to a specific
+                            server, this parameter is not necessary.</td></tr><tr><td><em class="parameter"><code>dest-port</code></em></td><td><a id="idp495728" class="indexterm"></a><a id="idp497024" class="indexterm"></a>The destination port to request when connecting to a VNC
+                            proxy such as UltraVNC Repeater. This is only necessary if the VNC proxy
+                            in use requires the connecting user to specify which VNC server to
+                            connect to. If the VNC proxy automatically connects to a specific
+                            server, this parameter is not necessary.</td></tr><tr><td><em class="parameter"><code>enable-audio</code></em></td><td>
+                            <p><a id="idp500592" class="indexterm"></a><a id="idp500400" class="indexterm"></a>If set to "true", <span class="emphasis"><em>experimental</em></span>
+                                sound support will be enabled. VNC does not support sound, but
+                                Guacamole's VNC support can include sound using PulseAudio.</p>
+                            <p>Most Linux systems provide audio through a service called
+                                PulseAudio. This service is capable of communicating over the
+                                network. If PulseAudio is configured to allow TCP connections,
+                                Guacamole can connect to your PulseAudio server and combine its
+                                audio with the graphics coming over VNC.</p>
+                            <p>Beware that you must disable authentication within PulseAudio in
+                                order to allow Guacamole to connect, as Guacamole does not yet
+                                support this. The amount of latency you will see depends largely on
+                                the network and how PulseAudio is configured.</p>
+                        </td></tr><tr><td><em class="parameter"><code>audio-servername</code></em></td><td>
+                            <p>The name of the PulseAudio server to connect to. This will be the
+                                hostname of the computer providing audio for your connection via
+                                PulseAudio, most likely the same as the value given for the
+                                    <em class="parameter"><code>hostname</code></em> parameter.</p>
+                            <p>If this parameter is omitted, the default PulseAudio device will
+                                be used, which will be the PulseAudio server running on the same
+                                machine as guacd.</p>
+                        </td></tr><tr><td><em class="parameter"><code>reverse-connect</code></em></td><td>
+                            <p><a id="idp510752" class="indexterm"></a>Whether reverse connection should be used. If set to
+                                "true", instead of connecting to a server at a given hostname and
+                                port, guacd will listen on the given port for inbound connections
+                                from a VNC server.</p>
+                        </td></tr><tr><td><em class="parameter"><code>listen-timeout</code></em></td><td>
+                            <p><a id="idp514256" class="indexterm"></a>If reverse connection is in use, the maximum amount of
+                                time to wait for an inbound connection from a VNC server, in
+                                milliseconds. If blank, the default value is 5000 (five
+                                seconds).</p>
+                        </td></tr></tbody></table>
+        </div></div><br class="table-break" />
+        <div class="section" title="Adding a VNC connection"><div class="titlepage"><div><div><h3 class="title"><a id="adding-vnc"></a>Adding a VNC connection</h3></div></div></div>
+            
+            <a id="idp517440" class="indexterm"></a>
+            <p>If you are using the default authentication built into Guacamole, and you wish to
+                grant access to a VNC connection to a particular user, you need to locate the
+                    <code class="code">&lt;authorize&gt;</code> section for that user within your
+                    <code class="filename">user-mapping.xml</code>, and add a section like the following
+                within it:</p>
+            <pre class="programlisting">&lt;connection name="<em class="replaceable"><code>Unique Name</code></em>"&gt;
+    &lt;protocol&gt;vnc&lt;/protocol&gt;
+    &lt;param name="hostname"&gt;<em class="replaceable"><code>localhost</code></em>&lt;/param&gt;
+    &lt;param name="port"&gt;<em class="replaceable"><code>5901</code></em>&lt;/param&gt;
+&lt;/connection&gt;</pre>
+            <p>If added exactly as above, a new connection named "<em class="replaceable"><code>Unique
+                    Name</code></em>" will be available to the user associated with the
+                    <code class="code">&lt;authorize&gt;</code> section containing it. The connection will use VNC
+                to connect to <em class="replaceable"><code>localhost</code></em> at port
+                    <em class="replaceable"><code>5901</code></em>. Naturally, you will want to change some or all
+                of these values.</p>
+            <p>If your VNC server requires a password, or you wish to specify other configuration
+                parameters (to reduce the color depth, for example), you will need to add additional
+                    <code class="code">&lt;param&gt;</code> tags accordingly.</p>
+            <p>Other authentication methods will provide documentation describing how to
+                configure new connections. If the authentication method in use fully implements the
+                features of Guacamole's authentication API, you will be able to add a new VNC
+                connection easily and intuitively using the administration interface built into
+                Guacamole. You will not need to edit configuration files.</p>
+        </div>
+        <div class="section" title="Which VNC server?"><div class="titlepage"><div><div><h3 class="title"><a id="idp526544"></a>Which VNC server?</h3></div></div></div>
+            
+            <a id="idp527360" class="indexterm"></a>
+            <p>The choice of VNC server can make a big difference when it comes to performance,
+                especially over slower networks. While many systems provide VNC access by default,
+                using this is often not the fastest method.</p>
+            <div class="section" title="RealVNC or TigerVNC"><div class="titlepage"><div><div><h4 class="title"><a id="idp529168"></a>RealVNC or TigerVNC</h4></div></div></div>
+                
+                <a id="idp529808" class="indexterm"></a>
+                <a id="idp530912" class="indexterm"></a>
+                <p>RealVNC, and its derivative TigerVNC, perform quite well. In our testing, they
+                    perform the best with Guacamole. If you are okay with having a desktop that can
+                    only be accessed via VNC, one of these is likely your best choice. Both optimize
+                    window movement and (depending on the application) scrolling, giving a very
+                    responsive user experience.</p>
+            </div>
+            <div class="section" title="TightVNC"><div class="titlepage"><div><div><h4 class="title"><a id="idp532976"></a>TightVNC</h4></div></div></div>
+                
+                <a id="idp533616" class="indexterm"></a>
+                <p>TightVNC is widely-available and performs generally as well as RealVNC or
+                    TigerVNC. If you wish to use TightVNC with Guacamole, performance should be just
+                    fine, but we highly recommend disabling its JPEG encoding. This is because
+                    images transmitted to Guacamole are always encoded losslessly as PNG images.
+                    When this operation is performed on a JPEG image, the artifacts present from
+                    JPEG's lossy compression reduce the compressibility of the image for PNG, thus
+                    leading to a slower experience overall than if JPEG was simply not used to begin
+                    with.</p>
+            </div>
+            <div class="section" title="x11vnc"><div class="titlepage"><div><div><h4 class="title"><a id="idp535840"></a>x11vnc</h4></div></div></div>
+                
+                <a id="idp536480" class="indexterm"></a>
+                <p>The main benefit of using x11vnc is that it allows you to continue using your
+                    desktop normally, while simultaneously exposing control of your desktop via VNC.
+                    Performance of x11vnc is comparable to RealVNC, TigerVNC, and TightVNC. If you
+                    need to use your desktop locally as well as via VNC, you will likely be quite
+                    happy with x11vnc.</p>
+            </div>
+            <div class="section" title="vino"><div class="titlepage"><div><div><h4 class="title"><a id="idp538464"></a>vino</h4></div></div></div>
+                
+                <a id="idp539104" class="indexterm"></a>
+                <p>vino is the VNC server that comes with the Gnome desktop environment, and is
+                    enabled if you enable "desktop sharing" via the system preferences available
+                    within Gnome. If you need to share your local desktop, we recommend using x11vnc
+                    rather vino, as it has proven more performant and feature-complete in our
+                    testing. If you don't need to share a local desktop but simply need an
+                    environment you can access remotely, using a VNC server like RealVNC, TigerVNC,
+                    or TightVNC is a better choice.</p>
+            </div>
+            <div class="section" title="QEMU or KVM"><div class="titlepage"><div><div><h4 class="title"><a id="idp541344"></a>QEMU or KVM</h4></div></div></div>
+                
+                <a id="idp542160" class="indexterm"></a>
+                <a id="idp542928" class="indexterm"></a>
+                <p>QEMU (and thus KVM) expose the displays of virtual machines using VNC. If you
+                    need to see the virtual monitor of your virtual machine, using this VNC
+                    connection is really your only choice. As the VNC server built into QEMU cannot
+                    be aware of higher-level operations like window movement, resizing, or
+                    scrolling, those operations will tend to be sent suboptimally, and will not be
+                    as fast as a VNC server running within the virtual machine.</p>
+                <p>If you wish to use a virtual machine for desktop access, we recommend
+                    installing a native VNC server inside the virtual machine after the virtual
+                    machine is set up. This will give a more responsive desktop.</p>
+            </div>
+        </div>
+    </div>
+    <div class="section" title="RDP"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="rdp"></a>RDP</h2></div></div></div>
+        
+        <a id="idp546912" class="indexterm"></a>
+        <p>The RDP protocol is more complicated than VNC and was the second protocol officially
+            supported by Guacamole. RDP tends to be faster than VNC due to the use of caching, which
+            Guacamole does take advantage of.</p>
+        <p>RDP support for Guacamole is provided by the <span class="package">libguac-client-rdp</span>
+            library, which depends on a recent version of FreeRDP (version 1.0 or higher). If your
+            distribution does not have a recent enough version of FreeRDP, the Guacamole project
+            will not build a <span class="package">libguac-client-rdp</span> package for you. You will need to
+            build and install a recent version of FreeRDP, and then build and install
+                <span class="package">libguac-client-rdp</span> from source.</p>
+        <div class="table"><a id="idp550816"></a><p class="title"><strong>Table 3.2. RDP configuration parameters</strong></p><div class="table-contents">
+            
+            <a id="idp551696" class="indexterm"></a>
+            <table summary="RDP configuration parameters" border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><em class="parameter"><code>hostname</code></em></td><td>
+                            <p><a id="idp560224" class="indexterm"></a>The hostname or IP address of the RDP server Guacamole
+                                should connect to.</p>
+                        </td></tr><tr><td><em class="parameter"><code>port</code></em></td><td>
+                            <p><a id="idp563376" class="indexterm"></a>The port the RDP server is listening on, usually 3389.
+                                This parameter is optional. If this is not specified, the default of
+                                3389 will be used.</p>
+                        </td></tr><tr><td><em class="parameter"><code>username</code></em></td><td>
+                            <p><a id="idp566768" class="indexterm"></a>The username to use to authenticate, if any. This
+                                parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>password</code></em></td><td>
+                            <p><a id="idp570096" class="indexterm"></a>The password to use when attempting authentication, if
+                                any. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>domain</code></em></td><td>
+                            <p><a id="idp573408" class="indexterm"></a>The domain to use when attempting authentication, if
+                                any. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>color-depth</code></em></td><td>
+                            <p><a id="idp576720" class="indexterm"></a>The color depth to request, in bits-per-pixel. This
+                                parameter is optional. If specified, this must be either 8, 16, or
+                                24. Regardless of what value is chosen here, if a particular update
+                                uses less than 256 colors, Guacamole will always send that update as
+                                a 256-color PNG.</p>
+                        </td></tr><tr><td><em class="parameter"><code>width</code></em></td><td>
+                            <p><a id="idp580320" class="indexterm"></a>The width of the display to request, in pixels. This
+                                parameter is optional. If this value is not specified, the width of
+                                the connecting client display will be used instead.</p>
+                        </td></tr><tr><td><em class="parameter"><code>height</code></em></td><td>
+                            <p>The height of the display to request, in pixels. This parameter is
+                                optional. If this value is not specified, the height of the
+                                connecting client display will be used instead.</p>
+                        </td></tr><tr><td><em class="parameter"><code>disable-audio</code></em></td><td><a id="idp585504" class="indexterm"></a><a id="idp586352" class="indexterm"></a><a id="idp587136" class="indexterm"></a>Audio is enabled by default in both the client and in
+                            libguac-client-rdp. If you are concerned about bandwidth usage, or sound
+                            is causing problems, you can explicitly disable sound by setting this
+                            parameter to "true".</td></tr><tr><td><em class="parameter"><code>enable-printing</code></em></td><td>
+                            <p><a id="idp590176" class="indexterm"></a><a id="idp590720" class="indexterm"></a><a id="idp591536" class="indexterm"></a>Printing is disabled by default, but with printing
+                                enabled, RDP users can print to a virtual printer that sends a PDF
+                                containing the document printed to the Guacamole client. Enable
+                                printing by setting this parameter to "true".</p>
+                            <p><span class="emphasis"><em>Printing support requires
+                                        <span class="application">GhostScript</span> to be
+                                    installed.</em></span> If <span class="application">guacd</span> cannot
+                                find the <code class="filename">gs</code> executable when printing, the print
+                                attempt will fail.</p>
+                        </td></tr><tr><td><em class="parameter"><code>enable-drive</code></em></td><td>
+                            <p><a id="idp597760" class="indexterm"></a><a id="idp598112" class="indexterm"></a><a id="idp599440" class="indexterm"></a>File transfer is disabled by default, but with file
+                                transfer enabled, RDP users can transfer files to and from a virtual
+                                drive which persists on the Guacamole server. Enable file transfer
+                                support by setting this parameter to "true".</p>
+                            <p>Files will be stored in the directory specified by the
+                                    "<em class="parameter"><code>drive-path</code></em>" parameter, which is required
+                                if file transfer is enabled.</p>
+                        </td></tr><tr><td><em class="parameter"><code>drive-path</code></em></td><td>
+                            <p>The directory on the Guacamole server in which transfered files
+                                should be stored. This directory must be accessible by guacd and
+                                both readable and writable by the user that runs guacd.
+                                    <span class="emphasis"><em>This parameter does not refer to a directory on the
+                                    RDP server.</em></span></p>
+                            <p>If file transfer is not enabled, this parameter is ignored.</p>
+                        </td></tr><tr><td><em class="parameter"><code>console</code></em></td><td>
+                            <p><a id="idp607184" class="indexterm"></a>If set to "true", you will be connected to the console
+                                (admin) session of the RDP server.</p>
+                        </td></tr><tr><td><em class="parameter"><code>console-audio</code></em></td><td>
+                            <p><a id="idp610544" class="indexterm"></a>If set to "true", audio will be explicitly enabled in
+                                the console (admin) session of the RDP server. Setting this option
+                                to "true" only makes sense if the <em class="parameter"><code>console</code></em>
+                                parameter is also set to "true".</p>
+                        </td></tr><tr><td><em class="parameter"><code>initial-program</code></em></td><td>
+                            <p><a id="idp614144" class="indexterm"></a>The full path to the program to run immediately upon
+                                connecting. This parameter is optional.</p>
+                        </td></tr><tr><td><em class="parameter"><code>server-layout</code></em></td><td>
+                            <p><a id="idp617872" class="indexterm"></a><a id="idp617680" class="indexterm"></a>The server-side keyboard layout. This is the layout of
+                                the RDP server and has nothing to do with the keyboard layout in use
+                                on the client. <span class="emphasis"><em>The Guacamole client is independent of
+                                    keyboard layout.</em></span> The RDP protocol, however, is
+                                    <span class="emphasis"><em>not</em></span> independent of keyboard layout, and
+                                Guacamole needs to know the keyboard layout of the server in order
+                                to send the proper keys when a user is typing.</p>
+                            <p>Possible values are:</p>
+                            <div class="variablelist"><dl><dt><span class="term"><code class="constant">en-us-qwerty</code></span></dt><dd>
+                                        <p>English (US) keyboard</p>
+                                    </dd><dt><span class="term"><code class="constant">de-de-qwertz</code></span></dt><dd>
+                                        <p>German keyboard (qwertz)</p>
+                                    </dd><dt><span class="term"><code class="constant">fr-fr-azerty</code></span></dt><dd>
+                                        <p>French keyboard (azerty)</p>
+                                    </dd><dt><span class="term"><code class="constant">failsafe</code></span></dt><dd>
+                                        <p>Unknown keyboard - this option sends only Unicode
+                                            events and should work for any keyboard, though not
+                                            necessarily all RDP servers or applications.</p>
+                                        <p>If your server's keyboard layout is not yet supported,
+                                            this option should work in the meantime.</p>
+                                    </dd></dl></div>
+                        </td></tr><tr><td><em class="parameter"><code>security</code></em></td><td>
+                            <p><a id="idp633072" class="indexterm"></a><a id="idp634464" class="indexterm"></a><a id="idp635664" class="indexterm"></a>The security mode to use for the RDP connection. This
+                                mode dictates how data will be encrypted and what type of
+                                authentication will be performed, if any. By default, the server is
+                                allowed to control what type of security is used.</p>
+                            <p>Possible values are:</p>
+                            <div class="variablelist"><dl><dt><span class="term"><code class="constant">rdp</code></span></dt><dd>
+                                        <p>Standard RDP encryption. This mode should be supported
+                                            by all RDP servers.</p>
+                                    </dd><dt><span class="term"><code class="constant">nla</code></span></dt><dd>
+                                        <p>Network Level Authentication. This mode requires the
+                                            username and password, and performs an authentication
+                                            step before the remote desktop session actually starts.
+                                            If the username and password are not given, the
+                                            connection cannot be made.</p>
+                                    </dd><dt><span class="term"><code class="constant">tls</code></span></dt><dd>
+                                        <p>TLS encryption. TLS (Transport Layer Security) is the
+                                            successor to SSL.</p>
+                                    </dd><dt><span class="term"><code class="constant">any</code></span></dt><dd>
+                                        <p>Allow the server to choose the type of security. This
+                                            is the default.</p>
+                                    </dd></dl></div>
+                        </td></tr><tr><td><em class="parameter"><code>ignore-cert</code></em></td><td>
+                            <p><a id="idp649056" class="indexterm"></a>If set to "true", the certificate returned by the server
+                                will be ignored, even if that certificate cannot be validated. This
+                                is useful if you universally trust the server and your connection to
+                                the server, and you know that the server's certificate cannot be
+                                validated (for example, if it is self-signed).</p>
+                        </td></tr><tr><td><em class="parameter"><code>disable-auth</code></em></td><td>
+                            <p><a id="idp652656" class="indexterm"></a>If set to "true", authentication will be disabled. Note
+                                that this refers to authentication that takes place while
+                                connecting. Any authentication enforced by the server over the
+                                remote desktop session (such as a login dialog) will still take
+                                place. By default, authentication is enabled and only used when
+                                requested by the server.</p>
+                            <p>If you are using NLA, authentication must be enabled by
+                                definition.</p>
+                        </td></tr><tr><td><em class="parameter"><code>remote-app</code></em></td><td>
+                            <p><a id="idp656912" class="indexterm"></a>Specifies the RemoteApp to start on the remote desktop.
+                                If supported by your remote desktop server, this application, and
+                                only this application, will be visible to the user.</p>
+                            <p>Windows requires a special notation for the names of remote
+                                applications. The names of remote applications must be prefixed with
+                                two vertical bars. For example, if you have created a remote
+                                application on your server for <code class="filename">notepad.exe</code> and
+                                have assigned it the name "notepad", you would set this parameter
+                                to: "||notepad".</p>
+                        </td></tr><tr><td><em class="parameter"><code>remote-app-dir</code></em></td><td>
+                            <p>The working directory, if any, for the remote application. This
+                                parameter has no effect if RemoteApp is not in use.</p>
+                        </td></tr><tr><td><em class="parameter"><code>remote-app-args</code></em></td><td>
+                            <p>The command-line arguments, if any, for the remote application.
+                                This parameter has no effect if RemoteApp is not in use.</p>
+                        </td></tr><tr><td><em class="parameter"><code>static-channels</code></em></td><td>
+                            <p>A comma-separated list of static channel names to open and expose
+                                as pipes. If you wish to communicate between an application running
+                                on the remote desktop and JavaScript, this is the best way to do it.
+                                Guacamole will open an outbound pipe with the name of the static
+                                channel. If JavaScript needs to communicate back in the other
+                                direction, it should respond by opening another pipe with the same
+                                name.</p>
+                            <p>Guacamole allows any number of static channels to be opened, but
+                                protocol restrictions of RDP limit the size of each channel name to
+                                7 characters.</p>
+                        </td></tr></tbody></table>
+        </div></div><br class="table-break" />
+        <div class="section" title="Adding an RDP connection"><div class="titlepage"><div><div><h3 class="title"><a id="idp558320"></a>Adding an RDP connection</h3></div></div></div>
+            
+            <a id="idp667728" class="indexterm"></a>
+            <p>If you are using the default authentication built into Guacamole, and you wish to
+                grant access to a RDP connection to a particular user, you need to locate the
+                    <code class="code">&lt;authorize&gt;</code> section for that user within your
+                    <code class="filename">user-mapping.xml</code>, and add a section like the following
+                within it:</p>
+            <pre class="programlisting">&lt;connection name="<em class="replaceable"><code>Unique Name</code></em>"&gt;
+    &lt;protocol&gt;rdp&lt;/protocol&gt;
+    &lt;param name="hostname"&gt;<em class="replaceable"><code>localhost</code></em>&lt;/param&gt;
+    &lt;param name="port"&gt;<em class="replaceable"><code>3389</code></em>&lt;/param&gt;
+&lt;/connection&gt;</pre>
+            <p>If added exactly as above, a new connection named "<em class="replaceable"><code>Unique
+                    Name</code></em>" will be available to the user associated with the
+                    <code class="code">&lt;authorize&gt;</code> section containing it. The connection will use RDP
+                to connect to <em class="replaceable"><code>localhost</code></em> at port
+                    <em class="replaceable"><code>3389</code></em>. Naturally, you will want to change some or all
+                of these values.</p>
+            <p>If you want to login automatically rather than receive a login prompt upon
+                connecting, you can specify a username and password with additional
+                    <code class="code">&lt;param&gt;</code> tags. Other options are available for controlling the
+                color depth, size of the screen, etc.</p>
+            <p>Other authentication methods will provide documentation describing how to
+                configure new connections. If the authentication method in use fully implements the
+                features of Guacamole's authentication API, you will be able to add a new RDP
+                connection easily and intuitively using the administration interface built into
+                Guacamole. You will not need to edit configuration files.</p>
+        </div>
+    </div>
+    <div class="section" title="SSH"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ssh"></a>SSH</h2></div></div></div>
+        
+        <a id="idp678320" class="indexterm"></a>
+        <p>Unlike VNC or RDP, SSH is a text protocol. Its implementation in Guacamole is actually
+            a combination of a terminal emulator and SSH client, because the SSH protocol isn't
+            inherently graphical. Guacamole's SSH support emulates a terminal on the server side,
+            and draws the screen of this terminal remotely on the client.</p>
+        <p>SSH support for Guacamole is provided by the <span class="package">libguac-client-ssh</span>
+            library, which depends on libssh2 and libssl.</p>
+        <div class="table"><a id="idp681024"></a><p class="title"><strong>Table 3.3. SSH configuration parameters</strong></p><div class="table-contents">
+            
+            <a id="idp682160" class="indexterm"></a>
+            <table summary="SSH configuration parameters" border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><em class="parameter"><code>hostname</code></em></td><td>
+                            <p><a id="idp690240" class="indexterm"></a>The hostname or IP address of the SSH server Guacamole
+                                should connect to.</p>
+                        </td></tr><tr><td><em class="parameter"><code>port</code></em></td><td>
+                            <p><a id="idp693312" class="indexterm"></a>The port the SSH server is listening on, usually 22.
+                                This parameter is optional. If this is not specified, the default of
+                                22 will be used.</p>
+                        </td></tr><tr><td><em class="parameter"><code>username</code></em></td><td>
+                            <p><a id="idp696528" class="indexterm"></a>The username to use to authenticate, if any. This
+                                parameter is optional. If not specified, you will be prompted for
+                                the username upon connecting.</p>
+                        </td></tr><tr><td><em class="parameter"><code>password</code></em></td><td>
+                            <p><a id="idp700336" class="indexterm"></a>The password to use when attempting authentication, if
+                                any. This parameter is optional. If not specified, you will be
+                                prompted for your password upon connecting.</p>
+                        </td></tr><tr><td><em class="parameter"><code>font-name</code></em></td><td>
+                            <p><a id="idp703760" class="indexterm"></a>The name of the font to use. This parameter is optional.
+                                If not specified, the default of "monospace" will be used
+                                instead.</p>
+                        </td></tr><tr><td><em class="parameter"><code>font-size</code></em></td><td>
+                            <p>The size of the font to use, in points. This parameter is
+                                optional. If not specified, the default of 12 will be used
+                                instead.</p>
+                        </td></tr><tr><td><em class="parameter"><code>enable-sftp</code></em></td><td>
+                            <p><a id="idp709360" class="indexterm"></a><a id="idp710672" class="indexterm"></a>Whether file transfer should be enabled. If set to
+                                "true", the user will be allowed to upload or download files from
+                                the SSH server using SFTP. Guacamole includes the
+                                    <span class="command"><strong>guacctl</strong></span> utility which controls file downloads
+                                and uploads when run on the SSH server by the user over the SSH
+                                connection.</p>
+                        </td></tr><tr><td><em class="parameter"><code>private-key</code></em></td><td>
+                            <p><a id="idp714240" class="indexterm"></a>The entire contents of the private key to use for public
+                                key authentication. If this parameter is not specified, public key
+                                authentication will not be used. The private key must be in OpenSSH
+                                format, as would be generated by the OpenSSH
+                                    <span class="command"><strong>ssh-keygen</strong></span> utility.</p>
+                        </td></tr><tr><td><em class="parameter"><code>passphrase</code></em></td><td>
+                            <p><a id="idp718288" class="indexterm"></a>The passphrase to use to decrypt the private key for use
+                                in public key authentication. This parameter is not needed if the
+                                private key does not require a passphrase. If the private key
+                                requires a passphrase, but this parameter is not provided, the user
+                                will be prompted for the passphrase upon connecting.</p>
+                        </td></tr></tbody></table>
+        </div></div><br class="table-break" />
+        <div class="section" title="Adding an SSH connection"><div class="titlepage"><div><div><h3 class="title"><a id="idp720816"></a>Adding an SSH connection</h3></div></div></div>
+            
+            <a id="idp721632" class="indexterm"></a>
+            <p>If you are using the default authentication built into Guacamole, and you wish to
+                grant access to a SSH connection to a particular user, you need to locate the
+                    <code class="code">&lt;authorize&gt;</code> section for that user within your
+                    <code class="filename">user-mapping.xml</code>, and add a section like the following
+                within it:</p>
+            <pre class="programlisting">&lt;connection name="<em class="replaceable"><code>Unique Name</code></em>"&gt;
+    &lt;protocol&gt;ssh&lt;/protocol&gt;
+    &lt;param name="hostname"&gt;<em class="replaceable"><code>localhost</code></em>&lt;/param&gt;
+    &lt;param name="port"&gt;<em class="replaceable"><code>22</code></em>&lt;/param&gt;
+&lt;/connection&gt;</pre>
+            <p>If added exactly as above, a new connection named "<em class="replaceable"><code>Unique
+                    Name</code></em>" will be available to the user associated with the
+                    <code class="code">&lt;authorize&gt;</code> section containing it. The connection will use SSH
+                to connect to <em class="replaceable"><code>localhost</code></em> at port
+                    <em class="replaceable"><code>22</code></em>. Naturally, you will want to change some or all of
+                these values.</p>
+            <p>If you want to login automatically rather than receive a login prompt upon
+                connecting, you can specify a username and password with additional
+                    <code class="code">&lt;param&gt;</code> tags. Other options are available for controlling the
+                font.</p>
+            <p>Other authentication methods will provide documentation describing how to
+                configure new connections.</p>
+        </div>
+    </div>
+
+<div class="footnotes"><br /><hr width="100" align="left" /><div class="footnote">
+                <p><sup>[<a id="ftn.idp417472" href="#idp417472" class="para">1</a>] </sup><code class="classname">net.sourceforge.guacamole.net.basic.BasicFileAuthenticationProvider</code></p>
+            </div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="installing-guacamole.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mysql-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. Installing Guacamole </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4. MySQL authentication</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

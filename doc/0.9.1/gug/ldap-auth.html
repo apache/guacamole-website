@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 5. LDAP authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="mysql-auth.html" title="Chapter 4. MySQL authentication" /><link rel="next" href="noauth.html" title="Chapter 6. Disabling authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. LDAP authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mysql-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="noauth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" title="Chapter 5. LDAP authentication" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="ldap-auth"></a>Chapter 5. LDAP authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="ldap-auth.html#installing-ldap-auth">Installing LDAP authentication</a></span></dt><dd><dl><dt><span class="section"><a href="ldap-auth.html#idp1015888">Configuring Guacamole</a></span></dt><dt><span class="section"><a href="ldap-auth.html#idp1039056">Installing the schema</a></span></dt></dl></dd><dt><span class="section"><a href="ldap-auth.html#ldap-auth-schema">The LDAP schema</a></span></dt><dd><dl><dt><span class="section"><a href="ldap-auth.html#idp1056656">Users</a></span></dt><dt><span class="section"><a href="ldap-auth.html#idp1058560">Connections and parameters</a></span></dt></dl></dd></dl></div>
+    
+    <a id="idp996288" class="indexterm"></a>
+    <p>Guacamole supports LDAP authentication via an extension available from the main project
+        website. This extension allows users and connections to be stored directly within an LDAP
+        directory.</p>
+    <p>The LDAP authentication module will need an LDAP directory as storage for all
+        authentication data, and the instructions here assume you already have an LDAP directory
+        installed and working. The schema-related directions are further specific to the OpenLDAP
+        implementation of LDAP. Other LDAP implementations will have their own methods for updating
+        the schema. For such situations, a standards-compliant file describing the schema required
+        by Guacamole's LDAP support is included.</p>
+    <div class="section" title="Installing LDAP authentication"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-ldap-auth"></a>Installing LDAP authentication</h2></div></div></div>
+        
+        <p>The LDAP authentication module is not included in the main Guacamole bundle nor is it
+            enabled by default. You must use the download link provided in the downloads section of
+            the main Guacamole site.</p>
+        <p>The downloaded <code class="filename">.tar.gz</code> file will contain several
+            directories:</p>
+        <div class="variablelist"><dl><dt><span class="term"><code class="filename">lib/</code></span></dt><dd>
+                    <p>Contains all <code class="filename">.jar</code> files required for the LDAP
+                        authentication module to work, including the module itself and the LDAP
+                        library driving it.</p>
+                </dd><dt><span class="term"><code class="filename">schema/</code></span></dt><dd>
+                    <p>Contains an <code class="filename">.ldif</code> file which describes the LDAP
+                        schema changes as required for an OpenLDAP server, as well as a
+                            <code class="filename">.schema</code> file compliant with RFC-2252. The
+                            <code class="filename">.schema</code> file can be transformed into the
+                            <code class="filename">.ldif</code> file automatically.</p>
+                </dd></dl></div>
+        <p>The contents of <code class="filename">lib/</code> must be copied into the classpath of
+            Guacamole, which is the directory specified by the <span class="property">lib-directory</span>
+            property in <code class="filename">guacamole.properties</code>. If this property is not
+            specified, simply add it. On Linux servers,
+                <code class="filename">/var/lib/guacamole/classpath</code> is a good choice, but it can be
+            whatever you like.</p>
+        <p>After copying the files in place, check to make sure all files are present, and there
+            are no conflicts in between multiple versions of <span class="package">guacamole-auth-ldap</span>.
+            The contents should match at least the files shown here:</p>
+        <pre class="screen"><code class="prompt">$</code> ls <em class="replaceable"><code>/var/lib/guacamole/classpath</code></em>
+<code class="computeroutput">guacamole-auth-ldap-0.8.0.jar  jldap-4.3.jar</code>
+<code class="prompt">$</code></pre>
+        <p>Each of the <code class="filename">.jar</code> files above is either the LDAP authentication
+            module itself (<code class="filename">guacamole-auth-ldap-0.8.0.jar</code>) or a dependency. They
+            must all be placed in Guacamole's <span class="property">lib-directory</span> for the LDAP
+            authentication to work.</p>
+        <div class="section" title="Configuring Guacamole"><div class="titlepage"><div><div><h3 class="title"><a id="idp1015888"></a>Configuring Guacamole</h3></div></div></div>
+            
+            <a id="idp1016800" class="indexterm"></a>
+            <a id="idp1017648" class="indexterm"></a>
+            <p>Additional properties must be added to <code class="filename">guacamole.properties</code>
+                for Guacamole to load the LDAP support and for the LDAP support to properly connect
+                to your LDAP server:</p>
+            <pre class="programlisting"># Auth provider class
+auth-provider: net.sourceforge.guacamole.net.auth.ldap.LDAPAuthenticationProvider
+
+# LDAP properties
+ldap-hostname:           <em class="replaceable"><code>localhost</code></em>
+ldap-port:               <em class="replaceable"><code>389</code></em>
+ldap-user-base-dn:       <em class="replaceable"><code>ou=people,dc=example,dc=net</code></em>
+ldap-username-attribute: <em class="replaceable"><code>uid</code></em>
+ldap-config-base-dn:     <em class="replaceable"><code>ou=groups,dc=example,dc=net</code></em></pre>
+            <p>The LDAP support depends on the following properties, as shown in the example
+                above:</p>
+            <div class="variablelist"><dl><dt><span class="term"><span class="property">ldap-hostname</span></span></dt><dd>
+                        <p>The hostname of your LDAP server. In the example above, this is given
+                            as "localhost" - the same machine as the web server hosting Guacamole,
+                            but this can be anything.</p>
+                    </dd><dt><span class="term"><span class="property">ldap-port</span></span></dt><dd>
+                        <p>The port your LDAP server listens on. Unless you altered the
+                            configuration somehow, your LDAP server probably listens on the standard
+                            port of 389.</p>
+                    </dd><dt><span class="term"><span class="property">ldap-user-base-dn</span></span></dt><dd>
+                        <p>The base of the DN (Distinguished Name) for all Guacamole users. This
+                            will be appended to the username when a user logs in.</p>
+                    </dd><dt><span class="term"><span class="property">ldap-username-attribute</span></span></dt><dd>
+                        <p>The attribute which contains the username which is part of the DN for
+                            all Guacamole users. Usually, this is <span class="property">uid</span>. This
+                            works together with the user base DN to determine the full DN of each
+                            user logging in.</p>
+                        <p>For example, if the base DN is
+                                "<code class="systemitem">ou=people,dc=example,dc=net</code>" (like the
+                            example above) and the username attribute is "<span class="property">uid</span>",
+                            then a person attempting to login as "<code class="systemitem">user</code>"
+                            would effectively bind with the LDAP directory as
+                                "<code class="systemitem">uid=user,ou=people,dc=example,dc=net</code>".</p>
+                    </dd><dt><span class="term"><span class="property">ldap-config-base-dn</span></span></dt><dd>
+                        <p>The base of the DN for all Guacamole configurations. Each
+                            configuration is analogous to a connection. Within Guacamole's LDAP
+                            support, each configuration functions as a group, having user members. A
+                            user which is a member of a particular configuration group will have
+                            access to that configuration.</p>
+                        <p>This base DN will be used when querying all configurations accessible
+                            by a user once they have successfully logged in.</p>
+                    </dd></dl></div>
+            <p>With the above properties properly set, Guacamole will connect to your LDAP server
+                after you restart Tomcat (or whatever servlet container you are using). You will
+                still need to install the schema modifications to your LDAP server such that you can
+                create new configurations and associated them with users.</p>
+        </div>
+        <div class="section" title="Installing the schema"><div class="titlepage"><div><div><h3 class="title"><a id="idp1039056"></a>Installing the schema</h3></div></div></div>
+            
+            <p>Guacamole's LDAP support requires modifications to the standard LDAP schema, adding
+                support for an additional object called <code class="classname">guacConfigGroup</code>. This
+                object and its use will be explained in more detail later. For now, we must add
+                support for this object to the LDAP directory through the provided schema
+                file.</p>
+            <p>The <code class="filename">schema/</code> directory contains two files:
+                    <code class="filename">guacConfigGroup.schema</code>, a standards-compliant file
+                describing the schema, and <code class="filename">guacConfigGroup.ldif</code>, an LDIF file
+                which was automatically generated from the <code class="filename">.schema</code> file
+                specifically for update the schema of an OpenLDAP server. We will be working with
+                    <code class="filename">guacConfigGroup.ldif</code>. If you are not using OpenLDAP, your
+                LDAP server should provide documentation for modifying its schema.</p>
+            <p>The <code class="classname">guacConfigGroup</code> object can be created using the
+                    <span class="command"><strong>ldapadd</strong></span> utility and the provided <code class="filename">.ldif</code>
+                file:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>ldapadd -Q -Y EXTERNAL -H ldapi:/// -f schema/guacConfigGroup.ldif</code></strong>
+<code class="computeroutput">adding new entry "cn=guacConfigGroup,cn=schema,cn=config"
+</code>
+<code class="prompt">#</code></pre>
+            </div>
+            <p>If the <code class="classname">guacConfigGroup</code> object was added successfully, you
+                should see output as above. You can confirm the presence of the new object class
+                using the <span class="command"><strong>ldapsearch</strong></span> utility:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=schema,cn=config dn</code></strong>
+<code class="computeroutput">dn: cn=schema,cn=config
+
+dn: cn={0}core,cn=schema,cn=config
+
+dn: cn={1}cosine,cn=schema,cn=config
+
+dn: cn={2}nis,cn=schema,cn=config
+
+dn: cn={3}inetorgperson,cn=schema,cn=config
+
+dn: cn={4}guacConfigGroup,cn=schema,cn=config
+</code>
+<code class="prompt">#</code></pre>
+            </div>
+        </div>
+    </div>
+    <div class="section" title="The LDAP schema"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ldap-auth-schema"></a>The LDAP schema</h2></div></div></div>
+        
+        <a id="idp1054128" class="indexterm"></a>
+        <p>Guacamole's LDAP support allows users and connections to be managed purely within an
+            LDAP directory defined in <code class="filename">guacamole.properties</code>. This is
+            accomplished with a minimum of changes to the standard LDAP schema - all Guacamole users
+            are traditional LDAP users and share the same mechanism of authentication. The only new
+            type of object required is a representation for Guacamole connections,
+                <code class="classname">guacConfigGroup</code>, which was added to your server's schema
+            during the install process above.</p>
+        <div class="section" title="Users"><div class="titlepage"><div><div><h3 class="title"><a id="idp1056656"></a>Users</h3></div></div></div>
+            
+            <p>All Guacamole users, as far as the LDAP support is concerned, are LDAP users with
+                standard LDAP credentials. When a user signs in to Guacamole, their username and
+                password will be used to bind to the LDAP server. If this bind operation is
+                successful, the available connections are queried from the directory and the user is
+                allowed in.</p>
+        </div>
+        <div class="section" title="Connections and parameters"><div class="titlepage"><div><div><h3 class="title"><a id="idp1058560"></a>Connections and parameters</h3></div></div></div>
+            
+            <p>Each connection is represented by an instance of the
+                    <code class="classname">guacConfigGroup</code> object class, which is simply an extended
+                version of the standard LDAP <code class="classname">groupOfNames</code> which provides a
+                protocol and set of parameters. Only members of the
+                    <code class="classname">guacConfigGroup</code> will have access to the corresponding
+                connection.</p>
+            <p>The <code class="classname">guacConfigGroup</code> object class provides two new
+                attributes in addition to those provided by
+                <code class="classname">groupOfNames</code>:</p>
+            <div class="variablelist"><dl><dt><span class="term"><span class="property">guacConfigProtocol</span></span></dt><dd>
+                        <p>The protocol associated with the connection, such as "vnc" or "rdp".
+                            This attribute is required for every
+                                <code class="classname">guacConfigGroup</code> and can be given only
+                            once.</p>
+                    </dd><dt><span class="term"><span class="property">guacConfigParameter</span></span></dt><dd>
+                        <p>The name and value of a parameter for the specified protocol. This is
+                            given as
+                                    <code class="code"><em class="replaceable"><code>name</code></em>=<em class="replaceable"><code>value</code></em></code>,
+                            where "name" is the name of the parameter as defined by the
+                            documentation for the protocol specified, and "value" is any allowed
+                            value for that parameter.</p>
+                        <p>This attribute can be given multiple times for the same
+                            connection.</p>
+                    </dd></dl></div>
+            <p>For example, to create a new VNC connection which connects to localhost at port
+                5900, while granting access to <code class="systemitem">user1</code> and
+                    <code class="systemitem">user2</code>, you could create an <code class="filename">.ldif</code>
+                file like the following:</p>
+            <div class="informalexample">
+                <pre class="programlisting">dn: cn=Example Connection,ou=groups,dc=example,dc=net
+objectClass: guacConfigGroup
+objectClass: groupOfNames
+cn: Example Connection
+guacConfigProtocol: vnc
+guacConfigParameter: hostname=localhost
+guacConfigParameter: port=5900
+guacConfigParameter: password=secret
+member: cn=user1,ou=people,dc=example,dc=net
+member: cn=user2,ou=people,dc=example,dc=net</pre>
+            </div>
+            <p>The new connection can then be created using the <span class="command"><strong>ldapadd</strong></span>
+                utility:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>ldapadd -x -D <em class="replaceable"><code>cn=admin,dc=example,dc=net</code></em> -W -f <em class="replaceable"><code>example-connection.ldif</code></em></code></strong>
+<code class="computeroutput">Enter LDAP Password: 
+adding new entry "cn=Example Connection,ou=groups,dc=example,dc=net"
+</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>Where <code class="systemitem">cn=admin,dc=example,dc=net</code> is an administrator
+                account with permission to create new entries, and
+                    <code class="filename">example-connection.ldif</code> is the name of the
+                    <code class="filename">.ldif</code> file you just created.</p>
+            <p>There is, of course, no need to use only the standard LDAP utilities to create
+                connections and users. There are useful graphical environments for manipulating LDAP
+                directories, such as Apache Directory Studio, which make many of the tasks given
+                above much easier.</p>
+        </div>
+    </div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mysql-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="noauth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. MySQL authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 6. Disabling authentication</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

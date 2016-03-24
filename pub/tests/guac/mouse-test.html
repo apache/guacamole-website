@@ -1,0 +1,53 @@
+<html>
+
+    <head>
+        <title>Guacamole Mouse Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="../log/log.css"/>
+    </head>
+
+    <body>
+
+        <div id="target" style="width: 320px; height: 240px; border: 1px solid black; background: teal;"></div>
+
+        <div id="log"></div>
+
+        <script type="text/javascript" src="../log/log.js"></script>
+        <script type="text/javascript" src="modules/Mouse.js"></script>
+        <script type="text/javascript" src="modules/Version.js"></script>
+
+        <script type="text/javascript">
+
+            var target = document.getElementById("target");
+
+            var log = new Log();
+            document.getElementById("log").appendChild(log.getElement());
+
+            log.log("Guacamole.Mouse tester", "version 1.4 (" + Guacamole.API_VERSION + ")", "Mike Jumper");
+            log.log("Please press some keys...");
+
+            var mouse = new Guacamole.Mouse(target);
+
+            mouse.onmousedown = function(s) {
+                log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                return false;
+            };
+
+            mouse.onmousemove = function(s) {
+                log.log("guacamole", "mousemove", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                return false;
+            };
+
+            mouse.onmouseup = function(s) {
+                log.log("guacamole", "mouseup", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                return false;
+            };
+
+            mouse.onmousedown = function(s) {
+                log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+            };
+
+        </script>
+
+    </body>
+</html>

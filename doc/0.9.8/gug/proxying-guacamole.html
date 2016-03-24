@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 4. Proxying Guacamole</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="guacamole-docker.html" title="Chapter 3. Installing Guacamole with Docker" /><link rel="next" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. Proxying Guacamole</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="guacamole-docker.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="configuring-guacamole.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="proxying-guacamole"></a>Chapter 4. Proxying Guacamole</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="proxying-guacamole.html#preparing-servlet-container">Preparing your servlet container</a></span></dt><dt><span class="section"><a href="proxying-guacamole.html#nginx">Nginx</a></span></dt><dd><dl><dt><span class="section"><a href="proxying-guacamole.html#proxying-with-nginx">Proxying Guacamole</a></span></dt><dt><span class="section"><a href="proxying-guacamole.html#changing-path-with-nginx">Changing the path</a></span></dt></dl></dd><dt><span class="section"><a href="proxying-guacamole.html#apache">Apache and <span class="package">mod_proxy</span></a></span></dt><dd><dl><dt><span class="section"><a href="proxying-guacamole.html#proxying-with-apache">Proxying Guacamole</a></span></dt><dt><span class="section"><a href="proxying-guacamole.html#websocket-and-apache">Proxying the WebSocket tunnel</a></span></dt><dt><span class="section"><a href="proxying-guacamole.html#changing-path-with-apache">Changing the path</a></span></dt><dt><span class="section"><a href="proxying-guacamole.html#disable-tunnel-logging">Disabling logging of tunnel requests</a></span></dt></dl></dd></dl></div><p>Like most web applications, Guacamole can be placed behind a reverse proxy. For production
+        deployments of Guacamole, this is <span class="emphasis"><em>highly recommended</em></span>. It provides
+        flexibility and, if your proxy is properly configured for SSL, encryption.</p><p>Proxying isolates privileged operations within native applications that can safely drop
+        those privileges when no longer needed, using Java only for unprivileged tasks. On Linux and
+        UNIX systems, a process must be running with root privileges to listen on any port under
+        1024, including the standard HTTP and HTTPS ports (80 and 443 respectively). If the servlet
+        container instead listens on a higher port, such as the default port 8080, it can run as a
+        reduced-privilege user, allowing the reverse proxy to bear the burden of root privileges. As
+        a native application, the reverse proxy can make system calls to safely drop root privileges
+        once the port is open; a Java application like Tomcat cannot do this.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="preparing-servlet-container"></a>Preparing your servlet container</h2></div></div></div><p>Your servlet container is most likely already configured to listen for HTTP
+            connections on port 8080 as this is the default. If this is the case, and you can
+            already access Guacamole over port 8080 from a web browser, you need not make any
+            further changes to its configuration.</p><p>If you <span class="emphasis"><em>have</em></span> changed this, perhaps with the intent of proxying
+            Guacamole over AJP, <span class="emphasis"><em>change it back</em></span>. Using Guacamole over AJP is
+            unsupported as it is known to cause problems, namely:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>WebSocket will not work over AJP, forcing Guacamole to fallback to HTTP,
+                    possibly resulting in reduced performance.</p></li><li class="listitem"><p>Apache 2.4.3 and older does not support the HTTP PATCH method over AJP,
+                    preventing the Guacamole management interface from functioning properly.</p></li></ol></div><p>The connector entry within <code class="filename">conf/server.xml</code> should look like
+            this:</p><div class="informalexample"><pre class="programlisting">&lt;Connector port="8080" protocol="HTTP/1.1" 
+           connectionTimeout="20000"
+           URIEncoding="UTF-8"
+           redirectPort="8443" /&gt;</pre></div><p>Be sure to specify the <code class="code">URIEncoding="UTF-8"</code> attribute as above to ensure
+            that connection names, user names, etc. are properly received by the web application. If
+            you will be creating connections that have Cyrillic, Chinese, Japanese, or other
+            non-Latin characters in their names or parameter values, this attribute is
+            required.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="nginx"></a>Nginx</h2></div></div></div><p>Nginx can be used as a reverse proxy, and supports WebSocket out-of-the-box <a class="link" href="http://nginx.com/blog/websocket-nginx/" target="_top">since version 1.3</a>. Both
+            Apache and Nginx require some additional configuration for proxying of WebSocket to work
+            properly.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="proxying-with-nginx"></a>Proxying Guacamole</h3></div></div></div><p>Nginx does support WebSocket for proxying, but requires that the "Connection" and
+                "Upgrade" HTTP headers are set explicitly due to the nature of the WebSocket
+                protocol. From the Nginx documentation:</p><div class="blockquote"><blockquote class="blockquote"><p>NGINX supports WebSocket by allowing a tunnel to be set up between a client
+                    and a back-end server. For NGINX to send the Upgrade request from the client to
+                    the back-end server, Upgrade and Connection headers must be set explicitly.
+                    ...</p></blockquote></div><p>The proxy configuration belongs within a dedicated <a class="link" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#location" target="_top"><code class="code">location</code></a> block, declaring the backend hosting Guacamole
+                and explicitly specifying the "Connection" and "Upgrade" headers mentioned
+                earlier:</p><div class="informalexample"><pre class="programlisting">location /guacamole/ {
+    proxy_pass http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/;
+    proxy_buffering off;
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $http_connection;
+    access_log off;
+}</pre></div><p>Here, <em class="replaceable"><code>HOSTNAME</code></em> is the hostname or IP address of the
+                machine hosting your servlet container, and <em class="replaceable"><code>8080</code></em> is the
+                port that servlet container is configured to use. You will need to replace these
+                values with the correct values for your server.</p><div class="important"><h3 class="title">Important</h3><p><span class="emphasis"><em>Do not forget to specify "<code class="code">proxy_buffering
+                        off</code>".</em></span></p><p>Most proxies, including Nginx, will buffer all data sent over the connection,
+                    waiting until the connection is closed before sending that data to the client.
+                    As Guacamole's HTTP tunnel relies on streaming data to the client over an open
+                    connection, excessive buffering will effectively block Guacamole connections,
+                    rendering Guacamole useless.</p><p><span class="emphasis"><em>If the option "<code class="code">proxy_buffering off</code>" is not specified,
+                        Guacamole may not work</em></span>.</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="changing-path-with-nginx"></a>Changing the path</h3></div></div></div><p>If you wish to serve Guacamole through Nginx under a path other than
+                    <code class="uri">/guacamole/</code>, the configuration will need to be altered slightly to
+                take cookies into account. Although Guacamole does not rely on receipt of cookies in
+                general, cookies are required for the proper operation of the HTTP tunnel. If the
+                HTTP tunnel is used, and cookies cannot be set, users may be unexpectedly denied
+                access to their connections.</p><p>Regardless of the location specified for the proxy, cookies set by Guacamole will
+                be set using its own absolute path within the backend (<code class="uri">/guacamole/</code>). If
+                this path differs from that used by Nginx, the path in the cookie needs to be
+                modified using <code class="code">proxy_cookie_path</code>:</p><div class="informalexample"><pre class="programlisting">location /<em class="replaceable"><code>new-path/</code></em> {
+    proxy_pass http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/;
+    proxy_buffering off;
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $http_connection;
+    <span class="emphasis"><em>proxy_cookie_path /guacamole/ /<em class="replaceable"><code>new-path/</code></em>;</em></span>
+    access_log off;
+}</pre></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="apache"></a>Apache and <span class="package">mod_proxy</span></h2></div></div></div><p>Apache supports reverse proxy configurations through <a class="link" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy.html" target="_top"><span class="package">mod_proxy</span></a>. Apache 2.4.5 and later also support
+            proxying of WebSocket through a sub-module called <a class="link" href="http://httpd.apache.org/docs/2.4/mod/mod_proxy_wstunnel.html" target="_top"><span class="package">mod_proxy_wstunnel</span></a>. Both of these modules will need
+            to be enabled for proxying of Guacamole to work properly.</p><p>Lacking <span class="package">mod_proxy_wstunnel</span>, it is still possible to proxy
+            Guacamole, but Guacamole will be unable to use WebSocket. It will instead fallback to
+            using the HTTP tunnel, resulting in reduced performance.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="proxying-with-apache"></a>Proxying Guacamole</h3></div></div></div><p>Configuring Apache to proxy HTTP requests requires using the
+                    <em class="parameter"><code>ProxyPass</code></em> and <em class="parameter"><code>ProxyPassReverse</code></em>
+                directives, which are provided by the <span class="package">mod_proxy</span> module. These
+                directives describe how HTTP traffic should be routed to the web server behind the
+                proxy:</p><div class="informalexample"><pre class="programlisting">&lt;Location /guacamole/&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/ flushpackets=on
+    ProxyPassReverse http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/
+&lt;/Location&gt;</pre></div><p>Here, <em class="replaceable"><code>HOSTNAME</code></em> is the hostname or IP address of the
+                machine hosting your servlet container, and <em class="replaceable"><code>8080</code></em> is the
+                port that servlet container is configured to use. You will need to replace these
+                values with the correct values for your server.</p><div class="important"><h3 class="title">Important</h3><p><span class="emphasis"><em>Do not forget the <code class="option">flushpackets=on</code>
+                        option.</em></span></p><p>Most proxies, including <span class="package">mod_proxy</span>, will buffer all data
+                    sent over the connection, waiting until the connection is closed before sending
+                    that data to the client. As Guacamole's HTTP tunnel relies on streaming data to
+                    the client over an open connection, excessive buffering will effectively block
+                    Guacamole connections, rendering Guacamole useless.</p><p><span class="emphasis"><em>If the option <code class="option">flushpackets=on</code> is not specified,
+                        Guacamole may not work</em></span>.</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="websocket-and-apache"></a>Proxying the WebSocket tunnel</h3></div></div></div><p>Apache will not automatically proxy WebSocket connections, but you can proxy them
+                separately with Apache 2.4.5 and later using <span class="package">mod_proxy_wstunnel</span>.
+                After enabling <span class="package">mod_proxy_wstunnel</span> a secondary
+                    <code class="code">Location</code> section can be added which explicitly proxies the
+                Guacamole WebSocket tunnel, located at
+                <code class="uri">/guacamole/websocket-tunnel</code>:</p><div class="informalexample"><pre class="programlisting">&lt;Location /guacamole/websocket-tunnel&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass ws://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/websocket-tunnel
+    ProxyPassReverse ws://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/websocket-tunnel
+&lt;/Location&gt;</pre></div><p>Lacking this, Guacamole will still work by using normal HTTP, but network latency
+                will be more pronounced with respect to user input, and performance may be
+                lower.</p><div class="important"><h3 class="title">Important</h3><p>The <code class="code">Location</code> section for <code class="uri">/guacamole/websocket-tunnel</code>
+                    must be placed after the <code class="code">Location</code> section for the rest of
+                    Guacamole.</p><p>Apache evaluates all Location sections, giving priority to the last section
+                    that matches. If the <code class="uri">/guacamole/websocket-tunnel</code> section comes first,
+                    the section for <code class="uri">/guacamole/</code> will match instead, and WebSocket will
+                    not be proxied correctly.</p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="changing-path-with-apache"></a>Changing the path</h3></div></div></div><p>If you wish to serve Guacamole through Apache under a path other than
+                    <code class="uri">/guacamole/</code>, the configuration required for Apache will be slightly
+                different than the examples above due to cookies.</p><p>Guacamole does not rely on receipt of cookies for tracking whether a user is
+                logged in, but cookies are required for the proper operation of the HTTP tunnel. If
+                the HTTP tunnel is used, and cookies cannot be set, users will be unexpectedly
+                denied access to connections they legitimately should have access to.</p><p>Cookies are set using the absolute path of the web application
+                    (<code class="uri">/guacamole/</code>). If this path differs from that used by Apache, the
+                path in the cookie needs to be modified using the
+                    <em class="parameter"><code>ProxyPassReverseCookiePath</code></em> directive:</p><div class="informalexample"><pre class="programlisting">&lt;Location /<em class="replaceable"><code>new-path/</code></em>&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/ flushpackets=on
+    ProxyPassReverse http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/
+    <span class="emphasis"><em>ProxyPassReverseCookiePath /guacamole/ /<em class="replaceable"><code>new-path/</code></em></em></span>
+&lt;/Location&gt;
+
+&lt;Location /<em class="replaceable"><code>new-path</code></em>/websocket-tunnel&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass ws://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/websocket-tunnel
+    ProxyPassReverse ws://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/websocket-tunnel
+&lt;/Location&gt;</pre></div><p>This directive is not needed for the WebSocket section, as it is not applicable.
+                Cookies are only used by Guacamole within the HTTP tunnel.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="disable-tunnel-logging"></a>Disabling logging of tunnel requests</h3></div></div></div><p>If WebSocket is unavailable, Guacamole will fallback to using an HTTP-based
+                tunnel. The Guacamole HTTP tunnel works by transferring a continuous stream of data
+                over multiple short-lived streams, each associated with a separate HTTP request. By
+                default, Apache will log each of these requests, resulting in a rather bloated
+                access log.</p><p>There is little value in a log file filled with identical tunnel requests, so it
+                is recommended to explicitly disable logging of those requests. Apache does provide
+                a means of matching URL patterns and setting environment variables based on whether
+                the URL matches. Logging can then be restricted to requests which lack this
+                environment variable:</p><div class="informalexample"><pre class="programlisting">SetEnvIf Request_URI "^<em class="replaceable"><code>/guacamole</code></em>/tunnel" dontlog
+CustomLog  <em class="replaceable"><code>/var/log/apache2/guac.log</code></em> common env=!dontlog</pre></div><p>Note that if you are serving Guacamole under a path different from
+                    <code class="uri">/guacamole/</code>, you will need to change the value of
+                    <em class="parameter"><code>Request_URI</code></em> above accordingly.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="guacamole-docker.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="configuring-guacamole.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. Installing Guacamole with Docker </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 5. Configuring Guacamole</td></tr></table></div>
+
+            </div></div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

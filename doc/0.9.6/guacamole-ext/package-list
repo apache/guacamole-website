@@ -1,0 +1,11 @@
+org.glyptodon.guacamole.environment
+org.glyptodon.guacamole.net.auth
+org.glyptodon.guacamole.net.auth.permission
+org.glyptodon.guacamole.net.auth.simple
+org.glyptodon.guacamole.net.event
+org.glyptodon.guacamole.net.event.listener
+org.glyptodon.guacamole.properties
+org.glyptodon.guacamole.protocols
+org.glyptodon.guacamole.token
+org.glyptodon.guacamole.xml
+org.glyptodon.guacamole.xml.protocol

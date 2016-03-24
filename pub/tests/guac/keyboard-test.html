@@ -1,0 +1,41 @@
+<html>
+
+    <head>
+        <title>Guacamole Keyboard Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="../log/log.css"/>
+    </head>
+
+    <body>
+
+        <textarea></textarea>
+
+        <div id="log"></div>
+
+        <script type="text/javascript" src="../log/log.js"></script>
+        <script type="text/javascript" src="modules/Keyboard.js"></script>
+        <script type="text/javascript" src="modules/Version.js"></script>
+        <script type="text/javascript" src="keysyms.js"></script>
+
+        <script type="text/javascript">
+
+            var log = new Log();
+            document.getElementById("log").appendChild(log.getElement());
+
+            log.log("Guacamole.Keyboard tester", "version 1.4 (" + Guacamole.API_VERSION + ")", "Mike Jumper");
+            log.log("Please press some keys...");
+
+            var keyboard = new Guacamole.Keyboard(document);
+
+            keyboard.onkeydown = function(keysym) {
+                log.log("guacamole", "keydown", "0x" + keysym.toString(16), X11_KEYSYM[keysym]);
+            };
+
+            keyboard.onkeyup = function(keysym) {
+                log.log("guacamole", "keyup", "0x" + keysym.toString(16), X11_KEYSYM[keysym]);
+            };
+
+        </script>
+
+    </body>
+</html>

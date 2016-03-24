@@ -1,0 +1,26 @@
+
+.log {
+    display: table;
+}
+
+.log .entry {
+    display: table-row;
+    font-family: monospace;
+}
+
+.log .value {
+    display: table-cell;
+    padding-right: 1em;
+}
+
+.log .value:nth-child(1) {
+    color: black;
+    font-weight: bold;
+}
+
+.log .value:nth-child(2) { color: blue; }
+.log .value:nth-child(3) { color: green; }
+.log .value:nth-child(4) { color: red; }
+.log .value:nth-child(5) { color: teal; }
+.log .value:nth-child(6) { color: purple; }
+

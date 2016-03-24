@@ -1,0 +1,42 @@
+<html>
+
+    <head>
+        <title>XHR Download Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="log/log.css"/>
+    </head>
+
+    <body>
+
+        <div id="log"></div>
+
+        <script type="text/javascript" src="log/log.js"></script>
+        <script type="text/javascript">
+
+            var log = new Log();
+            document.getElementById("log").appendChild(log.getElement());
+
+            log.log("XHR tester", "version 1.1", "Mike Jumper");
+            log.log("Starting download of test file...");
+
+            var received_length = 0;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function __ready_state() {
+
+                var received_data = xhr.responseText || "";
+                var delta = received_data.length - received_length;
+                received_length = received_data.length;
+                log.log("readyState", xhr.readyState, "new_data", delta, "total", received_length);
+
+                if (xhr.readyState === 4)
+                    log.log("Download complete");        
+
+            };
+
+            xhr.open("GET", "/trickle.php?ts=" + new Date().getTime(), true);
+            xhr.send();
+
+        </script>
+
+    </body>
+</html>

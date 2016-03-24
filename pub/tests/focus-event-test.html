@@ -1,0 +1,61 @@
+<html>
+
+    <head>
+        <title>Focus Event Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="log/log.css"/>
+    </head>
+
+    <body>
+
+        <textarea id="textarea"></textarea>
+        <button id="focus">Focus Text Area</button>
+        <div id="box" style="padding: 3em; background: #FCF">
+            &lt;div&gt; with mousedown ignored
+        </div>
+
+        <div id="log"></div>
+
+        <script type="text/javascript" src="log/log.js"></script>
+        <script type="text/javascript">
+
+            var log = new Log();
+            document.getElementById("log").appendChild(log.getElement());
+
+            log.log("Focus event tester", "version 1.0", "Mike Jumper");
+
+            var textarea = document.getElementById("textarea");
+            var focus = document.getElementById("focus");
+            var box = document.getElementById("box");
+
+            box.onmousedown =
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            };
+
+            focus.onclick = function() {
+                log.log("button", "event", "onclick");
+                textarea.focus();
+            };
+
+            focus.onfocus = function() {
+                log.log("button", "event", "onfocus");
+            };
+            
+            focus.onblur = function() {
+                log.log("button", "event", "onblur");
+            };
+            
+            textarea.onfocus = function() {
+                log.log("textarea", "event", "onfocus");
+            };
+            
+            textarea.onblur = function() {
+                log.log("textarea", "event", "onblur");
+            };
+            
+        </script>
+
+    </body>
+</html>

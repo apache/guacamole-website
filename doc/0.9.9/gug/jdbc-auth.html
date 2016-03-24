@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 6. Database authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole" /><link rel="next" href="ldap-auth.html" title="Chapter 7. LDAP authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. Database authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="configuring-guacamole.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="ldap-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="jdbc-auth"></a>Chapter 6. Database authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="jdbc-auth.html#idm140538189025168">Downloading the database authentication extension</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-database-creation">Creating the Guacamole database</a></span></dt><dd><dl><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-mysql">MySQL</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-postgresql">PostgreSQL</a></span></dt></dl></dd><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-installation">Installing database authentication</a></span></dt><dd><dl><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-configuration">Configuring Guacamole for database authentication</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#idm140538188381584">Completing the installation</a></span></dt></dl></dd><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-default-user">Logging in</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-schema">Modifying data manually</a></span></dt><dd><dl><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-schema-users">Users</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-schema-connections">Connections and parameters</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-schema-connection-groups">Connection groups</a></span></dt><dt><span class="section"><a href="jdbc-auth.html#jdbc-auth-schema-permissions">Permissions</a></span></dt></dl></dd></dl></div><a id="idm140538189456928" class="indexterm"></a><a id="idm140538189456032" class="indexterm"></a><a id="idm140538189455136" class="indexterm"></a><p>Guacamole supports authentication via MySQL or PostgreSQL databases through extensions
+        available from the project website. Using a database for authentication provides additional
+        features, such as the ability to use load balancing groups of connections and a web-based
+        administrative interface. Unlike the default, XML-driven authentication module, all changes
+        to users and connections take effect immediately; users need not logout and back in to see
+        new connections.</p><p>While most authentication extensions function independently, the database authentication
+        can act in a subordinate role, allowing users from other authentication extensions to be
+        associated with connections within the database. Users are considered identical to users
+        within the database if they have the same usernames, and the authentication result of
+        another extension will be trusted if it succeeds. A user with an account under multiple
+        systems will thus be able to see data from each system after successfully logging in. For
+        more information on using the database authentication alongside other mechanisms, see <a class="xref" href="ldap-auth.html#ldap-and-database" title="Associating LDAP with a database">the section called “Associating LDAP with a database”</a> within <a class="xref" href="ldap-auth.html" title="Chapter 7. LDAP authentication">Chapter 7, <em>LDAP authentication</em></a>.</p><p>To use the database authentication extension, you will need:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>A supported database - currently MariaDB, MySQL, or PostgreSQL.</p></li><li class="listitem"><p>Sufficient permission to create new databases, to create new users, and to grant
+                those users permissions.</p></li><li class="listitem"><p>Network access to the database from the Guacamole server.</p></li></ol></div><div class="important"><h3 class="title">Important</h3><p>This chapter involves modifying the contents of <code class="varname">GUACAMOLE_HOME</code> -
+            the Guacamole configuration directory. If you are unsure where
+                <code class="varname">GUACAMOLE_HOME</code> is located on your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before proceeding.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140538189025168"></a>Downloading the database authentication extension</h2></div></div></div><p>The database authentication extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided on the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guac-dev.org/releases/" target="_top">http://guac-dev.org/releases/</a>.</p><p>The database authentication extension is packaged as a <code class="filename">.tar.gz</code>
+            file containing:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">mysql/</code></span></dt><dd><p>Contains the MySQL/MariaDB authentication extension,
+                            <code class="filename">guacamole-auth-jdbc-mysql-0.9.9.jar</code>, along with a
+                            <code class="filename">schema/</code> directory containing MySQL-specific SQL
+                        scripts required to set up the database. The
+                            <code class="filename">guacamole-auth-jdbc-mysql-0.9.9.jar</code> file will
+                        ultimately need to be placed within
+                            <code class="filename">GUACAMOLE_HOME/extensions</code>, while the MySQL JDBC
+                        driver must be placed within <code class="filename">GUACAMOLE_HOME/lib</code>.</p><p><span class="emphasis"><em>The MySQL JDBC driver is not included with the
+                            extension.</em></span> You must obtain the JDBC driver
+                            <code class="filename">.jar</code> yourself from <a class="link" href="http://dev.mysql.com/downloads/connector/j/" target="_top">MySQL's
+                            website</a>. The driver is known as "Connector/J", and the required
+                            <code class="filename">.jar</code> will be within a <code class="filename">.tar.gz</code>
+                        archive.</p></dd><dt><span class="term"><code class="filename">postgresql/</code></span></dt><dd><p>Contains the PostgreSQL authentication extension,
+                            <code class="filename">guacamole-auth-jdbc-postgresql-0.9.9.jar</code>, along
+                        with a <code class="filename">schema/</code> directory containing PostgreSQL-specific
+                        SQL scripts required to set up the database. The
+                            <code class="filename">guacamole-auth-jdbc-postgresql-0.9.9.jar</code> file will
+                        ultimately need to be placed within
+                            <code class="filename">GUACAMOLE_HOME/extensions</code>, while the PostgreSQL
+                        JDBC driver must be placed within
+                        <code class="filename">GUACAMOLE_HOME/lib</code>.</p><p><span class="emphasis"><em>The PostgreSQL JDBC driver is not included with the
+                            extension.</em></span> You must obtain the JDBC driver
+                            <code class="filename">.jar</code> yourself from <a class="link" href="https://jdbc.postgresql.org/download.html#current" target="_top">PostgreSQL's website</a>. The proper <code class="filename">.jar</code> file
+                        depends on the version of Java you have installed. </p></dd></dl></div><p>Only one of the directories within the archive will be applicable to you, depending on
+            whether you are using MariaDB, MySQL, or PostgreSQL.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="jdbc-auth-database-creation"></a>Creating the Guacamole database</h2></div></div></div><p>The database authentication module will need a database to store authentication data
+            and a user to use only for data access and manipulation. You can use an existing
+            database and existing user, but for the sake of simplicity and security, these
+            instructions assume you will be creating a new database and new user that will be used
+            only by Guacamole and only for this authentication module.</p><p>You need MariaDB, MySQL, or PostgreSQL installed, and must have sufficient access to
+            create and administer databases. If this is not the case, install your database of
+            choice now. Most distributions will provide a convenient MySQL or PostgreSQL package
+            which will set up everything for you, including the root database user, if
+            applicable.</p><p>For the sake of clarity, these instructions will refer to the database as
+            "guacamole_db" and the user as "guacamole_user", but the database and user can be named
+            whatever you like. Naturally, you should also choose a real password for your user
+            rather than the string "some_password" used as a placeholder below.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-mysql"></a>MySQL</h3></div></div></div><p>If using MySQL, you must create your database and user first:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> mysql -u root -p
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="computeroutput">Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 233
+Server version: 5.5.29-0ubuntu0.12.10.1 (Ubuntu)
+
+Copyright (c) 2000, 2012, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+</code>
+<code class="prompt">mysql&gt;</code> <strong class="userinput"><code>CREATE DATABASE <em class="replaceable"><code>guacamole_db</code></em>;</code></strong>
+<code class="computeroutput">Query OK, 1 row affected (0.00 sec)</code>
+
+<code class="prompt">mysql&gt;</code> <strong class="userinput"><code>CREATE USER '<em class="replaceable"><code>guacamole_user'</code></em>@'localhost' IDENTIFIED BY '<em class="replaceable"><code>some_password</code></em>';</code></strong>
+<code class="computeroutput">Query OK, 0 rows affected (0.00 sec)</code>
+
+<code class="prompt">mysql&gt;</code> <strong class="userinput"><code>GRANT SELECT,INSERT,UPDATE,DELETE ON <em class="replaceable"><code>guacamole_db</code></em>.* TO '<em class="replaceable"><code>guacamole_user'</code></em>@'localhost';</code></strong>
+<code class="computeroutput">Query OK, 0 rows affected (0.00 sec)</code>
+
+<code class="prompt">mysql&gt;</code> <strong class="userinput"><code>FLUSH PRIVILEGES;</code></strong>
+<code class="computeroutput">Query OK, 0 rows affected (0.02 sec)</code>
+
+<code class="prompt">mysql&gt;</code> <strong class="userinput"><code>quit</code></strong>
+<code class="computeroutput">Bye</code>
+<code class="prompt">$</code></pre></div><p>Once the database and user are created, the database schema must be applied by
+                running the supplied SQL scripts. These SQL scripts are included in the
+                    <code class="filename">mysql/schema/</code> directory of the archive you downloaded from
+                the Guacamole website. They are named such that they can be run in order with one
+                command:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>ls schema/</code></strong>
+<code class="computeroutput">001-create-schema.sql  002-create-admin-user.sql  upgrade</code>
+<code class="prompt">$</code> <strong class="userinput"><code>cat schema/*.sql | mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em></code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre></div><p>If the operation is successful, all tables have been created successfully, and the
+                database is now ready for use.</p><div class="important"><h3 class="title">Important</h3><p>If you are upgrading from an older version of Guacamole that lacked support
+                    for connection groups (older than 0.8.2), you should instead run the upgrade
+                    script located within the <code class="filename">upgrade/</code> directory:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>ls schema/upgrade/</code></strong>
+<code class="computeroutput">upgrade-pre-0.8.2.sql upgrade-pre-0.9.7.sql upgrade-pre-0.9.9.sql
+upgrade-pre-0.9.6.sql upgrade-pre-0.9.8.sql</code>
+<code class="prompt">$</code> <strong class="userinput"><code>mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em> &lt; schema/upgrade/upgrade-pre-0.8.2.sql</code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre><p>If you are upgrading from a version of Guacamole before 0.9.6, the default
+                        permissions associated with new users have changed such that users can
+                        change their own passwords. You may, if desired, run the upgrade script to
+                        migrate any existing users to the new permissions:</p></div><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em> &lt; schema/upgrade/upgrade-pre-0.9.6.sql</code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre></div><p>If you are upgrading from a version of Guacamole before 0.9.7, schema changes
+                    regarding support for disabling users and expiring passwords need to be
+                    applied:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em> &lt; schema/upgrade/upgrade-pre-0.9.7.sql</code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre></div><p>If you are upgrading from a version of Guacamole before 0.9.8, schema changes
+                    regarding support for restricting user access times and concurrent connection
+                    use need to be applied:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em> &lt; schema/upgrade/upgrade-pre-0.9.8.sql</code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre></div><p>If you are upgrading from a version of Guacamole before 0.9.9, schema changes
+                    which add indexes improving the performance of connection history searches need
+                    to be applied:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>mysql -u root -p <em class="replaceable"><code>guacamole_db</code></em> &lt; schema/upgrade/upgrade-pre-0.9.9.sql</code></strong>
+<code class="prompt">Enter password:</code> <strong class="userinput"><code><em class="replaceable"><code>password</code></em></code></strong>
+<code class="prompt">$</code></pre></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-postgresql"></a>PostgreSQL</h3></div></div></div><p>If using PostgreSQL, the database and schema must be created first:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>createdb <em class="replaceable"><code>guacamole_db</code></em></code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>ls schema/</code></strong>
+<code class="computeroutput">001-create-schema.sql  002-create-admin-user.sql</code>
+<code class="prompt">$</code> <strong class="userinput"><code>cat schema/*.sql | psql -d <em class="replaceable"><code>guacamole_db</code></em> -f -</code></strong>
+<code class="computeroutput">CREATE TYPE
+CREATE TYPE
+CREATE TYPE
+CREATE TABLE
+CREATE INDEX</code>
+...
+<code class="computeroutput">INSERT 0 1
+INSERT 0 4
+INSERT 0 3</code>
+<code class="prompt">$</code></pre></div><p>Once the database exists, you can safely create a new user for the database, and
+                grant that user sufficient privileges to manage the contents of all tables in the
+                database:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>psql -d <em class="replaceable"><code>guacamole_db</code></em></code></strong>
+<code class="computeroutput">psql (9.3.6)
+Type "help" for help.
+</code>
+<code class="prompt">guacamole=# </code><strong class="userinput"><code>CREATE USER <em class="replaceable"><code>guacamole_user</code></em> WITH PASSWORD '<em class="replaceable"><code>some_password</code></em>';</code></strong>
+<code class="computeroutput">CREATE ROLE</code>
+<code class="prompt">guacamole=# </code><strong class="userinput"><code>GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO <em class="replaceable"><code>guacamole_user</code></em>;</code></strong>
+<code class="computeroutput">GRANT</code>
+<code class="prompt">guacamole=# </code><strong class="userinput"><code>GRANT SELECT,USAGE ON ALL SEQUENCES IN SCHEMA public TO <em class="replaceable"><code>guacamole_user</code></em>;</code></strong>
+<code class="computeroutput">GRANT</code>
+<code class="prompt">guacamole=# </code><strong class="userinput"><code>\q</code></strong>
+<code class="prompt">$</code></pre></div><div class="important"><h3 class="title">Important</h3><p>If you are upgrading from an older version of Guacamole that lacked support
+                    disabling users and expiring passwords (older than 0.9.7), you should instead
+                    run the upgrade script located within the <code class="filename">upgrade/</code>
+                    directory:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>ls schema/upgrade/</code></strong>
+<code class="computeroutput">upgrade-pre-0.9.7.sql upgrade-pre-0.9.8.sql</code>
+<code class="prompt">$</code> <strong class="userinput"><code>psql -d <em class="replaceable"><code>guacamole_db</code></em> -f schema/upgrade/upgrade-pre-0.9.7.sql</code></strong>
+<code class="computeroutput">ALTER TABLE
+ALTER TABLE</code>
+<code class="prompt">$</code></pre><p>If you are upgrading from a version of Guacamole before 0.9.8, schema
+                        changes regarding support for restricting user access times and concurrent
+                        connection use need to be applied:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>psql -d <em class="replaceable"><code>guacamole_db</code></em> -f schema/upgrade/upgrade-pre-0.9.8.sql</code></strong>
+<code class="computeroutput">ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE</code>
+<code class="prompt">$</code></pre></div><p>If you are upgrading from a version of Guacamole before 0.9.9, schema
+                        changes which add indexes improving the performance of connection history
+                        searches need to be applied:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>psql -d <em class="replaceable"><code>guacamole_db</code></em> -f schema/upgrade/upgrade-pre-0.9.9.sql</code></strong>
+<code class="computeroutput">CREATE INDEX
+CREATE INDEX
+CREATE INDEX</code>
+<code class="prompt">$</code></pre></div></div></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="jdbc-auth-installation"></a>Installing database authentication</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory. To install
+            the database authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-jdbc-mysql-0.9.9.jar</code>
+                    <span class="emphasis"><em>or</em></span>
+                    <code class="filename">guacamole-auth-jdbc-postgresql-0.9.9.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>, depending on whether you are
+                    using MySQL/MariaDB or PostgreSQL.</p></li><li class="step"><p>Copy the JDBC driver for your database to
+                        <code class="filename">GUACAMOLE_HOME/lib</code>. Without a JDBC driver for your
+                    database, Guacamole will not be able to connect and authenticate users.</p></li><li class="step"><p>Configure Guacamole to use database authentication, as described below.</p></li></ol></div><div class="important"><h3 class="title">Important</h3><p>You will need to restart Guacamole by restarting your servlet container in order
+                to complete the installation. Doing this will disconnect all active users, so be
+                sure that it is safe to do so prior to attempting installation. If you do not
+                configure the database authentication properly, Guacamole will not start up again
+                until the configuration is fixed.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-configuration"></a>Configuring Guacamole for database authentication</h3></div></div></div><p>Additional properties must be added to <code class="filename">guacamole.properties</code>
+                for Guacamole to properly connect to your database. These properties are specific to
+                the database being used, and must be set correctly for authentication to
+                work.</p><p>To use a MySQL database, you will need to specify the following:</p><div class="informalexample"><pre class="programlisting"># MySQL properties
+mysql-hostname: localhost
+mysql-port: 3306
+mysql-database: <em class="replaceable"><code>guacamole_db</code></em>
+mysql-username: <em class="replaceable"><code>guacamole_user</code></em>
+mysql-password: <em class="replaceable"><code>some_password</code></em></pre><p>For PostgreSQL, the properties are similar, but with different
+                    prefixes:</p><div class="informalexample"><pre class="programlisting"># PostgreSQL properties
+postgresql-hostname: localhost
+postgresql-port: 5432
+postgresql-database: <em class="replaceable"><code>guacamole_db</code></em>
+postgresql-username: <em class="replaceable"><code>guacamole_user</code></em>
+postgresql-password: <em class="replaceable"><code>some_password</code></em></pre></div></div><p>The properties absolutely required by the database authentication extension are
+                relatively few and self-explanatory, describing only how the connection to the
+                database is to be established, and how Guacamole will authenticate when querying the
+                database:</p><div class="informaltable"><table border="1"><colgroup><col class="c1" /><col class="c2" /><col class="c3" /></colgroup><thead><tr><th>MySQL/MariaDB Property</th><th>PostgreSQL Property</th><th>Description</th></tr></thead><tbody><tr><td><span class="property">mysql-hostname</span></td><td><span class="property">postgresql-hostname</span></td><td>
+                                <p>The hostname or IP address of the server hosting your
+                                    database.</p>
+                            </td></tr><tr><td><span class="property">mysql-port</span></td><td><span class="property">postgresql-port</span></td><td>
+                                <p>The port number of the database to connect to. For MySQL and
+                                    MariaDB, this will likely be 3306. For PostgreSQL, this will
+                                    likely be 5432.</p>
+                            </td></tr><tr><td><span class="property">mysql-database</span></td><td><span class="property">postgresql-database</span></td><td>
+                                <p>The name of the database that you created for Guacamole. This
+                                    is given as "guacamole_db" in the examples given in this
+                                    chapter.</p>
+                            </td></tr><tr><td><span class="property">mysql-username</span></td><td><span class="property">postgresql-username</span></td><td>
+                                <p>The username of the user that Guacamole should use to connect
+                                    to the database. This is given as "guacamole_user" in the
+                                    examples given in this chapter.</p>
+                            </td></tr><tr><td><span class="property">mysql-password</span></td><td><span class="property">postgresql-password</span></td><td>
+                                <p>The password Guacamole should provide when authenticating with
+                                    the database. This is given as "some_password" in the examples
+                                    given in this chapter.</p>
+                            </td></tr></tbody></table></div><p>Be sure to specify the correct username and password for the database user you
+                created, and to specify the correct database. Authentication will not work if these
+                parameters are not correct.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-concurrency"></a>Concurrent use of Guacamole connections</h4></div></div></div><p>The database authentication module provides configuration options to restrict
+                    concurrent use of connections or connection groups. These options are set
+                    through <code class="filename">guacamole.properties</code> and specify the default
+                    concurrency policies for connections and connection groups. The values set
+                    through the properties can be overridden later on a per-connection basis using
+                    the administrative interface:</p><div class="informalexample"><pre class="programlisting"># MySQL
+mysql-default-max-connections: 1
+mysql-default-max-group-connections: 1
+
+# PostgreSQL
+postgresql-default-max-connections: 1
+postgresql-default-max-group-connections: 1</pre></div><p>These properties are not required, but with the above properties in place,
+                    users attempting to use a connection or group that is already in use will be
+                    denied access. By default, concurrent access is allowed.</p><p>Concurrent access can also be restricted such that a particular user may only
+                    use a connection or group a certain number of times. By default, per-user
+                    concurrent use is limited for connection groups (to avoid allowing a single user
+                    to exhaust the contents of the group) but otherwise unrestricted. This default
+                    behavior can be modified through <code class="filename">guacamole.properties</code> or
+                    the per-connection settings exposed in the administrative interface:</p><div class="informalexample"><pre class="programlisting"># MySQL
+mysql-default-max-connections-per-user: 0
+mysql-default-max-group-connections-per-user: 0
+
+# PostgreSQL
+postgresql-default-max-connections-per-user: 0
+postgresql-default-max-group-connections-per-user: 0</pre></div><p>The above properties replace the "simultaneous" and "duplicate" properties used
+                    by prior Guacamole releases. The older properties will still work, but are now
+                    deprecated. If you continue to use those properties, you will receive warnings
+                    in the logs advising you of their deprecated status and including examples for
+                    providing the same behavior with the new properties described above:</p><div class="informalexample"><pre class="screen"><code class="computeroutput">WARN  o.g.g.a.p.PostgreSQLAuthenticationProvider - The
+"postgresql-disallow-simultaneous-connections" property is deprecated.
+Use "postgresql-default-max-connections" and
+"postgresql-default-max-group-connections" instead.
+INFO  o.g.g.a.p.PostgreSQLAuthenticationProvider - To achieve the same
+result of setting "postgresql-disallow-simultaneous-connections" to
+"false", set "postgresql-default-max-connections" to "0" and
+"postgresql-default-max-group-connections" to "0".</code></pre></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140538188381584"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before the database authentication will take effect. Restart your servlet
+                container and give the new authentication a try.</p><p>
+                </p><div class="important"><h3 class="title">Important</h3><p>You only need to restart your servlet container. <span class="emphasis"><em>You do not need
+                            to restart <span class="package">guacd</span></em></span>.</p><p><span class="package">guacd</span> is completely independent of the web application
+                        and does not deal with <code class="filename">guacamole.properties</code> or the
+                        authentication system in any way. Since you are already restarting the
+                        servlet container, restarting <span class="package">guacd</span> as well technically
+                        won't hurt anything, but doing so is completely pointless.</p></div><p>
+            </p><p>If Guacamole does not come back online after restarting your servlet container,
+                check the logs. Problems in the configuration of the database authentication
+                extension will prevent Guacamole from starting up, and any such errors will be
+                recorded in the logs of your servlet container.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="jdbc-auth-default-user"></a>Logging in</h2></div></div></div><a id="idm140538188373392" class="indexterm"></a><a id="idm140538188372496" class="indexterm"></a><p>The default Guacamole user created by the provided SQL scripts is
+                "<code class="systemitem">guacadmin</code>", with a default password of
+                "<code class="systemitem">guacadmin</code>". Once you have verified that the database
+            authentication is working, <span class="emphasis"><em>you should change your password
+                immediately</em></span>.</p><p>More detailed instructions for managing users and connections is given in <a class="xref" href="administration.html" title="Chapter 10. Administration">Chapter 10, <em>Administration</em></a>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="jdbc-auth-schema"></a>Modifying data manually</h2></div></div></div><a id="idm140538188703296" class="indexterm"></a><p>If necessary, it is possible to modify the data backing the authentication module
+            manually by executing SQL statements against the database. In general use, this will not
+            be common, but if you need to bulk-insert a large number of users or connections, or you
+            wish to translate an existing configuration automatically, you will need to know how
+            everything is laid out at a high level.</p><p>This section assumes knowledge of SQL and your chosen database, and that whatever you
+            need to do can be accomplished if only you had high-level information about Guacamole's
+            SQL schema.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-schema-users"></a>Users</h3></div></div></div><a id="idm140538188699792" class="indexterm"></a><p>Every user has a corresponding entry in the <code class="classname">guacamole_user</code>
+                table. Each user has a corresponding unique username and salted password. The salted
+                password is split into two columns: one containing the salt, and the other
+                containing the password hashed with SHA-256.</p><p>The <code class="classname">guacamole_user</code> table contains the following
+                columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The unique integer associated with each user. This value is generated
+                            automatically when a new entry is inserted into the
+                                <code class="classname">guacamole_user</code> table.</p></dd><dt><span class="term"><span class="property">username</span></span></dt><dd><p>The unique name associated with each user. This value must be
+                            specified manually, and must be different from any existing username in
+                            the table. References to users in other tables use the value from
+                                <span class="property">user_id</span>, not
+                            <span class="property">username</span>.</p></dd><dt><span class="term"><span class="property">password_hash</span></span></dt><dd><p>The result of hashing the user's password concatenated with the
+                            contents of <span class="property">password_salt</span> using SHA-256. The salt
+                            is appended to the password prior to hashing.</p><p>Although passwords set through Guacamole will always be salted, it is
+                            possible to use unsalted password hashes when inserted manually or
+                            through an external system. If <span class="property">password_salt</span> is
+                                <code class="constant">NULL</code>, the <span class="property">password_hash</span>
+                            will be handled as a simple unsalted hash of the password.</p></dd><dt><span class="term"><span class="property">password_salt</span></span></dt><dd><p>A 32-byte random value. When a new user is created from the web
+                            interface, this value is randomly generated using a
+                            cryptographically-secure random number generator.</p><p>This will always be set for users whose passwords are set through
+                            Guacamole, but it is possible to use unsalted password hashes when
+                            inserted manually or through an external system. If
+                                <span class="property">password_salt</span> is <code class="constant">NULL</code>, the
+                                <span class="property">password_hash</span> will be handled as a simple
+                            unsalted hash of the password.</p></dd><dt><span class="term"><span class="property">disabled</span></span></dt><dd><p>Whether login attempts as this user account should be rejected. If
+                            this column is set to <code class="constant">TRUE</code> or
+                                <code class="constant">1</code>, login attempts by this user will be rejected
+                            as if the user did not exist. By default, user accounts are not
+                            disabled, and login attempts will succeed if the user provides the
+                            correct password.</p></dd><dt><span class="term"><span class="property">expired</span></span></dt><dd><p>If set to <code class="constant">TRUE</code> or <code class="constant">1</code>,
+                            requires that the user reset their password prior to fully logging in.
+                            The user will be presented with a password reset form, and will not be
+                            allowed to log into Guacamole until the password has been changed. By
+                            default, user accounts are not expired, and no password reset will be
+                            required upon login.</p></dd><dt><span class="term"><span class="property">access_window_start</span></span></dt><dd><p>The time of day (not date) after which this user account may be used.
+                            If <code class="constant">NULL</code>, this restriction does not apply. If set to
+                                non-<code class="constant">NULL</code>, attempts to log in after the
+                            specified time will be allowed, while attempts to log in before the
+                            specified time will be denied.</p></dd><dt><span class="term"><span class="property">access_window_end</span></span></dt><dd><p>The time of day (not date) after which this user account may
+                                <span class="emphasis"><em>not</em></span> be used. If <code class="constant">NULL</code>, this
+                            restriction does not apply. If set to non-<code class="constant">NULL</code>,
+                            attempts to log in after the specified time will be denied, while
+                            attempts to log in before the specified time will be allowed.</p></dd><dt><span class="term"><span class="property">valid_from</span></span></dt><dd><p>The date (not time of day) after which this user account may be used.
+                            If <code class="constant">NULL</code>, this restriction does not apply. If set to
+                                non-<code class="constant">NULL</code>, attempts to log in after the
+                            specified date will be allowed, while attempts to log in before the
+                            specified date will be denied.</p></dd><dt><span class="term"><span class="property">valid_until</span></span></dt><dd><p>The date (not time of day) after which this user account may
+                                <span class="emphasis"><em>not</em></span> be used. If <code class="constant">NULL</code>, this
+                            restriction does not apply. If set to non-<code class="constant">NULL</code>,
+                            attempts to log in after the specified date will be denied, while
+                            attempts to log in before the specified date will be allowed.</p></dd><dt><span class="term"><span class="property">timezone</span></span></dt><dd><p>The time zone to use when interpreting the
+                                <span class="property">access_window_start</span>,
+                                <span class="property">access_window_end</span>,
+                                <span class="property">valid_from</span>, and
+                                <span class="property">valid_until</span> values. This value may be any Java
+                                <code class="classname">TimeZone</code> ID, as defined by <a class="link" href="http://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html#getAvailableIDs()" target="_top"><code class="methodname">getAvailableIDs()</code></a>, though the Guacamole
+                            management interface will only present a subset of these time
+                            zones.</p></dd></dl></div><div class="important"><h3 class="title">Important</h3><p>If you choose to manually set unsalted password hashes, please be sure you
+                    understand the security implications of doing so.</p><p>In the event that your database is compromised, finding the password for a
+                        <span class="emphasis"><em>salted</em></span> hash is computationally infeasible, but finding
+                    the password for an <span class="emphasis"><em>unsalted</em></span> hash is often not. In many
+                    cases, the password which corresponds to an unsalted hash can be found simply by
+                    entering the hash into a search engine like Google.</p></div><p>If creating a user manually, the main complication is the salt, which must be
+                determined before the <span class="command"><strong>INSERT</strong></span> statement can be constructed, but
+                this can be dealt with using variables. For MySQL:</p><div class="informalexample"><pre class="programlisting">-- Generate salt
+SET @salt = UNHEX(SHA2(UUID(), 256));
+
+-- Create user and hash password with salt
+INSERT INTO guacamole_user (username, password_salt, password_hash)
+     VALUES ('myuser', @salt, UNHEX(SHA2(CONCAT('mypassword', HEX(@salt)), 256)));</pre></div><p>This sort of statement is useful for both creating new users or for changing
+                passwords, especially if all administrators have forgotten theirs.</p><p>If you are not using MySQL, or you are using a version of MySQL that lacks the
+                    <code class="methodname">SHA2</code> function, you will need to calculate the SHA-256
+                value manually (by using the <span class="command"><strong>sha256sum</strong></span> command, for
+                example).</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-schema-connections"></a>Connections and parameters</h3></div></div></div><a id="idm140538188647920" class="indexterm"></a><a id="idm140538188646896" class="indexterm"></a><p>Each connection has an entry in the <code class="classname">guacamole_connection</code>
+                table, with a one-to-many relationship to parameters, stored as name/value pairs in
+                the <code class="classname">guacamole_connection_parameter</code> table.</p><p>The <code class="classname">guacamole_connection</code> table is simply a pairing of a
+                unique and descriptive name with the protocol to be used for the connection. It
+                contains the following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">connection_id</span></span></dt><dd><p>The unique integer associated with each connection. This value is
+                            generated automatically when a new entry is inserted into the
+                                <code class="classname">guacamole_connection</code> table.</p></dd><dt><span class="term"><span class="property">connection_name</span></span></dt><dd><p>The unique name associated with each connection. This value must be
+                            specified manually, and must be different from any existing connection
+                            name in the same connection group. References to connections in other
+                            tables use the value from <span class="property">connection_id</span>, not
+                                <span class="property">connection_name</span>.</p></dd><dt><span class="term"><span class="property">protocol</span></span></dt><dd><p>The protocol to use with this connection. This is the name of the
+                            protocol that should be sent to <span class="package">guacd</span> when
+                            connecting, for example "<code class="constant">vnc</code>" or
+                                "<code class="constant">rdp</code>".</p></dd><dt><span class="term"><span class="property">parent_id</span></span></dt><dd><p>The unique integer associated with the connection group containing
+                            this connection, or <code class="constant">NULL</code> if this connection is
+                            within the root group.</p></dd><dt><span class="term"><span class="property">max_connections</span></span></dt><dd><p>The maximum number of concurrent connections to allow to this
+                            connection at any one time <span class="emphasis"><em>regardless of user</em></span>.
+                                <code class="constant">NULL</code> will use the default value specified in
+                                <code class="filename">guacamole.properties</code> with the
+                                <span class="property">mysql-default-max-connections</span> or
+                                <span class="property">postgresql-default-max-connections</span> properties,
+                            and a value of <code class="constant">0</code> denotes unlimited.</p></dd><dt><span class="term"><span class="property">max_connections_per_user</span></span></dt><dd><p>The maximum number of concurrent connections to allow to this
+                            connection at any one time <span class="emphasis"><em>from a single user</em></span>.
+                                <code class="constant">NULL</code> will use the default value specified in
+                                <code class="filename">guacamole.properties</code> with the
+                                <span class="property">mysql-default-max-connections</span> or
+                                <span class="property">postgresql-default-max-connections</span> properties,
+                            and a value of <code class="constant">0</code> denotes unlimited.</p></dd></dl></div><p>As there are potentially multiple parameters per connection, where the names of
+                each parameter are completely arbitrary and determined only by the protocol in use,
+                every parameter for a given connection has an entry in table
+                    <code class="classname">guacamole_connection_parameter</code> table associated with its
+                corresponding connection. This table contains the following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">connection_id</span></span></dt><dd><p>The <span class="property">connection_id</span> value from the connection this
+                            parameter is for.</p></dd><dt><span class="term"><span class="property">parameter_name</span></span></dt><dd><p>The name of the parameter to set. This is the name listed in the
+                            documentation for the protocol specified in the associated
+                            connection.</p></dd><dt><span class="term"><span class="property">parameter_value</span></span></dt><dd><p>The value to assign to the parameter named. While this value is an
+                            arbitrary string, it must conform to the requirements of the protocol as
+                            documented for the connection to be successful.</p></dd></dl></div><p>Adding a connection and corresponding parameters is relatively easy compared to
+                adding a user as there is no salt to generate nor password to hash:</p><div class="informalexample"><pre class="programlisting">-- Create connection
+INSERT INTO guacamole_connection (connection_name, protocol) VALUES ('<em class="replaceable"><code>test</code></em>', '<em class="replaceable"><code>vnc</code></em>');
+
+-- Determine the connection_id
+SELECT * FROM guacamole_connection WHERE connection_name = '<em class="replaceable"><code>test</code></em>' AND parent_id IS NULL;
+
+-- Add parameters to the new connection
+INSERT INTO guacamole_connection_parameter VALUES (<em class="replaceable"><code>1</code></em>, 'hostname', '<em class="replaceable"><code>localhost</code></em>');
+INSERT INTO guacamole_connection_parameter VALUES (<em class="replaceable"><code>1</code></em>, 'port', '<em class="replaceable"><code>5901</code></em>');</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-schema-connection-history"></a>Usage history</h4></div></div></div><a id="idm140538188606688" class="indexterm"></a><p>When a connection is initiated or terminated, a corresponding entry in the
+                        <code class="classname">guacamole_connection_history</code> table is created or
+                    updated respectively. Each entry is associated with the user using the
+                    connection, the connection itself, and the time the connection started. If the
+                    connection has ended, the end time is also stored.</p><p>It is very unlikely that a user will need to update this table, but knowing
+                    the structure is potentially useful if you wish to generate a report of
+                    Guacamole usage. The <code class="classname">guacamole_connection_history</code> table
+                    has the following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">history_id</span></span></dt><dd><p>The unique integer associated with each history record. This value
+                                is generated automatically when a new entry is inserted into the
+                                    <code class="classname">guacamole_connection_history</code>
+                                table.</p></dd><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> from the entry in
+                                    <code class="classname">guacamole_user</code> associated with the user
+                                using the connection.</p></dd><dt><span class="term"><span class="property">connection_id</span></span></dt><dd><p>The value of the <span class="property">connection_id</span> from the entry
+                                in <code class="classname">guacamole_connection</code> associated the
+                                connection being used.</p></dd><dt><span class="term"><span class="property">start_date</span></span></dt><dd><p>The time at which the connection was started by the user
+                                specified. Despite its name, this column also stores time
+                                information in addition to the date.</p></dd><dt><span class="term"><span class="property">end_date</span></span></dt><dd><p>The time at which the connection ended. If the connection is still
+                                active, the value in this column will be <code class="constant">NULL</code>.
+                                Despite its name, this column also stores time information in
+                                addition to the date.</p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-schema-connection-groups"></a>Connection groups</h3></div></div></div><a id="idm140538189000800" class="indexterm"></a><p>Each connection group has an entry in the
+                    <code class="classname">guacamole_connection_group</code> table, with a one-to-many
+                relationship to other groups and connections.</p><p>The <code class="classname">guacamole_connection_group</code> table is simply a pairing of
+                a unique and descriptive name with a group type, which can be either
+                    <span class="type">ORGANIZATIONAL</span> or <span class="type">BALANCING</span>. It contains the following
+                columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">connection_group_id</span></span></dt><dd><p>The unique integer associated with each connection group. This value
+                            is generated automatically when a new entry is inserted into the
+                                <code class="classname">guacamole_connection_group</code> table.</p></dd><dt><span class="term"><span class="property">connection_group_name</span></span></dt><dd><p>The unique name associated with each connection group. This value must
+                            be specified manually, and must be different from any existing
+                            connection group name in the same connection group. References to
+                            connections in other tables use the value from
+                                <span class="property">connection_group_id</span>, not
+                                <span class="property">connection_group_name</span>.</p></dd><dt><span class="term"><span class="property">type</span></span></dt><dd><p>The type of this connection group. This can be either
+                                <span class="type">ORGANIZATIONAL</span> or <span class="type">BALANCING</span>.</p></dd><dt><span class="term"><span class="property">parent_id</span></span></dt><dd><p>The unique integer associated with the connection group containing
+                            this connection group, or <code class="constant">NULL</code> if this connection
+                            group is within the root group.</p></dd><dt><span class="term"><span class="property">max_connections</span></span></dt><dd><p>The maximum number of concurrent connections to allow to this
+                            connection group at any one time <span class="emphasis"><em>regardless of
+                            user</em></span>. <code class="constant">NULL</code> will use the default value
+                            specified in <code class="filename">guacamole.properties</code> with the
+                                <span class="property">mysql-default-max-connections</span> or
+                                <span class="property">postgresql-default-max-connections</span> properties,
+                            and a value of <code class="constant">0</code> denotes unlimited. This only has
+                            an effect on <span class="type">BALANCING</span> groups.</p></dd><dt><span class="term"><span class="property">max_connections_per_user</span></span></dt><dd><p>The maximum number of concurrent connections to allow to this
+                            connection group at any one time <span class="emphasis"><em>from a single
+                            user</em></span>. <code class="constant">NULL</code> will use the default value
+                            specified in <code class="filename">guacamole.properties</code> with the
+                                <span class="property">mysql-default-max-connections</span> or
+                                <span class="property">postgresql-default-max-connections</span> properties,
+                            and a value of <code class="constant">0</code> denotes unlimited. This only has
+                            an effect on <span class="type">BALANCING</span> groups.</p></dd></dl></div><p>Adding a connection group is even simpler than adding a new connection as there
+                are no associated parameters stored in a separate table:</p><div class="informalexample"><pre class="programlisting">-- Create connection group
+INSERT INTO guacamole_connection_group (connection_group_name, type)
+     VALUES ('<em class="replaceable"><code>test</code></em>', '<em class="replaceable"><code>ORGANIZATIONAL</code></em>');</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="jdbc-auth-schema-permissions"></a>Permissions</h3></div></div></div><p>There are three permissions tables in the schema which correspond to the three
+                types of permissions in Guacamole's authentication model: system permissions, which
+                control operations that affect the system as a whole, and user and connection
+                permissions, which control operations that affect specific, existing users or
+                connections respectively.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-schema-system-permissions"></a>System permissions</h4></div></div></div><a id="idm140538188968336" class="indexterm"></a><p>System permissions are defined by entries in the
+                        <code class="classname">guacamole_system_permission</code> table. Each entry grants
+                    permission for a specific user to perform a specific system operation.</p><p>The <code class="classname">guacamole_system_permission</code> table contains the
+                    following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> column of the entry
+                                associated with the user owning this permission.</p></dd><dt><span class="term"><span class="property">permission</span></span></dt><dd><p>The permission being granted. This column can have one of three
+                                possible values: <code class="constant">ADMINISTER</code>, which grants the
+                                ability to administer the entire system (essentially a wildcard
+                                permission), <code class="constant">CREATE_CONNECTION</code>, which grants
+                                the ability to create connections,
+                                    <code class="constant">CREATE_CONNECTION_GROUP</code>, which grants the
+                                ability to create connections groups, or
+                                    <code class="constant">CREATE_USER</code>, which grants the ability to
+                                create users.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-schema-user-permissions"></a>User permissions</h4></div></div></div><a id="idm140538188956656" class="indexterm"></a><p>User permissions are defined by entries in the
+                        <code class="classname">guacamole_user_permission</code> table. Each entry grants
+                    permission for a specific user to perform a specific operation on another
+                    existing user.</p><p>The <code class="classname">guacamole_user_permission</code> table contains the
+                    following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> column of the entry
+                                associated with the user owning this permission.</p></dd><dt><span class="term"><span class="property">affected_user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> column of the entry
+                                associated with the user <span class="emphasis"><em>affected</em></span> by this
+                                permission. This is the user that would be the object of the
+                                operation represented by this permission.</p></dd><dt><span class="term"><span class="property">permission</span></span></dt><dd><p>The permission being granted. This column can have one of four
+                                possible values: <code class="constant">ADMINISTER</code>, which grants the
+                                ability to add or remove permissions which affect the user,
+                                    <code class="constant">READ</code>, which grants the ability to read data
+                                associated with the user, <code class="constant">UPDATE</code>, which grants
+                                the ability to update data associated with the user, or
+                                    <code class="constant">DELETE</code>, which grants the ability to delete
+                                the user.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-schema-connection-permissions"></a>Connection permissions</h4></div></div></div><a id="idm140538188942048" class="indexterm"></a><p>Connection permissions are defined by entries in the
+                        <code class="classname">guacamole_connection_permission</code> table. Each entry
+                    grants permission for a specific user to perform a specific operation on an
+                    existing connection.</p><p>The <code class="classname">guacamole_connection_permission</code> table contains the
+                    following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> column of the entry
+                                associated with the user owning this permission.</p></dd><dt><span class="term"><span class="property">connection_id</span></span></dt><dd><p>The value of the <span class="property">connection_id</span> column of the
+                                entry associated with the connection affected by this permission.
+                                This is the connection that would be the object of the operation
+                                represented by this permission.</p></dd><dt><span class="term"><span class="property">permission</span></span></dt><dd><p>The permission being granted. This column can have one of four
+                                possible values: <code class="constant">ADMINISTER</code>, which grants the
+                                ability to add or remove permissions which affect the connection,
+                                    <code class="constant">READ</code>, which grants the ability to read data
+                                associated with the connection (a prerequisite for connecting),
+                                    <code class="constant">UPDATE</code>, which grants the ability to update
+                                data associated with the connection, or <code class="constant">DELETE</code>,
+                                which grants the ability to delete the connection.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="jdbc-auth-schema-connection-group-permissions"></a>Connection group permissions</h4></div></div></div><a id="idm140538188927520" class="indexterm"></a><p>Connection group permissions are defined by entries in the
+                        <code class="classname">guacamole_connection_group_permission</code> table. Each
+                    entry grants permission for a specific user to perform a specific operation on
+                    an existing connection group.</p><p>The <code class="classname">guacamole_connection_group_permission</code> table
+                    contains the following columns:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">user_id</span></span></dt><dd><p>The value of the <span class="property">user_id</span> column of the entry
+                                associated with the user owning this permission.</p></dd><dt><span class="term"><span class="property">connection_group_id</span></span></dt><dd><p>The value of the <span class="property">connection_group_id</span> column
+                                of the entry associated with the connection group affected by this
+                                permission. This is the connection group that would be the object of
+                                the operation represented by this permission.</p></dd><dt><span class="term"><span class="property">permission</span></span></dt><dd><p>The permission being granted. This column can have one of four
+                                possible values: <code class="constant">ADMINISTER</code>, which grants the
+                                ability to add or remove permissions which affect the connection
+                                group, <code class="constant">READ</code>, which grants the ability to read
+                                data associated with the connection group,
+                                    <code class="constant">UPDATE</code>, which grants the ability to update
+                                data associated with the connection group, or
+                                    <code class="constant">DELETE</code>, which grants the ability to delete
+                                the connection group (and implicitly its contents).</p></dd></dl></div></div></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="configuring-guacamole.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ldap-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 5. Configuring Guacamole </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 7. LDAP authentication</td></tr></table></div>
+
+            </div></div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

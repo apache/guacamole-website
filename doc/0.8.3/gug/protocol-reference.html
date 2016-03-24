@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Appendix B. Guacamole protocol reference</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="appendices.html" title="Part III. Appendices" /><link rel="prev" href="faq.html" title="Appendix A. FAQ" /><link rel="next" href="book-index.html" title="Index" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix B. Guacamole protocol reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="faq.html">Prev</a> </td><th width="60%" align="center">Part III. Appendices</th><td width="20%" align="right"> <a accesskey="n" href="book-index.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="appendix" title="Appendix B. Guacamole protocol reference" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="protocol-reference"></a>Appendix B. Guacamole protocol reference</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="protocol-reference.html#drawing-instructions">Drawing instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#arc-instruction">arc</a></span></dt><dt><span class="section"><a href="protocol-reference.html#cfill-instruction">cfill</a></span></dt><dt><span class="section"><a href="protocol-reference.html#clip-instruction">clip</a></span></dt><dt><span class="section"><a href="protocol-reference.html#close-instruction">close</a></span></dt><dt><span class="section"><a href="protocol-reference.html#copy-instruction">copy</a></span></dt><dt><span class="section"><a href="protocol-reference.html#cstroke-instruction">cstroke</a></span></dt><dt><span class="section"><a href="protocol-reference.html#cursor-instruction">cursor</a></span></dt><dt><span class="section"><a href="protocol-reference.html#curve-instruction">curve</a></span></dt><dt><span class="section"><a href="protocol-reference.html#dispose-instruction">dispose</a></span></dt><dt><span class="section"><a href="protocol-reference.html#distort-instruction">distort</a></span></dt><dt><span class="section"><a href="protocol-reference.html#identity-instruction">identity</a></span></dt><dt><span class="section"><a href="protocol-reference.html#lfill-instruction">lfill</a></span></dt><dt><span class="section"><a href="protocol-reference.html#line-instruction">line</a></span></dt><dt><span class="section"><a href="protocol-reference.html#lstroke-instruction">lstroke</a></span></dt><dt><span class="section"><a href="protocol-reference.html#move-instruction">move</a></span></dt><dt><span class="section"><a href="protocol-reference.html#png-instruction">png</a></span></dt><dt><span class="section"><a href="protocol-reference.html#pop-instruction">pop</a></span></dt><dt><span class="section"><a href="protocol-reference.html#push-instruction">push</a></span></dt><dt><span class="section"><a href="protocol-reference.html#rect-instruction">rect</a></span></dt><dt><span class="section"><a href="protocol-reference.html#reset-instruction">reset</a></span></dt><dt><span class="section"><a href="protocol-reference.html#set-instruction">set</a></span></dt><dt><span class="section"><a href="protocol-reference.html#shade-instruction">shade</a></span></dt><dt><span class="section"><a href="protocol-reference.html#size-instruction">size</a></span></dt><dt><span class="section"><a href="protocol-reference.html#start-instruction">start</a></span></dt><dt><span class="section"><a href="protocol-reference.html#transfer-instruction">transfer</a></span></dt><dt><span class="section"><a href="protocol-reference.html#transform-instruction">transform</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#streaming-instructions">Streaming instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#audio-stream-instruction">audio</a></span></dt><dt><span class="section"><a href="protocol-reference.html#file-stream-instruction">file</a></span></dt><dt><span class="section"><a href="protocol-reference.html#nest-stream-instruction">nest</a></span></dt><dt><span class="section"><a href="protocol-reference.html#video-stream-instruction">video</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#client-handshake-instructions">Client handshake instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#audio-handshake-instruction">audio</a></span></dt><dt><span class="section"><a href="protocol-reference.html#connect-instruction">connect</a></span></dt><dt><span class="section"><a href="protocol-reference.html#select-instruction">select</a></span></dt><dt><span class="section"><a href="protocol-reference.html#size-handshake-instruction">size</a></span></dt><dt><span class="section"><a href="protocol-reference.html#video-handshake-instruction">video</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#server-handshake-instructions">Server handshake instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#args-instruction">args</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#client-control-instructions">Client control instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#disconnect-instruction">disconnect</a></span></dt><dt><span class="section"><a href="protocol-reference.html#client-sync-instruction">sync</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#server-control-instructions">Server control instructions</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#error-instruction">error</a></span></dt><dt><span class="section"><a href="protocol-reference.html#server-sync-instruction">sync</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#client-events">Client events</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#client-clipboard-instruction">clipboard</a></span></dt><dt><span class="section"><a href="protocol-reference.html#key-instruction">key</a></span></dt><dt><span class="section"><a href="protocol-reference.html#mouse-instruction">mouse</a></span></dt></dl></dd><dt><span class="section"><a href="protocol-reference.html#server-events">Server events</a></span></dt><dd><dl><dt><span class="section"><a href="protocol-reference.html#server-clipboard-instruction">clipboard</a></span></dt></dl></dd></dl></div>
+    
+    <a id="idp2099008" class="indexterm"></a>
+    <a id="idp2099984" class="indexterm"></a>
+    <a id="idp2100752" class="indexterm"></a>
+    <div class="section" title="Drawing instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="drawing-instructions"></a>Drawing instructions</h2></div></div></div>
+        
+        <a id="idm2459904" class="indexterm"></a>
+        <a id="idm2481168" class="indexterm"></a>
+        <a id="idm2507472" class="indexterm"></a>
+        <div xml:lang="en" class="section" title="arc" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="arc-instruction"></a>arc</h3></div></div></div>
+    
+    <a id="idm2594736" class="indexterm"></a>
+    <p>The arc instruction adds the specified arc subpath to the existing
+        path, creating a new path if no path exists. The path created can be
+        modified further by other path-type instructions, and finally stroked,
+        filled, and/or closed.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer which should have the specified arc subpath
+                    added.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the center of the circle containing
+                    the arc to be drawn.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the center of the circle containing
+                    the arc to be drawn.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>radius</code></em></span></dt><dd>
+                <p>The radius of the circle containing the arc to be drawn,
+                    in pixels.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>start</code></em></span></dt><dd>
+                <p>The starting angle of the arc to be drawn, in
+                    radians.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>end</code></em></span></dt><dd>
+                <p>The ending angle of the arc to be drawn, in
+                    radians.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>negative</code></em></span></dt><dd>
+                <p>Non-zero if the arc should be drawn from START to END in
+                    order of decreasing angle, zero otherwise.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="cfill" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="cfill-instruction"></a>cfill</h3></div></div></div>
+    
+    <a id="idp2112400" class="indexterm"></a>
+    <p>Fills the current path with the specified color. This instruction
+        completes the current path. Future path instructions will begin a new
+        path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when filling the current path in
+                    the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose path should be filled.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>r</code></em></span></dt><dd>
+                <p>The red component of the color to use to fill the current
+                    path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>g</code></em></span></dt><dd>
+                <p>The green component of the color to use to fill the
+                    current path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>b</code></em></span></dt><dd>
+                <p>The blue component of the color to use to fill the current
+                    path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>a</code></em></span></dt><dd>
+                <p>The alpha component of the color to use to fill the
+                    current path in the specified layer.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="clip" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="clip-instruction"></a>clip</h3></div></div></div>
+    
+
+    <a id="idp2128064" class="indexterm"></a>
+    <p>Applies the current path as the clipping path. Future operations will
+        only draw within the current path. Note that future clip instructions
+        will also be limited by this path. To set a completely new clipping path,
+        you must first reset the layer with a reset instruction. If you wish to
+        only reset the clipping path, but preserve the current transform matrix,
+        push the layer state before setting the clipping path, and pop the layer
+        state to reset.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose clipping path should be set.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="close" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="close-instruction"></a>close</h3></div></div></div>
+    
+
+    <a id="idp2134304" class="indexterm"></a>
+    <p>Closes the current path by connecting the start and end points with a
+        straight line.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose path should be closed.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="copy" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="copy-instruction"></a>copy</h3></div></div></div>
+    
+
+    <a id="idp2139760" class="indexterm"></a>
+    <p>Copies image data from the specified rectangle of the specified layer
+        or buffer to a different location of another specified layer or
+        buffer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>srclayer</code></em></span></dt><dd>
+                <p>The index of the layer to copy image data from.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcx</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcy</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcwidth</code></em></span></dt><dd>
+                <p>The width of the source rectangle within the source
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcheight</code></em></span></dt><dd>
+                <p>The height of the source rectangle within the source
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when drawing the image data on
+                    the destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dstlayer</code></em></span></dt><dd>
+                <p>The index of the layer to draw the image data to.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dstx</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dsty</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="cstroke" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="cstroke-instruction"></a>cstroke</h3></div></div></div>
+    
+
+    <a id="idp2161456" class="indexterm"></a>
+    <p>Strokes the current path with the specified color. This instruction
+        completes the current path. Future path instructions will begin a new
+        path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when stroking the current path
+                    in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose path should be stroked.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cap</code></em></span></dt><dd>
+                <p>The index of the line cap style to use. This can be either
+                    butt (0), round (1), or square (2).</p>
+            </dd><dt><span class="term"><em class="parameter"><code>join</code></em></span></dt><dd>
+                <p>The index of the line join style to use. This can be
+                    either bevel (0), miter (1), or round (2).</p>
+            </dd><dt><span class="term"><em class="parameter"><code>thickness</code></em></span></dt><dd>
+                <p>The thickness of the stroke to draw, in pixels.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>r</code></em></span></dt><dd>
+                <p>The red component of the color to use to stroke the
+                    current path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>g</code></em></span></dt><dd>
+                <p>The green component of the color to use to stroke the
+                    current path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>b</code></em></span></dt><dd>
+                <p>The blue component of the color to use to stroke the
+                    current path in the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>a</code></em></span></dt><dd>
+                <p>The alpha component of the color to use to stroke the
+                    current path in the specified layer.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="cursor" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="cursor-instruction"></a>cursor</h3></div></div></div>
+    
+    <p>Sets the client's cursor to the image data from the specified
+        rectangle of a layer, with the specified hotspot.</p>
+    <a id="idp2183904" class="indexterm"></a>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the cursor's hotspot.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the cursor's hotspot.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srclayer</code></em></span></dt><dd>
+                <p>The index of the layer to copy image data from.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcx</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcy</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcwidth</code></em></span></dt><dd>
+                <p>The width of the source rectangle within the source
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcheight</code></em></span></dt><dd>
+                <p>The height of the source rectangle within the source
+                    layer.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="curve" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="curve-instruction"></a>curve</h3></div></div></div>
+    
+    <a id="idp2200816" class="indexterm"></a>
+    <p>Adds the specified cubic bezier curve subpath.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer which should have the specified curve subpath
+                    added.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cp1x</code></em></span></dt><dd>
+                <p>The X coordinate of the first control point of the
+                    curve.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cp1y</code></em></span></dt><dd>
+                <p>The Y coordinate of the first control point of the
+                    curve.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cp2x</code></em></span></dt><dd>
+                <p>The X coordinate of the second control point of the
+                    curve.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cp2y</code></em></span></dt><dd>
+                <p>The Y coordinate of the second control point of the
+                    curve.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the endpoint of the curve.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the endpoint of the curve.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="dispose" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="dispose-instruction"></a>dispose</h3></div></div></div>
+    
+
+    <a id="idp2218304" class="indexterm"></a>
+    <p>Removes the specified layer. The specified layer will be recreated as a
+        new layer if it is referenced again.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer to remove.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="distort" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="distort-instruction"></a>distort</h3></div></div></div>
+    
+
+    <a id="idp2224304" class="indexterm"></a>
+    <p>Sets the given affine transformation matrix to the layer. Unlike
+        transform, this operation is independent of any previously sent
+        transformation matrix. This operation can be undone by setting the
+        layer's transformation matrix to the identity matrix using
+        distort</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer to distort.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>a</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 1.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>b</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 1.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>c</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 2.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>d</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 2.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>e</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 3.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>f</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 3.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="identity" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="identity-instruction"></a>identity</h3></div></div></div>
+    
+
+    <a id="idp2241376" class="indexterm"></a>
+    <p>Resets the transform matrix of the specified layer to the identity
+        matrix.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose transform matrix should be reset.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="lfill" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="lfill-instruction"></a>lfill</h3></div></div></div>
+    
+
+    <a id="idp2247152" class="indexterm"></a>
+    <p>Fills the current path with a tiled pattern of the image data from the
+        specified layer. This instruction completes the current path. Future
+        path instructions will begin a new path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when filling the current path in
+                    the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose path should be filled.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srclayer</code></em></span></dt><dd>
+                <p>The layer to use as the pattern.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="line" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="line-instruction"></a>line</h3></div></div></div>
+    
+
+    <a id="idp2256560" class="indexterm"></a>
+    <p>Adds the specified line subpath.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer which should have the specified line subpath
+                    added.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the endpoint of the line.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the endpoint of the line.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="lstroke" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="lstroke-instruction"></a>lstroke</h3></div></div></div>
+    
+
+    <a id="idp2266128" class="indexterm"></a>
+    <p>Strokes the current path with a tiled pattern of the image data from
+        the specified layer. This instruction completes the current path. Future
+        path instructions will begin a new path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when filling the current path in
+                    the specified layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose path should be filled.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>cap</code></em></span></dt><dd>
+                <p>The index of the line cap style to use. This can be either
+                    butt (0), round (1), or square (2).</p>
+            </dd><dt><span class="term"><em class="parameter"><code>join</code></em></span></dt><dd>
+                <p>The index of the line join style to use. This can be
+                    either bevel (0), miter (1), or round (2).</p>
+            </dd><dt><span class="term"><em class="parameter"><code>thickness</code></em></span></dt><dd>
+                <p>The thickness of the stroke to draw, in pixels.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srclayer</code></em></span></dt><dd>
+                <p>The layer to use as the pattern.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="move" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="move-instruction"></a>move</h3></div></div></div>
+    
+
+    <a id="idp2281808" class="indexterm"></a>
+    <p>Moves the given layer to the given location within the specified parent
+        layer. This operation is applicable only to layers, and cannot be
+        applied to buffers (layers with negative indices). Applying this
+        operation to the default layer (layer 0) also has no effect.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer to move.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>parent</code></em></span></dt><dd>
+                <p>The layer that should be the parent of the given
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate to move the layer to.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate to move the layer to.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>z</code></em></span></dt><dd>
+                <p>The relative Z-ordering of this layer. Layers with larger
+                    values will appear above layers with smaller values.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="png" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="png-instruction"></a>png</h3></div></div></div>
+    
+
+    <a id="idp2295328" class="indexterm"></a>
+    <p>Loads PNG data into the specified location of the specified layer or
+        buffer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when drawing the image
+                    data.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>Base64-encoded PNG data.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="pop" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="pop-instruction"></a>pop</h3></div></div></div>
+    
+
+    <a id="idp2308944" class="indexterm"></a>
+    <p>Restores the previous state of the specified layer from the stack. The
+        state restored includes the transformation matrix and clipping
+        path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose state should be restored.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="push" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="push-instruction"></a>push</h3></div></div></div>
+    
+
+    <a id="idp2314768" class="indexterm"></a>
+    <p>Saves the current state of the specified layer to the stack. The state
+        saved includes the current transformation matrix and clipping
+        path.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose state should be saved.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="rect" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="rect-instruction"></a>rect</h3></div></div></div>
+    
+
+    <a id="idp2320240" class="indexterm"></a>
+    <p>Adds a rectangular path to the specified layer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The channel mask to apply when drawing the image
+                    data.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the rectangle
+                    to draw.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the rectangle
+                    to draw.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>width</code></em></span></dt><dd>
+                <p>The width of the rectangle to draw.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>height</code></em></span></dt><dd>
+                <p>The width of the rectangle to draw.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="reset" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="reset-instruction"></a>reset</h3></div></div></div>
+    
+
+    <a id="idp2335696" class="indexterm"></a>
+    <p>Resets the transformation and clip state of the layer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose state should be reset.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="set" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="set-instruction"></a>set</h3></div></div></div>
+    
+
+    <a id="idp2341120" class="indexterm"></a>
+    <p>Sets the given client-side property to the specified value. Currently
+        there is only one property: miter-limit, the maximum distance between
+        the inner and outer points of a miter joint, proportional to stroke
+        width (if miter-limit is set to 10.0, the default, then the maximum
+        distance between the points of the joint is 10 times the stroke
+        width).</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose property should be set.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>property</code></em></span></dt><dd>
+                <p>The name of the property to set.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>value</code></em></span></dt><dd>
+                <p>The value to set the given property to.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="shade" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="shade-instruction"></a>shade</h3></div></div></div>
+    
+
+    <a id="idp2350800" class="indexterm"></a>
+    <p>Sets the opacity of the given layer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer whose opacity should be set.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>opacity</code></em></span></dt><dd>
+                <p>The opacity of the layer, where 0 is completely
+                    transparent, and 255 is completely opaque.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="size" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="size-instruction"></a>size</h3></div></div></div>
+    
+
+    <a id="idp2358240" class="indexterm"></a>
+    <p>Sets the size of the specified layer.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer to resize.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>width</code></em></span></dt><dd>
+                <p>The new width of the layer</p>
+            </dd><dt><span class="term"><em class="parameter"><code>height</code></em></span></dt><dd>
+                <p>The new height of the layer</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="start" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="start-instruction"></a>start</h3></div></div></div>
+    
+
+    <a id="idp2367568" class="indexterm"></a>
+    <p>Starts a new subpath at the specified point.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer which should start a new subpath.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The X coordinate of the first point of the new
+                    subpath.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The Y coordinate of the first point of the new
+                    subpath.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="transfer" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="transfer-instruction"></a>transfer</h3></div></div></div>
+    
+
+    <a id="idp2377344" class="indexterm"></a>
+    <p>Transfers image data from the specified rectangle of the specified
+        layer or buffer to a different location of another specified layer or
+        buffer, using the specified transfer function. For a list of available
+        functions, see
+        [[http://guac-dev.org/trac/browser/libguac/include/protocol.h|guacamole/protocol.h.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>srclayer</code></em></span></dt><dd>
+                <p>The index of the layer to transfer image data from.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcx</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcy</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the source
+                    rectangle within the source layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcwidth</code></em></span></dt><dd>
+                <p>The width of the source rectangle within the source
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>srcheight</code></em></span></dt><dd>
+                <p>The height of the source rectangle within the source
+                    layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>function</code></em></span></dt><dd>
+                <p>The index of the transfer function to use. For a list of
+                    available functions, see
+                    [[http://guac-dev.org/trac/browser/libguac/include/protocol.h|guacamole/protocol.h.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dstlayer</code></em></span></dt><dd>
+                <p>The index of the layer to draw the image data to.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dstx</code></em></span></dt><dd>
+                <p>The X coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>dsty</code></em></span></dt><dd>
+                <p>The Y coordinate of the upper-left corner of the
+                    destination within the destination layer.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="transform" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="transform-instruction"></a>transform</h3></div></div></div>
+    
+
+    <a id="idp2400016" class="indexterm"></a>
+    <p>Applies the specified transformation matrix to future operations.
+        Unlike distort, this operation is dependent on any previously sent
+        transformation matrices, and only affects future operations. This
+        operation can be undone by setting the layer's transformation matrix to
+        the identity matrix using identity, but image data already drawn will
+        not be affected.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The layer to apply the given transformation matrix
+                    to.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>a</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 1.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>b</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 1.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>c</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 2.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>d</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 2.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>e</code></em></span></dt><dd>
+                <p>The matrix value in row 1, column 3.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>f</code></em></span></dt><dd>
+                <p>The matrix value in row 2, column 3.</p>
+            </dd></dl></div>
+
+</div>
+    </div>
+    <div class="section" title="Streaming instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="streaming-instructions"></a>Streaming instructions</h2></div></div></div>
+        
+        <div xml:lang="en" class="section" title="audio" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="audio-stream-instruction"></a>audio</h3></div></div></div>
+    
+    <a id="idp2102512" class="indexterm"></a>
+    <p>Sends a full chunk of audio data to the client. This chunk must be a
+        full, self-contained, audio file encoded with the codec specified by the
+        mimetype given, which must be a mimetype previously specified by the
+        client during the handshake procedure.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>channel</code></em></span></dt><dd>
+                <p>The index of the audio channel to use. All audio chunks
+                    within the same channel play sequentially, while audio
+                    chunks in separate channels play in parallel. This is not
+                    the same as the left or right audio channel, and refers only
+                    to a channel to which audio data is streamed, where that
+                    audio data consists of chunks that may themselves consist of
+                    multiple channels in the usual sense of the word. This
+                    number is completely arbitrary, and denotes only how audio
+                    data should be scheduled for playback.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>mimetype</code></em></span></dt><dd>
+                <p>The mimetype of the audio data being sent.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>duration</code></em></span></dt><dd>
+                <p>The duration of the audio data being sent, in
+                    milliseconds. This value may be a decimal, and need not be
+                    expressed in whole milliseconds. This is particularly
+                    important for audio formats that do not encode their own
+                    durations losslessly (MP3, for example), as well as for
+                    scheduling playback of future chunks within the same
+                    channel.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The actual audio data, base64-encoded.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="file" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="file-stream-instruction"></a>file</h3></div></div></div>
+    
+    <a id="idp2429344" class="indexterm"></a>
+    <p>Sends a file to the client.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>name</code></em></span></dt><dd>
+                <p>A human-readable name associated with the file.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>mimetype</code></em></span></dt><dd>
+                <p>The mimetype of the file being sent.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The actual audio data, base64-encoded.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="nest" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="nest-stream-instruction"></a>nest</h3></div></div></div>
+    
+    <a id="idp2438432" class="indexterm"></a>
+    <p>Encodes part of one or more instructions within a single instruction,
+        associating that packet of data with a stream index. Future nest
+        instructions with the same stream index will append their data to the
+        same logical stream on the client side. Once nested data is received on
+        the client side, the client immediately executes any completed
+        instructions within the associated stream, in order.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>index</code></em></span></dt><dd>
+                <p>The index of the stream this data should be appended to.
+                    This index is completely arbitrary, and denotes only how
+                    nested data should be reassembled.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The protocol data, containing part of one or more
+                    instructions.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="video" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="video-stream-instruction"></a>video</h3></div></div></div>
+    
+    <a id="idp2445952" class="indexterm"></a>
+    <p>Sends a full chunk of audio video to the client. This chunk must be a
+        full, self-contained, video file encoded with the codec specified by the
+        mimetype given, which must be a mimetype previously specified by the
+        client during the handshake procedure.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>layer</code></em></span></dt><dd>
+                <p>The index of the layer to stream the video data into.
+                    Future drawing operations into this layer will block until
+                    the video has finished playing. Playback of this video will
+                    not block operations in other layers.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>mimetype</code></em></span></dt><dd>
+                <p>The mimetype of the video data being sent.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>duration</code></em></span></dt><dd>
+                <p>The duration of the video data being sent, in
+                    milliseconds. This value may be a decimal, and need not be
+                    expressed in whole milliseconds.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The actual video data, base64-encoded.</p>
+            </dd></dl></div>
+</div>
+    </div>
+    <div class="section" title="Client handshake instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="client-handshake-instructions"></a>Client handshake instructions</h2></div></div></div>
+        
+        <div xml:lang="en" class="section" title="audio" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="audio-handshake-instruction"></a>audio</h3></div></div></div>
+    
+    <a id="idm2368736" class="indexterm"></a>
+    <p>Specifies which audio mimetypes are supported by the client. Each
+        parameter must be a single mimetype, listed in order of client
+        preference, with the optimal mimetype being the first parameter. This is
+        the third instruction sent during the handshake phase.</p>
+</div>
+        <div xml:lang="en" class="section" title="connect" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="connect-instruction"></a>connect</h3></div></div></div>
+    
+
+    <a id="idp2459840" class="indexterm"></a>
+    <p>Begins the connection using the previously specified protocol with the
+        given arguments.  This is the last instruction sent during the handshake
+        phase.</p>
+    <p>The parameters of this instruction correspond exactly to the
+        parameters of the received args instruction. If the received args
+        instruction has, for example, three parameters, the responding connect
+        instruction must also have three parameters.</p>
+
+</div>
+        <div xml:lang="en" class="section" title="select" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="select-instruction"></a>select</h3></div></div></div>
+    
+
+    <a id="idp2463664" class="indexterm"></a>
+    <p>Requests that the connection be made using the specified protocol.
+        This is the first instruction sent during the handshake phase.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>protocol</code></em></span></dt><dd>
+                <p>The protocol to use.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="size" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="size-handshake-instruction"></a>size</h3></div></div></div>
+    
+    <a id="idp2469488" class="indexterm"></a>
+    <p>Specifies the client's optimal screen size. This is the second
+        instruction sent during the handshake phase.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>width</code></em></span></dt><dd>
+                <p>The optimal screen width.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>height</code></em></span></dt><dd>
+                <p>The optimal screen height.</p>
+            </dd></dl></div>
+</div>
+        <div xml:lang="en" class="section" title="video" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="video-handshake-instruction"></a>video</h3></div></div></div>
+    
+    <a id="idp2476736" class="indexterm"></a>
+    <p>Specifies which video mimetypes are supported by the client. Each
+        parameter must be a single mimetype, listed in order of client
+        preference, with the optimal mimetype being the first parameter. This is
+        the fourth instruction sent during the handshake phase.</p>
+</div>
+    </div>
+    <div class="section" title="Server handshake instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="server-handshake-instructions"></a>Server handshake instructions</h2></div></div></div>
+        
+        <div xml:lang="en" class="section" title="args" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="args-instruction"></a>args</h3></div></div></div>
+
+
+    
+    <p>Reports the expected format of the argument list for the protocol
+        requested by the client. This message can be sent by the server during
+        the handshake phase only.</p>
+    <p>The parameters of the args instruction are the names of all parameters
+        accepted by the server for the protocol in selected by the client, in
+        order. The client's responding connect instruction must the values of
+        each of these parameters in the same order.</p>
+
+</div>
+    </div>
+    <div class="section" title="Client control instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="client-control-instructions"></a>Client control instructions</h2></div></div></div>
+        
+        <a id="idm2328336" class="indexterm"></a>
+        <a id="idp2482960" class="indexterm"></a>
+        <a id="idp2484384" class="indexterm"></a>
+        <div xml:lang="en" class="section" title="disconnect" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="disconnect-instruction"></a>disconnect</h3></div></div></div>
+    
+
+    <a id="idp2487408" class="indexterm"></a>
+    <p>Notifies the server that the connection is about to be closed by the
+        client. This message can be sent by the client during any phase, and
+        takes no parameters.</p>
+
+</div>
+        <div xml:lang="en" class="section" title="sync" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="client-sync-instruction"></a>sync</h3></div></div></div>
+    
+    <a id="idp2490864" class="indexterm"></a>
+    <p>Reports that all operations as of the given server-relative timestamp
+        have been completed. If a sync is received from the server, the client
+        must respond with a corresponding sync once all previous operations have
+        been completed, or the server may stop sending updates until the client
+        catches up. For the client, sending a sync with a timestamp newer than
+        any timestamp received from the server is an error.</p>
+    <p>Both client and server are expected to occasionally send sync to
+        report on current operation execution state.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>timestamp</code></em></span></dt><dd>
+                <p>A valid server-relative timestamp.</p>
+            </dd></dl></div>
+</div>
+    </div>
+    <div class="section" title="Server control instructions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="server-control-instructions"></a>Server control instructions</h2></div></div></div>
+        
+        <a id="idm2306736" class="indexterm"></a>
+        <div xml:lang="en" class="section" title="error" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="error-instruction"></a>error</h3></div></div></div>
+    
+
+    <a id="idp2498576" class="indexterm"></a>
+    <p>Notifies the client that the connection is about to be closed due to
+        the specified error. This message can be sent by the server during any
+        phase.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>text</code></em></span></dt><dd>
+                <p>An arbitrary message describing the error</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="sync" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="server-sync-instruction"></a>sync</h3></div></div></div>
+    
+    <a id="idp2504656" class="indexterm"></a>
+    <p>Indicates that the given timestamp is the current timestamp as of all
+        previous operations. The client must respond to every sync instruction
+        received.</p>
+    <p>Both client and server are expected to occasionally send sync to
+        report on current operation execution state.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>timestamp</code></em></span></dt><dd>
+                <p>A valid server-relative timestamp.</p>
+            </dd></dl></div>
+</div>
+    </div>
+    <div class="section" title="Client events"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="client-events"></a>Client events</h2></div></div></div>
+        
+        <a id="idm2288224" class="indexterm"></a>
+        <a id="idm2294512" class="indexterm"></a>
+        <a id="idp2510960" class="indexterm"></a>
+        <div xml:lang="en" class="section" title="clipboard" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="client-clipboard-instruction"></a>clipboard</h3></div></div></div>
+
+
+
+    
+    <a id="idp2513472" class="indexterm"></a>
+    <p>Sets the server-side clipboard to the given data.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The data the clipboard should be set to.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="key" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="key-instruction"></a>key</h3></div></div></div>
+    
+
+    <a id="idp2519232" class="indexterm"></a>
+    <p>Sends the specified key press or release event.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>keysym</code></em></span></dt><dd>
+                <p>The <a class="ulink" href="http://www.x.org/wiki/KeySyms" target="_top">X11
+                        keysym</a> of the key being pressed or
+                    released.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>pressed</code></em></span></dt><dd>
+                <p>0 if the key is not pressed, 1 if the key is
+                    pressed.</p>
+            </dd></dl></div>
+
+</div>
+        <div xml:lang="en" class="section" title="mouse" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="mouse-instruction"></a>mouse</h3></div></div></div>
+    
+
+    <a id="idp2527440" class="indexterm"></a>
+    <p>Sends the specified mouse movement or button press or release event (or
+        combination thereof).</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>x</code></em></span></dt><dd>
+                <p>The current X coordinate of the mouse pointer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>y</code></em></span></dt><dd>
+                <p>The current Y coordinate of the mouse pointer.</p>
+            </dd><dt><span class="term"><em class="parameter"><code>mask</code></em></span></dt><dd>
+                <p>The button mask, representing the pressed or released
+                    status of each mouse button.</p>
+            </dd></dl></div>
+
+</div>
+    </div>
+    <div class="section" title="Server events"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="server-events"></a>Server events</h2></div></div></div>
+        
+        <a id="idp2536160" class="indexterm"></a>
+        <div xml:lang="en" class="section" title="clipboard" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="server-clipboard-instruction"></a>clipboard</h3></div></div></div>
+    
+    <a id="idp2538896" class="indexterm"></a>
+    <p>Sets the client-side clipboard to the given data.</p>
+    <div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>data</code></em></span></dt><dd>
+                <p>The data the clipboard should be set to.</p>
+            </dd></dl></div>
+</div>
+    </div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="faq.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="appendices.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="book-index.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Appendix A. FAQ </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Index</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

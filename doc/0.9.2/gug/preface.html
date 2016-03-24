@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Introduction</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="index.html" title="Guacamole Manual" /><link rel="prev" href="index.html" title="Guacamole Manual" /><link rel="next" href="users-guide.html" title="Part I. User's Guide" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Introduction</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="users-guide.html">Next</a></td></tr></table><hr /></div><div class="preface" title="Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="preface"></a>Introduction</h2></div></div></div>
+        
+        <p>This book is the official Guacamole manual, written by the upstream developers of the
+            Guacamole project. It is also the official general documentation, and an online version
+            at <a class="ulink" href="http://guac-dev.org/" target="_top">http://guac-dev.org/</a>. It is a work in
+            progress which will be continuously updated as Guacamole changes with each
+            release.</p>
+        <p>We decided to maintain the documentation for Guacamole as a book, as there is an awful
+            lot that can be done with the Guacamole web application, and even more that can be done
+            with the API. This book is intended to explore the possibilities of Guacamole as an
+            application, and to provide documentation necessary to install, maintain, and use
+            Guacamole.</p>
+        <p>For the sake of users and administrators, we have provided a
+            high-level overview of Guacamole's architecture and technical
+            design, as well as basic usage instructions and installation
+            instructions for common platforms.</p>
+        <p>For the sake of developers, we have provided a protocol reference
+            and tutorials for common tasks (implementing protocol support,
+            integrating Guacamole into your own application, etc.) to give a
+            good starting point beyond simply looking at the Guacamole
+            codebase.</p>
+        <p>This particular edition of the <em class="citetitle">Guacamole Manual</em> covers
+            Guacamole version 0.9.2. New releases which create new features or break compatibility
+            will result in new editions of the user's guide, as will any necessary corrections. As
+            the official documentation for the project, this book will always be freely available in
+            its entirety online.</p>
+        <a id="idp28720" class="indexterm"></a>
+        <div class="simplesect" title="What is Guacamole?"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idp30128"></a>What is Guacamole?</h2></div></div></div>
+            
+            <a id="idp31184" class="indexterm"></a>
+            <p>Guacamole is an HTML5 web application that provides access to desktop environments
+                using remote desktop protocols (such as VNC or RDP). Guacamole is also the project
+                that produces this web application, and provides an API that drives it. This API can
+                be used to power other similar applications or services.</p>
+            <p>"Guacamole" is most commonly used to refer to the web application produced by the
+                Guacamole project using their API. This web application is part of a stack that
+                provides a protocol-agnostic remote desktop gateway. Written in JavaScript and using
+                only HTML5 and other standards, the client part of Guacamole requires nothing more
+                than a modern web browser or web-enabled device when accessing any of the desktops
+                served.</p>
+            <a id="idp13088" class="indexterm"></a>
+            <p>Historically, Guacamole was an HTML5 VNC client, and before that, a JavaScript
+                Telnet client called <span class="application"><a class="application" href="http://sourceforge.net/projects/realmint" target="_top">RealMint</a></span>
+                ("RealMint" is an anagram for "terminal"), but this is no longer the case.
+                Guacamole's architecture has grown to encompass remote desktop in general, and can
+                be used as a gateway for any number of computers. Originally a proof-of-concept,
+                Guacamole is now performant enough for daily use, and all Guacamole development is
+                done over Guacamole.</p>
+            <p>As an API, Guacamole provides a common and efficient means of streaming text data
+                over a JavaScript-based tunnel (which need not use WebSocket), and a client
+                implementation which supports the Guacamole protocol and renders the remote display
+                when combined with a Guacamole protocol stream from the tunnel.</p>
+            <p>It provides cross-browser mouse and keyboard events, an XML-driven on-screen
+                keyboard, and synchronized nestable layers with hardware-accelerated compositing.
+                Projects that wish to provide remote desktop support over HTML5 can leverage the
+                years of research and development that went into Guacamole by incorporating the API
+                into their application or service.</p>
+        </div>
+        <div class="simplesect" title="Why use Guacamole?"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="access-from-anywhere"></a>Why use Guacamole?</h2></div></div></div>
+            
+            <p>The principle reason to use Guacamole is constant, world-wide, unfettered access
+                to your computers.</p>
+            <p>Guacamole allows access one or more desktops from anywhere remotely, without
+                having to install a client, particularly when installing a client is not possible.
+                By setting up a Guacamole server, you can provide access to any other computer on
+                the network from virtually any other computer on the internet, anywhere in the
+                world. Even mobile phones or tablets can be used, without having to install
+                anything.</p>
+            <p>As a true web application whose communication is over HTTP or HTTPS only,
+                Guacamole allows you to access your machines from anywhere without violating the
+                policy of your workplace, and without requiring the installation of special clients.
+                The presence of a proxy or corporate firewall does not prevent Guacamole use.</p>
+        </div>
+        <div class="simplesect" title="Access your computers from any device"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="access-from-anything"></a>Access your computers from any device</h2></div></div></div>
+            
+            <p>As Guacamole requires only a reasonably-fast, standards-compliant browser,
+                Guacamole will run on many devices, including mobile phones and tablets.</p>
+            <p>Guacamole is specifically designed to not care whether you have a mouse, keyboard,
+                touchscreen, or any combination of those.</p>
+            <p>One of the major design philosophies behind Guacamole is that it should never
+                assume you have a particular device (ie: a mobile phone) just because your browser
+                has or is missing a specific feature (ie: touch events or a smallish screen).
+                Guacamole's codebase provides support for both mouse and touch events
+                simultaneously, without choosing one over the other, while the interface is intended
+                to be usable regardless of screen size.</p>
+            <p>Barring bugs, you should be able to use Guacamole on just about any modern device
+                with a web browser.</p>
+        </div>
+        <div class="simplesect" title="Keep a computer in the &quot;cloud&quot;"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="non-physical-computer"></a>Keep a computer in the "cloud"</h2></div></div></div>
+            
+            <p>Ignoring the buzzword, it's often useful to have a computer that has no dedicated
+                physical hardware, where its processing and storage power are handled transparently
+                by redundant systems in some remote datacenter.</p>
+            <p>Computers hosted on virtualized hardware are more resilient to failures, and with
+                so many companies now offering on-demand computing resources, Guacamole is a perfect
+                way to access several machines that are only accessible over the internet.</p>
+            <p>In fact, all Guacamole development is done on computers like this. This is partly
+                because we like the mobility, and partly because we want to ensure Guacamole is
+                always performant enough for daily use.</p>
+        </div>
+        <div class="simplesect" title="Provide easy access to a group"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="group-access"></a>Provide easy access to a group</h2></div></div></div>
+            
+            <p>Guacamole allows you to centralize access to a large group of machines, and
+                specify on a per-user basis which machines are accessible. Rather than remember a
+                list of machines and credentials, users need only log into a central server and
+                click on one of the connections listed.</p>
+            <p>If you have multiple computers which you would like to access remotely, or you are
+                part of a group where each person has a set of machines that they need remote access
+                to, Guacamole is a good way to provide that access while also ensuring that access
+                is available from anywhere.</p>
+        </div>
+        <div class="simplesect" title="Adding HTML5 remote access to your existing infrastructure"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="adding-remote-access"></a>Adding HTML5 remote access to your existing infrastructure</h2></div></div></div>
+            
+            <p>As Guacamole is an API, not just a web application, the core components and
+                libraries provided by the Guacamole project can be used to add HTML5 remote access
+                features to an existing application. You need not use the main Guacamole web
+                application; you can write (or integrate with) your own rather easily.</p>
+            <p>If you host an on-demand computing service, adding HTML5-based remote access
+                allows users of your service more broad access; users need nothing more than a web
+                browser to see their computers' screens.</p>
+        </div>
+    </div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="users-guide.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Guacamole Manual </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Part I. User's Guide</td></tr></table></div>
+
+            </div></div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

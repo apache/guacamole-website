@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Troubleshooting</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="using-guacamole.html" title="Chapter 7. Using Guacamole" /><link rel="next" href="developers-guide.html" title="Part II. Developer's Guide" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Troubleshooting</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-guacamole.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="developers-guide.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" title="Chapter 8. Troubleshooting" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="troubleshooting"></a>Chapter 8. Troubleshooting</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="troubleshooting.html#not-working">It isn't working</a></span></dt><dd><dl><dt><span class="section"><a href="troubleshooting.html#idp1229984">No graphics appear</a></span></dt><dt><span class="section"><a href="troubleshooting.html#idp1236240">Connections involving Unicode don't work</a></span></dt></dl></dd><dt><span class="section"><a href="troubleshooting.html#syslog">syslog</a></span></dt><dd><dl><dt><span class="section"><a href="troubleshooting.html#guacd-errors">guacd errors</a></span></dt><dt><span class="section"><a href="troubleshooting.html#libguac-client-vnc-errors">libguac-client-vnc errors</a></span></dt><dt><span class="section"><a href="troubleshooting.html#libguac-client-rdp-errors">libguac-client-rdp errors</a></span></dt></dl></dd><dt><span class="section"><a href="troubleshooting.html#servlet-container-logs">Servlet container logs</a></span></dt><dd><dl><dt><span class="section"><a href="troubleshooting.html#user-mapping-xml-errors"><code class="filename">user-mapping.xml</code> errors</a></span></dt><dt><span class="section"><a href="troubleshooting.html#guacamole-properties-errors"><code class="filename">guacamole.properties</code> errors</a></span></dt><dt><span class="section"><a href="troubleshooting.html#guacamole-auth-errors">Authentication errors</a></span></dt><dt><span class="section"><a href="troubleshooting.html#guacamole-tunnel-errors">Tunnel errors</a></span></dt></dl></dd></dl></div>
+    
+    <a id="idp1225136" class="indexterm"></a>
+    <a id="idp1226080" class="indexterm"></a>
+    <div class="section" title="It isn't working"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="not-working"></a>It isn't working</h2></div></div></div>
+        
+        <p>If Guacamole isn't working, chances are something isn't configured
+            properly, or something is wrong with the network. Thankfully,
+            Guacamole and all its components log errors thoroughly, so the
+            problem can usually be traced down fairly easily if you know where
+            to look. Troubleshooting Guacamole usually boils down to checking
+            either syslog or your servlet container's logs (likely
+            Tomcat).</p>
+        <p>Failing all that, you can always post a question in the forums, or
+            if you truly feel you've discovered a bug, you can create a new
+            ticket in Trac. Beware that if something isn't working, and there
+            are errors in the logs describing the problem, it is usually not a
+            bug, and the best place to handle such things is through consulting
+            this guide or the forums.</p>
+        <div class="section" title="No graphics appear"><div class="titlepage"><div><div><h3 class="title"><a id="idp1229984"></a>No graphics appear</h3></div></div></div>
+            
+            <a id="idp1230832" class="indexterm"></a>
+            <a id="idp1231872" class="indexterm"></a>
+            <p>If you <span class="emphasis"><em>never</em></span> see any graphics appear, or you see "Connecting,
+                waiting for first update..." for a while and then are disconnected, the most likely
+                cause is a proxy.</p>
+            <p>Guacamole relies on streaming data to you over a persistent connection. If
+                software between Guacamole and your browser is buffering all incoming data, such as
+                a proxy, this data never makes it to your browser, and you will just see it wait
+                indefinitely. Eventually, thinking the client has disconnected, Guacamole closes the
+                connection, at which point the proxy finally flushes its buffer and you see
+                graphics! ... just in time to see it disconnect.</p>
+            <p>The solution here is to either modify your proxy settings to flush packets
+                immediately as they are received, or to use HTTPS. Proxies are required to pass
+                HTTPS through untouched, and this usually solves the problem.</p>
+            <p>Even if you aren't aware of any proxy, there may be one in place. Corporate
+                firewalls very often incorporate proxies. Antivirus software may buffer incoming
+                data until the connection is closed and the data is scanned for viruses.
+                Virtualization software may detect HTTP data and buffer the connection just like a
+                proxy. If all else fails, try HTTPS - it's the only secure way to do this
+                anyway.</p>
+        </div>
+        <div class="section" title="Connections involving Unicode don't work"><div class="titlepage"><div><div><h3 class="title"><a id="idp1236240"></a>Connections involving Unicode don't work</h3></div></div></div>
+            
+            <a id="idp1237216" class="indexterm"></a>
+            <a id="idp1238128" class="indexterm"></a>
+            <a id="idp1239296" class="indexterm"></a>
+            <p>If you are using Tomcat, beware that you <span class="emphasis"><em>must</em></span> set the
+                    <code class="code">URIEncoding="UTF-8"</code> attribute on all connectors in your
+                    <code class="filename">server.xml</code>. If you are using a different servlet container,
+                you need to find out whether it requires special options to support UTF-8 in URIs,
+                and change the required settings to enable such support.</p>
+            <p>Without UTF-8 support enabled for URIs, Unicode characters in connection names
+                will not be received properly when connecting, and Guacamole will thing the
+                connection you requested does not exist. Similarly, if you are using the built-in
+                administration interface, parameters involving Unicode characters will not save
+                properly without these options enabled.</p>
+        </div>
+    </div>
+    <div class="section" title="syslog"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="syslog"></a>syslog</h2></div></div></div>
+        
+        <a id="idp1244352" class="indexterm"></a>
+        <p>guacd and libguac-based programs (such as all client plugins) log
+            informational messages and errors to syslog. Specifically, guacd
+            uses syslog, and it exposes this logging facility to everything it
+            loads (client plugins), thus if the VNC or RDP support plugins
+            encounter errors, they log those errors over the logging facilities
+            exposed by guacd, in this case syslog.</p>
+        <p>Once you guacd is started, you'll see entries like the following
+            in syslog:</p>
+        <div class="informalexample">
+            <pre class="screen">guacd[19663]: Guacamole proxy daemon (guacd) version 0.7.0
+guacd[19663]: Unable to bind socket to host ::1, port 4823: Address family
+              not supported by protocol
+guacd[19663]: Successfully bound socket to host 127.0.0.1, port 4823
+guacd[19663]: Exiting and passing control to PID 19665
+guacd[19665]: Exiting and passing control to PID 19666
+guacd[19666]: Listening on host 127.0.0.1, port 4823</pre>
+        </div>
+        <p>Each entry relevant to Guacamole has the prefix "guacd", denoting
+            the program that produced the entry, followed by the process ID,
+            followed by the message. The entries above show guacamole starting
+            successfully and listening on a non-default port 4823.</p>
+        <div class="section" title="guacd errors"><div class="titlepage"><div><div><h3 class="title"><a id="guacd-errors"></a>guacd errors</h3></div></div></div>
+            
+            <a id="idp1250400" class="indexterm"></a>
+            <a id="idp1251600" class="indexterm"></a>
+            <div class="section" title="Unable to bind socket to any addresses."><div class="titlepage"><div><div><h4 class="title"><a id="idp1253152"></a>Unable to bind socket to any addresses.</h4></div></div></div>
+                
+                <p>This means that guacd failed to start up at all because
+                    the port it wants to listen on is already taken at all
+                    addresses attempted. The details of what guacd tried will be
+                    listed in the log entries above this. To solve the problem,
+                    find what port guacd was trying to listen on (the default is
+                    4822) and check if any other service is listening on that
+                    port.</p>
+                <p>If another service is listening on the default port, you
+                    can always specify a non-standard port for guacd by using
+                    the <code class="option">-l<em class="replaceable"><code> PORT</code></em></code>
+                    option (that's a lowercase "L", not a number "1"), where
+                        <em class="replaceable"><code>PORT</code></em> is the number of the
+                    port to listen on. Beware that you will likely have to
+                    modify <code class="filename">guacamole.properties</code> so that
+                    Guacamole knows how to connect to guacd.</p>
+            </div>
+            <div class="section" title="Unable to start input thread"><div class="titlepage"><div><div><h4 class="title"><a id="idp1257312"></a>Unable to start <em class="replaceable"><code>input</code></em>
+                    thread</h4></div></div></div>
+                
+                <p>guacd creates two threads for each connection: one that
+                    receives input from the connected client, and the other that
+                    produces output for the client. If either of these fails to
+                    start, the above error will be logged along with the
+                    cause.</p>
+                <p>If it is the output thread that fails to start, the
+                    message will instead read: "Unable to start output
+                    thread".</p>
+            </div>
+            <div class="section" title="Client finished abnormally"><div class="titlepage"><div><div><h4 class="title"><a id="idp1260000"></a>Client finished abnormally</h4></div></div></div>
+                
+                <p>If the client plugin ever returns an error code, this will
+                    cause the connection to immediately terminate, with the
+                    cause of the error specific to the plugin in use. The cause
+                    should be detailed in the log messages above the error. If
+                    those log messages don't make sense, you may have found a
+                    bug.</p>
+            </div>
+            <div class="section" title="Could not fork() parent"><div class="titlepage"><div><div><h4 class="title"><a id="idp1261808"></a>Could not fork()
+                    <em class="replaceable"><code>parent</code></em></h4></div></div></div>
+                
+                <p>When guacd starts up, it immediately attempts to "fork"
+                    into the background (unless instructed otherwise). The word
+                    "fork()" above is a reference to the C function call that
+                    does this. There are several calls to this function, each of
+                    which might fail if system resources are lacking or
+                    something went wrong at a low level. If you see this
+                    message, it is probably not a bug in Guacamole, but rather a
+                    problem with the load level of your system.</p>
+                <p>This message may also appear as "Could not fork() group
+                    leader".</p>
+            </div>
+            <div class="section" title="Unable to change working directory to /"><div class="titlepage"><div><div><h4 class="title"><a id="idp1264448"></a>Unable to change working directory to /</h4></div></div></div>
+                
+                <p>One of the duties of guacd as it starts up is to change
+                    its working directory to the root directory. This is to
+                    prevent locking the current directory in case it needs to be
+                    unmounted, etc. If guacd cannot do this, this error will be
+                    logged, along with the cause.</p>
+            </div>
+            <div class="section" title="Unable to redirect standard file descriptors to /dev/null"><div class="titlepage"><div><div><h4 class="title"><a id="idp1266256"></a>Unable to redirect standard file descriptors to
+                    /dev/null</h4></div></div></div>
+                
+                <p>As guacd starts, it also has to redirect STDOUT, STDERR,
+                    and STDIN to <code class="filename">/dev/null</code> such that
+                    attempts to use these output mechanisms do not pollute the
+                    active console. Though guacd and client plugins will use the
+                    exposed logging facilities (and thus syslog) rather than
+                    STDOUT or STDERR, libraries used by client plugins are often
+                    written only from the mindset of a typical client, and use
+                    standard output mechanisms for debug logging. Not
+                    redirecting these would result in undesired output to the
+                    console.</p>
+                <p>If guacd cannot redirect these file descriptors for any
+                    reason, this error will be logged, along with the
+                    cause.</p>
+            </div>
+            <div class="section" title="Error parsing given address or port: HOSTNAME"><div class="titlepage"><div><div><h4 class="title"><a id="idp1269264"></a>Error parsing given address or port:
+                        <em class="replaceable"><code>HOSTNAME</code></em></h4></div></div></div>
+                
+                <p>If you specified a host or port to listen on via
+                    commandline options, and that host or port is actually
+                    invalid, you will see this error. Fix the corresponding
+                    option and try again.</p>
+            </div>
+            <div class="section" title="Error opening socket"><div class="titlepage"><div><div><h4 class="title"><a id="idp1270576"></a>Error opening socket</h4></div></div></div>
+                
+                <p>When guacd starts up, it needs to open a socket and then
+                    listen on that socket. If it can't even open the socket,
+                    this error will be logged, and guacd will exit. The cause is
+                    most likely related to permissions, and is logged along with
+                    the error.</p>
+            </div>
+            <div class="section" title="Unable to resolve host"><div class="titlepage"><div><div><h4 class="title"><a id="idp1272912"></a>Unable to resolve host</h4></div></div></div>
+                
+                <p>If the hostname you specified on the commandline cannot be
+                    found, you will see this error. Note that this error is from
+                    guacd, and does not relate to whatever remote desktop
+                    servers you may be trying to use; it relates only to the
+                    host guacd is trying to listen on. Check the hostname or IP
+                    address specified on the commandline. If that checks out,
+                    there may be a problem with your DNS or your network.</p>
+            </div>
+            <div class="section" title="Could not become a daemon"><div class="titlepage"><div><div><h4 class="title"><a id="idp1274608"></a>Could not become a daemon</h4></div></div></div>
+                
+                <p>In order to become a "daemon" (that is, in order to run in
+                    the background as a system process), guacd must create and
+                    exit from several processes, redirect file descriptors, etc.
+                    If any of these steps fails, guacd will not become a daemon,
+                    and it will log this message and exit. The reason guacd
+                    could not become a daemon will be in the previous error
+                    message in the logs.</p>
+            </div>
+            <div class="section" title="Could not write PID file"><div class="titlepage"><div><div><h4 class="title"><a id="idp1276576"></a>Could not write PID file</h4></div></div></div>
+                
+                <p>guacd offers a commandline option that lets you specify a
+                    file that it should write its process ID into, which is
+                    useful for init scripts. If you see this error, it likely
+                    means the user guacd is running as does not have permission
+                    to write this file. The true cause of the error will be
+                    logged in the same entry. Check which user guacd is running
+                    as, and then check that it has write permission to the file
+                    in question.</p>
+            </div>
+            <div class="section" title="Could not listen on socket"><div class="titlepage"><div><div><h4 class="title"><a id="idp1278480"></a>Could not listen on socket</h4></div></div></div>
+                
+                <p>When guacd starts up, it needs to listen on the socket it
+                    just opened in order to accept connections. If it cannot
+                    listen on the socket, clients will be unable to connect. If,
+                    for any reason, guacd is unable to listen on the socket,
+                    guacd will exit and log this message along with the cause,
+                    which is most likely a low-level system resource
+                    problem.</p>
+            </div>
+            <div class="section" title="Could not accept client connection"><div class="titlepage"><div><div><h4 class="title"><a id="idp1280288"></a>Could not accept client connection</h4></div></div></div>
+                
+                <p>When a client connects to guacd, it must accept the
+                    connection in order for communication to ensue. If it cannot
+                    even accept the connection, no communication between server
+                    and client will happen, and this error will be logged. The
+                    cause of the error will be logged in the same entry.
+                    Possible causes include permissions problems, or lack of
+                    server resources.</p>
+            </div>
+            <div class="section" title="Error forking child process"><div class="titlepage"><div><div><h4 class="title"><a id="idp1282112"></a>Error forking child process</h4></div></div></div>
+                
+                <p>When a client connects to guacd, it must create a new
+                    process to handle the connection while the old guacd process
+                    continues to listen for new connections. If, for any reason,
+                    guacd cannot create this process, the connection from that
+                    client will be denied, and the cause of the error will be
+                    logged. Possible causes include permissions problems, or
+                    lack of server resources.</p>
+            </div>
+            <div class="section" title="Error closing daemon reference to child descriptor"><div class="titlepage"><div><div><h4 class="title"><a id="idp1283952"></a>Error closing daemon reference to child
+                    descriptor</h4></div></div></div>
+                
+                <p>When guacd receives a connection, and it creates a new
+                    process to handle that connection, it gains a copy of the
+                    file descriptor that the client will use for communication.
+                    As this connection can never be closed unless all references
+                    to the descriptor are closed, the server must close its copy
+                    such that the client is the only remaining holder of the
+                    file descriptor. If the server cannot close the descriptor,
+                    it will log this error message along with the cause.</p>
+            </div>
+            <div class="section" title="Error sending &quot;sync&quot; instruction"><div class="titlepage"><div><div><h4 class="title"><a id="idp1286000"></a>Error sending "sync" instruction</h4></div></div></div>
+                
+                <p>During the course of a Guacamole session, guacd must
+                    occasionally "ping" the client to make sure it is still
+                    alive. This ping takes the form of a "sync" instruction,
+                    which the client is obligated to respond to as soon as it is
+                    received. If guacd cannot send this instruction, this error
+                    will be logged, along with the cause. Chances are the
+                    connection has simply been closed, and this error can be
+                    ignored.</p>
+            </div>
+            <div class="section" title="Error flushing output"><div class="titlepage"><div><div><h4 class="title"><a id="idp1287712"></a>Error flushing output</h4></div></div></div>
+                
+                <p>After the client plugin is finished (for the time being)
+                    with handling server messages, the socket is automatically
+                    flushed. If the server cannot flush this socket for some
+                    reason, such as the connection already being closed, you
+                    will see this error. Normally, this error does not indicate
+                    a problem, but rather that the client has simply closed the
+                    connection.</p>
+            </div>
+            <div class="section" title="Error handling server messages"><div class="titlepage"><div><div><h4 class="title"><a id="idp1289728"></a>Error handling server messages</h4></div></div></div>
+                
+                <p>While the client plugin is running, guacd will
+                    occasionally ask the plugin to check and handle any messages
+                    that it may have received from the server it connected to.
+                    If the client plugin fails for some reason while doing this,
+                    this error will be logged, and the cause of the error will
+                    likely be logged in previous log entries by the client
+                    plugin.</p>
+            </div>
+            <div class="section" title="Error reading instruction"><div class="titlepage"><div><div><h4 class="title"><a id="idp1291360"></a>Error reading instruction</h4></div></div></div>
+                
+                <p>During the course of a Guacamole session, instructions are
+                    sent from client to server which are to be handled by the
+                    client plugin. If an instruction cannot be read, this error
+                    will be logged. Usually this means simply that the
+                    connection was closed, but it could also indicate that the
+                    version of the client in use is so old that it doesn't
+                    support the current Guacamole protocol at all. If the cause
+                    looks like the connection was closed (end of stream reached,
+                    etc.), this log entry can be ignored. Otherwise, if the
+                    first two numbers of the version numbers of all Guacamole
+                    components match, you have probably found a bug.</p>
+            </div>
+            <div class="section" title="Client instruction handler error"><div class="titlepage"><div><div><h4 class="title"><a id="idp1293632"></a>Client instruction handler error</h4></div></div></div>
+                
+                <p>This error indicates that a client plugin failed inside
+                    the handler for a specific instruction. When the server
+                    receives instructions from the client, it then invokes
+                    specific instruction handles within the client plugin. In
+                    general, this error is not useful to a user or system
+                    administrator. If the cause looks benign, such as reaching
+                    the end of a stream (the connection closed), it can be
+                    ignored as normal. Otherwise, this error can indicate a bug
+                    either in the client plugin or in a library used by the
+                    client plugin.</p>
+                <p>It can also indicate a problem in the remote desktop
+                    server which is causing the client plugin to fail while
+                    communicating with it.</p>
+            </div>
+            <div class="section" title="Error reading &quot;OPCODE&quot;"><div class="titlepage"><div><div><h4 class="title"><a id="idp1296256"></a>Error reading "<em class="replaceable"><code>OPCODE</code></em>"</h4></div></div></div>
+                
+                <p>During the handshake of the Guacamole protocol, the server
+                    expects a very specific sequence of instructions to be
+                    received. If the wrong instructions are received, or the
+                    connection is abruptly closed during the handshake, the
+                    above error will occur.</p>
+                <p>In the case that the cause is the connection closing, this
+                    is normal, and probably just means that the client
+                    disconnected before the initial handshake completed.</p>
+                <p>If the connection was not closed abruptly, but instead the
+                    wrong instruction was received, this could mean either that
+                    the connecting client is from an incompatible version of
+                    Guacamole (and thus does not know the proper handshake
+                    procedure) or you have found a bug. Check whether all
+                    installed components came from the same upstream release
+                    bundle.</p>
+            </div>
+            <div class="section" title="Error sending &quot;args&quot;"><div class="titlepage"><div><div><h4 class="title"><a id="idp1299984"></a>Error sending "args"</h4></div></div></div>
+                
+                <p>During the handshake of the Guacamole protocol, the server
+                    must expose all parameters used by the client plugin via the
+                    args instruction. If this cannot be sent, you will see this
+                    error in the logs. The cause will be included in the error
+                    message, and usually just indicates that the connection was
+                    closed during the handshake, and thus the handshake cannot
+                    continue.</p>
+            </div>
+            <div class="section" title="Error loading client plugin"><div class="titlepage"><div><div><h4 class="title"><a id="idp1301808"></a>Error loading client plugin</h4></div></div></div>
+                
+                <p>When the client connects, it sends an instruction to guacd
+                    informing it what protocol it wishes to use. If the
+                    corresponding client plugin cannot be found or used for any
+                    reason, this message will appear in the logs. Normally this
+                    indicates that the corresponding client plugin is not
+                    actually installed. The cause listed after the error message
+                    will indicate whether this is the case.</p>
+            </div>
+            <div class="section" title="Error instantiating client"><div class="titlepage"><div><div><h4 class="title"><a id="idp1303488"></a>Error instantiating client</h4></div></div></div>
+                
+                <p>After the client plugin is loaded, an initialization
+                    function provided by the client plugin is invoked. If this
+                    function fails, then the client itself cannot be created,
+                    and this error will be logged. Usually this indicates that
+                    one or more of the parameters given to the client plugin are
+                    incorrect or malformed. Check the configuration of the
+                    connection in use at the time.</p>
+            </div>
+        </div>
+        <div class="section" title="libguac-client-vnc errors"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-client-vnc-errors"></a>libguac-client-vnc errors</h3></div></div></div>
+            
+            <div class="section" title="Error waiting for VNC message"><div class="titlepage"><div><div><h4 class="title"><a id="idp1305872"></a>Error waiting for VNC message</h4></div></div></div>
+                
+                <p>The VNC client plugin must wait for messages sent by the
+                    VNC server, and handle them when they arrive. If there was
+                    an error while waiting for a message from the VNC server,
+                    this error message will be displayed. Usually this means
+                    that the VNC server closed the connection, or there is a
+                    problem with the VNC server itself, but the true cause of
+                    the error will be logged.</p>
+            </div>
+            <div class="section" title="Error handling VNC server message"><div class="titlepage"><div><div><h4 class="title"><a id="idp1307840"></a>Error handling VNC server message</h4></div></div></div>
+                
+                <p>When messages are received from the VNC server,
+                    libvncclient must handle them and then invoke the functions
+                    of libguac-client-vnc as necessary. If libvncclient fails
+                    during the handling of a received message, this error will
+                    be logged, along with (hopefully) the cause. This may
+                    indicate a problem with the VNC server, or a lack of support
+                    within libvncclient.</p>
+            </div>
+            <div class="section" title="Wrong argument count received"><div class="titlepage"><div><div><h4 class="title"><a id="idp1309488"></a>Wrong argument count received</h4></div></div></div>
+                
+                <p>The connecting client is required to send exactly the same
+                    number of arguments as requested by the client plugin. If
+                    you see this message, it means there is a bug in the client
+                    connecting to guacd, most likely the web application.</p>
+            </div>
+        </div>
+        <div class="section" title="libguac-client-rdp errors"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-client-rdp-errors"></a>libguac-client-rdp errors</h3></div></div></div>
+            
+            <div class="section" title="Invalid parameter"><div class="titlepage"><div><div><h4 class="title"><a id="idp1312592"></a>Invalid <em class="replaceable"><code>parameter</code></em></h4></div></div></div>
+                
+                <p>If one of the parameters given, such as "width", "height",
+                    or "color-depth", is invalid (not an integer, for example),
+                    you will receive this error. Check the parameters of the
+                    connection in use and try again.</p>
+            </div>
+            <div class="section" title="Failed to load cliprdr plugin"><div class="titlepage"><div><div><h4 class="title"><a id="idp1313728"></a>Failed to load cliprdr plugin</h4></div></div></div>
+                
+                <p>FreeRDP provides a plugin called "cliprdr" which provides
+                    clipboard support for RDP. libguac-client-rdp loads this
+                    plugin in order to support clipboard, as well. If this
+                    plugin could not be loaded, then clipboard support will not
+                    be available, and the reason will be logged.</p>
+            </div>
+            <div class="section" title="Failed to load guac_rdpsnd plugin"><div class="titlepage"><div><div><h4 class="title"><a id="idp1316144"></a>Failed to load guac_rdpsnd plugin</h4></div></div></div>
+                
+                <p>In order to support sound, libguac-client-rdp builds a
+                    plugin for FreeRDP called "guac_rdpsnd" which must be loaded
+                    for sound to be available. If libguac-client-rdp cannot load
+                    this plugin, sound will not work, and the reason will be
+                    logged. A likely explanation is that libguac-client-rdp was
+                    built from source, and the directory specified for FreeRDP's
+                    installation location was incorrect.</p>
+            </div>
+            <div class="section" title="Server requested unsupported clipboard data type"><div class="titlepage"><div><div><h4 class="title"><a id="idp1317968"></a>Server requested unsupported clipboard data type</h4></div></div></div>
+                
+                <p>When clipboard support is loaded, libguac-client-rdp
+                    informs the RDP server of all supported clipboard data
+                    types. The RDP server is required to send only those types
+                    supported by the client. If the server decides to send an
+                    unsupported type anyway, libguac-client-rdp ignores the data
+                    sent, and logs this message.</p>
+            </div>
+            <div class="section" title="Clipboard data missing null terminator"><div class="titlepage"><div><div><h4 class="title"><a id="idp1319760"></a>Clipboard data missing null terminator</h4></div></div></div>
+                
+                <p>When text is sent via a clipboard message, it is required
+                    to have a terminating null byte. If this is not the case,
+                    the clipboard data is invalid, and libguac-client-rdp
+                    ignores it, logging this error message.</p>
+            </div>
+        </div>
+    </div>
+    <div class="section" title="Servlet container logs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="servlet-container-logs"></a>Servlet container logs</h2></div></div></div>
+        
+        <p>Your servlet container will have logs which the web application
+            side of Guacamole will log errors to. In the case of Tomcat, this is
+            usually <code class="filename">catalina.out</code> or
+                    <code class="filename"><em class="replaceable"><code>HOSTNAME</code></em>.log</code>
+            (for example, <code class="filename">localhost.log</code>).</p>
+        <div class="section" title="user-mapping.xml errors"><div class="titlepage"><div><div><h3 class="title"><a id="user-mapping-xml-errors"></a><code class="filename">user-mapping.xml</code> errors</h3></div></div></div>
+            
+            <p>Errors in the relating to the
+                    <code class="filename">user-mapping.xml</code> file usually indicate
+                that either the XML is malformed, or the file itself cannot be
+                found.</p>
+            <div class="section" title="Attribute &quot;name&quot; required for connection tag"><div class="titlepage"><div><div><h4 class="title"><a id="idp1327312"></a>Attribute "name" required for connection tag</h4></div></div></div>
+                
+                <p>If you specify a connection with a
+                        <code class="code">&lt;connection&gt;</code> tag, it must have a
+                    corresponding name set via the <code class="code">name</code> attribute.
+                    If it does not, then the XML is malformed, and this error
+                    will be logged. No users will be able to login.</p>
+            </div>
+            <div class="section" title="Attribute &quot;name&quot; required for param tag"><div class="titlepage"><div><div><h4 class="title"><a id="idp1329872"></a>Attribute "name" required for param tag</h4></div></div></div>
+                
+                <p>Each parameter specified with a <code class="code">&lt;param&gt;</code>
+                    tag must have a corresponding name set via the
+                        <code class="code">name</code> attribute. If it does not, then the
+                    XML is malformed, and this error will be logged. No users
+                    will be able to login.</p>
+            </div>
+            <div class="section" title="Unexpected character data"><div class="titlepage"><div><div><h4 class="title"><a id="idp1332544"></a>Unexpected character data</h4></div></div></div>
+                
+                <p>Character data (text not within angle brackets) can only
+                    exist within the <code class="code">&lt;param&gt;</code> tag. If it exists
+                    elsewhere, then the XML is malformed, and this error will be
+                    logged. No users will be able to login.</p>
+            </div>
+            <div class="section" title="Invalid encoding type"><div class="titlepage"><div><div><h4 class="title"><a id="idp1334368"></a>Invalid encoding type</h4></div></div></div>
+                
+                <p>There are only two legal values for the
+                        <code class="code">encoding</code> attribute of the
+                        <code class="code">&lt;authorize&gt;</code> tag: <code class="code">plain</code>
+                    (indicating plain text) and <code class="code">md5</code> (indicating a
+                    value hashed with the MD5 digest). If any other value is
+                    used, then the XML is malformed, and this error will be
+                    logged. No users will be able to login.</p>
+            </div>
+            <div class="section" title="User mapping could not be read"><div class="titlepage"><div><div><h4 class="title"><a id="idp1337968"></a>User mapping could not be read</h4></div></div></div>
+                
+                <p>If for any reason the user mapping file cannot be read
+                    (the servlet container lacks read permission for the file,
+                    the file does not exist, etc.), this error will be logged.
+                    Check <code class="filename">guacamole.properties</code> to see where
+                    the user mapping file is specified to exist, and then check
+                    that is both exists and is readable by your servlet
+                    container.</p>
+            </div>
+        </div>
+        <div class="section" title="guacamole.properties errors"><div class="titlepage"><div><div><h3 class="title"><a id="guacamole-properties-errors"></a><code class="filename">guacamole.properties</code> errors</h3></div></div></div>
+            
+            <p>If a property is malformed or a required property is missing,
+                an error describing the problem will be logged.</p>
+            <div class="section" title="Property PROPERTY is required"><div class="titlepage"><div><div><h4 class="title"><a id="idp1342144"></a>Property <em class="replaceable"><code>PROPERTY</code></em> is
+                    required</h4></div></div></div>
+                
+                <p>If Guacamole or an extension of Guacamole requires a
+                    specific property in
+                        <code class="filename">guacamole.properties</code>, but this
+                    property is not defined, this error will be logged. Check
+                    which properties are required by the authentication provider
+                    (or other extensions) in use, and then compare that against
+                    the properties within
+                        <code class="filename">guacamole.properties</code>.</p>
+            </div>
+            <div class="section" title="Specified authentication provider class is not a AuthenticationProvider"><div class="titlepage"><div><div><h4 class="title"><a id="idp1345264"></a>Specified authentication provider class is not a
+                    AuthenticationProvider</h4></div></div></div>
+                
+                <p>The <code class="code">auth-provider</code> property allows you to
+                    specify a custom authentication provider class which will
+                    handle all authentication, but these classes must implement
+                    the <code class="classname">AuthenticationProvider</code> interface.
+                    If the class specified does not, this error will be logged.
+                    Check that your authentication provider class implements
+                        <code class="classname">AuthenticationProvider</code> (if you
+                    implemented it yourself), and verify that you are specifying
+                    the correct class.</p>
+                <p>If you are certain that the class specified is correct,
+                    you may have placed the .jar file for your authentication
+                    provider in the wrong directory. Make sure the .jar file is
+                    in the directory specified by the <code class="code">lib-directory</code>
+                    parameter in guacamole.properties.</p>
+            </div>
+            <div class="section" title="Resource /guacamole.properties not found"><div class="titlepage"><div><div><h4 class="title"><a id="idp1349792"></a>Resource /guacamole.properties not found</h4></div></div></div>
+                
+                <p>Guacamole requires that the
+                        <code class="filename">guacamole.properties</code> file is in the
+                    classpath of your servlet container. If it is not, this
+                    error will be logged. Check that
+                        <code class="filename">guacamole.properties</code> is in the
+                    proper location, and then restart your servlet
+                    container.</p>
+            </div>
+            <div class="section" title="Missing &quot;basic-user-mapping&quot; parameter required for basic login"><div class="titlepage"><div><div><h4 class="title"><a id="idp1352528"></a>Missing "basic-user-mapping" parameter required for basic
+                    login</h4></div></div></div>
+                
+                <p>If you are using the authentication provider included with
+                    Guacamole, it requires the <code class="code">basic-user-mapping</code>
+                    property to be set. If this property is missing, you will
+                    see this error. Add the missing property to
+                        <code class="filename">guacamole.properties</code>, restart your
+                    servlet container, and try again.</p>
+            </div>
+        </div>
+        <div class="section" title="Authentication errors"><div class="titlepage"><div><div><h3 class="title"><a id="guacamole-auth-errors"></a>Authentication errors</h3></div></div></div>
+            
+            <p>If someone attempts to login with invalid credentials, or
+                someone attempts to access a resource or connection that does
+                not exist or they do not have access to, errors regarding the
+                invalid attempt will be logged.</p>
+            <div class="section" title="Cannot connect - user not logged in"><div class="titlepage"><div><div><h4 class="title"><a id="idp1356976"></a>Cannot connect - user not logged in</h4></div></div></div>
+                
+                <p>A user attempted to connect using the HTTP tunnel, and
+                    while the tunnel does exist and is attached to their
+                    session, they are not actually logged in. Normally, this
+                    isn't strictly possible, as a user has to have logged in for
+                    a tunnel to be attached to their session, but as it isn't an
+                    impossibility, this error does exist. If you see this error,
+                    it could mean that the user logged out at the same time that
+                    they made a connection attempt.</p>
+            </div>
+            <div class="section" title="Requested configuration is not authorized"><div class="titlepage"><div><div><h4 class="title"><a id="idp1358720"></a>Requested configuration is not authorized</h4></div></div></div>
+                
+                <p>A user attempted to connect to a configuration with a
+                    given ID, and while that configuration does exist, they are
+                    not authorized to use it. This could mean that the user is
+                    trying to access things they have no privileges for, or that
+                    they are trying to access configurations they legitimately
+                    should, but are actually logged out.</p>
+            </div>
+            <div class="section" title="User has no session"><div class="titlepage"><div><div><h4 class="title"><a id="idp1360480"></a>User has no session</h4></div></div></div>
+                
+                <p>A user attempted to access a page that needs data from
+                    their session, but their session does not actually exist.
+                    This usually means the user has not logged in, as sessions
+                    are created through the login process.</p>
+            </div>
+        </div>
+        <div class="section" title="Tunnel errors"><div class="titlepage"><div><div><h3 class="title"><a id="guacamole-tunnel-errors"></a>Tunnel errors</h3></div></div></div>
+            
+            <p>The tunnel frequently returns errors if guacd is killed, the
+                connection is closed, or the client abruptly closes the
+                connection.</p>
+            <div class="section" title="No such tunnel"><div class="titlepage"><div><div><h4 class="title"><a id="idp1364208"></a>No such tunnel</h4></div></div></div>
+                
+                <p>An attempt was made to use a tunnel which does not
+                    actually exist. This is usually just the JavaScript client
+                    sending a leftover message or two while it hasn't realized
+                    that the server has disconnected. If this error happens
+                    consistently and is associated with Guacamole generally not
+                    working, it could be a bug.</p>
+            </div>
+            <div class="section" title="No tunnel created"><div class="titlepage"><div><div><h4 class="title"><a id="idp1365792"></a>No tunnel created</h4></div></div></div>
+                
+                <p>A connection attempt for a specific configuration was
+                    made, but the connection failed, and no tunnel was created.
+                    This is usually because the user was not authorized to use
+                    that connection, and thus no tunnel was created for access
+                    to that connection.</p>
+            </div>
+            <div class="section" title="No query string provided"><div class="titlepage"><div><div><h4 class="title"><a id="idp1367632"></a>No query string provided</h4></div></div></div>
+                
+                <p>When the JavaScript client is communicating with the HTTP
+                    tunnel, it <span class="emphasis"><em>must</em></span> provide data in the
+                    query string describing whether it wants to connect, read,
+                    or write. If this data is missing as the error indicates,
+                    there is a bug in the HTTP tunnel.</p>
+            </div>
+            <div class="section" title="Tunnel reached end of stream"><div class="titlepage"><div><div><h4 class="title"><a id="idp1369776"></a>Tunnel reached end of stream</h4></div></div></div>
+                
+                <p>An attempt to read from the tunnel was made, but the
+                    tunnel in question has already reached the end of stream
+                    (the connection is closed). This is mostly an informative
+                    error, and can be ignored.</p>
+            </div>
+            <div class="section" title="Tunnel is closed"><div class="titlepage"><div><div><h4 class="title"><a id="idp1371408"></a>Tunnel is closed</h4></div></div></div>
+                
+                <p>An attempt to read from the tunnel was made, but the
+                    tunnel in question is already closed. This can happen if the
+                    client or guacd have closed the connection, but the client
+                    has not yet settled down and is still making read attempts.
+                    As there can be lags between when connections close and when
+                    the client realizes it, this can be safely ignored.</p>
+            </div>
+            <div class="section" title="End of stream during initial handshake"><div class="titlepage"><div><div><h4 class="title"><a id="idp1373024"></a>End of stream during initial handshake</h4></div></div></div>
+                
+                <p>If guacd closes the connection suddenly without allowing
+                    the client to complete the initial handshake required by the
+                    Guacamole protocol, this error will appear in the logs. If
+                    you see this error, you should check syslog for any errors
+                    logged by guacd to determine why it closed the connection so
+                    early.</p>
+            </div>
+            <div class="section" title="Element terminator of instruction was not ';' nor ','"><div class="titlepage"><div><div><h4 class="title"><a id="idp1374832"></a>Element terminator of instruction was not ';' nor
+                    ','</h4></div></div></div>
+                
+                <p>The Guacamole protocol imposes a strict format which
+                    requires individual parts of instructions (called
+                    "elements") to end with either a ";" or "," character. If
+                    they do not, then something has gone wrong during
+                    transmission. This usually indicates a bug in the client
+                    plugin in use, guacd, or libguac.</p>
+            </div>
+            <div class="section" title="Non-numeric character in element length"><div class="titlepage"><div><div><h4 class="title"><a id="idp1376432"></a>Non-numeric character in element length</h4></div></div></div>
+                
+                <p>The Guacamole protocol imposes a strict format which
+                    requires each element of an instruction to have a length
+                    prefix, which must be composed entirely of numeric
+                    characters (digits 0 through 9). If a non-numeric character
+                    is read, then something has gone wrong during transmission.
+                    This usually indicates a bug in the client plugin in use,
+                    guacd, or libguac.</p>
+            </div>
+        </div>
+    </div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-guacamole.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="developers-guide.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. Using Guacamole </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Part II. Developer's Guide</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>
