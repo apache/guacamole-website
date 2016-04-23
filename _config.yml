@@ -4,6 +4,10 @@ title: Apache Guacamole
 
 # Build settings
 markdown: kramdown
+exclude:
+    - build.sh
+    - content
+    - doc
 
 # Custom collections
 collections:
