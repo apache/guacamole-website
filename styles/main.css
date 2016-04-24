@@ -22,7 +22,7 @@ a[href]:visited { color: #884; }
 
 div#header {
     color: white;
-    background: #474747;
+    background: #304730;
     display: table;
     width: 100%;
     padding: 1em;
@@ -50,14 +50,62 @@ div#header > * {
     background-position: 0.25em center;
 }
 
-.hook {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.1);
+ul.features {
+    list-style: none;
+    padding: 0;
+}
+
+ul.features li {
+    padding-left: 1.25in;
+    position: relative;
+}
+
+ul.features li > * {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ul.features li::before {
+    content: ' ';
+    height: 1in;
+    width: 1in;
+    background: #304730;
+    border-radius: 1in;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -0.5in;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: center;
+}
+
+ul.features li.apache::before {
+    background-image: url('/images/feather.png');
+    background-size: 40%;
+}
+
+ul.features li.html5::before {
+    background-image: url('/images/html5-white.png');
+}
+
+ul.features li.cloud-desktop::before {
+    background-image: url('/images/cloud-desktop.png');
+}
+
+ul.features li.documented-api::before {
+    background-image: url('/images/code.png');
+}
+ul.features li.commercially-supported::before {
+    background-image: url('/images/business.png');
 }
 
 .hook {
+    padding-bottom: 2em;
+    overflow: hidden;
+    background: #304730;
+    color: white;
     text-align: center;
 }
 
@@ -72,21 +120,9 @@ div#header > * {
     width: 7cm;
 }
 
-div#page {
-    background: white;
-    color: black;
-}
-
-div#content {
-
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-
-    max-width: 32cm;
-    padding: 1em;
-
+.hook .description {
+    font-size: 1.25em;
+    max-width: 40%;
 }
 
 .latest {
@@ -118,9 +154,12 @@ img.book-pic {
     background: url('/images/book-pages.png');
 }
 
+h1 {
+    margin-top: 0.25in;
+    margin-bottom: 0.25in;
+}
+
 h2 {
-    font-size: 1.75em;
-    font-weight: lighter;
     margin-top: 2em;
 }
 
@@ -201,13 +240,30 @@ ul#navigation {
 p {
     line-height: 1.5;
     text-align: justify;
+    margin: 1em;
+}
+
+#content > * {
+    width: 11in;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.25in;
+    padding-right: 0.25in;
+}
+
+#content .hook {
+    margin: 0;
+    width: 100%;
 }
 
 div#footer {
     font-size: 0.9em;
-    border-top: 1px solid black;
-    margin: 1em;
+    border-top: 1px solid silver;
+    margin-top: 3em;
     padding: 1em;
+    background: #EEE;
+    opacity: 0.5;
 }
 
 #footer .block-menu {
@@ -307,7 +363,7 @@ div.button .title {
     display: inline-block;
     position: relative;
     width: 15cm;
-    max-width: 80%;
+    max-width: 40%;
     border: 1px solid black;
 }
 
@@ -606,17 +662,33 @@ input.donate {
 
 }
 
-/* Expand sections when screen too small */
-@media screen and (max-width: 30cm) {
-    #footer .block-menu { max-width: 100%; width: 4cm; }
+/* Reformat feature list when screen too small */
+@media screen and (max-width: 6in) {
+
+    ul.features li::before {
+        position: static;
+        width: 0.5in;
+        height: 0.5in;
+        margin: 0 0.125in;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    ul.features li > h2 {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 75%;
+        margin: 0.75em 0;
+    }
+
+    ul.features li {
+        padding-left: 0;
+    }
+
 }
 
 @media screen and (max-width: 18cm) {
-    div#footer { padding-top: 0; }
-    #footer .block-menu { display: none; }
     .not-found .error-icon { float: right; }
     .not-found .error-description { max-width: 80%; display: block; }
-    #donate { padding-left: 1em; }
-    #donate::after { display: none; }
 }
 
