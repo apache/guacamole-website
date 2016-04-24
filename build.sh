@@ -30,6 +30,9 @@
 # The built results will be available in the "content" subdirectory of the
 # source tree.
 #
+# To stage the results for commit to the "asf-git" branch, specify "stage"
+# instead of an HTTP port number.
+#
 # USAGE:
 #
 #     ./build.sh [HTTP SERVER PORT]
@@ -127,20 +130,61 @@ serve() {
 
 }
 
+##
+## Stages the current build result for commit to the "asf-git" branch.
+##
+stage() {
+
+    # Verify required programs are installed
+    assert_program git
+    assert_program mktemp
+
+    # Move contents to temporary directory
+    TMP="`mktemp -d -p "$PWD"`"
+    mv content/* "$TMP"
+    rmdir content
+
+    # Change to asf-git
+    git checkout asf-git
+
+    # Replace contents
+    rm -rf content
+    mv "$TMP" content
+
+    # Stage for commit
+    git add content/
+    git clean -xfd .
+
+    # Done
+    log "Content staged for commit. Use git to commit the results when ready."
+    log "NOTE: The build.sh script will no longer exist. To serve the staged "
+    log "contents, run:"
+    log
+    log "    ruby -run -e httpd content/ -p PORT"
+    log
+    log "where PORT is the port number where the HTTP server should listen."
+
+}
+
 # Verify number of arguments
 if [ "$#" -gt 1 -o "$1" = "-h" ]; then
     log "Usage:"
     log "    $0 -h       # Display this message"
     log "    $0          # Build website"
     log "    $0 PORT     # Build website and serve from the given PORT"
+    log "    $0 stage    # Build website and stage the contents for asf-git"
     exit 1
 fi
 
 # Build in all cases
 build
 
-# Serve on requested port
-if [ -n "$1" ]; then
+# Stage for commit (if requested)
+if [ "$1" = "stage" ]; then
+    stage
+
+# Otherwise assume port number and serve
+elif [ -n "$1" ]; then
     serve "$1"
 fi
 
