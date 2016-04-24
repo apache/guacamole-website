@@ -12,14 +12,6 @@ layout: default
     </div>
 </div>
 
-<!-- Latest Version -->
-<!--<div class="announce">
-    <div class="version"><a href="/release/release-notes-0-9-6">0.9.6</a></div>
-    <div class="summary">PostgreSQL support, database speed improvements, RDP memory fixes, session management.</div>
-</div>-->
-
-<div class="main">
-<div class="section guac-description" markdown="1">
 What is Guacamole?
 ------------------------------
 
@@ -38,10 +30,6 @@ Guacamole is and will always be **free and open source software**. It is license
 
 We feel this sets us apart from other remote desktop solutions, and gives us a [distinct advantage](/open-source).
 
-<div class="attribution"><span>HTML5 Logo &copy; <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a></span>.</div>
-</div>
-
-<div class="section support" markdown="1">
 What about support?
 ------------------------------
 
@@ -50,6 +38,4 @@ As an open source project, free support is always available to anyone through ou
 We maintain thorough documentation for Guacamole and its components in an [online manual](/doc/gug/), as well as full [API documentation](/api-documentation) for the Guacamole core. Like the software itself, these resources will always be free.
 
 For enterprises, dedicated commercial support is also available through **[Glyptodon LLC](http://glyptodon.org/)**, the company founded around the Guacamole project. If interested, please <a href="mailto:contact@glyptodon.org" class="piwik_link" onclick="piwikTracker.trackGoal(8)">contact us for a quote</a>. Paid support helps drive development, and benefits both the project and the community.
-</div>
-</div>
 

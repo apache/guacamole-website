@@ -208,85 +208,6 @@ div#navigation {
     background-image: url('/images/guac-sponsors.png');
 }
 
-.main {
-    text-align: center;
-}
-
-.main > * {
-    text-align: left;
-    vertical-align: top;
-}
-
-.section {
-    padding: 1.5cm 2.5cm;
-    background-repeat: no-repeat;
-}
-
-.section h2 {
-    margin: 1em 0;
-    margin-top: 0;
-    font-weight: bold;
-}
-
-.section h2 ~ h2 {
-    margin-top: 1.5cm;
-}
-
-.section.guac-description {
-
-    position: relative;
-    padding-right: 8.5cm;
-    border-right: 2.5cm solid transparent;
-
-    -moz-background-position:    right center;
-    -webkit-background-position: right center;
-    background-position:         right center;
-
-    min-height: 8.5cm;
-    -moz-background-size:    6cm;
-    -webkit-background-size: 6cm;
-    background-size:         6cm;
-
-    background-image: url('/images/html5-color.png');
-
-}
-
-.section.guac-description .attribution {
-
-    position: absolute;
-    right: 0;
-    top: 50%;
-
-    width: 6cm;
-    margin-top: 3cm;
-    padding-top: 1em;
-
-    text-align: center;
-    font-size: 0.75em;
-    font-style: italic;
-
-}
-
-
-.section.support {
-
-    padding-top: 0;
-    padding-left: 13.5cm;
-    margin-bottom: -3em;
-
-    -moz-background-position:    3cm bottom;
-    -webkit-background-position: 3cm bottom;
-    background-position:         3cm bottom;
-
-    min-height: 5cm;
-    -moz-background-size:    7.5cm;
-    -webkit-background-size: 7.5cm;
-    background-size:         7.5cm;
-
-    background-image: url('/images/official-glyptodon-logo.png');
-
-}
-
 p {
     line-height: 1.5;
     text-align: justify;
@@ -326,11 +247,6 @@ div#footer {
 
 #footer li {
     list-style-type: none;
-}
-
-#footer img.glyptodon {
-    max-height: 1em;
-    vertical-align: baseline;
 }
 
 .social-buttons {
@@ -561,121 +477,6 @@ table.releases td {
     width: 16cm;
 }
 
-/*
- * Sponsors
- */
-
-.sponsored-by {
-    background: white;
-    color: black;
-    padding: 1em;
-}
-
-.sponsored-by h2 {
-    font-size: 1em;
-    font-weight: bold;
-}
-
-.sponsor {
-    display: inline-block;
-    margin: 1em;
-}
-
-.sponsor .logo {
-    padding: 1em;
-    display: inline-block;
-}
-
-.platinum .sponsor .logo,
-.gold .sponsor .logo,
-.silver .sponsor .logo,
-.bronze .sponsor .logo {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.25);
-}
-
-.platinum .sponsor {
-    display: table;
-}
-
-.platinum .sponsor .sponsor-section {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 1em;
-}
-
-.sponsored-by .sponsor .logo img,
-.platinum .sponsor .logo img,
-.gold .sponsor .logo img {
-    max-width:  256px;
-    max-height: 192px;
-}
-
-.silver .sponsor .logo img {
-    max-width:  160px;
-    max-height: 120px;
-}
-
-.bronze .sponsor .logo img {
-    max-width:  100px;
-    max-height: 75px;
-}
-
-.sponsor-page .sponsor-profile {
-    float: right;
-    margin: 2em;
-}
-
-.sponsor-page .sponsor-profile img {
-    max-width: 320px;
-    width: 100%;
-}
-
-table.benefits {
-    border-collapse: collapse;
-    margin: 2em auto;
-}
-
-table.benefits th,
-table.benefits td {
-    margin: 0;
-    padding: 1em;
-}
-
-table.benefits tbody td {
-    border: 1px solid #CCC;
-    text-align: center;
-}
-
-table.benefits th .level {
-    font-weight: bold;
-}
-
-table.benefits th .description{
-    font-weight: normal;
-}
-
-table.benefits tbody tr:nth-child(even) {
-    background: #F5F5F5;
-}
-
-table.benefits tbody th,
-table.benefits tbody th p {
-    text-align: left;
-    font-weight: normal;
-}
-
-table.benefits thead td,
-table.benefits thead th,
-table.benefits thead td p,
-table.benefits thead th p {
-    text-align: center;
-}
-
-table.benefits p {
-    margin: 0;
-}
-
 /* Donation section */
 
 form.standalone {
@@ -803,14 +604,6 @@ input.donate {
         display: none;
     }
 
-    .section   {
-        display: block;
-        max-width: none;
-        width: auto;
-        margin: 0;
-        padding: 0;
-    }
-
     h2 {
         margin-top: 1em;
         margin-bottom: 0.75em;
@@ -835,29 +628,5 @@ input.donate {
     .not-found .error-description { max-width: 80%; display: block; }
     #donate { padding-left: 1em; }
     #donate::after { display: none; }
-}
-
-@media screen and (max-width: 25cm) {
-
-    .section.guac-description {
-        padding: 1em;
-        border: none;
-        background: none;
-        min-height: 0;
-    }
-
-    .section.guac-description .attribution {
-        display: none;
-    }
-
-    .section.support {
-        padding: 1em;
-        padding-bottom: 5cm;
-        -moz-background-position:    center bottom;
-        -webkit-background-position: center bottom;
-        background-position:         center bottom;
-        border: none;
-    }
-
 }
 
