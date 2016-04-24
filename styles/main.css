@@ -1,9 +1,14 @@
+
+* {
+    box-sizing: border-box;
+}
+
 body {
 
     color: black;
     background: white;
 
-    font-family: 'FreeSans', 'Liberation Sans', 'Arial', 'Helvetica', sans-serif;
+    font-family: 'Carlito', 'FreeSans', 'Liberation Sans', 'Arial', 'Helvetica', sans-serif;
     text-rendering: optimizeLegibility;
 
     margin: 0;
@@ -16,39 +21,33 @@ a[href]         { color: #080; }
 a[href]:visited { color: #884; }
 
 div#header {
-    color: black;
-    background: rgb(139, 168, 116);
+    color: white;
+    background: #474747;
+    display: table;
+    width: 100%;
+    padding: 1em;
 }
 
-
-div#header {
-    text-align: center;
-}
 
 div#header > * {
+    display: table-cell;
     vertical-align: middle;
 }
 
 #header h1 {
-    display: inline-block;
     text-align: left;
-    font-size: 2.5em;
-    text-transform: uppercase;
+    font-size: 1.75em;
     margin: 0.25em 0;
 }
 
 #header h1 a[href] {
     color: inherit;
     text-decoration: inherit;
-}
-
-#header div.logo {
-    display: inline-block;
-}
-
-#header .logo img {
-    max-height: 3em;
-    margin: 0.5em;
+    padding-left: 1.5em;
+    background-image: url('/images/guac-logo.png');
+    background-repeat: no-repeat;
+    background-size: 1em;
+    background-position: 0.25em center;
 }
 
 .hook {
@@ -140,13 +139,9 @@ table.downloads td {
     padding-right: 1em;
 }
 
-div#navigation {
-    text-align: center;
+ul#navigation {
+    text-align: right;
     font-size: 0.9em;
-    background: rgba(255, 255, 255, 0.8);
-}
-
-#navigation ul {
     padding: 0;
     margin: 0;
 }
@@ -157,14 +152,11 @@ div#navigation {
 
 #navigation li {
     display: inline-block;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
     white-space: nowrap;
 }
 
 #navigation a[href] {
-    color: black;
-    text-shadow: rgba(255, 255, 255, 0.8) 1px 1px;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -176,8 +168,6 @@ div#navigation {
 }
 
 #navigation li a:hover {
-    color: black;
-    background-color: white;
     text-decoration: underline;
 }
 
