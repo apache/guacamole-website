@@ -100,8 +100,12 @@ build() {
     rm -rf content/; mkdir content
 
     # Copy site and docs into place
+    log "Copying \"doc/\" and built site to \"content/\" ..."
     cp -a doc/ content/
     cp -a _site/* content/
+
+    # All done
+    log "Done. Full site is now within the \"content/\" directory."
 
 }
 
