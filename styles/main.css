@@ -21,7 +21,7 @@ div#header {
 }
 
 
-div#header, div#footer {
+div#header {
     text-align: center;
 }
 
@@ -293,12 +293,10 @@ p {
 }
 
 div#footer {
-    text-align: center;
-    background: black;
-    color: white;
     font-size: 0.9em;
-    padding-top: 1em;
-    margin-top: 2em;
+    border-top: 1px solid black;
+    margin: 1em;
+    padding: 1em;
 }
 
 #footer .block-menu {
@@ -318,20 +316,6 @@ div#footer {
 
 #footer .block-menu {
     display: inline-block;
-}
-
-#footer .copyright {
-    margin: 0;
-    opacity: 0.8;
-    font-style: italic;
-    text-align: right;
-    font-size: 0.8em;
-    padding: 0.5em;
-}
-
-#footer a[href] {
-    text-decoration: none;
-    color: white;
 }
 
 #footer ul {
@@ -815,7 +799,7 @@ input.donate {
         background: inherit;
     }
 
-    #navigation, #footer, .social-buttons, .hook{
+    #navigation, .social-buttons, .hook{
         display: none;
     }
 
