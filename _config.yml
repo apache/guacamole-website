@@ -23,6 +23,7 @@ title: Apache Guacamole
 # Build settings
 markdown: kramdown
 exclude:
+    - README.md
     - build.sh
     - content
     - doc
