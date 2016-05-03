@@ -76,4 +76,17 @@ Companies providing support for Apache Guacamole are not endorsed by the Apache
 Software Foundation, though some such companies do employ committers of the
 Apache Guacamole project.
 
-(PLACEHOLDER)
+<ul class="company-list">
+    {% for company in site.companies %}
+        <li class="company">
+            {% if company.logo %}
+                <div class="company-logo"><a href="{{ company.location }}"><img src="{{ company.logo }}"/></a></div>
+            {% endif %}
+            <div class="company-description">
+                <h3><a href="{{ company.location }}">{{ company.title }}</a></h3>
+                {{ company.content }}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+

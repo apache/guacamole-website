@@ -40,6 +40,10 @@ collections:
     links:
         output: false
 
+    # Pseudo-pages describing third-party support companies
+    companies:
+        output: false
+
 # Site-wide defaults
 defaults:
 

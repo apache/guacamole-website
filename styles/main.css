@@ -413,6 +413,38 @@ div#links ul {
     list-style: none;
 }
 
+#content > ul.company-list {
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+}
+
+.company-list li.company {
+    list-style: none;
+    display: table;
+    width: 100%;
+    background: #FFFFFA;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.company-list li.company > * {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 1em;
+}
+
+.company-list li.company .company-logo img {
+    max-width: 5em;
+    max-height: 5em;
+}
+
+.company-list li.company .company-description {
+    width: 100%;
+}
+
+.company-list li.company .company-description > * {
+    margin: 0.25em 0;
+}
+
 table.releases {
     background: #FFFFFA;
     border-collapse: collapse;
