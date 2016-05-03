@@ -240,7 +240,7 @@ ul#navigation {
 p {
     line-height: 1.5;
     text-align: justify;
-    margin: 1em;
+    margin: 1em 0;
 }
 
 #content > * {
@@ -255,6 +255,29 @@ p {
 #content .hook {
     margin: 0;
     width: 100%;
+}
+
+#content ol,
+#content ul {
+    padding-left: 0.5in;
+}
+
+#content ol li,
+#content ul li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#content pre {
+    padding: 0.125in;
+    background: #EEE;
+}
+
+#content blockquote {
+    padding: 1px 1em;
+    border-left: 0.25em solid #EEE;
+    font-style: oblique;
+    width: 8in;
 }
 
 div#footer {
