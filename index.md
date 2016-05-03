@@ -41,7 +41,7 @@ access your desktops is a web browser.
     </li>
     <li class="commercially-supported">
         <h2>Commercially supported</h2>
-        <p>For enterprises, dedicated commercial support is also available through <a href="/support/#commercial">third party companies</a>.</p>
+        <p>For enterprises, dedicated commercial support is also available through <a href="/support/#commercial-support">third party companies</a>.</p>
     </li>
 </li>
 </ul>
