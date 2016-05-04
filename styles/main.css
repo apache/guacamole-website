@@ -451,7 +451,7 @@ table.releases {
     border: 1px solid rgba(0, 0, 0, 0.5);
     margin-left: auto;
     margin-right: auto;
-    margin-top: 4em;
+    margin-top: 0.25in;
     margin-bottom: 4em;
 }
 
@@ -478,6 +478,13 @@ table.releases td {
     padding-bottom: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
+}
+
+#content > .legacy-release-note {
+    background: #FFFFFA;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    width: 8in;
+    margin: 0.25in auto;
 }
 
 /* Style appropriately for printing */
