@@ -7,26 +7,86 @@ menu-title:  Help / Support
 menu-weight: 7
 ---
 
-If you need (or wish to provide) help with Guacamole, there are [forums](https://sourceforge.net/p/guacamole/discussion/) on the [SourceForge project page](http://sourceforge.net/projects/guacamole/). You will need to register a username with SourceForge to use the forums. There is also an IRC channel on freenode.net dedicated to Guacamole support: #guacamole-help.
+If you need (or wish to provide) help with Guacamole, the primary means for
+doing so are the project [mailing lists](#mailing-lists). All project members
+subscribe to these lists, and members of the community are encouraged to do the
+same.
+
+We consider the availability of commercial support to be crucial to the
+success of Apache Guacamole, and maintain a list of [third party
+companies](#commercial-support) providing commercial support. If you provide
+commercial support and would like your company to be listed, please send us an
+email, and we will work with you to do so.
+
+The Guacamole project historically used the [SourceForge
+forums](https://sourceforge.net/p/guacamole/discussion/), so it is worth
+searching through past threads there to see if your question has been asked and
+answered, but **please do not uses these forums for new posts**.  New questions
+should use the mailing lists. Any further posts to the forums will be asked to
+use the mailing instead.
+
+Mailing Lists
+-------------
+
+If you would like help with Apache Guacamole, or wish to help others, we highly
+recommend sending an email to the one of the project's mailing lists. **You
+will need to subscribe prior to sending email to any list.** All mailing lists
+are actively filtered for spam, and any email not originating from a subscriber
+will bounce.
+
+### General Discussion / Questions ([user@guacamole.incubator.apache.org](mailto:user@guacamole.incubator.apache.org))
+
+The general/users list is indended for general questions and discussions which
+do not necessarily pertain to development. This list replaces the old
+[SourceForge forums](https://sourceforge.net/p/guacamole/discussion/) used by
+Guacamole prior to its acceptance into the Apache Incubator.
+
+* [Subscribe](mailto:user-subscribe@guacamole.incubator.apache.org)
+* [Unsubscribe](mailto:user-unsubscribe@guacamole.incubator.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-user/)
+
+### Development ([dev@guacamole.incubator.apache.org](mailto:dev@guacamole.incubator.apache.org))
+
+The development list is for development-related discussion involving people who
+are contributors to the Apache Guacamole project (or who wish to become
+contributors).
+
+* [Subscribe](mailto:dev-subscribe@guacamole.incubator.apache.org)
+* [Unsubscribe](mailto:dev-unsubscribe@guacamole.incubator.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/)
+
+[The Guacamole Manual](/doc/gug/)
+---------------------------------
 
 The central body of documentation is the [Guacamole manual](/doc/gug/). It is kept up-to-date with each release, and provides a massive amount of information in one place. The manual contains installation and configuration instructions, as well as instructions for using the application itself. There is also a large section devoted entirely to development tutorials and descriptions of the architecture and APIs of the Guacamole core.
 
 The Guacamole team monitors the IRC channels and SourceForge forums daily and responds whenever time permits.
 
-Reporting Problems
------------------------------
-
-If you think you've encountered a bug in Guacamole or any of its components, or you wish to request a feature, please create a new issue in [JIRA](https://glyptodon.org/jira/). This JIRA instance is hosted by [Glyptodon LLC](http://glyptodon.org/), which is the open source company formed by the Guacamole team.
-
-New issues enter the backlog and are prioritized along with all other reported issues, whether those issues were reported internally or by members of the wider open source community. Depending on the issue, work may not begin until higher-priority issues are taken care of, so please be patient. If you absolutely need something fixed or implemented immediately, and it is not otherwise an upstream priority, you are welcome to [contribute to the Guacamole project](/open-source#contribute), or to fund the change through Glyptodon LLC. This is one of the major benefits of Guacamole being open source.
-
 Commercial Support
 ------------------------------
 
-One of the main target audiences for Guacamole are enterprises and companies that need to provide access to many computers, hence Guacamole's design as a gateway. If you are a commercial company, and want dedicated support, there are two main options available: leveraging the community, which provides support when time is available purely for the sake of the greater good, and [Glyptodon LLC](http://glyptodon.org/), which is the company founded as a result of Guacamole's growth.
+As some of the main target audiences for Apache Guacamole are enterprises and
+companies that need to provide access to many computers (hence its design as a
+gateway), we consider the availability of commercial support crucial to
+Guacamole's success. If you provide commercial support and would like your
+company to be listed, please send us an email, and we will work with you to do
+so.
 
-Both the Guacamole team and the rest of the open source community tend to be very responsive to questions from others, regardless of whether those questions are from commercial companies.
+Companies providing support for Apache Guacamole are not endorsed by the Apache
+Software Foundation, though some such companies do employ committers of the
+Apache Guacamole project.
 
-Support provided to commercial companies, particularly support which results in implementation of new features, is one of the main driving forces behind Guacamole's development. It leads to new and useful features being prioritized and brought to the community, and helps keep Guacamole development active and focused.
+<ul class="company-list">
+    {% for company in site.companies %}
+        <li class="company">
+            {% if company.logo %}
+                <div class="company-logo"><a href="{{ company.location }}"><img src="{{ company.logo }}"/></a></div>
+            {% endif %}
+            <div class="company-description">
+                <h3><a href="{{ company.location }}">{{ company.title }}</a></h3>
+                {{ company.content }}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
 
-<div id="contact-us"><a href="mailto:contact@glyptodon.org" class="piwik_link" onclick="piwikTracker.trackGoal(8)">Contact us for a quote</a></div>

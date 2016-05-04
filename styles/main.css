@@ -138,22 +138,6 @@ ul.features li.commercially-supported::before {
     font-style: italic;
 }
 
-.promotion #book-pic {
-    margin: 0.5em;
-    text-align: center;
-}
-
-img.book-pic {
-
-    box-shadow: 0.25em 0.25em 0.5em rgba(0, 0, 0, 0.5);
-    max-width: 1in;
-    float: right;
-    margin: 1em;
-
-    padding-right: 0.03in;
-    background: url('/images/book-pages.png');
-}
-
 h1 {
     margin-top: 0.25in;
     margin-bottom: 0.25in;
@@ -211,8 +195,7 @@ ul#navigation {
 }
 
 #navigation a.download,
-#navigation a.github,
-#navigation a.sponsors {
+#navigation a.github {
     padding-left: 2em;
     font-weight: bold;
 
@@ -233,10 +216,6 @@ ul#navigation {
     background-image: url('/images/github-mark.png');
 }
 
-#navigation a.sponsors {
-    background-image: url('/images/guac-sponsors.png');
-}
-
 p {
     line-height: 1.5;
     text-align: justify;
@@ -255,6 +234,10 @@ p {
 #content .hook {
     margin: 0;
     width: 100%;
+}
+
+#content table {
+    width: auto;
 }
 
 #content ol,
@@ -407,9 +390,9 @@ div#links {
     float: right;
     border: 1px solid rgba(0, 0, 0, 0.25);
     background: #FFFFFA;
-    margin-left: 2em;
-    margin-bottom: 2em;
-    margin-top: 2em;
+    margin: 2em;
+    width: auto;
+    padding: 0;
 }
 
 div#links h2 {
@@ -420,15 +403,46 @@ div#links h2 {
     padding-right: 1em;
     font-size: 1em;
     font-style: oblique;
-    background: black;
+    background: #304730;
     color: white;
-    opacity: 0.5;
 }
 
 div#links ul {
     margin: 0;
-    padding: 1em;
+    padding: 0 1em;
     list-style: none;
+}
+
+#content > ul.company-list {
+    padding-left: 0.5in;
+    padding-right: 0.5in;
+}
+
+.company-list li.company {
+    list-style: none;
+    display: table;
+    width: 100%;
+    background: #FFFFFA;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.company-list li.company > * {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 1em;
+}
+
+.company-list li.company .company-logo img {
+    max-width: 5em;
+    max-height: 5em;
+}
+
+.company-list li.company .company-description {
+    width: 100%;
+}
+
+.company-list li.company .company-description > * {
+    margin: 0.25em 0;
 }
 
 table.releases {
@@ -450,9 +464,8 @@ table.releases th {
     font-size: 1em;
     font-weight: normal;
     font-style: oblique;
-    background: black;
+    background: #304730;
     color: white;
-    opacity: 0.5;
 }
 
 table.releases tr:nth-child(even) {
@@ -465,201 +478,6 @@ table.releases td {
     padding-bottom: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
-}
-
-.not-found {
-
-    min-height: 500px;
-    text-align: center;
-    text-shadow: 1px 1px white;
-
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.not-found .error-icon, .not-found .error-description {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.not-found .error-description {
-    text-align: left;
-    max-width: 50%;
-    width: 800px;
-    margin-left: 1em;
-}
-
-.not-found .error-icon {
-    max-width: 30%;
-    width: 250px;
-}
-
-.not-found .error-icon img {
-    width: 100%;
-}
-
-.not-found .error-description h2 {
-    margin-top: 0;
-}
-
-/* Drupal system management */
-
-#user-login {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 3px;
-    background: #FFD;
-    width: 10cm;
-    max-width: 100%;
-    text-align: left;
-    font-size: 0.8em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#user-login label {
-    font-weight: bold;
-}
-
-#user-login input[type='text'],
-#user-login input[type='password'] {
-    width: 100%;
-}
-
-#user-login .form-item,
-#user-login .form-actions {
-    margin: 1em;
-}
-
-#user-login .description {
-    font-style: italic;
-}
-
-.profile {
-    max-width: 100%;
-    margin: 0 auto;
-    font-size: 0.8em;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    background: #EFE;
-    padding: 1em;
-    border-radius: 3px;
-    width: 16cm;
-}
-
-/* Donation section */
-
-form.standalone {
-    display: block;
-    margin: 2em;
-    text-align: center;
-}
-
-#donate {
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    text-align: center;
-    padding: 1em;
-    background: #FFFAE2;
-    margin-top: 2em;
-    position: relative;
-    padding-left: 10em;
-}
-
-#donate::after {
-    content: ' ';
-    display: block;
-    width: 10em;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    background-image: url('/images/guac-sponsors.png');
-    background-repeat: no-repeat;
-    -webkit-background-size: 50%;
-       -moz-background-size: 50%;
-            background-size: 50%;
-    -webkit-background-position: center;
-       -moz-background-position: center;
-            background-position: center;
-    opacity: 0.25;
-}
-
-#donate h2 {
-    margin-top: 0;
-    font-weight: bold;
-}
-
-input.donate {
-
-    display: inline-block;
-    padding: 0.5em 1em;
-
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 0.25em;
-
-    color: white;
-    font-weight: bold;
-    font-size: 1.1em;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
-
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-                inset -1px -1px 1px rgba(0, 0, 0, 0.125);
-
-    background: rgb(84, 140, 226);
-    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
-    background-image:    -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
-    background-image:         linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/donate.png');
-    background-repeat: repeat, no-repeat;
-    -webkit-background-position: 0%, 0.55em center;
-       -moz-background-position: 0%, 0.55em center;
-            background-position: 0%, 0.55em center;
-    -webkit-background-size: auto, 1.1em;
-       -moz-background-size: auto, 1.1em;
-            background-size: auto, 1.1em;
-
-    position: relative;
-    padding-left: 2em;
-
-}
-
-/* Quote button */
-
-#contact-us {
-    text-align: center;
-}
-
-#contact-us a {
-
-    display: inline-block;
-    padding: 0.5em 1em;
-
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 0.25em;
-
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
-
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5),
-                inset -1px -1px 1px rgba(0, 0, 0, 0.125);
-
-    background: rgb(84, 140, 226);
-    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
-    background-image:    -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
-    background-image:         linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.15)), url('/images/envelope.png');
-    background-repeat: repeat, no-repeat;
-    -webkit-background-position: 0%, 0.55em center;
-       -moz-background-position: 0%, 0.55em center;
-            background-position: 0%, 0.55em center;
-    -webkit-background-size: auto, 1.1em;
-       -moz-background-size: auto, 1.1em;
-            background-size: auto, 1.1em;
-
-    position: relative;
-    padding-left: 2em;
-
 }
 
 /* Style appropriately for printing */
@@ -679,7 +497,7 @@ input.donate {
         text-decoration: underline;
     }
 
-    #donate, #links {
+    #links {
         display: none;
     }
 
@@ -708,10 +526,5 @@ input.donate {
         padding-left: 0;
     }
 
-}
-
-@media screen and (max-width: 18cm) {
-    .not-found .error-icon { float: right; }
-    .not-found .error-description { max-width: 80%; display: block; }
 }
 

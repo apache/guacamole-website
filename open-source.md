@@ -7,72 +7,66 @@ menu-title:  Contributing
 menu-weight: 6
 ---
 
-Guacamole is an open source project. It is entirely free in every sense (under the [MIT license](http://opensource.org/licenses/MIT)), and will always be so. It is supported by [Glyptodon LLC](http://glyptodon.org/), the company that formed out of Guacamole's creation, through donations to the project from the community, and by corporate sponsors that fund changes for the benefit of the community.
+Guacamole is an open source project. It is entirely free in every sense (under
+the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)),
+and will always be so.
 
-We believe this gives Guacamole distinct advantages over purely-commercial alternatives. It's open source nature means that the codebase is readily modifiable and extendable. It can be embedded in whole or in part in other projects. Because the source is publicly viewable, effort is made by the Guacamole team to keep the codebase clean and readable. As such, Guacamole is not a "black box"; you can read through the codebase and see exactly what it does and why. Commercial support is available, but because the source is open, there is no aspect of vendor lock-in to this support.
+We believe that being open source gives Guacamole distinct advantages over
+purely-commercial alternatives. The public availability of the source means
+that the codebase is readily modifiable and extendable. It can be embedded in
+whole or in part in other projects. For the sake of the project and its
+community, significant effort is made by the Guacamole team to keep the
+codebase clean and readable. Guacamole is not a "black box"; you can read
+through the codebase and see exactly what it does and why. Commercial support
+is available, but because the software itself is free and open, there is no
+aspect of vendor lock-in.
 
-The MIT License
-------------------------
-
-The MIT license is exceedingly simple, and only three paragraphs long:
-
-    Copyright (c) <year> <copyright holders>
-    
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-    
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-    
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
-
-Guacamole is not public domain, but the MIT license is very permissive, and as long as you follow it's simple conditions ("The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software"), you can modify and include Guacamole in other projects to your heart's content, including commercial or proprietary projects.
+Guacamole is not public domain, but the Apache license is very permissive, and
+as long as you follow it's simple conditions, you can modify and include
+Guacamole in other projects to your heart's content, including commercial or
+proprietary projects.
 
 Contributing {#contribute}
 -----------------
 
-If you believe you have a feature or bug fix that would benefit the project, feel free to contact us via IRC or email, or open a new ticket on [JIRA](https://glyptodon.org/jira/) with your patch attached. Code contributions are also always welcome, but do have to go through a review process. The code will more than likely be discussed and sent back a few times in order to bring the style and implementation in line with the rest of the Guacamole codebase. Alternatively, if you want to prioritize and fund specific changes to Guacamole, this is one of the main reasons [Glyptodon LLC](http://glyptodon.org/) was founded.
+If you believe you have a feature or bug fix that would benefit the project, or
+simply wish to help other users, please feel free to subscribe to and use the
+[project mailing lists](/support/#mailing-lists). To ensure issues are properly
+tracked and development effort is not duplicated, all bugs or proposed
+development should be reported by opening a new ticket in our
+[JIRA](https://issues.apache.org/jira/browse/GUACAMOLE/).
 
-If you are planning to contribute code to the upstream project, you absolutely __must__ develop against the code from our [git repositories](https://github.com/glyptodon/). Patches against releases and copies of entire files will not be accepted, and we will need a [signed CLA](http://glyptodon.org/cla.html) on file, to ensure we have the legal right to include your code. Our full contribution guidelines can be found in the "CONTRIBUTING" file of either the guacamole-server or guacamole-client git repositories.
+Code contributions are also always welcome, but do have to go through a review
+process. The code will more than likely be discussed and sent back a few times
+in order to bring the style and implementation in line with the rest of the
+Guacamole codebase.
 
-Another great way to pitch in is to actively help other users on [JIRA](https://glyptodon.org/jira/), in [the Guacamole forums](https://sourceforge.net/p/guacamole/discussion/), or on IRC. We have two IRC channels on irc.freenode.net: #guacamole-dev, which is development specific, and #guacamole-help, which is dedicated to generic help and support.
+If you are planning to contribute code, please keep in mind that the point of
+contributing is to collaborate for the benefit of the project and its
+community; it is a service you are choosing to provide because you believe, as
+the members of the Guacamole project believe, that doing so works toward the
+greater good. It is thus important to remember:
 
-Finally, if you would like to simply donate money to the project, thank you! Such donations show appreciation and help fund further development.
+1. Expect honest and constructive criticism. It is a good thing.
+2. A project's processes exist for a reason. The goal of contributing is to
+   work with the project for the common good, not fight against it.
+3. Develop against the most recent code on git. Patches against releases and
+   naiive copies of entire files cannot be accepted as they lack context and
+   are likely out of date.
+4. You will need a [signed CLA](https://www.apache.org/licenses/icla.txt) on
+   file with the Apache Software Foudation, to ensure we have the legal right
+   to include your code. If the contribution was created for your employer or
+   using your employer's resources, the ASF will also need to sign the
+   [corporate CLA](https://www.apache.org/licenses/cla-corporate.txt). For more
+   information, please see
+   [the ASF's documentation regarding CLAs](https://www.apache.org/licenses/#clas).
+5. Code must follow consistent style or it will become unreadable and
+   unmaintainable. Please read through our [style guidelines](/guac-style/) and,
+   when in doubt, follow the style of the code you are modifying.
 
-<form class="standalone"
-      action="https://www.paypal.com/cgi-bin/webscr"
-      method="post" target="_top">
-
-    <!-- PayPal parameters -->
-    <input type="hidden" name="cmd"              value="_s-xclick">
-    <input type="hidden" name="item_name"        value="Donation to Guacamole">
-    <input type="hidden" name="hosted_button_id" value="53Z55SN74N9SS">
-
-    <!-- Donate button -->
-    <input type="submit" class="donate"
-           value="Donate with PayPal"
-           onclick="piwikTracker.trackGoal(6)">
-
-</form>
-
-Development {#develop}
--------------------
-
-Public discussion of development efforts is done over IRC at freenode.net on the #guacamole-dev channel. If you wish to develop a Guacamole-based web application, or to develop new protocol support plugins for guacd, please consult the [API documentation](/api-documentation).
-
-If you need help getting started, the manual contains several tutorials:
-
-* [Adding protocol support](/doc/gug/custom-protocols.html)
-* [Custom authentication](/doc/gug/custom-authentication.html)
-* [Writing your own Guacamole-based application](/doc/gug/writing-you-own-guacamole-app.html)
+Our full contribution guidelines can be found in the `CONTRIBUTING` file in any
+of our git repositories. If you need help getting started, the [API
+documentation](/api-documentation) is an excellent resource, as are the
+[mailing lists](/support/#mailing-lists) and the tutorials in [the
+manual](/doc/gug/).
 

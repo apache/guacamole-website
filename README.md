@@ -37,6 +37,7 @@ licensed project, the repository contains the following critical files:
 | `images/`     | Images which are referenced within the website HTML and CSS.
 | `pub/`        | Miscellaneous public files, such as test scripts. The test scripts in this directory have historically been shared to users to help with debugging.
 | `styles/`     | All CSS files referenced by the website HTML.
+| `_companies/` | Documents which contain metadata describing third-party companies that provide support for Apache Guacamole. The content of these documents is rendered as the description for that company on the support page.
 | `_includes/`  | Common HTML fragments used by Jekyll and referenced in other templates, such as the website header and footer. These *must* be HTML only. This is a standard Jekyll directory. See: [Jekyll directory structure](https://jekyllrb.com/docs/structure/)
 | `_layouts/`   | Templates describing the structure of different types of content. This is a standard Jekyll directory. See: [Jekyll directory structure](https://jekyllrb.com/docs/structure/)
 | `_links/`     | Documents which contain metadata describing the links which should appear in the site navigation menu. The documents here are completely empty except for the metadata.

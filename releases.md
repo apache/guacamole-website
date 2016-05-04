@@ -12,7 +12,7 @@ All recent Guacamole releases are listed here, along with several historical rel
 
 Please be sure to read the [installation instructions](/doc/gug/installing-guacamole.html) in the [manual](/doc/gug/) thoroughly. If you do not wish to build things from source, you can also [install Guacamole using Docker](/doc/gug/guacamole-docker.html).
 
-If you are looking for the absolute latest unreleased code (or extremely old code not archived here), please check our git repositories on [GitHub](https://github.com/glyptodon/).
+If you are looking for the absolute latest unreleased code (or extremely old code not archived here), please check our git repositories on GitHub.
 
 Which version should I download?
 ------------------------------------------------
