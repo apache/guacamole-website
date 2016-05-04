@@ -19,6 +19,14 @@ Which version should I download?
 
 Unless you already know that you need a *very* specific version (your custom or third-party extensions use an older version of the Guacamole API, for example), **you should always download the most recent release**. Guacamole development is very active, and recent releases will contain bug fixes and performance improvements that will be absent in older releases.
 
+<div class="legacy-release-note">
+    <p>The Apache Guacamole project has not yet made a release through the
+    Apache Incubator. <strong>All releases below are from prior to Guacamole's
+    acceptance into the Incubator.</strong> They are not Apache Software
+    Foundation releases, and are licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
 <table class="releases">
     <tr>
         <th>Version</th>
