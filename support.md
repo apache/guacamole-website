@@ -60,8 +60,6 @@ contributors).
 
 The central body of documentation is the [Guacamole manual](/doc/gug/). It is kept up-to-date with each release, and provides a massive amount of information in one place. The manual contains installation and configuration instructions, as well as instructions for using the application itself. There is also a large section devoted entirely to development tutorials and descriptions of the architecture and APIs of the Guacamole core.
 
-The Guacamole team monitors the IRC channels and SourceForge forums daily and responds whenever time permits.
-
 Commercial Support
 ------------------------------
 
