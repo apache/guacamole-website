@@ -93,7 +93,7 @@ Braces
 
 1. Avoid braces when unnecessary (single statement `if`'s, for example) unless
    it significantly increases readability. There is no hard rule here - use
-   your own best judgement.
+   your own best judgment.
 2. Do not cuddle the `else`, etc.
 
         /* Do this */

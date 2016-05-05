@@ -21,9 +21,9 @@ email, and we will work with you to do so.
 The Guacamole project historically used the [SourceForge
 forums](https://sourceforge.net/p/guacamole/discussion/), so it is worth
 searching through past threads there to see if your question has been asked and
-answered, but **please do not uses these forums for new posts**.  New questions
+answered, but **please do not use these forums for new posts**.  New questions
 should use the mailing lists. Any further posts to the forums will be asked to
-use the mailing instead.
+use the mailing lists instead.
 
 Mailing Lists
 -------------
@@ -36,7 +36,7 @@ will bounce.
 
 ### General Discussion / Questions ([user@guacamole.incubator.apache.org](mailto:user@guacamole.incubator.apache.org))
 
-The general/users list is indended for general questions and discussions which
+The general/users list is intended for general questions and discussions which
 do not necessarily pertain to development. This list replaces the old
 [SourceForge forums](https://sourceforge.net/p/guacamole/discussion/) used by
 Guacamole prior to its acceptance into the Apache Incubator.
@@ -59,8 +59,6 @@ contributors).
 ---------------------------------
 
 The central body of documentation is the [Guacamole manual](/doc/gug/). It is kept up-to-date with each release, and provides a massive amount of information in one place. The manual contains installation and configuration instructions, as well as instructions for using the application itself. There is also a large section devoted entirely to development tutorials and descriptions of the architecture and APIs of the Guacamole core.
-
-The Guacamole team monitors the IRC channels and SourceForge forums daily and responds whenever time permits.
 
 Commercial Support
 ------------------------------

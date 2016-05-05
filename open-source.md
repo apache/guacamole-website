@@ -51,10 +51,10 @@ greater good. It is thus important to remember:
 2. A project's processes exist for a reason. The goal of contributing is to
    work with the project for the common good, not fight against it.
 3. Develop against the most recent code on git. Patches against releases and
-   naiive copies of entire files cannot be accepted as they lack context and
+   naive copies of entire files cannot be accepted as they lack context and
    are likely out of date.
 4. You will need a [signed CLA](https://www.apache.org/licenses/icla.txt) on
-   file with the Apache Software Foudation, to ensure we have the legal right
+   file with the Apache Software Foundation, to ensure we have the legal right
    to include your code. If the contribution was created for your employer or
    using your employer's resources, the ASF will also need to sign the
    [corporate CLA](https://www.apache.org/licenses/cla-corporate.txt). For more
