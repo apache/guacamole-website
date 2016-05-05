@@ -38,6 +38,7 @@ div#header > * {
     text-align: left;
     font-size: 1.75em;
     margin: 0.25em 0;
+    white-space: nowrap;
 }
 
 #header h1 a[href] {
@@ -46,13 +47,21 @@ div#header > * {
     padding-left: 1.5em;
     background-image: url('/images/guac-logo.png');
     background-repeat: no-repeat;
-    background-size: 1em;
-    background-position: 0.25em center;
+    -moz-background-size:    1em;
+    -webkit-background-size: 1em;
+    background-size:         1em;
+    -moz-background-position:    0.25em center;
+    -webkit-background-position: 0.25em center;
+    background-position:         0.25em center;
+}
+
+#content > ul.features {
+    padding-left: 0.25in;
+    padding-right: 0.25in;
 }
 
 ul.features {
     list-style: none;
-    padding: 0;
 }
 
 ul.features li {
@@ -70,6 +79,8 @@ ul.features li::before {
     height: 1in;
     width: 1in;
     background: #304730;
+    -moz-border-radius: 1in;
+    -webkit-border-radius: 1in;
     border-radius: 1in;
     display: block;
     position: absolute;
@@ -77,12 +88,18 @@ ul.features li::before {
     top: 50%;
     margin-top: -0.5in;
     background-repeat: no-repeat;
+    -moz-background-size: 75%;
+    -webkit-background-size: 75%;
     background-size: 75%;
+    -moz-background-position: center;
+    -webkit-background-position: center;
     background-position: center;
 }
 
 ul.features li.apache::before {
     background-image: url('/images/feather.png');
+    -moz-background-size: 40%;
+    -webkit-background-size: 40%;
     background-size: 40%;
 }
 
@@ -185,9 +202,7 @@ ul#navigation {
 
 #navigation li a {
     display: inline-block;
-    padding: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    margin: 0.5em;
 }
 
 #navigation li a:hover {
@@ -261,6 +276,7 @@ p {
     border-left: 0.25em solid #EEE;
     font-style: oblique;
     width: 8in;
+    max-width: 80%;
 }
 
 div#footer {
@@ -491,10 +507,57 @@ table.releases td {
 @media print {
 
     div#header {
-        background: inherit;
+        margin: 0.25in;
     }
 
-    #navigation, .social-buttons, .hook{
+    div#header,
+    #header h1,
+    #header h1 a[href] {
+        color: black;
+        background: transparent;
+        padding: 0;
+    }
+
+    #header h1 {
+        font-size: 2em;
+    }
+
+    ul#navigation {
+        display: none;
+    }
+
+    .hook {
+        background: transparent;
+        color: black;
+        padding-bottom: 0;
+    }
+
+    .hook .description {
+        font-size: 1em;
+        max-width: 100%;
+    }
+
+    .hook > * {
+        display: block;
+        margin: 0;
+    }
+
+    .demo {
+        border: none;
+        float: right;
+        margin: 1em 3em;
+        margin-right: 0;
+    }
+
+    .demo iframe {
+        display: none;
+    }
+
+    ul.features li {
+        padding: 0;
+    }
+
+    ul.features li::before {
         display: none;
     }
 
@@ -506,6 +569,63 @@ table.releases td {
 
     #links {
         display: none;
+    }
+
+    div#footer {
+        background: white;
+        opacity: 1;
+        border-top: 1px solid black;
+        font-size: 0.75em;
+    }
+
+}
+
+/* Reformat hook/header when screen too small */
+@media screen and (max-width: 10in) {
+
+    #header h1 {
+        font-size: 1.25em;
+    }
+
+    #navigation {
+        font-size: 0.8em;
+    }
+
+    .hook .description {
+        font-size: 1em;
+    }
+
+}
+
+/* Reformat hook/header on individual lines if screen otherwise too small */
+@media screen and (max-width: 8in) {
+
+    #header h1 {
+        font-size: 1.75em;
+    }
+
+    div#header > * {
+        display: block;
+        text-align: center;
+    }
+
+    .hook {
+        padding-bottom: 1em;
+    }
+
+    .hook > * {
+        margin: 0;
+    }
+
+    .demo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .demo,
+    .hook .description {
+        display: block;
+        max-width: 100%;
     }
 
 }
@@ -525,7 +645,7 @@ table.releases td {
     ul.features li > h2 {
         display: inline-block;
         vertical-align: middle;
-        max-width: 75%;
+        max-width: 70%;
         margin: 0.75em 0;
     }
 
