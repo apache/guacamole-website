@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole: 0.9.8</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <div class="legacy-release-note">
+    <p><strong>The release below is from prior to Guacamole's acceptance into
+        the Apache Incubator.</strong> It is not an Apache Software Foundation
+        release, and is licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
+<div id="links">
+
+    <!-- Compatible extensions -->
+    
+    
+        <h2>Compatible extensions</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.8.tar.gz/download">Database Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-0.9.8.tar.gz/download">LDAP Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-noauth-0.9.8.tar.gz/download">NoAuth (Disabled) Authentication</a></li>
+        
+    </ul>
+
+
+
+    <!-- Binary .war -->
+    
+    
+        <h2>Web application (.war)</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/binary/guacamole-0.9.8.war/download">guacamole-0.9.8.war</a></li>
+        
+    </ul>
+
+
+
+    <!-- Source archives -->
+    
+    
+        <h2>Source</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-client-0.9.8.tar.gz/download">guacamole-client-0.9.8.tar.gz</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.8.tar.gz/download">guacamole-server-0.9.8.tar.gz</a></li>
+        
+    </ul>
+
+
+
+    <!-- Documentation -->
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.8/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.7/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.8/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.8/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.8/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<h1>Guacamole 0.9.8</h1>
+
+<p>The 0.9.8 release of Guacamole is the first release to allow multiple authentication extensions to be loaded simultaneously. Administrators can now, for example, <a href="/doc/0.9.8/gug/ldap-auth.html#ldap-and-database">authenticate users against LDAP while storing connection data in MySQL or PostgreSQL</a>.</p>
+
+<p>Guacamole 0.9.8 also features major improvements to the file transfer interface, allowing the filesystem hierarchy of the remote system to be <a href="/doc/0.9.8/gug/using-guacamole.html#file-transfer">browsed directly within the Guacamole menu</a>, as well as fully stabilized and documented support for audio and file transfer for VNC using PulseAudio and SFTP respectively.</p>
+
+<h2 id="install-multiple-extensions">Install multiple extensions</h2>
+
+<p>One major shortcoming of Guacamole in past releases was that it could only use one authentication mechanism at a time. LDAP, MySQL, etc. were supported, but only exclusively with respect to each other. If you wanted to authenticate against LDAP while storing connection data in MySQL (a very common request), the only solution was to create your own hybrid authentication extension.</p>
+
+<p>Guacamole now supports loading multiple authentication extensions at the same time, and allows each extension to provide data for a user account, even if that user account didn’t come from that extension. <a href="/doc/0.9.8/gug/ldap-auth.html#ldap-and-database">More information on exactly how this can be configured</a> is provided in the manual.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-586">GUAC-586</a>] - Decouple storage and authorization from authentication</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1260">GUAC-1260</a>] - Allow the Guacamole logo to be overridden through extensions</li>
+</ul>
+
+<h2 id="file-browsing">File browsing</h2>
+
+<p>In addition to traditional drag-and-drop, files can now be transferred by <a href="/doc/0.9.8/gug/using-guacamole.html#file-transfer">browsing a hierarchy of folders within the Guacamole menu</a>. This file transfer support has been extended to the point that it can even be used with VNC through a secondary SFTP connection.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1167">GUAC-1167</a>] - File download using RDP protocol via xrdp does not work</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1171">GUAC-1171</a>] - Add SSH file transfer support to VNC and RDP</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1172">GUAC-1172</a>] - Add file browsing support</li>
+</ul>
+
+<h2 id="audio-within-vnc">Audio within VNC</h2>
+
+<p>Though Guacamole has supported audio within VNC using PulseAudio in previous releases, that support was experimental, and had known issues. All known issues with Guacamole’s support for PulseAudio alongside VNC have now been fixed, and this support is considered stable. The manual has been updated to document <a href="/doc/0.9.8/gug/configuring-guacamole.html#vnc-audio">configuration of both Guacamole and PulseAudio to provide audio for VNC</a>.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-427">GUAC-427</a>] - Improve PulseAudio latency and bandwidth usage</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1212">GUAC-1212</a>] - Creating Guacamole.AudioChannel.context fails if user has multiple tabs with sound open</li>
+</ul>
+
+<h2 id="rdp-performanceexperience-flags">RDP performance/experience flags</h2>
+
+<p>The various options provided by RDP for configuring user experience, possibly to the detriment of connection bandwidth usage and speed, are now supported. Wallpaper, theming, smooth text, desktop composition, etc. can all be explicitly enabled, though group policies on the RDP server can still override these settings.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-835">GUAC-835</a>] - Support RDP performance flags</li>
+</ul>
+
+<h2 id="ssh-and-telnet-terminal-palette">SSH and telnet terminal palette</h2>
+
+<p>Past releases of Guacamole provided SSH and telnet support which rendered all text as gray-on-black by default. Normal terminal colors were still supported, of course, but the default text would always be gray-on-black. Guacamole 0.9.8 adds the ability to <a href="/doc/0.9.8/gug/configuring-guacamole.html#ssh-display-settings">specify a color scheme for SSH and telnet connections</a>, including higher-contrast options like white-on-black which are easier to read.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1195">GUAC-1195</a>] - Configurable terminal palette</li>
+</ul>
+
+<h2 id="administration-improvements">Administration improvements</h2>
+
+<p>If using the database authentication extension, use of individual user accounts can now be restricted to specific times of day or configured to automatically become valid/invalid after specific dates.</p>
+
+<p>For ease of configuration, connection parameters within the administration interface are now organized into logical sections. What used to be a sea of miscellaneous options for each protocol is now organized by category.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-830">GUAC-830</a>] - Limit concurrent access to Windows RDP sessions</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1194">GUAC-1194</a>] - Log connection usage statistics</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1213">GUAC-1213</a>] - Restrict account access by date/time</li>
+</ul>
+
+<h2 id="additional-languages">Additional languages</h2>
+
+<p>Thanks to the generous contributions of Mathias Müller, Norbert Klaus, and Serena Soldati, Guacamole now has support for three additional languages: Dutch, German, and Italian. These, or any supported language, will automatically be selected by Guacamole when it is used for the first time in a browser configured to prefer that language.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1230">GUAC-1230</a>] - Use browser language by default</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1225">GUAC-1225</a>] - Review and merge contributed German translation</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1238">GUAC-1238</a>] - Review and merge Dutch translation</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1241">GUAC-1241</a>] - Review and merge Italian translation</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1254">GUAC-1254</a>] - Merge German on-screen keyboard layout</li>
+</ul>
+
+<h2 id="support-for-telnet-break">Support for telnet break</h2>
+
+<p>The telnet protocol provides for sending a “break” to the remote end, but it was previously impossible to send this signal using Guacamole. Unlike <code class="highlighter-rouge">Ctrl</code>+<code class="highlighter-rouge">C</code> and similar keyboard shortcuts, which actually result in <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29">control codes</a>, <a href="https://en.wikipedia.org/wiki/Break_key">“break”</a> is more low-level and is commonly necessary to control running processes within a telnet session to a network appliance.</p>
+
+<p>To send “break” over telnet within Guacamole, you can press either <code class="highlighter-rouge">Pause</code>, <code class="highlighter-rouge">Break</code>, or <code class="highlighter-rouge">Ctrl</code>+<code class="highlighter-rouge">0</code>.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1296">GUAC-1296</a>] - Add support for IAC BRK</li>
+</ul>
+
+<h2 id="minor-fixesimprovements">Minor fixes/improvements</h2>
+
+<p>In addition to the above major improvements, several minor improvements and bug fixes have also been made in 0.9.8, including low-level improvements to the Guacamole tunnel, the ability to override the standard encoding of the VNC clipboard, and automatic creation of the RDP drive directory.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-298">GUAC-298</a>] - Allow encoding of VNC clipboard to be overridden</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-515">GUAC-515</a>] - Create RDP drive directory if necessary</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1083">GUAC-1083</a>] - HTTP tunnel isn't working in CORS</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1084">GUAC-1084</a>] - ChainedTunnel does not support reconnect</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1226">GUAC-1226</a>] - SSH/Telnet font rendering sometimes fails on high DPI</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1236">GUAC-1236</a>] - Installation documentation incorrect with respect to guacamole.properties</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1244">GUAC-1244</a>] - Mouse scroll events are not issued for minor mouse wheel scrolling</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1245">GUAC-1245</a>] - OSK keys Super and Menu are stuck together</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1247">GUAC-1247</a>] - Surface does not catch 1 pixel put's with no pixel value change</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1249">GUAC-1249</a>] - Labels do not show on login page in IE 11</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1294">GUAC-1294</a>] - Error creating users/connections/groups</li>
+</ul>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

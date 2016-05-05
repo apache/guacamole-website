@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole: 0.9.7</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <div class="legacy-release-note">
+    <p><strong>The release below is from prior to Guacamole's acceptance into
+        the Apache Incubator.</strong> It is not an Apache Software Foundation
+        release, and is licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
+<div id="links">
+
+    <!-- Compatible extensions -->
+    
+    
+        <h2>Compatible extensions</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.7.tar.gz/download">Database Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-0.9.7.tar.gz/download">LDAP Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-noauth-0.9.7.tar.gz/download">NoAuth (Disabled) Authentication</a></li>
+        
+    </ul>
+
+
+
+    <!-- Binary .war -->
+    
+    
+        <h2>Web application (.war)</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/binary/guacamole-0.9.7.war/download">guacamole-0.9.7.war</a></li>
+        
+    </ul>
+
+
+
+    <!-- Source archives -->
+    
+    
+        <h2>Source</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-client-0.9.7.tar.gz/download">guacamole-client-0.9.7.tar.gz</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.7.tar.gz/download">guacamole-server-0.9.7.tar.gz</a></li>
+        
+    </ul>
+
+
+
+    <!-- Documentation -->
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.7/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.7/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.7/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.7/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.7/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<h1>Guacamole 0.9.7</h1>
+
+<p>The 0.9.7 release of Guacamole greatly simplifies the installation process for extensions and reduces the need for <code class="highlighter-rouge">guacamole.properties</code>, providing reasonable defaults where possible. Extensions can now be used to theme, brand, and translate Guacamole, not only to provide custom authentication. In addition to several bug fixes, this release also marks the first public availability of Guacamole in languages other than English, and the first official release with support for Docker.</p>
+
+<h2 id="simplified-extensions">Simplified extensions</h2>
+
+<p>Guacamole extensions are now entirely self-contained <code class="highlighter-rouge">.jar</code> files which can be installed simply by <a href="/doc/0.9.7/gug/configuring-guacamole.html#guacamole-home">copying them into the <code class="highlighter-rouge">GUACAMOLE_HOME/extensions</code> directory</a>. The <code class="highlighter-rouge">auth-provider</code> and <code class="highlighter-rouge">lib-directory</code> properties are still supported for backward compatibility, but are no longer needed. The remaining common properties, like <code class="highlighter-rouge">guacd-hostname</code> and <code class="highlighter-rouge">guacd-port</code>, now have default values and no longer need to be specified unless your configuration deviates from the defaults.</p>
+
+<p>Each extension now also provides enough information for Guacamole to determine compatibility prior to loading the extension. If an extension is not compatible, and is not forcibly loaded through the legacy <code class="highlighter-rouge">auth-provider</code> property, Guacamole will refuse to load the extension and log an error describing the problem.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-631">GUAC-631</a>] - Remove need for guacamole.properties</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1069">GUAC-1069</a>] - Detect and warn of improper extension versions</li>
+</ul>
+
+<h2 id="theming-and-translation">Theming and translation</h2>
+
+<p>In the past, Guacamole extensions could only be used to extend authentication. Extensions can now be used to <a href="/doc/0.9.7/gug/guacamole-ext.html">augment Guacamole’s styling for the sake of theming or branding</a>, or to add additional translations or on-screen keyboard layouts. Multiple extensions can be loaded at the same time by simply placing their <code class="highlighter-rouge">.jar</code> files within <code class="highlighter-rouge">GUACAMOLE_HOME/extensions</code>, though no more than one extension may provide authentication.</p>
+
+<p>With this translation support in place, Guacamole has been translated into both French and Russian, and those translations have been contributed and merged into the main Guacamole codebase thanks to the generosity of Jerome Charlot and Konstantin Kozhin.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-587">GUAC-587</a>] - Allow theming/translation through extensions</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1053">GUAC-1053</a>] - Allow selection of display language</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1187">GUAC-1187</a>] - Merge contributed Russian translation</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1217">GUAC-1217</a>] - Review and merge contributed French translation</li>
+</ul>
+
+<h2 id="official-docker-support">Official Docker support</h2>
+
+<p>Version 0.9.7 marks the first release with official support for Docker. Experimental support for Docker and Guacamole 0.9.6 was made available prior to the 0.9.7 release, and this support is now stabilized and <a href="/doc/0.9.7/gug/guacamole-docker.html">officially documented within the Guacamole manual</a>.</p>
+
+<h2 id="login-screen-behavior">Login screen behavior</h2>
+
+<p>The Guacamole home screen has little use for a user that has access to only one connection. As of 0.9.7, users will be taken immediately to their connection if only one connection is available. Further, if a user visits a page within Guacamole, but is not logged in, they will no longer be redirected to a distinct login page from which logging in redirects to the home screen. Visiting a page while not logged in now simply results in the page being replaced with a login screen - no redirect occurs. Once the user logs in, the page is allowed to load normally.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1061">GUAC-1061</a>] - Login page should redirect to destination</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1066">GUAC-1066</a>] - Connection errors not cleared after logout</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1126">GUAC-1126</a>] - Open connection by default if only one exists</li>
+</ul>
+
+<h2 id="hanging-vnc-connections">Hanging VNC connections</h2>
+
+<p>Past versions of Guacamole suffered from occasional hanging connections when VNC was used, typically when data in the clipboard changed. The cause of this rare but annoying phenomenon has now been both explained and fixed.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1056">GUAC-1056</a>] - VNC client hangs when clipboard is changed</li>
+</ul>
+
+<h2 id="ios-bluetooth-keyboard">iOS bluetooth keyboard</h2>
+
+<p>When Guacamole 0.9.6 or older is used with iOS and a bluetooth keyboard, a bug in keyboard event handling results in Guacamole only receiving each key press. Without any corresponding key release, pressed keys act permanently stuck. A workaround is now in place which addresses this problem, ensuring pressed keys are released.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-661">GUAC-661</a>] - Stuck keys with iPad and bluetooth keyboard</li>
+</ul>
+
+<h2 id="improved-audio-in-firefox">Improved audio in Firefox</h2>
+
+<p>Although Guacamole has supported audio for quite some time, this audio support has been poor under Firefox. This is not Mozilla’s fault: Guacamole was simply using a Chrome-specific version of the Web Audio API, and thus only supported audio within Firefox using a lower-quality fallback mode. This has been fixed, and the Web Audio API is used wherever supported.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1088">GUAC-1088</a>] - Web Audio API not being used in Firefox</li>
+</ul>
+
+<h2 id="restricting-user-accounts">Restricting user accounts</h2>
+
+<p>User accounts within the database authentication <a href="/doc/0.9.7/gug/administration.html#user-management">can now be manually disabled or expired</a>. A disabled account cannot be used, and attempts to login with a disabled account are rejected as if the account did not exist. If a user logs in with an expired account, they are prompted to change their password before login succeeds.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-800">GUAC-800</a>] - Enhanced user account restrictions</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1176">GUAC-1176</a>] - Implement password expiration attribute</li>
+</ul>
+
+<h2 id="user-management-regression">User management regression</h2>
+
+<p>Guacamole 0.9.6 was released with a regression that prevented non-admin users with user-creation permissions from editing the users they created. This has now been fixed.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1188">GUAC-1188</a>] - Created users cannot be modified</li>
+</ul>
+
+<h2 id="rdp-features">RDP features</h2>
+
+<p>Support for specifying the name of the connecting RDP client is now available through an additional <code class="highlighter-rouge">client-name</code> parameter. Past releases would simply send the hostname of the guacd server to the RDP server when connecting, but Guacamole 0.9.7 allows this to be explicitly specified on a per-connection basis. Setting this value affects the <code class="highlighter-rouge">CLIENTNAME</code> environment variable of Windows RDP servers.</p>
+
+<p>Support for Italian keyboards has also been added - a contribution from Denis Bernacci.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-346">GUAC-346</a>] - Add support for specifying the RDP client name</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-794">GUAC-794</a>] - Italian keyboard keymap</li>
+</ul>
+
+<h2 id="buildbrowser-warnings">Build/browser warnings</h2>
+
+<p>Although guacamole-server is configured to treat warnings as errors during the build process, guacamole-client was not, resulting in several warnings going unnoticed. These warnings have been resolved, and the build process is now configured to treat all warnings as errors. Warnings which were logged by the web browser while Guacamole runs have also been fixed.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1170">GUAC-1170</a>] - Fix build and browser warnings</li>
+</ul>
+
+<h2 id="low-level-connectiontunnel-issues">Low-level connection/tunnel issues</h2>
+
+<p>Several miscellaneous, low-level improvements have been made to the Guacamole HTTP tunnel and request handling structure in general. The size and complexity of functions handling tunnel requests have been reduced, and issues involving mishandling of tunnel reconnect/disconnect have been resolved. Thanks to David Dvora and Vasily Loginov for these improvements.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1082">GUAC-1082</a>] - HTTP tunnel fails to reconnect</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1086">GUAC-1086</a>] - TunnelRequestService.createTunnel method is too large</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1096">GUAC-1096</a>] - Tunnel remains open despite disconnect</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1102">GUAC-1102</a>] - HttpServletRequest within Credentials contains no parameters</li>
+</ul>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

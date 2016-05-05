@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Part I. User's Guide</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="index.html" title="Guacamole Manual" /><link rel="prev" href="preface.html" title="Introduction" /><link rel="next" href="guacamole-architecture.html" title="Chapter 1. Implementation and architecture" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Part I. User's Guide</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preface.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="guacamole-architecture.html">Next</a></td></tr></table><hr /></div><div class="part"><div class="titlepage"><div><div><h1 class="title"><a id="users-guide"></a>Part I. User's Guide</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="chapter"><a href="guacamole-architecture.html">1. Implementation and architecture</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-architecture.html#guacamole-protocol-architecture">The Guacamole protocol </a></span></dt><dt><span class="section"><a href="guacamole-architecture.html#guacd">guacd</a></span></dt><dt><span class="section"><a href="guacamole-architecture.html#web-application">The web application</a></span></dt><dt><span class="section"><a href="guacamole-architecture.html#realmint">RealMint</a></span></dt><dt><span class="section"><a href="guacamole-architecture.html#vnc-client">VNC Client</a></span></dt><dt><span class="section"><a href="guacamole-architecture.html#gateway">Remote Desktop Gateway</a></span></dt></dl></dd><dt><span class="chapter"><a href="installing-guacamole.html">2. Installing Guacamole</a></span></dt><dd><dl><dt><span class="section"><a href="installing-guacamole.html#building-guacamole-server">Building <span class="package">guacamole-server</span></a></span></dt><dt><span class="section"><a href="installing-guacamole.html#building-guacamole-client"><span class="package">guacamole-client</span></a></span></dt><dt><span class="section"><a href="installing-guacamole.html#deploying-guacamole">Deploying Guacamole</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#mod-proxy">Using Apache as a frontend (<span class="package">mod_proxy</span>)</a></span></dt></dl></dd><dt><span class="chapter"><a href="configuring-guacamole.html">3. Configuring Guacamole</a></span></dt><dd><dl><dt><span class="section"><a href="configuring-guacamole.html#guacamole-home"><code class="varname">GUACAMOLE_HOME</code></a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#initial-setup"><code class="filename">guacamole.properties</code></a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#idm139657086719600">Logging within the web application</a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#basic-auth">Using the default authentication</a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#idm139657086630336">Configuring connections</a></span></dt><dt><span class="section"><a href="configuring-guacamole.html#guacd.conf">Configuring guacd</a></span></dt></dl></dd><dt><span class="chapter"><a href="mysql-auth.html">4. MySQL authentication</a></span></dt><dd><dl><dt><span class="section"><a href="mysql-auth.html#installing-mysql-auth">Installing MySQL authentication</a></span></dt><dt><span class="section"><a href="mysql-auth.html#mysql-auth-schema">Modifying data manually</a></span></dt></dl></dd><dt><span class="chapter"><a href="ldap-auth.html">5. LDAP authentication</a></span></dt><dd><dl><dt><span class="section"><a href="ldap-auth.html#installing-ldap-auth">Installing LDAP authentication</a></span></dt><dt><span class="section"><a href="ldap-auth.html#ldap-auth-schema">The LDAP schema</a></span></dt></dl></dd><dt><span class="chapter"><a href="noauth.html">6. Disabling authentication</a></span></dt><dd><dl><dt><span class="section"><a href="noauth.html#installing-noauth">Installing the "noauth" extension</a></span></dt><dt><span class="section"><a href="noauth.html#noauth-configuration">Adding connections</a></span></dt></dl></dd><dt><span class="chapter"><a href="using-guacamole.html">7. Using Guacamole</a></span></dt><dd><dl><dt><span class="section"><a href="using-guacamole.html#file-transfer">Transferring files</a></span></dt><dt><span class="section"><a href="using-guacamole.html#guacamole-menu">The Guacamole menu</a></span></dt><dt><span class="section"><a href="using-guacamole.html#guacamole-admin-ui">Administration</a></span></dt><dt><span class="section"><a href="using-guacamole.html#logging-out-of-guacamole">Logging out</a></span></dt></dl></dd><dt><span class="chapter"><a href="troubleshooting.html">8. Troubleshooting</a></span></dt><dd><dl><dt><span class="section"><a href="troubleshooting.html#not-working">It isn't working</a></span></dt><dt><span class="section"><a href="troubleshooting.html#syslog">syslog</a></span></dt><dt><span class="section"><a href="troubleshooting.html#servlet-container-logs">Servlet container logs</a></span></dt></dl></dd></dl></div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="preface.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="guacamole-architecture.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Introduction </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 1. Implementation and architecture</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

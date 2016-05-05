@@ -1,0 +1,81 @@
+
+body {
+
+    color: black;
+    background: white;
+
+    font-family: 'FreeSans', 'Liberation Sans', 'Arial', 'Helvetica', sans-serif;
+    font-size: 10pt;
+    text-align: justify;
+    text-rendering: optimizeLegibility;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+/* Green links */
+a[href]         { color: #080; }
+a[href]:visited { color: #884; }
+
+div#content {
+
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 25cm;
+    padding: 1em;
+
+}
+
+/* DOCBOOK */
+
+.navheader hr, .navfooter hr {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+.programlisting, .screen {
+    background: black;
+    color: silver;
+    padding: 1em;
+    border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+}
+
+.book .titlepage {
+    text-align: center;
+    padding: 2em;
+}
+
+.titlepage hr {
+    display: none;
+}
+
+.mediaobject {
+    text-align: center;
+    float: none;
+    margin: 1em;
+}
+
+.caption {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.navfooter, .section {
+    clear: both;
+}
+
+.table-contents table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.table-contents td, .table-contents th {
+    padding: 0.5em;
+}
+

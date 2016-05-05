@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Disabling authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="ldap-auth.html" title="Chapter 7. LDAP authentication" /><link rel="next" href="using-guacamole.html" title="Chapter 9. Using Guacamole" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Disabling authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ldap-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="using-guacamole.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="noauth"></a>Chapter 8. Disabling authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="noauth.html#idm139795231938208">Downloading the NoAuth extension</a></span></dt><dt><span class="section"><a href="noauth.html#installing-noauth">Installing the NoAuth extension</a></span></dt><dd><dl><dt><span class="section"><a href="noauth.html#idm139795231944000">Configuring Guacamole for NoAuth</a></span></dt><dt><span class="section"><a href="noauth.html#idm139795231328528">Completing the installation</a></span></dt></dl></dd></dl></div><a id="idm139795230831312" class="indexterm"></a><a id="idm139795231250144" class="indexterm"></a><p>Guacamole normally enforces authentication, requiring all users to have a corresponding
+        set of credentials. If you would rather just type in your server's URL and gain access to
+        your computer, you can do this with the so-called "NoAuth" extension.</p><p>The NoAuth extension still performs authentication, but does not validate any credentials,
+        giving anyone that visits your server access to the same set of connections dictated by an
+        XML configuration file. It is an authentication implementation in its own right, and thus
+        doesn't truly "disable" authentication. It simply grants anyone access without requesting a
+        username or password.</p><div class="important"><h3 class="title">Important</h3><p>The security implications of this should be obvious - anyone with access to your
+            Guacamole instance will have access to your remote desktops. If you wish to effectively
+            disable authentication using NoAuth, do so with caution.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm139795231938208"></a>Downloading the NoAuth extension</h2></div></div></div><p>The NoAuth authentication extension is
+            available separately from the main <code class="filename">guacamole.war</code>. The link for this
+            and all other officially-supported and compatible extensions for a particular version of
+            Guacamole are provided on the release notes for that version. You can find the release
+            notes for current versions of Guacamole here: <a class="link" href="http://guac-dev.org/releases/" target="_top">http://guac-dev.org/releases/</a>.</p><p>The NoAuth authentication extension is
+            packaged as a <code class="filename">.tar.gz</code> file containing:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">guacamole-auth-noauth-0.9.8.jar</code></span></dt><dd><p>The NoAuth extension itself, which must be placed in
+                            <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></dd><dt><span class="term"><code class="filename">doc/example/</code></span></dt><dd><p>Contains an example configuration file:
+                            <code class="filename">noauth-config.xml</code>.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-noauth"></a>Installing the NoAuth extension</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory. To install
+            the NoAuth authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Remove any existing authentication extensions from
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>. Guacamole does not currently
+                    support using multiple authentication extensions at the same time.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-noauth-0.9.8.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></li><li class="step"><p>Configure Guacamole to use NoAuth, as described below.</p></li></ol></div><div class="important"><h3 class="title">Important</h3><p>You will need to restart Guacamole by restarting your servlet container in order
+                to complete the installation. Doing this will disconnect all active users, so be
+                sure that it is safe to do so prior to attempting installation. If you do not
+                configure the NoAuth extension properly, Guacamole will not start up again until the
+                configuration is fixed.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm139795231944000"></a>Configuring Guacamole for NoAuth</h3></div></div></div><p>An additional property must be added to <code class="filename">guacamole.properties</code>
+                such that Guacamole will load the NoAuth extension and locate its configuration
+                file:</p><pre class="programlisting"># NoAuth properties
+noauth-config: <em class="replaceable"><code>/etc/guacamole/noauth-config.xml</code></em></pre><p>The <span class="property">noauth-config</span> property defines the location of the XML
+                configuration file required by NoAuth. This file describes the connections available
+                to any user of your Guacamole instance and can be placed anywhere so long as its
+                location is given in <code class="filename">guacamole.properties</code>. On Linux servers,
+                    <code class="filename">/etc/guacamole</code> is a good location for Guacamole
+                configuration files, including the configuration file used by NoAuth.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="noauth-configuration"></a>The NoAuth configuration file</h4></div></div></div><a id="idm139795230809008" class="indexterm"></a><p>Although the NoAuth extension does not check credentials, it still requires a
+                    configuration file describing which connections are available and the protocols
+                    to use. This configuration is an XML file, typically called
+                        <code class="filename">noauth-config.xml</code>.</p><p>An example configuration file is provided in the
+                        <code class="filename">doc/example/</code> directory of the
+                        <code class="filename">.tar.gz</code> file downloadable from the Guacamole site. The
+                    format is fairly straightforward, and consists only of a list of connections
+                    (configurations) and parameters:</p><div class="informalexample"><pre class="programlisting">&lt;configs&gt;
+    &lt;config name="myconfig" protocol="rdp"&gt;
+        &lt;param name="hostname" value="rdp-server" /&gt;
+        &lt;param name="port" value="3389" /&gt;
+    &lt;/config&gt;
+&lt;/configs&gt;</pre><p>The file consists of a single <code class="code">&lt;configs&gt;</code> tag that contains
+                        any number of <code class="code">&lt;config&gt;</code> tags, each representing a distinct
+                        connection available for use.</p><p>Each <code class="code">&lt;config&gt;</code> tag has a corresponding <code class="code">name</code>
+                        and <code class="code">protocol</code>. The <code class="code">name</code> attribute defines a unique
+                        identifier for the connection and tells Guacamole what text should be
+                        displayed when identifying the connection. The <code class="code">protocol</code>
+                        attribute defines the standard remote desktop protocol to use, such as
+                            "<code class="constant">vnc</code>", "<code class="constant">rdp</code>", or
+                            "<code class="constant">ssh</code>". These protocols must be specified as
+                        lowercase due to the naming convention used by the libraries providing
+                        protocol support. If the wrong case is used, Guacamole will be unable to
+                        load the corresponding protocol support and the connection will fail.</p><p>The <code class="code">&lt;param&gt;</code> tags are placed within
+                            <code class="code">&lt;config&gt;</code> tags, describing a parameter name/value pair.
+                        The parameters available, their names, and their allowed values are
+                        protocol-specific and documented in <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a>.</p><p>The example above creates a new connection called "myconfig" that uses RDP
+                        to connect to the server at "rdp-server" on port 3389.</p></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm139795231328528"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before the disabled authentication will take effect. Restart your servlet
+                container and check whether your changes have been successful.</p><p>
+                </p><div class="important"><h3 class="title">Important</h3><p>You only need to restart your servlet container. <span class="emphasis"><em>You do not need
+                            to restart <span class="package">guacd</span></em></span>.</p><p><span class="package">guacd</span> is completely independent of the web application
+                        and does not deal with <code class="filename">guacamole.properties</code> or the
+                        authentication system in any way. Since you are already restarting the
+                        servlet container, restarting <span class="package">guacd</span> as well technically
+                        won't hurt anything, but doing so is completely pointless.</p></div><p>
+            </p><p>If Guacamole does not come back online after restarting your servlet container, or
+                you are prompted for a username and password, check the logs. Problems in the
+                configuration of NoAuth extension will prevent Guacamole from starting up, and any
+                such errors will be recorded in the logs of your servlet container.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ldap-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-guacamole.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. LDAP authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Using Guacamole</td></tr></table></div>
+
+            </div></div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

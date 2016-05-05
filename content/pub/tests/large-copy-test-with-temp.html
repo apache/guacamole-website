@@ -1,0 +1,85 @@
+<html>
+
+    <head><title>Large Copy Test (with temp)</title></head>
+
+    <body>
+
+        <!-- Results display -->
+        <h1 id="results">(results pending)</h1>
+
+        <!-- Test canvas -->
+        <canvas id="canvas" width="1024" height="768"
+            style="border: 1px solid black"></canvas>
+
+        <script type="text/javascript">
+
+            // Temp canvas
+            var temp = document.createElement("canvas");
+            var temp_ctx = temp.getContext("2d");
+
+            // Source canvas
+            var src = document.createElement("canvas");
+            var src_ctx = src.getContext("2d");
+
+            // Get elements
+            var results = document.getElementById("results");
+            var canvas  = document.getElementById("canvas");
+
+            // Get context
+            var ctx = canvas.getContext("2d");
+
+            // Draw arbitrary rectangle (which we will copy)
+            src.width = 1024;
+            src.height = 768;
+            src_ctx.beginPath();
+            src_ctx.rect(0, 100, 640,480);
+            src_ctx.closePath();
+            src_ctx.fillStyle = "#ABCDEF";
+            src_ctx.fill();
+
+            // Get start time
+            var start = new Date().getTime();
+
+            // Move rectangle using drawImage() copies, one pixel at a time.
+            // Source and destination region overlap.
+            // Trail is drawn in black.
+            for (var i=0; i<256; i++) {
+
+                // Get data
+                var data = src_ctx.getImageData(0, 100, 640, 480);
+                temp.width = 640; temp.height = 480;
+                temp_ctx.putImageData(data, 0, 0);
+
+                // Copy rectangle from source to new location
+                ctx.drawImage(temp,
+                        0,   0, 640, 480,
+                        i+1, 100, 640, 480);
+
+                // Draw black trail
+                ctx.beginPath();
+                ctx.rect(i, 100, 1, 480);
+                ctx.closePath();
+                ctx.fillStyle = "#000000";
+                ctx.fill();
+
+            }
+
+            // Get end time and duration
+            var end = new Date().getTime();
+            var duration = end - start;
+
+            // Display results
+            results.textContent =
+                duration + "ms (" + (duration/256) + "ms per frame)";
+
+            /*
+             * Results of own test runs:
+             *
+             * Hardware acceleration OFF: 1329ms (5.19140625ms per frame)
+             * Hardware acceleration ON:  1329ms (5.19140625ms per frame)
+             */
+
+        </script>
+
+    </body>
+</html>

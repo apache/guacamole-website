@@ -1,0 +1,51 @@
+<html>
+    <body>
+
+        <canvas id="canvas" width="8" height="8"></canvas>
+        <canvas id="canvas2" width="216" height="216"></canvas>
+
+        <script type="text/javascript">
+
+            var canvas = document.getElementById("canvas");
+            var canvas2 = document.getElementById("canvas2");
+
+            var ctx = canvas.getContext("2d");
+            var ctx2 = canvas2.getContext("2d");
+
+            var style = [
+                "#000000", "#000080", "#0000FF",
+                "#008000", "#008080", "#0080FF",
+                "#00FF00", "#00FF80", "#00FFFF",
+                "#800000", "#800080", "#8000FF",
+                "#808000", "#808080", "#8080FF",
+                "#80FF00", "#80FF80", "#80FFFF",
+                "#FF0000", "#FF0080", "#FF00FF",
+                "#FF8000", "#FF8080", "#FF80FF",
+                "#FFFF00", "#FFFF80", "#FFFFFF"
+            ];
+
+            ctx.beginPath();
+            ctx.arc(4, 4, 4, 0, 6.28, false);
+            ctx.closePath();
+            ctx.fillStyle = "#ABCDEF";
+            ctx.fill();
+
+            for (var j=0; j<27; j++) {
+                for (var i=0; i<27; i++) {
+
+                    ctx.beginPath();
+                    ctx.rect(0, 0, 8, 8);
+                    ctx.closePath();
+                    ctx.globalCompositeOperation = "source-in";
+                    ctx.fillStyle = style[i];
+                    ctx.fill();
+
+                    ctx2.drawImage(canvas, 0, 0, 8, 8, 8*i, 8*j, 8, 8);
+
+                }
+            }
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,643 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="WHIT">
+<span class='line'>  2</span> </span><span class="COMM">/* ***** BEGIN LICENSE BLOCK *****
+<span class='line'>  3</span>  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+<span class='line'>  4</span>  *
+<span class='line'>  5</span>  * The contents of this file are subject to the Mozilla Public License Version
+<span class='line'>  6</span>  * 1.1 (the "License"); you may not use this file except in compliance with
+<span class='line'>  7</span>  * the License. You may obtain a copy of the License at
+<span class='line'>  8</span>  * http://www.mozilla.org/MPL/
+<span class='line'>  9</span>  *
+<span class='line'> 10</span>  * Software distributed under the License is distributed on an "AS IS" basis,
+<span class='line'> 11</span>  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+<span class='line'> 12</span>  * for the specific language governing rights and limitations under the
+<span class='line'> 13</span>  * License.
+<span class='line'> 14</span>  *
+<span class='line'> 15</span>  * The Original Code is guacamole-common-js.
+<span class='line'> 16</span>  *
+<span class='line'> 17</span>  * The Initial Developer of the Original Code is
+<span class='line'> 18</span>  * Michael Jumper.
+<span class='line'> 19</span>  * Portions created by the Initial Developer are Copyright (C) 2010
+<span class='line'> 20</span>  * the Initial Developer. All Rights Reserved.
+<span class='line'> 21</span>  *
+<span class='line'> 22</span>  * Contributor(s):
+<span class='line'> 23</span>  *
+<span class='line'> 24</span>  * Alternatively, the contents of this file may be used under the terms of
+<span class='line'> 25</span>  * either the GNU General Public License Version 2 or later (the "GPL"), or
+<span class='line'> 26</span>  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+<span class='line'> 27</span>  * in which case the provisions of the GPL or the LGPL are applicable instead
+<span class='line'> 28</span>  * of those above. If you wish to allow use of your version of this file only
+<span class='line'> 29</span>  * under the terms of either the GPL or the LGPL, and not to allow others to
+<span class='line'> 30</span>  * use your version of this file under the terms of the MPL, indicate your
+<span class='line'> 31</span>  * decision by deleting the provisions above and replace them with the notice
+<span class='line'> 32</span>  * and other provisions required by the GPL or the LGPL. If you do not delete
+<span class='line'> 33</span>  * the provisions above, a recipient may use your version of this file under
+<span class='line'> 34</span>  * the terms of any one of the MPL, the GPL or the LGPL.
+<span class='line'> 35</span>  *
+<span class='line'> 36</span>  * ***** END LICENSE BLOCK ***** */</span><span class="WHIT">
+<span class='line'> 37</span> 
+<span class='line'> 38</span> </span><span class="COMM">/**
+<span class='line'> 39</span>  * Namespace for all Guacamole JavaScript objects.
+<span class='line'> 40</span>  * @namespace
+<span class='line'> 41</span>  */</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Guacamole</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Guacamole</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> 
+<span class='line'> 44</span> </span><span class="COMM">/**
+<span class='line'> 45</span>  * Provides cross-browser and cross-keyboard keyboard for a specific element.
+<span class='line'> 46</span>  * Browser and keyboard layout variation is abstracted away, providing events
+<span class='line'> 47</span>  * which represent keys as their corresponding X11 keysym.
+<span class='line'> 48</span>  * 
+<span class='line'> 49</span>  * @constructor
+<span class='line'> 50</span>  * @param {Element} element The Element to use to provide keyboard events.
+<span class='line'> 51</span>  */</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="NAME">Guacamole.Keyboard</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 53</span> 
+<span class='line'> 54</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 55</span>      * Reference to this Guacamole.Keyboard.
+<span class='line'> 56</span>      * @private
+<span class='line'> 57</span>      */</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">guac_keyboard</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> 
+<span class='line'> 60</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 61</span>      * Fired whenever the user presses a key with the element associated
+<span class='line'> 62</span>      * with this Guacamole.Keyboard in focus.
+<span class='line'> 63</span>      * 
+<span class='line'> 64</span>      * @event
+<span class='line'> 65</span>      * @param {Number} keysym The keysym of the key being pressed.
+<span class='line'> 66</span>      */</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="WHIT">    </span><span class="NAME">this.onkeydown</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 68</span> 
+<span class='line'> 69</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 70</span>      * Fired whenever the user releases a key with the element associated
+<span class='line'> 71</span>      * with this Guacamole.Keyboard in focus.
+<span class='line'> 72</span>      * 
+<span class='line'> 73</span>      * @event
+<span class='line'> 74</span>      * @param {Number} keysym The keysym of the key being released.
+<span class='line'> 75</span>      */</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">    </span><span class="NAME">this.onkeyup</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span> 
+<span class='line'> 78</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 79</span>      * Map of known JavaScript keycodes which do not map to typable characters
+<span class='line'> 80</span>      * to their unshifted X11 keysym equivalents.
+<span class='line'> 81</span>      * @private
+<span class='line'> 82</span>      */</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">unshiftedKeysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="WHIT">        </span><span class="NUMB">8</span><span class="PUNC">:</span><span class="WHIT">   </span><span class="PUNC">[</span><span class="NUMB">0xFF08</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// backspace</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">        </span><span class="NUMB">9</span><span class="PUNC">:</span><span class="WHIT">   </span><span class="PUNC">[</span><span class="NUMB">0xFF09</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// tab</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="WHIT">        </span><span class="NUMB">13</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF0D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// enter</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="WHIT">        </span><span class="NUMB">16</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFE1</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE1</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// shift</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="WHIT">        </span><span class="NUMB">17</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFE3</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE3</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE4</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// ctrl</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="WHIT">        </span><span class="NUMB">18</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFE9</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE9</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFEA</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// alt</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="WHIT">        </span><span class="NUMB">19</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF13</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// pause/break</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="WHIT">        </span><span class="NUMB">20</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFE5</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// caps lock</span><span class="WHIT">
+<span class='line'> 92</span> </span><span class="WHIT">        </span><span class="NUMB">27</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF1B</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// escape</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="WHIT">        </span><span class="NUMB">32</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0x0020</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// space</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="WHIT">        </span><span class="NUMB">33</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF55</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// page up</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="WHIT">        </span><span class="NUMB">34</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF56</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// page down</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="WHIT">        </span><span class="NUMB">35</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF57</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// end</span><span class="WHIT">
+<span class='line'> 97</span> </span><span class="WHIT">        </span><span class="NUMB">36</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF50</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// home</span><span class="WHIT">
+<span class='line'> 98</span> </span><span class="WHIT">        </span><span class="NUMB">37</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF51</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// left arrow</span><span class="WHIT">
+<span class='line'> 99</span> </span><span class="WHIT">        </span><span class="NUMB">38</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF52</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// up arrow</span><span class="WHIT">
+<span class='line'>100</span> </span><span class="WHIT">        </span><span class="NUMB">39</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF53</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// right arrow</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">        </span><span class="NUMB">40</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF54</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// down arrow</span><span class="WHIT">
+<span class='line'>102</span> </span><span class="WHIT">        </span><span class="NUMB">45</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF63</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// insert</span><span class="WHIT">
+<span class='line'>103</span> </span><span class="WHIT">        </span><span class="NUMB">46</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFFF</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// delete</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="WHIT">        </span><span class="NUMB">91</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFEB</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// left window key (super_l)</span><span class="WHIT">
+<span class='line'>105</span> </span><span class="WHIT">        </span><span class="NUMB">92</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFF67</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// right window key (menu key?)</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="WHIT">        </span><span class="NUMB">93</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">     </span><span class="COMM">// select key</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">        </span><span class="NUMB">112</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFBE</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f1</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="WHIT">        </span><span class="NUMB">113</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFBF</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f2</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="WHIT">        </span><span class="NUMB">114</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC0</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f3</span><span class="WHIT">
+<span class='line'>110</span> </span><span class="WHIT">        </span><span class="NUMB">115</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC1</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f4</span><span class="WHIT">
+<span class='line'>111</span> </span><span class="WHIT">        </span><span class="NUMB">116</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f5</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">        </span><span class="NUMB">117</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC3</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f6</span><span class="WHIT">
+<span class='line'>113</span> </span><span class="WHIT">        </span><span class="NUMB">118</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC4</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f7</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="WHIT">        </span><span class="NUMB">119</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC5</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f8</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">        </span><span class="NUMB">120</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC6</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f9</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">        </span><span class="NUMB">121</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC7</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f10</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">        </span><span class="NUMB">122</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC8</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f11</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="WHIT">        </span><span class="NUMB">123</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC9</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// f12</span><span class="WHIT">
+<span class='line'>119</span> </span><span class="WHIT">        </span><span class="NUMB">144</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF7F</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// num lock</span><span class="WHIT">
+<span class='line'>120</span> </span><span class="WHIT">        </span><span class="NUMB">145</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF14</span><span class="PUNC">]</span><span class="WHIT">  </span><span class="COMM">// scroll lock</span><span class="WHIT">
+<span class='line'>121</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>122</span> 
+<span class='line'>123</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>124</span>      * Map of known JavaScript keyidentifiers which do not map to typable
+<span class='line'>125</span>      * characters to their unshifted X11 keysym equivalents.
+<span class='line'>126</span>      * @private
+<span class='line'>127</span>      */</span><span class="WHIT">
+<span class='line'>128</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keyidentifier_keysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">        </span><span class="STRN">"AllCandidates"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF3D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>130</span> </span><span class="WHIT">        </span><span class="STRN">"Alphanumeric"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF30</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>131</span> </span><span class="WHIT">        </span><span class="STRN">"Alt"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFE9</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE9</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFEA</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>132</span> </span><span class="WHIT">        </span><span class="STRN">"Attn"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD0E</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>133</span> </span><span class="WHIT">        </span><span class="STRN">"AltGraph"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFEA</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>134</span> </span><span class="WHIT">        </span><span class="STRN">"CapsLock"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFE5</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>135</span> </span><span class="WHIT">        </span><span class="STRN">"Clear"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF0B</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">        </span><span class="STRN">"Convert"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF21</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>137</span> </span><span class="WHIT">        </span><span class="STRN">"Copy"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD15</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">        </span><span class="STRN">"Crsel"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD1C</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>139</span> </span><span class="WHIT">        </span><span class="STRN">"CodeInput"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF37</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>140</span> </span><span class="WHIT">        </span><span class="STRN">"Control"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFE3</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE3</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE4</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>141</span> </span><span class="WHIT">        </span><span class="STRN">"Down"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF54</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="WHIT">        </span><span class="STRN">"End"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF57</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">        </span><span class="STRN">"Enter"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF0D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">        </span><span class="STRN">"EraseEof"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD06</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>145</span> </span><span class="WHIT">        </span><span class="STRN">"Execute"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF62</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">        </span><span class="STRN">"Exsel"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD1D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">        </span><span class="STRN">"F1"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFBE</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>148</span> </span><span class="WHIT">        </span><span class="STRN">"F2"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFBF</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>149</span> </span><span class="WHIT">        </span><span class="STRN">"F3"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC0</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>150</span> </span><span class="WHIT">        </span><span class="STRN">"F4"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC1</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>151</span> </span><span class="WHIT">        </span><span class="STRN">"F5"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>152</span> </span><span class="WHIT">        </span><span class="STRN">"F6"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC3</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>153</span> </span><span class="WHIT">        </span><span class="STRN">"F7"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC4</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="WHIT">        </span><span class="STRN">"F8"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC5</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>155</span> </span><span class="WHIT">        </span><span class="STRN">"F9"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC6</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="WHIT">        </span><span class="STRN">"F10"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC7</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="WHIT">        </span><span class="STRN">"F11"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC8</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="WHIT">        </span><span class="STRN">"F12"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFC9</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">        </span><span class="STRN">"F13"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCA</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="WHIT">        </span><span class="STRN">"F14"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCB</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="WHIT">        </span><span class="STRN">"F15"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCC</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="WHIT">        </span><span class="STRN">"F16"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCD</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="WHIT">        </span><span class="STRN">"F17"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCE</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="WHIT">        </span><span class="STRN">"F18"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFCF</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>165</span> </span><span class="WHIT">        </span><span class="STRN">"F19"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD0</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="WHIT">        </span><span class="STRN">"F20"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD1</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="WHIT">        </span><span class="STRN">"F21"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="WHIT">        </span><span class="STRN">"F22"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD3</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="WHIT">        </span><span class="STRN">"F23"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD4</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">        </span><span class="STRN">"F24"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFD5</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="WHIT">        </span><span class="STRN">"Find"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF68</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">        </span><span class="STRN">"FullWidth"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="WHIT">        </span><span class="STRN">"HalfWidth"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>174</span> </span><span class="WHIT">        </span><span class="STRN">"HangulMode"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF31</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>175</span> </span><span class="WHIT">        </span><span class="STRN">"HanjaMode"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF34</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>176</span> </span><span class="WHIT">        </span><span class="STRN">"Help"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF6A</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>177</span> </span><span class="WHIT">        </span><span class="STRN">"Hiragana"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF25</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>178</span> </span><span class="WHIT">        </span><span class="STRN">"Home"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF50</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>179</span> </span><span class="WHIT">        </span><span class="STRN">"Insert"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF63</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>180</span> </span><span class="WHIT">        </span><span class="STRN">"JapaneseHiragana"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF25</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">        </span><span class="STRN">"JapaneseKatakana"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF26</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>182</span> </span><span class="WHIT">        </span><span class="STRN">"JapaneseRomaji"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF24</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>183</span> </span><span class="WHIT">        </span><span class="STRN">"JunjaMode"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF38</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">        </span><span class="STRN">"KanaMode"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF2D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>185</span> </span><span class="WHIT">        </span><span class="STRN">"KanjiMode"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF21</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>186</span> </span><span class="WHIT">        </span><span class="STRN">"Katakana"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF26</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>187</span> </span><span class="WHIT">        </span><span class="STRN">"Left"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF51</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>188</span> </span><span class="WHIT">        </span><span class="STRN">"Meta"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFE7</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>189</span> </span><span class="WHIT">        </span><span class="STRN">"NumLock"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF7F</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>190</span> </span><span class="WHIT">        </span><span class="STRN">"PageDown"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF55</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>191</span> </span><span class="WHIT">        </span><span class="STRN">"PageUp"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF56</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>192</span> </span><span class="WHIT">        </span><span class="STRN">"Pause"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF13</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>193</span> </span><span class="WHIT">        </span><span class="STRN">"PreviousCandidate"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF3E</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="WHIT">        </span><span class="STRN">"PrintScreen"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFD1D</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>195</span> </span><span class="WHIT">        </span><span class="STRN">"Right"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF53</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>196</span> </span><span class="WHIT">        </span><span class="STRN">"RomanCharacters"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>197</span> </span><span class="WHIT">        </span><span class="STRN">"Scroll"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF14</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>198</span> </span><span class="WHIT">        </span><span class="STRN">"Select"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF60</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>199</span> </span><span class="WHIT">        </span><span class="STRN">"Shift"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFE1</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE1</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>200</span> </span><span class="WHIT">        </span><span class="STRN">"Up"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF52</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>201</span> </span><span class="WHIT">        </span><span class="STRN">"Undo"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFF65</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>202</span> </span><span class="WHIT">        </span><span class="STRN">"Win"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NUMB">0xFFEB</span><span class="PUNC">]</span><span class="WHIT">
+<span class='line'>203</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>204</span> 
+<span class='line'>205</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>206</span>      * Map of known JavaScript keycodes which do not map to typable characters
+<span class='line'>207</span>      * to their shifted X11 keysym equivalents. Keycodes must only be listed
+<span class='line'>208</span>      * here if their shifted X11 keysym equivalents differ from their unshifted
+<span class='line'>209</span>      * equivalents.
+<span class='line'>210</span>      * @private
+<span class='line'>211</span>      */</span><span class="WHIT">
+<span class='line'>212</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">shiftedKeysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>213</span> </span><span class="WHIT">        </span><span class="NUMB">18</span><span class="PUNC">:</span><span class="WHIT">  </span><span class="PUNC">[</span><span class="NUMB">0xFFE7</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFE7</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">0xFFEA</span><span class="PUNC">]</span><span class="WHIT">  </span><span class="COMM">// alt</span><span class="WHIT">
+<span class='line'>214</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>215</span> 
+<span class='line'>216</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>217</span>      * All keysyms which should not repeat when held down.
+<span class='line'>218</span>      * @private
+<span class='line'>219</span>      */</span><span class="WHIT">
+<span class='line'>220</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">no_repeat</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>221</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFE1</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// Left shift</span><span class="WHIT">
+<span class='line'>222</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFE2</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// Right shift</span><span class="WHIT">
+<span class='line'>223</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFE3</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// Left ctrl </span><span class="WHIT">
+<span class='line'>224</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFE4</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// Right ctrl </span><span class="WHIT">
+<span class='line'>225</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFE9</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">// Left alt</span><span class="WHIT">
+<span class='line'>226</span> </span><span class="WHIT">        </span><span class="NUMB">0xFFEA</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="WHIT">  </span><span class="COMM">// Right alt (or AltGr)</span><span class="WHIT">
+<span class='line'>227</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>228</span> 
+<span class='line'>229</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>230</span>      * All modifiers and their states.
+<span class='line'>231</span>      */</span><span class="WHIT">
+<span class='line'>232</span> </span><span class="WHIT">    </span><span class="NAME">this.modifiers</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>233</span> </span><span class="WHIT">        
+<span class='line'>234</span>         </span><span class="COMM">/**
+<span class='line'>235</span>          * Whether shift is currently pressed.
+<span class='line'>236</span>          */</span><span class="WHIT">
+<span class='line'>237</span> </span><span class="WHIT">        </span><span class="STRN">"shift"</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>238</span> </span><span class="WHIT">        
+<span class='line'>239</span>         </span><span class="COMM">/**
+<span class='line'>240</span>          * Whether ctrl is currently pressed.
+<span class='line'>241</span>          */</span><span class="WHIT">
+<span class='line'>242</span> </span><span class="WHIT">        </span><span class="STRN">"ctrl"</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>243</span> </span><span class="WHIT">        
+<span class='line'>244</span>         </span><span class="COMM">/**
+<span class='line'>245</span>          * Whether alt is currently pressed.
+<span class='line'>246</span>          */</span><span class="WHIT">
+<span class='line'>247</span> </span><span class="WHIT">        </span><span class="STRN">"alt"</span><span class="WHIT">  </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>248</span> </span><span class="WHIT">        
+<span class='line'>249</span>         </span><span class="COMM">/**
+<span class='line'>250</span>          * Whether meta (apple key) is currently pressed.
+<span class='line'>251</span>          */</span><span class="WHIT">
+<span class='line'>252</span> </span><span class="WHIT">        </span><span class="STRN">"meta"</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="WHIT">
+<span class='line'>253</span> 
+<span class='line'>254</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>255</span> 
+<span class='line'>256</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>257</span>      * The state of every key, indexed by keysym. If a particular key is
+<span class='line'>258</span>      * pressed, the value of pressed for that keysym will be true. If a key
+<span class='line'>259</span>      * is not currently pressed, it will not be defined. 
+<span class='line'>260</span>      */</span><span class="WHIT">
+<span class='line'>261</span> </span><span class="WHIT">    </span><span class="NAME">this.pressed</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>262</span> 
+<span class='line'>263</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>264</span>      * The keysym associated with a given keycode when keydown fired.
+<span class='line'>265</span>      * @private
+<span class='line'>266</span>      */</span><span class="WHIT">
+<span class='line'>267</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keydownChar</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>268</span> 
+<span class='line'>269</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>270</span>      * Timeout before key repeat starts.
+<span class='line'>271</span>      * @private
+<span class='line'>272</span>      */</span><span class="WHIT">
+<span class='line'>273</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">key_repeat_timeout</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>274</span> 
+<span class='line'>275</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>276</span>      * Interval which presses and releases the last key pressed while that
+<span class='line'>277</span>      * key is still being held down.
+<span class='line'>278</span>      * @private
+<span class='line'>279</span>      */</span><span class="WHIT">
+<span class='line'>280</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">key_repeat_interval</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>281</span> 
+<span class='line'>282</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>283</span>      * Given an array of keysyms indexed by location, returns the keysym
+<span class='line'>284</span>      * for the given location, or the keysym for the standard location if
+<span class='line'>285</span>      * undefined.
+<span class='line'>286</span>      * 
+<span class='line'>287</span>      * @param {Array} keysyms An array of keysyms, where the index of the
+<span class='line'>288</span>      *                        keysym in the array is the location value.
+<span class='line'>289</span>      * @param {Number} location The location on the keyboard corresponding to
+<span class='line'>290</span>      *                          the key pressed, as defined at:
+<span class='line'>291</span>      *                          http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent
+<span class='line'>292</span>      */</span><span class="WHIT">
+<span class='line'>293</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">get_keysym</span><span class="PUNC">(</span><span class="NAME">keysyms</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>294</span> 
+<span class='line'>295</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">keysyms</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>296</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>297</span> 
+<span class='line'>298</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">keysyms</span><span class="PUNC">[</span><span class="NAME">location</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">keysyms</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>299</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>300</span> 
+<span class='line'>301</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">keysym_from_key_identifier</span><span class="PUNC">(</span><span class="NAME">shifted</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">keyIdentifier</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>302</span> 
+<span class='line'>303</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">unicodePrefixLocation</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keyIdentifier.indexOf</span><span class="PUNC">(</span><span class="STRN">"U+"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>304</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">unicodePrefixLocation</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>305</span> 
+<span class='line'>306</span> </span><span class="WHIT">            </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">hex</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keyIdentifier.substring</span><span class="PUNC">(</span><span class="NAME">unicodePrefixLocation</span><span class="PUNC">+</span><span class="NUMB">2</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>307</span> </span><span class="WHIT">            </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">hex</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">16</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>308</span> </span><span class="WHIT">            </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">typedCharacter</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>309</span> 
+<span class='line'>310</span> </span><span class="WHIT">            </span><span class="COMM">// Convert case if shifted</span><span class="WHIT">
+<span class='line'>311</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">shifted</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>312</span> </span><span class="WHIT">                </span><span class="NAME">typedCharacter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">String.fromCharCode</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">toLowerCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>313</span> </span><span class="WHIT">            </span><span class="KEYW">else</span><span class="WHIT">
+<span class='line'>314</span> </span><span class="WHIT">                </span><span class="NAME">typedCharacter</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">String.fromCharCode</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">toUpperCase</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>315</span> 
+<span class='line'>316</span> </span><span class="WHIT">            </span><span class="COMM">// Get codepoint</span><span class="WHIT">
+<span class='line'>317</span> </span><span class="WHIT">            </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">typedCharacter.charCodeAt</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>318</span> 
+<span class='line'>319</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">keysym_from_charcode</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>320</span> 
+<span class='line'>321</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>322</span> 
+<span class='line'>323</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">get_keysym</span><span class="PUNC">(</span><span class="NAME">keyidentifier_keysym</span><span class="PUNC">[</span><span class="NAME">keyIdentifier</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>324</span> 
+<span class='line'>325</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>326</span> 
+<span class='line'>327</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">isControlCharacter</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>328</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">&lt;=</span><span class="WHIT"> </span><span class="NUMB">0x1F</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NUMB">0x7F</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">&lt;=</span><span class="WHIT"> </span><span class="NUMB">0x9F</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>329</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>330</span> 
+<span class='line'>331</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">keysym_from_charcode</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>332</span> 
+<span class='line'>333</span> </span><span class="WHIT">        </span><span class="COMM">// Keysyms for control characters</span><span class="WHIT">
+<span class='line'>334</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">isControlCharacter</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NUMB">0xFF00</span><span class="WHIT"> </span><span class="PUNC">|</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>335</span> 
+<span class='line'>336</span> </span><span class="WHIT">        </span><span class="COMM">// Keysyms for ASCII chars</span><span class="WHIT">
+<span class='line'>337</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NUMB">0x0000</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">&lt;=</span><span class="WHIT"> </span><span class="NUMB">0x00FF</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>338</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>339</span> 
+<span class='line'>340</span> </span><span class="WHIT">        </span><span class="COMM">// Keysyms for Unicode</span><span class="WHIT">
+<span class='line'>341</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NUMB">0x0100</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">&lt;=</span><span class="WHIT"> </span><span class="NUMB">0x10FFFF</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>342</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NUMB">0x01000000</span><span class="WHIT"> </span><span class="PUNC">|</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>343</span> 
+<span class='line'>344</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>345</span> 
+<span class='line'>346</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>347</span> 
+<span class='line'>348</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">keysym_from_keycode</span><span class="PUNC">(</span><span class="NAME">keyCode</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>349</span> 
+<span class='line'>350</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keysyms</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>351</span> 
+<span class='line'>352</span> </span><span class="WHIT">        </span><span class="COMM">// If not shifted, just return unshifted keysym</span><span class="WHIT">
+<span class='line'>353</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>354</span> </span><span class="WHIT">            </span><span class="NAME">keysyms</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">unshiftedKeysym</span><span class="PUNC">[</span><span class="NAME">keyCode</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>355</span> 
+<span class='line'>356</span> </span><span class="WHIT">        </span><span class="COMM">// Otherwise, return shifted keysym, if defined</span><span class="WHIT">
+<span class='line'>357</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT">
+<span class='line'>358</span> </span><span class="WHIT">            </span><span class="NAME">keysyms</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">shiftedKeysym</span><span class="PUNC">[</span><span class="NAME">keyCode</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">unshiftedKeysym</span><span class="PUNC">[</span><span class="NAME">keyCode</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>359</span> 
+<span class='line'>360</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">get_keysym</span><span class="PUNC">(</span><span class="NAME">keysyms</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>361</span> 
+<span class='line'>362</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>363</span> 
+<span class='line'>364</span> 
+<span class='line'>365</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>366</span>      * Marks a key as pressed, firing the keydown event if registered. Key
+<span class='line'>367</span>      * repeat for the pressed key will start after a delay if that key is
+<span class='line'>368</span>      * not a modifier.
+<span class='line'>369</span>      * @private
+<span class='line'>370</span>      */</span><span class="WHIT">
+<span class='line'>371</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">press_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>372</span> 
+<span class='line'>373</span> </span><span class="WHIT">        </span><span class="COMM">// Don't bother with pressing the key if the key is unknown</span><span class="WHIT">
+<span class='line'>374</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>375</span> 
+<span class='line'>376</span> </span><span class="WHIT">        </span><span class="COMM">// Only press if released</span><span class="WHIT">
+<span class='line'>377</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.pressed</span><span class="PUNC">[</span><span class="NAME">keysym</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>378</span> 
+<span class='line'>379</span> </span><span class="WHIT">            </span><span class="COMM">// Mark key as pressed</span><span class="WHIT">
+<span class='line'>380</span> </span><span class="WHIT">            </span><span class="NAME">guac_keyboard.pressed</span><span class="PUNC">[</span><span class="NAME">keysym</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>381</span> 
+<span class='line'>382</span> </span><span class="WHIT">            </span><span class="COMM">// Send key event</span><span class="WHIT">
+<span class='line'>383</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.onkeydown</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>384</span> </span><span class="WHIT">                </span><span class="NAME">guac_keyboard.onkeydown</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>385</span> 
+<span class='line'>386</span> </span><span class="WHIT">                </span><span class="COMM">// Stop any current repeat</span><span class="WHIT">
+<span class='line'>387</span> </span><span class="WHIT">                </span><span class="NAME">window.clearTimeout</span><span class="PUNC">(</span><span class="NAME">key_repeat_timeout</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>388</span> </span><span class="WHIT">                </span><span class="NAME">window.clearInterval</span><span class="PUNC">(</span><span class="NAME">key_repeat_interval</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>389</span> 
+<span class='line'>390</span> </span><span class="WHIT">                </span><span class="COMM">// Repeat after a delay as long as pressed</span><span class="WHIT">
+<span class='line'>391</span> </span><span class="WHIT">                </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">no_repeat</span><span class="PUNC">[</span><span class="NAME">keysym</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>392</span> </span><span class="WHIT">                    </span><span class="NAME">key_repeat_timeout</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.setTimeout</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>393</span> </span><span class="WHIT">                        </span><span class="NAME">key_repeat_interval</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.setInterval</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>394</span> </span><span class="WHIT">                            </span><span class="NAME">guac_keyboard.onkeyup</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>395</span> </span><span class="WHIT">                            </span><span class="NAME">guac_keyboard.onkeydown</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>396</span> </span><span class="WHIT">                        </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">50</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>397</span> </span><span class="WHIT">                    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">500</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>398</span> 
+<span class='line'>399</span> 
+<span class='line'>400</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>401</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>402</span> 
+<span class='line'>403</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>404</span> 
+<span class='line'>405</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>406</span>      * Marks a key as released, firing the keyup event if registered.
+<span class='line'>407</span>      * @private
+<span class='line'>408</span>      */</span><span class="WHIT">
+<span class='line'>409</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>410</span> 
+<span class='line'>411</span> </span><span class="WHIT">        </span><span class="COMM">// Only release if pressed</span><span class="WHIT">
+<span class='line'>412</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.pressed</span><span class="PUNC">[</span><span class="NAME">keysym</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>413</span> </span><span class="WHIT">            
+<span class='line'>414</span>             </span><span class="COMM">// Mark key as released</span><span class="WHIT">
+<span class='line'>415</span> </span><span class="WHIT">            </span><span class="KEYW">delete</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.pressed</span><span class="PUNC">[</span><span class="NAME">keysym</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>416</span> 
+<span class='line'>417</span> </span><span class="WHIT">            </span><span class="COMM">// Stop repeat</span><span class="WHIT">
+<span class='line'>418</span> </span><span class="WHIT">            </span><span class="NAME">window.clearTimeout</span><span class="PUNC">(</span><span class="NAME">key_repeat_timeout</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>419</span> </span><span class="WHIT">            </span><span class="NAME">window.clearInterval</span><span class="PUNC">(</span><span class="NAME">key_repeat_interval</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>420</span> 
+<span class='line'>421</span> </span><span class="WHIT">            </span><span class="COMM">// Send key event</span><span class="WHIT">
+<span class='line'>422</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.onkeyup</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>423</span> </span><span class="WHIT">                </span><span class="NAME">guac_keyboard.onkeyup</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>424</span> 
+<span class='line'>425</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>426</span> 
+<span class='line'>427</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>428</span> 
+<span class='line'>429</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">isTypable</span><span class="PUNC">(</span><span class="NAME">keyIdentifier</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>430</span> 
+<span class='line'>431</span> </span><span class="WHIT">        </span><span class="COMM">// Find unicode prefix</span><span class="WHIT">
+<span class='line'>432</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">unicodePrefixLocation</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keyIdentifier.indexOf</span><span class="PUNC">(</span><span class="STRN">"U+"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>433</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">unicodePrefixLocation</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>434</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>435</span> 
+<span class='line'>436</span> </span><span class="WHIT">        </span><span class="COMM">// Parse codepoint value</span><span class="WHIT">
+<span class='line'>437</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">hex</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keyIdentifier.substring</span><span class="PUNC">(</span><span class="NAME">unicodePrefixLocation</span><span class="PUNC">+</span><span class="NUMB">2</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>438</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">codepoint</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">hex</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NUMB">16</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>439</span> 
+<span class='line'>440</span> </span><span class="WHIT">        </span><span class="COMM">// If control character, not typable</span><span class="WHIT">
+<span class='line'>441</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">isControlCharacter</span><span class="PUNC">(</span><span class="NAME">codepoint</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>442</span> 
+<span class='line'>443</span> </span><span class="WHIT">        </span><span class="COMM">// Otherwise, typable</span><span class="WHIT">
+<span class='line'>444</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>445</span> 
+<span class='line'>446</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>447</span> 
+<span class='line'>448</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>449</span>      * Given a keyboard event, updates the local modifier state and remote
+<span class='line'>450</span>      * key state based on the modifier flags within the event. This function
+<span class='line'>451</span>      * pays no attention to keycodes.
+<span class='line'>452</span>      * 
+<span class='line'>453</span>      * @param {KeyboardEvent} e The keyboard event containing the flags to update.
+<span class='line'>454</span>      */</span><span class="WHIT">
+<span class='line'>455</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">update_modifier_state</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>456</span> 
+<span class='line'>457</span> </span><span class="WHIT">        </span><span class="COMM">// Release alt if implicitly released</span><span class="WHIT">
+<span class='line'>458</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">e.altKey</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>459</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE9</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Left alt</span><span class="WHIT">
+<span class='line'>460</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFEA</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Right alt (or AltGr)</span><span class="WHIT">
+<span class='line'>461</span> </span><span class="WHIT">            </span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>462</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>463</span> 
+<span class='line'>464</span> </span><span class="WHIT">        </span><span class="COMM">// Release shift if implicitly released</span><span class="WHIT">
+<span class='line'>465</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">e.shiftKey</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>466</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE1</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Left shift</span><span class="WHIT">
+<span class='line'>467</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE2</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Right shift</span><span class="WHIT">
+<span class='line'>468</span> </span><span class="WHIT">            </span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>469</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>470</span> 
+<span class='line'>471</span> </span><span class="WHIT">        </span><span class="COMM">// Release ctrl if implicitly released</span><span class="WHIT">
+<span class='line'>472</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">e.ctrlKey</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>473</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE3</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Left ctrl </span><span class="WHIT">
+<span class='line'>474</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE4</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Right ctrl </span><span class="WHIT">
+<span class='line'>475</span> </span><span class="WHIT">            </span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>476</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>477</span> 
+<span class='line'>478</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>479</span> 
+<span class='line'>480</span> </span><span class="WHIT">    </span><span class="COMM">// When key pressed</span><span class="WHIT">
+<span class='line'>481</span> </span><span class="WHIT">    </span><span class="NAME">element.addEventListener</span><span class="PUNC">(</span><span class="STRN">"keydown"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>482</span> 
+<span class='line'>483</span> </span><span class="WHIT">        </span><span class="COMM">// Only intercept if handler set</span><span class="WHIT">
+<span class='line'>484</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.onkeydown</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>485</span> 
+<span class='line'>486</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>487</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">window.event</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.event.keyCode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>488</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e.which</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">e.which</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>489</span> 
+<span class='line'>490</span> </span><span class="WHIT">        </span><span class="COMM">// Get key location</span><span class="WHIT">
+<span class='line'>491</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">location</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">e.location</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">e.keyLocation</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>492</span> 
+<span class='line'>493</span> </span><span class="WHIT">        </span><span class="COMM">// Ignore any unknown key events</span><span class="WHIT">
+<span class='line'>494</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">e.keyIdentifier</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>495</span> </span><span class="WHIT">            </span><span class="NAME">e.preventDefault</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>496</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>497</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>498</span> 
+<span class='line'>499</span> </span><span class="WHIT">        </span><span class="COMM">// Fix modifier states</span><span class="WHIT">
+<span class='line'>500</span> </span><span class="WHIT">        </span><span class="NAME">update_modifier_state</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>501</span> 
+<span class='line'>502</span> </span><span class="WHIT">        </span><span class="COMM">// Ctrl/Alt/Shift/Meta</span><span class="WHIT">
+<span class='line'>503</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT">      </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">16</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>504</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">17</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT">  </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>505</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">18</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="WHIT">   </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>506</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">91</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.meta</span><span class="WHIT">  </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>507</span> 
+<span class='line'>508</span> </span><span class="WHIT">        </span><span class="COMM">// Try to get keysym from keycode</span><span class="WHIT">
+<span class='line'>509</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keysym_from_keycode</span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>510</span> 
+<span class='line'>511</span> </span><span class="WHIT">        </span><span class="COMM">// By default, we expect a corresponding keypress event</span><span class="WHIT">
+<span class='line'>512</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">expect_keypress</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>513</span> 
+<span class='line'>514</span> </span><span class="WHIT">        </span><span class="COMM">// If key is known from keycode, prevent default</span><span class="WHIT">
+<span class='line'>515</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>516</span> </span><span class="WHIT">            </span><span class="NAME">expect_keypress</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>517</span> </span><span class="WHIT">        
+<span class='line'>518</span>         </span><span class="COMM">// Also try to get get keysym from keyIdentifier</span><span class="WHIT">
+<span class='line'>519</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e.keyIdentifier</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>520</span> 
+<span class='line'>521</span> </span><span class="WHIT">            </span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT">
+<span class='line'>522</span> </span><span class="WHIT">            </span><span class="NAME">keysym_from_key_identifier</span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>523</span> </span><span class="WHIT">                </span><span class="NAME">e.keyIdentifier</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">location</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>524</span> 
+<span class='line'>525</span> </span><span class="WHIT">            </span><span class="COMM">// Prevent default if non-typable character or if modifier combination</span><span class="WHIT">
+<span class='line'>526</span> </span><span class="WHIT">            </span><span class="COMM">// likely to be eaten by browser otherwise (NOTE: We must not prevent</span><span class="WHIT">
+<span class='line'>527</span> </span><span class="WHIT">            </span><span class="COMM">// default for Ctrl+Alt, as that combination is commonly used for</span><span class="WHIT">
+<span class='line'>528</span> </span><span class="WHIT">            </span><span class="COMM">// AltGr. If we receive AltGr, we need to handle keypress, which</span><span class="WHIT">
+<span class='line'>529</span> </span><span class="WHIT">            </span><span class="COMM">// means we cannot cancel keydown).</span><span class="WHIT">
+<span class='line'>530</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">isTypable</span><span class="PUNC">(</span><span class="NAME">e.keyIdentifier</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>531</span> </span><span class="WHIT">                </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>532</span> </span><span class="WHIT">                </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT">  </span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>533</span> </span><span class="WHIT">                </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.meta</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>534</span> </span><span class="WHIT">                </span><span class="NAME">expect_keypress</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>535</span> </span><span class="WHIT">            
+<span class='line'>536</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>537</span> 
+<span class='line'>538</span> </span><span class="WHIT">        </span><span class="COMM">// If we do not expect to handle via keypress, handle now</span><span class="WHIT">
+<span class='line'>539</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">expect_keypress</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>540</span> </span><span class="WHIT">            </span><span class="NAME">e.preventDefault</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>541</span> 
+<span class='line'>542</span> </span><span class="WHIT">            </span><span class="COMM">// Press key if known</span><span class="WHIT">
+<span class='line'>543</span> </span><span class="WHIT">            </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>544</span> </span><span class="WHIT">                </span><span class="NAME">keydownChar</span><span class="PUNC">[</span><span class="NAME">keynum</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keysym</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>545</span> </span><span class="WHIT">                </span><span class="NAME">press_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>546</span> </span><span class="WHIT">                
+<span class='line'>547</span>                 </span><span class="COMM">// If a key is pressed while meta is held down, the keyup will never be sent in Chrome, so send it now. (bug #108404)</span><span class="WHIT">
+<span class='line'>548</span> </span><span class="WHIT">                </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">guac_keyboard.modifiers.meta</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>549</span> </span><span class="WHIT">                    </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>550</span> </span><span class="WHIT">                </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>551</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>552</span> </span><span class="WHIT">            
+<span class='line'>553</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>554</span> 
+<span class='line'>555</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>556</span> 
+<span class='line'>557</span> </span><span class="WHIT">    </span><span class="COMM">// When key pressed</span><span class="WHIT">
+<span class='line'>558</span> </span><span class="WHIT">    </span><span class="NAME">element.addEventListener</span><span class="PUNC">(</span><span class="STRN">"keypress"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>559</span> 
+<span class='line'>560</span> </span><span class="WHIT">        </span><span class="COMM">// Only intercept if handler set</span><span class="WHIT">
+<span class='line'>561</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.onkeydown</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">guac_keyboard.onkeyup</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>562</span> 
+<span class='line'>563</span> </span><span class="WHIT">        </span><span class="NAME">e.preventDefault</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>564</span> 
+<span class='line'>565</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>566</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">window.event</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.event.keyCode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>567</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e.which</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">e.which</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>568</span> 
+<span class='line'>569</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keysym_from_charcode</span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>570</span> 
+<span class='line'>571</span> </span><span class="WHIT">        </span><span class="COMM">// Fix modifier states</span><span class="WHIT">
+<span class='line'>572</span> </span><span class="WHIT">        </span><span class="NAME">update_modifier_state</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>573</span> 
+<span class='line'>574</span> </span><span class="WHIT">        </span><span class="COMM">// If event identified as a typable character, and we're holding Ctrl+Alt,</span><span class="WHIT">
+<span class='line'>575</span> </span><span class="WHIT">        </span><span class="COMM">// assume Ctrl+Alt is actually AltGr, and release both.</span><span class="WHIT">
+<span class='line'>576</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">isControlCharacter</span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>577</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE3</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Left ctrl</span><span class="WHIT">
+<span class='line'>578</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE4</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Right ctrl</span><span class="WHIT">
+<span class='line'>579</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFE9</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Left alt</span><span class="WHIT">
+<span class='line'>580</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NUMB">0xFFEA</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">// Right alt</span><span class="WHIT">
+<span class='line'>581</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>582</span> 
+<span class='line'>583</span> </span><span class="WHIT">        </span><span class="COMM">// Send press + release if keysym known</span><span class="WHIT">
+<span class='line'>584</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>585</span> </span><span class="WHIT">            </span><span class="NAME">press_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>586</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NAME">keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>587</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>588</span> 
+<span class='line'>589</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>590</span> 
+<span class='line'>591</span> </span><span class="WHIT">    </span><span class="COMM">// When key released</span><span class="WHIT">
+<span class='line'>592</span> </span><span class="WHIT">    </span><span class="NAME">element.addEventListener</span><span class="PUNC">(</span><span class="STRN">"keyup"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>593</span> 
+<span class='line'>594</span> </span><span class="WHIT">        </span><span class="COMM">// Only intercept if handler set</span><span class="WHIT">
+<span class='line'>595</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">guac_keyboard.onkeyup</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="KEYW">return</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>596</span> 
+<span class='line'>597</span> </span><span class="WHIT">        </span><span class="NAME">e.preventDefault</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>598</span> 
+<span class='line'>599</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>600</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">window.event</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">window.event.keyCode</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>601</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e.which</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">e.which</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>602</span> </span><span class="WHIT">        
+<span class='line'>603</span>         </span><span class="COMM">// Fix modifier states</span><span class="WHIT">
+<span class='line'>604</span> </span><span class="WHIT">        </span><span class="NAME">update_modifier_state</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>605</span> 
+<span class='line'>606</span> </span><span class="WHIT">        </span><span class="COMM">// Ctrl/Alt/Shift/Meta</span><span class="WHIT">
+<span class='line'>607</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT">      </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">16</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.shift</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>608</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">17</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.ctrl</span><span class="WHIT">  </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>609</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">18</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.alt</span><span class="WHIT">   </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>610</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keynum</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">91</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">guac_keyboard.modifiers.meta</span><span class="WHIT">  </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>611</span> 
+<span class='line'>612</span> </span><span class="WHIT">        </span><span class="COMM">// Send release event if original key known</span><span class="WHIT">
+<span class='line'>613</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">keydown_keysym</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">keydownChar</span><span class="PUNC">[</span><span class="NAME">keynum</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>614</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">keydown_keysym</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>615</span> </span><span class="WHIT">            </span><span class="NAME">release_key</span><span class="PUNC">(</span><span class="NAME">keydown_keysym</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>616</span> 
+<span class='line'>617</span> </span><span class="WHIT">        </span><span class="COMM">// Clear character record</span><span class="WHIT">
+<span class='line'>618</span> </span><span class="WHIT">        </span><span class="NAME">keydownChar</span><span class="PUNC">[</span><span class="NAME">keynum</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>619</span> 
+<span class='line'>620</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>621</span> 
+<span class='line'>622</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>623</span> </span></pre>
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+</body></html>

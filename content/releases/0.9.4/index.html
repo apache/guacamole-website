@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole: 0.9.4</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <div class="legacy-release-note">
+    <p><strong>The release below is from prior to Guacamole's acceptance into
+        the Apache Incubator.</strong> It is not an Apache Software Foundation
+        release, and is licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
+<div id="links">
+
+    <!-- Compatible extensions -->
+    
+    
+        <h2>Compatible extensions</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-0.9.4.tar.gz/download">LDAP Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-mysql-0.9.4.tar.gz/download">MySQL Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-noauth-0.9.4.tar.gz/download">NoAuth (Disabled) Authentication</a></li>
+        
+    </ul>
+
+
+
+    <!-- Binary .war -->
+    
+    
+        <h2>Web application (.war)</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/binary/guacamole-0.9.4.war/download">guacamole-0.9.4.war</a></li>
+        
+    </ul>
+
+
+
+    <!-- Source archives -->
+    
+    
+        <h2>Source</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-client-0.9.4.tar.gz/download">guacamole-client-0.9.4.tar.gz</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.4.tar.gz/download">guacamole-server-0.9.4.tar.gz</a></li>
+        
+    </ul>
+
+
+
+    <!-- Documentation -->
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.4/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.4/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.4/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.4/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.4/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<h1>Guacamole 0.9.4</h1>
+
+<p>The 0.9.4 release of Guacamole is our biggest update yet. It contains a complete rewrite of the web interface, standardized official support for WebSocket, improved and configurable logging, as well as cosmetic changes improving style and usability.</p>
+
+<h2 id="massively-improved-interface">Massively improved interface</h2>
+
+<p>The Guacamole web interface has been completely rewritten as a single-tab application. You can still open connections in new tabs if you wish, but the new interface allows you to open multiple connections within the same tab. While these connections are running, their thumbnails on the home screen update in real time.</p>
+
+<p>Opening the Guacamole menu, a common point of confusion among users, is now much easier. The Ctrl+Alt+Shift shortcut for showing/hiding the menu is much less picky. Pressing these keys in any order will toggle menu visibility - you no longer need to ensure that Shift is pressed last.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-546">GUAC-546</a>] - Refactor of the Guacamole interface</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-804">GUAC-804</a>] - Ctrl-Alt-Shift is too finicky</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-829">GUAC-829</a>] - Configurable connection names</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-894">GUAC-894</a>] - Complete new Guacamole UI</li>
+</ul>
+
+<h2 id="websockets-for-everyone">WebSockets for everyone</h2>
+
+<p>When users encounter latency or poor performance while using Guacamole, the answer has often been “enable WebSocket”. WebSocket is now enabled by default, and is supported for Tomcat 7.0.37 or later (including Tomcat 8), Jetty 8 or later, or any Java servlet container supporting JSR-356 (the Java standard for WebSocket support).</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-866">GUAC-866</a>] - Support WebSocket as a standard feature</li>
+</ul>
+
+<h2 id="usernamepassword-parameter-tokens">Username/password parameter tokens</h2>
+
+<p>If you or your users use the same username/password for Guacamole as in their remote desktop accounts, you can now specify the “${GUAC_USERNAME}” or “${GUAC_PASSWORD}” tokens in any connection parameter. Guacamole will substitute the current user’s username or password respectively when connecting.</p>
+
+<p>If editing passwords through the management interface, using the above tokens can be difficult as passwords are masked by default, and you will be unable to see exactly what has been entered. You can now temporarily reveal the contents of a password connection parameter by clicking the lock icon next to the password field.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-340">GUAC-340</a>] - Implement cached authentication credentials and SSO</li>
+</ul>
+
+<h2 id="improved-and-configurable-logging">Improved (and configurable) logging</h2>
+
+<p>Guacamole’s logging is now configurable and much more readable. Both guacd and the web application may be configured to log at higher levels of detail and, by default, debugging information like stacktraces is omitted, replaced with human-readable descriptions of the problem at hand.</p>
+
+<p>If you serve Guacamole through a reverse proxy, Guacamole will now take the de facto standard “X-Forwarded-For” header into account when logging IP addresses. No longer will your logs consist only of the IP address of your proxy server.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-778">GUAC-778</a>] - Log reasonable things in reasonable ways</li>
+</ul>
+
+<h2 id="improved-mouse-behavior">Improved mouse behavior</h2>
+
+<p>Guacamole will now automatically take advantage of browser support for local mouse cursors, using those in favor of its own software-rendered cursor. This is often noticeably faster, and feels more responsive.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-823">GUAC-823</a>] - Cursor CSS3 image instead of canvas image</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-842">GUAC-842</a>] - Remove remote mouse pointer when leaving canvas space</li>
+</ul>
+
+<h2 id="keyboard-improvements-and-fixes">Keyboard improvements and fixes</h2>
+
+<p>In past releases, pressing key combinations like Alt+Tab or the “Windows” key could result in those key(s) being stuck down in the remote connection. This is no longer the case - such keys are now automatically released when Guacamole detects that you have switched to a different application.</p>
+
+<p>Guacamole 0.9.4 also adds support for Swedish keyboard to RDP, and fixes several recent keyboard-related bugs.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-872">GUAC-872</a>] - Page Up and Page Down are swapped</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-875">GUAC-875</a>] - No keyboard input on Firefox 27</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-884">GUAC-884</a>] - Keyboard event queue can become permanently blocked</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-916">GUAC-916</a>] - Super (“Windows”) key can be stuck down</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-930">GUAC-930</a>] - Implement Swedish keymap</li>
+</ul>
+
+<h2 id="other-bug-fixes">Other bug fixes</h2>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-833">GUAC-833</a>] - JS error thrown - Mouse.js not checking if variable is undefined</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-849">GUAC-849</a>] - RDP audio not working with all servers</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-852">GUAC-852</a>] - Implicit declaration of function ‘bitmap_decompress’</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-876">GUAC-876</a>] - No sound on Safari 7.1 on OS X</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-882">GUAC-882</a>] - Cannot use Guacamole under IE11</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-891">GUAC-891</a>] - Segfault in guac_common_surface due to resize</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-893">GUAC-893</a>] - Synchronous XMLHttpRequest on the main thread is deprecated</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-924">GUAC-924</a>] - Browser crash on iOS 8</li>
+</ul>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

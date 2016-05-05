@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole: 0.9.9</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <div class="legacy-release-note">
+    <p><strong>The release below is from prior to Guacamole's acceptance into
+        the Apache Incubator.</strong> It is not an Apache Software Foundation
+        release, and is licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
+<div id="links">
+
+    <!-- Compatible extensions -->
+    
+    
+        <h2>Compatible extensions</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-jdbc-0.9.9.tar.gz/download">Database Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-0.9.9.tar.gz/download">LDAP Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-noauth-0.9.9.tar.gz/download">NoAuth (Disabled) Authentication</a></li>
+        
+    </ul>
+
+
+
+    <!-- Binary .war -->
+    
+    
+        <h2>Web application (.war)</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/binary/guacamole-0.9.9.war/download">guacamole-0.9.9.war</a></li>
+        
+    </ul>
+
+
+
+    <!-- Source archives -->
+    
+    
+        <h2>Source</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-client-0.9.9.tar.gz/download">guacamole-client-0.9.9.tar.gz</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.9.tar.gz/download">guacamole-server-0.9.9.tar.gz</a></li>
+        
+    </ul>
+
+
+
+    <!-- Documentation -->
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.9/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.9/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.9/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.9/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.9/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<h1>Guacamole 0.9.9</h1>
+
+<p>The 0.9.9 release of Guacamole features improved performance due to dynamic use
+of JPEG and WebP, as well as greatly improved LDAP support. The Guacamole
+interface overall is now all but completely searchable/filterable, with
+“Filter” fields available on every connection and user list. This interface-wide
+availability of filtering includes the home screen, all user and
+connection lists within the administration interface, as well as the completely
+new and unified connection history screen.</p>
+
+<h2 id="everything-is-searchable">Everything is searchable</h2>
+
+<p>Just about every list in the Guacamole interface is now searchable, including
+the list of connections on the home screen, all connection and user lists in
+the admin interface, and the new connection history screen.</p>
+
+<p>Users with large numbers of connections (and administrators managing large
+numbers of users and connections) can now narrow their view by entering search
+terms into any of the “Filter” fields. There is no longer any need to hop back
+and forth through dozens of pages to find that one connection within a haystack
+of several hundred connections.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1193">GUAC-1193</a>] - Centralize usage statistics</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1406">GUAC-1406</a>] - Allow connection and user lists to be filtered</li>
+</ul>
+
+<h2 id="dynamic-jpegwebp-compression">Dynamic JPEG/WebP compression</h2>
+
+<p>Previous releases of Guacamole encoded images purely using PNG compression.
+This was very efficient for typical remote desktop use, but anything involving
+fast moving or photographic imagery would tend to slow down.</p>
+
+<p>Thanks to the contributions and collaboration of Frode Langelo of <a href="http://www.skytap.com/">Skytap</a>, Guacamole will
+now select between PNG, JPEG, and WebP depending on how fast parts of your
+screen are changing, the content of those areas, and which encodings are
+supported by your browser.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-240">GUAC-240</a>] - Implement streaming of JPEG images</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1305">GUAC-1305</a>] - Implement support for WebP encoded images</li>
+</ul>
+
+<h2 id="ldap-improvements">LDAP improvements</h2>
+
+<p>Guacamole’s LDAP support can now be used with more complex directory
+hierarchies, such as those used by Active Directory. In addition to directly
+deriving a user’s DN using a base DN and username attribute, Guacamole can now
+search for and discover a user’s DN when given the necessary credentials to do
+so. This allows users to be mapped even if their DNs do not contain usernames.</p>
+
+<p>Encrypted LDAP can now also be used. Past releases supported only unencrypted
+LDAP connections, but communication with LDAP servers using SSL/TLS or STARTTLS
+is now fully supported.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1115">GUAC-1115</a>] - Support complex LDAP organizational structures</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1166">GUAC-1166</a>] - Support for LDAP over SSL/TLS</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1342">GUAC-1342</a>] - Passthrough authentication not working for LDAP in 0.9.8</li>
+</ul>
+
+<h2 id="run-commands-via-ssh">Run commands via SSH</h2>
+
+<p>The equivalent of the <code class="highlighter-rouge">ssh</code> command’s <code class="highlighter-rouge">-c</code> option has now been implemented
+within Guacamole. By specifying a value for the <code class="highlighter-rouge">command</code> parameter of an SSH
+connection (or by entering a value within the appropriate field in the admin
+interface), the SSH connection will run the specified command instead of simply
+invoking the default shell.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1038">GUAC-1038</a>] - Add parameter for running command via SSH</li>
+</ul>
+
+<h2 id="sound-printing-and-file-transfer-fixed-on-windows-2012">Sound, printing, and file transfer fixed on Windows 2012</h2>
+
+<p>Windows Server 2012 suffers from a bug which requires both RDPDR (drive
+redirection or printing) and RDPSND (audio) to be loaded for either to work,
+even if both are not actually needed. Past releases of Guacamole had a workaround
+for this which automatically loaded RDPDR if audio was enabled, but this
+workaround did not apply in the other direction. If audio was disabled,
+printing and file transfer would mysteriously not work.</p>
+
+<p>As of Guacamole 0.9.9, both RDPSND and RDPDR will always be loaded if either is
+enabled. File transfer, printing, and sound should all work under Windows
+Server 2012, regardless of which combination of those features is enabled.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1196">GUAC-1196</a>] - RDPSND and RDPDR must be loaded together</li>
+</ul>
+
+<h2 id="linking-docker-images-to-non-docker-databases">Linking Docker images to non-Docker databases</h2>
+
+<p>The Guacamole Docker images previously required 100% Docker everything when
+it Came to deployment. Both the web application and guacd needed to be within
+Docker, and the database backing the web application (MySQL or PostgreSQL)
+needed to be within Docker as well.</p>
+
+<p>While all Guacamole components (the web application and guacd) still need to be
+within Docker if Docker is going to be used, the requirement that the database
+be within Docker has been removed. The hostname and port of your database can
+now be specified when creating the Guacamole Docker container. The database
+does not need to be specified with a Docker link.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1291">GUAC-1291</a>] - Allow linking with non-Docker MySQL/PostgreSQL databases</li>
+</ul>
+
+<h2 id="guacamole-api-and-protocol-changes">Guacamole API and protocol changes</h2>
+
+<p>In preparation for supporting real-time hardware encoding of complex grapics,
+the Guacamole protocol and JavaScript client have been extended to allow
+streaming of arbitrary video codecs. Developers using the Guacamole API can
+associate the JavaScript client with codec implementations which will then be
+used to decode and render video streams.</p>
+
+<p>The Guacamole extension API has also been updated, allowing extensions to
+automatically invalidate users’ sessions by throwing specific exceptions which
+by their own nature imply that the user’s current session is invalid. These
+exceptions are automatically caught and handled within the Guacamole web
+application, invalidating the user’s session and displaying a login dialog.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1354">GUAC-1354</a>] - Add real-time video streaming support to Guacamole protocol</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1364">GUAC-1364</a>] - Allow extensions to invalidate user sessions</li>
+</ul>
+
+<h2 id="minor-improvements--bug-fixes">Minor improvements / bug fixes</h2>
+
+<p>In addition to the above major improvements, several minor improvements and bug
+fixes are included in 0.9.9, including additional translations, changes to
+interface layout and behavior, and improved support for Microsoft Edge.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-554">GUAC-554</a>] - WebSocket connection errors not exposed</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-555">GUAC-555</a>] - WebSocket connection errors cannot be detected as required by connect()</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-799">GUAC-799</a>] - Guacamole.Status is undocumented</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1250">GUAC-1250</a>] - Display login page instead of “reconnect/home” when session expires</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1314">GUAC-1314</a>] - Support distinct keysyms for numeric keypad</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1324">GUAC-1324</a>] - “Currently in use” text overlaps connection name on mobile</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1338">GUAC-1338</a>] - Add German missing translations</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1345">GUAC-1345</a>] - Allow available languages to be restricted</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1349">GUAC-1349</a>] - File transfer dialog overflows screen</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1361">GUAC-1361</a>] - listen() need not be present in main loop</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1374">GUAC-1374</a>] - “guac_socket_alloc()” must initialize “__keep_alive_enabled”</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1375">GUAC-1375</a>] - JavaScript error in MS EDGE if HTML5 audio/video is disabled</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1376">GUAC-1376</a>] - Add “logout” action to disconnect/error notifications</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1380">GUAC-1380</a>] - Added missing Dutch translations</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1404">GUAC-1404</a>] - Active sessions list sometimes contains closed connections</li>
+</ul>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

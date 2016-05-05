@@ -1,0 +1,59 @@
+<html>
+
+    <head>
+        <title>Keyboard Event Test</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        <link rel="stylesheet" type="text/css" href="log/log.css"/>
+    </head>
+
+    <body>
+
+        <textarea></textarea>
+
+        <div id="log"></div>
+
+        <script type="text/javascript" src="log/log.js"></script>
+        <script type="text/javascript">
+
+            var log = new Log();
+            document.getElementById("log").appendChild(log.getElement());
+
+            log.log("Keyboard event tester", "version 1.3", "Mike Jumper");
+            log.log("Please press some keys...");
+
+            function logEvent(name, e) {
+
+                log.log(
+                    name,
+                    "e.keyCode=" + e.keyCode,
+                    "e.which=" + e.which,
+                    "e.keyIdentifier=" + e.keyIdentifier,
+                    "e.key=" + e.key,
+                    "e.altKey=" + e.altKey,
+                    "e.ctrlKey=" + e.ctrlKey,
+                    "e.altGraphKey=" + e.altGraphKey,
+                    "e.metaKey=" + e.metaKey,
+                    "e.shiftKey=" + e.shiftKey,
+                    "e.location=" + e.location,
+                    "e.keyLocation=" + e.keyLocation
+                );
+
+            }
+
+            document.addEventListener("keydown", function(e) {
+                logEvent("keydown", e);
+            }, true);
+
+            document.addEventListener("keyup", function(e) {
+                logEvent("keyup", e);
+            }, true);
+
+            document.addEventListener("keypress", function(e) {
+                logEvent("keypress", e);
+                e.preventDefault();
+            }, true);
+
+        </script>
+
+    </body>
+</html>

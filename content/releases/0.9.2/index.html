@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole: 0.9.2</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <div class="legacy-release-note">
+    <p><strong>The release below is from prior to Guacamole's acceptance into
+        the Apache Incubator.</strong> It is not an Apache Software Foundation
+        release, and is licensed under the <a
+    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+</div>
+
+<div id="links">
+
+    <!-- Compatible extensions -->
+    
+    
+        <h2>Compatible extensions</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-ldap-0.9.2.tar.gz/download">LDAP Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-mysql-0.9.2.tar.gz/download">MySQL Authentication</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/extensions/guacamole-auth-noauth-0.9.2.tar.gz/download">NoAuth (Disabled) Authentication</a></li>
+        
+    </ul>
+
+
+
+    <!-- Binary .war -->
+    
+    
+        <h2>Web application (.war)</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/binary/guacamole-0.9.2.war/download">guacamole-0.9.2.war</a></li>
+        
+    </ul>
+
+
+
+    <!-- Source archives -->
+    
+    
+        <h2>Source</h2>
+    
+    <ul>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-client-0.9.2.tar.gz/download">guacamole-client-0.9.2.tar.gz</a></li>
+        
+            <li><a href="http://sourceforge.net/projects/guacamole/files/current/source/guacamole-server-0.9.2.tar.gz/download">guacamole-server-0.9.2.tar.gz</a></li>
+        
+    </ul>
+
+
+
+    <!-- Documentation -->
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.2/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.2/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.2/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.2/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.2/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<h1>Guacamole 0.9.2</h1>
+
+<p>The 0.9.2 release of Guacamole contains several general bug fixes and improvements. Both telnet and SSH now support wide characters, such as those used in Chinese, Japanese, and Korean, and the login process for telnet connections can now be automated. Connections via RDP and SSH should now be more stable, and the Guacamole source now builds properly on more platforms.</p>
+
+<h2 id="wide-character-support">Wide character support</h2>
+
+<p>Several languages use characters which are too wide to fit within the space used for individual characters by text terminals. The standard mechanism for dealing with this is to allow such characters to span across two columns, but older versions of Guacamole simply placed all characters within single columns. This caused wide characters to be clipped, with only the left half of the character being visible.</p>
+
+<p>As of Guacamole 0.9.2, wide characters are fully supported, and text written in Chinese, Japanese, and Korean is readable.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-440">GUAC-440</a>] -         Wide character support</li>
+</ul>
+
+<h2 id="keyboard-interactive-authentication-for-ssh">Keyboard interactive authentication for SSH</h2>
+
+<p>Guacamole has supported password-based login for SSH for some time, but some SSH servers require instead the newer “keyboard interactive” authentication method. Guacamole 0.9.2 adds basic support for “keyboard interactive”, transparently sending the password in response to the server’s authentication prompt.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-493">GUAC-493</a>] -         Add “keyboard-interactive” authentication method to SSH</li>
+</ul>
+
+<h2 id="automated-telnet-login">Automated telnet login</h2>
+
+<p>Telnet has no standard authentication mechanism; all authentication via telnet is interactive and implemented completely on the server. Authentication thus depends on responses to prompts which are sent in text form and intended to be human-readable.</p>
+
+<p>Guacamole now supports automation of telnet login, using heuristics to detect the username and password prompts.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-711">GUAC-711</a>] -         Automate Telnet login</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-763">GUAC-763</a>] -         Add username regex to Telnet</li>
+</ul>
+
+<h2 id="connection-stability-issues">Connection stability issues</h2>
+
+<p>Several bugs ranging from threadsafety issues to segfaults have been causing problems with connection stability. Known issues which could lead to failures to connect (or unexpected disconnects) for RDP and SSH have been fixed.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-645">GUAC-645</a>] -         Segfault when using private-key authentication to the set top box</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-668">GUAC-668</a>] -         Terminal lost after command “reset” with linux terminal</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-678">GUAC-678</a>] -         Segfault when using SSH private key</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-750">GUAC-750</a>] -         SSH client is not threadsafe</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-751">GUAC-751</a>] -         Segfault error in RDP connection</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-754">GUAC-754</a>] -         Frequent caching issues in new releases</li>
+</ul>
+
+<h2 id="build-failures">Build failures</h2>
+
+<p>Newer compiler warnings, differences between Linux and FreeBSD, and API changes within FreeRDP have caused problems with building Guacamole from source. As of 0.9.2, Guacamole builds properly on FreeBSD and against the latest FreeRDP from git.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-707">GUAC-707</a>] -         Add support for latest FreeRDP release (1.2.0-beta1)</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-712">GUAC-712</a>] -         FreeBSD 9.2 Build fails with SSH support</li>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-735">GUAC-735</a>] -         Error making buffer.c/h from source</li>
+</ul>
+
+<h2 id="on-screen-keyboard-modifier-behavior">On-screen keyboard modifier behavior</h2>
+
+<p>A minor issue which cause the appearance of Ctrl/Alt/Shift on the on-screen keyboard to differ from their true state has been fixed.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-466">GUAC-466</a>] -         Alternating left and right sticky modifier keys only cancels visual indicator, not behaviour.</li>
+</ul>
+
+<h2 id="wip-connection-sharing">WIP connection sharing</h2>
+
+<p>A major focus of recent development has been adding support for connection sharing at the Guacamole protocol level. While this is not yet complete, we have implemented about half the core changes required. This has absolutely no effect on user experience for the moment (other than a new “connection ID” message appearing in the guacd logs), but is a milestone as far as internal progress is concerned.</p>
+
+<p>Eventually, once this support is complete, multiple users will be able to share access to the same display simultaneously regardless of underlying protocol - even RDP and SSH.</p>
+
+<ul>
+  <li>[<a href="https://glyptodon.org/jira/browse/GUAC-739">GUAC-739</a>] -         Tie logical Guacamole connections to unique IDs</li>
+</ul>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+    </body>
+</html>

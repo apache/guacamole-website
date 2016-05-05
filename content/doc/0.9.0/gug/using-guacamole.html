@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 7. Using Guacamole</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="noauth.html" title="Chapter 6. Disabling authentication" /><link rel="next" href="troubleshooting.html" title="Chapter 8. Troubleshooting" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 7. Using Guacamole</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="noauth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="troubleshooting.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" title="Chapter 7. Using Guacamole" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="using-guacamole"></a>Chapter 7. Using Guacamole</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="using-guacamole.html#logging-into-guacamole">Logging in</a></span></dt><dt><span class="section"><a href="using-guacamole.html#selecting-a-connection">Selecting a connection</a></span></dt><dt><span class="section"><a href="using-guacamole.html#interacting-with-the-desktop">Interacting with the remote desktop</a></span></dt><dd><dl><dt><span class="section"><a href="using-guacamole.html#using-the-clipboard">Using the clipboard</a></span></dt><dt><span class="section"><a href="using-guacamole.html#using-the-osk">Typing with special keys</a></span></dt><dt><span class="section"><a href="using-guacamole.html#idp1116160">Transferring files</a></span></dt><dt><span class="section"><a href="using-guacamole.html#logging-out-of-guacamole">Logging out</a></span></dt></dl></dd><dt><span class="section"><a href="using-guacamole.html#using-touch-devices">Using touch devices</a></span></dt><dd><dl><dt><span class="section"><a href="using-guacamole.html#using-mouse">Moving the mouse</a></span></dt><dt><span class="section"><a href="using-guacamole.html#zooming">Zooming in</a></span></dt><dt><span class="section"><a href="using-guacamole.html#typing">Typing</a></span></dt><dt><span class="section"><a href="using-guacamole.html#panning">Panning</a></span></dt></dl></dd><dt><span class="section"><a href="using-guacamole.html#changing-settings">Changing settings</a></span></dt><dd><dl><dt><span class="section"><a href="using-guacamole.html#disabling-sound">Disabling sound</a></span></dt><dt><span class="section"><a href="using-guacamole.html#disabling-auto-fit">Disabling auto-fit of the display</a></span></dt></dl></dd><dt><span class="section"><a href="using-guacamole.html#guacamole-admin-ui">Administration</a></span></dt><dd><dl><dt><span class="section"><a href="using-guacamole.html#idp1185456">Managing users</a></span></dt><dt><span class="section"><a href="using-guacamole.html#idp1199920">Managing connections</a></span></dt></dl></dd></dl></div>
+
+    
+
+    <div class="section" title="Logging in"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="logging-into-guacamole"></a>Logging in</h2></div></div></div>
+        
+        <a id="idp1076672" class="indexterm"></a>
+        <p>When you visit a Guacamole instance for the first time, you will see the login screen.
+            This screen authenticates you with Guacamole, allowing you to use Guacamole to interact
+            with one or more remote desktops. </p>
+        <p>Enter your username and password and click "login". You will then be given a list of
+            available remote desktop connections to choose from. If you have used Guacamole in that
+            specific web browser before, you will also see thumbnails of the screens of recently
+            used connections. </p>
+        <p>Keep in mind this is the login for Guacamole, and not necessarily the login for the
+            remote desktop you wish to connect to. The username and password you give Guacamole
+            grants you access to the Guacamole system only. The usernames and passwords required for
+            the remote desktops you have access to through Guacamole are independent. </p>
+        <div class="informalfigure">
+            <div class="mediaobject"><img src="../images/login.png" width="360" /><div class="caption">
+                    <p> The Guacamole login screen. </p>
+                </div></div>
+        </div>
+    </div>
+
+    <div class="section" title="Selecting a connection"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="selecting-a-connection"></a>Selecting a connection</h2></div></div></div>
+        
+        <a id="idp1087392" class="indexterm"></a>
+        <p>Once logged in, you will be presented with a list of connections. Selecting a
+            connection from this list will open that connection in a new window or tab. The
+            connection list interface will remain open and running in the previous window or tab, as
+            it is the only access point for other connections, the clipboard, and settings.</p>
+        <p>Multiple connections can be used simultaneously. </p>
+        <div class="informalfigure">
+            <div class="mediaobject"><img src="../images/connection-list.png" width="360" /><div class="caption">
+                    <p> List of available connections. </p>
+                </div></div>
+        </div>
+        <p>If you don't wish to connect to any desktops, you can also logout from this screen by
+            clicking the "logout" button. Beware that this will disconnect you from any of your open
+            desktops, if you have any. </p>
+    </div>
+
+    <div class="section" title="Interacting with the remote desktop"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="interacting-with-the-desktop"></a>Interacting with the remote desktop</h2></div></div></div>
+        
+        <a id="idp1094624" class="indexterm"></a>
+        <p>Once you open a connection, you will see an image of a desktop. You can interact with
+            this image just as you would your normal desktop, or any remote desktop client. </p>
+        <p>Clicking on parts of the image will affect the remote desktop as if you were clicking
+            on the desktop directly. Typing causes keys to be typed remotely as if you were using a
+            keyboard connected directly to the remote machine. </p>
+        <div class="informalfigure">
+            <div class="mediaobject"><img src="../images/vnc.png" width="360" /><div class="caption">
+                    <p> An active remote desktop. </p>
+                </div></div>
+        </div>
+        <div class="section" title="Using the clipboard"><div class="titlepage"><div><div><h3 class="title"><a id="using-the-clipboard"></a>Using the clipboard</h3></div></div></div>
+            
+            <a id="idp1101760" class="indexterm"></a>
+            <p>The clipboard can be manipulated using the clipboard editor accessible near the
+                bottom of the connection list interface.</p>
+            <p>Web browsers don't provide access to clipboard data, thus true synchronization
+                between your local clipboard and the remote clipboard is impossible. Instead, the
+                clipboard editor acts as an intermediary. You can paste text from your clipboard
+                into the editor, and it will be sent to the remote clipboard. If you cut or copy
+                text remotely, that text will be visible in the clipboard editor locally, where you
+                can then select and copy it.</p>
+            <p>All open Guacamole connections use this common clipboard, thus copying and pasting
+                between connections is seamless; you do not need to visit the clipboard editor to
+                copy and paste from one connection to another.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/clipboard.png" width="270" /><div class="caption">
+                        <p> The editable clipboard contents, accessible from the connection list
+                            interface. </p>
+                    </div></div>
+            </div>
+        </div>
+        <div class="section" title="Typing with special keys"><div class="titlepage"><div><div><h3 class="title"><a id="using-the-osk"></a>Typing with special keys</h3></div></div></div>
+            
+            <a id="idp1105808" class="indexterm"></a>
+            <p>Certain key combinations are impossible to press within a web application like
+                Guacamole because they are reserved by the operating system (Ctrl-Alt-Del or
+                Alt-Tab, for example) or by the web browser. If you press one of these reserved
+                combinations, the effect will be observed locally, not remotely, and the remote
+                desktop will receive only some of the keys. </p>
+            <p>Guacamole provides an on-screen keyboard such that key events can be sent to the
+                remote machine without affecting the local browser. You can show the on-screen
+                keyboard by pressing Ctrl-Alt-Shift. Pressing the Ctrl-Alt-Shift again will hide the
+                on-screen keyboard.</p>
+            <p>Clicking on the buttons of the on-screen keyboard has the same effect as pressing
+                the same buttons on a real keyboard, except that the operating system and browser
+                will not intercept these keypresses; they will only be sent remotely. </p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/osk.png" width="360" /><div class="caption">
+                        <p> The on-screen keyboard. </p>
+                    </div></div>
+            </div>
+        </div>
+        <div class="section" title="Transferring files"><div class="titlepage"><div><div><h3 class="title"><a id="idp1116160"></a>Transferring files</h3></div></div></div>
+            
+            <a id="idp1116976" class="indexterm"></a>
+            <p>Guacamole supports file transfer if it is enabled in the underlying protocol.
+                Currently, both RDP and SSH have support for file transfer, though with slightly
+                different semantics. RDP provides file transfer by emulating a virtual drive, while
+                SSH provides file transfer by using SFTP.</p>
+            <p>To transfer files to the remote computer, drag the files into your browser window.
+                If file transfer is enabled, you will see a notification popup showing upload
+                progress. If file transfer is not enabled or not supported, you will instead see a
+                notification with an error message describing the problem.</p>
+            <p>The method for downloading files from the remote computer depends on the protocol.
+                In the case of RDP, you must drag, copy, move, or save the files into the special
+                "Download" folder located in the virtual drive. All files dropped into this folder
+                will automatically begin uploading to the client, and thus downloading through your
+                browser.</p>
+            <p><a id="idp1120160" class="indexterm"></a>To download files over SSH, you must use the <span class="command"><strong>guacctl</strong></span>
+                utility. The <span class="command"><strong>guacctl</strong></span> utility is included with Guacamole, and
+                allows you to initiate a file download or to change the directory in which uploaded
+                files will be placed:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>guacctl</code></strong>
+<code class="computeroutput">guacctl 0.8.0, Guacamole SSH session control utility.
+Usage: guacctl [OPTION] [FILE]...
+
+    -d, --download         download each of the files listed.
+    -s, --set-directory    set the destination directory for future uploaded 
+                           files.</code>
+<code class="prompt">$</code> <strong class="userinput"><code>guacctl -d <em class="replaceable"><code>FILENAME</code></em></code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>guacctl -s <em class="replaceable"><code>DIRECTORY</code></em></code></strong>
+$</pre>
+            </div>
+            <p>You may also create a symbol link or alias to <span class="command"><strong>guacctl</strong></span> called
+                    <span class="command"><strong>guacget</strong></span>. When run as <span class="command"><strong>guacget</strong></span>, it behaves
+                as if the <code class="option">--download</code> option was supplied and initiates a download
+                for each file specified on the command line.</p>
+        </div>
+        <div class="section" title="Logging out"><div class="titlepage"><div><div><h3 class="title"><a id="logging-out-of-guacamole"></a>Logging out</h3></div></div></div>
+            
+            <a id="idp1130784" class="indexterm"></a>
+            <p>When you are done and wish to logout of Guacamole completely, find the original
+                connection interface tab and click the "logout" button. Beware that this will close
+                all current connections and end your Guacamole session. </p>
+            <p>Note that this is not the same as disconnecting from a single connection. To
+                disconnect, simply close the tab or window with the remote desktop in it. Closing a
+                tab or window automatically disconnects from the associated remote desktop without
+                logging you out of Guacamole completely. </p>
+            <p>If you logout of Guacamole, all active connections are closed, and can only be
+                accessed by logging in again and reconnecting.</p>
+        </div>
+    </div>
+
+    <div class="section" title="Using touch devices"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="using-touch-devices"></a>Using touch devices</h2></div></div></div>
+        
+        <a id="idp1134960" class="indexterm"></a>
+        <p>Guacamole can be used on devices that have touchscreens, even when
+            those touchscreens are the sole means of input, such as most tablets
+            and mobile phones.</p>
+        <div class="section" title="Moving the mouse"><div class="titlepage"><div><div><h3 class="title"><a id="using-mouse"></a>Moving the mouse</h3></div></div></div>
+            
+            <a id="idp1137472" class="indexterm"></a>
+            <p>As a finger makes for a very inaccurate pointing device,
+                especially for mouse-driven applications designed for precise
+                input, the default mode for touch-based mouse input in Guacamole
+                is touchpad emulation.</p>
+            <p>Guacamole's touchpad emulation is similar in behavior to the
+                touchpad present on most modern laptops. Drag your finger across
+                the display to move the mouse pointer, and tap the display to
+                left-click. Right-clicking is accomplished with a two-finger
+                tap, and middle-clicking with a three-finger tap.</p>
+            <p>Click-and-drag by tapping the screen and then quickly placing
+                your finger back down. This gesture only causes the mouse button
+                to press down, but does not release it again until you lift your
+                finger back up.</p>
+            <p>The mouse scroll wheel can be operated by dragging two fingers
+                up or down.</p>
+        </div>
+        <div class="section" title="Zooming in"><div class="titlepage"><div><div><h3 class="title"><a id="zooming"></a>Zooming in</h3></div></div></div>
+            
+            <a id="idp1142432" class="indexterm"></a>
+            <p>Many touch-enabled devices have small screens, which makes the
+                larger screens of a typical remote desktop hard to see and
+                interact with. If you want to temporarily zoom in, long-press on
+                the display. This will reveal a rectangular magnifier that can
+                be dragged around the screen, revealing detail below it at full
+                resolution.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/android-magnifier.png" width="360" /><div class="caption">
+                        <p>The magnifier tool in use</p>
+                    </div></div>
+            </div>
+            <p>Tapping outside this magnifier closes the magnifier, while
+                tapping inside engages a typing mode.</p>
+        </div>
+        <div class="section" title="Typing"><div class="titlepage"><div><div><h3 class="title"><a id="typing"></a>Typing</h3></div></div></div>
+            
+            <a id="idp1149072" class="indexterm"></a>
+            <p>In most cases, if your device has a hardware keyboard or you
+                use a bluetooth keyboard, you will not need to do anything
+                special in order to type; you can just press keys and expect the
+                same effect you would have on a desktop.</p>
+            <p>For devices that lack a hardware keyboard, you need to bring
+                Guacamole into "typing mode" by long-pressing on the display to
+                bring up the magnifier. Tap on the magnifier to bring up your
+                device's on-screen keyboard.</p>
+        </div>
+        <div class="section" title="Panning"><div class="titlepage"><div><div><h3 class="title"><a id="panning"></a>Panning</h3></div></div></div>
+            
+            <a id="idp1152576" class="indexterm"></a>
+            <p>Because Guacamole uses all touch events to drive mouse input,
+                the normal gestures for scrolling the screen will not work.
+                Depending on how big your screen is, and whether the display is
+                currently zoomed, you have three options for panning the screen:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+                        <p>Move the mouse</p>
+                        <p>Moving the mouse beyond the bounds of the screen
+                            of the device will cause the display to
+                            automatically scroll until the mouse pointer is in
+                            view again. This will only work if the screen is not
+                            already fully visible.</p>
+                    </li><li class="listitem">
+                        <p>Long-press to bring up panning mode</p>
+                        <p>If the remote display is already fully visible,
+                            long-pressing will not bring up the magnifier, but
+                            will instead put Guacamole in a panning mode. Arrows
+                            will appear at the sides of the screen, and you can
+                            drag around the screen as normal. Tapping on the
+                            screen will put Guacamole in typing mode, allowing
+                            you to type and use your native on-screen keyboard
+                            (if any).</p>
+                        <div class="informalfigure">
+                            <div class="mediaobject"><img src="../images/android-panning.png" width="360" /><div class="caption">
+                                    <p>Panning mode</p>
+                                </div></div>
+                        </div>
+                    </li><li class="listitem">
+                        <p>Bring up the magnifier, tap to put Guacamole in
+                            typing/panning mode, and then drag the screen</p>
+                        <p>When in typing mode, dragging your finger on the
+                            screen will cause the screen to pan as it normally
+                            would. This is useful while typing, especially if
+                            what you're typing starts to run off the visible
+                            area of your device's screen.</p>
+                    </li></ol></div>
+        </div>
+    </div>
+    <div class="section" title="Changing settings"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="changing-settings"></a>Changing settings</h2></div></div></div>
+        
+        <a id="idp1164592" class="indexterm"></a>
+        <p>Guacamole's settings section is located within the connection interface, and affects
+            the behavior of all active and future Guacamole connections. Unless specified otherwise,
+            changing a setting affects current Guacamole connections immediately.</p>
+        <div class="informalfigure">
+            <div class="mediaobject"><img src="../images/settings.png" width="270" /><div class="caption">
+                    <p>Guacamole settings, accessible from the connection list interface. </p>
+                </div></div>
+        </div>
+        <div class="section" title="Disabling sound"><div class="titlepage"><div><div><h3 class="title"><a id="disabling-sound"></a>Disabling sound</h3></div></div></div>
+            
+            <a id="idp1170656" class="indexterm"></a>
+            <a id="idp1171984" class="indexterm"></a>
+            <a id="idp1173264" class="indexterm"></a>
+            <p>Sound can sometimes cause problems if your browser is too slow or if you lack
+                sufficient network bandwidth. In some cases, browsers do not actually support sound,
+                but misreport that they do to Guacamole, causing wasted bandwidth when Guacamole
+                sends audio data that can't actually be played.</p>
+            <p>To disable sound, check the "Disable sound" checkbox in the settings
+                section.</p>
+        </div>
+        <div class="section" title="Disabling auto-fit of the display"><div class="titlepage"><div><div><h3 class="title"><a id="disabling-auto-fit"></a>Disabling auto-fit of the display</h3></div></div></div>
+            
+            <a id="idp1176720" class="indexterm"></a>
+            <a id="idp1178048" class="indexterm"></a>
+            <p>Normally, scrolling around the screen is troublesome and distracting if the remote
+                display you're using is larger than the display of your device. Because of this, the
+                remote display will automatically fit itself to the available space by default. If
+                this is undesirable, you can manually disable this on a per-browser basis in the
+                settings section.</p>
+            <p>To disable auto-fit, uncheck the "Auto-fit display to browser window" checkbox in
+                the settings section.</p>
+        </div>
+    </div>
+    <div class="section" title="Administration"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="guacamole-admin-ui"></a>Administration</h2></div></div></div>
+        
+        <a id="idp1181888" class="indexterm"></a>
+        <p>Users and connections can be administered from within the web interface if the
+            underlying authentication module supports this. The only officially-supported
+            authentication module supporting this is the MySQL authentication provider, which is
+            documented in a different chapter.</p>
+        <p>If you are using the default authentication mechanism, this
+            section does not apply to you, and the Guacamole web interface will
+            appear as it did in past releases. If, on the other hand, you are
+            using the MySQL authentication provider, and you are logged in as an
+            administrator, you will see a "Manage" button next to the "Logout"
+            button at the top of the screen.</p>
+        <div class="informalfigure">
+            <div class="mediaobject"><img src="../images/manage-button.png" width="270" /><div class="caption">
+                    <p>The "Manage" button</p>
+                </div></div>
+        </div>
+        <p>Clicking this button takes you to an administration screen where
+            you can add or manipulate users and connections, depending on your
+            permissions.</p>
+        <div class="section" title="Managing users"><div class="titlepage"><div><div><h3 class="title"><a id="idp1185456"></a>Managing users</h3></div></div></div>
+            
+            <a id="idp1189248" class="indexterm"></a>
+            <p>Once at the administration screen, you will see two sections
+                displaying all visible users and connections. The visibility of
+                these sections depends on your user's permissions. If you lack
+                permission to manage users, the user management section will not
+                display. The same goes for management of connections.</p>
+            <p>To add a new user, type the username of the new user within
+                the text box inside the user management section, and click the
+                "Add" button. The new user will be added and made available. The
+                new user will have no access to any existing connections, no
+                administrative privileges, and no password, and will not be able
+                to login. You will need to set the user's password first in
+                order to allow login.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/manage-users.png" width="270" /><div class="caption">
+                        <p>User management interface</p>
+                    </div></div>
+            </div>
+            <p>To edit a user, just click on the user you wish to edit. A small dialog will
+                display allowing you to change the user's password, add or remove administrative
+                permissions, and add or remove access to specific connections or groups.</p>
+            <p>If you have delete permission on the user, you will also see a
+                "Delete" button. Clicking this button will permanently delete
+                the user.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/edit-user.png" width="180" /><div class="caption">
+                        <p>Editing a user</p>
+                    </div></div>
+            </div>
+        </div>
+        <div class="section" title="Managing connections"><div class="titlepage"><div><div><h3 class="title"><a id="idp1199920"></a>Managing connections</h3></div></div></div>
+            
+            <a id="idp1200896" class="indexterm"></a>
+            <p>To add a new connection, click the "New Connection" button. A connection creation
+                dialog will appear, allowing you to enter the details of the connection, such as its
+                location, parameters, and name. This name should be descriptive, but must also be
+                unique.</p>
+            <p>Once you click "Save", the new connection will be added, but will initially only
+                be usable by administrators and your current user. To add access to the new
+                connection to another existing user, you must edit that user, checking the box
+                corresponding to the new connection.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/manage-connections.png" width="270" /><div class="caption">
+                        <p>Connection management interface</p>
+                    </div></div>
+            </div>
+            <p>Editing a connection works identically to editing a user.
+                Click on the connection you wish to edit. A dialog will pop up
+                displaying all parameters associated with the connection,
+                allowing you to change the protocol, associated parameters, and
+                to view the connection history.</p>
+            <p>Connections can also be renamed or moved by altering the contents of the "Name" or
+                "Location" fields.</p>
+            <p>If you have delete permission on the connection, you will also
+                see a "Delete" button. Clicking this button will permanently
+                delete the connection.</p>
+            <div class="informalfigure">
+                <div class="mediaobject"><img src="../images/edit-connection.png" width="180" /><div class="caption">
+                        <p>Editing a connection</p>
+                    </div></div>
+            </div>
+            <div class="section" title="Grouping connections"><div class="titlepage"><div><div><h4 class="title"><a id="idp1211984"></a>Grouping connections</h4></div></div></div>
+                
+                <a id="idp1212800" class="indexterm"></a>
+                <a id="idp1213744" class="indexterm"></a>
+                <p>Connections can be placed within groups for purposes of organization or load
+                    balancing. Each group is displayed in connection lists as a "+" symbol followed
+                    by its name. The group can be expanded revealing any contained connections or
+                    groups. If the group is a balancing group, the group can be used as a
+                    connection, and the least-used contained connection will be used.</p>
+                <p>To add a new connection group, click the "New Group" button. A connection
+                    group creation dialog will appear, allowing you to enter the details of the
+                    group. Just as with connections, you can enter the location and name, which
+                    should be descriptive and unique. Duplicate names are not allowed.</p>
+                <div class="informalfigure">
+                    <div class="mediaobject"><img src="../images/edit-group.png" width="270" /><div class="caption">
+                            <p>Editing a connection group</p>
+                        </div></div>
+                </div>
+                <p>You can edit existing connection groups by clicking on them within the
+                    administration interface, just like with users and connections. From within the
+                    dialog that appears, you can rename, move, and change the properties of existing
+                    connection groups.</p>
+            </div>
+            <div class="section" title="Balancing vs. organizational groups"><div class="titlepage"><div><div><h4 class="title"><a id="idp1217872"></a>Balancing vs. organizational groups</h4></div></div></div>
+                
+                <p>Connection groups can be either "organizational" or "balancing". Each group
+                    can contain any number of other connections or groups, but the semantics of the
+                    group change depending on the type.</p>
+                <p>An organizational group behaves exactly as a folder or directory in a file
+                    system. It simply contains connections and other groups, but provides no other
+                    behavior. Clicking on an organizational group within a connection list will
+                    expand the group, revealing its contents.</p>
+                <p>A balancing group behaves as a connection. It dynamically balances load across
+                    the connections it contains, choosing the connection with the fewest number of
+                    active users. Unlike organizational groups, clicking on a balancing group causes
+                    a new connection to be opened. The actual underlying connection used depends on
+                    which connection has the least load at the time the group was clicked.</p>
+            </div>
+        </div>
+    </div>
+
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="noauth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="troubleshooting.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 6. Disabling authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Troubleshooting</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

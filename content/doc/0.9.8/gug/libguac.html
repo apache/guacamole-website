@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 13. libguac</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="developers-guide.html" title="Part II. Developer's Guide" /><link rel="prev" href="guacamole-protocol.html" title="Chapter 12. The Guacamole protocol" /><link rel="next" href="guacamole-common.html" title="Chapter 14. guacamole-common" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 13. libguac</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="guacamole-protocol.html">Prev</a> </td><th width="60%" align="center">Part II. Developer's Guide</th><td width="20%" align="right"> <a accesskey="n" href="guacamole-common.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="libguac"></a>Chapter 13. libguac</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="libguac.html#libguac-error-handling">Error handling</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-client-plugins">Client plugins</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-layers">Layers and buffers</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-sending-instructions">Sending instructions</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-protocol-nesting">Protocol nesting</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-event-handling">Event handling</a></span></dt><dd><dl><dt><span class="section"><a href="libguac.html#libguac-key-events">Key events</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-mouse-events">Mouse events</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-clipboard-events">Clipboard events</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-message-handling">Handling server messages</a></span></dt></dl></dd></dl></div><a id="idm139795232105792" class="indexterm"></a><a id="idm139795229870320" class="indexterm"></a><p>The C API for extending and developing with Guacamole is libguac. All
+        native components produced by the Guacamole project link with this
+        library, and this library provides the common basis for extending the
+        native functionality of those native components (by implementing client
+        plugins).</p><p>libguac is used mainly for developing client plugins like
+        libguac-client-vnc or libguac-client-rdp, or for developing a proxy
+        supporting the Guacamole protocol like guacd. This chapter is intended
+        to give an overview of how libguac is used, and how to use it for
+        general communication with the Guacamole protocol.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-error-handling"></a>Error handling</h2></div></div></div><p>Most functions within libguac handle errors by returning a zero or
+            non-zero value, whichever is appropriate for the function at hand.
+            If an error is encountered, the <code class="varname">guac_error</code>
+            variable is set appropriately, and
+                <code class="varname">guac_error_message</code> contains a
+            statically-allocated human-readable string describing the context of
+            the error. These variables intentionally mimic the functionality
+            provided by <code class="varname">errno</code> and
+                <code class="filename">errno.h</code>.</p><p>Both <code class="varname">guac_error</code> and
+                <code class="varname">guac_error_message</code> are defined within
+                <code class="filename">error.h</code>. A human-readable string describing
+            the error indicated by <code class="varname">guac_error</code> can be
+            retrieved using <code class="methodname">guac_status_string()</code>, which
+            is also statically allocated.</p><p>If functions defined within client plugins set
+                <code class="varname">guac_error</code> and
+                <code class="varname">guac_error_message</code> appropriately when errors
+            are encountered, the messages logged to syslog by guacd will be more
+            meaningful for both users and developers.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-client-plugins"></a>Client plugins</h2></div></div></div><p>Client plugins are libraries loaded dynamically using the
+            functions of libdl. Each client plugin is required to follow a
+            naming convention, where the name of the library is
+                    <span class="package">libguac-client-<em class="replaceable"><code>PROTOCOL</code></em></span>.
+            Failing to do this means that guacd will be unable to find the
+            library when the client plugin needs to be loaded.</p><p>To load a client plugin, guacd calls the guac_client_plugin_open()
+            function with the name of the protocol corresponding to the plugin
+            to be loaded. Upon success,
+                <code class="methodname">guac_client_plugin_open()</code> returns a
+            handle to the library containing the client plugin within an
+            instance of <code class="classname">guac_client_plugin</code>. This instance
+            will eventually be cleaned up by
+                <code class="methodname">guac_client_plugin_close()</code> when guacd
+            is finished using it. While these functions are intended to be used
+            by guacd, there is no reason they cannot be used in another proxy
+            implementation, even if that proxy implementation resides within
+            another client plugin.</p><p>Once the client plugin is successfully loaded, guacd makes a call
+            to <code class="methodname">guac_client_plugin_init_client()</code> to
+            initialize the client. This function calls the
+                <code class="methodname">guac_client_init()</code> function within the
+            client plugin which absolutely all client plugins must define. This
+            function is the entry point of all client plugins, similar to the
+                <code class="methodname">main()</code> function of a C program.</p><p>As guacd handles the handshake procedure required by the Guacamole
+            protocol, it reads a statically-allocated,
+            <code class="constant">NULL</code>-terminated set of argument names declared
+            within the client plugin: <code class="varname">GUAC_CLIENT_ARGS</code>. As
+            with <code class="methodname">guac_client_init()</code>, all client plugins
+            must define this variable if they are to work. As the handshake
+            procedure is completed, guacd will initialize and populate a
+                <code class="classname">guac_client</code> structure, including the
+                <code class="classname">guac_client_info</code> structure contained
+            within it, and pass it to
+                <code class="methodname">guac_client_init()</code> along with the
+            argument count and argument values received by the connecting
+            client.</p><p>It is the duty of the client plugin implementation to populate the
+            event handlers of the <code class="classname">guac_client</code> it receives
+            as applicable. Once this is done, and the
+                <code class="methodname">guac_client_init()</code> function returns
+            successfully, communication with the connected client begins, and
+            guacd will invoke the event handlers of the
+                <code class="classname">guac_client</code> as necessary for any
+            instruction received.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-layers"></a>Layers and buffers</h2></div></div></div><p>The main operand of all drawing instructions is the layer,
+            represented within libguac by the <code class="classname">guac_layer</code>
+            structure. Each <code class="classname">guac_layer</code> is normally
+            allocated using <code class="methodname">guac_client_alloc_layer()</code>
+            or <code class="methodname">guac_client_alloc_buffer()</code>, depending on
+            whether a layer or buffer is desired, and freed with
+                <code class="methodname">guac_client_free_layer()</code> or
+                <code class="methodname">guac_client_free_buffer()</code>.</p><div class="important"><h3 class="title">Important</h3><p>Care must be taken to invoke the allocate and free pairs of
+                each type of layer correctly.
+                    <code class="methodname">guac_client_free_layer()</code> should
+                only be used to free layers allocated with
+                    <code class="methodname">guac_client_alloc_layer()</code>, and
+                    <code class="methodname">guac_client_free_buffer()</code> should
+                only be used to free layers allocated with
+                    <code class="methodname">guac_client_alloc_buffer()</code>, all
+                called using the same instance of
+                    <code class="classname">guac_client</code>.</p><p>If these restrictions are not observed, the effect of invoking
+                these functions is undefined.</p></div><p>Using these layer management functions allows you to reuse
+            existing layers or buffers after their original purpose has expired,
+            thus conserving resources on the client side, as allocation of new
+            layers within the remote client is a relatively expensive
+            operation.</p><p>It is through layers and buffers that Guacamole provides support
+            for hardware-accelerated compositing and cached updates. Creative
+            use of layers and buffers leads to efficient updates on the client
+            side, which usually translates into speed and responsiveness.</p><p>Regardless of whether you allocate new layers or buffers, there is
+            always one layer guaranteed to be present: the default layer,
+            represented by libguac as <code class="varname">GUAC_DEFAULT_LAYER</code>. If
+            you only wish to affect to the main display of the connected client
+            somehow, this is the layer you want to use as the operand of your
+            drawing instruction.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-sending-instructions"></a>Sending instructions</h2></div></div></div><p>All drawing in Guacamole is accomplished through the sending of
+            instructions to the connected client using the Guacamole protocol.
+            The same goes for streaming audio, video, or file content. All
+            features and content supported by Guacamole ultimately reduces to
+            one or more instructions which are part of the documented
+            protocol.</p><p>Most drawing using libguac is done using Cairo functions on a
+                <code class="classname">cairo_surface_t</code> (see the Cairo API documentation) which is
+            later streamed to the client using an <code class="methodname">img</code> instruction and
+            subsequent <code class="methodname">blob</code> instructions, sent via
+                <code class="methodname">guac_client_stream_png()</code>. Cairo was chosen as a dependency
+            of libguac to provide developers an existing and stable means of drawing to image
+            buffers which will ultimately be sent as easy-to-digest PNG images.</p><p>The Guacamole protocol also supports drawing primitives similar to
+            those present in the Cairo API and HTML5's canvas tag. These
+            instructions are documented individually in the Guacamole Protocol
+            Reference in a section dedicated to drawing instructions, and like
+            all Guacamole protocol instructions, each instruction has a
+            corresponding function in libguac following the naming convention
+                    <code class="methodname">guac_protocol_send_<em class="replaceable"><code>OPCODE</code></em>()</code>.</p><p>Each protocol function takes a <code class="classname">guac_socket</code>
+            as an argument, which is the buffered I/O object used by libguac.
+            The <code class="classname">guac_socket</code> corresponding to the
+            connected client is stored within the socket member of the
+                <code class="classname">guac_client</code> object in use, for
+            example:</p><div class="informalexample"><pre class="programlisting">guac_protocol_send_size(client-&gt;socket, GUAC_DEFAULT_LAYER, 1024, 768);</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-protocol-nesting"></a>Protocol nesting</h2></div></div></div><p>When large instructions need to be sent, particularly those
+            associated with audio or video, it is best to send those
+            instructions broken into individual packets using nest instructions,
+            such that the larger instruction can be interleaved with the smaller
+            instructions such that normal responsiveness is not lessened. As
+            future instructions cannot be parsed until the earlier instructions
+            finish parsing, avoiding large instructions is important if the user
+            is expected to interact with their display in real-time.</p><p>libguac provides rudimentary means of automatically nesting
+            instructions using the <code class="methodname">guac_socket_nest()</code>
+            function. This function returns a new
+                <code class="classname">guac_socket</code> which writes data to nest
+            instructions to its parent <code class="classname">guac_socket</code>,
+            rather than to the client's stream directly. By using this and the
+            piecemeal versions of the instruction-sending functions required,
+            audio or video data can be stretched over multiple instructions
+            rather than one single instruction:</p><div class="informalexample"><pre class="programlisting">/* Get nested socket */
+guac_socket* nested_socket = guac_socket_nest(client-&gt;socket, 0);
+
+/* Write audio header */
+guac_protocol_send_audio_header(nested_socket,
+    0, "audio/ogg", 250, buffer_size);
+
+...
+
+/* Write data packets */
+guac_protocol_send_audio_data(nested_socket, data, sizeof(data));
+
+...
+
+/* Finish audio instruction */
+guac_protocol_send_audio_end(nested_socket);
+
+/* When done, close the socket */
+guac_socket_close(nested_socket);</pre></div><p>Providing that calls to guac_protocol_send_audio_data() (or the
+            similar video functions) are made interleaved with calls to smaller
+            instructions, those smaller instructions will not be blocked by the
+            size of the audio data that must be sent.</p><div class="important"><h3 class="title">Important</h3><p>Because of the nature of the Guacamole protocol, the size and
+                duration of audio or video data must be known beforehand. If
+                audio or video data must be streamed in real-time, it will need
+                to be divided into individual self-contained chunks. Smaller
+                chunks have a greater chance of causing noticeable gaps due to
+                network hiccups, but are more responsive and will seem more
+                in-line with what is happening from the user's perspective,
+                while larger chunks will be less vulnerable to network issues,
+                but obviously will require the client to wait for a longer time
+                before the audio or video actually starts playing.</p><p>Note that the size of each audio or video packet is not
+                related to the size of each nest instruction. Choosing larger
+                audio or video packets does not mean that the nest instruction
+                cannot be used; in fact, this is the purpose of the nest
+                instruction: to allow larger instructions to be broken up into
+                smaller instructions.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-event-handling"></a>Event handling</h2></div></div></div><p>Generally, as guacd receives instructions from the connected
+            client, it invokes event handlers if set within the associated
+                <code class="classname">guac_client</code> instance. These handlers
+            correspond to the instructions received, which in turn correspond to
+            events which occur on the client side. The only exception to this is
+            when guacd wishes to give the client plugin control and allow it to
+            handle any messages that may have arrived from the remote desktop
+            server, in which case it invokes a specific event handler dedicated
+            to this purpose.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-key-events"></a>Key events</h3></div></div></div><p>When keys are pressed or released on the client side, the
+                client sends key instructions to the server. These instructions
+                are parsed and handled by calling the key event handler
+                installed in the <span class="property">key_handler</span> member of the
+                    <code class="classname">guac_client</code>. This key handler is
+                given the keysym of the key that was changed, and a boolean
+                value indicating whether the key was pressed or released.</p><div class="informalexample"><pre class="programlisting">int key_handler(guac_client* client, int keysym, int pressed) {
+    /* Do something */
+}
+
+...
+
+/* Within guac_client_init */
+client-&gt;key_handler = key_handler;</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-mouse-events"></a>Mouse events</h3></div></div></div><p>When the mouse is moved, and buttons are pressed or released,
+                the client sends mouse instructions to the server. These
+                instructions are parsed and handled by calling the mouse event
+                handler installed in the <span class="property">mouse_handler</span>
+                member of the <code class="classname">guac_client</code>. This mouse
+                handler is given the current X and Y coordinates of the mouse
+                pointer, as well as a mask indicating which buttons are pressed
+                and which are released.</p><div class="informalexample"><pre class="programlisting">int mouse_handler(guac_client* client, int x, int y, int button_mask) {
+    /* Do something */
+}
+
+...
+
+/* Within guac_client_init */
+client-&gt;mouse_handler = mouse_handler;</pre></div><p>The file <code class="filename">client.h</code> also defines the mask
+                of each button for convenience:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_LEFT</code></span></dt><dd><p>The left mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_MIDDLE</code></span></dt><dd><p>The middle mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_RIGHT</code></span></dt><dd><p>The right mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_UP</code></span></dt><dd><p>The button corresponding to one scroll in the
+                            upwards direction of the mouse scroll wheel, set
+                            when scrolled.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_DOWN</code></span></dt><dd><p>The button corresponding to one scroll in the
+                            downwards direction of the mouse scroll wheel, set
+                            when scrolled.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-clipboard-events"></a>Clipboard events</h3></div></div></div><p>If the client sends data which should be sent to the clipboard
+                of the remote desktop, guacd will trigger the clipboard handler
+                installed in the <span class="property">clipboard_handler</span> member
+                of the <code class="classname">guac_client</code>.</p><div class="informalexample"><pre class="programlisting">int clipboard_handler(guac_client* client, char* text) {
+    /* Do something */
+}
+
+...
+
+/* Within guac_client_init */
+client-&gt;clipboard_handler = clipboard_handler;</pre></div><p>The data given will always be a
+                <code class="constant">NULL</code>-terminated string of UTF8-encoded
+                text. The Guacamole protocol does not yet support clipboard data
+                in other formats.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-message-handling"></a>Handling server messages</h3></div></div></div><p>A client plugin implementation is expected to only handle
+                server messages when control is given to it via a call to the
+                message handler installed in the
+                    <span class="property">handle_messages</span> member of the
+                    <code class="classname">guac_client</code>. While it might seem
+                intuitive to simply create a thread which handles server message
+                in the background, it is important that you do not do this, as
+                guacd pays attention to the exchange of sync instructions back
+                and forth between itself and the client to determine if the
+                client is under load or falling behind due to network problems,
+                and will restrict how frequently the message handler is called
+                accordingly. Ignoring this can lead to the client being
+                overwhelmed with instructions, leading to a bad user
+                experience.</p><p>The message handler is simpler than all the other handlers,
+                receiving only a pointer to the current
+                    <code class="classname">guac_client</code>:</p><div class="informalexample"><pre class="programlisting">int message_handler(guac_client* client) {
+    /* Handle server messages */
+}
+
+...
+
+/* Within guac_client_init */
+client-&gt;handle_messages = message_handler;</pre></div></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="guacamole-protocol.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="developers-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="guacamole-common.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 12. The Guacamole protocol </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 14. <span class="package">guacamole-common</span></td></tr></table></div>
+
+            </div></div>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>

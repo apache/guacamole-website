@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 2. Installing Guacamole</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="guacamole-architecture.html" title="Chapter 1. Implementation and architecture" /><link rel="next" href="configuring-guacamole.html" title="Chapter 3. Configuring Guacamole" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Installing Guacamole</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="guacamole-architecture.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="configuring-guacamole.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" title="Chapter 2. Installing Guacamole" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="installing-guacamole"></a>Chapter 2. Installing Guacamole</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl><dt><span class="section"><a href="installing-guacamole.html#binary-packages">Packages from your distribution</a></span></dt><dd><dl><dt><span class="section"><a href="installing-guacamole.html#idp98160">Debian and Ubuntu</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#idp98480">Fedora, RHEL, and CentOS</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#idp122944">Other distributions</a></span></dt></dl></dd><dt><span class="section"><a href="installing-guacamole.html#building-guacamole-from-source">Building Guacamole from source</a></span></dt><dd><dl><dt><span class="section"><a href="installing-guacamole.html#compiling-guacamole-server"><span class="package">guacamole-server</span></a></span></dt><dt><span class="section"><a href="installing-guacamole.html#compiling-guacamole-client"><span class="package">guacamole-client</span></a></span></dt></dl></dd><dt><span class="section"><a href="installing-guacamole.html#deploying-guacamole">Deploying Guacamole</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#mod-proxy">Using Apache as a frontend (<span class="package">mod_proxy</span>)</a></span></dt><dd><dl><dt><span class="section"><a href="installing-guacamole.html#ajp-proxy">Using AJP</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#http-proxy">Using HTTP</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#disable-tunnel-logging">Disable logging of tunnel requests</a></span></dt><dt><span class="section"><a href="installing-guacamole.html#change-web-app-path">Proxying under a different path</a></span></dt></dl></dd></dl></div>
+    
+    <a id="idp88992" class="indexterm"></a>
+    <div class="section" title="Packages from your distribution"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="binary-packages"></a>Packages from your distribution</h2></div></div></div>
+        
+        <a id="idp91184" class="indexterm"></a>
+        <p>Guacamole is included in the repositories of several Linux distributions. If your
+            distribution provides Guacamole packages for you, this is the preferred method of
+            installing Guacamole. If your distribution does not provide Guacamole packages, or the
+            packages provided are too old, you can build Guacamole from source fairly easily.</p>
+        <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+            <p>Be aware that Guacamole is a remote desktop gateway, and cannot access your
+                desktop's display without a remote desktop server of some kind to connect to.
+                Guacamole does not contain its own VNC or RDP server, and these installation
+                procedures will not walk you through the installation of a VNC or RDP server.</p>
+            <p>Your distribution of choice will provide documentation for setting up VNC, as will
+                the documentation provided by those that created the VNC server you wish to use. If
+                you are going to use RDP to connect to Windows computers, Microsoft (and many others
+                on the internet) provides documentation describing how to set up remote
+                desktop.</p>
+        </div>
+        <p>Installing Guacamole from your distribution's <span class="package">guacamole</span> package
+            will typically install the web application and the proxy <span class="package">guacd</span>, along
+            with support for VNC (<span class="package">libguac-client-vnc</span>). If you want support for
+            RDP or SSH, you will need to install those packages as well.</p>
+        <p>After the Guacamole packages are installed, the web application may still need to be
+            deployed to your servlet container. Some packages, like the Debian package called
+                <span class="package">guacamole-tomcat</span>, will do this for you, but if your distribution
+            provides no such package, you will have to deploy Guacamole yourself.</p>
+        <div class="section" title="Debian and Ubuntu"><div class="titlepage"><div><div><h3 class="title"><a id="idp98160"></a>Debian and Ubuntu</h3></div></div></div>
+            
+            <p>The Debian repositories contain packages for all of Guacamole's components, and
+                Ubuntu has inherited those packages (being Debian-based).</p>
+            <p>There is also a PPA which contains the most recent stable build of Guacamole while
+                updates to the official Debian and Ubuntu repositories are pending. If you don't
+                want to wait for the main repositories to update, users of Ubuntu can just add the
+                PPA and install the packages from there:</p>
+            <div class="informalexample">
+                <a id="idp101168" class="indexterm"></a>
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>sudo add-apt-repository ppa:guacamole/stable</code></strong>
+<code class="computeroutput">[sudo] password for user: 
+You are about to add the following PPA to your system:
+ The most recent stable release of Guacamole and its components. The packages
+here use the same packaging as the downstream Debian and Ubuntu packages, but
+are updated more frequently, usually while the corresponding downstream
+packages are under official review.
+ More info: https://launchpad.net/~guacamole/+archive/stable
+Press [ENTER] to continue or ctrl-c to cancel adding it
+
+gpg: keyring `/tmp/tmpc7ipgi/secring.gpg' created
+gpg: keyring `/tmp/tmpc7ipgi/pubring.gpg' created
+gpg: requesting key 106BB296 from hkp server keyserver.ubuntu.com
+gpg: /tmp/tmpc7ipgi/trustdb.gpg: trustdb created
+gpg: key 106BB296: public key "Launchpad PPA for Guacamole" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+OK</code>
+<code class="prompt">$</code> </pre>
+            </div>
+            <p>For users of Debian or any flavor of Ubuntu, installing Guacamole is as simple as
+                installing the <span class="package">guacamole-tomcat</span> package, and then editing the
+                    <code class="filename">/etc/guacamole/user-mapping.xml</code> file to add some
+                connections. The <span class="package">guacamole-tomcat</span> package will install Tomcat and
+                automatically create the necessary symbolic links to deploy Guacamole. If you don't
+                want to use Tomcat, or you want to deploy Guacamole manually, you can install the
+                    <span class="package">guacamole</span> package instead, and follow the deployment
+                instructions provided in this chapter.</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>apt-get install guacamole-tomcat</code></strong>
+<code class="prompt">#</code> </pre>
+            </div>
+            <p>If you install the <span class="package">guacamole-tomcat</span> package, you will be
+                prompted for whether you wish to restart Tomcat automatically. Tomcat must be
+                restarted after Guacamole is installed or upgraded. If you don't want to do this, or
+                you want to do this manually, choose "No" (the default). Choosing "Yes" will restart
+                Tomcat for this and future installs of Guacamole.</p>
+            <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+                <p>The Debian and Ubuntu packages will set up <span class="package">guacd</span> such that
+                    it runs as its own reduced-privilege <code class="code">guacd</code> user, for the sake of
+                    security. Similarly, the <code class="filename">user-mapping.xml</code> file will only be
+                    readable by users in the <code class="code">guacamole-web</code> group, as it will
+                    potentially contain sensitive information like passwords in plain text.</p>
+                <p>The guacamole-tomcat package will automatically put the tomcat6 user in the
+                        <code class="code">guacamole-web</code> group, but if you are installing Tomcat manually
+                    or using another servlet container, <span class="emphasis"><em>you must ensure your servlet
+                        container's user is a member of the <code class="code">guacamole-web</code>
+                        group</em></span>. If you do not do this, your servlet container will not be
+                    able to read <code class="filename">user-mapping.xml</code>, and all attempts to login to
+                    Guacamole will fail.</p>
+            </div>
+            <p>By default, VNC support will be installed as a dependency of the
+                    <span class="package">guacamole</span> package. If you want SSH or RDP support, you will
+                need to install <span class="package">libguac-client-ssh0</span> or
+                    <span class="package">libguac-client-rdp0</span> manually:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>apt-get install libguac-client-ssh0 libguac-client-rdp0</code></strong>
+<code class="prompt">#</code> </pre>
+                <p>Recent versions of Debian and Ubuntu have a recent-enough version of FreeRDP
+                    and include <span class="package">libguac-client-rdp0</span>, but if you're using an older
+                    version of Debian (such as Debian 6.0 a.k.a. "squeeze"), you will have to either
+                    do without RDP support or install FreeRDP and
+                        <span class="package">guacamole-server</span> manually, without using your
+                    distribution's packages.</p>
+                <p>Once installed, both Tomcat and <span class="package">guacd</span> will start
+                    automatically and on boot.</p>
+            </div>
+        </div>
+        <div class="section" title="Fedora, RHEL, and CentOS"><div class="titlepage"><div><div><h3 class="title"><a id="idp98480"></a>Fedora, RHEL, and CentOS</h3></div></div></div>
+            
+            <p>Fedora has an excellent Guacamole package, <span class="package">guacamole</span>, which
+                will automatically install deploy Guacamole to Tomcat. It does not depend on
+                    <span class="package">guacd</span>, however, and you thus must install the
+                    <span class="package">guacd</span> package manually alongside
+                <span class="package">guacamole</span>:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>yum install guacamole guacd</code></strong>
+<code class="prompt">#</code> </pre>
+            </div>
+            <p>Depending on which protocols you require support for, you will need to install one
+                of the <span class="package">libguac-client-*</span> packages to provide support for those
+                protocols. Most users will want at least <span class="package">libguac-client-vnc</span>. If
+                you want SSH support, or access to RDP servers, you will need to install
+                    <span class="package">libguac-client-ssh</span> or <span class="package">libguac-client-rdp</span>
+                respectively.</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>yum install libguac-client-vnc libguac-client-ssh libguac-client-rdp</code></strong>
+<code class="prompt">#</code> </pre>
+            </div>
+            <p>Neither RHEL nor CentOS include Guacamole packages in their main repositories,
+                however Fedora maintains a repository called EPEL which contains binaries compatible
+                with both RHEL and CentOS. The EPEL repository contains the Guacamole packages
+                described above. If you wish to install Guacamole on RHEL or CentOS, you should
+                either add the EPEL repository and install from that, or build Guacamole from
+                source.</p>
+            <p>Once everything is installed, you will still need to configure
+                    <span class="package">guacd</span> and Tomcat to start automatically on boot (assuming
+                this is what you want):</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>chkconfig tomcat6 on</code></strong>
+<code class="computeroutput">Note: forwarding request to 'systemctl enable tomcat6.service'
+ln -s '/usr/lib/systemd/system/tomcat6.service'
+    '/etc/systemd/system/multi-user.target.wants/tomcat6.service'</code>
+<code class="prompt">#</code> <strong class="userinput"><code>chkconfig guacd on</code></strong>
+<code class="prompt">#</code></pre>
+            </div>
+            <p>If you don't want Tomcat and guacd to start automatically, you can start them
+                manually instead:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>service tomcat6 start</code></strong>
+<code class="computeroutput">Redirecting to /bin/systemctl start tomcat6.service</code>
+<code class="prompt">#</code> <strong class="userinput"><code>service guacd start</code></strong>
+<code class="computeroutput">Starting guacd: SUCCESS
+guacd[6229]: INFO:  Guacamole proxy daemon (guacd) version 0.7.0
+guacd[6229]: INFO:  Unable to bind socket to host ::1, port 4822: Address family not supported by
+protocol
+guacd[6229]: INFO:  Successfully bound socket to host 127.0.0.1, port 4822
+guacd[6229]: INFO:  Exiting and passing control to PID 6230
+guacd[6230]: INFO:  Exiting and passing control to PID 6231</code>
+<code class="prompt">#</code></pre>
+            </div>
+            <p>At this point, all you need to do is edit the
+                    <code class="filename">/etc/guacamole/user-mapping.xml</code> file to add some
+                connections. You do not need to restart Tomcat after editing this file; it will be
+                reloaded automatically by Guacamole.</p>
+        </div>
+        <div class="section" title="Other distributions"><div class="titlepage"><div><div><h3 class="title"><a id="idp122944"></a>Other distributions</h3></div></div></div>
+            
+            <p>If you distribution isn't listed above, there is still a chance your distribution
+                provides Guacamole packages. A search for "guacamole" in your distribution's package
+                manage should answer that question quickly. If no package is provided, your only
+                option is to build Guacamole from source.</p>
+            <p>Building Guacamole from source is not hard. In most cases, all you need to do is
+                download the latest source for <span class="package">guacamole-server</span>, and the latest
+                guacamole.war from the Guacamole project website, build
+                    <span class="package">guacamole-server</span>, and then deploy
+                    <code class="filename">guacamole.war</code>.</p>
+            <p>The method for installing Guacamole is fairly constant across platforms, and the
+                instructions given here should apply almost universally (and in the case that they
+                don't, you probably already know what you need to do).</p>
+        </div>
+    </div>
+    <div class="section" title="Building Guacamole from source"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="building-guacamole-from-source"></a>Building Guacamole from source</h2></div></div></div>
+        
+        <a id="idp150256" class="indexterm"></a>
+        <p>Building the components of Guacamole from source is not difficult, providing you have
+            the necessary tools installed already. The source for the entirety of Guacamole is
+            available from the Guacamole project web site in convenient source archives, each named
+            after the component they contain. Each archive also contains a file named
+                <code class="filename">README</code> which lists detailed instructions for building and
+            installing. </p>
+        <p>Guacamole is separated into two pieces: <span class="package">guacamole-server</span>, which
+            provides the <span class="package">guacd</span> proxy and related libraries, and
+                <span class="package">guacamole-client</span>, which provides the client to be served by your
+            servlet container. In most cases, the only source you will need to build is
+                <span class="package">guacamole-server</span>, and downloading the latest
+                <code class="filename">guacamole.war</code> from the project website will be sufficient to
+            provide the client. Building <span class="package">guacamole-client</span> is really only
+            necessary when you wish to modify the source or when you want to try the latest
+            unreleased changes.</p>
+        <p>To compile the C components, you will need a C compiler (such as
+                <span class="package">gcc</span>) and the libraries that each component depends on. Note that
+            many Linux distribution separates library packages into binary and "development"
+            packages; you will need to install the development packages. These will usually end in a
+            "-dev" or "-devel" suffix.</p>
+        <div class="section" title="guacamole-server"><div class="titlepage"><div><div><h3 class="title"><a id="compiling-guacamole-server"></a><span class="package">guacamole-server</span></h3></div></div></div>
+            
+            <a id="idp159616" class="indexterm"></a>
+            <a id="idp161152" class="indexterm"></a>
+            <a id="idp162048" class="indexterm"></a>
+            <a id="idp163904" class="indexterm"></a>
+            <a id="idp165056" class="indexterm"></a>
+            <a id="idp166208" class="indexterm"></a>
+            <a id="idp167360" class="indexterm"></a>
+            <a id="idp168640" class="indexterm"></a>
+            <a id="idp169920" class="indexterm"></a>
+            <a id="idp171200" class="indexterm"></a>
+            <a id="idp172480" class="indexterm"></a>
+            <p><span class="package">guacamole-server</span> contains all the native, server-side
+                components required by Guacamole to connect to remote desktops. It provides a common
+                C library, <span class="package">libguac</span>, which all other native components depend on,
+                as well as separate libraries for each supported protocol, and a proxy daemon,
+                    <span class="package">guacd</span>, the heart of Guacamole.</p>
+            <p><span class="package">guacd</span> is the proxy daemon that runs on your Guacamole server,
+                accepting connections from the Guacamole web application on behalf of remote users.
+                It effectively translates between common remote desktop protocols like VNC or RDP by
+                dynamically loading protocol support plugins. Building <span class="package">guacd</span>
+                creates an executable called <code class="filename">guacd</code> which can be run manually
+                or, if you wish, automatically when your computer starts up.</p>
+            <p>In order to build <span class="package">guacamole-server</span>, you will need
+                    <span class="package">Cairo</span>, a graphics library, and <span class="package">libpng</span>, the
+                official PNG library. These libraries are strictly required <span class="emphasis"><em>in all
+                    cases</em></span>. Guacamole cannot be built without them. The other dependencies
+                of <span class="package">guacamole-server</span> are optional. Which libraries you will need
+                to install depends on what support you need.</p>
+            <p>Guacamole currently supports VNC, RDP, SSH, and telnet. Each protocol corresponds
+                to a separate library that will be built with <span class="package">guacamole-server</span> if
+                you have its corresponding optional dependencies. VNC support depends on the
+                    <span class="package">libvncclient</span> library, which is part of
+                    <span class="package">libVNCServer</span>, RDP support depends on a recent version of
+                    <span class="package">FreeRDP</span> - 1.0 or higher, SSH support depends on
+                    <span class="package">libssh2</span>, and telnet depends on <span class="package">libtelnet</span>.
+                    <span class="package">Pango</span>, a font rendering and text layout library, is required
+                for both SSH and telnet support.</p>
+            <p>Optional features of these protocols will be enabled if you have other libraries
+                installed.</p>
+            <div class="informaltable">
+                <table border="1"><colgroup><col class="c1" /><col class="c2" /><col class="c3" /></colgroup><thead><tr><th>Library name</th><th>Required?</th><th>Features</th></tr></thead><tbody><tr><td>Cairo</td><td>Yes.</td><td>
+                                <p>Cairo is used by libguac for graphics rendering. Guacamole
+                                    cannot function without Cairo installed.</p>
+                            </td></tr><tr><td>libpng</td><td>Yes.</td><td>
+                                <p>libpng is used by libguac to write PNG images, the core image
+                                    type used by the Guacamole protocol. Guacamole cannot function
+                                    without libpng.</p>
+                            </td></tr><tr><td>FreeRDP</td><td>Only for RDP.</td><td>
+                                <p>FreeRDP is required for RDP support. If you do not wish to
+                                    build RDP support, this library is not needed.</p>
+                            </td></tr><tr><td>Pango</td><td>For SSH or telnet.</td><td>
+                                <p>Pango is a text layout library which Guacamole's SSH and
+                                    telnet support uses to render text. If you do not wish to build
+                                    SSH or telnet support, this library is not needed.</p>
+                            </td></tr><tr><td>libssh2</td><td>Only for SSH.</td><td>
+                                <p>libssh2 is required for SSH support. If you do not wish to
+                                    build SSH support, this library is not needed.</p>
+                            </td></tr><tr><td>libtelnet</td><td>Only for telnet.</td><td>
+                                <p>libtelnet is required for telnet support. If you do not wish
+                                    to build telnet support, this library is not needed.</p>
+                            </td></tr><tr><td>libVNCServer</td><td>Only for VNC.</td><td>
+                                <p>libVNCServer provides libvncclient which is required for VNC
+                                    support. If you do not wish to build VNC support, this library
+                                    is not needed.</p>
+                            </td></tr><tr><td>libpulse</td><td>No.</td><td>
+                                <p>libpulse provides support for PulseAudio, which is used by
+                                    Guacamole's VNC support to provide experimental audio. If you
+                                    are not going to be using the experimental audio support for
+                                    VNC, you do not need this library.</p>
+                            </td></tr><tr><td>libssl</td><td>For SSH and for SSL connections to guacd.</td><td>
+                                <p>libssl provides support for SSL and TLS - two common
+                                    encryption schemes that make up the majority of encrypted web
+                                    traffic.</p>
+                                <p>If you have libssl installed, guacd will be built with SSL
+                                    support, allowing communication between the web application and
+                                    guacd to be encrypted. This library is also required for SSH
+                                    support for the sake of manipulating public/private keys.</p>
+                                <p>Without SSL support, there will be no option to encrypt
+                                    communication to guacd, and support for SSH cannot be
+                                    built.</p>
+                            </td></tr><tr><td>libvorbis</td><td>No.</td><td>
+                                <p>libvorbis provides support for Ogg Vorbis - a free and open
+                                    standard for sound compression. If installed, libguac will be
+                                    built with support for Ogg Vorbis, and protocols supporting
+                                    audio will use Ogg Vorbis compression when possible.</p>
+                                <p>Otherwise, sound will only be encoded as WAV (uncompressed),
+                                    and will only be available if your browser also supports
+                                    WAV.</p>
+                            </td></tr></tbody></table>
+            </div>
+            <p>You can obtain a copy of the <span class="package">guacamole-server</span> source from the
+                Guacamole project web site if you want the latest released code. These releases are
+                stable snapshots of the latest code which have undergone enough testing that the
+                Guacamole team considers them fit for public consumption. Source downloaded from the
+                project web site will take the form of a <code class="filename">.tar.gz</code> archive which
+                you can extract from the command line:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>tar -xzf guacamole-server-0.9.0.tar.gz</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>cd guacamole-server-0.9.0/</code></strong>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>If you want the absolute latest code, and don't care that the code hasn't been as
+                rigorously tested as the code in stable releases, you can also clone the Guacamole
+                team's git repository on GitHub:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>git clone <code class="uri">git://github.com/glyptodon/guacamole-server.git</code></code></strong>
+<code class="computeroutput">Cloning into 'guacamole-server'...
+remote: Counting objects: 6769, done.
+remote: Compressing objects: 100% (2244/2244), done.
+remote: Total 6769 (delta 3058), reused 6718 (delta 3008)
+Receiving objects: 100% (6769/6769), 2.32 MiB | 777 KiB/s, done.
+Resolving deltas: 100% (3058/3058), done.</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>Once the <span class="package">guacamole-server</span> source has been downloaded and
+                extracted, you need to run <code class="filename">configure</code>. This is a shell script
+                automatically generated by GNU Autotools, a popular build system used by the
+                Guacamole project for <span class="package">guacamole-server</span>. Running
+                    <code class="filename">configure</code> will determine which libraries are available on
+                your system and will select the appropriate components for building depending on
+                what you actually have installed.</p>
+            <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+                <p>Source downloaded directly from git will not contain this
+                        <code class="filename">configure</code> script, as autogenerated code is not included
+                    in the project's repositories. If you downloaded the code from the project's git
+                    repositories directly, you will need to generate <code class="filename">configure</code>
+                    manually:</p>
+                <div class="informalexample">
+                    <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd guacamole-server/</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>autoreconf -fi</code></strong>
+<code class="prompt">$</code></pre>
+                    <p>Doing this requires GNU Autotools to be installed.</p>
+                    <p>Source archives downloaded from the project website contain the
+                            <code class="filename">configure</code> script and all other necessary build
+                        files, and thus do not require GNU Autotools to be installed on the build
+                        machine.</p>
+                </div>
+            </div>
+            <p>Once you run <code class="filename">configure</code>, you can see what a listing of what
+                libraries were found and what it has determined should be built:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>./configure --with-init-dir=<em class="replaceable"><code>/etc/init.d</code></em></code></strong>
+<code class="computeroutput">checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+...
+
+------------------------------------------------
+guacamole-server version 0.9.0
+------------------------------------------------
+
+   Library status:
+
+     freerdp ............. yes
+     pango ............... yes
+     libssh2 ............. yes
+     libssl .............. yes
+     libtelnet ........... yes
+     libVNCServer ........ yes
+     libvorbis ........... yes
+     libpulse ............ yes
+
+   Protocol support:
+
+      RDP ....... yes
+      SSH ....... yes
+      Telnet .... yes
+      VNC ....... yes
+
+   Init scripts: /etc/init.d
+
+Type "make" to compile guacamole-server.
+</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p><a id="idp233056" class="indexterm"></a>The <code class="option">--with-init-dir=/etc/init.d</code> shown above prepares
+                the build to install a startup script for <span class="package">guacd</span> into the
+                    <code class="filename">/etc/init.d</code> directory, such that we can later easily
+                configure <span class="package">guacd</span> to start automatically on boot. If you do not
+                wish guacd to start automatically at boot, leave off the
+                    <code class="option">--with-init-dir</code> option. If the directory containing your
+                distribution's startup scripts differs from the common
+                    <code class="filename">/etc/init.d</code>, replace <code class="filename">/etc/init.d</code> with
+                the proper directory here. You may need to consult your distribution's
+                documentation, or do a little digging in <code class="filename">/etc</code>, to determine the
+                proper location.</p>
+            <p>Here, <code class="filename">configure</code> has found everything, including all optional
+                libraries, and will build all protocol support, even support for Ogg Vorbis sound in
+                RDP. If you are missing some libraries, some of the
+                    "<code class="computeroutput">yes</code>" answers above will read
+                    "<code class="computeroutput">no</code>". If a library which is strictly required
+                is missing, the script will fail outright, and you will need to install the missing
+                dependency. If, after running <code class="filename">configure</code>, you find support for
+                something you wanted is missing, simply install the corresponding dependencies and
+                run <code class="filename">configure</code> again.</p>
+            <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+                <p>SSH and telnet support both require that fonts are installed in order to
+                    function - output from the terminal cannot be rendered otherwise. Support for
+                    SSH and telnet will build just fine if fonts are not installed, but it will fail
+                    to connect when used:</p>
+                <div class="informalexample">
+                    <pre class="screen">Aug 23 14:09:45 my-server guacd[5606]: Unable to get font "monospace"</pre>
+                </div>
+                <p>If SSH or telnet connections are not working and you see such a message in
+                    syslog, install fonts and try again.</p>
+            </div>
+            <p>Once <code class="filename">configure</code> is finished, just type
+                    "<strong class="userinput"><code>make</code></strong>", and it will <span class="package">guacamole-server</span>
+                will compile:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>make</code></strong>
+<code class="computeroutput">Making all in src/libguac
+make[1]: Entering directory `/home/zhz/guacamole/guacamole-server/src/libguac'
+...
+make[1]: Leaving directory `/home/zhz/guacamole/guacamole-server/src/protocols/vnc'
+make[1]: Entering directory `/home/zhz/guacamole/guacamole-server'
+make[1]: Nothing to be done for `all-am'.
+make[1]: Leaving directory `/home/zhz/guacamole/guacamole-server'</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>Quite a bit of output will scroll up the screen as all the components are
+                compiled. Once everything finishes, all you have left to do is type "<strong class="userinput"><code>make
+                    install</code></strong>" to install the components that were built, and then
+                    "<strong class="userinput"><code>ldconfig</code></strong>" to update your system's cache of installed
+                libraries:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>make install</code></strong>
+<code class="computeroutput">Making install in src/libguac
+make[1]: Entering directory `/home/zhz/guacamole/guacamole-server/src/libguac'
+make[2]: Entering directory `/home/zhz/guacamole/guacamole-server/src/libguac'
+...
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/home/zhz/guacamole/guacamole-server/src/protocols/vnc'
+make[1]: Leaving directory `/home/zhz/guacamole/guacamole-server/src/protocols/vnc'
+make[1]: Entering directory `/home/zhz/guacamole/guacamole-server'
+make[2]: Entering directory `/home/zhz/guacamole/guacamole-server'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/home/zhz/guacamole/guacamole-server'
+make[1]: Leaving directory `/home/zhz/guacamole/guacamole-server'</code>
+<code class="prompt">#</code> <strong class="userinput"><code>ldconfig</code></strong>
+<code class="prompt">#</code>   </pre>
+            </div>
+            <p>At this point, everything is installed, but <span class="package">guacd</span> is not
+                running. You will need to run guacd in order to use Guacamole once the client
+                components are installed as well.</p>
+            <p>Beware that even after installing <span class="package">guacd</span> and its startup script,
+                you will likely still have to activate the service for it to start automatically.
+                Doing this varies by distribution, but each distribution will have documentation
+                describing how to do so.</p>
+        </div>
+        <div class="section" title="guacamole-client"><div class="titlepage"><div><div><h3 class="title"><a id="compiling-guacamole-client"></a><span class="package">guacamole-client</span></h3></div></div></div>
+            
+            <a id="idp256432" class="indexterm"></a>
+            <a id="idp257712" class="indexterm"></a>
+            <p><span class="package">guacamole-client</span> contains all Java and Maven components of
+                Guacamole (<span class="package">guacamole</span>, <span class="package">guacamole-common</span>,
+                    <span class="package">guacamole-ext</span>, and <span class="package">guacamole-common-js</span>).
+                These components ultimately make up the web application that will serve the HTML5
+                Guacamole client to users that connect to your server. This web application will
+                connect to <span class="package">guacd</span>, part of <span class="package">guacamole-server</span>, on
+                behalf of connected users in order to serve them any remote desktop they are
+                authorized to access.</p>
+            <p>Normally, you don't need to build <span class="package">guacamole-client</span> manually, as
+                it is written in Java and is cross-platform. The easiest way to obtain the latest
+                version of <span class="package">guacamole-client</span> is to simply download the latest
+                    <code class="filename">guacamole.war</code> (the compiled form of
+                    <span class="package">guacamole-client</span>) from the Guacamole project web site.</p>
+            <p>To compile <span class="package">guacamole-client</span>, all you need is Apache Maven and a
+                copy of the Java JDK. Most, if not all, Linux distributions will provide packages
+                for these.</p>
+            <p>You can obtain a copy of the <span class="package">guacamole-client</span> source from the
+                Guacamole project web site if you want the latest released code. These releases are
+                stable snapshots of the latest code which have undergone enough testing that the
+                Guacamole team considers them fit for public consumption. Source downloaded from the
+                project web site will take the form of a <code class="filename">.tar.gz</code> archive which
+                you can extract from the command line:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>tar -xzf guacamole-client-0.9.0.tar.gz</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>cd guacamole-client-0.9.0/</code></strong>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>As with <span class="package">guacamole-server</span>, if you want the absolute latest code,
+                and don't care that the code hasn't been as rigorously tested as the code in stable
+                releases, you can also clone the Guacamole team's git repository on GitHub:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>git clone <code class="uri">git://github.com/glyptodon/guacamole-client.git</code></code></strong>
+<code class="computeroutput">Cloning into 'guacamole-client'...
+remote: Counting objects: 12788, done.
+remote: Compressing objects: 100% (4183/4183), done.
+remote: Total 12788 (delta 3942), reused 12667 (delta 3822)
+Receiving objects: 100% (12788/12788), 3.23 MiB | 799 KiB/s, done.
+Resolving deltas: 100% (3942/3942), done.</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>Unlike <span class="package">guacamole-server</span>, even if you grab the code from the git
+                repositories, you won't need to run anything before building. There are no scripts
+                that need to be generated before building - all Maven needs is the
+                    <code class="filename">pom.xml</code> file provided with the source.</p>
+            <p>To build <span class="package">guacamole-client</span>, just run "<strong class="userinput"><code>mvn
+                    package</code></strong>". This will invoke Maven to automatically build and package
+                all components, producing a single <code class="filename">.war</code> file, which contains
+                the entire web application:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>mvn package</code></strong>
+<code class="computeroutput">[INFO] Scanning for projects...
+[INFO] Reactor build order: 
+[INFO]   guacamole-common
+[INFO]   guacamole-ext
+[INFO]   guacamole-common-js
+[INFO]   guacamole
+[INFO]   guacamole-client
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] ------------------------------------------------------------------------
+[INFO] guacamole-common ...................................... SUCCESS [4.467s]
+[INFO] guacamole-ext ......................................... SUCCESS [1.479s]
+[INFO] guacamole-common-js ................................... SUCCESS [3.680s]
+[INFO] guacamole ............................................. SUCCESS [3.729s]
+[INFO] guacamole-client ...................................... SUCCESS [0.008s]
+[INFO] ------------------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 13 seconds
+[INFO] Finished at: Mon Jul 08 00:44:42 PDT 2013
+[INFO] Final Memory: 43M/354M
+[INFO] ------------------------------------------------------------------------</code>
+<code class="prompt">$</code></pre>
+            </div>
+            <p>Once the Guacamole web application is built, there will be a .war file in the
+                    <code class="filename">guacamole/target/</code> subdirectory of the current directory
+                (the directory you were in when you ran <span class="application">mvn</span>). This
+                    <code class="filename">.war</code> file contains the entirety of the Guacamole web
+                application, including all dependencies. Installing Guacamole means copying this
+                    <code class="filename">.war</code> file into the directory required by your servlet
+                container.</p>
+            <p>You will probably have to do this as the root user:</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>cp guacamole/target/guacamole-0.9.0.war /var/lib/tomcat6/webapps/guacamole.war</code></strong>
+<code class="prompt">#</code></pre>
+            </div>
+            <p>The Guacamole web application also depends on a configuration file,
+                    <code class="filename">guacamole.properties</code>, to tell it the type of authentication
+                to use and how to connect to guacd. A functional example
+                    <code class="filename">guacamole.properties</code> is contained in the
+                    <code class="filename">doc/</code> subdirectory; you can simply copy this somewhere (like
+                    <code class="filename">/etc/guacamole</code>) and then create a symbolic link to in a
+                directory called <code class="filename">.guacamole</code> within the home directory of your
+                servlet container. The home directory of your servlet container will be the home
+                directory of the user that the servlet container runs as.</p>
+            <div class="informalexample">
+                <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>mkdir /etc/guacamole</code></strong>
+<code class="prompt">#</code> <strong class="userinput"><code>mkdir <em class="replaceable"><code>/usr/share/tomcat6</code></em>/.guacamole</code></strong>
+<code class="prompt">#</code> <strong class="userinput"><code>cp guacamole/doc/example/guacamole.properties /etc/guacamole/guacamole.properties</code></strong>
+<code class="prompt">#</code> <strong class="userinput"><code>ln -s /etc/guacamole/guacamole.properties <em class="replaceable"><code>/usr/share/tomcat6</code></em>/.guacamole/</code></strong>
+<code class="prompt">#</code>           </pre>
+            </div>
+            <p>You will need to edit <code class="filename">guacamole.properties</code> to be sure that
+                all the settings are valid for your installation.</p>
+            <p>If you are using the default authentication method, you will also need to install
+                the <code class="filename">user-mapping.xml</code> file. This file describes the users that
+                should be allowed to log into Guacamole, as well as their passwords, and all
+                corresponding remote desktop connections they should have access to.</p>
+            <p>An example <code class="filename">user-mapping.xml</code> file is provided in the
+                    <code class="filename">doc/</code> subdirectory. You can simply copy this file to a
+                reasonable location (like <code class="filename">/etc/guacamole/user-mapping.xml</code>) and
+                then edit <code class="filename">guacamole.properties</code> to specify the correct location
+                of this file.</p>
+            <p>You will need to edit <code class="filename">user-mapping.xml</code> to add and remove
+                users, as well as to remove the "default" users included as examples.</p>
+        </div>
+    </div>
+    <div class="section" title="Deploying Guacamole"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="deploying-guacamole"></a>Deploying Guacamole</h2></div></div></div>
+        
+        <a id="idp297280" class="indexterm"></a>
+        <p>Typically, deploying Guacamole is a one-time process, and needs to be done only when
+            Guacamole is initially installed. If done correctly, future upgrades to Guacamole will
+            be automatically deployed.</p>
+        <p>There are two critical files involved in the deployment of Guacamole:
+                <code class="filename">guacamole.war</code>, which is the file containing the web
+            application, and <code class="filename">guacamole.properties</code>, the main configuration file
+            for Guacamole. The recommend way to set up Guacamole involves placing these files in
+            standard locations, and then creating symbolic links to them so that Tomcat can find
+            them.</p>
+        <p>Ultimately, the <code class="filename">guacamole.war</code> file, or a symbolic link to it,
+            must be found by your servlet container within the directory it uses for
+                <code class="filename">.war</code> files, and the <code class="filename">guacamole.properties</code>
+            file must be within the <code class="filename">.guacamole</code> directory in the home directory
+            of the user your servlet container runs as. Legacy installations will have
+                <code class="filename">guacamole.properties</code> placed in the classpath of the servlet
+            container, but this is officially deprecated, and will be unsupported in future
+            releases.</p>
+        <p>We recommend placing <code class="filename">guacamole.properties</code> and any other
+            configuration files in <code class="filename">/etc/guacamole</code>, and
+                <code class="filename">guacamole.war</code> in <code class="filename">/var/lib/guacamole</code>. You
+            will likely have to create each of these directories manually, as root.</p>
+        <p>With these files in place, you can create symbolic links in the places Tomcat and
+            Guacamole require them, such that future upgrades will only involve placing the new
+            files in standard locations. The standard locations involved are the Tomcat
+                "<code class="filename">webapps</code>" directory (below,
+                <code class="filename">/var/lib/tomcat6/webapps</code>, but your installation may be
+            different), and the "<code class="filename">.guacamole</code>" directory, which must be manually
+            created within the Tomcat user's home directory.</p>
+        <div class="informalexample">
+            <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>ln -s /var/lib/guacamole/guacamole.war <em class="replaceable"><code>/var/lib/tomcat6</code></em>/webapps</code></strong>
+<code class="prompt">#</code> <strong class="userinput"><code>ln -s /etc/guacamole/guacamole.properties <em class="replaceable"><code>/usr/share/tomcat6</code></em>/.guacamole/</code></strong>
+<code class="prompt">#</code></pre>
+        </div>
+        <p>If you are using a different servlet container or Tomcat is installed in a different
+            location, you will need to replace the directories above with the corresponding
+            directories of your install.</p>
+        <p>Once Guacamole has been deployed, Tomcat must be restarted (as
+                <code class="filename">guacamole.properties</code> will only be read on servlet container
+            start) and the guacd daemon must be started if it isn't running already. After
+            restarting Tomcat and starting guacd, Guacamole is successfully installed and
+            running.</p>
+        <p>The command to restart Tomcat and guacd will vary by distribution. Typically, you can
+            do this by running the corresponding init scripts with the "restart" option:</p>
+        <div class="informalexample">
+            <pre class="screen"><code class="prompt">#</code> <strong class="userinput"><code>/etc/init.d/tomcat6 restart</code></strong>
+<code class="computeroutput">Stopping Tomcat... OK
+Starting Tomcat... OK</code>
+<code class="prompt">#</code> <strong class="userinput"><code>/etc/init.d/guacd start</code></strong>
+<code class="computeroutput">Starting guacd: SUCCESS
+guacd[6229]: INFO:  Guacamole proxy daemon (guacd) version 0.7.0
+guacd[6229]: INFO:  Unable to bind socket to host ::1, port 4822: Address family not supported by
+protocol
+guacd[6229]: INFO:  Successfully bound socket to host 127.0.0.1, port 4822
+guacd[6229]: INFO:  Exiting and passing control to PID 6230
+guacd[6230]: INFO:  Exiting and passing control to PID 6231</code>
+<code class="prompt">#</code></pre>
+        </div>
+        <p>If you want Guacamole to start on boot, you will need to configure the tomcat6 and
+            guacd services to run automatically. Your distribution will provide documentation for
+            doing this.</p>
+    </div>
+    <div class="section" title="Using Apache as a frontend (mod_proxy)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="mod-proxy"></a>Using Apache as a frontend (<span class="package">mod_proxy</span>)</h2></div></div></div>
+        
+        <p>Many users end up serving Guacamole through Apache using <span class="package">mod_proxy</span>,
+            a module which allows Apache to be used as a reverse proxy for other servers, such as a
+            servlet container like Tomcat. The need to do this can range from simply wanting to use
+            port 80, to sharing an SSL certificate with your web server, to security and load
+            balancing.</p>
+        <p>By default, servlet containers like Tomcat listen on port 8080, which is not the
+            standard HTTP port (port 80). If you are using Linux (or another UNIX system), only the
+            root user can run programs which listen on ports less than 1024, including port 80, and
+            reducing the number of programs that run with root privileges is always a good
+            idea.</p>
+        <p>If you have an SSL certificate, it may make sense to use Apache for SSL processing and
+            save Tomcat from having to do this itself, which may not be as efficient. Again, this
+            also makes sense from the perspective of security, as it reduces the number of users
+            that require read access to identifying certificates.</p>
+        <p>While load balancing won't be covered here, if you are expecting large numbers of
+            users, balancing the load on Tomcat across multiple Tomcat instances is a common
+            solution.</p>
+        <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+            <p>Beware that, like the rest of this manual, we assume here that you are using
+                Tomcat. If you are using a different servlet container, the same principles apply,
+                and the Apache configuration examples will still be valid, with the notable
+                exception of AJP, which may not be supported by your servlet container.</p>
+        </div>
+        <div class="section" title="Using AJP"><div class="titlepage"><div><div><h3 class="title"><a id="ajp-proxy"></a>Using AJP</h3></div></div></div>
+            
+            <p>AJP is the Apache JServ Protocol - a protocol specifically designed for proxy
+                communication between a web server like Apache and Tomcat. The AJP protocol is
+                intended to be faster than HTTP when it comes to proxying web traffic, and it
+                implements features that allow load balancing between multiple servlet
+                containers.</p>
+            <div class="section" title="Configuring Tomcat for AJP"><div class="titlepage"><div><div><h4 class="title"><a id="idp324368"></a>Configuring Tomcat for AJP</h4></div></div></div>
+                
+                <p>To allow AJP connections to Tomcat, you must add a connector to Tomcat's
+                        <code class="filename">conf/server.xml</code>. There may already be an example
+                    connector in your <code class="filename">server.xml</code>, in which case all you need to
+                    do is uncomment it, editing the port number as desired:</p>
+                <div class="informalexample">
+                    <pre class="programlisting">&lt;Connector port="8009" protocol="AJP/1.3"
+    URIEncoding="UTF-8"
+    redirectPort="8443" /&gt;</pre>
+                </div>
+                <p>Tomcat must be restarted after the connector is added.</p>
+                <p>The <code class="code">URIEncoding="UTF-8"</code> attribute above ensures that connection
+                    names, user names, etc. which contain non-latin characters are properly
+                    received. If you will be creating connections that have Cyrillic, Chinese,
+                    Japanese, etc. characters in the names or parameter values, you should be sure
+                    to set this attribute.</p>
+            </div>
+            <div class="section" title="Forwarding HTTP requests over AJP"><div class="titlepage"><div><div><h4 class="title"><a id="idp329088"></a>Forwarding HTTP requests over AJP</h4></div></div></div>
+                
+                <p>Once the connector is open, and Tomcat is listening on the port specified, you
+                    can edit your Apache configuration, adding a location which will proxy the
+                    Guacamole web application served via AJP by Tomcat:</p>
+                <div class="informalexample">
+                    <pre class="programlisting">&lt;Location /guacamole/&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass ajp://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8009</code></em>/guacamole/ max=20 flushpackets=on
+    ProxyPassReverse <em class="replaceable"><code>http://HOSTNAME</code></em>/guacamole/
+&lt;/Location&gt;</pre>
+                </div>
+                <p>The most important thing in this entire section is the option
+                        <code class="option">flushpackets=on</code>. Most proxies, including
+                        <span class="package">mod_proxy</span>, will buffer all data sent over the connection,
+                    waiting until the connection is closed before sending that data to the client.
+                    As Guacamole's tunnel will stream data to the client over an open connection,
+                    buffering this stream breaks Guacamole's communication.</p>
+                <p><span class="emphasis"><em>If the option <code class="option">flushpackets=on</code> is not specified,
+                        Guacamole will not work</em></span>.</p>
+                <p>Note also the protocol of the URL specified in the
+                        <em class="parameter"><code>ProxyPassReverse</code></em> directive. The protocol
+                        <span class="emphasis"><em>MUST</em></span> match the protocol that will be used to connect to
+                    to Apache. The example above specifies <em class="replaceable"><code>http</code></em>, but if
+                    you are using HTTPS then the URL specified here will have to reflect
+                    this.</p>
+            </div>
+        </div>
+        <div class="section" title="Using HTTP"><div class="titlepage"><div><div><h3 class="title"><a id="http-proxy"></a>Using HTTP</h3></div></div></div>
+            
+            <p>If you don't wish to use AJP, the default HTTP connector (or any HTTP connector)
+                can be used without any noticeable performance hit.</p>
+            <div class="section" title="Configuring Tomcat for HTTP"><div class="titlepage"><div><div><h4 class="title"><a id="idp338624"></a>Configuring Tomcat for HTTP</h4></div></div></div>
+                
+                <p>Tomcat is most likely already configured to listen for HTTP connections on
+                    port 8080 as this is the default. In the case that the default HTTP connector
+                    has been disabled or removed, you need to add a connector entry to
+                        <code class="filename">conf/server.xml</code>:</p>
+                <div class="informalexample">
+                    <pre class="programlisting">&lt;Connector port="8080" protocol="HTTP/1.1" 
+           connectionTimeout="20000"
+           URIEncoding="UTF-8"
+           redirectPort="8443" /&gt;</pre>
+                </div>
+                <div class="important" title="Important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3>
+                    <p>If you want to edit or add this connector just to change the port used by
+                        Tomcat to port 80, you should consider simply proxying the original port
+                        through Apache instead. On Linux and UNIX systems, a process must be running
+                        with root privileges to listen on any port under 1024, including port 80.
+                        Proxying Tomcat through Apache means Tomcat can run as a reduced-privilege
+                        user, while Apache can bear the burden of root privileges. Further, as
+                        Apache is a native application, it can make system calls to safely drop root
+                        privileges once the port is open; a Java application like Tomcat cannot do
+                        this.</p>
+                </div>
+                <p>As with AJP, be sure to specify the <code class="code">URIEncoding="UTF-8"</code> attribute
+                    as above to ensure that connection names, user names, etc. are properly
+                    received. If you will be creating connections that have Cyrillic, Chinese,
+                    Japanese, etc. characters in the names or parameter values, this attribute is
+                    required.</p>
+            </div>
+            <div class="section" title="Forwarding HTTP requests over HTTP"><div class="titlepage"><div><div><h4 class="title"><a id="idp344128"></a>Forwarding HTTP requests over HTTP</h4></div></div></div>
+                
+                <p>The configuration necessary to proxy HTTP requests is similar to the
+                    configuration required for proxying requests through AJP. In fact, it is
+                    completely identical except for the differing protocol names in the URIs given
+                    to the proxy directives:</p>
+                <div class="informalexample">
+                    <pre class="programlisting">&lt;Location /guacamole/&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/ max=20 flushpackets=on
+    ProxyPassReverse http://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8080</code></em>/guacamole/
+&lt;/Location&gt;</pre>
+                </div>
+                <p>Again, take note of the option <code class="option">flushpackets=on</code>. This option
+                    is absolutely critical as <span class="package">mod_proxy</span> will otherwise buffer all
+                    data sent over the connection, rendering Guacamole unusable.</p>
+                <p><span class="emphasis"><em>If the option <code class="option">flushpackets=on</code> is not specified,
+                        Guacamole will not work</em></span>.</p>
+            </div>
+        </div>
+        <div class="section" title="Disable logging of tunnel requests"><div class="titlepage"><div><div><h3 class="title"><a id="disable-tunnel-logging"></a>Disable logging of tunnel requests</h3></div></div></div>
+            
+            <p>The Guacamole HTTP tunnel works by transferring a continuous stream of data over
+                multiple short-lived streams, each associated with a separate HTTP request. Each
+                HTTP request will be logged by Apache if you don not explicitly disable logging of
+                those requests.</p>
+            <p>Apache provides a means of matching URL patterns and setting environment variables
+                based on whether the URL matches. Logging can then be restricted to requests which
+                lack this environment variable:</p>
+            <div class="informalexample">
+                <pre class="programlisting">SetEnvIf Request_URI "^<em class="replaceable"><code>/guacamole</code></em>/tunnel" dontlog
+CustomLog  <em class="replaceable"><code>/var/log/apache2/guac.log</code></em> common env=!dontlog</pre>
+            </div>
+            <p>There is little value in a log file filled with identical tunnel requests.</p>
+            <p>Note that if you are serving Guacamole under a path different from
+                    <code class="uri">/guacamole/</code>, you will need to change the value of
+                    <em class="parameter"><code>Request_URI</code></em> above accordingly.</p>
+        </div>
+        <div class="section" title="Proxying under a different path"><div class="titlepage"><div><div><h3 class="title"><a id="change-web-app-path"></a>Proxying under a different path</h3></div></div></div>
+            
+            <p>If you wish to serve Guacamole through Apache under a different path than it is
+                served under Tomcat, the configuration required for Apache will be slightly
+                different than the examples above due to cookies.</p>
+            <p>When a user logs in to Guacamole, a new session is created, and that session is
+                associated with a cookie sent to the user after they successfully log in. This
+                cookie is specific to the absolute path of the web application
+                    (<code class="uri">/guacamole</code>). If the path being used for Guacamole under Apache
+                differs from that used by Tomcat, the path in the cookie needs to be modified.
+                Thankfully, <span class="package">mod_proxy</span> has a directive for this:
+                    <em class="parameter"><code>ProxyPassReverseCookiePath</code></em>.</p>
+            <div class="informalexample">
+                <pre class="programlisting">&lt;Location /<em class="replaceable"><code>new-path/</code></em>&gt;
+    Order allow,deny
+    Allow from all
+    ProxyPass ajp://<em class="replaceable"><code>HOSTNAME</code></em>:<em class="replaceable"><code>8009</code></em>/guacamole/ max=20 flushpackets=on
+    ProxyPassReverse <em class="replaceable"><code>http://HOSTNAME</code></em>/guacamole/
+    ProxyPassReverseCookiePath /guacamole/ <em class="replaceable"><code>/new-path/</code></em>
+&lt;/Location&gt;</pre>
+            </div>
+            <p>The configuration shown above is similar to the configuration shown for generic
+                AJP proxying, except that the additional
+                    <em class="parameter"><code>ProxyPassReverseCookiePath</code></em> directive is given,
+                instructing <span class="package">mod_proxy</span> to update the cookie path, changing
+                    <code class="uri">/guacamole/</code> to <code class="uri">/new-path/</code>, the same path specified when
+                the location was declared.</p>
+            <p>Be careful when specifying the URL in the <em class="parameter"><code>ProxyPassReverse</code></em>
+                directive. The protocol of the URL <span class="emphasis"><em>MUST</em></span> match the protocol that
+                will be used to connect to to Apache, even if it differs from the protocol being
+                used to connect to Tomcat.</p>
+        </div>
+    </div>
+</div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="guacamole-architecture.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="configuring-guacamole.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 1. Implementation and architecture </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Configuring Guacamole</td></tr></table></div>
+
+            </div></div>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75289145-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+        </body></html>
