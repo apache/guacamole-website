@@ -47,8 +47,12 @@ div#header > * {
     padding-left: 1.5em;
     background-image: url('/images/guac-logo.png');
     background-repeat: no-repeat;
-    background-size: 1em;
-    background-position: 0.25em center;
+    -moz-background-size:    1em;
+    -webkit-background-size: 1em;
+    background-size:         1em;
+    -moz-background-position:    0.25em center;
+    -webkit-background-position: 0.25em center;
+    background-position:         0.25em center;
 }
 
 #content > ul.features {
@@ -75,6 +79,8 @@ ul.features li::before {
     height: 1in;
     width: 1in;
     background: #304730;
+    -moz-border-radius: 1in;
+    -webkit-border-radius: 1in;
     border-radius: 1in;
     display: block;
     position: absolute;
@@ -82,12 +88,18 @@ ul.features li::before {
     top: 50%;
     margin-top: -0.5in;
     background-repeat: no-repeat;
+    -moz-background-size: 75%;
+    -webkit-background-size: 75%;
     background-size: 75%;
+    -moz-background-position: center;
+    -webkit-background-position: center;
     background-position: center;
 }
 
 ul.features li.apache::before {
     background-image: url('/images/feather.png');
+    -moz-background-size: 40%;
+    -webkit-background-size: 40%;
     background-size: 40%;
 }
 
