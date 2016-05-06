@@ -30,7 +30,7 @@
 # The built results will be available in the "content" subdirectory of the
 # source tree.
 #
-# To stage the results for commit to the "asf-git" branch, specify "stage"
+# To stage the results for commit to the "asf-site branch, specify "stage"
 # instead of an HTTP port number.
 #
 # USAGE:
@@ -131,7 +131,7 @@ serve() {
 }
 
 ##
-## Stages the current build result for commit to the "asf-git" branch.
+## Stages the current build result for commit to the "asf-site" branch.
 ##
 stage() {
 
@@ -144,8 +144,8 @@ stage() {
     mv content/* "$TMP"
     rmdir content
 
-    # Change to asf-git
-    git checkout asf-git
+    # Change to asf-site
+    git checkout asf-site
 
     # Replace contents
     rm -rf content
@@ -172,7 +172,7 @@ if [ "$#" -gt 1 -o "$1" = "-h" ]; then
     log "    $0 -h       # Display this message"
     log "    $0          # Build website"
     log "    $0 PORT     # Build website and serve from the given PORT"
-    log "    $0 stage    # Build website and stage the contents for asf-git"
+    log "    $0 stage    # Build website and stage the contents for asf-site"
     exit 1
 fi
 
