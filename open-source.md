@@ -53,14 +53,7 @@ greater good. It is thus important to remember:
 3. Develop against the most recent code on git. Patches against releases and
    naive copies of entire files cannot be accepted as they lack context and
    are likely out of date.
-4. You will need a [signed CLA](https://www.apache.org/licenses/icla.txt) on
-   file with the Apache Software Foundation, to ensure we have the legal right
-   to include your code. If the contribution was created for your employer or
-   using your employer's resources, the ASF will also need to sign the
-   [corporate CLA](https://www.apache.org/licenses/cla-corporate.txt). For more
-   information, please see
-   [the ASF's documentation regarding CLAs](https://www.apache.org/licenses/#clas).
-5. Code must follow consistent style or it will become unreadable and
+4. Code must follow consistent style or it will become unreadable and
    unmaintainable. Please read through our [style guidelines](/guac-style/) and,
    when in doubt, follow the style of the code you are modifying.
 
