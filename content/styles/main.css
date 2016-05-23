@@ -602,6 +602,7 @@ table.releases td {
 
     #header h1 {
         font-size: 1.75em;
+        white-space: normal;
     }
 
     div#header > * {
