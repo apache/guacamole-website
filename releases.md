@@ -33,7 +33,7 @@ Unless you already know that you need a *very* specific version (your custom or 
         <th>Summary</th>
         <th>Release Date</th>
     </tr>
-    {% assign releases = site.releases | sort: 'date' %}
+    {% assign releases = site.legacy-releases | sort: 'date' %}
     {% for release in releases reversed %}
         {% if release.title %}
             <tr>

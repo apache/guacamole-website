@@ -31,8 +31,8 @@ exclude:
 # Custom collections
 collections:
 
-    # All Apache Guacamole releases
-    releases:
+    # All Guacamole releases from prior to the Apache Incubator
+    legacy-releases:
         output: true
         permalink: /releases/:title/
 
@@ -47,7 +47,7 @@ collections:
 # Site-wide defaults
 defaults:
 
-    # All releases should use the "release" layout
-    - scope:  { type: releases }
-      values: { layout: release }
+    # All legacy (pre-Apache) releases should use the "legacy-release" layout
+    - scope:  { type: legacy-releases }
+      values: { layout: legacy-release }
 
