@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 16. guacamole-ext</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="developers-guide.html" title="Part II. Developer's Guide" /><link rel="prev" href="guacamole-common-js.html" title="Chapter 15. guacamole-common-js" /><link rel="next" href="custom-protocols.html" title="Chapter 17. Adding new protocols" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 16. guacamole-ext</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="guacamole-common-js.html">Prev</a> </td><th width="60%" align="center">Part II. Developer's Guide</th><td width="20%" align="right"> <a accesskey="n" href="custom-protocols.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="guacamole-ext"></a>Chapter 16. guacamole-ext</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="guacamole-ext.html#ext-file-format">Guacamole extension format</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-ext.html#ext-manifest">Extension manifest</a></span></dt><dt><span class="section"><a href="guacamole-ext.html#ext-patch-html">Updating existing HTML</a></span></dt></dl></dd><dt><span class="section"><a href="guacamole-ext.html#ext-environment">Accessing the server configuration</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-ext.html#ext-simple-config">Custom properties</a></span></dt><dt><span class="section"><a href="guacamole-ext.html#ext-advanced-config">Advanced configuration</a></span></dt></dl></dd><dt><span class="section"><a href="guacamole-ext.html#ext-auth-providers">Authentication providers</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-ext.html#ext-simple-auth"><code class="classname">SimpleAuthenticationProvider</code></a></span></dt></dl></dd><dt><span class="section"><a href="guacamole-ext.html#ext-user-context">The <code class="classname">UserContext</code></a></span></dt><dt><span class="section"><a href="guacamole-ext.html#ext-object-directories"><code class="classname">Directory</code> classes</a></span></dt><dt><span class="section"><a href="guacamole-ext.html#ext-permissions">Permissions</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-ext.html#idm139658298805616">System permissions</a></span></dt><dt><span class="section"><a href="guacamole-ext.html#idm139658298792368">Object permissions</a></span></dt></dl></dd><dt><span class="section"><a href="guacamole-ext.html#ext-connections">Connections</a></span></dt><dt><span class="section"><a href="guacamole-ext.html#ext-active-connections">Managing/sharing active connections</a></span></dt></dl></div><a id="idm139658299241296" class="indexterm"></a><a id="idm139658299239952" class="indexterm"></a><p>While not strictly part of the Java API provided by the Guacamole project, guacamole-ext
+        is an API exposed by the Guacamole web application within a separate project such that
+        extensions, specifically authentication providers, can be written to tweak Guacamole to fit
+        well in existing deployments.</p><p>Extensions to Guacamole can:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Provide alternative authentication methods and sources of connection/user
+                data.</p></li><li class="listitem"><p>Theme or brand Guacamole through additional CSS files and static resources.</p></li><li class="listitem"><p>Extend Guacamole's JavaScript code by providing JavaScript that will be loaded
+                automatically.</p></li><li class="listitem"><p>Add additional display languages, or alter the translation strings of existing
+                languages.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-file-format"></a>Guacamole extension format</h2></div></div></div><p>Guacamole extensions are standard Java <code class="filename">.jar</code> files which contain
+            all classes and resources required by the extension, as well as the Guacamole extension
+            manifest. There is no set structure to an extension except that the manifest must be in
+            the root of the archive. Java classes and packages, if any, will be read from the
+                <code class="filename">.jar</code> relative to the root, as well.</p><p>Beyond this, the semantics and locations associated with all other resources within
+            the extension are determined by the extension manifest alone.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ext-manifest"></a>Extension manifest</h3></div></div></div><p>The Guacamole extension manifest is a single JSON file,
+                    <code class="filename">guac-manifest.json</code>, which describes the location of each
+                resource, the type of each resource, and the version of Guacamole that the extension
+                was built for. The manifest can contain the following properties:</p><div class="informaltable"><table border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Property</th><th>Description</th></tr></thead><tbody><tr><td><span class="property">guacamoleVersion</span></td><td>
+                                <p>The version string of the Guacamole release that this
+                                    extension is written for. <span class="emphasis"><em>This property is required
+                                        for all extensions.</em></span> The special version string
+                                        <code class="code">"*"</code> can be used if the extension does not
+                                    depend on a particular version of Guacamole, but be careful -
+                                    this will bypass version compatibility checks, and should never
+                                    be used if the extension does more than basic theming or
+                                    branding.</p>
+                            </td></tr><tr><td><span class="property">name</span></td><td>
+                                <p>A human-readable name for the extension. <span class="emphasis"><em>This
+                                        property is required for all extensions.</em></span> When
+                                    your extension is successfully loaded, a message acknowledging
+                                    the successful loading of your extension by name will be
+                                    logged.</p>
+                            </td></tr><tr><td><span class="property">namespace</span></td><td>
+                                <p>A unique string which identifies your extension.
+                                        <span class="emphasis"><em>This property is required for all
+                                        extensions.</em></span> This string should be unique enough
+                                    that it is unlikely to collide with the namespace of any other
+                                    extension.</p>
+                                <p>If your extension contains static resources, those resources
+                                    will be served at a path derived from the namespace provided
+                                    here.</p>
+                            </td></tr><tr><td><span class="property">authProviders</span></td><td>
+                                <p>An array of the classnames of all
+                                        <code class="classname">AuthenticationProvider</code> subclasses
+                                    provided by this extension.</p>
+                            </td></tr><tr><td><span class="property">js</span></td><td>
+                                <p>An array of all JavaScript files within the extension. All
+                                    paths within this array must be relative paths, and will be
+                                    interpreted relative to the root of the archive.</p>
+                                <p>JavaScript files declared here will be automatically loaded
+                                    when the web application loads within the user's browser.</p>
+                            </td></tr><tr><td><span class="property">css</span></td><td>
+                                <p>An array of all CSS files within the extension. All paths
+                                    within this array must be relative paths, and will be
+                                    interpreted relative to the root of the archive.</p>
+                                <p>CSS files declared here will be automatically applied when the
+                                    web application loads within the user's browser.</p>
+                            </td></tr><tr><td><span class="property">html</span></td><td>
+                                <p>An array of all HTML files within the extension that should be
+                                    used to update or replace existing HTML within the Guacamole
+                                    interface. All paths within this array must be relative paths,
+                                    and will be interpreted relative to the root of the
+                                    archive.</p>
+                                <p>HTML files declared here will be automatically applied to
+                                    other HTML within the Guacamole interface when the web
+                                    application loads within the user's browser. The manner in which
+                                    the files are applied is dictated by <code class="sgmltag-element">&lt;meta ...&gt;</code>
+                                    within those same files.</p>
+                            </td></tr><tr><td><span class="property">translations</span></td><td>
+                                <p>An array of all translation files within the extension. All
+                                    paths within this array must be relative paths, and will be
+                                    interpreted relative to the root of the archive.</p>
+                                <p>Translation files declared here will be automatically added to
+                                    the available languages. If a translation file provides a
+                                    language that already exists within Guacamole, its strings will
+                                    override the strings of the existing translation.</p>
+                            </td></tr><tr><td><span class="property">resources</span></td><td>
+                                <p>An object where each property name is the name of a web
+                                    resource file, and each value is the mimetype for that resource.
+                                    All paths within this object must be relative paths, and will be
+                                    interpreted relative to the root of the archive.</p>
+                                <p>Web resources declared here will be made available to the
+                                    application at
+                                            <code class="filename">app/ext/<em class="replaceable"><code>NAMESPACE</code></em>/<em class="replaceable"><code>PATH</code></em></code>,
+                                    where <em class="replaceable"><code>NAMESPACE</code></em> is the value of the
+                                        <span class="property">namespace</span> property, and
+                                        <em class="replaceable"><code>PATH</code></em> is the declared web resource
+                                    filename.</p>
+                            </td></tr></tbody></table></div><p>The only absolutely required properties are <span class="property">guacamoleVersion</span>,
+                    <span class="property">name</span>, and <span class="property">namespace</span>, as they are used
+                to identify the extension and for compatibility checks. The most minimal
+                    <code class="filename">guac-manifest.json</code> will look something like this:</p><div class="informalexample"><pre class="programlisting">{
+    "guacamoleVersion" : "0.9.10-incubating",
+    "name" : "My Extension",
+    "namespace" : "my-extension"
+}</pre></div><p>This will allow the extension to load, but does absolutely nothing otherwise.
+                Lacking the semantic information provided by the other properties, no other files
+                within the extension will be used. A typical <code class="filename">guac-manifest.json</code>
+                for an extension providing theming or branding would be more involved:</p><div class="informalexample"><pre class="programlisting">{
+
+    "guacamoleVersion" : "0.9.10-incubating",
+
+    "name"      : "My Extension",
+    "namespace" : "my-extension",
+
+    "css" : [ "theme.css" ],
+
+    "html" : [ "loginDisclaimer.html" ],
+
+    "resources" : {
+        "images/logo.png"   : "image/png",
+        "images/cancel.png" : "image/png",
+        "images/delete.png" : "image/png"
+    }
+
+}</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ext-patch-html"></a>Updating existing HTML</h3></div></div></div><p>The existing HTML structure of Guacamole's interface can be modified by extensions
+                through special "patch" HTML files declared by the <span class="property">html</span>
+                property in <code class="filename">guac-manifest.json</code>. These files are HTML fragments
+                and are identical to any other HTML file except that they contain Guacamole-specific
+                    <code class="sgmltag-element">meta</code> tags that instruct Guacamole to modify its own HTML in a
+                particular way. Each <code class="sgmltag-element">meta</code> tag takes the following form:</p><div class="informalexample"><pre class="programlisting">&lt;meta name="<em class="replaceable"><code>NAME</code></em>" content="<em class="replaceable"><code>SELECTOR</code></em>"&gt;</pre></div><p>where <em class="replaceable"><code>SELECTOR</code></em> is a CSS selector that matches the
+                elements within the Guacamole interface that serve as a basis for the modification,
+                and <em class="replaceable"><code>NAME</code></em> is any one of the following defined
+                modifications:</p><div class="informaltable"><table border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><span class="property">before</span></td><td>
+                                <p>Inserts the specified HTML immediately before any element
+                                    matching the CSS selector.</p>
+                            </td></tr><tr><td><span class="property">after</span></td><td>
+                                <p>Inserts the specified HTML immediately after any element
+                                    matching the CSS selector.</p>
+                            </td></tr><tr><td><span class="property">replace</span></td><td>
+                                <p>Replaces any element matching the CSS selector with the
+                                    specified HTML.</p>
+                            </td></tr><tr><td><span class="property">before-children</span></td><td>
+                                <p>Inserts the specified HTML immediately before the first child
+                                    (if any) of any element matching the CSS selector. If a matching
+                                    element has no children, the HTML simply becomes the entire
+                                    contents of the matching element.</p>
+                            </td></tr><tr><td><span class="property">after-children</span></td><td>
+                                <p>Inserts the specified HTML immediately after the last child
+                                    (if any) of any element matching the CSS selector. If a matching
+                                    element has no children, the HTML simply becomes the entire
+                                    contents of the matching element.</p>
+                            </td></tr><tr><td><span class="property">replace-children</span></td><td>
+                                <p>Replaces the entire contents of any element matching the CSS
+                                    selector with the specified HTML.</p>
+                            </td></tr></tbody></table></div><p>For example, to add a welcome message and link to some corporate privacy policy (a
+                fairly common need), you would add an HTML file like the following:</p><div class="informalexample"><pre class="programlisting">&lt;meta name="after" content=".login-ui .login-dialog"&gt;
+
+&lt;div class="welcome"&gt;
+    &lt;h2&gt;Welcome to our Guacamole server!&lt;/h2&gt;
+    &lt;p&gt;
+        Please be sure to read our &lt;a href="/path/to/some/privacy.html"&gt;privacy
+        policy&lt;/a&gt; before continuing.
+    &lt;/p&gt;
+&lt;/div&gt;</pre></div><p>After the extension is installed and Guacamole is restarted, the "welcome" div and
+                its contents will automatically be inserted directly below the login dialog (the
+                only element that would match <code class="code">.login-ui .login-dialog</code>) as if they were
+                part of Guacamole's HTML in the first place.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-environment"></a>Accessing the server configuration</h2></div></div></div><p>The configuration of the Guacamole server is exposed through the
+                <code class="classname">Environment</code> interface, specifically the
+                <code class="classname">LocalEnvironment</code> implementation of this interface. Through
+                <code class="classname">Environment</code>, you can access all properties declared within
+                <code class="filename">guacamole.properties</code>, determine the proper hostname/port of
+                <span class="package">guacd</span>, and access the contents of
+                <code class="varname">GUACAMOLE_HOME</code>.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ext-simple-config"></a>Custom properties</h3></div></div></div><p>If your extension requires generic, unstructured configuration parameters,
+                    <code class="filename">guacamole.properties</code> is a reasonable and simple location
+                for them. The <code class="classname">Environment</code> interface provides direct access to
+                    <code class="filename">guacamole.properties</code> and simple mechanisms for reading and
+                parsing the properties therein. The value of a property can be retrieved calling
+                    <code class="methodname">getProperty()</code>, which will return
+                    <code class="constant">null</code> or a default value for undefined properties, or
+                    <code class="methodname">getRequiredProperty()</code>, which will throw an exception
+                for undefined properties.</p><p>For convenience, guacamole-ext contains several pre-defined property base classes
+                for common types:</p><div class="informaltable"><table border="1"><colgroup><col class="c1" /><col class="c2" /><col class="c3" /></colgroup><thead><tr><th>Class Name</th><th>Value Type</th><th>Interpretation</th></tr></thead><tbody><tr><td><code class="classname">BooleanGuacamoleProperty</code></td><td><code class="classname">Boolean</code></td><td>The values "true" and "false" are parsed as their corresponding
+                                    <code class="classname">Boolean</code> values. Any other value results
+                                in a parse error.</td></tr><tr><td><code class="classname">IntegerGuacamoleProperty</code></td><td><code class="classname">Integer</code></td><td>Numeric strings are parsed as <code class="classname">Integer</code>
+                                values. Non-numeric strings will result in a parse error.</td></tr><tr><td><code class="classname">LongGuacamoleProperty</code></td><td><code class="classname">Long</code></td><td>Numeric strings are parsed as <code class="classname">Long</code> values.
+                                Non-numeric strings will result in a parse error.</td></tr><tr><td><code class="classname">StringGuacamoleProperty</code></td><td><code class="classname">String</code></td><td>The property value is returned as an untouched
+                                    <code class="classname">String</code>. No parsing is performed, and
+                                parse errors cannot occur.</td></tr><tr><td><code class="classname">FileGuacamoleProperty</code></td><td><code class="classname">File</code></td><td>The property is interpreted as a filename, and a new
+                                    <code class="classname">File</code> pointing to that filename is
+                                returned. If the filename is invalid, a parse error will be thrown.
+                                Note that the file need not exist or be accessible for the filename
+                                to be valid.</td></tr></tbody></table></div><p>To use these types, you must extend the base class, implementing the
+                    <code class="methodname">getName()</code> function to identify your property.
+                Typically, you would declare these properties as static members of some class
+                containing all properties relevant to your extension:</p><div class="informalexample"><pre class="programlisting">public class MyProperties {
+
+    public static <em class="replaceable"><code>MY_PROPERTY</code></em> = new IntegerGuacamoleProperty() {
+
+        @Override
+        public String getName() { return "<em class="replaceable"><code>my-property</code></em>"; }
+
+    };
+
+}</pre></div><p>Your property can then be retrieved with <code class="methodname">getProperty()</code> or
+                    <code class="methodname">getRequiredProperty()</code>:</p><div class="informalexample"><pre class="programlisting">Integer value = environment.getProperty(<em class="replaceable"><code>MyProperties.MY_PROPERTY</code></em>);</pre></div><p>If you need more sophisticated parsing, you can also implement your own property
+                types by implementing the <code class="classname">GuacamoleProperty</code> interface. The
+                only functions to implement are <code class="methodname">getName()</code>, which returns
+                the name of the property, and <code class="methodname">parseValue()</code>, which parses a
+                given string and returns its value.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ext-advanced-config"></a>Advanced configuration</h3></div></div></div><p>If you need more structured data than provided by simple properties, you can place
+                completely arbitrary files in a hierarchy of your choosing anywhere within
+                    <code class="varname">GUACAMOLE_HOME</code> as long as you avoid placing your files in
+                directories reserved for other purposes as described above.</p><p>The Environment interface exposes the location of
+                    <code class="varname">GUACAMOLE_HOME</code> through the
+                    <code class="methodname">getGuacamoleHome()</code> function. This function returns a
+                standard Java <code class="classname">File</code> which can then be used to locate other
+                files or directories within <code class="varname">GUACAMOLE_HOME</code>:</p><div class="informalexample"><pre class="programlisting">File myConfigFile = new File(environment.getGuacamoleHome(), "my-config.xml");</pre><p>There is no guarantee that <code class="varname">GUACAMOLE_HOME</code> or your file will
+                    exist, and you should verify this before proceeding further in your extension's
+                    configuration process, but once this is done you can simply parse your file as
+                    you see fit.</p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-auth-providers"></a>Authentication providers</h2></div></div></div><p>Guacamole's authentication system is driven by authentication providers, which are
+            classes which implement the <code class="classname">AuthenticationProvider</code> interface
+            defined by guacamole-ext. When any page within Guacamole is visited, the following
+            process occurs:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>All currently installed extensions are polled, in lexicographic order of their
+                    filenames, by invoking the <code class="methodname">getAuthenticatedUser()</code>
+                    function with a <code class="classname">Credentials</code> object constructed with the
+                    contents of the HTTP request.</p><p>The credentials given are abstract. While the Credentials object provides
+                    convenience access to a traditional username and password,
+                        <span class="emphasis"><em>implementations are not required to use usernames and
+                        passwords</em></span>. The entire contents of the HTTP request is at your
+                    disposal, including parameters, cookies, and SSL information.</p></li><li class="listitem"><p>If an authentication attempt fails, the extension throws either a
+                        <code class="classname">GuacamoleInsufficientCredentialsException</code> (if more
+                    credentials are needed before validity can be determined) or
+                        <code class="classname">GuacamoleInvalidCredentialsException</code> (if the
+                    credentials are technically sufficient, but are invalid as provided). If all
+                    extensions fail to authenticate the user, the contents of the exception thrown
+                    by the first extension to fail are used to produce the user login prompt.</p><p><span class="emphasis"><em>Note that this means there is no "login screen" in Guacamole per se;
+                        the prompt for credentials for unauthenticated users is determined purely
+                        based on the needs of the extension as declared within the authentication
+                        failure itself.</em></span></p><p>If an authentication attempt succeeds, the extension returns an instance of
+                        <code class="classname">AuthenticatedUser</code> describing the identity of the user
+                    that just authenticated, and no further extensions are polled.</p></li><li class="listitem"><p>If authentication has succeeded, and thus an
+                        <code class="classname">AuthenticatedUser</code> is available, that
+                        <code class="classname">AuthenticatedUser</code> is passed to the
+                        <code class="methodname">getUserContext()</code> function of all extensions'
+                    authentication providers. Each extension now has the opportunity to provide
+                    access to data for a user, even if that extension did not originally
+                    authenticate the user. If no <code class="classname">UserContext</code> is returned for
+                    the given <code class="classname">AuthenticatedUser</code>, then that extension has
+                    simply refused to provide data for that user.</p><p>The Guacamole interface will transparently unify the data from each extension,
+                    providing the user with a view of all available connections. If the user has
+                    permission to modify or administer any objects associated with an extension,
+                    access to the administrative interface will be exposed as well, again with a
+                    unified view of all applicable objects.</p></li></ol></div><div class="important"><h3 class="title">Important</h3><p>Because authentication is decoupled from data storage/access, <span class="emphasis"><em>you do not
+                    need to implement full-blown data storage if you only wish to provide an
+                    additional authentication mechanism</em></span>. You can instead implement only
+                the authentication portion of an <code class="classname">AuthenticationProvider</code>, and
+                otherwise rely on the storage and features provided by other extensions, such as the
+                    <a class="link" href="jdbc-auth.html" title="Chapter 6. Database authentication">database
+                    authentication extension</a>.</p></div><p>The Guacamole web application includes a basic authentication provider implementation
+            which parses an XML file to determine which users exist, their corresponding passwords,
+            and what configurations those users have access to. This is the part of Guacamole that
+            reads the <code class="filename">user-mapping.xml</code> file. If you use a custom authentication
+            provider for your authentication, this file will probably not be required.</p><p>The community has implemented authentication providers which access databases, use
+            LDAP, or even perform no authentication at all, redirecting all users to a single
+            configuration specified in <code class="filename">guacamole.properties</code>.</p><p>A minimal authentication provider is implemented in the tutorials later, and the
+            upstream authentication provider implemented within Guacamole, as well as the
+            authentication providers implemented by the community, are good examples for how
+            authentication can be extended without having to implement a whole new web
+            application.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ext-simple-auth"></a><code class="classname">SimpleAuthenticationProvider</code></h3></div></div></div><p>The <code class="classname">SimpleAuthenticationProvider</code> class provides a much
+                simpler means of implementing authentication when you do not require the ability to
+                add and remove users and connections. It is an abstract class and requires only one
+                function implementation:
+                <code class="methodname">getAuthorizedConfigurations()</code>.</p><p>This function is required to return a <code class="classname">Map</code> of unique IDs to
+                configurations, where these configurations are all configurations accessible with
+                the provided credentials. As before, the credentials given are abstract. You are not
+                required to use usernames and passwords.</p><p>The configurations referred to by the function name are instances of
+                    <code class="classname">GuacamoleConfiguration</code> (part of guacamole-common), which
+                is just a wrapper around a protocol name and set of parameter name/value pairs. The
+                name of the protocol to use and a set of parameters is the minimum information
+                required for other parts of the Guacamole API to complete the handshake required by
+                the Guacamole protocol.</p><p>When a class that extends <code class="classname">SimpleAuthenticationProvider</code> is
+                asked for more advanced operations by the web application,
+                    <code class="classname">SimpleAuthenticationProvider</code> simply returns that there is
+                no permission to do so. This effectively disables all administrative functionality
+                within the web interface.</p><p>If you choose to go the simple route, most of the rest of this chapter is
+                irrelevant. Permissions, security model, and various classes will be discussed that
+                are all handled for you automatically by
+                    <code class="classname">SimpleAuthenticationProvider</code>.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-user-context"></a>The <code class="classname">UserContext</code></h2></div></div></div><p>The <code class="classname">UserContext</code> is the root of all data-related operations. It
+            is used to list, create, modify, or delete users and connections, as well as to query
+            available permissions. If an extension is going to provide access to data of any sort,
+            it must do so through the <code class="classname">UserContext</code>.</p><p>The Guacamole web application uses permissions queries against the
+                <code class="classname">UserContext</code> to determine what operations to present, but
+                <span class="emphasis"><em>beware that it is up to the <code class="classname">UserContext</code> to actually
+                enforce these restrictions</em></span>. The Guacamole web application will not
+            enforce restrictions on behalf of the <code class="classname">UserContext</code>.</p><p>The <code class="classname">UserContext</code> is the sole means of entry and the sole means
+            of modification available to a logged-in user. If the <code class="classname">UserContext</code>
+            refuses to perform an operation (by throwing an exception), the user cannot perform the
+            operation at all.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-object-directories"></a><code class="classname">Directory</code> classes</h2></div></div></div><p>Access to objects beneath the <code class="classname">UserContext</code> is given through
+                <code class="classname">Directory</code> classes. These <code class="classname">Directory</code>
+            classes are similar to Java collections, but they also embody update and batching
+            semantics. Objects can be retrieved from a <code class="classname">Directory</code> using its
+                <code class="methodname">get()</code> function and added or removed with
+                <code class="methodname">add()</code> and <code class="methodname">remove()</code> respectively,
+            but objects already in the set can also be updated by passing an updated object to its
+                <code class="methodname">update()</code> function.</p><p>An implementation of a <code class="classname">Directory</code> can rely on these functions to
+            define the semantics surrounding all operations. The <code class="methodname">add()</code>
+            function is called only when creating new objects, the <code class="methodname">update()</code>
+            function is called only when updating an object previously retrieved with
+                <code class="methodname">get()</code>, and <code class="methodname">remove()</code> is called only
+            when removing an existing object by its identifier.</p><p>When implementing an <code class="classname">AuthenticationProvider</code>, you must ensure
+            that the <code class="classname">UserContext</code> will only return
+                <code class="classname">Directory</code> classes that automatically enforce the permissions
+            associated with all objects and the associated user.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-permissions"></a>Permissions</h2></div></div></div><p>The permissions system within guacamole-ext is an advisory system. It is the means by
+            which an authentication module describes to the web application what a user is allowed
+            to do. The body of permissions granted to a user describes which objects that user can
+            see and what they can do to those objects, and thus suggests how the Guacamole interface
+            should appear to that user.</p><p><span class="emphasis"><em>Permissions are not the means by which access is restricted</em></span>; they
+            are purely a means of describing access level. An implementation may internally use the
+            permission objects to define restrictions, but this is not required. It is up to the
+            implementation to enforce its own restrictions by throwing exceptions when an operation
+            is not allowed, and to correctly communicate the abilities of individual users through
+            these permissions.</p><p>The permissions available to a user are exposed through the
+                <code class="classname">SystemPermissionSet</code> and
+                <code class="classname">ObjectPermissionSet</code> classes which are accessible through the
+                <code class="classname">UserContext</code>. These classes also serve as the means for
+            manipulating the permissions granted to a user.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm139658298805616"></a>System permissions</h3></div></div></div><p>System permissions describe access to operations that manipulate the system as a
+                whole, rather than specific objects. This includes the creation of new objects, as
+                object creation directly affects the system, and per-object controls cannot exist
+                before the object is actually created.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="constant">ADMINISTER</code></span></dt><dd><p>The user is a super-user - the Guacamole equivalent of root. They are
+                            allowed to manipulate of system-level permissions and all other objects.
+                            This permission implies all others.</p></dd><dt><span class="term"><code class="constant">CREATE_CONNECTION</code></span></dt><dd><p>The user is allowed to create new connections. If a user has this
+                            permission, the management interface will display components related to
+                            connection creation.</p></dd><dt><span class="term"><code class="constant">CREATE_CONNECTION_GROUP</code></span></dt><dd><p>The user is allowed to create new connection groups. If a user has
+                            this permission, the management interface will display components
+                            related to connection group creation.</p></dd><dt><span class="term"><code class="constant">CREATE_SHARING_PROFILE</code></span></dt><dd><p>The user is allowed to create new sharing profiles. If a user has this
+                            permission, the management interface will display components related to
+                            sharing profile creation.</p></dd><dt><span class="term"><code class="constant">CREATE_USER</code></span></dt><dd><p>The user is allowed to create other users. If a user has this
+                            permission, the management interface will display components related to
+                            user creation.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm139658298792368"></a>Object permissions</h3></div></div></div><p>Object permissions describe access to operations that affect a particular object.
+                Guacamole currently defines four types of objects which can be associated with
+                permissions: users, connections, connection groups, and sharing profiles. Each
+                object permission associates a single user with an action that may be performed on a
+                single object.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="constant">ADMINISTER</code></span></dt><dd><p>The user may grant or revoke permissions involving this object.
+                            "Involving", in this case, refers to either side of the permission
+                            association, and includes both the user to whom the permission is
+                            granted and the object the permission affects.</p></dd><dt><span class="term"><code class="constant">DELETE</code></span></dt><dd><p>The user may delete this object. This is distinct from the
+                                <code class="constant">ADMINISTER</code> permission which deals only with
+                            permissions. A user with this permission will see the "Delete" button
+                            when applicable.</p></dd><dt><span class="term"><code class="constant">READ</code></span></dt><dd><p>The user may see that this object exists and read the properties of
+                            that object.</p><p>Note that the implementation is <span class="emphasis"><em>not required to divulge the
+                                true underlying properties of any object</em></span>. The parameters
+                            of a connection or sharing profile, the type or contents of a connection
+                            group, the password of a user, etc. all need not be exposed.</p><p>This is particularly important from the perspective of security when
+                            it comes to connections, as the parameters of a connection are only
+                            truly needed when a connection is being modified, and likely should not
+                            be exposed otherwise. The actual connection operation is always
+                            performed internally by the authentication provider, and thus does not
+                            require client-side knowledge of anything beyond the connection's
+                            existence.</p></dd><dt><span class="term"><code class="constant">UPDATE</code></span></dt><dd><p>The user may change the properties of this object.</p><p>In the case of users, this means the user's password can be altered.
+                                <span class="emphasis"><em>Permissions are not considered properties of a
+                                user</em></span>, nor objects in their own right, but rather
+                            associations between a user and an action which may involve another
+                            object.</p><p>The properties of a connection include its name, protocol, parent
+                            connection group, and parameters. The properties of a connection group
+                            include its name, type, parent connection group, and children. The
+                            properties of a sharing profile include its name, primary connection,
+                            and parameters.</p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-connections"></a>Connections</h2></div></div></div><p>Guacamole connections are organized in a hierarchy made up of connection groups, which
+            each act as folders organizing the connections themselves. The hierarchy is accessed
+            through the root-level connection group, exposed by
+                <code class="methodname">getRootConnectionGroup()</code> by the
+                <code class="classname">UserContext</code>. The connections and connection groups exposed
+            beneath the root connection group must also be accessible directly through the
+            connection and connection group directories exposed by
+                <code class="methodname">getConnectionDirectory()</code> and
+                <code class="methodname">getConnectionGroupDirectory()</code> of the
+                <code class="classname">UserContext</code>.</p><p>When a user attempts to use a connection the <code class="methodname">connect()</code> of the
+            associated <code class="classname">Connection</code> object will be invoked. It is then up to
+            the implementation of this function to establish the TCP connection to guacd, perform
+            the connection handshake (most likely via an <code class="classname">InetGuacamoleSocket</code>
+            wrapped within a <code class="classname">ConfiguredGuacamoleSocket</code>), and then return a
+                <code class="classname">GuacamoleTunnel</code> which controls access to the established
+            socket.</p><p>Extensions may maintain historical record of connection use via
+                <code class="classname">ConnectionRecord</code> objects, which are exposed both at the
+                <code class="classname">Connection</code> level and across all connections via the
+                <code class="classname">UserContext</code>. Such record maintenance is optional, and it is
+            expected that most implementations will simply return empty lists.</p><div class="important"><h3 class="title">Important</h3><p>If connection state will not be tracked by the extension, and the parameters
+                associated with the connection will be known at the time the connection object is
+                created, the <code class="classname">SimpleConnection</code> implementation of
+                    <code class="classname">Connection</code> can be used to make life easier.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="ext-active-connections"></a>Managing/sharing active connections</h2></div></div></div><p>After a connection has been established, its underlying
+                <code class="classname">GuacamoleTunnel</code> can be exposed by a
+                <code class="classname">UserContext</code> through the <code class="classname">Directory</code>
+            returned by <code class="methodname">getActiveConnectionDirectory()</code>. The
+                <code class="classname">ActiveConnection</code> objects accessible through this
+                <code class="classname">Directory</code> are the means by which an administrator may monitor
+            or forcibly terminate another user's connection, ultimately resulting in Guacamole
+            invoking the <code class="methodname">close()</code> function of the underlying
+                <code class="classname">GuacamoleTunnel</code>, and also serve as the basis for screen
+            sharing.</p><p>Screen sharing is implemented through the use of <code class="classname">SharingProfile</code>
+            objects, exposed through yet another <code class="classname">Directory</code> beneath the
+                <code class="classname">UserContext</code>. Each sharing profile is associated with a single
+            connection that it can be used to share, referred to as the "primary connection". If a
+            user has read access to a sharing profile associated with their current connection, that
+            sharing profile will be displayed as an option within <a class="link" href="using-guacamole.html#client-share-menu" title="Sharing the connection">the share
+                menu of the Guacamole menu</a>.</p><p>The overall sharing process is as follows:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>A user, having access to a sharing profile associated with their current
+                    active connection, clicks its option within the <a class="link" href="using-guacamole.html#client-share-menu" title="Sharing the connection">share
+                        menu</a>.</p></li><li class="listitem"><p>Guacamole locates the <code class="classname">ActiveConnection</code> and invokes its
+                        <code class="methodname">getSharingCredentials()</code> function with the
+                    identifier of the sharing profile. The contents of the returned
+                        <code class="classname">UserCredentials</code> object is used by Guacamole to
+                    generate a sharing link which can be given to other users.</p></li><li class="listitem"><p>When another user visits the sharing link, the credentials embedded in the
+                    link are passed to the authentication providers associated with each installed
+                    extension. <span class="emphasis"><em>It is up to the extension that originally provided those
+                        credentials to authenticate the user and provide them with access to the
+                        shared connection.</em></span></p></li><li class="listitem"><p>When the user attempts to connect to the shared connection, the extension
+                    establishes the connection using the ID of the connection being joined.
+                        <span class="emphasis"><em>This is not the connection identifier as dictated by
+                        guacamole-ext, but rather <a class="link" href="guacamole-protocol.html#guacamole-protocol-joining" title="Joining an existing connection">the unique ID assigned by guacd as
+                            required by the Guacamole protocol</a>.</em></span> This ID can be
+                    retrieved from a <code class="methodname">ConfiguredGuacamoleSocket</code> via
+                        <code class="methodname">getConnectionID()</code>, and can be passed through a
+                        <code class="methodname">GuacamoleConfiguration</code> through
+                        <code class="methodname">setConnectionID()</code> (instead of specifying a
+                    protocol, as would be done for a brand new connection).</p></li></ol></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="guacamole-common-js.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="developers-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="custom-protocols.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 15. guacamole-common-js </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 17. Adding new protocols</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
