@@ -1,0 +1,58 @@
+---
+layout: default
+permalink: /release/release-notes-:title
+---
+
+{% unless page.released %}
+    <div class="draft-disclaimer">
+        <p><strong>Apache Guacamole {{ page.title }} has not yet been
+        released!</strong> The artifacts and release notes below are drafts for
+        a proposed release of Apache Guacamole which has not yet occurred.</p>
+    </div>
+{% endunless %}
+
+<h1>Apache Guacamole {{ page.title }}</h1>
+
+<div id="links">
+
+    {% include link-list.html
+        title="Release documentation"
+        entries=page.documentation %}
+
+</div>
+
+<p>Apache Guacamole is split into two subprojects: "guacamole-client", the
+HTML5 web application which serves the Guacamole client to users, and
+"guacamole-server", the remote desktop proxy which the web application
+communicates with. The source code for each of these may be downloaded
+below.</p>
+
+<!-- Source archives -->
+<div class="release-downloads">
+    {% include download-list.html
+        artifact-root=page.artifact-root
+        checksum-root=page.checksum-root
+        path=page.download-path
+        files=page.source-dist %}
+</div>
+
+<p>If you do not wish to build Apache Guacamole entirely from source, pre-built
+versions of the web application (.war) and all extensions are provided here in
+binary form for convenience.  <strong>Please note that guacamole-server must
+still be built and installed from source.</strong></p>
+
+<!-- All binaries -->
+<div class="release-downloads">
+    {% include download-list.html
+        artifact-root=page.artifact-root
+        checksum-root=page.checksum-root
+        path=page.download-path
+        files=page.binary-dist %}
+</div>
+
+<!-- Release notes -->
+<div id="release-notes">
+    <h1>Release notes</h1>
+    {{ content }}
+</div>
+

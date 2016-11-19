@@ -496,7 +496,8 @@ table.releases td {
     padding-right: 1em;
 }
 
-#content > .legacy-release-note {
+#content > .legacy-release-note,
+#content > .draft-disclaimer {
     background: #FFFFFA;
     border: 1px solid rgba(0, 0, 0, 0.25);
     width: 8in;
