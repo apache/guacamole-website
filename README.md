@@ -32,6 +32,7 @@ licensed project, the repository contains the following critical files:
 | Filename      | Description
 | ------------- | -----------
 | `_config.yml` | Configuration information controlling the Jekyll build.  This is a standard Jekyll file. See: [Jekyll directory structure](https://jekyllrb.com/docs/structure/)
+| `add-tracking.pl` | Utility script which edits specified HTML files in-place, adding the project's Google Analytics tracking code at the end of the `<body>` (requires Perl).
 | `build.sh`    | The website build script (usage documented below).
 | `doc/`        | Per-release documentation for Apache Guacamole. This directory contains one subdirectory per release, where each subdirectory contains the overall manual (`.../gug/`) API documentation for each part of the Guacamole core (`.../libguac/`, `.../guacamole-common/`, etc.). Files in this directory are not interpreted by Jekyll, as there are far too many files for this to be reasonable. They are instead copied into place by the `build.sh` script.
 | `images/`     | Images which are referenced within the website HTML and CSS.
