@@ -24,6 +24,7 @@ title: Apache Guacamole (incubating)
 markdown: kramdown
 exclude:
     - README.md
+    - add-tracking.pl
     - build.sh
     - content
     - doc
