@@ -12,21 +12,35 @@ doing so are the project [mailing lists](#mailing-lists). All project members
 subscribe to these lists, and members of the community are encouraged to do the
 same.
 
-We consider the availability of commercial support to be crucial to the
-success of Apache Guacamole, and maintain a list of [third party
+We also consider the availability of commercial support to be crucial to the
+success of Apache Guacamole, and thus maintain a list of [third party
 companies](#commercial-support) providing commercial support. If you provide
 commercial support and would like your company to be listed, please send us an
 email, and we will work with you to do so.
 
-The Guacamole project historically used the [SourceForge
-forums](https://sourceforge.net/p/guacamole/discussion/), so it is worth
-searching through past threads there to see if your question has been asked and
-answered, but **please do not use these forums for new posts**.  New questions
-should use the mailing lists. Any further posts to the forums will be asked to
-use the mailing lists instead.
+Forums
+------
+
+While the Guacamole project does not provide its own forums, **you can use the
+general/users list as if it were a forum via the [forum interface provided by
+Nabble](http://apache-guacamole-incubating-users.2363388.n4.nabble.com/)**.
+Nabble provides a familiar forum interface wrapped around a mailing list
+archive, allowing forum users and mailing list users to communicate
+transparently.
+
+The Guacamole project did historically use the [SourceForge
+forums](https://sourceforge.net/p/guacamole/discussion/) prior to its
+acceptance into the Apache Incubator, so it may be worth searching through past
+threads there to see if your question has been asked and answered, but these
+forums have since been closed in favor of the project's official communication
+channels: the mailing lists.
 
 Mailing Lists
 -------------
+
+Like all other projects under Apache or the Apache Incubator, mailing lists
+form Guacamole's primary support channel and the means by which development
+is coordinated.
 
 If you would like help with Apache Guacamole, or wish to help others, we highly
 recommend sending an email to the one of the project's mailing lists. **You
@@ -44,6 +58,10 @@ Guacamole prior to its acceptance into the Apache Incubator.
 * [Subscribe](mailto:user-subscribe@guacamole.incubator.apache.org)
 * [Unsubscribe](mailto:user-unsubscribe@guacamole.incubator.apache.org)
 * [Archives](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-user/)
+
+Alternatively, the general/users list can also be used via the [forum hosted
+on Nabble](http://apache-guacamole-incubating-users.2363388.n4.nabble.com/),
+as described above.
 
 ### Development ([dev@guacamole.incubator.apache.org](mailto:dev@guacamole.incubator.apache.org))
 
