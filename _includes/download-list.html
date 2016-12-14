@@ -4,7 +4,7 @@
             <tr>
                 {% assign mirror = include.artifact-root | append: include.path %}
                 {% assign dist = include.checksum-root | append: include.path %}
-                <td><a href="{{ mirror | append: file }}">{{ file }}</a></td>
+                <td><a href="{{ mirror | append: file }}">{{ file | split: "/" | last }}</a></td>
                 <td>[ <a href="{{ dist | append: file }}.md5">MD5</a> ]</td>
                 <td>[ <a href="{{ dist | append: file }}.sha">SHA</a> ]</td>
                 <td>[ <a href="{{ dist | append: file }}.asc">PGP</a> ]</td>
