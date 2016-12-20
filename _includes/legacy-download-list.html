@@ -1,0 +1,16 @@
+{% if include.entries != empty %}
+    {% if include.title %}
+        <h2>{{ include.title }}</h2>
+    {% endif %}
+    <ul>
+        {% for entry in include.entries %}
+            <li><a href="{{ entry[1] | prepend: site.baseurl }}"
+                   onclick="ga('send', 'event', {
+                       eventCategory : 'Download',
+                       eventAction   : 'click',
+                       eventLabel    : '{{ entry[1] | split: "/" | last }}',
+                       transport     : 'beacon'
+                   })">{{ entry[0] }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
