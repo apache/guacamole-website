@@ -8,7 +8,7 @@
                    onclick="ga('send', 'event', {
                        eventCategory : 'Download',
                        eventAction   : 'click',
-                       eventLabel    : '{{ entry[0] }}',
+                       eventLabel    : '{{ entry[1] | split: "/" | last }}',
                        transport     : 'beacon'
                    })">{{ entry[0] }}</a></li>
         {% endfor %}

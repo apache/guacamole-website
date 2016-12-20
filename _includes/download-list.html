@@ -4,13 +4,14 @@
             <tr>
                 {% assign mirror = include.artifact-root | append: include.path %}
                 {% assign dist = include.checksum-root | append: include.path %}
+                {% assign basename = file | split: "/" | last %}
                 <td><a href="{{ mirror | append: file }}"
                        onclick="ga('send', 'event', {
                            eventCategory : 'Download',
                            eventAction   : 'click',
-                           eventLabel    : '{{ file }}',
+                           eventLabel    : '{{ basename }}',
                            transport     : 'beacon'
-                       })">{{ file | split: "/" | last }}</a></td>
+                       })">{{ basename }}</a></td>
                 <td>[ <a href="{{ dist | append: file }}.md5">MD5</a> ]</td>
                 <td>[ <a href="{{ dist | append: file }}.sha">SHA</a> ]</td>
                 <td>[ <a href="{{ dist | append: file }}.asc">PGP</a> ]</td>
