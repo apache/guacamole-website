@@ -108,28 +108,34 @@
     <ul>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/extensions/guacamole-auth-ldap-0.9.5.tar.gz"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-auth-ldap-0.9.5.tar.gz',
-                       transport     : 'beacon'
-                   })">LDAP Authentication</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-auth-ldap-0.9.5.tar.gz'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-auth-ldap-0.9.5.tar.gz'
+                   )">LDAP Authentication</a></li>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/extensions/guacamole-auth-mysql-0.9.5.tar.gz"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-auth-mysql-0.9.5.tar.gz',
-                       transport     : 'beacon'
-                   })">MySQL Authentication</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-auth-mysql-0.9.5.tar.gz'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-auth-mysql-0.9.5.tar.gz'
+                   )">MySQL Authentication</a></li>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/extensions/guacamole-auth-noauth-0.9.5.tar.gz"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-auth-noauth-0.9.5.tar.gz',
-                       transport     : 'beacon'
-                   })">NoAuth (Disabled) Authentication</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-auth-noauth-0.9.5.tar.gz'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-auth-noauth-0.9.5.tar.gz'
+                   )">NoAuth (Disabled) Authentication</a></li>
         
     </ul>
 
@@ -143,12 +149,14 @@
     <ul>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.5.war"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-0.9.5.war',
-                       transport     : 'beacon'
-                   })">guacamole-0.9.5.war</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-0.9.5.war'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-0.9.5.war'
+                   )">guacamole-0.9.5.war</a></li>
         
     </ul>
 
@@ -162,20 +170,24 @@
     <ul>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/source/guacamole-client-0.9.5.tar.gz"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-client-0.9.5.tar.gz',
-                       transport     : 'beacon'
-                   })">guacamole-client-0.9.5.tar.gz</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-client-0.9.5.tar.gz'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-client-0.9.5.tar.gz'
+                   )">guacamole-client-0.9.5.tar.gz</a></li>
         
             <li><a href="http://downloads.sourceforge.net/project/guacamole/current/source/guacamole-server-0.9.5.tar.gz"
-                   onclick="ga('send', 'event', {
-                       eventCategory : 'Download',
-                       eventAction   : 'click',
-                       eventLabel    : 'guacamole-server-0.9.5.tar.gz',
-                       transport     : 'beacon'
-                   })">guacamole-server-0.9.5.tar.gz</a></li>
+                   onclick="trackDownload(
+                       'click',
+                       'guacamole-server-0.9.5.tar.gz'
+                   )"
+                   oncontextmenu="trackDownload(
+                       'menu',
+                       'guacamole-server-0.9.5.tar.gz'
+                   )">guacamole-server-0.9.5.tar.gz</a></li>
         
     </ul>
 
@@ -318,6 +330,33 @@
 
           ga('create', 'UA-75289145-1', 'auto');
           ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
         </script>
 
     </body>
