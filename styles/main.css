@@ -22,7 +22,7 @@ a[href]:visited { color: #884; }
 
 div#header {
     color: white;
-    background: #304730;
+    background: #213121;
     display: table;
     width: 100%;
     padding: 1em;
@@ -119,7 +119,6 @@ ul.features li.commercially-supported::before {
 }
 
 .hook {
-    padding-bottom: 2em;
     overflow: hidden;
     background: #304730;
     color: white;
@@ -530,7 +529,6 @@ table.releases td {
     .hook {
         background: transparent;
         color: black;
-        padding-bottom: 0;
     }
 
     .hook .description {
@@ -611,17 +609,12 @@ table.releases td {
         text-align: center;
     }
 
-    .hook {
-        padding-bottom: 1em;
-    }
-
     .hook > * {
         margin: 0;
     }
 
     .demo {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 1em auto;
     }
 
     .demo,
