@@ -141,7 +141,17 @@ ul.features li.commercially-supported::before {
     max-width: 40%;
 }
 
-.latest {
+.latest-release {
+    color: white;
+    background: #213121;
+    padding: 1em;
+    font-size: 0.8em;
+}
+
+.latest-release a[href].version,
+.latest-release a[href].version:visited {
+    color: white;
+    margin: 0.25em 0.5em;
     font-weight: bold;
 }
 
@@ -245,7 +255,8 @@ p {
     padding-right: 0.25in;
 }
 
-#content .hook {
+#content .hook,
+#content .latest-release {
     margin: 0;
     width: 100%;
 }
