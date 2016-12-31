@@ -22,7 +22,7 @@ a[href]:visited { color: #884; }
 
 div#header {
     color: white;
-    background: #304730;
+    background: #213121;
     display: table;
     width: 100%;
     padding: 1em;
@@ -119,7 +119,6 @@ ul.features li.commercially-supported::before {
 }
 
 .hook {
-    padding-bottom: 2em;
     overflow: hidden;
     background: #304730;
     color: white;
@@ -142,7 +141,17 @@ ul.features li.commercially-supported::before {
     max-width: 40%;
 }
 
-.latest {
+.latest-release {
+    color: white;
+    background: #213121;
+    padding: 1em;
+    font-size: 0.8em;
+}
+
+.latest-release a[href].version,
+.latest-release a[href].version:visited {
+    color: white;
+    margin: 0.25em 0.5em;
     font-weight: bold;
 }
 
@@ -246,7 +255,8 @@ p {
     padding-right: 0.25in;
 }
 
-#content .hook {
+#content .hook,
+#content .latest-release {
     margin: 0;
     width: 100%;
 }
@@ -530,7 +540,6 @@ table.releases td {
     .hook {
         background: transparent;
         color: black;
-        padding-bottom: 0;
     }
 
     .hook .description {
@@ -611,17 +620,12 @@ table.releases td {
         text-align: center;
     }
 
-    .hook {
-        padding-bottom: 1em;
-    }
-
     .hook > * {
         margin: 0;
     }
 
     .demo {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 1em auto;
     }
 
     .demo,
