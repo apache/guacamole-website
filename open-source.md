@@ -100,6 +100,13 @@ a committer not otherwise directly involved in those changes.
 * [Managing pull requests](/pull-requests/)
 * [Style guidelines](/guac-style/)
 
+### Release procedures:
+
+* [Beginning the release process](/release-procedures-part1/)
+* [Producing a release candidate](/release-procedures-part2/)
+* [Promoting a release candidate to release](/release-procedures-part3/)
+* [Announcing the release](/release-procedures-part4/)
+
 PPMC members
 ------------
 
