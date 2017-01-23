@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 14. libguac</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="developers-guide.html" title="Part II. Developer's Guide" /><link rel="prev" href="guacamole-protocol.html" title="Chapter 13. The Guacamole protocol" /><link rel="next" href="guacamole-common.html" title="Chapter 15. guacamole-common" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 14. libguac</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="guacamole-protocol.html">Prev</a> </td><th width="60%" align="center">Part II. Developer's Guide</th><td width="20%" align="right"> <a accesskey="n" href="guacamole-common.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="libguac"></a>Chapter 14. libguac</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="libguac.html#libguac-error-handling">Error handling</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-client-plugins">Client plugins</a></span></dt><dd><dl><dt><span class="section"><a href="libguac.html#libguac-lifecycle-entry">Entry point</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-lifecycle-users">Joining/leaving a connection</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-lifecycle-termination">Termination</a></span></dt></dl></dd><dt><span class="section"><a href="libguac.html#libguac-layers">Layers and buffers</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-streams">Streams</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-sending-instructions">Sending instructions</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-event-handling">Event handling</a></span></dt><dd><dl><dt><span class="section"><a href="libguac.html#libguac-key-events">Key events</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-mouse-events">Mouse events</a></span></dt><dt><span class="section"><a href="libguac.html#libguac-clipboard-events">Clipboard, file, and other stream events</a></span></dt></dl></dd></dl></div><a id="idm140352911045200" class="indexterm"></a><a id="idm140352908254864" class="indexterm"></a><p>The C API for extending and developing with Guacamole is libguac. All
+        native components produced by the Guacamole project link with this
+        library, and this library provides the common basis for extending the
+        native functionality of those native components (by implementing client
+        plugins).</p><p>libguac is used mainly for developing client plugins like
+        libguac-client-vnc or libguac-client-rdp, or for developing a proxy
+        supporting the Guacamole protocol like guacd. This chapter is intended
+        to give an overview of how libguac is used, and how to use it for
+        general communication with the Guacamole protocol.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-error-handling"></a>Error handling</h2></div></div></div><p>Most functions within libguac handle errors by returning a zero or
+            non-zero value, whichever is appropriate for the function at hand.
+            If an error is encountered, the <code class="varname">guac_error</code>
+            variable is set appropriately, and
+                <code class="varname">guac_error_message</code> contains a
+            statically-allocated human-readable string describing the context of
+            the error. These variables intentionally mimic the functionality
+            provided by <code class="varname">errno</code> and
+                <code class="filename">errno.h</code>.</p><p>Both <code class="varname">guac_error</code> and
+                <code class="varname">guac_error_message</code> are defined within
+                <code class="filename">error.h</code>. A human-readable string describing
+            the error indicated by <code class="varname">guac_error</code> can be
+            retrieved using <code class="methodname">guac_status_string()</code>, which
+            is also statically allocated.</p><p>If functions defined within client plugins set
+                <code class="varname">guac_error</code> and
+                <code class="varname">guac_error_message</code> appropriately when errors
+            are encountered, the messages logged to syslog by guacd will be more
+            meaningful for both users and developers.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-client-plugins"></a>Client plugins</h2></div></div></div><p>Client plugins are libraries which follow specific conventions such that they can be
+            loaded dynamically by guacd. All client plugins <span class="emphasis"><em>must</em></span>:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Follow a naming convention, where the name of the library is
+                            <span class="package">libguac-client-<em class="replaceable"><code>PROTOCOL</code></em></span>.
+                        <span class="emphasis"><em>This is necessary for guacd to locate the library for a requested
+                        protocol.</em></span></p></li><li class="listitem"><p>Be linked against libguac, the library used by guacd to handle the Guacamole
+                    protocol. The structures which are given to functions invoked by guacd are
+                    defined by libguac, and are expected to be manipulated via the functions
+                    provided by libguac or as otherwise documented within the structure itself.
+                        <span class="emphasis"><em>Communication between guacd and client plugins is only possible if
+                        they share the same core structural and functional definitions provided by
+                        libguac.</em></span></p></li><li class="listitem"><p>Implement the standard entry point for client plugins,
+                        <code class="methodname">guac_client_init()</code>, described in more detail below.
+                    It is this function which initializes the structures provided by guacd such that
+                    users can join and interact with the connection.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-lifecycle-entry"></a>Entry point</h3></div></div></div><p>All client plugins must provide a function named
+                    <code class="methodname">guac_client_init</code> which accepts, as its sole argument, a
+                pointer to a <code class="classname">guac_client</code> structure. This function is similar
+                in principle to the <code class="methodname">main()</code> function of a C program, and it
+                is the responsibility of this function to initialize the provided structure as
+                necessary to begin the actual remote desktop connection, allow users to join/leave,
+                etc.</p><p>The provided <code class="classname">guac_client</code> will already have been initialized
+                with handlers for logging, the broadcast socket, etc. The absolutely critical pieces
+                which must be provided by <code class="methodname">guac_client_init</code> are:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>A handler for users which join the connection
+                            (<span class="property">join_handler</span>). The join handler is also usually
+                        the most appropriate place for the actual remote desktop connection to be
+                        established.</p></li><li class="listitem"><p>A <code class="constant">NULL</code>-terminated set of argument names which the
+                        client plugin accepts, assigned to the <span class="property">args</span> property of
+                        the given <code class="classname">guac_client</code>. As the handshake procedure is
+                        completed for each connecting user, these argument names will be presented
+                        as part of the handshake, and the values for those arguments will be passed
+                        to the join handler once the handshake completes.</p></li><li class="listitem"><p>A handler for users leaving the connection
+                            (<span class="property">leave_handler</span>), if any cleanup, updates, etc. are
+                        required.</p></li><li class="listitem"><p>A handler for freeing the data associated with the
+                            <code class="classname">guac_client</code> after the connection has terminated
+                            (<span class="property">free_handler</span>). If your plugin will allocate any
+                        data at all, implementing the free handler is necessary to avoid memory
+                        leaks.</p></li></ol></div><p>If <code class="methodname">guac_client_init</code> returns successfully, guacd will
+                proceed with allowing the first use to join the connection, and the rest of the
+                plugin lifecycle commences.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-lifecycle-users"></a>Joining/leaving a connection</h3></div></div></div><p>Whenever a user joins a connection, including the very first user of a connection
+                (the user which is establishing the remote desktop connection in the first place),
+                the join handler of the <span class="property">guac_client</span> will be invoked. This
+                handler is provided with the <code class="classname">guac_user</code> structure representing
+                the user that just joined, along with the arguments provided during the handshake
+                procedure:</p><div class="informalexample"><pre class="programlisting">int join_handler(guac_user* user, int argc, char** argv) {
+    /* Synchronize display state, init the user, etc. */
+}
+
+...
+
+/* Within guac_client_init  */
+client-&gt;join_handler = join_handler;</pre></div><p>As the parameters and user information provided during the Guacamole protocol
+                handshake are often required to be known before the remote desktop connection can be
+                established, the join handler is usually the best place to create a thread which
+                establishes the remote desktop connection and updates the display
+                accordingly.</p><p>If necessary, the user which first established the connection can be distinguished
+                from all other users by the <span class="property">owner</span> flag of
+                    <code class="classname">guac_user</code>, which will be set to a non-zero value.</p><p>Once a user has disconnected, the leave handler of
+                    <code class="classname">guac_client</code> will be invoked. Just as with the join
+                handler, this handler is provided the <code class="classname">guac_user</code> structure of
+                the user that disconnected. The <code class="classname">guac_user</code> structure will be
+                freed immediately after the handler completes:</p><div class="informalexample"><pre class="programlisting">int leave_handler(guac_user* user) {
+    /* Free user-specific data and clean up */
+}
+
+...
+
+/* Within guac_client_init  */
+client-&gt;leave_handler = leave_handler;</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-lifecycle-termination"></a>Termination</h3></div></div></div><p>Once the last user of a connection has left, guacd will begin freeing resources
+                allocated to that connection, invoking the free handler of the
+                    <code class="classname">guac_client</code>. At this point, the "leave" handler has been
+                invoked for all previous users. All that remains is for the client plugin to free
+                any remaining data that it allocated, such that guacd can clean up the rest:</p><div class="informalexample"><pre class="programlisting">int free_handler(guac_client* client) {
+    /* Disconnect, free client-specific data, etc. */
+}
+
+...
+
+/* Within guac_client_init  */
+client-&gt;free_handler = free_handler;</pre></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-layers"></a>Layers and buffers</h2></div></div></div><p>The main operand of all drawing instructions is the layer,
+            represented within libguac by the <code class="classname">guac_layer</code>
+            structure. Each <code class="classname">guac_layer</code> is normally
+            allocated using <code class="methodname">guac_client_alloc_layer()</code>
+            or <code class="methodname">guac_client_alloc_buffer()</code>, depending on
+            whether a layer or buffer is desired, and freed with
+                <code class="methodname">guac_client_free_layer()</code> or
+                <code class="methodname">guac_client_free_buffer()</code>.</p><div class="important"><h3 class="title">Important</h3><p>Care must be taken to invoke the allocate and free pairs of
+                each type of layer correctly.
+                    <code class="methodname">guac_client_free_layer()</code> should
+                only be used to free layers allocated with
+                    <code class="methodname">guac_client_alloc_layer()</code>, and
+                    <code class="methodname">guac_client_free_buffer()</code> should
+                only be used to free layers allocated with
+                    <code class="methodname">guac_client_alloc_buffer()</code>, all
+                called using the same instance of
+                    <code class="classname">guac_client</code>.</p><p>If these restrictions are not observed, the effect of invoking
+                these functions is undefined.</p></div><p>Using these layer management functions allows you to reuse
+            existing layers or buffers after their original purpose has expired,
+            thus conserving resources on the client side, as allocation of new
+            layers within the remote client is a relatively expensive
+            operation.</p><p>It is through layers and buffers that Guacamole provides support
+            for hardware-accelerated compositing and cached updates. Creative
+            use of layers and buffers leads to efficient updates on the client
+            side, which usually translates into speed and responsiveness.</p><p>Regardless of whether you allocate new layers or buffers, there is
+            always one layer guaranteed to be present: the default layer,
+            represented by libguac as <code class="varname">GUAC_DEFAULT_LAYER</code>. If
+            you only wish to affect to the main display of the connected client
+            somehow, this is the layer you want to use as the operand of your
+            drawing instruction.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-streams"></a>Streams</h2></div></div></div><p>In addition to drawing, the Guacamole protocol supports streaming of arbitrary data.
+            The main operand of all streaming instructions is the stream, represented within libguac
+            by the <code class="classname">guac_stream</code> structure. Each
+                <code class="classname">guac_stream</code> exists either at the user or client levels,
+            depending on whether the stream is intended to be broadcast to all users or just one,
+            and is thus allocated using either <code class="methodname">guac_client_alloc_stream()</code>
+            or <code class="methodname">guac_user_alloc_stream()</code>. Explicitly-allocated streams must
+            eventually be freed with <code class="methodname">guac_client_free_stream()</code> or
+                <code class="methodname">guac_user_free_stream()</code>.</p><div class="important"><h3 class="title">Important</h3><p>Just as with layers, care must be taken to invoke the allocate and free pairs
+                correctly for each explicitly-allocated stream.
+                    <code class="methodname">guac_client_free_stream()</code> should only be used to free
+                streams allocated with <code class="methodname">guac_client_alloc_stream()</code>, and
+                    <code class="methodname">guac_user_free_stream()</code> should only be used to free
+                streams allocated with <code class="methodname">guac_user_alloc_stream()</code>.</p><p>If these restrictions are not observed, the effect of invoking these functions is
+                undefined.</p></div><p>Streams are the means by which data is transmitted for clipboard (via the <a class="link" href="protocol-reference.html#clipboard-instruction" title="clipboard">"clipboard" instruction</a>), audio (via the <a class="link" href="protocol-reference.html#audio-stream-instruction" title="audio">"audio" instruction</a>), and even the images which make up typical drawing
+            operations (via the <a class="link" href="protocol-reference.html#img-instruction" title="img">"img" instruction</a>). They will either be allocated
+            for you, when an inbound stream is received from a user, or allocated manually, when an
+            outbound stream needs to be sent to a user. As with <code class="classname">guac_client</code>
+            and <code class="classname">guac_user</code>, each <code class="classname">guac_stream</code> has a set
+            of handlers which correspond to instructions received related to streams. These
+            instructions are documented in more detail in <a class="xref" href="guacamole-protocol.html#guacamole-protocol-streaming" title="Streams and objects">the section called “Streams and objects”</a>
+            and <a class="xref" href="protocol-reference.html" title="Appendix B. Guacamole protocol reference">Appendix B, <em>Guacamole protocol reference</em></a>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-sending-instructions"></a>Sending instructions</h2></div></div></div><p>All drawing in Guacamole is accomplished through the sending of instructions to the
+            connected client using the Guacamole protocol. The same goes for streaming audio, video,
+            or file content. All features and content supported by Guacamole ultimately reduce to
+            one or more instructions which are part of the documented protocol.</p><p>Most drawing using libguac is done using Cairo functions on a
+                <code class="classname">cairo_surface_t</code> (see the Cairo API documentation) which is
+            later streamed to the client using an <code class="methodname">img</code> instruction and
+            subsequent <code class="methodname">blob</code> instructions, sent via
+                <code class="methodname">guac_client_stream_png()</code>. Cairo was chosen as a dependency
+            of libguac to provide developers an existing and stable means of drawing to image
+            buffers which will ultimately be sent as easy-to-digest PNG images.</p><p>The Guacamole protocol also supports drawing primitives similar to
+            those present in the Cairo API and HTML5's canvas tag. These
+            instructions are documented individually in the Guacamole Protocol
+            Reference in a section dedicated to drawing instructions, and like
+            all Guacamole protocol instructions, each instruction has a
+            corresponding function in libguac following the naming convention
+                    <code class="methodname">guac_protocol_send_<em class="replaceable"><code>OPCODE</code></em>()</code>.</p><p>Each protocol function takes a <code class="classname">guac_socket</code> as an argument,
+            which is the buffered I/O object used by libguac. For each active connection, there are
+            two important types of <code class="classname">guac_socket</code> instance: the broadcast
+            socket, which exists at the client level within the <code class="classname">guac_client</code>,
+            and the per-user socket, which is accessible within each
+                <code class="classname">guac_user</code>. Data sent along the client-level broadcast socket
+            will be sent to all connected users beneath that <code class="classname">guac_client</code>,
+            while data sent along a user-level socket will be sent only to that user.</p><p>For example, to send a "size" instruction to all connected users via the client-level
+            broadcast socket, you could invoke:</p><div class="informalexample"><pre class="programlisting">guac_protocol_send_size(client-&gt;socket, GUAC_DEFAULT_LAYER, 1024, 768);</pre></div><p>Or, if the instruction is only relevant to a particular user, the socket associated
+            with that user can be used instead:</p><div class="informalexample"><pre class="programlisting">guac_protocol_send_size(<span class="emphasis"><em>user</em></span>-&gt;socket, GUAC_DEFAULT_LAYER, 1024, 768);</pre></div><p>The sockets provided by libguac are threadsafe at the protocol level. Instructions
+            written to a socket by multiple threads are guaranteed to be written atomically with
+            respect to that socket.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="libguac-event-handling"></a>Event handling</h2></div></div></div><p>Generally, as guacd receives instructions from the connected client, it invokes event
+            handlers if set within the associated <code class="classname">guac_user</code> or
+                <code class="classname">guac_client</code>, depending on the nature of the event. Most
+            events are user-specific, and thus the event handlers reside within the
+                <code class="classname">guac_user</code> structure, but there are client-specific events as
+            well, such as a user joining or leaving the current connection. Event handlers typically
+            correspond to Guacamole protocol instructions received over the socket by a connected
+            user, which in turn correspond to events which occur on the client side.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-key-events"></a>Key events</h3></div></div></div><p>When keys are pressed or released on the client side, the client sends key
+                instructions to the server. These instructions are parsed and handled by calling the
+                key event handler installed in the <span class="property">key_handler</span> member of the
+                    <code class="classname">guac_user</code>. This key handler is given the keysym of the
+                key that was changed, and a boolean value indicating whether the key was pressed or
+                released.</p><div class="informalexample"><pre class="programlisting">int key_handler(guac_user* user, int keysym, int pressed) {
+    /* Do something */
+}
+
+...
+
+/* Within the "join" handler of guac_client */
+user-&gt;key_handler = key_handler;</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-mouse-events"></a>Mouse events</h3></div></div></div><p>When the mouse is moved, and buttons are pressed or released, the client sends
+                mouse instructions to the server. These instructions are parsed and handled by
+                calling the mouse event handler installed in the <span class="property">mouse_handler</span>
+                member of the <code class="classname">guac_user</code>. This mouse handler is given the
+                current X and Y coordinates of the mouse pointer, as well as a mask indicating which
+                buttons are pressed and which are released.</p><div class="informalexample"><pre class="programlisting">int mouse_handler(guac_user* user, int x, int y, int button_mask) {
+    /* Do something */
+}
+
+...
+
+/* Within the "join" handler of guac_client */
+user-&gt;mouse_handler = mouse_handler;</pre></div><p>The file <code class="filename">client.h</code> also defines the mask
+                of each button for convenience:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_LEFT</code></span></dt><dd><p>The left mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_MIDDLE</code></span></dt><dd><p>The middle mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_RIGHT</code></span></dt><dd><p>The right mouse button, set when pressed.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_UP</code></span></dt><dd><p>The button corresponding to one scroll in the
+                            upwards direction of the mouse scroll wheel, set
+                            when scrolled.</p></dd><dt><span class="term"><code class="constant">GUAC_CLIENT_MOUSE_DOWN</code></span></dt><dd><p>The button corresponding to one scroll in the
+                            downwards direction of the mouse scroll wheel, set
+                            when scrolled.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libguac-clipboard-events"></a>Clipboard, file, and other stream events</h3></div></div></div><p>If a connected user sends data which should be sent to the clipboard of the remote
+                desktop, guacd will trigger the clipboard handler installed in the
+                    <span class="property">clipboard_handler</span> member of the
+                    <code class="classname">guac_user</code> associated with that user.</p><div class="informalexample"><pre class="programlisting">int clipboard_handler(guac_user* user, guac_stream* stream, char* mimetype) {
+    /* Do something */
+}
+
+...
+
+/* Within the "join" handler of guac_client */
+user-&gt;clipboard_handler = clipboard_handler;</pre></div><p>The handler is expected to assign further handlers to the provided
+                    <code class="classname">guac_stream</code> as necessary, such that the <a class="link" href="protocol-reference.html#blob-instruction" title="blob">"blob"</a> and <a class="link" href="protocol-reference.html#end-instruction" title="end">"end"</a> instructions received along the stream
+                can be handled. A similar handler is provided for received files:</p><div class="informalexample"><pre class="programlisting">int file_handler(guac_user* user, guac_stream* stream,
+        char* mimetype, char* filename) {
+    /* Do something */
+}
+
+...
+
+/* Within the "join" handler of guac_client */
+user-&gt;file_handler = file_handler;</pre></div><p>This pattern continues for all other types of streams which can be received from a
+                user. The instruction which begins the stream has a corresponding handler within
+                    <code class="classname">guac_user</code>, and the metadata describing that stream and
+                provided with the instruction is included within the parameters passed to that
+                handler.</p><p>These handlers are, of course, optional. If any type of stream lacks a
+                corresponding handler, guacd will automatically close the stream and respond with an
+                    <a class="link" href="protocol-reference.html#ack-instruction" title="ack">"ack"
+                    instruction</a> and appropriate error code, informing the user's Guacamole
+                client that the stream is unsupported.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="guacamole-protocol.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="developers-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="guacamole-common.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 13. The Guacamole protocol </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 15. <span class="package">guacamole-common</span></td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
