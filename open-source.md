@@ -89,14 +89,15 @@ of the [Apache Guacamole PPMC](#ppmc-members).
 
 Committers have write access to Apache Guacamole's git repositories, but do not
 make direct changes on their own behalf. Code changes are made only through
-pull requests, and are merged only after code review by a committer not
-otherwise directly involved in those changes.
+[pull requests](/pull-requests/), and are merged only after code review by
+a committer not otherwise directly involved in those changes.
 
 ### Resources for committers:
 
 * [Committers' FAQ](http://www.apache.org/dev/committers.html)
 * [Guide for new committers](http://www.apache.org/dev/new-committers-guide.html)
 * [Maintaining the website](https://github.com/apache/incubator-guacamole-website/blob/master/README.md)
+* [Managing pull requests](/pull-requests/)
 * [Style guidelines](/guac-style/)
 
 PPMC members
