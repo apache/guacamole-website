@@ -26,6 +26,21 @@ as long as you follow it's simple conditions, you can modify and include
 Guacamole in other projects to your heart's content, including commercial or
 proprietary projects.
 
+Joining the project {#meritocracy}
+----------------------------------
+
+The Apache Guacamole project operates as a
+[meritocracy](http://apache.org/foundation/how-it-works.html#meritocracy). The
+project is made up of volunteers who, based on the subjective judgement of the
+existing project members, have demonstrated merit through their contributions
+and thus have been offered membership themselves. If you wish to join the
+project, the first step is to be active in the community as a
+[contributor](#contribute).
+
+Contributors who show merit through the quality of their continuing activity in
+the community and their contributions to the project will be invited to become
+[committers](#committers) or [members of the PPMC](#ppmc-members).
+
 Contributing {#contribute}
 -----------------
 
@@ -62,4 +77,42 @@ of our git repositories. If you need help getting started, the [API
 documentation](/api-documentation) is an excellent resource, as are the
 [mailing lists](/support/#mailing-lists) and the tutorials in [the
 manual](/doc/gug/).
+
+Committers
+----------
+
+Committers actively maintain and contribute to the Apache Guacamole project,
+produce releases, review the code of contributors and fellow committers, and
+identify contributors who have shown [merit](#meritocracy) and should be
+offered committership. Apache Guacamole committers are also implicitly members
+of the [Apache Guacamole PPMC](#ppmc-members).
+
+Committers have write access to Apache Guacamole's git repositories, but do not
+make direct changes on their own behalf. Code changes are made only through
+[pull requests](/pull-requests/), and are merged only after code review by
+a committer not otherwise directly involved in those changes.
+
+### Resources for committers:
+
+* [Committers' FAQ](http://www.apache.org/dev/committers.html)
+* [Guide for new committers](http://www.apache.org/dev/new-committers-guide.html)
+* [Maintaining the website](https://github.com/apache/incubator-guacamole-website/blob/master/README.md)
+* [Managing pull requests](/pull-requests/)
+* [Style guidelines](/guac-style/)
+
+PPMC members
+------------
+
+The Apache Guacamole PPMC is responsible for project oversight. PPMC members
+participate in discussions on the [mailing lists](/support/#mailing-lists) and
+vote on release candidates, new committers, and new PPMC members. Like
+[committers](#committers) (who are implicitly PPMC members), the PPMC is
+responsible for identifying members of the community who have shown
+[merit](#meritocracy) warranting committership or PPMC membership.
+
+### Resources for PPMC members:
+
+* [Apache Guacamole mailing lists](/support/#mailing-lists)
+* [Apache Incubator: PPMC guide](http://incubator.apache.org/guides/ppmc.html)
+* [Apache voting process](http://apache.org/foundation/voting.html)
 
