@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole (incubating): Managing Pull Requests</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <h1>Managing Pull Requests</h1>
+
+<p>The Apache Guacamole project requires code review for absolutely all changes,
+and uses pull requests to facilitate that review. However, because pull 
+requests must be made against the read-only mirrors on GitHub, merging is
+slightly more complicated.</p>
+
+<p>There is no “merge” button. Merges must be performed manually and pushed to the
+main repositories which live at the ASF. Once pushed, a robot running at the
+ASF (which has write access to the GitHub mirrors) will automatically close
+the pull request as merged.</p>
+
+<p>You will need three remotes for each Apache Guacamole git repository:</p>
+
+<ol>
+  <li>The upstream repository hosted by the ASF’s servers</li>
+  <li>The GitHub mirror</li>
+  <li>Your personal fork of the GitHub mirror</li>
+</ol>
+
+<p>For the sake of simplicity, these will be referred to here as <code class="highlighter-rouge">upstream</code>,
+<code class="highlighter-rouge">mirror</code>, and <code class="highlighter-rouge">origin</code>, respectively. For example, the recommended
+configuration for <code class="highlighter-rouge">incubator-guacamole-server</code> would be:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+mirror git@github.com:apache/incubator-guacamole-server.git
+origin git@github.com:mike-jumper/incubator-guacamole-server.git
+upstream https://git-wip-us.apache.org/repos/asf/incubator-guacamole-server.git
+$
+</code></pre>
+</div>
+
+<p>After reviewing and approving code submitted via a pull request, you will need
+to:</p>
+
+<ol>
+  <li>
+    <p>Manually fetch the contents of the pull request to a new branch via the
+command line:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch mirror pull/NUMBER/head:some-branch
+</code></pre>
+    </div>
+
+    <p>where <code class="highlighter-rouge">NUMBER</code> is the pull request number and <code class="highlighter-rouge">some-branch</code> is a sensible
+branch name of your choice.</p>
+  </li>
+  <li>
+    <p>Ensure your copy of the base branch is up to date, whether that be <code class="highlighter-rouge">master</code>
+or the staging branch for an upcoming release:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch upstream
+$ git checkout master
+$ git merge --ff-only upstream/master
+$ git push origin
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Merge the branch containing the changes from the pull request:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ git merge --no-ff some-branch
+</code></pre>
+    </div>
+
+    <p><strong>Be sure to specify <code class="highlighter-rouge">--no-ff</code>!</strong> Merges of pull requests must have
+corresponding merge commits, and the messages of those merge commits must
+properly tag the associated JIRA issue (just like all other commits).</p>
+  </li>
+  <li>
+    <p>Confirm that the changes look as expected:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ git diff upstream/master
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Push the merge result to the ASF repository:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ git push upstream master
+</code></pre>
+    </div>
+
+    <p>You will be prompted for your username (Apache ID) and password. It is
+highly recommended that you not save/cache your credentials for this step,
+as it serves as an additional sanity check preventing accidental pushes to
+the main repository.</p>
+  </li>
+</ol>
+
+<p>Once this is done, the ASF git bot should kick in, and emails should go out
+across the <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#099;&#111;&#109;&#109;&#105;&#116;&#115;&#064;&#103;&#117;&#097;&#099;&#097;&#109;&#111;&#108;&#101;&#046;&#105;&#110;&#099;&#117;&#098;&#097;&#116;&#111;&#114;&#046;&#097;&#112;&#097;&#099;&#104;&#101;&#046;&#111;&#114;&#103;">&#099;&#111;&#109;&#109;&#105;&#116;&#115;&#064;&#103;&#117;&#097;&#099;&#097;&#109;&#111;&#108;&#101;&#046;&#105;&#110;&#099;&#117;&#098;&#097;&#116;&#111;&#114;&#046;&#097;&#112;&#097;&#099;&#104;&#101;&#046;&#111;&#114;&#103;</a> list noting each commit
+pushed. If this does not happen, or the commits show up only within the ASF
+repositories and not the GitHub mirrors, it may be necessary to reach out to
+<a href="https://www.apache.org/dev/infrastructure.html">Infra</a> by opening an issue
+against <a href="https://issues.apache.org/jira/browse/INFRA/">the “Infrastructure” project in
+JIRA</a>.</p>
+
+<h2 id="merging-release-specific-changes">Merging release-specific changes</h2>
+
+<p>When a pull request is intended for a pending release, the merge base specified
+in the pull request <em>should</em> be the staging branch for that release. That said,
+part of the point of code review is to identify mistakes prior to merge, and
+using the wrong base for a release-specific change is one of those mistakes. It
+is good practice to verify whether a staging branch for the release exists in
+the main ASF repository, and to double-check whether the change in question is
+associated with a release-specific change by checking the “Fix Version” field
+for the issue in JIRA.</p>
+
+<p>Merging release-specific changes involves:</p>
+
+<ol>
+  <li>
+    <p>Merging the pull request to the <strong>staging branch</strong>. The steps for doing this
+are exactly as described above, except you will need to specify
+<code class="highlighter-rouge">staging/VERSION</code> instead of <code class="highlighter-rouge">master</code>.</p>
+  </li>
+  <li>
+    <p>Merging the <strong>staging branch</strong> to <strong><code class="highlighter-rouge">master</code></strong>. Doing this is largely the
+same as described above, except that there is inherently no JIRA issue to
+tag in the commit message. A message like “Merging 0.9.10-incubating
+changes back to master.” is pretty sensible.</p>
+
+    <p><strong>DO NOT MERGE THE PULL REQUEST TO MASTER DIRECTLY!</strong> The point of merging
+the staging branch to master rather than the pull request is to ensure that
+the git history reflects that all commits to the staging branch are present
+on <code class="highlighter-rouge">master</code>. If the pull request is merged to master directly, then the git
+history ends up with two distinct merges and two distinct sets of commits,
+and final release sanity checks performed prior to deleting the staging
+branch will fail.</p>
+  </li>
+</ol>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+    </body>
+</html>
