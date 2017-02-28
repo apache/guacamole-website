@@ -80,11 +80,13 @@ Comments and Documentation
          *     Description of return value.
          */
          int fun(int var1, int var2);
-2. There must be no undocumented behavior of functions.
-3. If changes you are making will make parts of the existing manual incorrect,
+2. Do not use the `@author` tag (or similar). The authors of various parts of
+   the codebase should be tracked by git, not by the code itself.
+3. There must be no undocumented behavior of functions.
+4. If changes you are making will make parts of the existing manual incorrect,
    you are not expected to update the manual yourself, but **please let us know
    so we correct it**.
-4. For C code, local functions should be static and documented locally.
+5. For C code, local functions should be static and documented locally.
    Functions, types, etc. which are not local should be declared in an
    appropriate header file, and documented within the header file.
 
