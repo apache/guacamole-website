@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole (incubating): Promoting a release candidate to release</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <h1>Promoting a release candidate to release</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#delete-branch" id="markdown-toc-delete-branch">Delete the release branch</a></li>
+  <li><a href="#final-tag" id="markdown-toc-final-tag">Tag the final version of the release</a></li>
+  <li><a href="#final-upload" id="markdown-toc-final-upload">Upload final release artifacts</a>    <ul>
+      <li><a href="#artifacts-in-dist-svn" id="markdown-toc-artifacts-in-dist-svn">Artifacts in dist SVN</a></li>
+      <li><a href="#maven-artifacts" id="markdown-toc-maven-artifacts">Maven artifacts</a></li>
+      <li><a href="#docker-images" id="markdown-toc-docker-images">Docker images</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="delete-branch">Delete the release branch</h2>
+
+<p>Once <a href="/release-procedures-part2/#ppmc-vote">the PPMC vote</a> and <a href="/release-procedures-part2/#ipmc-vote">IPMC
+vote</a> for the release have passed, the
+release branches <a href="/release-procedures-part1/#release-branch">which were created
+previously</a> must be deleted.
+Assuming they were properly merged back to <code class="highlighter-rouge">master</code> as release-specific changes
+were made, deleting these branches with <code class="highlighter-rouge">git branch -d</code> will succeed without
+warnings. If git refuses to delete the branches because commits are missing
+from <code class="highlighter-rouge">master</code>, <strong>something is horribly wrong, and the release needs to be
+rechecked</strong>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout master
+$ git branch -d staging/0.9.11-incubating
+$ git push upstream :staging/0.9.11-incubating
+</code></pre>
+</div>
+
+<h2 id="final-tag">Tag the final version of the release</h2>
+
+<p>The specific point in the git history that the release was made must be marked
+with a new tag, pointing to the exact same commit as the last <a href="/release-procedures-part2/#tag-rc">tagged release
+candidate</a>. This tag must be made in the
+format <code class="highlighter-rouge">[VERSION]</code>, where <code class="highlighter-rouge">[VERSION]</code> is the version of the release:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag -m "Release 0.9.11-incubating." 0.9.11-incubating
+$ git push upstream 0.9.11-incubating
+</code></pre>
+</div>
+
+<p>Just as with release candidates, each repository relevant to the release must
+be tagged. This will be every repository that had a release branch (the release
+branch having been <a href="#delete-branch">deleted earlier</a>) and <em>never</em> includes
+<code class="highlighter-rouge">incubator-guacamole-website</code>, which is not part of the release.</p>
+
+<p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=incubator-guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130">the “0.9.10-incubating” tag on
+incubator-guacamole-server</a></p>
+
+<h2 id="final-upload">Upload final release artifacts</h2>
+
+<h3 id="artifacts-in-dist-svn">Artifacts in dist SVN</h3>
+
+<p>The release artifacts and their signatures come from the release candidate
+which was approved via the various VOTEs. These artifacts are already present
+in the SVN dist area under <code class="highlighter-rouge">dev/</code>, and need to be moved to the analogous area
+under <code class="highlighter-rouge">release/</code>. <em>This must be done using <code class="highlighter-rouge">svn mv</code></em>, with the directory
+containing the artifacts and signatures being renamed from <code class="highlighter-rouge">[VERSION]-RC[N]</code> to
+<code class="highlighter-rouge">[VERSION</code>] in the process.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ svn mv dev/incubator/guacamole/0.9.11-incubating-RC1 release/incubator/guacamole/0.9.11-incubating
+$ svn commit -m "Promote Apache Guacamole 0.9.11-incubating-RC1 artifacts to 0.9.11-incubating release."
+</code></pre>
+</div>
+
+<p>Note that, once this has finished, <strong>YOU MUST STILL WAIT AT LEAST 24 HOURS TO
+ALLOW THE <a href="https://www.apache.org/mirrors/">MIRRORS</a> TIME TO SYNC</strong> before
+announcing the release.</p>
+
+<h3 id="maven-artifacts">Maven artifacts</h3>
+
+<p>For the Maven artifacts to become generally available at
+<a href="https://repository.apache.org/">https://repository.apache.org/</a>, and for those artifacts to be synced with
+<a href="https://search.maven.org/">Maven Central</a>, the staging repository <a href="/release-procedures-part2/#staging-maven">created and
+closed earlier</a> needs to be
+explicitly released using <a href="https://repository.apache.org/">Apache’s Nexus
+instance</a>. Doing this involves simply selecting
+the repository, clicking the “release” button, and typing a reasonable log
+message noting the release.</p>
+
+<p>Note that it may take a day or so for Maven Central to contain the new
+artifacts, just like the mirrors, but absence of artifacts from Maven Central
+does not block announcement of the release as long as they are confirmed to be
+present on <a href="https://repository.apache.org/">https://repository.apache.org/</a>.</p>
+
+<h3 id="docker-images">Docker images</h3>
+
+<p>Both the <code class="highlighter-rouge">guacamole/guacamole</code> and <code class="highlighter-rouge">guacamole/guacd</code> images should now be
+updated with a new version-specific tag, duplicated to the <code class="highlighter-rouge">latest</code> tag. Since
+the images deployed for past release candidates were first cleaned with
+<code class="highlighter-rouge">git clean</code>, nothing should be actually rebuilt as a consequence of running
+<code class="highlighter-rouge">docker build</code> unless something has gone wrong and source changes were made
+in the absence of an RC.</p>
+
+<p>For example, to build the <code class="highlighter-rouge">guacamole/guacamole</code> Docker image for the current
+release candidate, from within the top-level <code class="highlighter-rouge">incubator-guacamole-client</code>
+directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clean -xfd .
+$ sudo docker build -t guacamole/guacamole:0.9.11-incubating .
+$ sudo docker build -t guacamole/guacamole:latest .
+</code></pre>
+</div>
+
+<p>Each of the above commands should finish virtually instantaneously, and the
+hash of the built images should match each other and the previous RC. Assuming
+all looks well, it should be safe to push the images:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo docker push guacamole/guacamole:0.9.11-incubating
+$ sudo docker push guacamole/guacamole:latest
+</code></pre>
+</div>
+
+<p>Again, this should finish virtually instantaneously, as no new data will need
+to be pushed. Docker Hub already has the images/layers from the previous RC
+builds.</p>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+    </body>
+</html>
