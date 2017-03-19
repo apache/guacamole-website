@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole (incubating): 0.9.12-incubating</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                
+    <div class="draft-disclaimer">
+        <p><strong>Apache Guacamole 0.9.12-incubating has not yet been
+        released!</strong> The artifacts and release notes below are drafts for
+        a proposed release of Apache Guacamole which has not yet occurred.</p>
+    </div>
+
+
+<h1>Apache Guacamole 0.9.12-incubating</h1>
+
+<div id="links">
+
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.12-incubating/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.10-incubating/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.12-incubating/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.12-incubating/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.12-incubating/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<p>Apache Guacamole is split into two subprojects: "guacamole-client", the
+HTML5 web application which serves the Guacamole client to users, and
+"guacamole-server", the remote desktop proxy which the web application
+communicates with. The source code for each of these may be downloaded
+below.</p>
+
+<!-- Source archives -->
+<div class="release-downloads">
+    
+    <table>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-client-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-client-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-client-0.9.12-incubating.tar.gz'
+                       )">guacamole-client-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-client-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-client-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-client-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-server-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-server-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-server-0.9.12-incubating.tar.gz'
+                       )">guacamole-server-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-server-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-server-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/source/guacamole-server-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<p>If you do not wish to build Apache Guacamole entirely from source, pre-built
+versions of the web application (.war) and all extensions are provided here in
+binary form for convenience.  <strong>Please note that guacamole-server must
+still be built and installed from source.</strong></p>
+
+<!-- All binaries -->
+<div class="release-downloads">
+    
+    <table>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-0.9.12-incubating.war"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-0.9.12-incubating.war'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-0.9.12-incubating.war'
+                       )">guacamole-0.9.12-incubating.war</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-0.9.12-incubating.war.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-0.9.12-incubating.war.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-0.9.12-incubating.war.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-duo-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-duo-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-duo-0.9.12-incubating.tar.gz'
+                       )">guacamole-auth-duo-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-duo-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-duo-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-duo-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-jdbc-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-jdbc-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-jdbc-0.9.12-incubating.tar.gz'
+                       )">guacamole-auth-jdbc-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-jdbc-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-jdbc-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-jdbc-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-header-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-header-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-header-0.9.12-incubating.tar.gz'
+                       )">guacamole-auth-header-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-header-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-header-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-header-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-ldap-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-ldap-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-ldap-0.9.12-incubating.tar.gz'
+                       )">guacamole-auth-ldap-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-ldap-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-ldap-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-ldap-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-noauth-0.9.12-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-noauth-0.9.12-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-noauth-0.9.12-incubating.tar.gz'
+                       )">guacamole-auth-noauth-0.9.12-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-noauth-0.9.12-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-noauth-0.9.12-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.12-incubating-RC1/binary/guacamole-auth-noauth-0.9.12-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<!-- Release notes -->
+<div id="release-notes">
+    <h1>Release notes</h1>
+    <p>The 0.9.12-incubating release features nifty auto-updating connection
+thumbnails for tab icons, performance improvements, and fixes for issues with
+printing, file transfer, and terminal emulation.</p>
+
+<p>New support for authenticating users based on arbitrary HTTP headers has also
+been added, allowing the authentication result of external systems sitting
+between the user and Guacamole to be trusted (as long as those headers can be
+truly guaranteed to come only from those trusted systems).</p>
+
+<h2 id="thumbnails-as-tab-icon">Thumbnails as tab icon</h2>
+
+<p>Guacamole normally updates the locally-stored thumbnail of previously-used
+connections for reference on the home screen. This update now occurs more
+regularly while the connection is in use, and the result is used for the tab
+icon (“favicon”), allowing multiple open connections and bookmarks of
+individual connections to be more easily distinguished from each other.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-190">GUACAMOLE-190</a> - Use thumbnail of connection for tab icon</li>
+</ul>
+
+<h2 id="performance-improvements">Performance improvements</h2>
+
+<p>Part of the continuing development of the experimental <a href="https://issues.apache.org/jira/browse/GUACAMOLE-168">Guacamole driver for
+the X.Org X11 server</a>, the
+performance surrounding certain rendering operations has been improved, in
+particular the handling of updates to client-side layer size, position, and the
+calculation of client lag.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-172">GUACAMOLE-172</a> - Calculation of processing lag (potentially) incorrect</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-177">GUACAMOLE-177</a> - Update layer properties only on flush</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-187">GUACAMOLE-187</a> - Improve performance of layer/surface resize</li>
+</ul>
+
+<h2 id="printing--file-transfer-issues">Printing / file transfer issues</h2>
+
+<p>Regressions related to <a href="http://guacamole.incubator.apache.org/releases/0.9.10-incubating/#streamlined-file-transfers">improvements to file transfer made in
+0.9.10-incubating</a>
+have been identified and fixed. Some of these regressions were specific to
+Internet Explorer and Microsoft Edge, but others were generic, such as file
+transfer itself possibly blocking interaction until the transfer has completed.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-129">GUACAMOLE-129</a> - Office mime-types problem with IE</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-138">GUACAMOLE-138</a> - Print with Microsoft Edge</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-196">GUACAMOLE-196</a> - Backslashes in document title cause printing to fail</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-200">GUACAMOLE-200</a> - read() in RDPDR printer can block user input</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-201">GUACAMOLE-201</a> - HTTP transfer of files can make connection unresponsive</li>
+</ul>
+
+<h2 id="terminal-emulation-bugs">Terminal emulation bugs</h2>
+
+<p>The Guacamole terminal emulator is currently intended to implement <a href="http://man7.org/linux/man-pages/man4/console_codes.4.html">the same
+subset of VT102 / ECMA-48 codes as the Linux
+console</a>. Issues
+with Guacamole’s implementation of these codes (specifically with handling of
+scrolling vs. non-scrolling regions) were identified and fixed. These issues
+affected use of GNU screen, tmux, vim, and others.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-148">GUACAMOLE-148</a> - SSH does not behave properly when using GNU screen</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-149">GUACAMOLE-149</a> - Potential busy loop in guac_terminal_display_set_columns()</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-193">GUACAMOLE-193</a> - Terminal emulator forgets background color of spaces</li>
+</ul>
+
+<h2 id="http-header-authentication">HTTP header authentication</h2>
+
+<p>Guacamole now supports for authenticating users based on arbitrary HTTP
+headers. While this support was always possible to implement via an extension,
+such an extension is now included as part of the Guacamole codebase, with a
+binary version built alongside the release for convenience. This new extension
+allowing the authentication result of external systems sitting between the user
+and Guacamole to be trusted.</p>
+
+<p><strong>NOTE:</strong> For this to be safe, the header added by the external system <strong>MUST</strong>
+be guaranteed to come only from the trusted authentication system itself. It is
+up to the configuration of the external system, proxies, etc. to ensure that
+users cannot manipulate or add these headers, and thus that the header will be
+present if and only if they are authenticated as the user identified by that
+header.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-195">GUACAMOLE-195</a> - Support for HTTP Header-Based Authentication</li>
+</ul>
+
+<h2 id="build-issues-deprecated-functions">Build issues (deprecated functions)</h2>
+
+<p>Two functions used within the guacamole-server build, <code class="highlighter-rouge">readdir_r()</code> and
+<code class="highlighter-rouge">avcodec_encode_video2()</code>, have been marked as deprecated, resulting in build
+failures. Guacamole has been modified to no longer depend on these functions,
+using the recommended alternatives instead, and the build should no longer fail
+on platforms where these functions are deprecated or unavailable.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-94">GUACAMOLE-94</a> - readdir_r is deprecated</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-167">GUACAMOLE-167</a> - avcodec_encode_video2() is deprecated</li>
+</ul>
+
+<h2 id="cursorlayer-rendering-issues">Cursor/layer rendering issues</h2>
+
+<p>In addition to <a href="#performance-improvements">performance improvements</a>,
+development for the experimental <a href="https://issues.apache.org/jira/browse/GUACAMOLE-168">Guacamole driver for the X.Org X11
+server</a> revealed issues
+with layer rendering with respect to stacking order, threadsafety, and
+transparency.</p>
+
+<p>In most cases, due to the way that VNC and RDP are currently implemented, these
+issues had no effect, but handling of alpha transparency for RDP cursors was
+noticeably incorrect when the remote desktop used cursor shadows. This was a
+regression due to changes introduced in 0.9.10-incubating for screen sharing,
+and should now be fixed.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-176">GUACAMOLE-176</a> - Support layer position and opacity in guac_common_surface</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-178">GUACAMOLE-178</a> - Shared cursor can be obscured by other layers</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-180">GUACAMOLE-180</a> - Common display/surface should be threadsafe</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-184">GUACAMOLE-184</a> - guac_common_surface_dup() may send invalid PNG</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-185">GUACAMOLE-185</a> - Source rectangle for transfer/copy not properly clipped</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-188">GUACAMOLE-188</a> - Support alpha transparency in guac_common_surface</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-211">GUACAMOLE-211</a> - RDP mouse cursor shadow black</li>
+</ul>
+
+<h2 id="client-hostnameaddress-tokens">Client hostname/address tokens</h2>
+
+<p>Two new <a href="http://guacamole.incubator.apache.org/doc/gug/configuring-guacamole.html#parameter-tokens">parameter
+tokens</a>
+have been added, <code class="highlighter-rouge">GUAC_CLIENT_HOSTNAME</code> and <code class="highlighter-rouge">GUAC_CLIENT_ADDRESS</code>, representing
+the hostname and IP address of the user respectively. The values of these
+tokens are determined at the time the user authenticated, and can be used to
+include the user’s hostname/address within connection parameters.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-47">GUACAMOLE-47</a> - Get client hostname for use in guac RDP session</li>
+</ul>
+
+<h2 id="miscellaneous-fixesimprovements">Miscellaneous fixes/improvements</h2>
+
+<p>This latest release of Guacamole also adds translation strings for French which
+were previously missing, support for RDP servers having Swiss-French keyboard
+layouts, and reorganizes some of the internal convenience libraries used by
+guacamole-server for the sake of cleanliness and maintainability.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-126">GUACAMOLE-126</a> - Property “guacd-host” should actually be “guacd-hostname”</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-135">GUACAMOLE-135</a> - Add Swiss-French keymap for RDP</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-156">GUACAMOLE-156</a> - Missing translations in 0.9.10-incubating</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-169">GUACAMOLE-169</a> - Use namespace for common utility headers</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-170">GUACAMOLE-170</a> - Always initialize guac_client args</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-171">GUACAMOLE-171</a> - Bring broadcast socket into public libguac API</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-175">GUACAMOLE-175</a> - Move core of guacd into utility library</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-179">GUACAMOLE-179</a> - Move PulseAudio support into utility library</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-186">GUACAMOLE-186</a> - Duo-Web-v2.js license missing from LICENSE</li>
+</ul>
+
+
+</div>
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2016 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+    </body>
+</html>
