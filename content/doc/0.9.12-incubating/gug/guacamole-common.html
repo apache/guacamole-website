@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 16. guacamole-common</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="developers-guide.html" title="Part II. Developer's Guide" /><link rel="prev" href="libguac.html" title="Chapter 15. libguac" /><link rel="next" href="guacamole-common-js.html" title="Chapter 17. guacamole-common-js" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 16. <span class="package">guacamole-common</span></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="libguac.html">Prev</a> </td><th width="60%" align="center">Part II. Developer's Guide</th><td width="20%" align="right"> <a accesskey="n" href="guacamole-common-js.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="guacamole-common"></a>Chapter 16. <span class="package">guacamole-common</span></h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="guacamole-common.html#java-http-tunnel">HTTP tunnel</a></span></dt><dt><span class="section"><a href="guacamole-common.html#java-protocol-usage">Using the Guacamole protocol</a></span></dt><dd><dl><dt><span class="section"><a href="guacamole-common.html#java-reading-protocol"><code class="classname">GuacamoleReader</code></a></span></dt><dt><span class="section"><a href="guacamole-common.html#java-writing-protocol"><code class="classname">GuacamoleWriter</code></a></span></dt></dl></dd></dl></div><a id="idm139895978522848" class="indexterm"></a><a id="idm139895978384336" class="indexterm"></a><p>The Java API provided by the Guacamole project is called guacamole-common. It provides a
+        basic means of tunneling data between the JavaScript client provided by guacamole-common-js
+        and the native proxy daemon, guacd, and for dealing with the Guacamole protocol. The purpose
+        of this library is to facilitate the creation of custom tunnels between the JavaScript
+        client and guacd, allowing your Guacamole-driven web application to enforce its own security
+        model, if any, and dictate exactly what connections are established.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="java-http-tunnel"></a>HTTP tunnel</h2></div></div></div><p>The Guacamole Java API implements the HTTP tunnel using a servlet
+            called <code class="classname">GuacamoleHTTPTunnelServlet</code>. This
+            servlet handles all requests coming to it over HTTP from the
+            JavaScript client, and translated them into connect, read, or write
+            requests, which each get dispatched to the
+                <code class="methodname">doConnect()</code>,
+                <code class="methodname">doRead()</code>, and
+                <code class="methodname">doWrite()</code> functions accordingly.</p><p>Normally, you wouldn't touch the <code class="methodname">doRead()</code>
+            and <code class="methodname">doWrite()</code> functions, as these have
+            already been written to properly handle the requests of the
+            JavaScript tunnel, and if you feel the need to touch these
+            functions, you are probably better off writing your own tunnel
+            implementation, although such a thing is difficult to do in a
+            performant way.</p><p>When developing an application based on the Guacamole API, you
+            should use <code class="classname">GuacamoleHTTPTunnelServlet</code> by
+            extending it, implementing your own version of
+                <code class="methodname">doConnect()</code>, which is the only abstract
+            function it defines. The tutorial later in this book demonstrating
+            how to write a Guacamole-based web application shows the basics of
+            doing this, but generally, <code class="methodname">doConnect()</code> is
+            an excellent place for authentication or other validation, as it is
+            the responsibility of <code class="methodname">doConnect()</code> to create
+            (or not create) the actual tunnel. If
+                <code class="methodname">doConnect()</code> does not create the tunnel,
+            communication between the JavaScript client and guacd cannot take
+            place, which is an ideal power to have as an authenticator.</p><p>The <code class="methodname">doConnect()</code> function is expected to return a new
+                <code class="classname">GuacamoleTunnel</code>, but it is completely up to the
+            implementation to decide how that tunnel is to be created. The already-implemented parts
+            of <code class="classname">GuacamoleHTTPTunnelServlet</code> then return the unique identifier
+            of this tunnel to the JavaScript client, allowing its own tunnel implementation to
+            continue to communicate with the tunnel existing on the Java side.</p><p>Instances of <code class="classname">GuacamoleTunnel</code> are created associated with a
+                <code class="classname">GuacamoleSocket</code>, which is the abstract interface surrounding
+            the low-level connection to guacd. Overall, there is a socket
+                (<code class="classname">GuacamoleSocket</code>) which provides a TCP connection to guacd.
+            This socket is exposed to <code class="classname">GuacamoleTunnel</code>, which provides
+            abstract protocol access around what is actually (but secretly, through the abstraction
+            of the API) a TCP socket.</p><p>The Guacamole web application extends this tunnel servlet in order
+            to implement authentication at the lowest possible level,
+            effectively prohibiting communication between the client and any
+            remote desktops unless they have properly authenticated. Your own
+            implementation can be considerably simpler, especially if you don't
+            need authentication:</p><div class="informalexample"><pre class="programlisting">public class MyGuacamoleTunnelServlet
+    extends GuacamoleHTTPTunnelServlet {
+
+    @Override
+    protected GuacamoleTunnel doConnect(HttpServletRequest request)
+        throws GuacamoleException {
+
+        // Connect to guacd here (this is a STUB)
+        GuacamoleSocket socket;
+
+        // Return a new tunnel which uses the connected socket
+        return new SimpleGuacamoleTunnel(socket);
+
+    }
+
+}</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="java-protocol-usage"></a>Using the Guacamole protocol</h2></div></div></div><p>guacamole-common provides basic low-level support for the
+            Guacamole protocol. This low-level support is leveraged by the HTTP
+            tunnel implementation to satisfy the requirements of the JavaScript
+            client implementation, as the JavaScript client expects the
+            handshake procedure to have already taken place. This support exists
+            through the <code class="classname">GuacamoleReader</code> and
+                <code class="classname">GuacamoleWriter</code> classes, which are
+            similar to Java's <code class="classname">Reader</code> and
+                <code class="classname">Writer</code> classes, except that they deal
+            with the Guacamole protocol specifically, and thus have slightly
+            different contracts.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="java-reading-protocol"></a><code class="classname">GuacamoleReader</code></h3></div></div></div><p><code class="classname">GuacamoleReader</code> provides a very basic
+                    <code class="methodname">read()</code> function which is required
+                to return one or more complete instructions in a
+                    <span class="type">char</span> array. It also provides the typical
+                    <code class="methodname">available()</code> function, which informs
+                you whether <code class="methodname">read()</code> is likely to block
+                the next time it is called, and an even more abstract version of
+                    <code class="methodname">read()</code> called
+                    <code class="methodname">readInstruction()</code> which returns one
+                instruction at a time, wrapped within a
+                    <code class="classname">GuacamoleInstruction</code> instance.</p><p>Normally, you would not need to use this class yourself. It is
+                used by <code class="classname">ConfiguredGuacamoleSocket</code> to
+                complete the Guacamole protocol handshake procedure, and it is
+                used by <code class="classname">GuacamoleHTTPTunnelServlet</code> within
+                    <code class="methodname">doRead()</code> to implement the reading
+                half of the tunnel.</p><p>The only concrete implementation of
+                    <code class="classname">GuacamoleReader</code> is
+                    <code class="classname">ReaderGuacamoleReader</code>, which wraps a
+                Java <code class="classname">Reader</code>, using that as the source for
+                data to parse into Guacamole instructions. Again, you would not
+                normally directly use this class, nor instantiate it yourself. A
+                working, concrete instance of
+                    <code class="classname">GuacamoleReader</code> can be retrieved from
+                any <code class="classname">GuacamoleSocket</code> or
+                    <code class="classname">GuacamoleTunnel</code>.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="java-writing-protocol"></a><code class="classname">GuacamoleWriter</code></h3></div></div></div><p><code class="classname">GuacamoleWriter</code> provides a very basic
+                    <code class="methodname">write()</code> function and a more
+                abstract version called
+                    <code class="methodname">writeInstruction()</code> which writes
+                instances of <code class="classname">GuacamoleInstruction</code>. These
+                functions are analogous to the <code class="methodname">read()</code>
+                and <code class="methodname">readInstruction()</code> functions
+                provided by <code class="classname">GuacamoleReader</code>, and have
+                similar restrictions: the contract imposed by
+                    <code class="methodname">write()</code> requires that written
+                instructions be complete</p><p>The only concrete implementation of
+                    <code class="classname">GuacamoleWriter</code> is
+                    <code class="classname">WriterGuacamoleWriter</code>, which wraps a
+                Java <code class="classname">Writer</code>, using that as the
+                destination for Guacamole instruction data, but you would not
+                normally directly use this class, nor instantiate it yourself.
+                It is used by <code class="classname">ConfiguredGuacamoleSocket</code>
+                to complete the Guacamole protocol handshake procedure, and it
+                is used by <code class="classname">GuacamoleHTTPTunnelServlet</code>
+                within <code class="methodname">doWrite()</code> to implement the
+                writing half of the tunnel.</p><p>If necessary, a <code class="classname">GuacamoleWriter</code> can be
+                retrieved from any <code class="classname">GuacamoleSocket</code> or
+                    <code class="classname">GuacamoleTunnel</code>, but in most cases,
+                the classes provided by the Guacamole Java API which already use
+                    <code class="classname">GuacamoleWriter</code> will be
+                sufficient.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="libguac.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="developers-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="guacamole-common-js.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 15. libguac </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 17. guacamole-common-js</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
