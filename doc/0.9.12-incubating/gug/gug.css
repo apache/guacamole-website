@@ -1,0 +1,179 @@
+
+body {
+
+    color: black;
+    background: white;
+
+    font-family: 'FreeSans', 'Liberation Sans', 'Arial', 'Helvetica', sans-serif;
+    text-align: justify;
+    text-rendering: optimizeLegibility;
+    line-height: 125%;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+/* Green links */
+a[href]         { color: #080; }
+a[href]:visited { color: #884; }
+
+div#content {
+
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 25cm;
+    padding: 1em;
+
+}
+
+/* DOCBOOK */
+
+.navheader hr, .navfooter hr {
+    border: 0;
+    border-bottom: 1px solid black;
+}
+
+.chapter div.toc,
+.appendix div.toc {
+    border: 1px solid #BCBCBC;
+    background: #FBFBFB;
+    margin: 2em;
+    padding: 0 1em;
+    font-size: 0.75em;
+}
+
+.programlisting, .screen {
+    padding: 1em;
+}
+
+.replaceable {
+    color: #008;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-style: normal;
+    padding: 0 0.25em;
+}
+
+pre .emphasis em {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.book .titlepage {
+    text-align: center;
+    padding: 2em;
+}
+
+.titlepage hr {
+    display: none;
+}
+
+.titlepage .legalnotice {
+    text-align: left;
+}
+
+.mediaobject {
+    text-align: center;
+    float: none;
+    margin: 1em;
+}
+
+.mediaobject img {
+    width: auto;
+    max-width: 100%;
+}
+
+.screenshot img {
+    border: 1px solid black;
+}
+
+.caption {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.navfooter, .section {
+    clear: both;
+}
+
+.table-contents, .informaltable {
+    margin: 1em;
+}
+
+.table-contents table,
+.informaltable table {
+    border: 1px solid #BCBCBC;
+    border-collapse: collapse;
+    font-size: 10pt;
+}
+
+.table-contents th, .informaltable th {
+    background: #FBFBFB;
+}
+
+.table-contents td, .table-contents th,
+.informaltable td, .informaltable th {
+    border: 1px solid #BCBCBC;
+    padding: 0.5em;
+    min-width: 1.5in;
+}
+
+.table-contents table table,
+.informaltable table table {
+    border: none;
+}
+
+.table-contents table table td,
+.table-contents table table th,
+.informaltable table table td,
+.informaltable table table th {
+    background: none;
+    padding: 0.25em;
+}
+
+dl.variablelist {
+    margin-left: 1em;
+}
+
+.variablelist .term {
+    font-weight: bold;
+}
+
+blockquote {
+    border-left: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 1px 1em;
+    font-style: oblique;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+div.important {
+    background: #FFFFE8;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 0 1em;
+    margin: 2em;
+}
+
+/* Printable styles */
+
+@media print {
+
+    .navheader, .navfooter, .chapter .toc {
+        display: none
+    }
+
+    body {
+        font-size: 10pt;
+    }
+
+    .chapter > .titlepage {
+        margin: 2em 0;
+        font-size: 1.5em;
+        text-align: center; 
+    }
+
+}
+
