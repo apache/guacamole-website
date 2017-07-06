@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Parser.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Parser.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+var Guacamole = Guacamole || {};
+
+/**
+ * Simple Guacamole protocol parser that invokes an oninstruction event when
+ * full instructions are available from data received via receive().
+ * 
+ * @constructor
+ */
+Guacamole.Parser = function() {
+
+    /**
+     * Reference to this parser.
+     * @private
+     */
+    var parser = this;
+
+    /**
+     * Current buffer of received data. This buffer grows until a full
+     * element is available. After a full element is available, that element
+     * is flushed into the element buffer.
+     * 
+     * @private
+     */
+    var buffer = "";
+
+    /**
+     * Buffer of all received, complete elements. After an entire instruction
+     * is read, this buffer is flushed, and a new instruction begins.
+     * 
+     * @private
+     */
+    var element_buffer = [];
+
+    // The location of the last element's terminator
+    var element_end = -1;
+
+    // Where to start the next length search or the next element
+    var start_index = 0;
+
+    /**
+     * Appends the given instruction data packet to the internal buffer of
+     * this Guacamole.Parser, executing all completed instructions at
+     * the beginning of this buffer, if any.
+     *
+     * @param {String} packet The instruction data to receive.
+     */
+    this.receive = function(packet) {
+
+        // Truncate buffer as necessary
+        if (start_index > 4096 &amp;&amp; element_end >= start_index) {
+
+            buffer = buffer.substring(start_index);
+
+            // Reset parse relative to truncation
+            element_end -= start_index;
+            start_index = 0;
+
+        }
+
+        // Append data to buffer
+        buffer += packet;
+
+        // While search is within currently received data
+        while (element_end &lt; buffer.length) {
+
+            // If we are waiting for element data
+            if (element_end >= start_index) {
+
+                // We now have enough data for the element. Parse.
+                var element = buffer.substring(start_index, element_end);
+                var terminator = buffer.substring(element_end, element_end+1);
+
+                // Add element to array
+                element_buffer.push(element);
+
+                // If last element, handle instruction
+                if (terminator == ";") {
+
+                    // Get opcode
+                    var opcode = element_buffer.shift();
+
+                    // Call instruction handler.
+                    if (parser.oninstruction != null)
+                        parser.oninstruction(opcode, element_buffer);
+
+                    // Clear elements
+                    element_buffer.length = 0;
+
+                }
+                else if (terminator != ',')
+                    throw new Error("Illegal terminator.");
+
+                // Start searching for length at character after
+                // element terminator
+                start_index = element_end + 1;
+
+            }
+
+            // Search for end of length
+            var length_end = buffer.indexOf(".", start_index);
+            if (length_end != -1) {
+
+                // Parse length
+                var length = parseInt(buffer.substring(element_end+1, length_end));
+                if (isNaN(length))
+                    throw new Error("Non-numeric character in element length.");
+
+                // Calculate start of element
+                start_index = length_end + 1;
+
+                // Calculate location of element terminator
+                element_end = start_index + length;
+
+            }
+            
+            // If no period yet, continue search when more data
+            // is received
+            else {
+                start_index = buffer.length;
+                break;
+            }
+
+        } // end parse loop
+
+    };
+
+    /**
+     * Fired once for every complete Guacamole instruction received, in order.
+     * 
+     * @event
+     * @param {String} opcode The Guacamole instruction opcode.
+     * @param {Array} parameters The parameters provided for the instruction,
+     *                           if any.
+     */
+    this.oninstruction = null;
+
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Guacamole.ArrayBufferReader.html">ArrayBufferReader</a></li><li><a href="Guacamole.ArrayBufferWriter.html">ArrayBufferWriter</a></li><li><a href="Guacamole.AudioPlayer.html">AudioPlayer</a></li><li><a href="Guacamole.AudioRecorder.html">AudioRecorder</a></li><li><a href="Guacamole.BlobReader.html">BlobReader</a></li><li><a href="Guacamole.BlobWriter.html">BlobWriter</a></li><li><a href="Guacamole.ChainedTunnel.html">ChainedTunnel</a></li><li><a href="Guacamole.Client.html">Client</a></li><li><a href="Guacamole.DataURIReader.html">DataURIReader</a></li><li><a href="Guacamole.Display.html">Display</a></li><li><a href="Guacamole.Display.VisibleLayer.html">VisibleLayer</a></li><li><a href="Guacamole.HTTPTunnel.html">HTTPTunnel</a></li><li><a href="Guacamole.InputStream.html">InputStream</a></li><li><a href="Guacamole.IntegerPool.html">IntegerPool</a></li><li><a href="Guacamole.JSONReader.html">JSONReader</a></li><li><a href="Guacamole.Keyboard.html">Keyboard</a></li><li><a href="Guacamole.Keyboard.ModifierState.html">ModifierState</a></li><li><a href="Guacamole.Layer.html">Layer</a></li><li><a href="Guacamole.Layer.Pixel.html">Pixel</a></li><li><a href="Guacamole.Mouse.html">Mouse</a></li><li><a href="Guacamole.Mouse.State.html">State</a></li><li><a href="Guacamole.Mouse.Touchpad.html">Touchpad</a></li><li><a href="Guacamole.Mouse.Touchscreen.html">Touchscreen</a></li><li><a href="Guacamole.Object.html">Object</a></li><li><a href="Guacamole.OnScreenKeyboard.html">OnScreenKeyboard</a></li><li><a href="Guacamole.OnScreenKeyboard.Key.html">Key</a></li><li><a href="Guacamole.OnScreenKeyboard.Layout.html">Layout</a></li><li><a href="Guacamole.OutputStream.html">OutputStream</a></li><li><a href="Guacamole.Parser.html">Parser</a></li><li><a href="Guacamole.RawAudioFormat.html">RawAudioFormat</a></li><li><a href="Guacamole.RawAudioPlayer.html">RawAudioPlayer</a></li><li><a href="Guacamole.RawAudioRecorder.html">RawAudioRecorder</a></li><li><a href="Guacamole.SessionRecording.html">SessionRecording</a></li><li><a href="Guacamole.StaticHTTPTunnel.html">StaticHTTPTunnel</a></li><li><a href="Guacamole.Status.html">Status</a></li><li><a href="Guacamole.StringReader.html">StringReader</a></li><li><a href="Guacamole.StringWriter.html">StringWriter</a></li><li><a href="Guacamole.Tunnel.html">Tunnel</a></li><li><a href="Guacamole.VideoPlayer.html">VideoPlayer</a></li><li><a href="Guacamole.WebSocketTunnel.html">WebSocketTunnel</a></li></ul><h3>Events</h3><ul><li><a href="Guacamole.ArrayBufferReader.html#event:ondata">ondata</a></li><li><a href="Guacamole.ArrayBufferReader.html#event:onend">onend</a></li><li><a href="Guacamole.ArrayBufferWriter.html#event:onack">onack</a></li><li><a href="Guacamole.AudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.AudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobReader.html#event:onend">onend</a></li><li><a href="Guacamole.BlobReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.BlobWriter.html#event:onack">onack</a></li><li><a href="Guacamole.BlobWriter.html#event:oncomplete">oncomplete</a></li><li><a href="Guacamole.BlobWriter.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobWriter.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.ChainedTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onaudio">onaudio</a></li><li><a href="Guacamole.Client.html#event:onclipboard">onclipboard</a></li><li><a href="Guacamole.Client.html#event:onerror">onerror</a></li><li><a href="Guacamole.Client.html#event:onfile">onfile</a></li><li><a href="Guacamole.Client.html#event:onfilesystem">onfilesystem</a></li><li><a href="Guacamole.Client.html#event:onname">onname</a></li><li><a href="Guacamole.Client.html#event:onpipe">onpipe</a></li><li><a href="Guacamole.Client.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onsync">onsync</a></li><li><a href="Guacamole.Client.html#event:onvideo">onvideo</a></li><li><a href="Guacamole.DataURIReader.html#event:onend">onend</a></li><li><a href="Guacamole.Display.html#event:oncursor">oncursor</a></li><li><a href="Guacamole.Display.html#event:onresize">onresize</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.HTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.InputStream.html#event:onblob">onblob</a></li><li><a href="Guacamole.InputStream.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.Keyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.Keyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.html#event:onmouseout">onmouseout</a></li><li><a href="Guacamole.Mouse.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Object.html#event:onbody">onbody</a></li><li><a href="Guacamole.Object.html#event:onundefine">onundefine</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.OutputStream.html#event:onack">onack</a></li><li><a href="Guacamole.Parser.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.SessionRecording.html#event:onpause">onpause</a></li><li><a href="Guacamole.SessionRecording.html#event:onplay">onplay</a></li><li><a href="Guacamole.SessionRecording.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.SessionRecording.html#event:onseek">onseek</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.StringReader.html#event:onend">onend</a></li><li><a href="Guacamole.StringReader.html#event:ontext">ontext</a></li><li><a href="Guacamole.StringWriter.html#event:onack">onack</a></li><li><a href="Guacamole.Tunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.Tunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.Tunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onstatechange">onstatechange</a></li></ul><h3>Namespaces</h3><ul><li><a href="Guacamole.html">Guacamole</a></li><li><a href="Guacamole.AudioContextFactory.html">AudioContextFactory</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jul 02 2017 12:09:53 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>
