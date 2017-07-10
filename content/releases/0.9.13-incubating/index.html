@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole (incubating): 0.9.13-incubating</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <ul id="navigation" class="menu">
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                <li><a
+                    
+                        href="/releases/"
+                    
+                    
+                        class="download"
+                    >Downloads</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    
+                    
+                        class="github"
+                    >GitHub</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/api-documentation/"
+                    
+                    >API</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                    
+                    >JIRA</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/doc/gug/"
+                    
+                    >Manual</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/open-source/"
+                    
+                    >Contributing</a></li>
+            
+        
+            
+                <li><a
+                    
+                        href="/support/"
+                    
+                    >Help / Support</a></li>
+            
+        
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                
+    <div class="draft-disclaimer">
+        <p><strong>Apache Guacamole 0.9.13-incubating has not yet been
+        released!</strong> The artifacts and release notes below are drafts for
+        a proposed release of Apache Guacamole which has not yet occurred.</p>
+    </div>
+
+
+<h1>Apache Guacamole 0.9.13-incubating</h1>
+
+<div id="links">
+
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/0.9.13-incubating/gug">Manual</a></li>
+        
+            <li><a href="/doc/0.9.13-incubating/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/0.9.13-incubating/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/0.9.13-incubating/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/0.9.13-incubating/libguac">libguac</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<p>Apache Guacamole is split into two subprojects: "guacamole-client", the
+HTML5 web application which serves the Guacamole client to users, and
+"guacamole-server", the remote desktop proxy which the web application
+communicates with. The source code for each of these may be downloaded
+below.</p>
+
+<!-- Source archives -->
+<div class="release-downloads">
+    
+    <table>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-client-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-client-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-client-0.9.13-incubating.tar.gz'
+                       )">guacamole-client-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-client-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-client-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-client-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-server-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-server-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-server-0.9.13-incubating.tar.gz'
+                       )">guacamole-server-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-server-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-server-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/source/guacamole-server-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<p>If you do not wish to build Apache Guacamole entirely from source, pre-built
+versions of the web application (.war) and all extensions are provided here in
+binary form for convenience.  <strong>Please note that guacamole-server must
+still be built and installed from source.</strong></p>
+
+<!-- All binaries -->
+<div class="release-downloads">
+    
+    <table>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-0.9.13-incubating.war"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-0.9.13-incubating.war'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-0.9.13-incubating.war'
+                       )">guacamole-0.9.13-incubating.war</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-0.9.13-incubating.war.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-0.9.13-incubating.war.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-0.9.13-incubating.war.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-cas-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-cas-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-cas-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-cas-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-cas-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-cas-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-cas-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-duo-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-duo-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-duo-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-duo-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-duo-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-duo-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-duo-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-jdbc-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-jdbc-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-jdbc-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-jdbc-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-jdbc-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-jdbc-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-jdbc-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-header-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-header-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-header-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-header-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-header-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-header-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-header-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-ldap-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-ldap-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-ldap-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-ldap-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-ldap-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-ldap-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-ldap-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+            <tr>
+                
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-noauth-0.9.13-incubating.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-noauth-0.9.13-incubating.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-noauth-0.9.13-incubating.tar.gz'
+                       )">guacamole-auth-noauth-0.9.13-incubating.tar.gz</a></td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-noauth-0.9.13-incubating.tar.gz.md5">MD5</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-noauth-0.9.13-incubating.tar.gz.sha">SHA</a> ]</td>
+                <td>[ <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/0.9.13-incubating-RC1/binary/guacamole-auth-noauth-0.9.13-incubating.tar.gz.asc">PGP</a> ]</td>
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<!-- Release notes -->
+<div id="release-notes">
+    <h1>Release notes</h1>
+    <p>The 0.9.13-incubating release features new support for CAS single sign-on,
+automatic failover to connections within the same connection group, and fixes
+for issues in all supported protocols. The JavaScript API has also been
+extended to provide for in-browser playback of screen recordings, and the
+extension API now allows custom REST services to be defined.</p>
+
+<p><strong>This release contains changes which break compatibility with past releases.</strong>
+Please see the <a href="#deprecation--compatibility-notes">deprecation / compatibility
+notes</a> section for more information.</p>
+
+<h2 id="support-for-cas-single-sign-on">Support for CAS single sign-on</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Central_Authentication_Service">Central Authentication
+Service</a> (CAS),
+is a single sign-on solution commonly used by universities to unify
+authentication across various web applications which are otherwise independent.
+The newly-implemented guacamole-auth-cas extension allows Guacamole to delegate
+authentication to CAS, relying on CAS to determine the identity and validity
+of each user.</p>
+
+<p>Note that this new extension only deals with determining the identity of users
+that have authenticated with CAS, and redirecting unauthenticated users to the
+CAS system to authenticate. The details of the connections available to each
+user must be provided via another extension, such as the <a href="/doc/0.9.13-incubating/gug/jdbc-auth.html">database
+authentication</a>.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-204">GUACAMOLE-204</a> - Support CAS Single Sign On</li>
+</ul>
+
+<h2 id="correction-to-duo-documentation">Correction to Duo documentation</h2>
+
+<p>The documentation for Guacamole’s Duo extension previously stated that Duo’s
+“Auth API” was required. This is incorrect; though the “Auth API” will work,
+Guacamole actually uses the “Web SDK”. This is particularly important, as Duo
+recently ceased offering the “Auth API” for free, whereas the “Web SDK” is
+still available for free accounts.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-219">GUACAMOLE-219</a> - Duo documentation should point to “Web SDK”, not “Auth API”</li>
+</ul>
+
+<h2 id="in-browser-playback-of-screen-recordings">In-browser playback of screen recordings</h2>
+
+<p>Guacamole’s screen recordings are actually copies of the same exact data which
+would be fed to the Guacamole client over the course of the connection, thus
+the JavaScript API already had much of what was necessary to support in-browser
+playback of recordings. The main things lacking were a means of reading a
+Guacamole protocol stream from a static resource, and a means of seeking
+backward or forward within that stream.</p>
+
+<p>This missing API-level functionality is now provided through the new
+<a href="/doc/0.9.13-incubating/guacamole-common-js/Guacamole.StaticHTTPTunnel.html"><code class="highlighter-rouge">Guacamole.StaticHTTPTunnel</code></a> and <a href="/doc/0.9.13-incubating/guacamole-common-js/Guacamole.SessionRecording.html"><code class="highlighter-rouge">Guacamole.SessionRecording</code></a> objects respectively,
+and an example demonstrating this use, <a href="https://github.com/apache/incubator-guacamole-client/tree/de12b683d746129ddc8b34425ed6e40b618c91d6/doc/guacamole-playback-example">guacamole-playback-example</a>, is provided within the guacamole-client source.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-250">GUACAMOLE-250</a> - Implement support for in-browser playback of screen recordings</li>
+</ul>
+
+<h2 id="noauth-now-deprecated">NoAuth now deprecated</h2>
+
+<p>Over the years since its introduction, the NoAuth extension has grown to become
+a consistent source of issues for both users and the Guacamole development
+community, and simply using the extension has become de facto bad practice. As
+such, <strong>the NoAuth extension is now deprecated</strong>.</p>
+
+<p>To ease migration away from its use, the extension remains part of the
+Guacamole source and a convenience binary of the extension is provided with
+this release, but its continued use is not recommended and it will eventually
+be removed. <strong>Integrations of Guacamole should instead use the extension API</strong>,
+or the core Guacamole API for absolute low-level control.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-256">GUACAMOLE-256</a> - Deprecate the NoAuth extension</li>
+</ul>
+
+<h2 id="sshtelnet-support-for-256-color-console-codes">SSH/telnet support for 256-color console codes</h2>
+
+<p>Guacamole has historically supported only the subset of console codes
+implemented by the Linux kernel’s built-in terminal emulator. As part of a
+larger, ongoing effort to <a href="https://issues.apache.org/jira/browse/GUACAMOLE-277">achieve compatibility with
+xterm</a>, support for
+xterm’s 256-color console codes has been added, along with support for the
+console code which changes the window title.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-265">GUACAMOLE-265</a> - Support OSC 0 for changing SSH/telnet window title</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-278">GUACAMOLE-278</a> - Add support for xterm’s 256-color control codes</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-280">GUACAMOLE-280</a> - Add support for the “faint” SGR flag</li>
+</ul>
+
+<h2 id="automatic-failover-for-connections-in-groups">Automatic failover for connections in groups</h2>
+
+<p>In past releases, the database authentication would handle connection attempts
+to connection groups by selecting the least-used connection, but would
+otherwise only make one connection attempt. If that connection attempt fails
+due to an error within the remote desktop, the user must manually reconnect (or
+wait 15 seconds for the automatic reconnect).</p>
+
+<p>Connection groups provided via the database authentication will now
+automatically and transparently switch to the next available connection in the
+group for remote desktop errors that occur early in the connection. If
+graphical updates are sent prior to the error, automatic failover will not
+occur.</p>
+
+<p>This functionality has also been added at the Java API level. Extensions and
+applications leveraging the Guacamole API can use the
+<a href="/doc/0.9.13-incubating/guacamole-common/org/apache/guacamole/protocol/FailoverGuacamoleSocket.html"><code class="highlighter-rouge">FailoverGuacamoleSocket</code></a> class to automatically detect
+and handle upstream (remote desktop) errors during the connection process.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-208">GUACAMOLE-208</a> - Expand status codes to represent common remote desktop states</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-267">GUACAMOLE-267</a> - Support health checks for connections</li>
+</ul>
+
+<h2 id="fixes-for-all-supported-protocols">Fixes for all supported protocols</h2>
+
+<p>Several bugs with each supported protocol have been addressed. Most
+significantly, issues with audio stream stability for recent versions of
+Windows, and transfer of large files over RDP, the behavior of the “Alt” key
+for SSH and telnet, and VNC connection stability have all been fixed.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-194">GUACAMOLE-194</a> - Double free() in guac_common_ssh_destroy_user()</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-205">GUACAMOLE-205</a> - libguac_common_ssh build fails with OpenSSL 1.1</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-206">GUACAMOLE-206</a> - Alt key combinations broken in SSH and telnet</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-218">GUACAMOLE-218</a> - Audio stops playing on Windows Server 2016</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-222">GUACAMOLE-222</a> - SFTP file handles not closed for downloads</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-257">GUACAMOLE-257</a> - Segfault in on VNC/SSH file upload if SFTP is disabled</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-262">GUACAMOLE-262</a> - Cannot connect to ESXi 6.5 VNC server</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-268">GUACAMOLE-268</a> - RDPDR file size may be truncated to 32 bits</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-282">GUACAMOLE-282</a> - Common surface transfer functions incorrect with respect to alpha channel</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-306">GUACAMOLE-306</a> - VNC may segfault during the connection process</li>
+</ul>
+
+<h2 id="defining-rest-services-via-extensions">Defining REST services via extensions</h2>
+
+<p>Extensions can now define arbitrary REST services by implementing the new
+<code class="highlighter-rouge">getResource()</code> function at either the
+<a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/AuthenticationProvider.html"><code class="highlighter-rouge">AuthenticationProvider</code></a>
+<a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/UserContext.html"><code class="highlighter-rouge">UserContext</code></a>
+levels, returning objects annotated with JAX-RS (JSR-311) annotations.</p>
+
+<p>REST resources exposed at the <code class="highlighter-rouge">UserContext</code> level are inherently tied to the
+user’s session and thus require authentication, while resources exposed at the
+<code class="highlighter-rouge">AuthenticationProvider</code> level do not.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-289">GUACAMOLE-289</a> - Add support for declaring REST services within extensions</li>
+</ul>
+
+<h2 id="user-profile-attributes">User profile attributes</h2>
+
+<p>The database authentication now defines additional, arbitrary attributes for
+users which, if specified, are rendered within Guacamole’s user menu. These
+attributes are optional - if omitted, the user menu renders as in previous
+releases.</p>
+
+<p>The additional attributes are standardized at the API level on the
+<a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/User.Attribute.html"><code class="highlighter-rouge">User.Attribute</code></a>
+object, and thus can be leveraged by any extension, producing the same effect.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-292">GUACAMOLE-292</a> - Add support for user profiles</li>
+</ul>
+
+<h2 id="support-for-filtering-ldap-users">Support for filtering LDAP users</h2>
+
+<p>Guacamole’s LDAP support now provides an additional <code class="highlighter-rouge">ldap-user-search-filter</code>
+property which, if specified, reduces the users that can log into Guacamole or
+are displayed to administrators within the user management interface (when
+combining LDAP with a MySQL or PostgreSQL database).</p>
+
+<p>Note that this filter only affects Guacamole logins if Guacamole has been
+configured to search for users prior to binding (with the <code class="highlighter-rouge">ldap-search-bind-dn</code>
+property). If a search DN is not being used, Guacamole derives each user’s DN
+directly, and thus will not apply the search filter to login attempts.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-101">GUACAMOLE-101</a> - Allow arbitrary filtering of LDAP users</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-244">GUACAMOLE-244</a> - Allow configuration of LDAP alias dereferencing</li>
+</ul>
+
+<h2 id="overriding-guacd-on-a-per-connection-basis">Overriding guacd on a per-connection basis</h2>
+
+<p>The connection to guacd is normally defined globally within
+<code class="highlighter-rouge">guacamole.properties</code>, but this is insufficient for deployments involving
+multiple distinct guacd instances or multiple implementations of the Guacamole
+protocol.</p>
+
+<p>For cases where different instances of guacd may be spread out across the
+network of remote desktop servers, or where other applications/drivers may
+implement their own internal version of guacd (such as the <a href="https://issues.apache.org/jira/browse/GUACAMOLE-168">work-in-progress
+X.Org driver</a>), Guacamole
+now supports defining/overriding the guacd hostname, port, and encryption
+method on a per-connection basis.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-189">GUACAMOLE-189</a> - Add support for per-connection guacd</li>
+</ul>
+
+<h2 id="miscellaneous-fixesimprovements">Miscellaneous fixes/improvements</h2>
+
+<p>This latest release of Guacamole also addresses several minor JavaScript
+issues, addresses potential disconnects due to system clocks which are not
+monotonic (can run backwards), and fixes the Docker image sanity checks such
+that database-specific environment variables need not be specified if a custom
+<code class="highlighter-rouge">GUACAMOLE_HOME</code> is being used.</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-40">GUACAMOLE-40</a> - Support TS gateway connections to RDP</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-223">GUACAMOLE-223</a> - Locking callbacks not set for guacd+SSL</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-229">GUACAMOLE-229</a> - Intervals when polling xmlhttprequests are not always cleared</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-239">GUACAMOLE-239</a> - Disconnects due to ‘backwards’ running time</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-252">GUACAMOLE-252</a> - Display jumps to top in MS Edge when Guacamole menu is opened</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-259">GUACAMOLE-259</a> - Log metrics for gauging user experience</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-281">GUACAMOLE-281</a> - GUACAMOLE_HOME not taken into account during Docker image sanity checks</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-294">GUACAMOLE-294</a> - Incorrectly positioned bracket in <code class="highlighter-rouge">guacTouchDrag.js</code>.</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-295">GUACAMOLE-295</a> - In Parser.js, the <code class="highlighter-rouge">length</code> variable is incorrectly checked for equality against NaN.</li>
+  <li><a href="https://issues.apache.org/jira/browse/GUACAMOLE-301">GUACAMOLE-301</a> - Login prompt not cleared when visiting unrestricted page</li>
+</ul>
+
+<h1 id="deprecation--compatibility-notes">Deprecation / Compatibility notes</h1>
+
+<p>As of 0.9.13-incubating, the following changes have been made which affect
+compatibility with past releases:</p>
+
+<h2 id="database-schema-changes">Database schema changes</h2>
+
+<p>The MySQL and PostgreSQL schemas have changed, adding columns to
+<code class="highlighter-rouge">guacamole_connection</code> (for defining the connection to guacd service
+implementing the Guacamole protocol) and to <code class="highlighter-rouge">guacamole_user</code> (for defining
+optional and arbitrary profile information).</p>
+
+<p>Users of the database authentication will need to run the
+<code class="highlighter-rouge">upgrade-pre-0.9.13.sql</code> script specific to their chosen database.</p>
+
+<h2 id="deprecation-of-the-noauth-extension">Deprecation of the NoAuth extension</h2>
+
+<p>The NoAuth extension is now deprecated. The extension remains part of the
+Guacamole source and a convenience binary of the extension is provided with
+this release, but its continued use is not recommended and it will eventually
+be removed entirely.</p>
+
+<p><strong>Integrations of Guacamole should instead use the extension API</strong>, or the core
+Guacamole API for absolute low-level control.</p>
+
+<h2 id="extension-api-changes">Extension API changes</h2>
+
+<p>Both the
+<a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/AuthenticationProvider.html"><code class="highlighter-rouge">AuthenticationProvider</code></a>
+and
+<a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/UserContext.html"><code class="highlighter-rouge">UserContext</code></a>
+interfaces now define a <code class="highlighter-rouge">getResource()</code> function. If implemented, the returned
+object will be served as a REST resource and must be annotated with JAX-RS
+(JSR-311) annotations. Because this new function is defined at the interface
+level, implementations of these interfaces will now need to define this
+function:</p>
+
+<ul>
+  <li><a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/AuthenticationProvider.html#getResource--"><code class="highlighter-rouge">AuthenticationProvider.getResource()</code></a></li>
+  <li><a href="/doc/0.9.13-incubating/guacamole-ext/org/apache/guacamole/net/auth/UserContext.html#getResource--"><code class="highlighter-rouge">UserContext.getResource()</code></a></li>
+</ul>
+
+<p>If your extension does not need to expose its own REST resources, the function
+can simply return <code class="highlighter-rouge">null</code>, and no such resources will be exposed:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@Override
+public Object getResource() {
+
+    // No associated REST resource
+    return null;
+
+}
+</code></pre>
+</div>
+
+
+</div>
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2017 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+    </body>
+</html>
