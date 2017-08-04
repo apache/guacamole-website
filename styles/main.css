@@ -219,6 +219,7 @@ ul#navigation {
     text-decoration: underline;
 }
 
+#navigation a.apache,
 #navigation a.download,
 #navigation a.github {
     padding-left: 2em;
@@ -231,6 +232,14 @@ ul#navigation {
     -webkit-background-size: 1em;
     background-size: 1em;
     background-repeat: no-repeat;
+}
+
+#navigation a.apache {
+    background-image: url('/images/feather.png');
+    padding-left: 1.5em;
+    -moz-background-size: 0.7em;
+    -webkit-background-size: 0.7em;
+    background-size: 0.7em;
 }
 
 #navigation a.download {
