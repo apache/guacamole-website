@@ -1,5 +1,5 @@
 ---
 menu-title:  Security
-menu-weight: 3
+menu-weight: 4
 location:    http://www.apache.org/security/
 ---
