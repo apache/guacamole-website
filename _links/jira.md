@@ -1,5 +1,5 @@
 ---
 menu-title:  JIRA
-menu-weight: 4
+menu-weight: 3
 location:    https://issues.apache.org/jira/browse/GUACAMOLE/
 ---
