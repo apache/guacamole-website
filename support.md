@@ -2,9 +2,6 @@
 layout: page 
 title: Help / Support
 permalink: /support/
-
-menu-title:  Help / Support
-menu-weight: 7
 ---
 
 If you need (or wish to provide) help with Guacamole, the primary means for

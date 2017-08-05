@@ -202,6 +202,7 @@ ul#navigation {
 #navigation li {
     display: inline-block;
     white-space: nowrap;
+    position: relative;
 }
 
 #navigation a[href] {
@@ -218,6 +219,7 @@ ul#navigation {
     text-decoration: underline;
 }
 
+#navigation a.apache,
 #navigation a.download,
 #navigation a.github {
     padding-left: 2em;
@@ -232,12 +234,57 @@ ul#navigation {
     background-repeat: no-repeat;
 }
 
+#navigation a.apache {
+    background-image: url('/images/feather.png');
+    padding-left: 1.5em;
+    -moz-background-size: 0.7em;
+    -webkit-background-size: 0.7em;
+    background-size: 0.7em;
+}
+
 #navigation a.download {
     background-image: url('/images/guac-download.png');
 }
 
 #navigation a.github {
     background-image: url('/images/github-mark.png');
+}
+
+#navigation li.dropdown .dropdown-menu {
+    display: none;
+}
+
+#navigation li.dropdown.open {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+#navigation li.dropdown.open .dropdown-menu {
+    position: absolute;
+    left: 0;
+    display: block;
+    background: #213121;
+    padding: 0.25em 0.5em;
+    text-align: left;
+    min-width: 100%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+#navigation li.dropdown .dropdown-menu li {
+    display: block;
+}
+
+#navigation li.dropdown .dropdown-toggle::after {
+    display: inline-block;
+    content: ' ';
+    width: 0;
+    height: 0;
+    border-left: 0.25em solid transparent;
+    border-right: 0.25em solid transparent;
+    border-top: 0.25em solid;
+    vertical-align: middle;
+    margin-left: 0.25em;
 }
 
 p {

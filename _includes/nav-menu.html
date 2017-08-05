@@ -1,0 +1,28 @@
+{% assign menu_pages = site.links | sort: 'menu-weight' %}
+{% for menu_page in menu_pages %}
+    {% assign menu_dir = menu_page.path | split: '/' | pop | join: '/' %}
+    {% if menu_dir == include.path %}
+        {% if menu_page.menu-title %}
+            {% if menu_page.location %}
+                <li>
+                    <a href="{{ menu_page.location }}"
+                        {% if menu_page.menu-class %}
+                            class="{{ menu_page.menu-class }}"
+                            {% endif %}>{{ menu_page.menu-title }}</a>
+                </li>
+            {% else %}
+                <li class="dropdown">
+                    {% assign submenu = menu_page.path
+                                          | split: '.'
+                                          | pop
+                                          | join: '.' %}
+                    <a class="dropdown-toggle {{ menu_page.menu-class }}"
+                       href="#">{{ menu_page.menu-title }}</a>
+                    <ul class="dropdown-menu">
+                        {% include nav-menu.html path=submenu %}
+                    </ul>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}

@@ -2,10 +2,6 @@
 layout: page 
 title: Release Archive
 permalink: /releases/
-
-menu-title:  Downloads
-menu-weight: 0
-menu-class:  download
 ---
 
 All recent Guacamole releases are listed here, along with several historical releases. Each release below is listed by the version of the overall software bundle and the date on which it was released. Clicking on the version number will take you to the release notes and downloads for that release, including a pre-built `guacamole.war` file and all associated source code.

@@ -2,9 +2,6 @@
 layout: page 
 title: Open Source
 permalink: /open-source/
-
-menu-title:  Contributing
-menu-weight: 6
 ---
 
 Guacamole is an open source project. It is entirely free in every sense (under

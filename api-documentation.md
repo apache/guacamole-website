@@ -2,9 +2,6 @@
 layout: page 
 title: API Documentation
 permalink: /api-documentation/
-
-menu-title:  API
-menu-weight: 3
 ---
 
 Guacamole provides several APIs for extending and embedding Guacamole in existing infrastructures and applications. The majority of the Guacamole codebase actually forms the Guacamole core; the web application named "Guacamole" merely leverages this core, wrapping it in a nice user interface and simple authentication scheme.
