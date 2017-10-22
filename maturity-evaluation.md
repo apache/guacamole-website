@@ -225,45 +225,52 @@ CO10
 : The project has a well-known homepage that points to all the information
   required to operate according to this maturity model.
 
-  ?
+  **OK:** The project's homepage is <http://guacamole.incubator.apache.org>.
 
 CO20
 : The community welcomes contributions from anyone who acts in good faith and
   in a respectful manner and adds value to the project.
 
-  ?
+  **OK:** All contributors willing to work with the community are welcome.
+  Contributions are only ever rejected for technical reasons.
 
 CO30
 : Contributions include not only source code, but also documentation,
   constructive bug reports, constructive discussions, marketing and generally
   anything that adds value to the project.
 
-  ?
+  **OK:** Participation within the mailing lists and JIRA is active and
+  encouraged. The community can contribute to the documentation and website
+  just as they can contribute to the code of the project.
 
 CO40
 : The community is meritocratic and over time aims to give more rights and
   responsibilities to contributors who add value to the project.
 
-  ?
+  **OK:** The community's meritocratic nature is [documented on the project
+  website](/open-source/#meritocracy). Through operating in this fashion, the
+  project has grown over the course of its incubation from its original two
+  committers to five.
 
 CO50
 : The way in which contributors can be granted more rights such as commit
   access or decision power is clearly documented and is the same for all
   contributors.
 
-  ?
+  **OK:** See CO40.
 
 CO60
 : The community operates based on consensus of its members (see CS10) who have
   decision power. Dictators, benevolent or not, are not welcome in Apache
   projects.
 
-  ?
+  **OK:** Decisions affecting the project are made only on the mailing lists
+  through discussions and VOTEs.
 
 CO70
 : The project strives to answer user questions in a timely manner.
 
-  ?
+  **OK:** Yes, via the mailing lists.
 
 Consensus Building
 ------------------
