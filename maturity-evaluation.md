@@ -57,31 +57,68 @@ Licenses and Copyright
 LC10
 : The code is released under the Apache License, version 2.0.
 
-  ?
+  **OK:** All code from the project is under the Apache License, version 2.0.
+  See:
+
+   * <https://github.com/apache/incubator-guacamole-client/blob/master/LICENSE>
+   * <https://github.com/apache/incubator-guacamole-server/blob/master/LICENSE>
 
 LC20
 : Libraries that are mandatory dependencies of the project's code do not create
   more restrictions than the Apache License does.
 
-  ?
+  **OK:** The mandatory dependencies of "guacamole-server" (Cairo, libjpeg /
+  libjpeg-turbo, libpng, and OSSP UUID) and "guacamole-client" (documented
+  within the `LICENSE` files of guacamole-client and its subprojects) do not
+  impose restrictions beyond that of the Apache license.
+
+  Mandatory dependencies of "guacamole-server" (written in C, built using
+  GNU Autotools):
+
+   * Cairo (Mozilla Public License)
+   * libjpeg OR libjpeg-turbo (The [IJG license](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/README.ijg),
+     as well as modified BSD and the zlib license. See: <https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.md>)
+   * libpng ([libpng license](http://www.libpng.org/pub/png/src/libpng-LICENSE.txt))
+   * OSSP UUID (MIT license)
+
+  Mandatory dependencies of "guacamole-client" (written in Java and
+  JavaScript, built using Maven):
+
+   * Dependencies bundled with the source are documented in [the top-level `LICENSE` file](https://github.com/apache/incubator-guacamole-client/blob/master/LICENSE).
+   * Dependencies bundled with the various binaries are documented at the end
+     of artifact-specific `LICENSE` files:
+      * [`guacamole/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/guacamole/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-header/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-header/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-jdbc/modules/guacamole-auth-jdbc-dist/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-jdbc/modules/guacamole-auth-jdbc-dist/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-cas/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-cas/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-ldap/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-ldap/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-duo/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-duo/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-openid/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-openid/src/licenses/LICENSE)
+      * [`extensions/guacamole-auth-noauth/src/licenses/LICENSE`](https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-noauth/src/licenses/LICENSE)
 
 LC30
 : The libraries mentioned in LC20 are available as Open Source software.
 
-  ?
+  **OK:** Absolutely all dependencies of "guacamole-server" and
+  "guacamole-client" are open source.
 
 LC40
 : Committers are bound by an Individual Contributor Agreement (the "Apache
   iCLA") that defines which code they are allowed to commit and how they need
   to identify code that is not their own.
 
-  ?
+  **OK:** All committers have completed the ICLA.
 
 LC50
 : The copyright ownership of everything that the project produces is clearly
   defined and documented.
 
-  ?
+  **OK:** All source files carry prominent header comments documenting the
+  license and copyright ownership of that file, with the exception of files
+  which inherently cannot contain comments (JSON) and files where includng
+  such comments would hurt the performance of the application (AngularJS
+  templates). Copyright ownership and license of the source overall is
+  always documented with top-level `LICENSE` and `NOTICE` files.
 
 Releases
 --------
