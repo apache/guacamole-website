@@ -127,33 +127,51 @@ RE10
 : Releases consist of source code, distributed using standard and open archive
   formats that are expected to stay readable in the long term.
 
-  ?
+  **OK:** Each Apache Guacamole release consists of two `.tar.gz` source
+  archives (for "guacamole-client" and "guacamole-server" respectively).
+  Binaries are provided only as a convenience. See [the 0.9.13-incubating
+  release notes](/releases/0.9.13-incubating/).
 
 RE20
 : Releases are approved by the project's PMC (see CS10), in order to make them
   an act of the Foundation.
 
-  ?
+  **OK:** Each release candidate must pass a corresponding VOTE before it can
+  be promoted to a release, [as documented in our release
+  procedures](/release-procedures-part2/#ppmc-vote). For example, see [the
+  archived VOTE RESULT for the 0.9.13-incubating
+  release](https://lists.apache.org/thread.html/191c32b9ca2e62fe75cdc8df414bae949875550e57cf6b6014832829@%3Cdev.guacamole.apache.org%3E).
 
 RE30
 : Releases are signed and/or distributed along with digests that can be
   reliably used to validate the downloaded archives.
 
-  ?
+  **OK:** All release artifacts are signed and distributed with corresponding
+  signatures and checksums as defined by [the relevant section of our release
+  procedures](/release-procedures-part2/#upload-rc). See [the 0.9.13-incubating
+  release notes](/releases/0.9.13-incubating/).
 
 RE40
 : Convenience binaries can be distributed alongside source code but they are
   not Apache Releases -- they are just a convenience provided with no
   guarantee.
 
-  ?
+  **OK:** Convenience binaries are linked within the release notes of each
+  release with prominent wording noting that they are provided for convenience.
+  See [the 0.9.13-incubating release notes](/releases/0.9.13-incubating/).
 
 RE50
 : The release process is documented and repeatable to the extent that someone
   new to the project is able to independently generate the complete set of
   artifacts required for a release.
 
-  ?
+  **OK:** The [release process](/open-source/#release-procedures) is fully
+  documented from start to finish:
+
+   * [Beginning the release process](/release-procedures-part1/)
+   * [Producing a release candidate](/release-procedures-part2/)
+   * [Promoting a release candidate to release](/release-procedures-part3/)
+   * [Announcing the release](/release-procedures-part4/)
 
 Quality
 -------
