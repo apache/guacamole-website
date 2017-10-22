@@ -181,30 +181,42 @@ QU10
   of quality and maturity for various modules are natural and acceptable as
   long as they are clearly communicated.
 
-  ?
+  **OK:** Changes are only accepted after passing code review. All code is
+  required to be thoroughly documented and commented, and these requirements
+  are [published on the project website](/guac-style/).
 
 QU20
 : The project puts a very high priority on producing secure software.
 
-  ?
+  **OK:** The project follows strict code review policies, and the website
+  provides a prominent "Security" link in the navigation menu pointing to the
+  ASF's documentation on properly reporting security issues. Any report of
+  a possible issue with security implications is handled with priority via
+  private channels.
 
 QU30
 : The project provides a well-documented, secure and private channel to report
   security issues, along with a documented way of responding to them.
 
-  ?
+  **OK:** The project provides the <private@guacamole.incubator.apache.org>
+  mailing list for security issues. These procedures are documented in the
+  ASF's own security documentation, which is linked within the project
+  website's navigation menu.
 
 QU40
 : The project puts a high priority on backwards compatibility and aims to
   document any incompatible changes and provide tools and documentation to help
   users transition to new features.
 
-  ?
+  **OK:** Any changes in a release which affect compatibility are noted in the
+  release notes. Where possible, old functionality is maintained but
+  deprecated. See [the "deprecation / compatibility notes" section of the
+  0.9.13-incubating release](/0.9.13-incubating/#deprecation--compatibility-notes).
 
 QU50
 : The project strives to respond to documented bug reports in a timely manner.
 
-  ?
+  **OK:** Yes, via JIRA.
 
 Community
 ---------
