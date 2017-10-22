@@ -280,33 +280,38 @@ CS10
   power -- the project's PMC (Project Management Committee) consists of those
   contributors.
 
-  ?
+  **OK:** This list is automatically produced by people.apache.org and can be
+  found at: <http://people.apache.org/committers-by-project.html#guacamole>.
 
 CS20
 : Decisions are made by consensus among PMC members and are documented on the
   project's main communications channel. Community opinions are taken into
   account but the PMC has the final word if needed.
 
-  ?
+  **OK:** All decisions affecting the project are made on the mailing lists
+  (see CO60) and are inherently documented through the mail archives.
+  Development itself is documented in JIRA.
 
 CS30
 : Documented voting rules are used to build consensus when discussion is not
   sufficient.
 
-  ?
+  **OK:** Discussion has always been sufficient. If/when consensus cannot be
+  reached via discussion, voting is the next logical step.
 
 CS40
 : In Apache projects, vetoes are only valid for code commits and are justified
   by a technical explanation, as per the Apache voting rules defined in CS30.
 
-  ?
+  **OK:** The project has never used vetoes.
 
 CS50
 : All "important" discussions happen asynchronously in written form on the
   project's main communications channel. Offline, face-to-face or private
   discussions that affect the project are also documented on that channel.
 
-  ?
+  **OK:** All decisions affecting the project are made on the mailing lists
+  (see CO60).
 
 Independence
 ------------
