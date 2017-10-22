@@ -16,24 +16,30 @@ CD10
 : The project produces Open Source software, for distribution to the public at
   no charge.
 
-  ?
+  **OK:** We sure do.
 
 CD20
 : The project's code is easily discoverable and publicly accessible.
 
-  ?
+  **OK:** The GitHub mirrors of the project's git repositories are linked
+  within the website navigation menu, and the source for each release is linked
+  within the release notes.
 
 CD30
 : The code can be built in a reproducible way using widely available standard
   tools.
 
-  ?
+  **OK:** The two bodies of code making up Guacamole, "guacamole-client" and
+  "guacamole-server", are built with Apache Maven and GNU Autotools
+  respectively.
 
 CD40
 : The full history of the project's code is available via a source code control
   system, in a way that allows any released version to be recreated.
 
-  ?
+  **OK:** The full history of the project's code can be found within the git
+  repositories, and each release has a corresponding tag whose format is
+  dictated by [our release procedures](/release-procedures-part3/#final-tag).
 
 CD50
 : The provenance of each line of code is established via the source code
@@ -41,7 +47,9 @@ CD50
   committer. When third-party contributions are committed, commit messages
   provide reliable information about the code provenance.
 
-  ?
+  **OK:** Commits are accepted only through pull requests [after having been
+  reviewed by other committers](/pull-requests/), and git inherently records
+  the name and email address of the author for each commit.
 
 Licenses and Copyright
 ----------------------
