@@ -319,11 +319,14 @@ Independence
 IN10
 : The project is independent from any corporate or organizational influence.
 
-  ?
+  **OK:** Project members operate as individuals, not representatives of any
+  organization (corporate or otherwise). Though the project members were
+  originally all affiliated with the same organization, the project has grown
+  and this is no longer the case (see CO40).
 
 IN20
 : Contributors act as themselves as opposed to representatives of a corporation
   or organization.
 
-  ?
+  **OK:** See IN10.
 
