@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css?s=44c01e5b7ffc920bf562e2c24a4aaeb1">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole (incubating): Podling Maturity Evaluation</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <ul id="navigation" class="menu">
+        
+
+    
+    
+        
+            
+                <li>
+                    <a href="/releases/"
+                        
+                            class="download"
+                            >Downloads</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Docs</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/api-documentation/"
+                        >API</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/doc/gug/"
+                        >Manual</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Community</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                        >GitHub</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/open-source/"
+                        >Contributing</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/support/"
+                        >Help / Support</a>
+                </li>
+            
+        
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                        >JIRA</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/security/"
+                        >Security</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle apache"
+                       href="#">Apache Software Foundation</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/"
+                        >ASF Homepage</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/licenses/"
+                        >License</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/thanks.html"
+                        >Thanks</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/sponsorship.html"
+                        >Sponsorship</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/policies/conduct.html"
+                        >Code of Conduct</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <h1>Podling Maturity Evaluation</h1>
+
+<p>This is an assessment of the Guacamole podling’s maturity, meant to help inform
+the decision (of the mentors, community, Incubator PMC and ASF Board of
+Directors) to graduate it as a top-level Apache project. It is based on <a href="http://community.apache.org/apache-way/apache-project-maturity-model.html">the
+ASF project maturity model</a>.</p>
+
+<h2 id="code">Code</h2>
+
+<dl>
+  <dt>CD10</dt>
+  <dd>The project produces Open Source software, for distribution to the public at
+no charge.
+
+    <p><strong>OK:</strong> We sure do.</p>
+  </dd>
+  <dt>CD20</dt>
+  <dd>The project’s code is easily discoverable and publicly accessible.
+
+    <p><strong>OK:</strong> The GitHub mirrors of the project’s git repositories are linked
+within the website navigation menu, and the source for each release is linked
+within the release notes.</p>
+  </dd>
+  <dt>CD30</dt>
+  <dd>The code can be built in a reproducible way using widely available standard
+tools.
+
+    <p><strong>OK:</strong> The two bodies of code making up Guacamole, “guacamole-client” and
+“guacamole-server”, are built with Apache Maven and GNU Autotools
+respectively.</p>
+  </dd>
+  <dt>CD40</dt>
+  <dd>The full history of the project’s code is available via a source code control
+system, in a way that allows any released version to be recreated.
+
+    <p><strong>OK:</strong> The full history of the project’s code can be found within the git
+repositories, and each release has a corresponding tag whose format is
+dictated by <a href="/release-procedures-part3/#final-tag">our release procedures</a>.</p>
+  </dd>
+  <dt>CD50</dt>
+  <dd>The provenance of each line of code is established via the source code
+control system, in a reliable way based on strong authentication of the
+committer. When third-party contributions are committed, commit messages
+provide reliable information about the code provenance.
+
+    <p><strong>OK:</strong> Commits are accepted only through pull requests <a href="/pull-requests/">after having been
+reviewed by other committers</a>, and git inherently records
+the name and email address of the author for each commit.</p>
+  </dd>
+</dl>
+
+<h2 id="licenses-and-copyright">Licenses and Copyright</h2>
+
+<dl>
+  <dt>LC10</dt>
+  <dd>The code is released under the Apache License, version 2.0.
+
+    <p><strong>OK:</strong> All code from the project is under the Apache License, version 2.0.
+See:</p>
+
+    <ul>
+      <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/LICENSE">https://github.com/apache/incubator-guacamole-client/blob/master/LICENSE</a></li>
+      <li><a href="https://github.com/apache/incubator-guacamole-server/blob/master/LICENSE">https://github.com/apache/incubator-guacamole-server/blob/master/LICENSE</a></li>
+    </ul>
+  </dd>
+  <dt>LC20</dt>
+  <dd>Libraries that are mandatory dependencies of the project’s code do not create
+more restrictions than the Apache License does.
+
+    <p><strong>OK:</strong> The mandatory dependencies of “guacamole-server” (Cairo, libjpeg /
+libjpeg-turbo, libpng, and OSSP UUID) and “guacamole-client” (documented
+within the <code class="highlighter-rouge">LICENSE</code> files of guacamole-client and its subprojects) do not
+impose restrictions beyond that of the Apache license.</p>
+
+    <p>Mandatory dependencies of “guacamole-server” (written in C, built using
+GNU Autotools):</p>
+
+    <ul>
+      <li>Cairo (Mozilla Public License)</li>
+      <li>libjpeg OR libjpeg-turbo (The <a href="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/README.ijg">IJG license</a>,
+as well as modified BSD and the zlib license. See: <a href="https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.md">https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/LICENSE.md</a>)</li>
+      <li>libpng (<a href="http://www.libpng.org/pub/png/src/libpng-LICENSE.txt">libpng license</a>)</li>
+      <li>OSSP UUID (MIT license)</li>
+    </ul>
+
+    <p>Mandatory dependencies of “guacamole-client” (written in Java and
+JavaScript, built using Maven):</p>
+
+    <ul>
+      <li>Dependencies bundled with the source are documented in <a href="https://github.com/apache/incubator-guacamole-client/blob/master/LICENSE">the top-level <code class="highlighter-rouge">LICENSE</code> file</a>.</li>
+      <li>Dependencies bundled with the various binaries are documented at the end
+of artifact-specific <code class="highlighter-rouge">LICENSE</code> files:
+        <ul>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/guacamole/src/licenses/LICENSE"><code class="highlighter-rouge">guacamole/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-header/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-header/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-jdbc/modules/guacamole-auth-jdbc-dist/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-jdbc/modules/guacamole-auth-jdbc-dist/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-cas/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-cas/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-ldap/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-ldap/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-duo/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-duo/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-openid/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-openid/src/licenses/LICENSE</code></a></li>
+          <li><a href="https://github.com/apache/incubator-guacamole-client/blob/master/extensions/guacamole-auth-noauth/src/licenses/LICENSE"><code class="highlighter-rouge">extensions/guacamole-auth-noauth/src/licenses/LICENSE</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </dd>
+  <dt>LC30</dt>
+  <dd>The libraries mentioned in LC20 are available as Open Source software.
+
+    <p><strong>OK:</strong> Absolutely all dependencies of “guacamole-server” and
+“guacamole-client” are open source.</p>
+  </dd>
+  <dt>LC40</dt>
+  <dd>Committers are bound by an Individual Contributor Agreement (the “Apache
+iCLA”) that defines which code they are allowed to commit and how they need
+to identify code that is not their own.
+
+    <p><strong>OK:</strong> All committers have completed the ICLA.</p>
+  </dd>
+  <dt>LC50</dt>
+  <dd>The copyright ownership of everything that the project produces is clearly
+defined and documented.
+
+    <p><strong>OK:</strong> All source files carry prominent header comments documenting the
+license and copyright ownership of that file, with the exception of files
+which inherently cannot contain comments (JSON) and files where includng
+such comments would hurt the performance of the application (AngularJS
+templates). Copyright ownership and license of the source overall is
+always documented with top-level <code class="highlighter-rouge">LICENSE</code> and <code class="highlighter-rouge">NOTICE</code> files.</p>
+  </dd>
+</dl>
+
+<h2 id="releases">Releases</h2>
+
+<dl>
+  <dt>RE10</dt>
+  <dd>Releases consist of source code, distributed using standard and open archive
+formats that are expected to stay readable in the long term.
+
+    <p><strong>OK:</strong> Each Apache Guacamole release consists of two <code class="highlighter-rouge">.tar.gz</code> source
+archives (for “guacamole-client” and “guacamole-server” respectively).
+Binaries are provided only as a convenience. See <a href="/releases/0.9.13-incubating/">the 0.9.13-incubating
+release notes</a>.</p>
+  </dd>
+  <dt>RE20</dt>
+  <dd>Releases are approved by the project’s PMC (see CS10), in order to make them
+an act of the Foundation.
+
+    <p><strong>OK:</strong> Each release candidate must pass a corresponding VOTE before it can
+be promoted to a release, <a href="/release-procedures-part2/#ppmc-vote">as documented in our release
+procedures</a>. For example, see <a href="https://lists.apache.org/thread.html/191c32b9ca2e62fe75cdc8df414bae949875550e57cf6b6014832829@%3Cdev.guacamole.apache.org%3E">the
+archived VOTE RESULT for the 0.9.13-incubating
+release</a>.</p>
+  </dd>
+  <dt>RE30</dt>
+  <dd>Releases are signed and/or distributed along with digests that can be
+reliably used to validate the downloaded archives.
+
+    <p><strong>OK:</strong> All release artifacts are signed and distributed with corresponding
+signatures and checksums as defined by <a href="/release-procedures-part2/#upload-rc">the relevant section of our release
+procedures</a>. See <a href="/releases/0.9.13-incubating/">the 0.9.13-incubating
+release notes</a>.</p>
+  </dd>
+  <dt>RE40</dt>
+  <dd>Convenience binaries can be distributed alongside source code but they are
+not Apache Releases – they are just a convenience provided with no
+guarantee.
+
+    <p><strong>OK:</strong> Convenience binaries are linked within the release notes of each
+release with prominent wording noting that they are provided for convenience.
+See <a href="/releases/0.9.13-incubating/">the 0.9.13-incubating release notes</a>.</p>
+  </dd>
+  <dt>RE50</dt>
+  <dd>The release process is documented and repeatable to the extent that someone
+new to the project is able to independently generate the complete set of
+artifacts required for a release.
+
+    <p><strong>OK:</strong> The <a href="/open-source/#release-procedures">release process</a> is fully
+documented from start to finish:</p>
+
+    <ul>
+      <li><a href="/release-procedures-part1/">Beginning the release process</a></li>
+      <li><a href="/release-procedures-part2/">Producing a release candidate</a></li>
+      <li><a href="/release-procedures-part3/">Promoting a release candidate to release</a></li>
+      <li><a href="/release-procedures-part4/">Announcing the release</a></li>
+    </ul>
+  </dd>
+</dl>
+
+<h2 id="quality">Quality</h2>
+
+<dl>
+  <dt>QU10</dt>
+  <dd>The project is open and honest about the quality of its code. Various levels
+of quality and maturity for various modules are natural and acceptable as
+long as they are clearly communicated.
+
+    <p><strong>OK:</strong> Changes are only accepted after passing code review. All code is
+required to be thoroughly documented and commented, and these requirements
+are <a href="/guac-style/">published on the project website</a>.</p>
+  </dd>
+  <dt>QU20</dt>
+  <dd>The project puts a very high priority on producing secure software.
+
+    <p><strong>OK:</strong> The project follows strict code review policies, and the website
+provides a prominent “Security” link in the navigation menu pointing to the
+ASF’s documentation on properly reporting security issues. Any report of
+a possible issue with security implications is handled with priority via
+private channels.</p>
+  </dd>
+  <dt>QU30</dt>
+  <dd>The project provides a well-documented, secure and private channel to report
+security issues, along with a documented way of responding to them.
+
+    <p><strong>OK:</strong> The project provides the <a href="mailto:private@guacamole.incubator.apache.org">private@guacamole.incubator.apache.org</a>
+mailing list for security issues. These procedures are documented in the
+ASF’s own security documentation, which is linked within the project
+website’s navigation menu.</p>
+  </dd>
+  <dt>QU40</dt>
+  <dd>The project puts a high priority on backwards compatibility and aims to
+document any incompatible changes and provide tools and documentation to help
+users transition to new features.
+
+    <p><strong>OK:</strong> Any changes in a release which affect compatibility are noted in the
+release notes. Where possible, old functionality is maintained but
+deprecated. See <a href="/0.9.13-incubating/#deprecation--compatibility-notes">the “deprecation / compatibility notes” section of the
+0.9.13-incubating release</a>.</p>
+  </dd>
+  <dt>QU50</dt>
+  <dd>The project strives to respond to documented bug reports in a timely manner.
+
+    <p><strong>OK:</strong> Yes, via JIRA.</p>
+  </dd>
+</dl>
+
+<h2 id="community">Community</h2>
+
+<dl>
+  <dt>CO10</dt>
+  <dd>The project has a well-known homepage that points to all the information
+required to operate according to this maturity model.
+
+    <p><strong>OK:</strong> The project’s homepage is <a href="http://guacamole.incubator.apache.org">http://guacamole.incubator.apache.org</a>.</p>
+  </dd>
+  <dt>CO20</dt>
+  <dd>The community welcomes contributions from anyone who acts in good faith and
+in a respectful manner and adds value to the project.
+
+    <p><strong>OK:</strong> All contributors willing to work with the community are welcome.
+Contributions are only ever rejected for technical reasons.</p>
+  </dd>
+  <dt>CO30</dt>
+  <dd>Contributions include not only source code, but also documentation,
+constructive bug reports, constructive discussions, marketing and generally
+anything that adds value to the project.
+
+    <p><strong>OK:</strong> Participation within the mailing lists and JIRA is active and
+encouraged. The community can contribute to the documentation and website
+just as they can contribute to the code of the project.</p>
+  </dd>
+  <dt>CO40</dt>
+  <dd>The community is meritocratic and over time aims to give more rights and
+responsibilities to contributors who add value to the project.
+
+    <p><strong>OK:</strong> The community’s meritocratic nature is <a href="/open-source/#meritocracy">documented on the project
+website</a>. Through operating in this fashion, the
+project has grown over the course of its incubation from its original two
+committers to five.</p>
+  </dd>
+  <dt>CO50</dt>
+  <dd>The way in which contributors can be granted more rights such as commit
+access or decision power is clearly documented and is the same for all
+contributors.
+
+    <p><strong>OK:</strong> See CO40.</p>
+  </dd>
+  <dt>CO60</dt>
+  <dd>The community operates based on consensus of its members (see CS10) who have
+decision power. Dictators, benevolent or not, are not welcome in Apache
+projects.
+
+    <p><strong>OK:</strong> Decisions affecting the project are made only on the mailing lists
+through discussions and VOTEs.</p>
+  </dd>
+  <dt>CO70</dt>
+  <dd>The project strives to answer user questions in a timely manner.
+
+    <p><strong>OK:</strong> Yes, via the mailing lists.</p>
+  </dd>
+</dl>
+
+<h2 id="consensus-building">Consensus Building</h2>
+
+<dl>
+  <dt>CS10</dt>
+  <dd>The project maintains a public list of its contributors who have decision
+power – the project’s PMC (Project Management Committee) consists of those
+contributors.
+
+    <p><strong>OK:</strong> This list is automatically produced by people.apache.org and can be
+found at: <a href="http://people.apache.org/committers-by-project.html#guacamole">http://people.apache.org/committers-by-project.html#guacamole</a>.</p>
+  </dd>
+  <dt>CS20</dt>
+  <dd>Decisions are made by consensus among PMC members and are documented on the
+project’s main communications channel. Community opinions are taken into
+account but the PMC has the final word if needed.
+
+    <p><strong>OK:</strong> All decisions affecting the project are made on the mailing lists
+(see CO60) and are inherently documented through the mail archives.
+Development itself is documented in JIRA.</p>
+  </dd>
+  <dt>CS30</dt>
+  <dd>Documented voting rules are used to build consensus when discussion is not
+sufficient.
+
+    <p><strong>OK:</strong> Discussion has always been sufficient. If/when consensus cannot be
+reached via discussion, voting is the next logical step.</p>
+  </dd>
+  <dt>CS40</dt>
+  <dd>In Apache projects, vetoes are only valid for code commits and are justified
+by a technical explanation, as per the Apache voting rules defined in CS30.
+
+    <p><strong>OK:</strong> The project has never used vetoes.</p>
+  </dd>
+  <dt>CS50</dt>
+  <dd>All “important” discussions happen asynchronously in written form on the
+project’s main communications channel. Offline, face-to-face or private
+discussions that affect the project are also documented on that channel.
+
+    <p><strong>OK:</strong> All decisions affecting the project are made on the mailing lists
+(see CO60).</p>
+  </dd>
+</dl>
+
+<h2 id="independence">Independence</h2>
+
+<dl>
+  <dt>IN10</dt>
+  <dd>The project is independent from any corporate or organizational influence.
+
+    <p><strong>OK:</strong> Project members operate as individuals, not representatives of any
+organization (corporate or otherwise). Though the project members were
+originally all affiliated with the same organization, the project has grown
+and this is no longer the case (see CO40).</p>
+  </dd>
+  <dt>IN20</dt>
+  <dd>Contributors act as themselves as opposed to representatives of a corporation
+or organization.
+
+    <p><strong>OK:</strong> See IN10.</p>
+  </dd>
+</dl>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2017 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache and the Apache feather logo are trademarks of The Apache
+        Software Foundation.
+    </p>
+
+    <!-- Incubation disclaimer -->
+    <p class="disclaimer">
+        Apache Guacamole is an effort undergoing Incubation at The Apache
+        Software Foundation (ASF), sponsored by the Incubator. Incubation is
+        required of all newly accepted projects until a further review
+        indicates that the infrastructure, communications, and decision making
+        process have stabilized in a manner consistent with other successful
+        ASF projects. While incubation status is not necessarily a reflection
+        of the completeness or stability of the code, it does indicate that the
+        project has yet to be fully endorsed by the ASF.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+        <!-- jQuery -->
+        <script src="/scripts/jquery.min.js" type="text/javascript"></script>
+
+        <!-- Dropdown toggle -->
+        <script src="/scripts/dropdown.js" type="text/javascript"></script>
+
+    </body>
+</html>
