@@ -44,19 +44,18 @@ Email announcement {#email-announce}
 ------------------------------------
 
 Finally, send an email with the subject `[ANNOUNCE] Apache Guacamole [VERSION]
-released` to <announce@apache.org>, <general@incubator.apache.org>,
-<dev@guacamole.apache.org>, and <user@guacamole.apache.org>.  **This email MUST
-be sent from an apache.org email address**, and should contain an announcement
-like the following:
+released` to <announce@apache.org>, <dev@guacamole.apache.org>, and
+<user@guacamole.apache.org>. **This email MUST be sent from an apache.org
+email address**, and should contain an announcement like the following:
 
 ```
 The Apache Guacamole community is proud to announce the release of Apache
 Guacamole [VERSION].
 
-Apache Guacamole  is a clientless remote desktop gateway which supports
-standard protocols like VNC, RDP, and SSH. We call it "clientless" because no
-plugins or client software are required; once Guacamole is installed on a
-server, all you need to access your desktops is a web browser.
+Apache Guacamole is a clientless remote desktop gateway which supports standard
+protocols like VNC, RDP, and SSH. We call it "clientless" because no plugins or
+client software are required; once Guacamole is installed on a server, all you
+need to access your desktops is a web browser.
 
 [VERSION] features [RELEASE HIGHLIGHTS].
 

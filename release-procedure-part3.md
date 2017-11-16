@@ -10,9 +10,8 @@ permalink: /release-procedures-part3/
 Delete the release branch {#delete-branch}
 ------------------------------------------
 
-Once [the PPMC vote](/release-procedures-part2/#ppmc-vote) and [IPMC
-vote](/release-procedures-part2/#ipmc-vote) for the release have passed, the
-release branches [which were created
+Once [the PMC vote](/release-procedures-part2/#pmc-vote) for the release has
+passed, the release branches [which were created
 previously](/release-procedures-part1/#release-branch) must be deleted.
 Assuming they were properly merged back to `master` as release-specific changes
 were made, deleting these branches with `git branch -d` will succeed without
@@ -50,10 +49,10 @@ Upload final release artifacts {#final-upload}
 ### Artifacts in dist SVN
 
 The release artifacts and their signatures come from the release candidate
-which was approved via the various VOTEs. These artifacts are already present
-in the SVN dist area under `dev/`, and need to be moved to the analogous area
-under `release/`. *This must be done using `svn mv`*, with the directory
-containing the artifacts and signatures being renamed from `[VERSION]-RC[N]` to
+which was approved via the VOTE. These artifacts are already present in the SVN
+dist area under `dev/`, and need to be moved to the analogous area under
+`release/`. *This must be done using `svn mv`*, with the directory containing
+the artifacts and signatures being renamed from `[VERSION]-RC[N]` to
 `[VERSION`] in the process.
 
     $ svn mv dev/guacamole/0.9.11-RC1 release/guacamole/0.9.11
