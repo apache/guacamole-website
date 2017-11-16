@@ -17,8 +17,8 @@ a new release candidate. These tags are made off the release branch (*not* off
 version of the upcoming release and `[N]` is the number of the release
 candidate:
 
-    $ git tag -m "Release 0.9.11-incubating - RC1." 0.9.11-incubating-RC1
-    $ git push upstream 0.9.11-incubating-RC1
+    $ git tag -m "Release 0.9.11 - RC1." 0.9.11-RC1
+    $ git push upstream 0.9.11-RC1
 
 Each repository relevant to the release must be tagged. At this point, this
 will be every repository that has a release branch. This *never* includes
@@ -117,18 +117,18 @@ uploaded individually using the `gpg:sign-and-deploy-file` mojo:
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating.jar
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10.jar
 
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-javadoc.jar \
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10-javadoc.jar \
         -Dclassifier=javadoc
 
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-sources.jar \
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10-sources.jar \
         -Dclassifier=sources
 
 The above will need to be done for both `guacamole-common` and `guacamole-ext`,
@@ -140,7 +140,7 @@ needs to be uploaded. The command for this is slightly different:
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache \
         -DpomFile=guacamole-common-js/pom.xml \
-        -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10-incubating.zip \
+        -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10.zip \
         -Dpackaging=zip
 
 Once everything has been uploaded, log into Apache's Nexus at
@@ -173,8 +173,8 @@ release candidate, from within the top-level `incubator-guacamole-client`
 directory:
 
     $ git clean -xfd .
-    $ sudo docker build -t guacamole/guacamole:0.9.11-incubating-RC1 .
-    $ sudo docker push guacamole/guacamole:0.9.11-incubating-RC1
+    $ sudo docker build -t guacamole/guacamole:0.9.11-RC1 .
+    $ sudo docker push guacamole/guacamole:0.9.11-RC1
 
 
 Upload documentation and release notes {#upload-docs}
@@ -242,11 +242,11 @@ guacamole-ext can be found in the following staging repository:
 
 Source and binary distributions (also linked within the release notes):
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/[VERSION]-RC[N]/
+https://dist.apache.org/repos/dist/dev/guacamole/[VERSION]-RC[N]/
 
 Artifacts have been signed with the "[EMAIL]" key listed in:
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/KEYS
+https://dist.apache.org/repos/dist/dev/guacamole/KEYS
 
 Please review and vote:
 

@@ -54,11 +54,10 @@ following:
 The Apache Guacamole community is proud to announce the release of Apache
 Guacamole [VERSION].
 
-Apache Guacamole (incubating) is a clientless remote desktop gateway which
-supports standard protocols like VNC, RDP, and SSH. We call it "clientless"
-because no plugins or client software are required; once Guacamole is
-installed on a server, all you need to access your desktops is a web
-browser.
+Apache Guacamole  is a clientless remote desktop gateway which supports
+standard protocols like VNC, RDP, and SSH. We call it "clientless" because no
+plugins or client software are required; once Guacamole is installed on a
+server, all you need to access your desktops is a web browser.
 
 [VERSION] features [RELEASE HIGHLIGHTS].
 
@@ -73,20 +72,7 @@ http://guacamole.incubator.apache.org/
 
 Thanks!
 
-The Apache Guacamole (incubating) Community
-
-----
-
-DISCLAIMER:
-
-Apache Guacamole is an effort undergoing Incubation at The Apache Software
-Foundation (ASF), sponsored by the Incubator. Incubation is required of all
-newly accepted projects until a further review indicates that the
-infrastructure, communications, and decision making process have stabilized
-in a manner consistent with other successful ASF projects. While incubation
-status is not necessarily a reflection of the completeness or stability of
-the code, it does indicate that the project has yet to be fully endorsed by
-the ASF.
+The Apache Guacamole Community
 ```
 
 Where `[VERSION]` is the version that was just released and `[RELEASE

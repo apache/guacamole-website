@@ -41,7 +41,7 @@ contents of the release to remain within the agreed scope.
 
 Create a new `staging/[VERSION]` branch for each of the following repositories,
 where `[VERSION]` is the version of the upcoming release, such as
-"0.9.11-incubating":
+"0.9.11":
 
  * [`incubator-guacamole-client`](https://github.com/apache/incubator-guacamole-client)
  * [`incubator-guacamole-server`](https://github.com/apache/incubator-guacamole-server)

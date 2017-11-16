@@ -98,8 +98,8 @@ Merging release-specific changes involves:
 
 2. Merging the **staging branch** to **`master`**. Doing this is largely the
    same as described above, except that there is inherently no JIRA issue to
-   tag in the commit message. A message like "Merging 0.9.10-incubating
-   changes back to master." is pretty sensible.
+   tag in the commit message. A message like "Merging 0.9.10 changes back to
+   master." is pretty sensible.
 
    **DO NOT MERGE THE PULL REQUEST TO MASTER DIRECTLY!** The point of merging
    the staging branch to master rather than the pull request is to ensure that

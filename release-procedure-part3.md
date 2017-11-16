@@ -21,8 +21,8 @@ from `master`, **something is horribly wrong, and the release needs to be
 rechecked**.
 
     $ git checkout master
-    $ git branch -d staging/0.9.11-incubating
-    $ git push upstream :staging/0.9.11-incubating
+    $ git branch -d staging/0.9.11
+    $ git push upstream :staging/0.9.11
 
 Tag the final version of the release {#final-tag}
 -------------------------------------------------
@@ -32,8 +32,8 @@ with a new tag, pointing to the exact same commit as the last [tagged release
 candidate](/release-procedures-part2/#tag-rc). This tag must be made in the
 format `[VERSION]`, where `[VERSION]` is the version of the release:
 
-    $ git tag -m "Release 0.9.11-incubating." 0.9.11-incubating
-    $ git push upstream 0.9.11-incubating
+    $ git tag -m "Release 0.9.11." 0.9.11
+    $ git push upstream 0.9.11
 
 Just as with release candidates, each repository relevant to the release must
 be tagged. This will be every repository that had a release branch (the release
@@ -56,8 +56,8 @@ under `release/`. *This must be done using `svn mv`*, with the directory
 containing the artifacts and signatures being renamed from `[VERSION]-RC[N]` to
 `[VERSION`] in the process.
 
-    $ svn mv dev/incubator/guacamole/0.9.11-incubating-RC1 release/incubator/guacamole/0.9.11-incubating
-    $ svn commit -m "Promote Apache Guacamole 0.9.11-incubating-RC1 artifacts to 0.9.11-incubating release."
+    $ svn mv dev/guacamole/0.9.11-RC1 release/guacamole/0.9.11
+    $ svn commit -m "Promote Apache Guacamole 0.9.11-RC1 artifacts to 0.9.11 release."
 
 Note that, once this has finished, **YOU MUST STILL WAIT AT LEAST 24 HOURS TO
 ALLOW THE [MIRRORS](https://www.apache.org/mirrors/) TIME TO SYNC** before
@@ -93,14 +93,14 @@ release candidate, from within the top-level `incubator-guacamole-client`
 directory:
 
     $ git clean -xfd .
-    $ sudo docker build -t guacamole/guacamole:0.9.11-incubating .
+    $ sudo docker build -t guacamole/guacamole:0.9.11 .
     $ sudo docker build -t guacamole/guacamole:latest .
 
 Each of the above commands should finish virtually instantaneously, and the
 hash of the built images should match each other and the previous RC. Assuming
 all looks well, it should be safe to push the images:
 
-    $ sudo docker push guacamole/guacamole:0.9.11-incubating
+    $ sudo docker push guacamole/guacamole:0.9.11
     $ sudo docker push guacamole/guacamole:latest
 
 Again, this should finish virtually instantaneously, as no new data will need

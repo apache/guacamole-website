@@ -18,7 +18,7 @@
 #
 
 # Site settings
-title: Apache Guacamole (incubating)
+title: Apache Guacamole
 
 # Build settings
 markdown: kramdown
