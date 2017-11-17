@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
     <meta charset="UTF-8"/>
-    <title>Apache Guacamole (incubating): Producing a release candidate</title>
+    <title>Apache Guacamole™: Producing a release candidate</title>
 </head>
 
 
@@ -14,7 +14,7 @@
 
         <!-- Header -->
 <div id="header">
-    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <h1><a href="/">Apache Guacamole™</a></h1>
     <ul id="navigation" class="menu">
         
 
@@ -393,8 +393,7 @@
     </ul>
   </li>
   <li><a href="#upload-docs" id="markdown-toc-upload-docs">Upload documentation and release notes</a></li>
-  <li><a href="#ppmc-vote" id="markdown-toc-ppmc-vote">Create the PPMC <code class="highlighter-rouge">[VOTE]</code> thread</a></li>
-  <li><a href="#ipmc-vote" id="markdown-toc-ipmc-vote">Create the IPMC <code class="highlighter-rouge">[VOTE]</code> thread</a></li>
+  <li><a href="#ppmc-vote" id="markdown-toc-ppmc-vote">Create the PMC <code class="highlighter-rouge">[VOTE]</code> thread</a></li>
 </ul>
 
 <h2 id="tag-rc">Tag the release candidate</h2>
@@ -406,10 +405,9 @@ a new release candidate. These tags are made off the release branch (<em>not</em
 version of the upcoming release and <code class="highlighter-rouge">[N]</code> is the number of the release
 candidate:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag -m "Release 0.9.11-incubating - RC1." 0.9.11-incubating-RC1
-$ git push upstream 0.9.11-incubating-RC1
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11 - RC1." 0.9.11-RC1
+$ git push upstream 0.9.11-RC1
+</code></pre></div></div>
 
 <p>Each repository relevant to the release must be tagged. At this point, this
 will be every repository that has a release branch. This <em>never</em> includes
@@ -469,17 +467,15 @@ tree once it has been built with <code class="highlighter-rouge">mvn clean insta
 <p>Producing the required MD5 and SHA256 checksums for a given artifact is very
 straightforward:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ md5sum FILENAME &gt; FILENAME.md5
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ md5sum FILENAME &gt; FILENAME.md5
 $ sha256sum FILENAME &gt; FILENAME.sha
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To produce the PGP signature for a given artifact, use <code class="highlighter-rouge">gpg</code>, as documented in
 Apache’s own <a href="https://www.apache.org/dev/release-signing.html#openpgp-ascii-detach-sig">release signing documentation</a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ gpg --armor --output FILENAME.asc --detach-sig FILENAME
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --armor --output FILENAME.asc --detach-sig FILENAME
+</code></pre></div></div>
 
 <p>Example: <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/?p=17053">the SVN commit uploading RC1 of 0.9.10-incubating (r17053)</a></p>
 
@@ -498,7 +494,7 @@ uploaded to Apache’s Nexus:</p>
 requires that your username and password be stored within your Maven
 <code class="highlighter-rouge">~/.m2/settings.xml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;settings&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;settings&gt;
     &lt;servers&gt;
         &lt;server&gt;
             &lt;id&gt;apache&lt;/id&gt;
@@ -507,59 +503,56 @@ requires that your username and password be stored within your Maven
         &lt;/server&gt;
     &lt;/servers&gt;
 &lt;/settings&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The ID of the server is arbitrary but must match the <code class="highlighter-rouge">repositoryId</code> value given
 to Maven. The examples here use <code class="highlighter-rouge">apache</code>. Most artifacts are Java <code class="highlighter-rouge">.jar</code> files
 with corresponding JavaDoc and source jars. Each of these must be signed and
 uploaded individually using the <code class="highlighter-rouge">gpg:sign-and-deploy-file</code> mojo:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-    -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating.jar
+    -Dfile=guacamole-common/target/guacamole-common-0.9.10.jar
 
 $ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-    -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-javadoc.jar \
+    -Dfile=guacamole-common/target/guacamole-common-0.9.10-javadoc.jar \
     -Dclassifier=javadoc
 
 $ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-    -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-sources.jar \
+    -Dfile=guacamole-common/target/guacamole-common-0.9.10-sources.jar \
     -Dclassifier=sources
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The above will need to be done for both <code class="highlighter-rouge">guacamole-common</code> and <code class="highlighter-rouge">guacamole-ext</code>,
 assuming both have been modified for the release. For JavaScript artifacts like
 <code class="highlighter-rouge">guacamole-common-js</code> which produce a single <code class="highlighter-rouge">.zip</code> file, only the <code class="highlighter-rouge">.zip</code> file
 needs to be uploaded. The command for this is slightly different:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache \
     -DpomFile=guacamole-common-js/pom.xml \
-    -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10-incubating.zip \
+    -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10.zip \
     -Dpackaging=zip
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Once everything has been uploaded, log into Apache’s Nexus at
 https://repository.apache.org/, locate the staging repository which was
 automatically created, and verify things look as expected. Assuming everything
 looks good, select close staging repository to make it publicly available; the
-URL of the repository will need to be provided in the various VOTE emails.</p>
+URL of the repository will need to be provided in the VOTE email.</p>
 
 <h3 id="docker-images">Docker images</h3>
 
 <p>Both guacamole-client and guacamole-server have associated Docker images which
 are produced along with releases as a form of convenience binaries. These
 images are <code class="highlighter-rouge">guacamole/guacamole</code> and <code class="highlighter-rouge">guacamole/guacd</code> respectively, both
-hosted under the Apache Guacamole project’s <a href="http://guacamole.incubator.apache.org/releases/">Docker Hub
+hosted under the Apache Guacamole project’s <a href="https://hub.docker.com/u/guacamole/">Docker Hub
 account</a>.</p>
 
 <p>When building the Docker images, keep in mind:</p>
@@ -579,16 +572,15 @@ the Docker image must be built with that tag.</li>
 release candidate, from within the top-level <code class="highlighter-rouge">incubator-guacamole-client</code>
 directory:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git clean -xfd .
-$ sudo docker build -t guacamole/guacamole:0.9.11-incubating-RC1 .
-$ sudo docker push guacamole/guacamole:0.9.11-incubating-RC1
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
+$ sudo docker build -t guacamole/guacamole:0.9.11-RC1 .
+$ sudo docker push guacamole/guacamole:0.9.11-RC1
+</code></pre></div></div>
 
 <h2 id="upload-docs">Upload documentation and release notes</h2>
 
 <p>The draft release notes and updated documentation both need to be uploaded to
-the website prior to <a href="#ppmc-vote">calling the PPMC vote</a>. These changes should
+the website prior to <a href="#pmc-vote">calling the PMC vote</a>. These changes should
 be handled like any other website changes - via pull requests against the
 <code class="highlighter-rouge">incubator-guacamole-website</code> repository. <strong>DO NOT UPDATE THE TOP-LEVEL
 DOCUMENTATION SYMBOLIC LINKS!</strong> The top-level symbolic links in the <code class="highlighter-rouge">doc/</code>
@@ -616,20 +608,20 @@ release notes for 0.9.10-incubating-RC3</a></li>
   <li><a href="https://github.com/apache/incubator-guacamole-website/tree/master/doc/0.9.10-incubating">The updated documentation for 0.9.10-incubating</a></li>
 </ul>
 
-<h2 id="ppmc-vote">Create the PPMC <code class="highlighter-rouge">[VOTE]</code> thread</h2>
+<h2 id="ppmc-vote">Create the PMC <code class="highlighter-rouge">[VOTE]</code> thread</h2>
 
 <p>Once the above has been completed, request a vote with an email to
-<a href="mailto:dev@guacamole.incubator.apache.org">dev@guacamole.incubator.apache.org</a> titled <code class="highlighter-rouge">[VOTE] Release Apache Guacamole
-[VERSION] (RC[N])</code>, containing the following:</p>
+<a href="mailto:dev@guacamole.apache.org">dev@guacamole.apache.org</a> titled <code class="highlighter-rouge">[VOTE] Release Apache Guacamole [VERSION]
+(RC[N])</code>, containing the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Hello all,
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello all,
 
 The [NTH] release candidate for Apache Guacamole [VERSION] has been
 uploaded and is ready for VOTE. The draft release notes (along with links
 to artifacts, signatures/checksums, and updated documentation) can be found
 here:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 The git tag for all relevant repositories is "[VERSION]-RC[N]":
 
@@ -640,7 +632,7 @@ https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
 Build instructions are included in the manual, which is part of the updated
 documentation referenced above. For convenience:
 
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
+http://guacamole.apache.org/doc/[VERSION]/gug/installing-guacamole.html
 
 Maven artifacts for guacamole-common, guacamole-common-js, and
 guacamole-ext can be found in the following staging repository:
@@ -649,11 +641,11 @@ guacamole-ext can be found in the following staging repository:
 
 Source and binary distributions (also linked within the release notes):
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/[VERSION]-RC[N]/
+https://dist.apache.org/repos/dist/dev/guacamole/[VERSION]-RC[N]/
 
 Artifacts have been signed with the "[EMAIL]" key listed in:
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/KEYS
+https://dist.apache.org/repos/dist/dev/guacamole/KEYS
 
 Please review and vote:
 
@@ -667,8 +659,7 @@ Here is my +1.
 Thanks,
 
 [YOU]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Where <code class="highlighter-rouge">[VERSION]</code> is the release version, <code class="highlighter-rouge">[N]</code> and <code class="highlighter-rouge">[NTH]</code> are the number of
 the release candidate, <code class="highlighter-rouge">[STAGING REPOSITORY URL]</code> is the URL of <a href="#staging-maven">the staging
@@ -677,7 +668,7 @@ associated with the PGP key used to sign the release artifacts, and <code class=
 your name.  Obviously, alter the email as necessary if the scope of the release
 is different.</p>
 
-<p>Please note that, though community input is welcome, <em>only PPMC votes count
+<p>Please note that, though community input is welcome, <em>only PMC votes count
 toward the required three “+1” votes</em>.</p>
 
 <p>Example: <a href="http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/201612.mbox/%3CCALKeL-PKQxOYqZCvhH6_ZF33Zo_LUZjLVZzTh%2B0VRipgsNxQ1g%40mail.gmail.com%3E">the 0.9.10-incubating-RC3 PPMC VOTE email</a></p>
@@ -685,74 +676,6 @@ toward the required three “+1” votes</em>.</p>
 <p>If any release-blocking issues are discovered, the vote must be canceled and
 development must resume, followed by another release candidate (prepared as
 above) intended to address those issues.</p>
-
-<h2 id="ipmc-vote">Create the IPMC <code class="highlighter-rouge">[VOTE]</code> thread</h2>
-
-<p>If/when the PPMC vote passes, another vote must be started for the IPMC. Only
-IPMC votes are binding here. Send an email to <a href="mailto:general@incubator.apache.org">general@incubator.apache.org</a>
-titled <code class="highlighter-rouge">[VOTE] Release Apache Guacamole [VERSION] (RC[N])</code> containing the
-following:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Hello Incubator PMC,
-
-The Apache Guacamole community has voted on and approved a proposal to
-release Apache Guacamole [VERSION].
-
-We now kindly request that the Incubator PMC members review and vote
-on this incubator release.
-
-The VOTE RESULT is here:
-
-[LINK TO VOTE RESULT]
-
-The draft release notes (along with links to artifacts,
-signatures/checksums, and updated documentation) can be found here:
-
-http://guacamole.incubator.apache.org/releases/[VERSION]/
-
-The git tag for all relevant repositories is "[VERSION]-RC[N]":
-
-https://github.com/apache/incubator-guacamole-client/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-server/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
-
-Build instructions are included in the manual, which is part of the
-updated documentation referenced above. For convenience:
-
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
-
-Maven artifacts for guacamole-common, guacamole-common-js, and
-guacamole-ext can be found in the following staging repository:
-
-[STAGING REPOSITORY URL]
-
-Source and binary distributions (also linked within the release notes):
-
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/[VERSION-RC[N]/
-
-Artifacts have been signed with the "[EMAIL]" key listed in:
-
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/KEYS
-
-Please review and vote:
-
-[ ] +1 Approve the release
-[ ] -1 Don't approve the release (please provide specific comments)
-
-This vote will be open for at least 72 hours.
-
-Thanks,
-
-[YOU]
-</code></pre>
-</div>
-
-<p>Where <code class="highlighter-rouge">[LINK TO VOTE RESULT]</code> the permalink to the specific email calling the
-result of <a href="#ppmc-vote">the PPMC vote</a> on the <a href="http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/">public archive of
-dev@guacamole.incubator.org</a>,
-and all other fields are as described for <a href="#ppmc-vote">the PPMC vote email</a>.</p>
-
-<p>Example: <a href="http://mail-archives.apache.org/mod_mbox/incubator-general/201612.mbox/%3CCALKeL-MQmTi1fW%2BGsvFvN21D-ECfHEpf7hwQN5rB-U1JmfAXtQ%40mail.gmail.com%3E">the 0.9.10-incubating-RC3 IPMC VOTE email</a></p>
 
 
 
@@ -778,20 +701,9 @@ and all other fields are as described for <a href="#ppmc-vote">the PPMC vote ema
 
     <!-- Trademarks -->
     <p class="trademarks">
-        Apache and the Apache feather logo are trademarks of The Apache
-        Software Foundation.
-    </p>
-
-    <!-- Incubation disclaimer -->
-    <p class="disclaimer">
-        Apache Guacamole is an effort undergoing Incubation at The Apache
-        Software Foundation (ASF), sponsored by the Incubator. Incubation is
-        required of all newly accepted projects until a further review
-        indicates that the infrastructure, communications, and decision making
-        process have stabilized in a manner consistent with other successful
-        ASF projects. While incubation status is not necessarily a reflection
-        of the completeness or stability of the code, it does indicate that the
-        project has yet to be fully endorsed by the ASF.
+        Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the
+        Apache Guacamole project logo are trademarks of The Apache Software
+        Foundation.
     </p>
 
 </div>

@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
     <meta charset="UTF-8"/>
-    <title>Apache Guacamole (incubating): Managing Pull Requests</title>
+    <title>Apache Guacamole™: Managing Pull Requests</title>
 </head>
 
 
@@ -14,7 +14,7 @@
 
         <!-- Header -->
 <div id="header">
-    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <h1><a href="/">Apache Guacamole™</a></h1>
     <ul id="navigation" class="menu">
         
 
@@ -406,13 +406,12 @@ the pull request as merged.</p>
 <code class="highlighter-rouge">mirror</code>, and <code class="highlighter-rouge">origin</code>, respectively. For example, the recommended
 configuration for <code class="highlighter-rouge">incubator-guacamole-server</code> would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote -v
 mirror git@github.com:apache/incubator-guacamole-server.git
 origin git@github.com:mike-jumper/incubator-guacamole-server.git
 upstream https://git-wip-us.apache.org/repos/asf/incubator-guacamole-server.git
 $
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>After reviewing and approving code submitted via a pull request, you will need
 to:</p>
@@ -422,9 +421,8 @@ to:</p>
     <p>Manually fetch the contents of the pull request to a new branch via the
 command line:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch mirror pull/NUMBER/head:some-branch
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch mirror pull/NUMBER/head:some-branch
+</code></pre></div>    </div>
 
     <p>where <code class="highlighter-rouge">NUMBER</code> is the pull request number and <code class="highlighter-rouge">some-branch</code> is a sensible
 branch name of your choice.</p>
@@ -433,19 +431,17 @@ branch name of your choice.</p>
     <p>Ensure your copy of the base branch is up to date, whether that be <code class="highlighter-rouge">master</code>
 or the staging branch for an upcoming release:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch upstream
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch upstream
 $ git checkout master
 $ git merge --ff-only upstream/master
 $ git push origin
-</code></pre>
-    </div>
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Merge the branch containing the changes from the pull request:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$ git merge --no-ff some-branch
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git merge --no-ff some-branch
+</code></pre></div>    </div>
 
     <p><strong>Be sure to specify <code class="highlighter-rouge">--no-ff</code>!</strong> Merges of pull requests must have
 corresponding merge commits, and the messages of those merge commits must
@@ -454,16 +450,14 @@ properly tag the associated JIRA issue (just like all other commits).</p>
   <li>
     <p>Confirm that the changes look as expected:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$ git diff upstream/master
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git diff upstream/master
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Push the merge result to the ASF repository:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>$ git push upstream master
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push upstream master
+</code></pre></div>    </div>
 
     <p>You will be prompted for your username (Apache ID) and password. It is
 highly recommended that you not save/cache your credentials for this step,
@@ -473,7 +467,7 @@ the main repository.</p>
 </ol>
 
 <p>Once this is done, the ASF git bot should kick in, and emails should go out
-across the <a href="mailto:commits@guacamole.incubator.apache.org">commits@guacamole.incubator.apache.org</a> list noting each commit
+across the <a href="mailto:commits@guacamole.apache.org">commits@guacamole.apache.org</a> list noting each commit
 pushed. If this does not happen, or the commits show up only within the ASF
 repositories and not the GitHub mirrors, it may be necessary to reach out to
 <a href="https://www.apache.org/dev/infrastructure.html">Infra</a> by opening an issue
@@ -502,8 +496,8 @@ are exactly as described above, except you will need to specify
   <li>
     <p>Merging the <strong>staging branch</strong> to <strong><code class="highlighter-rouge">master</code></strong>. Doing this is largely the
 same as described above, except that there is inherently no JIRA issue to
-tag in the commit message. A message like “Merging 0.9.10-incubating
-changes back to master.” is pretty sensible.</p>
+tag in the commit message. A message like “Merging 0.9.10 changes back to
+master.” is pretty sensible.</p>
 
     <p><strong>DO NOT MERGE THE PULL REQUEST TO MASTER DIRECTLY!</strong> The point of merging
 the staging branch to master rather than the pull request is to ensure that
@@ -539,20 +533,9 @@ branch will fail.</p>
 
     <!-- Trademarks -->
     <p class="trademarks">
-        Apache and the Apache feather logo are trademarks of The Apache
-        Software Foundation.
-    </p>
-
-    <!-- Incubation disclaimer -->
-    <p class="disclaimer">
-        Apache Guacamole is an effort undergoing Incubation at The Apache
-        Software Foundation (ASF), sponsored by the Incubator. Incubation is
-        required of all newly accepted projects until a further review
-        indicates that the infrastructure, communications, and decision making
-        process have stabilized in a manner consistent with other successful
-        ASF projects. While incubation status is not necessarily a reflection
-        of the completeness or stability of the code, it does indicate that the
-        project has yet to be fully endorsed by the ASF.
+        Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the
+        Apache Guacamole project logo are trademarks of The Apache Software
+        Foundation.
     </p>
 
 </div>

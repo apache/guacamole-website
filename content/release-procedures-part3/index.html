@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
     <meta charset="UTF-8"/>
-    <title>Apache Guacamole (incubating): Promoting a release candidate to release</title>
+    <title>Apache Guacamole™: Promoting a release candidate to release</title>
 </head>
 
 
@@ -14,7 +14,7 @@
 
         <!-- Header -->
 <div id="header">
-    <h1><a href="/">Apache Guacamole (incubating)</a></h1>
+    <h1><a href="/">Apache Guacamole™</a></h1>
     <ul id="navigation" class="menu">
         
 
@@ -397,9 +397,8 @@
 
 <h2 id="delete-branch">Delete the release branch</h2>
 
-<p>Once <a href="/release-procedures-part2/#ppmc-vote">the PPMC vote</a> and <a href="/release-procedures-part2/#ipmc-vote">IPMC
-vote</a> for the release have passed, the
-release branches <a href="/release-procedures-part1/#release-branch">which were created
+<p>Once <a href="/release-procedures-part2/#pmc-vote">the PMC vote</a> for the release has
+passed, the release branches <a href="/release-procedures-part1/#release-branch">which were created
 previously</a> must be deleted.
 Assuming they were properly merged back to <code class="highlighter-rouge">master</code> as release-specific changes
 were made, deleting these branches with <code class="highlighter-rouge">git branch -d</code> will succeed without
@@ -407,11 +406,10 @@ warnings. If git refuses to delete the branches because commits are missing
 from <code class="highlighter-rouge">master</code>, <strong>something is horribly wrong, and the release needs to be
 rechecked</strong>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout master
-$ git branch -d staging/0.9.11-incubating
-$ git push upstream :staging/0.9.11-incubating
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout master
+$ git branch -d staging/0.9.11
+$ git push upstream :staging/0.9.11
+</code></pre></div></div>
 
 <h2 id="final-tag">Tag the final version of the release</h2>
 
@@ -420,10 +418,9 @@ with a new tag, pointing to the exact same commit as the last <a href="/release-
 candidate</a>. This tag must be made in the
 format <code class="highlighter-rouge">[VERSION]</code>, where <code class="highlighter-rouge">[VERSION]</code> is the version of the release:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag -m "Release 0.9.11-incubating." 0.9.11-incubating
-$ git push upstream 0.9.11-incubating
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11." 0.9.11
+$ git push upstream 0.9.11
+</code></pre></div></div>
 
 <p>Just as with release candidates, each repository relevant to the release must
 be tagged. This will be every repository that had a release branch (the release
@@ -438,16 +435,15 @@ incubator-guacamole-server</a></p>
 <h3 id="artifacts-in-dist-svn">Artifacts in dist SVN</h3>
 
 <p>The release artifacts and their signatures come from the release candidate
-which was approved via the various VOTEs. These artifacts are already present
-in the SVN dist area under <code class="highlighter-rouge">dev/</code>, and need to be moved to the analogous area
-under <code class="highlighter-rouge">release/</code>. <em>This must be done using <code class="highlighter-rouge">svn mv</code></em>, with the directory
-containing the artifacts and signatures being renamed from <code class="highlighter-rouge">[VERSION]-RC[N]</code> to
+which was approved via the VOTE. These artifacts are already present in the SVN
+dist area under <code class="highlighter-rouge">dev/</code>, and need to be moved to the analogous area under
+<code class="highlighter-rouge">release/</code>. <em>This must be done using <code class="highlighter-rouge">svn mv</code></em>, with the directory containing
+the artifacts and signatures being renamed from <code class="highlighter-rouge">[VERSION]-RC[N]</code> to
 <code class="highlighter-rouge">[VERSION</code>] in the process.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ svn mv dev/incubator/guacamole/0.9.11-incubating-RC1 release/incubator/guacamole/0.9.11-incubating
-$ svn commit -m "Promote Apache Guacamole 0.9.11-incubating-RC1 artifacts to 0.9.11-incubating release."
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ svn mv dev/guacamole/0.9.11-RC1 release/guacamole/0.9.11
+$ svn commit -m "Promote Apache Guacamole 0.9.11-RC1 artifacts to 0.9.11 release."
+</code></pre></div></div>
 
 <p>Note that, once this has finished, <strong>YOU MUST STILL WAIT AT LEAST 24 HOURS TO
 ALLOW THE <a href="https://www.apache.org/mirrors/">MIRRORS</a> TIME TO SYNC</strong> before
@@ -482,20 +478,18 @@ in the absence of an RC.</p>
 release candidate, from within the top-level <code class="highlighter-rouge">incubator-guacamole-client</code>
 directory:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ git clean -xfd .
-$ sudo docker build -t guacamole/guacamole:0.9.11-incubating .
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
+$ sudo docker build -t guacamole/guacamole:0.9.11 .
 $ sudo docker build -t guacamole/guacamole:latest .
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Each of the above commands should finish virtually instantaneously, and the
 hash of the built images should match each other and the previous RC. Assuming
 all looks well, it should be safe to push the images:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo docker push guacamole/guacamole:0.9.11-incubating
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo docker push guacamole/guacamole:0.9.11
 $ sudo docker push guacamole/guacamole:latest
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Again, this should finish virtually instantaneously, as no new data will need
 to be pushed. Docker Hub already has the images/layers from the previous RC
@@ -525,20 +519,9 @@ builds.</p>
 
     <!-- Trademarks -->
     <p class="trademarks">
-        Apache and the Apache feather logo are trademarks of The Apache
-        Software Foundation.
-    </p>
-
-    <!-- Incubation disclaimer -->
-    <p class="disclaimer">
-        Apache Guacamole is an effort undergoing Incubation at The Apache
-        Software Foundation (ASF), sponsored by the Incubator. Incubation is
-        required of all newly accepted projects until a further review
-        indicates that the infrastructure, communications, and decision making
-        process have stabilized in a manner consistent with other successful
-        ASF projects. While incubation status is not necessarily a reflection
-        of the completeness or stability of the code, it does indicate that the
-        project has yet to be fully endorsed by the ASF.
+        Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the
+        Apache Guacamole project logo are trademarks of The Apache Software
+        Foundation.
     </p>
 
 </div>
