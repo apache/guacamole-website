@@ -1,3 +1,8 @@
+---
+# NOTE: Jekyll requires YAML front matter, even if empty, if Liquid filtering
+# is to take place. Such filtering is necessary for the DOAP file to
+# automatically list all current releases.
+---
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl"?>
 <!--
@@ -94,35 +99,18 @@
         </maintainer>
 
         <!-- Releases -->
-
+{% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' -%}
+{%- for release in releases reversed -%}
+    {%- if release.title %}
         <release>
             <Version>
                 <name>Apache Guacamole</name>
-                <created>2017-07-30</created>
-                <revision>0.9.13-incubating</revision>
+                <created>{{ release.date | date: "%Y-%m-%d" }}</created>
+                <revision>{{ release.title }}</revision>
             </Version>
         </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2017-04-01</created>
-                <revision>0.9.12-incubating</revision>
-            </Version>
-        </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2017-02-02</created>
-                <revision>0.9.11-incubating</revision>
-            </Version>
-        </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2016-12-29</created>
-                <revision>0.9.10-incubating</revision>
-            </Version>
-        </release>
+    {%- endif -%}
+{%- endfor %}
 
     </Project>
 </rdf:RDF>
