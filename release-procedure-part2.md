@@ -155,7 +155,7 @@ Both guacamole-client and guacamole-server have associated Docker images which
 are produced along with releases as a form of convenience binaries. These
 images are `guacamole/guacamole` and `guacamole/guacd` respectively, both
 hosted under the Apache Guacamole project's [Docker Hub
-account](http://guacamole.incubator.apache.org/releases/).
+account](https://hub.docker.com/u/guacamole/).
 
 When building the Docker images, keep in mind:
 
@@ -211,8 +211,8 @@ Create the PPMC `[VOTE]` thread {#ppmc-vote}
 --------------------------------------------
 
 Once the above has been completed, request a vote with an email to
-<dev@guacamole.incubator.apache.org> titled `[VOTE] Release Apache Guacamole
-[VERSION] (RC[N])`, containing the following:
+<dev@guacamole.apache.org> titled `[VOTE] Release Apache Guacamole [VERSION]
+(RC[N])`, containing the following:
 
 ```
 Hello all,
@@ -222,7 +222,7 @@ uploaded and is ready for VOTE. The draft release notes (along with links
 to artifacts, signatures/checksums, and updated documentation) can be found
 here:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 The git tag for all relevant repositories is "[VERSION]-RC[N]":
 
@@ -233,7 +233,7 @@ https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
 Build instructions are included in the manual, which is part of the updated
 documentation referenced above. For convenience:
 
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
+http://guacamole.apache.org/doc/[VERSION]/gug/installing-guacamole.html
 
 Maven artifacts for guacamole-common, guacamole-common-js, and
 guacamole-ext can be found in the following staging repository:
@@ -303,7 +303,7 @@ The VOTE RESULT is here:
 The draft release notes (along with links to artifacts,
 signatures/checksums, and updated documentation) can be found here:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 The git tag for all relevant repositories is "[VERSION]-RC[N]":
 
@@ -314,7 +314,7 @@ https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
 Build instructions are included in the manual, which is part of the
 updated documentation referenced above. For convenience:
 
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
+http://guacamole.apache.org/doc/[VERSION]/gug/installing-guacamole.html
 
 Maven artifacts for guacamole-common, guacamole-common-js, and
 guacamole-ext can be found in the following staging repository:

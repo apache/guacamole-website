@@ -45,30 +45,30 @@ will need to subscribe prior to sending email to any list.** All mailing lists
 are actively filtered for spam, and any email not originating from a subscriber
 will bounce.
 
-### General Discussion / Questions ([user@guacamole.incubator.apache.org](mailto:user@guacamole.incubator.apache.org))
+### General Discussion / Questions ([user@guacamole.apache.org](mailto:user@guacamole.apache.org))
 
 The general/users list is intended for general questions and discussions which
 do not necessarily pertain to development. This list replaces the old
 [SourceForge forums](https://sourceforge.net/p/guacamole/discussion/) used by
 Guacamole prior to its acceptance into the Apache Incubator.
 
-* [Subscribe](mailto:user-subscribe@guacamole.incubator.apache.org)
-* [Unsubscribe](mailto:user-unsubscribe@guacamole.incubator.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-user/)
+* [Subscribe](mailto:user-subscribe@guacamole.apache.org)
+* [Unsubscribe](mailto:user-unsubscribe@guacamole.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-user/)
 
 Alternatively, the general/users list can also be used via the [forum hosted
 on Nabble](http://apache-guacamole-incubating-users.2363388.n4.nabble.com/),
 as described above.
 
-### Development ([dev@guacamole.incubator.apache.org](mailto:dev@guacamole.incubator.apache.org))
+### Development ([dev@guacamole.apache.org](mailto:dev@guacamole.apache.org))
 
 The development list is for development-related discussion involving people who
 are contributors to the Apache Guacamole project (or who wish to become
 contributors).
 
-* [Subscribe](mailto:dev-subscribe@guacamole.incubator.apache.org)
-* [Unsubscribe](mailto:dev-unsubscribe@guacamole.incubator.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/)
+* [Subscribe](mailto:dev-subscribe@guacamole.apache.org)
+* [Unsubscribe](mailto:dev-unsubscribe@guacamole.apache.org)
+* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-dev/)
 
 [The Guacamole Manual](/doc/gug/)
 ---------------------------------

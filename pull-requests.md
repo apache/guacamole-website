@@ -71,7 +71,7 @@ to:
    the main repository.
 
 Once this is done, the ASF git bot should kick in, and emails should go out
-across the <commits@guacamole.incubator.apache.org> list noting each commit
+across the <commits@guacamole.apache.org> list noting each commit
 pushed. If this does not happen, or the commits show up only within the ASF
 repositories and not the GitHub mirrors, it may be necessary to reach out to
 [Infra](https://www.apache.org/dev/infrastructure.html) by opening an issue

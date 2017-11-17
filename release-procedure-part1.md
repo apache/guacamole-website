@@ -13,8 +13,7 @@ Create a discussion thread for the release {#discuss-thread}
 Beginning a new release candidate should not be a unilateral decision. There is
 no requirement that an official vote be held prior to starting a release
 candidate, but there needs to be some discussion via a `[DISCUSS]` thread on
-<dev@guacamole.incubator.apache.org> to gauge whether the time is right for a
-release.
+<dev@guacamole.apache.org> to gauge whether the time is right for a release.
 
 Development of Apache Guacamole is not halted when a release is being prepared,
 but the main development tree is forked. With this in mind, it is best to only

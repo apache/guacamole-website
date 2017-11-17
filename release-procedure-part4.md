@@ -45,10 +45,9 @@ Email announcement {#email-announce}
 
 Finally, send an email with the subject `[ANNOUNCE] Apache Guacamole [VERSION]
 released` to <announce@apache.org>, <general@incubator.apache.org>,
-<dev@guacamole.incubator.apache.org>, and
-<user@guacamole.incubator.apache.org>.  **This email MUST be sent from an
-apache.org email address**, and should contain an announcement like the
-following:
+<dev@guacamole.apache.org>, and <user@guacamole.apache.org>.  **This email MUST
+be sent from an apache.org email address**, and should contain an announcement
+like the following:
 
 ```
 The Apache Guacamole community is proud to announce the release of Apache
@@ -64,11 +63,11 @@ server, all you need to access your desktops is a web browser.
 A full list of the changes in this release, along with links to downloads
 and updated documentation, can be found in the release notes:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 For more information on Apache Guacamole, please see:
 
-http://guacamole.incubator.apache.org/
+http://guacamole.apache.org/
 
 Thanks!
 
