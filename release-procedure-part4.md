@@ -44,49 +44,33 @@ Email announcement {#email-announce}
 ------------------------------------
 
 Finally, send an email with the subject `[ANNOUNCE] Apache Guacamole [VERSION]
-released` to <announce@apache.org>, <general@incubator.apache.org>,
-<dev@guacamole.incubator.apache.org>, and
-<user@guacamole.incubator.apache.org>.  **This email MUST be sent from an
-apache.org email address**, and should contain an announcement like the
-following:
+released` to <announce@apache.org>, <dev@guacamole.apache.org>, and
+<user@guacamole.apache.org>. **This email MUST be sent from an apache.org
+email address**, and should contain an announcement like the following:
 
 ```
 The Apache Guacamole community is proud to announce the release of Apache
 Guacamole [VERSION].
 
-Apache Guacamole (incubating) is a clientless remote desktop gateway which
-supports standard protocols like VNC, RDP, and SSH. We call it "clientless"
-because no plugins or client software are required; once Guacamole is
-installed on a server, all you need to access your desktops is a web
-browser.
+Apache Guacamole is a clientless remote desktop gateway which supports standard
+protocols like VNC, RDP, and SSH. We call it "clientless" because no plugins or
+client software are required; once Guacamole is installed on a server, all you
+need to access your desktops is a web browser.
 
 [VERSION] features [RELEASE HIGHLIGHTS].
 
 A full list of the changes in this release, along with links to downloads
 and updated documentation, can be found in the release notes:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 For more information on Apache Guacamole, please see:
 
-http://guacamole.incubator.apache.org/
+http://guacamole.apache.org/
 
 Thanks!
 
-The Apache Guacamole (incubating) Community
-
-----
-
-DISCLAIMER:
-
-Apache Guacamole is an effort undergoing Incubation at The Apache Software
-Foundation (ASF), sponsored by the Incubator. Incubation is required of all
-newly accepted projects until a further review indicates that the
-infrastructure, communications, and decision making process have stabilized
-in a manner consistent with other successful ASF projects. While incubation
-status is not necessarily a reflection of the completeness or stability of
-the code, it does indicate that the project has yet to be fully endorsed by
-the ASF.
+The Apache Guacamole Community
 ```
 
 Where `[VERSION]` is the version that was just released and `[RELEASE

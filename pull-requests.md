@@ -71,7 +71,7 @@ to:
    the main repository.
 
 Once this is done, the ASF git bot should kick in, and emails should go out
-across the <commits@guacamole.incubator.apache.org> list noting each commit
+across the <commits@guacamole.apache.org> list noting each commit
 pushed. If this does not happen, or the commits show up only within the ASF
 repositories and not the GitHub mirrors, it may be necessary to reach out to
 [Infra](https://www.apache.org/dev/infrastructure.html) by opening an issue
@@ -98,8 +98,8 @@ Merging release-specific changes involves:
 
 2. Merging the **staging branch** to **`master`**. Doing this is largely the
    same as described above, except that there is inherently no JIRA issue to
-   tag in the commit message. A message like "Merging 0.9.10-incubating
-   changes back to master." is pretty sensible.
+   tag in the commit message. A message like "Merging 0.9.10 changes back to
+   master." is pretty sensible.
 
    **DO NOT MERGE THE PULL REQUEST TO MASTER DIRECTLY!** The point of merging
    the staging branch to master rather than the pull request is to ensure that

@@ -36,7 +36,7 @@ project, the first step is to be active in the community as a
 
 Contributors who show merit through the quality of their continuing activity in
 the community and their contributions to the project will be invited to become
-[committers](#committers) or [members of the PPMC](#ppmc-members).
+[committers](#committers) or [members of the PMC](#pmc-members).
 
 Contributing {#contribute}
 -----------------
@@ -81,8 +81,7 @@ Committers
 Committers actively maintain and contribute to the Apache Guacamole project,
 produce releases, review the code of contributors and fellow committers, and
 identify contributors who have shown [merit](#meritocracy) and should be
-offered committership. Apache Guacamole committers are also implicitly members
-of the [Apache Guacamole PPMC](#ppmc-members).
+offered committership.
 
 Committers have write access to Apache Guacamole's git repositories, but do not
 make direct changes on their own behalf. Code changes are made only through
@@ -104,19 +103,19 @@ a committer not otherwise directly involved in those changes.
 * [Promoting a release candidate to release](/release-procedures-part3/)
 * [Announcing the release](/release-procedures-part4/)
 
-PPMC members
-------------
+PMC members
+-----------
 
-The Apache Guacamole PPMC is responsible for project oversight. PPMC members
-participate in discussions on the [mailing lists](/support/#mailing-lists) and
-vote on release candidates, new committers, and new PPMC members. Like
-[committers](#committers) (who are implicitly PPMC members), the PPMC is
-responsible for identifying members of the community who have shown
-[merit](#meritocracy) warranting committership or PPMC membership.
+The Apache Guacamole PMC is made up of committers and is responsible for
+project oversight. PMC members participate in discussions on the [mailing
+lists](/support/#mailing-lists) and vote on release candidates, new committers,
+and new PMC members. The PMC is responsible for identifying members of the
+community who have shown [merit](#meritocracy) warranting committership and/or
+PMC membership.
 
-### Resources for PPMC members:
+### Resources for PMC members:
 
 * [Apache Guacamole mailing lists](/support/#mailing-lists)
-* [Apache Incubator: PPMC guide](http://incubator.apache.org/guides/ppmc.html)
+* [Project Management Committee Guide](http://www.apache.org/dev/pmc.html)
 * [Apache voting process](http://apache.org/foundation/voting.html)
 

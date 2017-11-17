@@ -17,8 +17,8 @@ a new release candidate. These tags are made off the release branch (*not* off
 version of the upcoming release and `[N]` is the number of the release
 candidate:
 
-    $ git tag -m "Release 0.9.11-incubating - RC1." 0.9.11-incubating-RC1
-    $ git push upstream 0.9.11-incubating-RC1
+    $ git tag -m "Release 0.9.11 - RC1." 0.9.11-RC1
+    $ git push upstream 0.9.11-RC1
 
 Each repository relevant to the release must be tagged. At this point, this
 will be every repository that has a release branch. This *never* includes
@@ -117,18 +117,18 @@ uploaded individually using the `gpg:sign-and-deploy-file` mojo:
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating.jar
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10.jar
 
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-javadoc.jar \
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10-javadoc.jar \
         -Dclassifier=javadoc
 
     $ mvn gpg:sign-and-deploy-file \
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
-        -Dfile=guacamole-common/target/guacamole-common-0.9.10-incubating-sources.jar \
+        -Dfile=guacamole-common/target/guacamole-common-0.9.10-sources.jar \
         -Dclassifier=sources
 
 The above will need to be done for both `guacamole-common` and `guacamole-ext`,
@@ -140,14 +140,14 @@ needs to be uploaded. The command for this is slightly different:
         -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
         -DrepositoryId=apache \
         -DpomFile=guacamole-common-js/pom.xml \
-        -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10-incubating.zip \
+        -Dfile=guacamole-common-js/target/guacamole-common-js-0.9.10.zip \
         -Dpackaging=zip
 
 Once everything has been uploaded, log into Apache's Nexus at
 https://repository.apache.org/, locate the staging repository which was
 automatically created, and verify things look as expected. Assuming everything
 looks good, select close staging repository to make it publicly available; the
-URL of the repository will need to be provided in the various VOTE emails.
+URL of the repository will need to be provided in the VOTE email.
 
 ### Docker images
 
@@ -155,7 +155,7 @@ Both guacamole-client and guacamole-server have associated Docker images which
 are produced along with releases as a form of convenience binaries. These
 images are `guacamole/guacamole` and `guacamole/guacd` respectively, both
 hosted under the Apache Guacamole project's [Docker Hub
-account](http://guacamole.incubator.apache.org/releases/).
+account](https://hub.docker.com/u/guacamole/).
 
 When building the Docker images, keep in mind:
 
@@ -173,15 +173,15 @@ release candidate, from within the top-level `incubator-guacamole-client`
 directory:
 
     $ git clean -xfd .
-    $ sudo docker build -t guacamole/guacamole:0.9.11-incubating-RC1 .
-    $ sudo docker push guacamole/guacamole:0.9.11-incubating-RC1
+    $ sudo docker build -t guacamole/guacamole:0.9.11-RC1 .
+    $ sudo docker push guacamole/guacamole:0.9.11-RC1
 
 
 Upload documentation and release notes {#upload-docs}
 -----------------------------------------------------
 
 The draft release notes and updated documentation both need to be uploaded to
-the website prior to [calling the PPMC vote](#ppmc-vote). These changes should
+the website prior to [calling the PMC vote](#pmc-vote). These changes should
 be handled like any other website changes - via pull requests against the
 `incubator-guacamole-website` repository. **DO NOT UPDATE THE TOP-LEVEL
 DOCUMENTATION SYMBOLIC LINKS!** The top-level symbolic links in the `doc/`
@@ -207,12 +207,12 @@ Examples:
 release notes for 0.9.10-incubating-RC3](https://github.com/apache/incubator-guacamole-website/blob/67adf0802701d696f9dc1a90229da694f4cebbaa/_releases/0.9.10-incubating.md)
  * [The updated documentation for 0.9.10-incubating](https://github.com/apache/incubator-guacamole-website/tree/master/doc/0.9.10-incubating)
 
-Create the PPMC `[VOTE]` thread {#ppmc-vote}
---------------------------------------------
+Create the PMC `[VOTE]` thread {#ppmc-vote}
+-------------------------------------------
 
 Once the above has been completed, request a vote with an email to
-<dev@guacamole.incubator.apache.org> titled `[VOTE] Release Apache Guacamole
-[VERSION] (RC[N])`, containing the following:
+<dev@guacamole.apache.org> titled `[VOTE] Release Apache Guacamole [VERSION]
+(RC[N])`, containing the following:
 
 ```
 Hello all,
@@ -222,7 +222,7 @@ uploaded and is ready for VOTE. The draft release notes (along with links
 to artifacts, signatures/checksums, and updated documentation) can be found
 here:
 
-http://guacamole.incubator.apache.org/releases/[VERSION]/
+http://guacamole.apache.org/releases/[VERSION]/
 
 The git tag for all relevant repositories is "[VERSION]-RC[N]":
 
@@ -233,7 +233,7 @@ https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
 Build instructions are included in the manual, which is part of the updated
 documentation referenced above. For convenience:
 
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
+http://guacamole.apache.org/doc/[VERSION]/gug/installing-guacamole.html
 
 Maven artifacts for guacamole-common, guacamole-common-js, and
 guacamole-ext can be found in the following staging repository:
@@ -242,11 +242,11 @@ guacamole-ext can be found in the following staging repository:
 
 Source and binary distributions (also linked within the release notes):
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/[VERSION]-RC[N]/
+https://dist.apache.org/repos/dist/dev/guacamole/[VERSION]-RC[N]/
 
 Artifacts have been signed with the "[EMAIL]" key listed in:
 
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/KEYS
+https://dist.apache.org/repos/dist/dev/guacamole/KEYS
 
 Please review and vote:
 
@@ -269,7 +269,7 @@ associated with the PGP key used to sign the release artifacts, and `[YOU]` is
 your name.  Obviously, alter the email as necessary if the scope of the release
 is different.
 
-Please note that, though community input is welcome, *only PPMC votes count
+Please note that, though community input is welcome, *only PMC votes count
 toward the required three "+1" votes*.
 
 Example: [the 0.9.10-incubating-RC3 PPMC VOTE email](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/201612.mbox/%3CCALKeL-PKQxOYqZCvhH6_ZF33Zo_LUZjLVZzTh%2B0VRipgsNxQ1g%40mail.gmail.com%3E)
@@ -277,74 +277,4 @@ Example: [the 0.9.10-incubating-RC3 PPMC VOTE email](http://mail-archives.apache
 If any release-blocking issues are discovered, the vote must be canceled and
 development must resume, followed by another release candidate (prepared as
 above) intended to address those issues.
-
-
-Create the IPMC `[VOTE]` thread {#ipmc-vote}
---------------------------------------------
-
-If/when the PPMC vote passes, another vote must be started for the IPMC. Only
-IPMC votes are binding here. Send an email to <general@incubator.apache.org>
-titled `[VOTE] Release Apache Guacamole [VERSION] (RC[N])` containing the
-following:
-
-```
-Hello Incubator PMC,
-
-The Apache Guacamole community has voted on and approved a proposal to
-release Apache Guacamole [VERSION].
-
-We now kindly request that the Incubator PMC members review and vote
-on this incubator release.
-
-The VOTE RESULT is here:
-
-[LINK TO VOTE RESULT]
-
-The draft release notes (along with links to artifacts,
-signatures/checksums, and updated documentation) can be found here:
-
-http://guacamole.incubator.apache.org/releases/[VERSION]/
-
-The git tag for all relevant repositories is "[VERSION]-RC[N]":
-
-https://github.com/apache/incubator-guacamole-client/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-server/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
-
-Build instructions are included in the manual, which is part of the
-updated documentation referenced above. For convenience:
-
-http://guacamole.incubator.apache.org/doc/[VERSION]/gug/installing-guacamole.html
-
-Maven artifacts for guacamole-common, guacamole-common-js, and
-guacamole-ext can be found in the following staging repository:
-
-[STAGING REPOSITORY URL]
-
-Source and binary distributions (also linked within the release notes):
-
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/[VERSION-RC[N]/
-
-Artifacts have been signed with the "[EMAIL]" key listed in:
-
-https://dist.apache.org/repos/dist/dev/incubator/guacamole/KEYS
-
-Please review and vote:
-
-[ ] +1 Approve the release
-[ ] -1 Don't approve the release (please provide specific comments)
-
-This vote will be open for at least 72 hours.
-
-Thanks,
-
-[YOU]
-```
-
-Where `[LINK TO VOTE RESULT]` the permalink to the specific email calling the
-result of [the PPMC vote](#ppmc-vote) on the [public archive of
-dev@guacamole.incubator.org](http://mail-archives.apache.org/mod_mbox/incubator-guacamole-dev/),
-and all other fields are as described for [the PPMC vote email](#ppmc-vote).
-
-Example: [the 0.9.10-incubating-RC3 IPMC VOTE email](http://mail-archives.apache.org/mod_mbox/incubator-general/201612.mbox/%3CCALKeL-MQmTi1fW%2BGsvFvN21D-ECfHEpf7hwQN5rB-U1JmfAXtQ%40mail.gmail.com%3E)
 
