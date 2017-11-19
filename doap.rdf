@@ -1,0 +1,116 @@
+---
+# NOTE: Jekyll requires YAML front matter, even if empty, if Liquid filtering
+# is to take place. Such filtering is necessary for the DOAP file to
+# automatically list all current releases.
+---
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<rdf:RDF xml:lang="en"
+    xmlns="http://usefulinc.com/ns/doap#"
+    xmlns:asfext="http://projects.apache.org/ns/asfext#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <Project rdf:about="http://guacamole.apache.org">
+
+        <name>Apache Guacamole</name>
+        <created>2017-11-15</created>
+        <license rdf:resource="http://www.apache.org/licenses/LICENSE-2.0"/>
+        <asfext:pmc rdf:resource="http://guacamole.apache.org"/>
+
+        <!-- Description -->
+
+        <shortdesc>Clientless remote desktop gateway.</shortdesc>
+
+        <description>Apache Guacamole is a clientless remote desktop gateway
+            which supports standard protocols like VNC, RDP, and SSH. We call
+            it "clientless" because no plugins or client software are required.
+            Once Guacamole is installed on a server, all you need to access
+            your desktops is a web browser.</description>
+
+        <!-- Links -->
+
+        <bug-database rdf:resource="https://issues.apache.org/jira/browse/GUACAMOLE"/>
+        <download-page rdf:resource="http://guacamole.apache.org/releases/"/>
+        <homepage rdf:resource="http://guacamole.apache.org"/>
+        <mailing-list rdf:resource="http://guacamole.apache.org/support/#mailing-lists"/>
+
+        <!-- Programming languages -->
+
+        <programming-language>C</programming-language>
+        <programming-language>Java</programming-language>
+        <programming-language>JavaScript</programming-language>
+
+        <!-- Related categories -->
+
+        <category rdf:resource="http://projects.apache.org/category/network-client"/>
+        <category rdf:resource="http://projects.apache.org/category/network-server"/>
+
+        <!-- Source repositories -->
+
+        <repository>
+            <GitRepository>
+                <location rdf:resource="https://git-wip-us.apache.org/repos/asf/incubator-guacamole-client.git"/>
+                <browse rdf:resource="https://github.com/apache/incubator-guacamole-client"/>
+            </GitRepository>
+        </repository>
+        <repository>
+            <GitRepository>
+                <location rdf:resource="https://git-wip-us.apache.org/repos/asf/incubator-guacamole-manual.git"/>
+                <browse rdf:resource="https://github.com/apache/incubator-guacamole-manual"/>
+            </GitRepository>
+        </repository>
+        <repository>
+            <GitRepository>
+                <location rdf:resource="https://git-wip-us.apache.org/repos/asf/incubator-guacamole-server.git"/>
+                <browse rdf:resource="https://github.com/apache/incubator-guacamole-server"/>
+            </GitRepository>
+        </repository>
+        <repository>
+            <GitRepository>
+                <location rdf:resource="https://git-wip-us.apache.org/repos/asf/incubator-guacamole-website.git"/>
+                <browse rdf:resource="https://github.com/apache/incubator-guacamole-website"/>
+            </GitRepository>
+        </repository>
+
+        <!-- Maintainer -->
+
+        <maintainer>
+            <foaf:Person>
+                <foaf:name>Apache Guacamole Community</foaf:name>
+                <foaf:mbox rdf:resource="mailto:dev@guacamole.apache.org"/>
+            </foaf:Person>
+        </maintainer>
+
+        <!-- Releases -->
+{% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' -%}
+{%- for release in releases reversed -%}
+    {%- if release.title %}
+        <release>
+            <Version>
+                <name>Apache Guacamole</name>
+                <created>{{ release.date | date: "%Y-%m-%d" }}</created>
+                <revision>{{ release.title }}</revision>
+            </Version>
+        </release>
+    {%- endif -%}
+{%- endfor %}
+
+    </Project>
+</rdf:RDF>
