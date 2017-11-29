@@ -72,9 +72,9 @@ Testing changes locally
 To test your changes to the website, you can either invoke `./build.sh` to build a static copy of the site to the `content/` subdirectory, or invoke `./build.sh PORT` (where `PORT` a TCP port number) to both build the static copy of the site *and* run Ruby's web server to serve `content/` locally at the given port:
 
     $ ./build.sh 8080
-    Configuration file: /home/mjumper/apache-guacamole/incubator-guacamole-website/_config.yml
-                Source: /home/mjumper/apache-guacamole/incubator-guacamole-website
-           Destination: /home/mjumper/apache-guacamole/incubator-guacamole-website/_site
+    Configuration file: /home/mjumper/apache-guacamole/guacamole-website/_config.yml
+                Source: /home/mjumper/apache-guacamole/guacamole-website
+           Destination: /home/mjumper/apache-guacamole/guacamole-website/_site
      Incremental build: disabled. Enable with --incremental
           Generating...
                         done in 0.563 seconds.
@@ -109,9 +109,9 @@ The `build.sh` script can take care of all this for you when invoked as
 `./build.sh stage`:
 
     $ ./build.sh stage
-    Configuration file: /home/mjumper/apache-guacamole/incubator-guacamole-website/_config.yml
-                Source: /home/mjumper/apache-guacamole/incubator-guacamole-website
-           Destination: /home/mjumper/apache-guacamole/incubator-guacamole-website/_site
+    Configuration file: /home/mjumper/apache-guacamole/guacamole-website/_config.yml
+                Source: /home/mjumper/apache-guacamole/guacamole-website
+           Destination: /home/mjumper/apache-guacamole/guacamole-website/_site
      Incremental build: disabled. Enable with --incremental
           Generating...
                         done in 0.568 seconds.

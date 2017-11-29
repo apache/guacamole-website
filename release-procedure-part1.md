@@ -42,12 +42,12 @@ Create a new `staging/[VERSION]` branch for each of the following repositories,
 where `[VERSION]` is the version of the upcoming release, such as
 "0.9.11":
 
- * [`incubator-guacamole-client`](https://github.com/apache/incubator-guacamole-client)
- * [`incubator-guacamole-server`](https://github.com/apache/incubator-guacamole-server)
- * [`incubator-guacamole-manual`](https://github.com/apache/incubator-guacamole-manual)
+ * [`guacamole-client`](https://github.com/apache/guacamole-client)
+ * [`guacamole-server`](https://github.com/apache/guacamole-server)
+ * [`guacamole-manual`](https://github.com/apache/guacamole-manual)
 
 Note that *the
-[`incubator-guacamole-website`](https://github.com/apache/incubator-guacamole-website)
+[`guacamole-website`](https://github.com/apache/guacamole-website)
 repository does not get a release branch*. The website points to release
 artifacts, etc. but is not itself part of the release.
 
@@ -76,9 +76,9 @@ dependencies being modified, and thus bumped as well. For example:
    all extensions will need to be modified to specify the correct version
    number in their `guac-manifest.json`.
 
-### Bumping the version of `incubator-guacamole-server`
+### Bumping the version of `guacamole-server`
 
-The main locations which need modification within `incubator-guacamole-server`
+The main locations which need modification within `guacamole-server`
 are:
 
  * `configure.ac`
@@ -88,11 +88,11 @@ are:
  * `bin/guacctl`
  * The manpages for `guacd`, `guacenc`, and `guacd.conf`.
 
-Example: [the pull request for bumping `incubator-guacamole-server` to 0.9.11-incubating](https://github.com/apache/incubator-guacamole-server/pull/34)
+Example: [the pull request for bumping `guacamole-server` to 0.9.11-incubating](https://github.com/apache/guacamole-server/pull/34)
 
-### Bumping the version of `incubator-guacamole-client`
+### Bumping the version of `guacamole-client`
 
-The main locations which need modification within `incubator-guacamole-client`
+The main locations which need modification within `guacamole-client`
 are:
 
  * The `pom.xml` of any modified project, as well as any project which depends
@@ -102,11 +102,11 @@ are:
  * The `Guacamole.API_VERSION` value declared within `Version.js` (if
    `guacamole-common-js` has been modified).
 
-Example: [the pull request for bumping `incubator-guacamole-client` to 0.9.11-incubating](https://github.com/apache/incubator-guacamole-client/pull/103)
+Example: [the pull request for bumping `guacamole-client` to 0.9.11-incubating](https://github.com/apache/guacamole-client/pull/103)
 
-### Updating `incubator-guacamole-manual` accordingly
+### Updating `guacamole-manual` accordingly
 
-The manual (`incubator-guacamole-manual`) will also need to be updated to point
+The manual (`guacamole-manual`) will also need to be updated to point
 to the latest versions of everything. In most cases, this involves simply
 replacing the old version number with the new version number wherever it
 occurs, but the process needs to be selective if not all components have been
@@ -116,5 +116,5 @@ modified. In particular, watch out for:
  * The need to update the webapp, authentication, and protocol plugin
    tutorials.
 
-Example: [the pull request for bumping `incubator-guacamole-manual` to 0.9.11-incubating](https://github.com/apache/incubator-guacamole-manual/pull/23)
+Example: [the pull request for bumping `guacamole-manual` to 0.9.11-incubating](https://github.com/apache/guacamole-manual/pull/23)
 
