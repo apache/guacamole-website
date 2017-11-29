@@ -147,7 +147,7 @@
         
             
                 <li>
-                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fguacamole-server+repo%3Aapache%2Fguacamole-client+repo%3Aapache%2Fguacamole-website&type=Repositories&ref=searchresults"
                         >GitHub</a>
                 </li>
             
@@ -388,9 +388,9 @@
   <li><a href="#discuss-thread" id="markdown-toc-discuss-thread">Create a discussion thread for the release</a></li>
   <li><a href="#release-branch" id="markdown-toc-release-branch">Create the release branch</a></li>
   <li><a href="#bump-version" id="markdown-toc-bump-version">Bump version numbers</a>    <ul>
-      <li><a href="#bumping-the-version-of-incubator-guacamole-server" id="markdown-toc-bumping-the-version-of-incubator-guacamole-server">Bumping the version of <code class="highlighter-rouge">incubator-guacamole-server</code></a></li>
-      <li><a href="#bumping-the-version-of-incubator-guacamole-client" id="markdown-toc-bumping-the-version-of-incubator-guacamole-client">Bumping the version of <code class="highlighter-rouge">incubator-guacamole-client</code></a></li>
-      <li><a href="#updating-incubator-guacamole-manual-accordingly" id="markdown-toc-updating-incubator-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">incubator-guacamole-manual</code> accordingly</a></li>
+      <li><a href="#bumping-the-version-of-guacamole-server" id="markdown-toc-bumping-the-version-of-guacamole-server">Bumping the version of <code class="highlighter-rouge">guacamole-server</code></a></li>
+      <li><a href="#bumping-the-version-of-guacamole-client" id="markdown-toc-bumping-the-version-of-guacamole-client">Bumping the version of <code class="highlighter-rouge">guacamole-client</code></a></li>
+      <li><a href="#updating-guacamole-manual-accordingly" id="markdown-toc-updating-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">guacamole-manual</code> accordingly</a></li>
     </ul>
   </li>
 </ul>
@@ -431,13 +431,13 @@ where <code class="highlighter-rouge">[VERSION]</code> is the version of the upc
 “0.9.11”:</p>
 
 <ul>
-  <li><a href="https://github.com/apache/incubator-guacamole-client"><code class="highlighter-rouge">incubator-guacamole-client</code></a></li>
-  <li><a href="https://github.com/apache/incubator-guacamole-server"><code class="highlighter-rouge">incubator-guacamole-server</code></a></li>
-  <li><a href="https://github.com/apache/incubator-guacamole-manual"><code class="highlighter-rouge">incubator-guacamole-manual</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-client"><code class="highlighter-rouge">guacamole-client</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-server"><code class="highlighter-rouge">guacamole-server</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-manual"><code class="highlighter-rouge">guacamole-manual</code></a></li>
 </ul>
 
 <p>Note that <em>the
-<a href="https://github.com/apache/incubator-guacamole-website"><code class="highlighter-rouge">incubator-guacamole-website</code></a>
+<a href="https://github.com/apache/guacamole-website"><code class="highlighter-rouge">guacamole-website</code></a>
 repository does not get a release branch</em>. The website points to release
 artifacts, etc. but is not itself part of the release.</p>
 
@@ -466,9 +466,9 @@ all extensions will need to be modified to specify the correct version
 number in their <code class="highlighter-rouge">guac-manifest.json</code>.</li>
 </ul>
 
-<h3 id="bumping-the-version-of-incubator-guacamole-server">Bumping the version of <code class="highlighter-rouge">incubator-guacamole-server</code></h3>
+<h3 id="bumping-the-version-of-guacamole-server">Bumping the version of <code class="highlighter-rouge">guacamole-server</code></h3>
 
-<p>The main locations which need modification within <code class="highlighter-rouge">incubator-guacamole-server</code>
+<p>The main locations which need modification within <code class="highlighter-rouge">guacamole-server</code>
 are:</p>
 
 <ul>
@@ -480,11 +480,11 @@ modified)</li>
   <li>The manpages for <code class="highlighter-rouge">guacd</code>, <code class="highlighter-rouge">guacenc</code>, and <code class="highlighter-rouge">guacd.conf</code>.</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/incubator-guacamole-server/pull/34">the pull request for bumping <code class="highlighter-rouge">incubator-guacamole-server</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-server/pull/34">the pull request for bumping <code class="highlighter-rouge">guacamole-server</code> to 0.9.11-incubating</a></p>
 
-<h3 id="bumping-the-version-of-incubator-guacamole-client">Bumping the version of <code class="highlighter-rouge">incubator-guacamole-client</code></h3>
+<h3 id="bumping-the-version-of-guacamole-client">Bumping the version of <code class="highlighter-rouge">guacamole-client</code></h3>
 
-<p>The main locations which need modification within <code class="highlighter-rouge">incubator-guacamole-client</code>
+<p>The main locations which need modification within <code class="highlighter-rouge">guacamole-client</code>
 are:</p>
 
 <ul>
@@ -496,11 +496,11 @@ example project in <code class="highlighter-rouge">doc/guacamole-example</code>!
 <code class="highlighter-rouge">guacamole-common-js</code> has been modified).</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/incubator-guacamole-client/pull/103">the pull request for bumping <code class="highlighter-rouge">incubator-guacamole-client</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-client/pull/103">the pull request for bumping <code class="highlighter-rouge">guacamole-client</code> to 0.9.11-incubating</a></p>
 
-<h3 id="updating-incubator-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">incubator-guacamole-manual</code> accordingly</h3>
+<h3 id="updating-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">guacamole-manual</code> accordingly</h3>
 
-<p>The manual (<code class="highlighter-rouge">incubator-guacamole-manual</code>) will also need to be updated to point
+<p>The manual (<code class="highlighter-rouge">guacamole-manual</code>) will also need to be updated to point
 to the latest versions of everything. In most cases, this involves simply
 replacing the old version number with the new version number wherever it
 occurs, but the process needs to be selective if not all components have been
@@ -512,7 +512,7 @@ modified. In particular, watch out for:</p>
 tutorials.</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/incubator-guacamole-manual/pull/23">the pull request for bumping <code class="highlighter-rouge">incubator-guacamole-manual</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-manual/pull/23">the pull request for bumping <code class="highlighter-rouge">guacamole-manual</code> to 0.9.11-incubating</a></p>
 
 
 

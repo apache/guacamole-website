@@ -147,7 +147,7 @@
         
             
                 <li>
-                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fguacamole-server+repo%3Aapache%2Fguacamole-client+repo%3Aapache%2Fguacamole-website&type=Repositories&ref=searchresults"
                         >GitHub</a>
                 </li>
             
@@ -411,11 +411,11 @@ $ git push upstream 0.9.11-RC1
 
 <p>Each repository relevant to the release must be tagged. At this point, this
 will be every repository that has a release branch. This <em>never</em> includes
-<code class="highlighter-rouge">incubator-guacamole-website</code>, which is not part of the release.</p>
+<code class="highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
 
-<p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=incubator-guacamole-server.git;a=tag;h=6c2bc47a93899cf00a869e7a2a5416fd5b081ed3">the
+<p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=guacamole-server.git;a=tag;h=6c2bc47a93899cf00a869e7a2a5416fd5b081ed3">the
 “0.9.10-incubating-RC3” tag on
-incubator-guacamole-server</a></p>
+guacamole-server</a></p>
 
 <h2 id="upload-rc">Sign and upload release artifacts</h2>
 
@@ -443,14 +443,14 @@ add it prior to signing artifacts.</strong></p>
 </ul>
 
 <p><code class="highlighter-rouge">guacamole-client-[VERSION].tar.gz</code> is created automatically when
-<code class="highlighter-rouge">incubator-guacamole-client</code> is built with <code class="highlighter-rouge">mvn clean install</code>.
+<code class="highlighter-rouge">guacamole-client</code> is built with <code class="highlighter-rouge">mvn clean install</code>.
 <code class="highlighter-rouge">guacamole-server-[VERSION].tar.gz</code> can be built manually by running <code class="highlighter-rouge">make
-dist</code> within <code class="highlighter-rouge">incubator-guacamole-server</code>. The <code class="highlighter-rouge">Makefile</code>, etc. will need to
+dist</code> within <code class="highlighter-rouge">guacamole-server</code>. The <code class="highlighter-rouge">Makefile</code>, etc. will need to
 have been generated first by running <code class="highlighter-rouge">autoreconf -fi</code> followed by
 <code class="highlighter-rouge">./configure</code>.</p>
 
-<p><code class="highlighter-rouge">incubator-guacamole-server</code> does not provide any convenience binaries, but
-<code class="highlighter-rouge">incubator-guacamole-client</code> does:</p>
+<p><code class="highlighter-rouge">guacamole-server</code> does not provide any convenience binaries, but
+<code class="highlighter-rouge">guacamole-client</code> does:</p>
 
 <ul>
   <li><code class="highlighter-rouge">guacamole-[VERSION].war</code></li>
@@ -461,7 +461,7 @@ have been generated first by running <code class="highlighter-rouge">autoreconf 
   <li><code class="highlighter-rouge">guacamole-auth-noauth-[VERSION].tar.gz</code></li>
 </ul>
 
-<p>Each of the above can be found within the <code class="highlighter-rouge">incubator-guacamole-client</code> source
+<p>Each of the above can be found within the <code class="highlighter-rouge">guacamole-client</code> source
 tree once it has been built with <code class="highlighter-rouge">mvn clean install</code>.</p>
 
 <p>Producing the required MD5 and SHA256 checksums for a given artifact is very
@@ -481,7 +481,7 @@ Apache’s own <a href="https://www.apache.org/dev/release-signing.html#openpgp-
 
 <h3 id="staging-maven">Maven artifacts</h3>
 
-<p>The following Maven subprojects of <code class="highlighter-rouge">incubator-guacamole-client</code> must be
+<p>The following Maven subprojects of <code class="highlighter-rouge">guacamole-client</code> must be
 uploaded to Apache’s Nexus:</p>
 
 <ul>
@@ -569,7 +569,7 @@ the Docker image must be built with that tag.</li>
 </ol>
 
 <p>For example, to build the <code class="highlighter-rouge">guacamole/guacamole</code> Docker image for the current
-release candidate, from within the top-level <code class="highlighter-rouge">incubator-guacamole-client</code>
+release candidate, from within the top-level <code class="highlighter-rouge">guacamole-client</code>
 directory:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
@@ -582,9 +582,9 @@ $ sudo docker push guacamole/guacamole:0.9.11-RC1
 <p>The draft release notes and updated documentation both need to be uploaded to
 the website prior to <a href="#pmc-vote">calling the PMC vote</a>. These changes should
 be handled like any other website changes - via pull requests against the
-<code class="highlighter-rouge">incubator-guacamole-website</code> repository. <strong>DO NOT UPDATE THE TOP-LEVEL
+<code class="highlighter-rouge">guacamole-website</code> repository. <strong>DO NOT UPDATE THE TOP-LEVEL
 DOCUMENTATION SYMBOLIC LINKS!</strong> The top-level symbolic links in the <code class="highlighter-rouge">doc/</code>
-directory of <code class="highlighter-rouge">incubator-guacamole-website</code> point to the documentation for the
+directory of <code class="highlighter-rouge">guacamole-website</code> point to the documentation for the
 latest release, and are thus only updated once the release is complete.</p>
 
 <p>Take a look at past release notes to get an idea for the expected format. There
@@ -603,9 +603,9 @@ of auto-generated HTML otherwise.</p>
 <p>Examples:</p>
 
 <ul>
-  <li><a href="https://github.com/apache/incubator-guacamole-website/blob/67adf0802701d696f9dc1a90229da694f4cebbaa/_releases/0.9.10-incubating.md">The draft
+  <li><a href="https://github.com/apache/guacamole-website/blob/67adf0802701d696f9dc1a90229da694f4cebbaa/_releases/0.9.10-incubating.md">The draft
 release notes for 0.9.10-incubating-RC3</a></li>
-  <li><a href="https://github.com/apache/incubator-guacamole-website/tree/master/doc/0.9.10-incubating">The updated documentation for 0.9.10-incubating</a></li>
+  <li><a href="https://github.com/apache/guacamole-website/tree/master/doc/0.9.10-incubating">The updated documentation for 0.9.10-incubating</a></li>
 </ul>
 
 <h2 id="ppmc-vote">Create the PMC <code class="highlighter-rouge">[VOTE]</code> thread</h2>
@@ -625,9 +625,9 @@ http://guacamole.apache.org/releases/[VERSION]/
 
 The git tag for all relevant repositories is "[VERSION]-RC[N]":
 
-https://github.com/apache/incubator-guacamole-client/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-server/tree/[VERSION]-RC[N]
-https://github.com/apache/incubator-guacamole-manual/tree/[VERSION]-RC[N]
+https://github.com/apache/guacamole-client/tree/[VERSION]-RC[N]
+https://github.com/apache/guacamole-server/tree/[VERSION]-RC[N]
+https://github.com/apache/guacamole-manual/tree/[VERSION]-RC[N]
 
 Build instructions are included in the manual, which is part of the updated
 documentation referenced above. For convenience:

@@ -147,7 +147,7 @@
         
             
                 <li>
-                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fincubator-guacamole-server+repo%3Aapache%2Fincubator-guacamole-client+repo%3Aapache%2Fincubator-guacamole-website&type=Repositories&ref=searchresults"
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fguacamole-server+repo%3Aapache%2Fguacamole-client+repo%3Aapache%2Fguacamole-website&type=Repositories&ref=searchresults"
                         >GitHub</a>
                 </li>
             
@@ -425,10 +425,10 @@ $ git push upstream 0.9.11
 <p>Just as with release candidates, each repository relevant to the release must
 be tagged. This will be every repository that had a release branch (the release
 branch having been <a href="#delete-branch">deleted earlier</a>) and <em>never</em> includes
-<code class="highlighter-rouge">incubator-guacamole-website</code>, which is not part of the release.</p>
+<code class="highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
 
-<p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=incubator-guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130">the “0.9.10-incubating” tag on
-incubator-guacamole-server</a></p>
+<p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130">the “0.9.10-incubating” tag on
+guacamole-server</a></p>
 
 <h2 id="final-upload">Upload final release artifacts</h2>
 
@@ -475,8 +475,7 @@ the images deployed for past release candidates were first cleaned with
 in the absence of an RC.</p>
 
 <p>For example, to build the <code class="highlighter-rouge">guacamole/guacamole</code> Docker image for the current
-release candidate, from within the top-level <code class="highlighter-rouge">incubator-guacamole-client</code>
-directory:</p>
+release candidate, from within the top-level <code class="highlighter-rouge">guacamole-client</code> directory:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
 $ sudo docker build -t guacamole/guacamole:0.9.11 .
