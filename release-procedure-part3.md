@@ -37,10 +37,10 @@ format `[VERSION]`, where `[VERSION]` is the version of the release:
 Just as with release candidates, each repository relevant to the release must
 be tagged. This will be every repository that had a release branch (the release
 branch having been [deleted earlier](#delete-branch)) and *never* includes
-`incubator-guacamole-website`, which is not part of the release.
+`guacamole-website`, which is not part of the release.
 
 Example: [the "0.9.10-incubating" tag on
-incubator-guacamole-server](https://git1-us-west.apache.org/repos/asf?p=incubator-guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130)
+guacamole-server](https://git1-us-west.apache.org/repos/asf?p=guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130)
 
 
 Upload final release artifacts {#final-upload}
@@ -88,8 +88,7 @@ the images deployed for past release candidates were first cleaned with
 in the absence of an RC.
 
 For example, to build the `guacamole/guacamole` Docker image for the current
-release candidate, from within the top-level `incubator-guacamole-client`
-directory:
+release candidate, from within the top-level `guacamole-client` directory:
 
     $ git clean -xfd .
     $ sudo docker build -t guacamole/guacamole:0.9.11 .

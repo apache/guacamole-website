@@ -22,12 +22,12 @@ You will need three remotes for each Apache Guacamole git repository:
 
 For the sake of simplicity, these will be referred to here as `upstream`,
 `mirror`, and `origin`, respectively. For example, the recommended
-configuration for `incubator-guacamole-server` would be:
+configuration for `guacamole-server` would be:
 
     $ git remote -v
-    mirror git@github.com:apache/incubator-guacamole-server.git
-    origin git@github.com:mike-jumper/incubator-guacamole-server.git
-    upstream https://git-wip-us.apache.org/repos/asf/incubator-guacamole-server.git
+    mirror git@github.com:apache/guacamole-server.git
+    origin git@github.com:mike-jumper/guacamole-server.git
+    upstream https://git-wip-us.apache.org/repos/asf/guacamole-server.git
     $
 
 After reviewing and approving code submitted via a pull request, you will need

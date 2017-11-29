@@ -92,7 +92,7 @@ a committer not otherwise directly involved in those changes.
 
 * [Committers' FAQ](http://www.apache.org/dev/committers.html)
 * [Guide for new committers](http://www.apache.org/dev/new-committers-guide.html)
-* [Maintaining the website](https://github.com/apache/incubator-guacamole-website/blob/master/README.md)
+* [Maintaining the website](https://github.com/apache/guacamole-website/blob/master/README.md)
 * [Managing pull requests](/pull-requests/)
 * [Style guidelines](/guac-style/)
 

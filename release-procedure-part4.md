@@ -27,7 +27,7 @@ updated:
    to use the release directory (rather than the RC directory) and to *not*
    use `dist.apache.org`.
 
-Example: [the pull request for incubator-guacamole-website announcing 0.9.11-incubating](https://github.com/apache/incubator-guacamole-website/pull/31)
+Example: [the pull request for guacamole-website announcing 0.9.11-incubating](https://github.com/apache/guacamole-website/pull/31)
 
 Update JIRA version information {#update-jira}
 ----------------------------------------------
