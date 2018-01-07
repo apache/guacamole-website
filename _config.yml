@@ -50,6 +50,10 @@ collections:
     companies:
         output: false
 
+    # Public security vulnerabilities
+    security:
+        output: false
+
 # Site-wide defaults
 defaults:
 
