@@ -24,8 +24,14 @@ discussing the issue in a public forum.
 {% assign releases = site.security | group_by: 'fixed' %}
 {% for release in releases reversed %}
 
+{% assign asfrelease = site.releases | where: 'title', release.name %}
+{% if asfrelease != empty %}
 Fixed in Apache Guacamole {{ release.name }}
 --------------------------------------------
+{% else %}
+Fixed in Guacamole {{ release.name }} (pre-Apache release)
+----------------------------------------------------------
+{% endif %}
 
 <ul>
     {% assign reports = release.items | sort: 'title' %}
