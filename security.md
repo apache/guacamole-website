@@ -22,7 +22,7 @@ the <private@guacamole.apache.org> mailing list, before disclosing or
 discussing the issue in a public forum.
 
 {% assign releases = site.security | group_by: 'fixed' %}
-{% for release in releases %}
+{% for release in releases reversed %}
 
 Fixed in Apache Guacamole {{ release.name }}
 --------------------------------------------
