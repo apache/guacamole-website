@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css?s=67343056ff3492c195425dc3ffb5a1f5">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole™: Frequently Asked Questions</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole™</a></h1>
+    <ul id="navigation" class="menu">
+        
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/releases/"
+                        
+                            class="download"
+                            >Downloads</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Docs</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+        
+            
+                <li>
+                    <a href="/faq/"
+                        >FAQ</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/api-documentation/"
+                        >API / Development</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/doc/gug/"
+                        >Guacamole Manual</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Community</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fguacamole-server+repo%3Aapache%2Fguacamole-client+repo%3Aapache%2Fguacamole-website&type=Repositories&ref=searchresults"
+                        >GitHub</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/open-source/"
+                        >Contributing</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/support/"
+                        >Help / Support</a>
+                </li>
+            
+        
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                        >JIRA</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/security/"
+                        >Security Reports</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle apache"
+                       href="#">Apache Software Foundation</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/"
+                        >ASF Homepage</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/licenses/"
+                        >License</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/thanks.html"
+                        >Thanks</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/sponsorship.html"
+                        >Sponsorship</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/policies/conduct.html"
+                        >Code of Conduct</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                <h1>Frequently Asked Questions</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#problems" id="markdown-toc-problems">Bugs / troubleshooting</a>    <ul>
+      <li><a href="#probably-not-a-bug" id="markdown-toc-probably-not-a-bug">Something fundamental to Guacamole isn’t working for me. Where do I report this?</a></li>
+      <li><a href="#test-against-latest-version" id="markdown-toc-test-against-latest-version">I have an old or modified version of Guacamole and [X] is not working. Where should I report this?</a></li>
+      <li><a href="#bug" id="markdown-toc-bug">I have set up the latest version successfully, however if i try [X], instead of [Y] happening as documented, [Z] happens. Where should I report this?</a></li>
+      <li><a href="#security" id="markdown-toc-security">I have found an issue which may have security implications. Where should I report this?</a></li>
+      <li><a href="#cannot-connect" id="markdown-toc-cannot-connect">I’m trying to connect to my remote desktop by it isn’t working. Why?</a></li>
+      <li><a href="#remote-application-broken" id="markdown-toc-remote-application-broken">I am using an application within the remote desktop under Guacamole, but the application isn’t working correctly. Can you fix Guacamole so it doesn’t break my application?</a></li>
+      <li><a href="#resize-rdp" id="markdown-toc-resize-rdp">When I connect via RDP, the screen size is set correctly, but it does not update if I resize the browser window. Why?</a></li>
+      <li><a href="#resize-vnc" id="markdown-toc-resize-vnc">When I connect via VNC, the screen size is not set correctly. It remains the same regardless of the browser window’s size. Why?</a></li>
+    </ul>
+  </li>
+  <li><a href="#clipboard" id="markdown-toc-clipboard">Clipboard</a>    <ul>
+      <li><a href="#local-clipboard" id="markdown-toc-local-clipboard">Why don’t you just use the clipboard directly instead of the box in the menu?</a></li>
+      <li><a href="#copy-paste-events" id="markdown-toc-copy-paste-events">I see the browser has “copy” and “paste” events. Why don’t you handle these events so clipboard works?</a></li>
+    </ul>
+  </li>
+  <li><a href="#user-input" id="markdown-toc-user-input">Keyboard / input</a>    <ul>
+      <li><a href="#keyboard-shortcuts" id="markdown-toc-keyboard-shortcuts">I press [keyboard shortcut] but it’s handled by my browser or operating system instead of the remote desktop. Can you fix this?</a></li>
+      <li><a href="#does-guacamole-support-my-keyboard-layout" id="markdown-toc-does-guacamole-support-my-keyboard-layout">Does Guacamole support my keyboard layout?</a></li>
+    </ul>
+  </li>
+  <li><a href="#device-redirection" id="markdown-toc-device-redirection">File transfer and device redirection</a>    <ul>
+      <li><a href="#local-files" id="markdown-toc-local-files">I need to share files on my computer with the remote desktop. I see Guacamole has drive redirection support, but only for files accessible to the Guacamole server. How can I share local files?</a></li>
+      <li><a href="#local-printers" id="markdown-toc-local-printers">I want to print to my local printer. I see Guacamole has printing support, but this produces a PDF download. How do I print directly to my local printers?</a></li>
+    </ul>
+  </li>
+  <li><a href="#protocols" id="markdown-toc-protocols">Supported protocols</a>    <ul>
+      <li><a href="#x11-forwarding" id="markdown-toc-x11-forwarding">Can you add support for X11 forwarding to SSH?</a></li>
+      <li><a href="#support-nx" id="markdown-toc-support-nx">NX is faster than VNC. Can you add support for NX?</a></li>
+      <li><a href="#support-x2go" id="markdown-toc-support-x2go">X2Go is faster than VNC. Can you add support for X2Go?</a></li>
+    </ul>
+  </li>
+  <li><a href="#development" id="markdown-toc-development">Development / integration</a>    <ul>
+      <li><a href="#iframes" id="markdown-toc-iframes">I want to put Guacamole in an <code class="highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</a></li>
+      <li><a href="#integrate-auth" id="markdown-toc-integrate-auth">I want to integrate Guacamole into my application, so I’ve written a script which updates the database / XML / …</a></li>
+      <li><a href="#disable-auth" id="markdown-toc-disable-auth">My application already does authentication. How do I disable authentication within Guacamole?</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="problems">Bugs / troubleshooting</h2>
+
+<h3 id="probably-not-a-bug">Something fundamental to Guacamole isn’t working for me. Where do I report this?</h3>
+
+<p>Please remember that Guacamole is used by many others without issue, and <em>the
+more fundamental a problem is, the less likely it’s a bug</em>. Before assuming
+that you have found a bug, perform basic troubleshooting steps to confirm that
+Guacamole itself is the <em>only</em> factor affecting whether things work correctly:</p>
+
+<ul>
+  <li>Check Guacamole’s logs for errors or warnings related to your configuration.
+These logs are within the logs of your servlet container, such as Apache
+Tomcat. Common locations are <code class="highlighter-rouge">/var/log/tomcat/catalina.out</code> or within the
+systemd journal (accessed via <code class="highlighter-rouge">journalctl</code>).</li>
+  <li>Check guacd’s logs for errors or warnings and and verify that guacd is
+actually running. Messages from guacd are logged to syslog, commonly located
+at <code class="highlighter-rouge">/var/log/syslog</code>, <code class="highlighter-rouge">/var/log/messages</code>, or within the systemd journal
+(accessed via <code class="highlighter-rouge">journalctl</code>).</li>
+  <li>Verify that your remote desktop server is actually accessible from the
+Guacamole server using a different remote desktop client.</li>
+  <li>Verify that the configuration parameters given for the remote desktop
+connection (including any credentials) are correct.</li>
+  <li>Walk through <a href="/doc/gug/installing-guacamole.html">the installation steps in our official
+documentation</a> and verify that what you
+have done matches what has been documented.</li>
+</ul>
+
+<h3 id="test-against-latest-version">I have an old or modified version of Guacamole and [X] is not working. Where should I report this?</h3>
+
+<p>We cannot look into issues which have not actually been reproduced in the
+latest version of our code. If the problem you’re experiencing has only
+been reproduced in an older or modified version of Guacamole, the chance is
+high that the problem has either already been addressed (even if you cannot
+find a bug report which specifically covers the issue) or that the problem is
+due to the difference between your code and upstream (even if you are
+absolutely positive this is impossible).</p>
+
+<p>Before reporting an issue upstream, please confirm that the issue exists within
+the latest version of the upstream code.</p>
+
+<h3 id="bug">I have set up the latest version successfully, however if i try [X], instead of [Y] happening as documented, [Z] happens. Where should I report this?</h3>
+
+<p>We use JIRA to track all known issues and feature requests. If you have found a
+bug, please open a new issue in the ASF’s JIRA against the “GUACAMOLE” project:</p>
+
+<p><a href="https://issues.apache.org/jira/browse/GUACAMOLE/">https://issues.apache.org/jira/browse/GUACAMOLE/</a></p>
+
+<h3 id="security">I have found an issue which may have security implications. Where should I report this?</h3>
+
+<p>If you have found an issue which may have security implications, <strong>please
+follow <a href="https://en.wikipedia.org/wiki/Responsible_disclosure">responsible
+disclosure</a> practices</strong>:</p>
+
+<ul>
+  <li>Report the issue to us privately, either to the private security mailing list
+of the <a href="https://www.apache.org/security/">ASF Security Team</a> or the
+<a href="mailto:private@guacamole.apache.org">private@guacamole.apache.org</a> mailing list.</li>
+  <li>Do not disclose or discuss the issue in a public forum until the Apache
+Guacamole project has addressed the issue and made an <a href="/security/">announcement of the
+vulnerability</a>, or until it has been determined not to be a
+vulnerability at all.</li>
+</ul>
+
+<p>Both the mailing lists and JIRA are public forums and should not be used for
+issues with potential security implications. If in doubt, please err on the
+side of caution and report the issue privately.</p>
+
+<h3 id="cannot-connect">I’m trying to connect to my remote desktop by it isn’t working. Why?</h3>
+
+<p>If you can access Guacamole but cannot connect to your remote desktop, the
+relevant log messages will be from guacd - the component of the Guacamole stack
+which actually handles the low-level connections to remote desktops. Check
+guacd’s logs for errors or warnings and verify that guacd is actually running.</p>
+
+<p>Messages from guacd are logged to syslog, which is commonly located at
+<code class="highlighter-rouge">/var/log/syslog</code>, <code class="highlighter-rouge">/var/log/messages</code>, or within the systemd journal (accessed
+via <code class="highlighter-rouge">journalctl</code>). You should also verify that your remote desktop server is
+actually accessible from the Guacamole server (using a different remote desktop
+client), and that the configuration parameters given for the remote desktop
+connection are correct (even if you are positive that you typed them
+correctly).</p>
+
+<h3 id="remote-application-broken">I am using an application within the remote desktop under Guacamole, but the application isn’t working correctly. Can you fix Guacamole so it doesn’t break my application?</h3>
+
+<p>No, Guacamole cannot affect your application in this way. The fact that you are
+using Guacamole to access the remote desktop has no bearing on whether
+applications running under that remote desktop function correctly. If an
+application within the remote desktop is malfunctioning, the problem lies
+within that application.</p>
+
+<h3 id="resize-rdp">When I connect via RDP, the screen size is set correctly, but it does not update if I resize the browser window. Why?</h3>
+
+<p>RDP inherently only supports changing screen size when initially connecting. In
+most cases, the screen size of the remote desktop cannot be altered except
+when the connection is established, and changing the screen size requires
+reconnecting.</p>
+
+<h3 id="resize-vnc">When I connect via VNC, the screen size is not set correctly. It remains the same regardless of the browser window’s size. Why?</h3>
+
+<p>VNC only supports changing the screen size from within the remote desktop, as
+the screen size is dictated by the VNC server. The client side of a VNC
+connection cannot dictate the size of the session.</p>
+
+<p>If your VNC server supports changing the screen size of an an active session,
+you should be able to do so using standard configuration tools within the
+remote desktop, such as the display settings of your desktop environment or
+the “xrandr” utility.</p>
+
+<h2 id="clipboard">Clipboard</h2>
+
+<h3 id="local-clipboard">Why don’t you just use the clipboard directly instead of the box in the menu?</h3>
+
+<p>Guacamole actually already attempts to do this leveraging the <a href="https://www.w3.org/TR/clipboard-apis/">Clipboard
+API</a> defined by the W3C. Browsers only
+provide access to the clipboard under very strict circumstances, so these
+attempts will fail unless the browser itself provides some means of explicitly
+granting clipboard access.</p>
+
+<p>IE10 and IE11 will both prompt the user to grant clipboard access, and there is
+a <a href="https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh">third-party extension for
+Chrome</a>
+which provides similar functionality. Until a generic mechanism for granting
+clipboard access exists across all browsers, these are really the only options.</p>
+
+<h3 id="copy-paste-events">I see the browser has “copy” and “paste” events. Why don’t you handle these events so clipboard works?</h3>
+
+<p>As much as this might seem like a good idea at first, it is extremely
+problematic. In practice, doing so does not work, and actually causes even
+more confusion:</p>
+
+<ul>
+  <li>
+    <p>The “copy” and “paste” events can only be relied upon in response to the
+keyboard shortcuts which cause copy/paste actions on the local machine. Even
+assuming these keyboard shortcuts can be reliably recognized (regardless of
+platform-specific differences in what keys are used to copy/paste), allowed
+to turn into clipboard events, and finally sent through to the remote
+desktop, this is still tied to the keyboard. <strong>Attempts to copy/paste using
+the mouse will fail.</strong></p>
+  </li>
+  <li>
+    <p><strong>Different platforms use different keyboard shortcuts for copy/paste</strong>, as
+do different applications within those platforms. The keyboard shortcut
+required to use the clipboard within the remote desktop cannot be guaranteed
+to match the shortcut which would result in clipboard events locally, nor
+can the necessary shortcut be reliably predicted and translated.</p>
+  </li>
+  <li>
+    <p><strong>The copy operation does not occur instantaneously</strong>, but the browser
+“copy” event requires that clipboard data be set only while the event is
+being handled (within the main thread). Even assuming that the other
+problems above are not an issue, there is no stable, non-deprecated means of
+blocking the main thread such that the clipboard can still be set once the
+data does become available.</p>
+  </li>
+</ul>
+
+<p>While the “copy” and “paste” events can be useful for traditional web
+applications, the above issues make them useless for a web application
+implementing remote desktop like Guacamole. Instead, we use the <a href="https://www.w3.org/TR/clipboard-apis/">Clipboard
+API</a> defined by the W3C, and rely on
+the browser to provide its own method of granting access to the clipboard.</p>
+
+<h2 id="user-input">Keyboard / input</h2>
+
+<h3 id="keyboard-shortcuts">I press [keyboard shortcut] but it’s handled by my browser or operating system instead of the remote desktop. Can you fix this?</h3>
+
+<p>Guacamole actually already attempts to handle all keyboard events. However, if
+your browser or operating system reserve some keyboard shortcuts for their own
+use. Keyboard events propagate from the operating system level, to the browser
+level, and finally into JavaScript where Guacamole resides. Guacamole can only
+take control of a keyboard event if each level above Guacamole allows it to do
+so.</p>
+
+<p>Most browsers now provide a means of bookmarking a web application as a
+shortcut on the desktop or home screen such that it behaves more like a native
+application, lacks the normal URL bar, etc. In these cases, the browser will
+often allow the application to take control of additional keyboard shortcuts
+which would normally be reserved for the browser. If you are running into this
+problem, or simply want to use Guacamole as if it were a native application,
+this is definitely worth a try.</p>
+
+<h3 id="does-guacamole-support-my-keyboard-layout">Does Guacamole support my keyboard layout?</h3>
+
+<p>Guacamole is actually independent of keyboard layout, and will send the true
+local identity of the key pressed. The behavior of each key within the remote
+desktop should identically match the local behavior of that key.</p>
+
+<p>This holds true for most of Guacamole’s supported protocols, but things get
+more complex for RDP. Unlike Guacamole, RDP uses scancodes to represent each
+key, which are a numeric representation of that key’s location, not its
+identity. To translate the identity of the key into the scancode required by
+your RDP server, Guacamole must know the keyboard layout of your RDP server,
+and must have explicit support for that keyboard layout.</p>
+
+<p><strong>This does not mean that your RDP server must have the same keyboard layout as
+the client machine.</strong> It only means that Guacamole must have a keyboard layout
+definition for the layout used by the RDP server. If a user attempts to use a
+keyboard with a different layout, Guacamole will translate pressed keys as
+necessary to match the layout of the RDP server. If the user attempts to press
+keys which are not present in the keyboard layout of the RDP server, Guacamole
+will send those keys in the form of Unicode events.</p>
+
+<p>If you are using an RDP server which does not support Unicode events (such as
+XRDP), locally-pressed keys must have matching keys within the RDP server’s
+keyboard layout, or they cannot be typed.</p>
+
+<h2 id="device-redirection">File transfer and device redirection</h2>
+
+<h3 id="local-files">I need to share files on my computer with the remote desktop. I see Guacamole has drive redirection support, but only for files accessible to the Guacamole server. How can I share local files?</h3>
+
+<p>Unfortunately, this is not possible. JavaScript cannot access local files
+directly. You <em>can</em> still share local files, but they must be manually uploaded
+using Guacamole’s file transfer support.</p>
+
+<h3 id="local-printers">I want to print to my local printer. I see Guacamole has printing support, but this produces a PDF download. How do I print directly to my local printers?</h3>
+
+<p>This is not possible, as JavaScript cannot access local printers. While it is
+technically possible to cause the PDF to automatically open a print dialog, and
+on some browsers it is also possible to automatically open the PDF, this does
+not currently work reliably across all platforms, and whether it will work
+cannot be detected/predicted. The only reliable mechanism is the one already
+implemented by Guacamole: file transfer of a standard format like PDF.</p>
+
+<h2 id="protocols">Supported protocols</h2>
+
+<h3 id="x11-forwarding">Can you add support for X11 forwarding to SSH?</h3>
+
+<p>No. Because of the complexity involved in implementing an X11 server, this
+wouldn’t actually work well in practice, however <a href="https://issues.apache.org/jira/browse/GUACAMOLE-168">a graphics driver
+for the X.Org X11 server is currently being
+written</a>. This driver
+functions as a display and set of input devices which implement the Guacamole
+protocol, and should be quite fast.</p>
+
+<h3 id="support-nx">NX is faster than VNC. Can you add support for NX?</h3>
+
+<p>No. Adding support for NX to Guacamole is not actually as straightforward as it
+sounds. Unlike remote desktop protocols like VNC and RDP, the protocol referred
+to as “NX” or “NXv3” is actually a method of compressing yet another protocol:
+X11. As discussed above, implementing support for X11 does not actually make
+sense for Guacamole, but there is an X.Org driver which achieves the same goal.</p>
+
+<p>“NXv4”, on the other hand, is proprietary and not publicly documented. No open
+source implementations of this protocol exist. Unless it becomes publicly
+documented, or an open source implementation is created, it is not feasible for
+support for NXv4 to be added to Guacamole.</p>
+
+<h3 id="support-x2go">X2Go is faster than VNC. Can you add support for X2Go?</h3>
+
+<p>No. X2Go is actually an implementation of NX, which is actually a compression
+method for X11, which is too complex. This is not necessary, though - as far as
+performance is concerned, there is an X.Org driver for Guacamole currently
+under development which achieves the same goal (see above).</p>
+
+<h2 id="development">Development / integration</h2>
+
+<h3 id="iframes">I want to put Guacamole in an <code class="highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</h3>
+
+<p>It is generally not recommended to rely on <code class="highlighter-rouge">&lt;iframe&gt;</code> to integrate Guacamole
+for precisely this reason. Browser keyboard focus is problematic if an
+<code class="highlighter-rouge">&lt;iframe&gt;</code> is used, as once focus has been lost, clicking within the <code class="highlighter-rouge">&lt;iframe&gt;</code>
+will not necessarily return keyboard focus to Guacamole.</p>
+
+<p>Rather than use an <code class="highlighter-rouge">&lt;iframe&gt;</code>, you should instead look into leveraging
+Guacamole’s JavaScript API,
+<a href="/doc/gug/guacamole-common-js.html">guacamole-common-js</a>, thus integrating
+Guacamole into your page directly. You might even consider building your own
+web application from Guacamole’s core Java API,
+<a href="/doc/gug/guacamole-common.html">guacamole-common</a>, if that would provide a
+better experience.</p>
+
+<p>If an <code class="highlighter-rouge">&lt;iframe&gt;</code> is really the only feasible solution, you can work around
+keyboard focus issues by automatically refocusing the <code class="highlighter-rouge">&lt;iframe&gt;</code> whenever focus
+is not explicitly on some other part of the page.  For example, assuming the
+variable <code class="highlighter-rouge">iframe</code> points to the DOM element of the <code class="highlighter-rouge">&lt;iframe&gt;</code> containing
+Guacamole, you could refocus Guacamole by default with something like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * Refocuses the iframe containing Guacamole if the user is not already
+ * focusing another non-body element on the page.
+ */
+var refocusGuacamole = function refocusGuacamole() {
+
+    // Do not refocus if focus is on an input field
+    var focused = document.activeElement;
+    if (focused &amp;&amp; focused !== document.body)
+        return;
+
+    // Ensure iframe is focused
+    iframe.focus();
+
+};
+
+// Attempt to refocus iframe upon click or keydown
+document.addEventListener('click', refocusGuacamole);
+document.addEventListener('keydown', refocusGuacamole);
+</code></pre></div></div>
+
+<h3 id="integrate-auth">I want to integrate Guacamole into my application, so I’ve written a script which updates the database / XML / …</h3>
+
+<p>There is no need to do this. While dynamically updating the XML or database
+contents may seem invitingly simple, it is rarely the best approach. Guacamole
+provides an API for integrating itself with other authentication systems and
+sources of data: <a href="/doc/gug/guacamole-ext.html">guacamole-ext</a>. Rather than
+attempt to keep an independent, Guacamole-specific source of data updated with
+respect to your application, it is better to pull or derive that data directly
+within an extension built specifically to integrate Guacamole with your
+application.</p>
+
+<p>The manual provides a basic example for <a href="/doc/gug/custom-auth.html">implementing your own Guacamole
+extension</a>, and the various extensions included
+as part of <a href="https://github.com/apache/guacamole-client">guacamole-client</a>
+are well-commented and can serve as more in-depth demonstrations of what is
+possible with this API.</p>
+
+<p>If the ultimate goal is to tightly integrate Guacamole within your application,
+and Guacamole’s authentication model and interface don’t quite match what you
+intend, you should also consider <a href="/doc/gug/writing-you-own-guacamole-app.html">building your own web
+application</a>. Guacamole’s is built
+on a set of APIs which are maintained independently from the web application of
+the same name specifically so that other applications, like yours, can be built
+from the same underlying technology.</p>
+
+<h3 id="disable-auth">My application already does authentication. How do I disable authentication within Guacamole?</h3>
+
+<p><strong>DO NOT DISABLE GUACAMOLE’S AUTHENTICATION!</strong> There are no use cases where
+this is a good idea. Even if you are absolutely positive that users cannot
+access Guacamole without first being authenticated elsewhere, validating each
+user’s authenticated state is the <em>only</em> safe choice. You don’t need to force
+users to log in multiple times, but you <em>do</em> need to verify that they are
+actually logged in.</p>
+
+<p>If you have an application which already handles authentication, the correct
+and safe way to integrate Guacamole with that application is to write a
+Guacamole extension which validates each user. If the connections available to
+each user will vary depending on that existing system, your extension can
+dynamically derive those connections by querying your existing system, as well.</p>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2017 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the
+        Apache Guacamole project logo are trademarks of The Apache Software
+        Foundation.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+        <!-- jQuery -->
+        <script src="/scripts/jquery.min.js" type="text/javascript"></script>
+
+        <!-- Dropdown toggle -->
+        <script src="/scripts/dropdown.js" type="text/javascript"></script>
+
+    </body>
+</html>
