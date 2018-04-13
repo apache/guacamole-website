@@ -61,7 +61,7 @@ disclosure](https://en.wikipedia.org/wiki/Responsible_disclosure) practices**:
 
 * Report the issue to us privately, either to the private security mailing list
   of the [ASF Security Team](https://www.apache.org/security/) or the
-  <private@guacamole.apache.org> mailing list.
+  <security@guacamole.apache.org> mailing list.
 * Do not disclose or discuss the issue in a public forum until the Apache
   Guacamole project has addressed the issue and made an [announcement of the
   vulnerability](/security/), or until it has been determined not to be a
