@@ -18,7 +18,7 @@ please follow [responsible
 disclosure](https://en.wikipedia.org/wiki/Responsible_disclosure) practices and
 report discovered security issues privately, either to the private security
 mailing list of the [ASF Security Team](https://www.apache.org/security/) or
-the <private@guacamole.apache.org> mailing list, before disclosing or
+the <security@guacamole.apache.org> mailing list, before disclosing or
 discussing the issue in a public forum.
 
 {% assign releases = site.security | group_by: 'fixed' %}
