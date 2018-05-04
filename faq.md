@@ -118,16 +118,20 @@ Clipboard {#clipboard}
 ### Why don't you just use the clipboard directly instead of the box in the menu? {#local-clipboard}
 
 Guacamole actually already attempts to do this leveraging the [Clipboard
-API](https://www.w3.org/TR/clipboard-apis/) defined by the W3C. Browsers only
-provide access to the clipboard under very strict circumstances, so these
-attempts will fail unless the browser itself provides some means of explicitly
-granting clipboard access.
+API](https://www.w3.org/TR/clipboard-apis/) defined by the W3C, with support
+for the asynchronous version of this API added via
+[GUACAMOLE-559](https://issues.apache.org/jira/browse/GUACAMOLE-559). Browsers
+vary in their level of support for this API, and some only provide access to
+the clipboard under very strict circumstances.
 
-IE10 and IE11 will both prompt the user to grant clipboard access, and there is
-a [third-party extension for
-Chrome](https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh)
-which provides similar functionality. Until a generic mechanism for granting
-clipboard access exists across all browsers, these are really the only options.
+The following browsers are known to support clipboard access:
+
+ * Google Chrome version 66 and later (via the [Asynchronous Clipboard API](https://www.w3.org/TR/clipboard-apis/#async-clipboard-api))
+ * Older versions of Google Chrome using the third-party [Clipboard Permission Manager extension](https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh)
+ * IE10 and IE11 (via the older, synchronous version of the API)
+
+This can be expected to change as the asynchronous version of the clipboard API
+gains wider adoption.
 
 ### I see the browser has "copy" and "paste" events. Why don't you handle these events so clipboard works? {#copy-paste-events}
 
