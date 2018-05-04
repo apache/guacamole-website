@@ -559,16 +559,22 @@ the “xrandr” utility.</p>
 <h3 id="local-clipboard">Why don’t you just use the clipboard directly instead of the box in the menu?</h3>
 
 <p>Guacamole actually already attempts to do this leveraging the <a href="https://www.w3.org/TR/clipboard-apis/">Clipboard
-API</a> defined by the W3C. Browsers only
-provide access to the clipboard under very strict circumstances, so these
-attempts will fail unless the browser itself provides some means of explicitly
-granting clipboard access.</p>
+API</a> defined by the W3C, with support
+for the asynchronous version of this API added via
+<a href="https://issues.apache.org/jira/browse/GUACAMOLE-559">GUACAMOLE-559</a>. Browsers
+vary in their level of support for this API, and some only provide access to
+the clipboard under very strict circumstances.</p>
 
-<p>IE10 and IE11 will both prompt the user to grant clipboard access, and there is
-a <a href="https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh">third-party extension for
-Chrome</a>
-which provides similar functionality. Until a generic mechanism for granting
-clipboard access exists across all browsers, these are really the only options.</p>
+<p>The following browsers are known to support clipboard access:</p>
+
+<ul>
+  <li>Google Chrome version 66 and later (via the <a href="https://www.w3.org/TR/clipboard-apis/#async-clipboard-api">Asynchronous Clipboard API</a>)</li>
+  <li>Older versions of Google Chrome using the third-party <a href="https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh">Clipboard Permission Manager extension</a></li>
+  <li>IE10 and IE11 (via the older, synchronous version of the API)</li>
+</ul>
+
+<p>This can be expected to change as the asynchronous version of the clipboard API
+gains wider adoption.</p>
 
 <h3 id="copy-paste-events">I see the browser has “copy” and “paste” events. Why don’t you handle these events so clipboard works?</h3>
 
