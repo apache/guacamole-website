@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
 
     <head>
@@ -12,41 +31,53 @@
 
         <div id="log"></div>
 
+        <!-- Base dependencies -->
         <script type="text/javascript" src="../log/log.js"></script>
-        <script type="text/javascript" src="modules/Mouse.js"></script>
-        <script type="text/javascript" src="modules/Version.js"></script>
+        <script type="text/javascript" src="gitguac.js"></script>
 
+        <!-- Load required guacamole-common-js modules from git -->
         <script type="text/javascript">
+            GIT_GUAC.loadModule('Mouse.js');
+            GIT_GUAC.loadModule('Version.js');
+        </script>
 
-            var target = document.getElementById("target");
+        <!-- Execute test after all modules have loaded -->
+        <script type="text/javascript">
+            window.onload = function documentLoaded() {
 
-            var log = new Log();
-            document.getElementById("log").appendChild(log.getElement());
+                var target = document.getElementById("target");
 
-            log.log("Guacamole.Mouse tester", "version 1.4 (" + Guacamole.API_VERSION + ")", "Mike Jumper");
-            log.log("Please press some keys...");
+                var log = new Log();
+                document.getElementById("log").appendChild(log.getElement());
 
-            var mouse = new Guacamole.Mouse(target);
+                log.log("Guacamole.Mouse tester",
+                    "git: " + GIT_GUAC.COMMIT,
+                    "API: " + Guacamole.API_VERSION);
 
-            mouse.onmousedown = function(s) {
-                log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
-                return false;
+                log.log("Please use the mouse to interact with the shaded area ...");
+
+                var mouse = new Guacamole.Mouse(target);
+
+                mouse.onmousedown = function(s) {
+                    log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                    return false;
+                };
+
+                mouse.onmousemove = function(s) {
+                    log.log("guacamole", "mousemove", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                    return false;
+                };
+
+                mouse.onmouseup = function(s) {
+                    log.log("guacamole", "mouseup", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                    return false;
+                };
+
+                mouse.onmousedown = function(s) {
+                    log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
+                };
+
             };
-
-            mouse.onmousemove = function(s) {
-                log.log("guacamole", "mousemove", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
-                return false;
-            };
-
-            mouse.onmouseup = function(s) {
-                log.log("guacamole", "mouseup", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
-                return false;
-            };
-
-            mouse.onmousedown = function(s) {
-                log.log("guacamole", "mousedown", s.x, s.y, s.left, s.middle, s.right, s.up, s.down);
-            };
-
         </script>
 
     </body>
