@@ -27,7 +27,7 @@
 
     <body>
 
-        <textarea></textarea>
+        <textarea id="field"></textarea>
 
         <div id="log"></div>
 
@@ -38,6 +38,7 @@
 
         <!-- Load required guacamole-common-js modules from git -->
         <script type="text/javascript">
+            GIT_GUAC.loadModule('InputSink.js');
             GIT_GUAC.loadModule('Keyboard.js');
             GIT_GUAC.loadModule('Version.js');
         </script>
@@ -56,6 +57,22 @@
                 log.log("Please press some keys...");
 
                 var keyboard = new Guacamole.Keyboard(document);
+
+                // Listen to additional elements if version of API being
+                // tested defines listenTo()
+                if (keyboard.listenTo) {
+
+                    keyboard.listenTo(document.getElementById('field'));
+
+                    // Use Guacamole.InputSink if available in version of API
+                    // being tested
+                    if (Guacamole.InputSink) {
+                        var sink = new Guacamole.InputSink();
+                        document.body.appendChild(sink.getElement());
+                        keyboard.listenTo(sink.getElement());
+                    }
+
+                }
 
                 keyboard.onkeydown = function(keysym) {
                     log.log("guacamole", "keydown",
