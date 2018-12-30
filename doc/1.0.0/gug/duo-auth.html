@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Duo two-factor authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="ldap-auth.html" title="Chapter 7. LDAP authentication" /><link rel="next" href="totp-auth.html" title="Chapter 9. TOTP two-factor authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Duo two-factor authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ldap-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="totp-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="duo-auth"></a>Chapter 8. Duo two-factor authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="duo-auth.html#duo-architecture">How Duo works with Guacamole</a></span></dt><dt><span class="section"><a href="duo-auth.html#duo-downloading">Downloading the Duo extension</a></span></dt><dt><span class="section"><a href="duo-auth.html#installing-duo-auth">Installing Duo authentication</a></span></dt><dd><dl><dt><span class="section"><a href="duo-auth.html#idm46248439908496">Adding Guacamole to Duo</a></span></dt><dt><span class="section"><a href="duo-auth.html#guac-duo-config">Configuring Guacamole for Duo</a></span></dt><dt><span class="section"><a href="duo-auth.html#completing-duo-install">Completing the installation</a></span></dt></dl></dd></dl></div><a id="idm46248438958496" class="indexterm"></a><p>Guacamole supports Duo as a second authentication factor, layered on top of any other
+        authentication extension, including those available from the main project website. The Duo
+        authentication extension allows users to be additionally verified against the Duo service
+        before the authentication process is allowed to succeed.</p><div class="important"><h3 class="title">Important</h3><p>This chapter involves modifying the contents of <code class="varname">GUACAMOLE_HOME</code> -
+            the Guacamole configuration directory. If you are unsure where
+                <code class="varname">GUACAMOLE_HOME</code> is located on your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before proceeding.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="duo-architecture"></a>How Duo works with Guacamole</h2></div></div></div><p>Guacamole provides support for Duo as a second authentication factor. To make use of
+            the Duo authentication extension, some other authentication mechanism will need be
+            configured, as well. When a user attempts to log into Guacamole, other installed
+            authentication methods will be queried first:</p><div class="informalfigure"><div class="mediaobject"><img src="images/duo-auth-factor-1.png" width="180" /></div></div><p>Only after authentication has succeeded with one of those methods will Guacamole reach
+            out to Duo to obtain additional verification of user identity:</p><div class="informalfigure"><div class="mediaobject"><img src="images/duo-auth-factor-2.png" width="360" /></div></div><p>If both the initial authentication attempt and verification through Duo succeed, the
+            user will be allowed in. If either mechanism fails, access to Guacamole is
+            denied.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="duo-downloading"></a>Downloading the Duo extension</h2></div></div></div><p>The Duo authentication extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided on the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guacamole.apache.org/releases/" target="_top">http://guacamole.apache.org/releases/</a>.</p><p>The Duo authentication extension is packaged as a <code class="filename">.tar.gz</code> file
+            containing only the extension itself,
+                <code class="filename">guacamole-auth-duo-1.0.0.jar</code>, which must ultimately
+            be placed in <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-duo-auth"></a>Installing Duo authentication</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory. To install
+            the Duo authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-duo-1.0.0.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></li><li class="step"><p>Configure Guacamole to use Duo authentication, as described below.</p></li></ol></div><div class="important"><h3 class="title">Important</h3><p>You will need to restart Guacamole by restarting your servlet container in order
+                to complete the installation. Doing this will disconnect all active users, so be
+                sure that it is safe to do so prior to attempting installation. If you do not
+                configure the Duo authentication properly, Guacamole will not start up again until
+                the configuration is fixed.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm46248439908496"></a>Adding Guacamole to Duo</h3></div></div></div><p>Duo does not provide a specific integration option for Guacamole, but Guacamole's
+                Duo extension uses Duo's generic authentication API which they refer to as the "Web
+                SDK". To use Guacamole with Duo, you will need to add it as a new "Web SDK"
+                application from within the "Applications" tab of the admin panel of your Duo
+                account:</p><div class="informalfigure"><div class="mediaobject"><img src="images/duo-add-guacamole.png" width="540" /></div></div><p>Within the settings of the newly-added application, rename the application to
+                something more representative than "Web SDK". This application name is what will be
+                presented to your users when they are prompted by Duo for additional
+                authentication:</p><div class="informalfigure"><div class="mediaobject"><img src="images/duo-rename-guacamole.png" width="540" /></div></div><p>Once you've finished adding Guacamole as an "Web SDK" application, the
+                configuration information required to configure Guacamole is listed within the
+                application's "Details" section. You will need to copy the integration key, secret
+                key, and API hostname - they will later be specified within
+                    <code class="filename">guacamole.properties</code>:</p><div class="informalfigure"><div class="mediaobject"><img src="images/duo-copy-details.png" width="540" /></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guac-duo-config"></a>Configuring Guacamole for Duo</h3></div></div></div><a id="idm46248439921216" class="indexterm"></a><a id="idm46248439920320" class="indexterm"></a><p>The application-specific configuration information retrieved from Duo must be
+                added to <code class="filename">guacamole.properties</code> to describe how Guacamole should
+                connect to the Duo service:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">duo-api-hostname</span></span></dt><dd><p>The hostname of the Duo API endpoint to be used to verify user
+                            identities. This will usually be in the form
+                                    "<code class="uri">api-<em class="replaceable"><code>XXXXXXXX</code></em>.duosecurity.com</code>",
+                            where "<em class="replaceable"><code>XXXXXXXX</code></em>" is some arbitrary
+                            alphanumeric value assigned by Duo. This value will have been generated
+                            by Duo when you added Guacamole as an "Web SDK" application, and can be
+                            found within the application details in the "API hostname" field.
+                                <span class="emphasis"><em>This value is required.</em></span></p></dd><dt><span class="term"><span class="property">duo-integration-key</span></span></dt><dd><p>The integration key provided for Guacamole by Duo. This value will
+                            have been generated by Duo when you added Guacamole as an "Web SDK"
+                            application, and can be found within the application details in the
+                            "Integration key" field. <span class="emphasis"><em>This value is required and must be
+                                EXACTLY 20 characters.</em></span></p></dd><dt><span class="term"><span class="property">duo-secret-key</span></span></dt><dd><p>The secret key provided for Guacamole by Duo. This value will have
+                            been generated by Duo when you added Guacamole as an "Web SDK"
+                            application, and can be found within the application details in the
+                            "Secret key" field. <span class="emphasis"><em>This value is required and must be EXACTLY
+                                20 characters.</em></span></p></dd></dl></div><p>In addition to the above, <span class="emphasis"><em>you must also manually generate an
+                    "application key"</em></span>. The application key is required by Duo's
+                authentication API, but is not provided by Duo. It is an arbitrary value meant to be
+                unique to each deployment of an application using their API.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">duo-application-key</span></span></dt><dd><p>An arbitrary, random key which you manually generated for Guacamole.
+                                <span class="emphasis"><em>This value is required and must be AT LEAST 40
+                                characters.</em></span></p></dd></dl></div><p>The application key can be generated with any method as long as it is sufficiently
+                random. There exist utilities which will do this for you, like
+                    <span class="command"><strong>pwgen</strong></span>:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>pwgen 40 1</code></strong>
+<code class="computeroutput">em1io4zievohneeseiwah0zie2raQuoo2ci5oBoo</code>
+<code class="prompt">$</code></pre></div><p>Alternatively, one quick and fairly portable way to do this is to use the
+                    <span class="command"><strong>dd</strong></span> utility to copy random bytes from the secure random device
+                    <code class="filename">/dev/random</code>, sending the data through a cryptographic hash
+                tool with a sufficiently-long result, like <span class="command"><strong>sha256sum</strong></span>:</p><div class="informalexample"><pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>dd if=/dev/random count=1 | sha256sum</code></strong>
+<code class="computeroutput">5d16d6bb86da73e7d1abd3286b21dcf3b3e707532e64ceebc7a008350d0d485d -</code>
+<code class="prompt">$</code></pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="completing-duo-install"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before Duo authentication will take effect. Restart your servlet container
+                and give the new authentication a try.</p><p>
+                </p><div class="important"><h3 class="title">Important</h3><p>You only need to restart your servlet container. <span class="emphasis"><em>You do not need
+                            to restart <span class="package">guacd</span></em></span>.</p><p><span class="package">guacd</span> is completely independent of the web application
+                        and does not deal with <code class="filename">guacamole.properties</code> or the
+                        authentication system in any way. Since you are already restarting the
+                        servlet container, restarting <span class="package">guacd</span> as well technically
+                        won't hurt anything, but doing so is completely pointless.</p></div><p>
+            </p><p>If Guacamole does not come back online after restarting your servlet container,
+                check the logs. Problems in the configuration of the Duo extension may prevent
+                Guacamole from starting up, and any such errors will be recorded in the logs of your
+                servlet container.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ldap-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="totp-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. LDAP authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. TOTP two-factor authentication</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>

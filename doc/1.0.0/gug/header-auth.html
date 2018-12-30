@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 10. HTTP header authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="totp-auth.html" title="Chapter 9. TOTP two-factor authentication" /><link rel="next" href="cas-auth.html" title="Chapter 11. CAS Authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 10. HTTP header authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="totp-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="cas-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="header-auth"></a>Chapter 10. HTTP header authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="header-auth.html#header-downloading">Downloading the HTTP header authentication extension</a></span></dt><dt><span class="section"><a href="header-auth.html#installing-header-auth">Installing HTTP header authentication</a></span></dt><dd><dl><dt><span class="section"><a href="header-auth.html#guac-header-config">Configuring Guacamole for HTTP header authentication</a></span></dt><dt><span class="section"><a href="header-auth.html#completing-header-install">Completing the installation</a></span></dt></dl></dd></dl></div><a id="idm46248440076576" class="indexterm"></a><p>Guacamole supports delegating authentication to an arbitrary external service, relying on
+        the presence of an HTTP header which contains the username of the authenticated user. This
+        authentication method must be layered on top of some other authentication extension, such as
+        those available from the main project website, in order to provide access to actual
+        connections.</p><div class="important"><h3 class="title">Important</h3><p>All external requests must be properly sanitized if this extension is used. The chosen
+            HTTP header must be stripped from untrusted requests, such that the authentication
+            service is the only possible source of that header. <span class="emphasis"><em>If such sanitization is
+                not performed, it will be trivial for malicious users to add this header manually,
+                and thus gain unrestricted access.</em></span></p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="header-downloading"></a>Downloading the HTTP header authentication extension</h2></div></div></div><p>The HTTP header authentication extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided on the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guacamole.apache.org/releases/" target="_top">http://guacamole.apache.org/releases/</a>.</p><p>The HTTP header authentication extension is packaged as a <code class="filename">.tar.gz</code>
+            file containing only the extension itself,
+                <code class="filename">guacamole-auth-header-1.0.0.jar</code>, which must
+            ultimately be placed in <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-header-auth"></a>Installing HTTP header authentication</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory.
+                <span class="emphasis"><em>If you are unsure where <code class="varname">GUACAMOLE_HOME</code> is located on
+                your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before
+                proceeding.</em></span></p><p>To install the HTTP header authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-header-1.0.0.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></li><li class="step"><p>Configure Guacamole to use HTTP header authentication, as described
+                    below.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guac-header-config"></a>Configuring Guacamole for HTTP header authentication</h3></div></div></div><a id="idm46248438314048" class="indexterm"></a><a id="idm46248438313136" class="indexterm"></a><p>The HTTP header authentication extension provides only one configuration property,
+                and it is optional. By default, the extension will pull the username of the
+                authenticated user from the <code class="constant">REMOTE_USER</code> header, if present. If
+                your authentication system uses a different HTTP header, you will need to override
+                this by specifying the <span class="property">http-auth-header</span> property within <a class="link" href="configuring-guacamole.html#initial-setup" title="guacamole.properties"><code class="filename">guacamole.properties</code></a>:</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">http-auth-header</span></span></dt><dd><p>The HTTP header containing the username of the authenticated user.
+                            This property is optional. If not specified,
+                                <code class="constant">REMOTE_USER</code> will be used by default.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="completing-header-install"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before HTTP header authentication can be used. <span class="emphasis"><em>Doing this will
+                    disconnect all active users, so be sure that it is safe to do so prior to
+                    attempting installation.</em></span> When ready, restart your servlet container
+                and give the new authentication a try.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="totp-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="cas-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 9. TOTP two-factor authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 11. CAS Authentication</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>

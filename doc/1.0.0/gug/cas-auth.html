@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 11. CAS Authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="header-auth.html" title="Chapter 10. HTTP header authentication" /><link rel="next" href="openid-auth.html" title="Chapter 12. OpenID Connect Authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 11. CAS Authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="header-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="openid-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="cas-auth"></a>Chapter 11. CAS Authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="cas-auth.html#cas-downloading">Downloading the CAS authentication extension</a></span></dt><dt><span class="section"><a href="cas-auth.html#installing-cas-auth">Installing CAS authentication</a></span></dt><dd><dl><dt><span class="section"><a href="cas-auth.html#guac-cas-config">Configuring Guacamole for CAS Authentication</a></span></dt><dt><span class="section"><a href="cas-auth.html#completing-cas-install">Completing the installation</a></span></dt><dt><span class="section"><a href="cas-auth.html#cas-clearpass">Using CAS ClearPass</a></span></dt></dl></dd></dl></div><a id="idm46248438565248" class="indexterm"></a><p>CAS is an open-source Single Sign On (SSO) provider that allows multiple applications
+        and services to authenticate against it and brokers those authentication requests to a
+        back-end authentication provider.  This module allows Guacamole to redirect to CAS for
+        authentication and user services.  This module must be layered on top of other authentication
+        extensions that provide connection information, as it only provides user authentication.
+        </p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="cas-downloading"></a>Downloading the CAS authentication extension</h2></div></div></div><p>The CAS authentication extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided on the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guacamole.apache.org/releases/" target="_top">http://guacamole.apache.org/releases/</a>.</p><p>The CAS authentication extension is packaged as a <code class="filename">.tar.gz</code>
+            file containing only the extension itself,
+                <code class="filename">guacamole-auth-cas-1.0.0.jar</code>, which must
+            ultimately be placed in <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-cas-auth"></a>Installing CAS authentication</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory.
+                <span class="emphasis"><em>If you are unsure where <code class="varname">GUACAMOLE_HOME</code> is located on
+                your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before
+                proceeding.</em></span></p><p>To install the CAS authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-cas-1.0.0.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></li><li class="step"><p>Configure Guacamole to use CAS authentication, as described
+                    below.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guac-cas-config"></a>Configuring Guacamole for CAS Authentication</h3></div></div></div><a id="idm46248438681008" class="indexterm"></a><a id="idm46248438680096" class="indexterm"></a><p>The CAS authentication extension provides two configuration properties, both
+                of which are required.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">cas-authorization-endpoint</span></span></dt><dd><p>The URL of the CAS authentication server.  This should be the full
+                            path to the base of the CAS installation.</p></dd><dt><span class="term"><span class="property">cas-redirect-uri</span></span></dt><dd><p>The URI to redirect back to upon successful authentication.  Normally
+                            this will be the full URL of your Guacamole installation.</p></dd><dt><span class="term"><span class="property">cas-clearpass-key</span></span></dt><dd><p>If using CAS ClearPass to pass the SSO password to Guacamole, this
+                            parameter specifies the private key file to use to decrypt the
+                            password.  See the section on ClearPass below.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="completing-cas-install"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before CAS authentication can be used. <span class="emphasis"><em>Doing this will
+                    disconnect all active users, so be sure that it is safe to do so prior to
+                    attempting installation.</em></span> When ready, restart your servlet container
+                and give the new authentication a try.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cas-clearpass"></a>Using CAS ClearPass</h3></div></div></div><p>CAS has a function called ClearPass that can be used to cache the password
+                used for SSO authentication and make that available to services at a later
+                time.  Configuring the CAS server for ClearPass is beyond the scope of this
+                article - more information can be found on the Apereo CAS wiki at the
+                following URL: <a class="link" href="https://apereo.github.io/cas" target="_top">
+                https://apereo.github.io/cas</a>.</p><p>Once you have CAS configured for credential caching, you need to configure
+                the service with a keypair for passing the credential securely.  The public 
+                key gets installed on the CAS server, while the private key gets configured
+                with the <span class="property">cas-clearpass-key</span> property.  The private key
+                file needs to be in RSA PKCS8 format.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="header-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="openid-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 10. HTTP header authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 12. OpenID Connect Authentication</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
