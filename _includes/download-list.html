@@ -14,9 +14,9 @@
                            'menu',
                            '{{ basename }}'
                        )">{{ basename }}</a></td>
-                <td>[ <a href="{{ dist | append: file }}.md5">MD5</a> ]</td>
-                <td>[ <a href="{{ dist | append: file }}.sha">SHA</a> ]</td>
-                <td>[ <a href="{{ dist | append: file }}.asc">PGP</a> ]</td>
+                {% for checksum in include.checksum-suffixes %}
+                    <td>[ <a href="{{ dist | append: file | append: checksum[1] }}">{{ checksum[0] }}</a> ]</td>
+                {% endfor %}
             </tr>
         {% endfor %}
     </table>

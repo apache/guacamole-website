@@ -32,6 +32,7 @@ below.</p>
     {% include download-list.html
         artifact-root=page.artifact-root
         checksum-root=page.checksum-root
+        checksum-suffixes=page.checksum-suffixes
         path=page.download-path
         files=page.source-dist %}
 </div>
@@ -46,6 +47,7 @@ still be built and installed from source.</strong></p>
     {% include download-list.html
         artifact-root=page.artifact-root
         checksum-root=page.checksum-root
+        checksum-suffixes=page.checksum-suffixes
         path=page.download-path
         files=page.binary-dist %}
 </div>
