@@ -3,11 +3,14 @@ layout: default
 permalink: /release/release-notes-:title
 ---
 
+{% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
 <div class="legacy-release-note">
     <p><strong>The release below is from prior to Guacamole's acceptance into
         the Apache Incubator.</strong> It is not an Apache Software Foundation
         release, and is licensed under the <a
-    href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+     href="https://opensource.org/licenses/MIT">MIT license</a>. The latest
+     release of Apache Guacamole is <a href="{{ latest.url }}">{{
+         latest.title }}</a>.</p>
 </div>
 
 <div id="links">

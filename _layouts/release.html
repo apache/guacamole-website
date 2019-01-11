@@ -11,6 +11,16 @@ permalink: /release/release-notes-:title
     </div>
 {% endunless %}
 
+{% if page.archived %}
+    {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
+    <div class="archive-disclaimer">
+        <p>Apache Guacamole {{ page.title }} is an archived release, and was
+        originally released on {{ page.date | date: "%Y-%m-%d" }}. <strong>The
+        latest release of Apache Guacamole is <a href="{{ latest.url }}">{{
+            latest.title }}</a>.</strong></p>
+    </div>
+{% endif %}
+
 <h1>Apache Guacamole {{ page.title }}</h1>
 
 <div id="links">
