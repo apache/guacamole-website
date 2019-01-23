@@ -421,6 +421,28 @@ mailing list of the <a href="https://www.apache.org/security/">ASF Security Team
 the <a href="mailto:security@guacamole.apache.org">security@guacamole.apache.org</a> mailing list, before disclosing or
 discussing the issue in a public forum.</p>
 
+<h2 id="fixed-in-apache-guacamole-100">Fixed in Apache Guacamole 1.0.0</h2>
+
+<ul>
+    
+    
+    <li>
+        <h3 id="CVE-2018-1340">
+            Secure flag missing from session cookie
+            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1340">CVE-2018-1340</a>)
+        </h3>
+        <p>Prior to 1.0.0, Apache Guacamole used a cookie for client-side storage of the
+user’s session token. This cookie lacked the “secure” flag, which could allow
+an attacker eavesdropping on the network to intercept the user’s session token
+if unencrypted HTTP requests are made to the same domain.</p>
+
+<p>Acknowledgements: We would like to thank Ross Golder for reporting this issue.</p>
+
+
+    </li>
+    
+</ul>
+
 <h2 id="fixed-in-apache-guacamole-0911-incubating">Fixed in Apache Guacamole 0.9.11-incubating</h2>
 
 <ul>
