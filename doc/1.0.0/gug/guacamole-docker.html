@@ -282,7 +282,7 @@
                                         exhausted by one user alone.</p>
                                 </td></tr></tbody></table></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guacamole-docker-ldap"></a>LDAP authentication</h3></div></div></div><p>To use Guacamole with the LDAP authentication backend, you will need network
                 access to an LDAP directory. Unlike MySQL and PostgreSQL, the Guacamole Docker image
-                does support Docker links for LDAP; the connection information
+                doesn't support Docker links for LDAP; the connection information
                     <span class="emphasis"><em>must</em></span> be specified using environment variables:</p><div class="informaltable"><table class="informaltable" border="1"><colgroup><col class="c1" /><col class="c2" /></colgroup><thead><tr><th>Variable</th><th>Description</th></tr></thead><tbody><tr><td><code class="envar">LDAP_HOSTNAME</code></td><td>
                                 <p>The hostname or IP address of your LDAP server.</p>
                             </td></tr><tr><td><code class="envar">LDAP_PORT</code></td><td>
