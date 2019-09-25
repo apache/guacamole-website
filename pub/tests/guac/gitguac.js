@@ -48,7 +48,7 @@ GIT_GUAC.COMMIT = (function getRequestedCommit() {
 GIT_GUAC.loadModule = function loadModule(filename) {
 
     // Construct URL pointing to guacamole-common-js module within ASF git
-    var url = 'https://git1-us-west.apache.org/repos/asf?'
+    var url = 'https://gitbox.apache.org/repos/asf?'
         + 'p=guacamole-client.git;'
         + 'a=blob_plain;'
         + 'f=guacamole-common-js/src/main/webapp/modules/' + encodeURIComponent(filename) + ';'
