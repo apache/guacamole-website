@@ -1,0 +1,5195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Client</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Client</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Guacamole.html">Guacamole</a>.</span>Client<span class="signature">(tunnel)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="Client"><span class="type-signature"></span>new Client<span class="signature">(tunnel)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Guacamole protocol client. Given a <a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a>,
+automatically handles incoming and outgoing Guacamole instructions via the
+provided tunnel, updating its display using one or more canvas elements.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tunnel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The tunnel to use to send and receive
+                                 Guacamole instructions.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="connect"><span class="type-signature"></span>connect<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Connects the underlying tunnel of this Guacamole.Client, passing the
+given arbitrary data to the tunnel during the connection process.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Arbitrary connection data to be sent to the underlying
+            tunnel during the connection process.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line1554">line 1554</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        If an error occurs during connection.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><a href="Guacamole.Status.html">Guacamole.Status</a></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createArgumentValueStream"><span class="type-signature"></span>createArgumentValueStream<span class="signature">(mimetype, name)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens a new argument value stream for writing, having the given
+parameter name and mimetype, requesting that the connection parameter
+with the given name be updated to the value described by the contents
+of the following stream. The instruction necessary to create this stream
+will automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data being sent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the connection parameter to attempt to update.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line466">line 466</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The created argument value stream.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createAudioStream"><span class="type-signature"></span>createAudioStream<span class="signature">(mimetype)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens a new audio stream for writing, where audio data having the give
+mimetype will be sent along the returned stream. The instruction
+necessary to create this stream will automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the audio data that will be sent along the returned
+    stream.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line389">line 389</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The created audio stream.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createClipboardStream"><span class="type-signature"></span>createClipboardStream<span class="signature">(mimetype, name)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens a new clipboard object for writing, having the given mimetype. The
+instruction necessary to create this stream will automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data being sent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the pipe.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line441">line 441</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The created file stream.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createFileStream"><span class="type-signature"></span>createFileStream<span class="signature">(mimetype, filename)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens a new file for writing, having the given index, mimetype and
+filename. The instruction necessary to create this stream will
+automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the file being sent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>filename</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The filename of the file being sent.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line407">line 407</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The created file stream.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createObjectOutputStream"><span class="type-signature"></span>createObjectOutputStream<span class="signature">(index, mimetype, name)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a new output stream associated with the given object and having
+the given mimetype and name. The legality of a mimetype and name is
+dictated by the object itself. The instruction necessary to create this
+stream will automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the object for which the output stream is being
+    created.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data which will be sent to the output stream.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The defined name of an output stream within the given object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line495">line 495</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An output stream which will write blobs to the named output stream
+    of the given object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createOutputStream"><span class="type-signature"></span>createOutputStream<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Allocates an available stream index and creates a new
+Guacamole.OutputStream using that index, associating the resulting
+stream with this Guacamole.Client. Note that this stream will not yet
+exist as far as the other end of the Guacamole connection is concerned.
+Streams exist within the Guacamole protocol only when referenced by an
+instruction which creates the stream, such as a "clipboard", "file", or
+"pipe" instruction.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line366">line 366</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new Guacamole.OutputStream with a newly-allocated index and
+    associated with this Guacamole.Client.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createPipeStream"><span class="type-signature"></span>createPipeStream<span class="signature">(mimetype, name)</span><span class="type-signature"> &rarr; {<a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Opens a new pipe for writing, having the given name and mimetype. The
+instruction necessary to create this stream will automatically be sent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data being sent.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the pipe.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line424">line 424</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The created file stream.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disconnect"><span class="type-signature"></span>disconnect<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends a disconnect instruction to the server and closes the tunnel.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line1525">line 1525</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="endStream"><span class="type-signature"></span>endStream<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Marks a currently-open stream as complete. The other end of the
+Guacamole connection will be notified via an "end" instruction that the
+stream is closed, and the index will be made available for reuse in
+future streams.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the stream to end.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line566">line 566</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="exportState"><span class="type-signature"></span>exportState<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Produces an opaque representation of Guacamole.Client state which can be
+later imported through a call to importState(). This object is
+effectively an independent, compressed snapshot of protocol and display
+state. Invoking this function implicitly flushes the display.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback which should be invoked once the state object is ready. The
+    state object will be passed to the callback as the sole parameter.
+    This callback may be invoked immediately, or later as the display
+    finishes rendering and becomes ready.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDisplay"><span class="type-signature"></span>getDisplay<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Guacamole.Display.html">Guacamole.Display</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the underlying display of this Guacamole.Client. The display
+contains an Element which can be added to the DOM, causing the
+display to become visible.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line286">line 286</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The underlying display of this
+                            Guacamole.Client.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.Display.html">Guacamole.Display</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="importState"><span class="type-signature"></span>importState<span class="signature">(state, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Restores Guacamole.Client protocol and display state based on an opaque
+object from a prior call to exportState(). The Guacamole.Client instance
+used to export that state need not be the same as this instance.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">An opaque representation of Guacamole.Client state from a prior call
+    to exportState().</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The function to invoke when state has finished being imported. This
+    may happen immediately, or later as images within the provided state
+    object are loaded.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line219">line 219</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="requestObjectInputStream"><span class="type-signature"></span>requestObjectInputStream<span class="signature">(index, name)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Requests read access to the input stream having the given name. If
+successful, a new input stream will be created.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the object from which the input stream is being
+    requested.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the input stream to request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line515">line 515</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendAck"><span class="type-signature"></span>sendAck<span class="signature">(index, message, code)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Acknowledge receipt of a blob on the stream with the given index.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the stream associated with the
+                      received blob.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A human-readable message describing the error
+                        or status.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The error code, if any, or 0 for success.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line533">line 533</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendBlob"><span class="type-signature"></span>sendBlob<span class="signature">(index, data)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Given the index of a file, writes a blob of data to that file.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The index of the file to write to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Base64-encoded data to write to the file.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line548">line 548</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendKeyEvent"><span class="type-signature"></span>sendKeyEvent<span class="signature">(pressed, keysym)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends a key event having the given properties as if the user
+pressed or released a key.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pressed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the key is pressed (true) or released
+                         (false).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keysym</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The keysym of the key being pressed or released.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line314">line 314</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendMouseState"><span class="type-signature"></span>sendMouseState<span class="signature">(mouseState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends a mouse event having the properties provided by the given mouse
+state.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mouseState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Mouse.State.html">Guacamole.Mouse.State</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The state of the mouse to send
+                                          in the mouse event.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line329">line 329</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendSize"><span class="type-signature"></span>sendSize<span class="signature">(width, height)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends the current size of the screen.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the screen.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the screen.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line296">line 296</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~getLayerIndex"><span class="type-signature">(inner) </span>getLayerIndex<span class="signature">(layer)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the index passed to getLayer() when the given layer was created.
+Positive indices refer to visible layers, an index of zero refers to the
+default layer, and negative indices refer to buffers.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>layer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></span>
+|
+
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The layer whose index should be determined.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line775">line 775</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The index of the given layer, or null if no such layer is associated
+    with this client.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onargv">onargv</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when the current value of a connection parameter is being exposed
+by the server.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive connection parameter data from the
+    server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data which will be received.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the connection parameter whose value is being exposed.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line667">line 667</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onaudio">onaudio</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when a audio stream is created. The stream provided to this event
+handler will contain its own event handlers for received data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive audio data from the server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the audio data which will be received.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line626">line 626</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An object which implements the Guacamole.AudioPlayer interface and
+    has been initialied to play the data in the provided stream, or null
+    if the built-in audio players of the Guacamole client should be
+    used.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.AudioPlayer.html">Guacamole.AudioPlayer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onclipboard">onclipboard</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when the clipboard of the remote client is changing.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive
+                                      clipboard data from the server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data which will be received.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line677">line 677</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onerror">onerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when an error is reported by the remote client, and the connection
+is being closed.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Status.html">Guacamole.Status</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A status object which describes the
+                                 error.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line607">line 607</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onfile">onfile</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when a file stream is created. The stream provided to this event
+handler will contain its own event handlers for received data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive data
+                                      from the server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the file received.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>filename</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the file received.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line689">line 689</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onfilesystem">onfilesystem</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when a filesystem object is created. The object provided to this
+event handler will contain its own event handlers and functions for
+requesting and handling data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Object.html">Guacamole.Object</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The created filesystem object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the filesystem.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line703">line 703</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onname">onname</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when the remote client sends a name update.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new name of this client.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line597">line 597</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onpipe">onpipe</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when a pipe stream is created. The stream provided to this event
+handler will contain its own event handlers for received data;
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive data
+                                      from the server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the data which will be received.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of the pipe.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line715">line 715</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onstatechange">onstatechange</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired whenever the state of this Guacamole.Client changes.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new state of the client.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line589">line 589</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onsync">onsync</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired whenever a sync instruction is received from the server, indicating
+that the server is finished processing any input from the client and
+has sent any results.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>timestamp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The timestamp associated with the sync
+                          instruction.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line726">line 726</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onvideo">onvideo</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when a video stream is created. The stream provided to this event
+handler will contain its own event handlers for received data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>stream</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stream that will receive video data from the server.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>layer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination layer on which the received video data should be
+    played. It is the responsibility of the Guacamole.VideoPlayer
+    implementation to play the received data within this layer.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mimetype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The mimetype of the video data which will be received.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line650">line 650</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An object which implements the Guacamole.VideoPlayer interface and
+    has been initialied to play the data in the provided stream, or null
+    if the built-in video players of the Guacamole client should be
+    used.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.VideoPlayer.html">Guacamole.VideoPlayer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Guacamole.ArrayBufferReader.html">ArrayBufferReader</a></li><li><a href="Guacamole.ArrayBufferWriter.html">ArrayBufferWriter</a></li><li><a href="Guacamole.AudioPlayer.html">AudioPlayer</a></li><li><a href="Guacamole.AudioRecorder.html">AudioRecorder</a></li><li><a href="Guacamole.BlobReader.html">BlobReader</a></li><li><a href="Guacamole.BlobWriter.html">BlobWriter</a></li><li><a href="Guacamole.ChainedTunnel.html">ChainedTunnel</a></li><li><a href="Guacamole.Client.html">Client</a></li><li><a href="Guacamole.DataURIReader.html">DataURIReader</a></li><li><a href="Guacamole.Display.html">Display</a></li><li><a href="Guacamole.Display.VisibleLayer.html">VisibleLayer</a></li><li><a href="Guacamole.HTTPTunnel.html">HTTPTunnel</a></li><li><a href="Guacamole.InputSink.html">InputSink</a></li><li><a href="Guacamole.InputStream.html">InputStream</a></li><li><a href="Guacamole.IntegerPool.html">IntegerPool</a></li><li><a href="Guacamole.JSONReader.html">JSONReader</a></li><li><a href="Guacamole.Keyboard.html">Keyboard</a></li><li><a href="Guacamole.Keyboard.ModifierState.html">ModifierState</a></li><li><a href="Guacamole.Layer.html">Layer</a></li><li><a href="Guacamole.Layer.Pixel.html">Pixel</a></li><li><a href="Guacamole.Mouse.html">Mouse</a></li><li><a href="Guacamole.Mouse.State.html">State</a></li><li><a href="Guacamole.Mouse.Touchpad.html">Touchpad</a></li><li><a href="Guacamole.Mouse.Touchscreen.html">Touchscreen</a></li><li><a href="Guacamole.Object.html">Object</a></li><li><a href="Guacamole.OnScreenKeyboard.html">OnScreenKeyboard</a></li><li><a href="Guacamole.OnScreenKeyboard.Key.html">Key</a></li><li><a href="Guacamole.OnScreenKeyboard.Layout.html">Layout</a></li><li><a href="Guacamole.OutputStream.html">OutputStream</a></li><li><a href="Guacamole.Parser.html">Parser</a></li><li><a href="Guacamole.RawAudioFormat.html">RawAudioFormat</a></li><li><a href="Guacamole.RawAudioPlayer.html">RawAudioPlayer</a></li><li><a href="Guacamole.RawAudioRecorder.html">RawAudioRecorder</a></li><li><a href="Guacamole.SessionRecording.html">SessionRecording</a></li><li><a href="Guacamole.StaticHTTPTunnel.html">StaticHTTPTunnel</a></li><li><a href="Guacamole.Status.html">Status</a></li><li><a href="Guacamole.StringReader.html">StringReader</a></li><li><a href="Guacamole.StringWriter.html">StringWriter</a></li><li><a href="Guacamole.Tunnel.html">Tunnel</a></li><li><a href="Guacamole.VideoPlayer.html">VideoPlayer</a></li><li><a href="Guacamole.WebSocketTunnel.html">WebSocketTunnel</a></li></ul><h3>Events</h3><ul><li><a href="Guacamole.ArrayBufferReader.html#event:ondata">ondata</a></li><li><a href="Guacamole.ArrayBufferReader.html#event:onend">onend</a></li><li><a href="Guacamole.ArrayBufferWriter.html#event:onack">onack</a></li><li><a href="Guacamole.AudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.AudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobReader.html#event:onend">onend</a></li><li><a href="Guacamole.BlobReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.BlobWriter.html#event:onack">onack</a></li><li><a href="Guacamole.BlobWriter.html#event:oncomplete">oncomplete</a></li><li><a href="Guacamole.BlobWriter.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobWriter.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.ChainedTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onargv">onargv</a></li><li><a href="Guacamole.Client.html#event:onaudio">onaudio</a></li><li><a href="Guacamole.Client.html#event:onclipboard">onclipboard</a></li><li><a href="Guacamole.Client.html#event:onerror">onerror</a></li><li><a href="Guacamole.Client.html#event:onfile">onfile</a></li><li><a href="Guacamole.Client.html#event:onfilesystem">onfilesystem</a></li><li><a href="Guacamole.Client.html#event:onname">onname</a></li><li><a href="Guacamole.Client.html#event:onpipe">onpipe</a></li><li><a href="Guacamole.Client.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onsync">onsync</a></li><li><a href="Guacamole.Client.html#event:onvideo">onvideo</a></li><li><a href="Guacamole.DataURIReader.html#event:onend">onend</a></li><li><a href="Guacamole.Display.html#event:oncursor">oncursor</a></li><li><a href="Guacamole.Display.html#event:onresize">onresize</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.HTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.InputStream.html#event:onblob">onblob</a></li><li><a href="Guacamole.InputStream.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.Keyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.Keyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.html#event:onmouseout">onmouseout</a></li><li><a href="Guacamole.Mouse.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Object.html#event:onbody">onbody</a></li><li><a href="Guacamole.Object.html#event:onundefine">onundefine</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.OutputStream.html#event:onack">onack</a></li><li><a href="Guacamole.Parser.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.SessionRecording.html#event:onpause">onpause</a></li><li><a href="Guacamole.SessionRecording.html#event:onplay">onplay</a></li><li><a href="Guacamole.SessionRecording.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.SessionRecording.html#event:onseek">onseek</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.StringReader.html#event:onend">onend</a></li><li><a href="Guacamole.StringReader.html#event:ontext">ontext</a></li><li><a href="Guacamole.StringWriter.html#event:onack">onack</a></li><li><a href="Guacamole.Tunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.Tunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.Tunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onstatechange">onstatechange</a></li></ul><h3>Namespaces</h3><ul><li><a href="Guacamole.html">Guacamole</a></li><li><a href="Guacamole.AudioContextFactory.html">AudioContextFactory</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jan 26 2020 10:17:42 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>
