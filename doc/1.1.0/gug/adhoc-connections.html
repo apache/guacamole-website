@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 14. Ad-hoc Connections</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="radius-auth.html" title="Chapter 13. RADIUS Authentication" /><link rel="next" href="using-guacamole.html" title="Chapter 15. Using Guacamole" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 14. Ad-hoc Connections</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="radius-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="using-guacamole.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="adhoc-connections"></a>Chapter 14. Ad-hoc Connections</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="adhoc-connections.html#quickconnect-downloading">Downloading the quickconnect extension</a></span></dt><dt><span class="section"><a href="adhoc-connections.html#installing-quickconnect">Installing the quickconnect extension</a></span></dt><dd><dl><dt><span class="section"><a href="adhoc-connections.html#guac-quickconnect-config">Configuring Guacamole for the quickconnect extension</a></span></dt><dt><span class="section"><a href="adhoc-connections.html#completing-quickconnect-install">Completing the installation</a></span></dt></dl></dd><dt><span class="section"><a href="adhoc-connections.html#using-quickconnect">Using the quickconnect extension</a></span></dt></dl></div><a id="idm46420848482096" class="indexterm"></a><a id="idm46420847676416" class="indexterm"></a><a id="idm46420847675520" class="indexterm"></a><p>The quickconnect extension provides a connection bar on the Guacamole Client home page
+        that allows users to type in the URI of a server to which they want to connect and the client
+        will parse the URI and immediately establish the connection.  The purpose of the extension is
+        to allow situations where administrators want to allow users the flexibility of establishing
+        their own connections without having to grant them access to edit connections or even to have
+        to create the connections at all, aside from typing the URI.</p><div class="important"><h3 class="title">Important</h3><p>There are several implications of using this extension that should be well-understood
+            by administrators prior to implementing it:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Connections established with this extension are created in-memory
+                    and only persist until the Guacamole session ends.</p></li><li class="listitem"><p>Connections created with this extension are not accessible to other users, and
+                    cannot be shared with other users.</p></li><li class="listitem"><p>This extension provides no functionality for authenticating users - it does
+                    not allow anonymous logins, and requires that users are successfully authenticated
+                    by another authentication module before it can be used.</p></li><li class="listitem"><p>The extension provides users the ability not only to establish connections, but
+                    also to set any of the parameters for a connection.  There are security implications for
+                    this - for example, RDP file sharing can be used to pass through any directory available
+                    on the server running guacd to the remote desktop.  This should be taken into consideration
+                    when enabling this extension and making sure that guacd is configured in a way that
+                    does not compromise sensitive system files by allowing access to them.</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="quickconnect-downloading"></a>Downloading the quickconnect extension</h2></div></div></div><p>The quickconnect extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided in the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guacamole.apache.org/releases/" target="_top">http://guacamole.apache.org/releases/</a>.</p><p>The quickconnect extension is packaged as a <code class="filename">.tar.gz</code> file containing
+            only the extension itself, <code class="filename">guacamole-auth-quickconnect-1.1.0.jar</code>, which must
+            ultimately be placed in <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-quickconnect"></a>Installing the quickconnect extension</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory.
+                <span class="emphasis"><em>If you are unsure where <code class="varname">GUACAMOLE_HOME</code> is located on
+                your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before
+                proceeding.</em></span></p><p>To install the extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Place the <code class="filename">guacamole-auth-quickconnect-1.1.0.jar</code> file in
+                    the <code class="filename">GUACAMOLE_HOME/extensions</code> directory.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guac-quickconnect-config"></a>Configuring Guacamole for the quickconnect extension</h3></div></div></div><a id="idm46420848179008" class="indexterm"></a><p>This module has no configuration options.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="completing-quickconnect-install"></a>Completing the installation</h3></div></div></div><p>Guacamole will only load newly-installed extensions during startup, so your
+                servlet container will need to be restarted before the quickconnect extension
+                can be used. <span class="emphasis"><em>Doing this will disconnect all active users, so be sure
+                    that it is safe to do so prior to attempting installation.</em></span>
+                When ready, restart your servlet container and give the extension a try.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="using-quickconnect"></a>Using the quickconnect extension</h2></div></div></div><p>The quickconnect extension provides a field on the home page that allows you to enter
+            a Uniform Resource Identifier (URI) to create a connection. A URI is in the form:</p><div class="informalexample"><p><code class="uri"><em class="replaceable"><code>protocol</code></em>://<em class="replaceable"><code>username</code></em>:<em class="replaceable"><code>password</code></em>@<em class="replaceable"><code>host</code></em>:<em class="replaceable"><code>port</code></em>/?<em class="replaceable"><code>parameters</code></em></code></p></div><p>The <em class="replaceable"><code>protocol</code></em> field can have any of the protocols supported
+            by Guacamole, as documented in <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a>. Many of the
+            protocols define a default <em class="replaceable"><code>port</code></em> value, with the exception of
+            VNC. The <em class="replaceable"><code>parameters</code></em> field can specify any of the
+            protocol-specific parameters as documented on the configuration page.</p><p>To establish a connection, simply type in a valid URI and either press "Enter" or
+            click the connect button. This extension will parse the URI and create a new connection,
+            and immediately start that connection in the current browser.</p><p>Here are a few examples of URIs:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><div class="informalexample"><p><code class="uri">ssh://linux1.example.com/</code></p></div><p>Connect to the server linux1.example.com using the SSH protocol on the default
+                    SSH port (22). This will result in prompting for both username and
+                    password.</p></li><li class="listitem"><div class="informalexample"><p><code class="uri">vnc://linux1.example.com:5900/</code></p></div><p>Connect to the server linux1.example.com using the VNC protocol and specifying
+                    the port as 5900.</p></li><li class="listitem"><div class="informalexample"><p><code class="uri">
+                            rdp://localuser@windows1.example.com/?security=rdp&amp;ignore-cert=true&amp;disable-audio=true&amp;enable-drive=true&amp;drive-path=/mnt/usb
+                        </code></p></div><p>Connect to the server windows1.example.com using the RDP protocol and the user
+                    "localuser". This URI also specifies several RDP-specific parameters on the
+                    connection, including forcing security mode to RDP (security=rdp), ignoring any
+                    certificate errors (ignore-cert=true), disabling audio pass-through
+                    (disable-audio=true), and enabling filesystem redirection (enable-drive=true) to
+                    the /mnt/usb folder on the system running guacd (drive-path=/mnt/usb).</p></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="radius-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-guacamole.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 13. RADIUS Authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 15. Using Guacamole</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
