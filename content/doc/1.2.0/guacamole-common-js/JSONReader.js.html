@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: JSONReader.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: JSONReader.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+var Guacamole = Guacamole || {};
+
+/**
+ * A reader which automatically handles the given input stream, assembling all
+ * received blobs into a JavaScript object by appending them to each other, in
+ * order, and decoding the result as JSON. Note that this object will overwrite
+ * any installed event handlers on the given Guacamole.InputStream.
+ * 
+ * @constructor
+ * @param {Guacamole.InputStream} stream
+ *     The stream that JSON will be read from.
+ */
+Guacamole.JSONReader = function guacamoleJSONReader(stream) {
+
+    /**
+     * Reference to this Guacamole.JSONReader.
+     *
+     * @private
+     * @type {Guacamole.JSONReader}
+     */
+    var guacReader = this;
+
+    /**
+     * Wrapped Guacamole.StringReader.
+     *
+     * @private
+     * @type {Guacamole.StringReader}
+     */
+    var stringReader = new Guacamole.StringReader(stream);
+
+    /**
+     * All JSON read thus far.
+     *
+     * @private
+     * @type {String}
+     */
+    var json = '';
+
+    /**
+     * Returns the current length of this Guacamole.JSONReader, in characters.
+     *
+     * @return {Number}
+     *     The current length of this Guacamole.JSONReader.
+     */
+    this.getLength = function getLength() {
+        return json.length;
+    };
+
+    /**
+     * Returns the contents of this Guacamole.JSONReader as a JavaScript
+     * object.
+     *
+     * @return {Object}
+     *     The contents of this Guacamole.JSONReader, as parsed from the JSON
+     *     contents of the input stream.
+     */
+    this.getJSON = function getJSON() {
+        return JSON.parse(json);
+    };
+
+    // Append all received text
+    stringReader.ontext = function ontext(text) {
+
+        // Append received text
+        json += text;
+
+        // Call handler, if present
+        if (guacReader.onprogress)
+            guacReader.onprogress(text.length);
+
+    };
+
+    // Simply call onend when end received
+    stringReader.onend = function onend() {
+        if (guacReader.onend)
+            guacReader.onend();
+    };
+
+    /**
+     * Fired once for every blob of data received.
+     * 
+     * @event
+     * @param {Number} length
+     *     The number of characters received.
+     */
+    this.onprogress = null;
+
+    /**
+     * Fired once this stream is finished and no further data will be written.
+     *
+     * @event
+     */
+    this.onend = null;
+
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Guacamole.ArrayBufferReader.html">ArrayBufferReader</a></li><li><a href="Guacamole.ArrayBufferWriter.html">ArrayBufferWriter</a></li><li><a href="Guacamole.AudioPlayer.html">AudioPlayer</a></li><li><a href="Guacamole.AudioRecorder.html">AudioRecorder</a></li><li><a href="Guacamole.BlobReader.html">BlobReader</a></li><li><a href="Guacamole.BlobWriter.html">BlobWriter</a></li><li><a href="Guacamole.ChainedTunnel.html">ChainedTunnel</a></li><li><a href="Guacamole.Client.html">Client</a></li><li><a href="Guacamole.DataURIReader.html">DataURIReader</a></li><li><a href="Guacamole.Display.html">Display</a></li><li><a href="Guacamole.Display.VisibleLayer.html">VisibleLayer</a></li><li><a href="Guacamole.HTTPTunnel.html">HTTPTunnel</a></li><li><a href="Guacamole.InputSink.html">InputSink</a></li><li><a href="Guacamole.InputStream.html">InputStream</a></li><li><a href="Guacamole.IntegerPool.html">IntegerPool</a></li><li><a href="Guacamole.JSONReader.html">JSONReader</a></li><li><a href="Guacamole.Keyboard.html">Keyboard</a></li><li><a href="Guacamole.Keyboard.ModifierState.html">ModifierState</a></li><li><a href="Guacamole.Layer.html">Layer</a></li><li><a href="Guacamole.Layer.Pixel.html">Pixel</a></li><li><a href="Guacamole.Mouse.html">Mouse</a></li><li><a href="Guacamole.Mouse.State.html">State</a></li><li><a href="Guacamole.Mouse.Touchpad.html">Touchpad</a></li><li><a href="Guacamole.Mouse.Touchscreen.html">Touchscreen</a></li><li><a href="Guacamole.Object.html">Object</a></li><li><a href="Guacamole.OnScreenKeyboard.html">OnScreenKeyboard</a></li><li><a href="Guacamole.OnScreenKeyboard.Key.html">Key</a></li><li><a href="Guacamole.OnScreenKeyboard.Layout.html">Layout</a></li><li><a href="Guacamole.OutputStream.html">OutputStream</a></li><li><a href="Guacamole.Parser.html">Parser</a></li><li><a href="Guacamole.RawAudioFormat.html">RawAudioFormat</a></li><li><a href="Guacamole.RawAudioPlayer.html">RawAudioPlayer</a></li><li><a href="Guacamole.RawAudioRecorder.html">RawAudioRecorder</a></li><li><a href="Guacamole.SessionRecording.html">SessionRecording</a></li><li><a href="Guacamole.StaticHTTPTunnel.html">StaticHTTPTunnel</a></li><li><a href="Guacamole.Status.html">Status</a></li><li><a href="Guacamole.StringReader.html">StringReader</a></li><li><a href="Guacamole.StringWriter.html">StringWriter</a></li><li><a href="Guacamole.Tunnel.html">Tunnel</a></li><li><a href="Guacamole.VideoPlayer.html">VideoPlayer</a></li><li><a href="Guacamole.WebSocketTunnel.html">WebSocketTunnel</a></li></ul><h3>Events</h3><ul><li><a href="Guacamole.ArrayBufferReader.html#event:ondata">ondata</a></li><li><a href="Guacamole.ArrayBufferReader.html#event:onend">onend</a></li><li><a href="Guacamole.ArrayBufferWriter.html#event:onack">onack</a></li><li><a href="Guacamole.AudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.AudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobReader.html#event:onend">onend</a></li><li><a href="Guacamole.BlobReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.BlobWriter.html#event:onack">onack</a></li><li><a href="Guacamole.BlobWriter.html#event:oncomplete">oncomplete</a></li><li><a href="Guacamole.BlobWriter.html#event:onerror">onerror</a></li><li><a href="Guacamole.BlobWriter.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.ChainedTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onargv">onargv</a></li><li><a href="Guacamole.Client.html#event:onaudio">onaudio</a></li><li><a href="Guacamole.Client.html#event:onclipboard">onclipboard</a></li><li><a href="Guacamole.Client.html#event:onerror">onerror</a></li><li><a href="Guacamole.Client.html#event:onfile">onfile</a></li><li><a href="Guacamole.Client.html#event:onfilesystem">onfilesystem</a></li><li><a href="Guacamole.Client.html#event:onname">onname</a></li><li><a href="Guacamole.Client.html#event:onpipe">onpipe</a></li><li><a href="Guacamole.Client.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.Client.html#event:onsync">onsync</a></li><li><a href="Guacamole.Client.html#event:onvideo">onvideo</a></li><li><a href="Guacamole.DataURIReader.html#event:onend">onend</a></li><li><a href="Guacamole.Display.html#event:oncursor">oncursor</a></li><li><a href="Guacamole.Display.html#event:onresize">onresize</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.HTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.InputStream.html#event:onblob">onblob</a></li><li><a href="Guacamole.InputStream.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onend">onend</a></li><li><a href="Guacamole.JSONReader.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.Keyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.Keyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Mouse.html#event:onmousedown">onmousedown</a></li><li><a href="Guacamole.Mouse.html#event:onmousemove">onmousemove</a></li><li><a href="Guacamole.Mouse.html#event:onmouseout">onmouseout</a></li><li><a href="Guacamole.Mouse.html#event:onmouseup">onmouseup</a></li><li><a href="Guacamole.Object.html#event:onbody">onbody</a></li><li><a href="Guacamole.Object.html#event:onundefine">onundefine</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeydown">onkeydown</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeyup">onkeyup</a></li><li><a href="Guacamole.OutputStream.html#event:onack">onack</a></li><li><a href="Guacamole.Parser.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onclose">onclose</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.SessionRecording.html#event:onpause">onpause</a></li><li><a href="Guacamole.SessionRecording.html#event:onplay">onplay</a></li><li><a href="Guacamole.SessionRecording.html#event:onprogress">onprogress</a></li><li><a href="Guacamole.SessionRecording.html#event:onseek">onseek</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.StringReader.html#event:onend">onend</a></li><li><a href="Guacamole.StringReader.html#event:ontext">ontext</a></li><li><a href="Guacamole.StringWriter.html#event:onack">onack</a></li><li><a href="Guacamole.Tunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.Tunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.Tunnel.html#event:onstatechange">onstatechange</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onerror">onerror</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:oninstruction">oninstruction</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onstatechange">onstatechange</a></li></ul><h3>Namespaces</h3><ul><li><a href="Guacamole.html">Guacamole</a></li><li><a href="Guacamole.AudioContextFactory.html">AudioContextFactory</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jun 25 2020 20:23:12 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>
