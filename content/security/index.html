@@ -421,6 +421,46 @@ mailing list of the <a href="https://www.apache.org/security/">ASF Security Team
 the <a href="mailto:security@guacamole.apache.org">security@guacamole.apache.org</a> mailing list, before disclosing or
 discussing the issue in a public forum.</p>
 
+<h2 id="fixed-in-apache-guacamole-120">Fixed in Apache Guacamole 1.2.0</h2>
+
+<ul>
+    
+    
+    <li>
+        <h3 id="CVE-2020-9498">
+            Dangling pointer in RDP static virtual channel handling
+            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9498">CVE-2020-9498</a>)
+        </h3>
+        <p>Apache Guacamole 1.1.0 and older may mishandle pointers involved in processing
+data received via RDP static virtual channels. If a user connects to a
+malicious or compromised RDP server, a series of specially-crafted PDUs could
+result in memory corruption, possibly allowing arbitrary code to be executed
+with the privileges of the running guacd process.</p>
+
+<p>Acknowledgements: We would like to thank Eyal Itkin (Check Point Research) for
+reporting this issue.</p>
+
+
+    </li>
+    
+    <li>
+        <h3 id="CVE-2020-9497">
+            Improper input validation of RDP static virtual channels
+            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9497">CVE-2020-9497</a>)
+        </h3>
+        <p>Apache Guacamole 1.1.0 and older do not properly validate data received from
+RDP servers via static virtual channels. If a user connects to a malicious or
+compromised RDP server, specially-crafted PDUs could result in disclosure of
+information within the memory of the guacd process handling the connection.</p>
+
+<p>Acknowledgements: We would like to thank the GitHub Security Lab and Eyal Itkin
+(Check Point Research) for reporting this issue.</p>
+
+
+    </li>
+    
+</ul>
+
 <h2 id="fixed-in-apache-guacamole-100">Fixed in Apache Guacamole 1.0.0</h2>
 
 <ul>
