@@ -554,6 +554,13 @@ table.releases td {
     padding-right: 1em;
 }
 
+#release-notes li.bug:before {
+    content: 'Bug: ';
+    text-transform: uppercase;
+    color: red;
+    font-style: italic;
+}
+
 #content > .legacy-release-note,
 #content > .draft-disclaimer,
 #content > .archive-disclaimer {
