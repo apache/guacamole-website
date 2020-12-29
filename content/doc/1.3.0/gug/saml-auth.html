@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 13. SAML Authentication</title><link rel="stylesheet" type="text/css" href="gug.css" /><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" /><link rel="home" href="index.html" title="Guacamole Manual" /><link rel="up" href="users-guide.html" title="Part I. User's Guide" /><link rel="prev" href="openid-auth.html" title="Chapter 12. OpenID Connect Authentication" /><link rel="next" href="radius-auth.html" title="Chapter 14. RADIUS Authentication" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+        </head><body>
+            <!-- CONTENT -->
+
+            <div id="page"><div id="content">
+        <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 13. SAML Authentication</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="openid-auth.html">Prev</a> </td><th width="60%" align="center">Part I. User's Guide</th><td width="20%" align="right"> <a accesskey="n" href="radius-auth.html">Next</a></td></tr></table><hr /></div><div xml:lang="en" class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="saml-auth"></a>Chapter 13. SAML Authentication</h2></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="saml-auth.html#saml-downloading">Downloading the SAML authentication extension</a></span></dt><dt><span class="section"><a href="saml-auth.html#installing-saml-auth">Installing SAML authentication</a></span></dt><dd><dl><dt><span class="section"><a href="saml-auth.html#guac-saml-config">Configuring Guacamole for SAML Authentication</a></span></dt><dt><span class="section"><a href="saml-auth.html#completing-saml-install">Completing the installation</a></span></dt></dl></dd></dl></div><a id="idm46227496333168" class="indexterm"></a><p>SAML is a widely implemented and used Single Sign On (SSO) provider that allows
+		applications and services to authenticate in a standard way, and brokers those
+		authentication requests to one or more back-end authentication providers.  The SAML
+		authentication extension allows Guacamole to redirect to a SAML Identity Provider (IdP)
+		for authentication and user services.  This module does not provide any capability
+		for storing or retrieving connections, and must be layered with other authentication
+		extensions that provide connection management.</p><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="saml-downloading"></a>Downloading the SAML authentication extension</h2></div></div></div><p>The SAML authentication extension is available separately from the main
+                <code class="filename">guacamole.war</code>. The link for this and all other
+            officially-supported and compatible extensions for a particular version of Guacamole are
+            provided on the release notes for that version. You can find the release notes for
+            current versions of Guacamole here: <a class="link" href="http://guacamole.apache.org/releases/" target="_top">http://guacamole.apache.org/releases/</a>.</p><p>The SAML authentication extension is packaged as a <code class="filename">.tar.gz</code>
+            file containing only the extension itself,
+                <code class="filename">guacamole-auth-saml-1.3.0.jar</code>, which must
+            ultimately be placed in <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-saml-auth"></a>Installing SAML authentication</h2></div></div></div><p>Guacamole extensions are self-contained <code class="filename">.jar</code> files which are
+            located within the <code class="filename">GUACAMOLE_HOME/extensions</code> directory.
+                <span class="emphasis"><em>If you are unsure where <code class="varname">GUACAMOLE_HOME</code> is located on
+                your system, please consult <a class="xref" href="configuring-guacamole.html" title="Chapter 5. Configuring Guacamole">Chapter 5, <em>Configuring Guacamole</em></a> before
+                proceeding.</em></span></p><p>To install the SAML authentication extension, you must:</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Create the <code class="filename">GUACAMOLE_HOME/extensions</code> directory, if it
+                    does not already exist.</p></li><li class="step"><p>Copy <code class="filename">guacamole-auth-saml-1.3.0.jar</code> within
+                        <code class="filename">GUACAMOLE_HOME/extensions</code>.</p></li><li class="step"><p>Configure Guacamole to use SAML authentication, as described
+                    below.</p></li></ol></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="guac-saml-config"></a>Configuring Guacamole for SAML Authentication</h3></div></div></div><a id="idm46227496841600" class="indexterm"></a><a id="idm46227496840688" class="indexterm"></a><p>The SAML authentication extension provides several configuration properties
+                to set it up to talk to the IdP.  The SAML IdP also must be configured with
+                Guacamole as a Service Provider (SP).  Configuration of the SAML IdP is beyond
+                the scope of this document, and will vary widely based on the IdP in use.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="property">saml-idp-metadata-url</span></span></dt><dd><p>The URI of the XML metadata file that from the
+                            SAML Identity Provider that contains all of the
+                            information the SAML extension needs in order to
+                            know how to authenticate with the IdP. This URI can
+                            either be a remote server (e.g. https://) or a local
+                            file on the filesystem (e.g. file://). Often the
+                            metadata file contains most of the required
+                            properties for SAML authentication and the other
+                            parameters are not required.</p></dd><dt><span class="term"><span class="property">saml-idp-url</span></span></dt><dd><p>The base URL of the SAML IdP. This is the URL that
+                            the SAML authentication extension will use to redirect
+                            when requesting SAML authentication. If the
+                            <span class="property">saml-idp-metadata</span> property is
+                            provided, this parameter will be ignored. If the metadata
+                            file is not provided this property is required.</p></dd><dt><span class="term"><span class="property">saml-entity-id</span></span></dt><dd><p>The entity ID of the Guacamole SAML client, which is
+                            generally the URL of the Guacamole server, but is not
+                            required to be so. This property is required if
+                            either the <span class="property">saml-idp-metadata-url</span>
+                            property is not specified, or if the provided
+                            metadata file does not contain the SAML SP Entity
+                            ID for Guacamole Client.</p></dd><dt><span class="term"><span class="property">saml-callback-url</span></span></dt><dd><p>The URL that the IdP will use once authentication has
+                            succeeded to return to the Guacamole web application and
+                            provide the authentication details to the SAML extension.
+                            The SAML extension currently only supports callback as a
+                            POST operation to this callback URL. This property
+                            is required.</p></dd><dt><span class="term"><span class="property">saml-strict</span></span></dt><dd><p>Require strict security checks during SAML logins.
+                            This will insure that valid certificates are
+                            present for all interactions with SAML servers and
+                            fail SAML authentication if security restrictions
+                            are violated. This property is optional, and will
+                            default to true, requiring strict security checks.
+                            This property should only be set to false in
+                            non-production environments during testing of
+                            SAML authentication.</p></dd><dt><span class="term"><span class="property">saml-debug</span></span></dt><dd><p>Enable additional logging within the supporting
+                            SAML library that can assist in tracking down issues
+                            during SAML logins. This property is optional, and 
+                            will default to false (no debugging).</p></dd><dt><span class="term"><span class="property">saml-compress-request</span></span></dt><dd><p>Enable compression of the HTTP requests sent to
+                            the SAML IdP. This property is optional and will
+                            default to true (compression enabled).</p></dd><dt><span class="term"><span class="property">saml-compress-response</span></span></dt><dd><p>Request that the SAML response returned by the
+                            IdP be compressed. This property is optional and
+                            will default to true (compression will be requested).
+                        </p></dd><dt><span class="term"><span class="property">saml-group-attribute</span></span></dt><dd><p>The name of the attribute provided by the SAML IdP
+                            that contains group membership of the user. These
+                            groups will be parsed and used to map group
+                            membership of the user logging in, which can be used
+                            for permissions management within Guacamole Client,
+                            particularly when layered with other authentication
+                            modules. This property is optional, and defaults to
+                            "groups".</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="completing-saml-install"></a>Completing the installation</h3></div></div></div><p>Guacamole will only reread <code class="filename">guacamole.properties</code> and load
+                newly-installed extensions during startup, so your servlet container will need to be
+                restarted before SAML authentication can be used. <span class="emphasis"><em>Doing this will
+                    disconnect all active users, so be sure that it is safe to do so prior to
+                    attempting installation.</em></span> When ready, restart your servlet container
+                and give the new authentication a try.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="openid-auth.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="users-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="radius-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 12. OpenID Connect Authentication </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 14. RADIUS Authentication</td></tr></table></div>
+
+            </div></div>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        </body></html>
