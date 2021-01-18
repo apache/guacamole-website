@@ -21,29 +21,25 @@ mailing list of the [ASF Security Team](https://www.apache.org/security/) or
 the <security@guacamole.apache.org> mailing list, before disclosing or
 discussing the issue in a public forum.
 
-{% assign releases = site.security | group_by: 'fixed' %}
+{% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' %}
 {% for release in releases reversed %}
 
-{% assign asfrelease = site.releases | where: 'title', release.name %}
-{% if asfrelease != empty %}
-Fixed in Apache Guacamole {{ release.name }}
---------------------------------------------
-{% else %}
-Fixed in Guacamole {{ release.name }} (pre-Apache release)
-----------------------------------------------------------
-{% endif %}
+    {% assign reports = site.security | where: 'fixed', release.title | sort: 'title' %}
+    {% capture title %} Fixed in Apache Guacamole {{ release.title }} {% endcapture %}
+    {% include cve-list.html title=title reports=reports %}
 
-<ul>
-    {% assign reports = release.items | sort: 'title' %}
-    {% for report in reports %}
-    <li>
-        <h3 id="{{ report.cve }}">
-            {{ report.title }}
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name={{ report.cve | url_encode }}">{{ report.cve }}</a>)
-        </h3>
-        {{ report.content }}
-    </li>
-    {% endfor %}
-</ul>
 {% endfor %}
+
+{% assign releases = site.legacy-releases | sort: 'date' %}
+{% for release in releases reversed %}
+
+    {% assign reports = site.security | where: 'fixed', release.title | sort: 'title' %}
+    {% capture title %} Fixed in Guacamole {{ release.title }} (pre-Apache release) {% endcapture %}
+    {% include cve-list.html title=title reports=reports %}
+
+{% endfor %}
+
+{% assign reports = site.security | where: 'fixed', '0.6.3' | sort: 'title' %}
+{% capture title %} Fixed in Guacamole 0.6.3 (pre-Apache release) {% endcapture %}
+{% include cve-list.html title=title reports=reports %}
 
