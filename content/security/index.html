@@ -421,17 +421,38 @@ mailing list of the <a href="https://www.apache.org/security/">ASF Security Team
 the <a href="mailto:security@guacamole.apache.org">security@guacamole.apache.org</a> mailing list, before disclosing or
 discussing the issue in a public forum.</p>
 
-<h2 id="fixed-in-apache-guacamole-120">Fixed in Apache Guacamole 1.2.0</h2>
-
+<h2 id="fixed-in-apache-guacamole-130">Fixed in Apache Guacamole 1.3.0</h2>
 <ul>
     
+        <li>
+            <h3 id="CVE-2020-11997">
+                Inconsistent restriction of connection history visibility
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11997">CVE-2020-11997</a>)
+            </h3>
+            <p>Apache Guacamole 1.2.0 and older do not consistently restrict access to
+connection history based on user visibility. If multiple users share access to
+the same connection, those users may be able to see which other users have
+accessed that connection, as well as the IP addresses from which that
+connection was accessed, even if those users do not otherwise have permission
+to see other users.</p>
+
+<p>Acknowledgements: We would like to thank William Le Berre (Synetis) for
+reporting this issue.</p>
+
+
+        </li>
     
-    <li>
-        <h3 id="CVE-2020-9498">
-            Dangling pointer in RDP static virtual channel handling
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9498">CVE-2020-9498</a>)
-        </h3>
-        <p>Apache Guacamole 1.1.0 and older may mishandle pointers involved in processing
+</ul>
+
+<h2 id="fixed-in-apache-guacamole-120">Fixed in Apache Guacamole 1.2.0</h2>
+<ul>
+    
+        <li>
+            <h3 id="CVE-2020-9498">
+                Dangling pointer in RDP static virtual channel handling
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9498">CVE-2020-9498</a>)
+            </h3>
+            <p>Apache Guacamole 1.1.0 and older may mishandle pointers involved in processing
 data received via RDP static virtual channels. If a user connects to a
 malicious or compromised RDP server, a series of specially-crafted PDUs could
 result in memory corruption, possibly allowing arbitrary code to be executed
@@ -441,14 +462,14 @@ with the privileges of the running guacd process.</p>
 reporting this issue.</p>
 
 
-    </li>
+        </li>
     
-    <li>
-        <h3 id="CVE-2020-9497">
-            Improper input validation of RDP static virtual channels
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9497">CVE-2020-9497</a>)
-        </h3>
-        <p>Apache Guacamole 1.1.0 and older do not properly validate data received from
+        <li>
+            <h3 id="CVE-2020-9497">
+                Improper input validation of RDP static virtual channels
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9497">CVE-2020-9497</a>)
+            </h3>
+            <p>Apache Guacamole 1.1.0 and older do not properly validate data received from
 RDP servers via static virtual channels. If a user connects to a malicious or
 compromised RDP server, specially-crafted PDUs could result in disclosure of
 information within the memory of the guacd process handling the connection.</p>
@@ -457,21 +478,19 @@ information within the memory of the guacd process handling the connection.</p>
 (Check Point Research) for reporting this issue.</p>
 
 
-    </li>
+        </li>
     
 </ul>
 
 <h2 id="fixed-in-apache-guacamole-100">Fixed in Apache Guacamole 1.0.0</h2>
-
 <ul>
     
-    
-    <li>
-        <h3 id="CVE-2018-1340">
-            Secure flag missing from session cookie
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1340">CVE-2018-1340</a>)
-        </h3>
-        <p>Prior to 1.0.0, Apache Guacamole used a cookie for client-side storage of the
+        <li>
+            <h3 id="CVE-2018-1340">
+                Secure flag missing from session cookie
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1340">CVE-2018-1340</a>)
+            </h3>
+            <p>Prior to 1.0.0, Apache Guacamole used a cookie for client-side storage of the
 user’s session token. This cookie lacked the “secure” flag, which could allow
 an attacker eavesdropping on the network to intercept the user’s session token
 if unencrypted HTTP requests are made to the same domain.</p>
@@ -479,21 +498,19 @@ if unencrypted HTTP requests are made to the same domain.</p>
 <p>Acknowledgements: We would like to thank Ross Golder for reporting this issue.</p>
 
 
-    </li>
+        </li>
     
 </ul>
 
 <h2 id="fixed-in-apache-guacamole-0911-incubating">Fixed in Apache Guacamole 0.9.11-incubating</h2>
-
 <ul>
     
-    
-    <li>
-        <h3 id="CVE-2017-3158">
-            Buffer overflow in SSH/telnet terminal emulator
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3158">CVE-2017-3158</a>)
-        </h3>
-        <p>A race condition in Guacamole’s terminal emulator could allow writes of blocks
+        <li>
+            <h3 id="CVE-2017-3158">
+                Buffer overflow in SSH/telnet terminal emulator
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3158">CVE-2017-3158</a>)
+            </h3>
+            <p>A race condition in Guacamole’s terminal emulator could allow writes of blocks
 of printed data to overlap. Such overlapping writes could cause packet data to
 be misread as the packet length, resulting in the remaining data being written
 beyond the end of a statically-allocated buffer.</p>
@@ -501,21 +518,19 @@ beyond the end of a statically-allocated buffer.</p>
 <p>Acknowledgements: We would like to thank Hariprasad Ng for reporting this
 issue.</p>
 
-    </li>
+        </li>
     
 </ul>
 
 <h2 id="fixed-in-guacamole-099-pre-apache-release">Fixed in Guacamole 0.9.9 (pre-Apache release)</h2>
-
 <ul>
     
-    
-    <li>
-        <h3 id="CVE-2016-1566">
-            Stored cross-site scripting (XSS) in file browser
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1566">CVE-2016-1566</a>)
-        </h3>
-        <p>A cross-site scripting (XSS) vulnerability was discovered through which files
+        <li>
+            <h3 id="CVE-2016-1566">
+                Stored cross-site scripting (XSS) in file browser
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1566">CVE-2016-1566</a>)
+            </h3>
+            <p>A cross-site scripting (XSS) vulnerability was discovered through which files
 with specially-crafted filenames could lead to JavaScript execution if file
 transfer is enabled to a location which is shared by multiple users, and the
 filename is displayed within the file browser located within the Guacamole
@@ -524,21 +539,19 @@ menu.</p>
 <p>Acknowledgements: We would like to thank Niv Levy for reporting this issue.</p>
 
 
-    </li>
+        </li>
     
 </ul>
 
 <h2 id="fixed-in-guacamole-063-pre-apache-release">Fixed in Guacamole 0.6.3 (pre-Apache release)</h2>
-
 <ul>
     
-    
-    <li>
-        <h3 id="CVE-2012-4415">
-            Buffer overflow in guac_client_plugin_open()
-            (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4415">CVE-2012-4415</a>)
-        </h3>
-        <p>A stack-based buffer overflow vulnerability was discovered in the
+        <li>
+            <h3 id="CVE-2012-4415">
+                Buffer overflow in guac_client_plugin_open()
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4415">CVE-2012-4415</a>)
+            </h3>
+            <p>A stack-based buffer overflow vulnerability was discovered in the
 <code class="highlighter-rouge">guac_client_plugin_open()</code> function in libguac in Guacamole before 0.6.3
 which could allow remote attackers to cause a denial of service (crash) or
 execute arbitrary code via a long protocol name.</p>
@@ -547,7 +560,7 @@ execute arbitrary code via a long protocol name.</p>
 this issue.</p>
 
 
-    </li>
+        </li>
     
 </ul>
 
