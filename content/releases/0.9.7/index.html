@@ -532,13 +532,13 @@
 
 <h1>Guacamole 0.9.7</h1>
 
-<p>The 0.9.7 release of Guacamole greatly simplifies the installation process for extensions and reduces the need for <code class="highlighter-rouge">guacamole.properties</code>, providing reasonable defaults where possible. Extensions can now be used to theme, brand, and translate Guacamole, not only to provide custom authentication. In addition to several bug fixes, this release also marks the first public availability of Guacamole in languages other than English, and the first official release with support for Docker.</p>
+<p>The 0.9.7 release of Guacamole greatly simplifies the installation process for extensions and reduces the need for <code class="language-plaintext highlighter-rouge">guacamole.properties</code>, providing reasonable defaults where possible. Extensions can now be used to theme, brand, and translate Guacamole, not only to provide custom authentication. In addition to several bug fixes, this release also marks the first public availability of Guacamole in languages other than English, and the first official release with support for Docker.</p>
 
 <h2 id="simplified-extensions">Simplified extensions</h2>
 
-<p>Guacamole extensions are now entirely self-contained <code class="highlighter-rouge">.jar</code> files which can be installed simply by <a href="/doc/0.9.7/gug/configuring-guacamole.html#guacamole-home">copying them into the <code class="highlighter-rouge">GUACAMOLE_HOME/extensions</code> directory</a>. The <code class="highlighter-rouge">auth-provider</code> and <code class="highlighter-rouge">lib-directory</code> properties are still supported for backward compatibility, but are no longer needed. The remaining common properties, like <code class="highlighter-rouge">guacd-hostname</code> and <code class="highlighter-rouge">guacd-port</code>, now have default values and no longer need to be specified unless your configuration deviates from the defaults.</p>
+<p>Guacamole extensions are now entirely self-contained <code class="language-plaintext highlighter-rouge">.jar</code> files which can be installed simply by <a href="/doc/0.9.7/gug/configuring-guacamole.html#guacamole-home">copying them into the <code class="language-plaintext highlighter-rouge">GUACAMOLE_HOME/extensions</code> directory</a>. The <code class="language-plaintext highlighter-rouge">auth-provider</code> and <code class="language-plaintext highlighter-rouge">lib-directory</code> properties are still supported for backward compatibility, but are no longer needed. The remaining common properties, like <code class="language-plaintext highlighter-rouge">guacd-hostname</code> and <code class="language-plaintext highlighter-rouge">guacd-port</code>, now have default values and no longer need to be specified unless your configuration deviates from the defaults.</p>
 
-<p>Each extension now also provides enough information for Guacamole to determine compatibility prior to loading the extension. If an extension is not compatible, and is not forcibly loaded through the legacy <code class="highlighter-rouge">auth-provider</code> property, Guacamole will refuse to load the extension and log an error describing the problem.</p>
+<p>Each extension now also provides enough information for Guacamole to determine compatibility prior to loading the extension. If an extension is not compatible, and is not forcibly loaded through the legacy <code class="language-plaintext highlighter-rouge">auth-provider</code> property, Guacamole will refuse to load the extension and log an error describing the problem.</p>
 
 <ul>
   <li>[<a href="https://glyptodon.org/jira/browse/GUAC-631">GUAC-631</a>] - Remove need for guacamole.properties</li>
@@ -547,7 +547,7 @@
 
 <h2 id="theming-and-translation">Theming and translation</h2>
 
-<p>In the past, Guacamole extensions could only be used to extend authentication. Extensions can now be used to <a href="/doc/0.9.7/gug/guacamole-ext.html">augment Guacamole’s styling for the sake of theming or branding</a>, or to add additional translations or on-screen keyboard layouts. Multiple extensions can be loaded at the same time by simply placing their <code class="highlighter-rouge">.jar</code> files within <code class="highlighter-rouge">GUACAMOLE_HOME/extensions</code>, though no more than one extension may provide authentication.</p>
+<p>In the past, Guacamole extensions could only be used to extend authentication. Extensions can now be used to <a href="/doc/0.9.7/gug/guacamole-ext.html">augment Guacamole’s styling for the sake of theming or branding</a>, or to add additional translations or on-screen keyboard layouts. Multiple extensions can be loaded at the same time by simply placing their <code class="language-plaintext highlighter-rouge">.jar</code> files within <code class="language-plaintext highlighter-rouge">GUACAMOLE_HOME/extensions</code>, though no more than one extension may provide authentication.</p>
 
 <p>With this translation support in place, Guacamole has been translated into both French and Russian, and those translations have been contributed and merged into the main Guacamole codebase thanks to the generosity of Jerome Charlot and Konstantin Kozhin.</p>
 
@@ -615,7 +615,7 @@
 
 <h2 id="rdp-features">RDP features</h2>
 
-<p>Support for specifying the name of the connecting RDP client is now available through an additional <code class="highlighter-rouge">client-name</code> parameter. Past releases would simply send the hostname of the guacd server to the RDP server when connecting, but Guacamole 0.9.7 allows this to be explicitly specified on a per-connection basis. Setting this value affects the <code class="highlighter-rouge">CLIENTNAME</code> environment variable of Windows RDP servers.</p>
+<p>Support for specifying the name of the connecting RDP client is now available through an additional <code class="language-plaintext highlighter-rouge">client-name</code> parameter. Past releases would simply send the hostname of the guacd server to the RDP server when connecting, but Guacamole 0.9.7 allows this to be explicitly specified on a per-connection basis. Setting this value affects the <code class="language-plaintext highlighter-rouge">CLIENTNAME</code> environment variable of Windows RDP servers.</p>
 
 <p>Support for Italian keyboards has also been added - a contribution from Denis Bernacci.</p>
 

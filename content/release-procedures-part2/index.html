@@ -414,7 +414,7 @@
     </ul>
   </li>
   <li><a href="#upload-docs" id="markdown-toc-upload-docs">Upload documentation and release notes</a></li>
-  <li><a href="#ppmc-vote" id="markdown-toc-ppmc-vote">Create the PMC <code class="highlighter-rouge">[VOTE]</code> thread</a></li>
+  <li><a href="#ppmc-vote" id="markdown-toc-ppmc-vote">Create the PMC <code class="language-plaintext highlighter-rouge">[VOTE]</code> thread</a></li>
 </ul>
 
 <h2 id="tag-rc">Tag the release candidate</h2>
@@ -422,17 +422,17 @@
 <p>Once <a href="/release-procedures-part1/">the release process has begun</a> and the
 release has been <strong>thoroughly tested</strong>, the git repositories must be tagged for
 a new release candidate. These tags are made off the release branch (<em>not</em> off
-<code class="highlighter-rouge">master</code>), and are in the format <code class="highlighter-rouge">[VERSION]-RC[N]</code>, where <code class="highlighter-rouge">[VERSION]</code> is the
-version of the upcoming release and <code class="highlighter-rouge">[N]</code> is the number of the release
+<code class="language-plaintext highlighter-rouge">master</code>), and are in the format <code class="language-plaintext highlighter-rouge">[VERSION]-RC[N]</code>, where <code class="language-plaintext highlighter-rouge">[VERSION]</code> is the
+version of the upcoming release and <code class="language-plaintext highlighter-rouge">[N]</code> is the number of the release
 candidate:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11 - RC1." 0.9.11-RC1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11 - RC1." 0.9.11-RC1
 $ git push upstream 0.9.11-RC1
 </code></pre></div></div>
 
 <p>Each repository relevant to the release must be tagged. At this point, this
 will be every repository that has a release branch. This <em>never</em> includes
-<code class="highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
+<code class="language-plaintext highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
 
 <p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=guacamole-server.git;a=tag;h=6c2bc47a93899cf00a869e7a2a5416fd5b081ed3">the
 “0.9.10-incubating-RC3” tag on
@@ -442,8 +442,8 @@ guacamole-server</a></p>
 
 <p>Create and sign release artifacts for all modified components, uploading to
 Apache’s dev dist via SVN (<em>NOT</em> the release dist), grouping the artifacts
-within <code class="highlighter-rouge">binary/</code> and <code class="highlighter-rouge">source/</code> subdirectories of a top-level, RC-specific
-subdirectory (named in the same <code class="highlighter-rouge">[VERSION]-RC[N]</code> format as the <a href="#tag-rc">repository
+within <code class="language-plaintext highlighter-rouge">binary/</code> and <code class="language-plaintext highlighter-rouge">source/</code> subdirectories of a top-level, RC-specific
+subdirectory (named in the same <code class="language-plaintext highlighter-rouge">[VERSION]-RC[N]</code> format as the <a href="#tag-rc">repository
 tag</a>).</p>
 
 <p>Creating the source and binary artifacts involves building the components of
@@ -451,7 +451,7 @@ Guacamole normally. The process for producing signatures and uploading the
 artifacts will depend on whether the artifacts are being deployed to a Maven
 repository.</p>
 
-<p><strong>If your PGP key is not already present in the <code class="highlighter-rouge">KEYS</code> file, you will need to
+<p><strong>If your PGP key is not already present in the <code class="language-plaintext highlighter-rouge">KEYS</code> file, you will need to
 add it prior to signing artifacts.</strong></p>
 
 <h3 id="artifacts">Normal source / binary artifacts</h3>
@@ -459,63 +459,63 @@ add it prior to signing artifacts.</strong></p>
 <p>There are currently two source artifacts:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">guacamole-client-[VERSION].tar.gz</code></li>
-  <li><code class="highlighter-rouge">guacamole-server-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-client-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-server-[VERSION].tar.gz</code></li>
 </ul>
 
-<p><code class="highlighter-rouge">guacamole-client-[VERSION].tar.gz</code> is created automatically when
-<code class="highlighter-rouge">guacamole-client</code> is built with <code class="highlighter-rouge">mvn clean install</code>.
-<code class="highlighter-rouge">guacamole-server-[VERSION].tar.gz</code> can be built manually by running <code class="highlighter-rouge">make
-dist</code> within <code class="highlighter-rouge">guacamole-server</code>. The <code class="highlighter-rouge">Makefile</code>, etc. will need to
-have been generated first by running <code class="highlighter-rouge">autoreconf -fi</code> followed by
-<code class="highlighter-rouge">./configure</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">guacamole-client-[VERSION].tar.gz</code> is created automatically when
+<code class="language-plaintext highlighter-rouge">guacamole-client</code> is built with <code class="language-plaintext highlighter-rouge">mvn clean install</code>.
+<code class="language-plaintext highlighter-rouge">guacamole-server-[VERSION].tar.gz</code> can be built manually by running <code class="language-plaintext highlighter-rouge">make
+dist</code> within <code class="language-plaintext highlighter-rouge">guacamole-server</code>. The <code class="language-plaintext highlighter-rouge">Makefile</code>, etc. will need to
+have been generated first by running <code class="language-plaintext highlighter-rouge">autoreconf -fi</code> followed by
+<code class="language-plaintext highlighter-rouge">./configure</code>.</p>
 
-<p><code class="highlighter-rouge">guacamole-server</code> does not provide any convenience binaries, but
-<code class="highlighter-rouge">guacamole-client</code> does:</p>
+<p><code class="language-plaintext highlighter-rouge">guacamole-server</code> does not provide any convenience binaries, but
+<code class="language-plaintext highlighter-rouge">guacamole-client</code> does:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">guacamole-[VERSION].war</code></li>
-  <li><code class="highlighter-rouge">guacamole-auth-duo-[VERSION].tar.gz</code></li>
-  <li><code class="highlighter-rouge">guacamole-auth-header-[VERSION].tar.gz</code></li>
-  <li><code class="highlighter-rouge">guacamole-auth-jdbc-[VERSION].tar.gz</code></li>
-  <li><code class="highlighter-rouge">guacamole-auth-ldap-[VERSION].tar.gz</code></li>
-  <li><code class="highlighter-rouge">guacamole-auth-noauth-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-[VERSION].war</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-auth-duo-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-auth-header-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-auth-jdbc-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-auth-ldap-[VERSION].tar.gz</code></li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-auth-noauth-[VERSION].tar.gz</code></li>
 </ul>
 
-<p>Each of the above can be found within the <code class="highlighter-rouge">guacamole-client</code> source
-tree once it has been built with <code class="highlighter-rouge">mvn clean install</code>.</p>
+<p>Each of the above can be found within the <code class="language-plaintext highlighter-rouge">guacamole-client</code> source
+tree once it has been built with <code class="language-plaintext highlighter-rouge">mvn clean install</code>.</p>
 
 <p>Producing the required MD5 and SHA256 checksums for a given artifact is very
 straightforward:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ md5sum FILENAME &gt; FILENAME.md5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ md5sum FILENAME &gt; FILENAME.md5
 $ sha256sum FILENAME &gt; FILENAME.sha
 </code></pre></div></div>
 
-<p>To produce the PGP signature for a given artifact, use <code class="highlighter-rouge">gpg</code>, as documented in
+<p>To produce the PGP signature for a given artifact, use <code class="language-plaintext highlighter-rouge">gpg</code>, as documented in
 Apache’s own <a href="https://www.apache.org/dev/release-signing.html#openpgp-ascii-detach-sig">release signing documentation</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --armor --output FILENAME.asc --detach-sig FILENAME
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gpg --armor --output FILENAME.asc --detach-sig FILENAME
 </code></pre></div></div>
 
 <p>Example: <a href="https://dist.apache.org/repos/dist/dev/incubator/guacamole/?p=17053">the SVN commit uploading RC1 of 0.9.10-incubating (r17053)</a></p>
 
 <h3 id="staging-maven">Maven artifacts</h3>
 
-<p>The following Maven subprojects of <code class="highlighter-rouge">guacamole-client</code> must be
+<p>The following Maven subprojects of <code class="language-plaintext highlighter-rouge">guacamole-client</code> must be
 uploaded to Apache’s Nexus:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">guacamole-common</code> (<code class="highlighter-rouge">.jar</code>, source, and javadoc)</li>
-  <li><code class="highlighter-rouge">guacamole-common-js</code> (<code class="highlighter-rouge">.zip</code> only)</li>
-  <li><code class="highlighter-rouge">guacamole-ext</code> (<code class="highlighter-rouge">.jar</code>, source, and javadoc)</li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-common</code> (<code class="language-plaintext highlighter-rouge">.jar</code>, source, and javadoc)</li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-common-js</code> (<code class="language-plaintext highlighter-rouge">.zip</code> only)</li>
+  <li><code class="language-plaintext highlighter-rouge">guacamole-ext</code> (<code class="language-plaintext highlighter-rouge">.jar</code>, source, and javadoc)</li>
 </ul>
 
 <p>Uploading to <a href="https://repository.apache.org/">Apache’s Nexus repository</a>
 requires that your username and password be stored within your Maven
-<code class="highlighter-rouge">~/.m2/settings.xml</code>:</p>
+<code class="language-plaintext highlighter-rouge">~/.m2/settings.xml</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;settings&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;settings&gt;
     &lt;servers&gt;
         &lt;server&gt;
             &lt;id&gt;apache&lt;/id&gt;
@@ -526,12 +526,12 @@ requires that your username and password be stored within your Maven
 &lt;/settings&gt;
 </code></pre></div></div>
 
-<p>The ID of the server is arbitrary but must match the <code class="highlighter-rouge">repositoryId</code> value given
-to Maven. The examples here use <code class="highlighter-rouge">apache</code>. Most artifacts are Java <code class="highlighter-rouge">.jar</code> files
+<p>The ID of the server is arbitrary but must match the <code class="language-plaintext highlighter-rouge">repositoryId</code> value given
+to Maven. The examples here use <code class="language-plaintext highlighter-rouge">apache</code>. Most artifacts are Java <code class="language-plaintext highlighter-rouge">.jar</code> files
 with corresponding JavaDoc and source jars. Each of these must be signed and
-uploaded individually using the <code class="highlighter-rouge">gpg:sign-and-deploy-file</code> mojo:</p>
+uploaded individually using the <code class="language-plaintext highlighter-rouge">gpg:sign-and-deploy-file</code> mojo:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache -DpomFile=guacamole-common/pom.xml \
     -Dfile=guacamole-common/target/guacamole-common-0.9.10.jar
@@ -549,12 +549,12 @@ $ mvn gpg:sign-and-deploy-file \
     -Dclassifier=sources
 </code></pre></div></div>
 
-<p>The above will need to be done for both <code class="highlighter-rouge">guacamole-common</code> and <code class="highlighter-rouge">guacamole-ext</code>,
+<p>The above will need to be done for both <code class="language-plaintext highlighter-rouge">guacamole-common</code> and <code class="language-plaintext highlighter-rouge">guacamole-ext</code>,
 assuming both have been modified for the release. For JavaScript artifacts like
-<code class="highlighter-rouge">guacamole-common-js</code> which produce a single <code class="highlighter-rouge">.zip</code> file, only the <code class="highlighter-rouge">.zip</code> file
+<code class="language-plaintext highlighter-rouge">guacamole-common-js</code> which produce a single <code class="language-plaintext highlighter-rouge">.zip</code> file, only the <code class="language-plaintext highlighter-rouge">.zip</code> file
 needs to be uploaded. The command for this is slightly different:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mvn gpg:sign-and-deploy-file \
     -Durl=https://repository.apache.org/service/local/staging/deploy/maven2 \
     -DrepositoryId=apache \
     -DpomFile=guacamole-common-js/pom.xml \
@@ -572,28 +572,28 @@ URL of the repository will need to be provided in the VOTE email.</p>
 
 <p>Both guacamole-client and guacamole-server have associated Docker images which
 are produced along with releases as a form of convenience binaries. These
-images are <code class="highlighter-rouge">guacamole/guacamole</code> and <code class="highlighter-rouge">guacamole/guacd</code> respectively, both
+images are <code class="language-plaintext highlighter-rouge">guacamole/guacamole</code> and <code class="language-plaintext highlighter-rouge">guacamole/guacd</code> respectively, both
 hosted under the Apache Guacamole project’s <a href="https://hub.docker.com/u/guacamole/">Docker Hub
 account</a>.</p>
 
 <p>When building the Docker images, keep in mind:</p>
 
 <ol>
-  <li>You should run <code class="highlighter-rouge">git clean -xfd .</code> first, to ensure the build context
+  <li>You should run <code class="language-plaintext highlighter-rouge">git clean -xfd .</code> first, to ensure the build context
 uploaded to the Docker daemon is minimal, and that future builds of the
 exact same source will not result in different images (this serves as a
 pre-release sanity check).</li>
-  <li>You <strong>MUST NOT</strong> update the <code class="highlighter-rouge">latest</code> tag on Docker Hub, as this must only
+  <li>You <strong>MUST NOT</strong> update the <code class="language-plaintext highlighter-rouge">latest</code> tag on Docker Hub, as this must only
 point to the latest stable release.</li>
   <li>When building a Docker image with the intent of pushing to a specific tag,
 the Docker image must be built with that tag.</li>
 </ol>
 
-<p>For example, to build the <code class="highlighter-rouge">guacamole/guacamole</code> Docker image for the current
-release candidate, from within the top-level <code class="highlighter-rouge">guacamole-client</code>
+<p>For example, to build the <code class="language-plaintext highlighter-rouge">guacamole/guacamole</code> Docker image for the current
+release candidate, from within the top-level <code class="language-plaintext highlighter-rouge">guacamole-client</code>
 directory:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
 $ sudo docker build -t guacamole/guacamole:0.9.11-RC1 .
 $ sudo docker push guacamole/guacamole:0.9.11-RC1
 </code></pre></div></div>
@@ -603,9 +603,9 @@ $ sudo docker push guacamole/guacamole:0.9.11-RC1
 <p>The draft release notes and updated documentation both need to be uploaded to
 the website prior to <a href="#pmc-vote">calling the PMC vote</a>. These changes should
 be handled like any other website changes - via pull requests against the
-<code class="highlighter-rouge">guacamole-website</code> repository. <strong>DO NOT UPDATE THE TOP-LEVEL
-DOCUMENTATION SYMBOLIC LINKS!</strong> The top-level symbolic links in the <code class="highlighter-rouge">doc/</code>
-directory of <code class="highlighter-rouge">guacamole-website</code> point to the documentation for the
+<code class="language-plaintext highlighter-rouge">guacamole-website</code> repository. <strong>DO NOT UPDATE THE TOP-LEVEL
+DOCUMENTATION SYMBOLIC LINKS!</strong> The top-level symbolic links in the <code class="language-plaintext highlighter-rouge">doc/</code>
+directory of <code class="language-plaintext highlighter-rouge">guacamole-website</code> point to the documentation for the
 latest release, and are thus only updated once the release is complete.</p>
 
 <p>Take a look at past release notes to get an idea for the expected format. There
@@ -629,13 +629,13 @@ release notes for 0.9.10-incubating-RC3</a></li>
   <li><a href="https://github.com/apache/guacamole-website/tree/master/doc/0.9.10-incubating">The updated documentation for 0.9.10-incubating</a></li>
 </ul>
 
-<h2 id="ppmc-vote">Create the PMC <code class="highlighter-rouge">[VOTE]</code> thread</h2>
+<h2 id="ppmc-vote">Create the PMC <code class="language-plaintext highlighter-rouge">[VOTE]</code> thread</h2>
 
 <p>Once the above has been completed, request a vote with an email to
-<a href="mailto:dev@guacamole.apache.org">dev@guacamole.apache.org</a> titled <code class="highlighter-rouge">[VOTE] Release Apache Guacamole [VERSION]
+<a href="mailto:dev@guacamole.apache.org">dev@guacamole.apache.org</a> titled <code class="language-plaintext highlighter-rouge">[VOTE] Release Apache Guacamole [VERSION]
 (RC[N])</code>, containing the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello all,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello all,
 
 The [NTH] release candidate for Apache Guacamole [VERSION] has been
 uploaded and is ready for VOTE. The draft release notes (along with links
@@ -682,10 +682,10 @@ Thanks,
 [YOU]
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">[VERSION]</code> is the release version, <code class="highlighter-rouge">[N]</code> and <code class="highlighter-rouge">[NTH]</code> are the number of
-the release candidate, <code class="highlighter-rouge">[STAGING REPOSITORY URL]</code> is the URL of <a href="#staging-maven">the staging
-repository created earlier</a>, <code class="highlighter-rouge">[EMAIL]</code> is the email address
-associated with the PGP key used to sign the release artifacts, and <code class="highlighter-rouge">[YOU]</code> is
+<p>Where <code class="language-plaintext highlighter-rouge">[VERSION]</code> is the release version, <code class="language-plaintext highlighter-rouge">[N]</code> and <code class="language-plaintext highlighter-rouge">[NTH]</code> are the number of
+the release candidate, <code class="language-plaintext highlighter-rouge">[STAGING REPOSITORY URL]</code> is the URL of <a href="#staging-maven">the staging
+repository created earlier</a>, <code class="language-plaintext highlighter-rouge">[EMAIL]</code> is the email address
+associated with the PGP key used to sign the release artifacts, and <code class="language-plaintext highlighter-rouge">[YOU]</code> is
 your name.  Obviously, alter the email as necessary if the scope of the release
 is different.</p>
 

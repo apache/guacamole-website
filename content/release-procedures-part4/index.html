@@ -420,19 +420,19 @@ updated:</p>
 
 <ol>
   <li>
-    <p>The top-level symbolic links within <code class="highlighter-rouge">/doc</code> must be updated to point to the
+    <p>The top-level symbolic links within <code class="language-plaintext highlighter-rouge">/doc</code> must be updated to point to the
 documentation of the latest release.</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">released: false</code> field at the top of the release notes needs to be
-updated to <code class="highlighter-rouge">released: true</code> to allow the release to be listed with the rest
-in the <a href="/releases/">release archives</a>. The <code class="highlighter-rouge">date</code> field should also be
+    <p>The <code class="language-plaintext highlighter-rouge">released: false</code> field at the top of the release notes needs to be
+updated to <code class="language-plaintext highlighter-rouge">released: true</code> to allow the release to be listed with the rest
+in the <a href="/releases/">release archives</a>. The <code class="language-plaintext highlighter-rouge">date</code> field should also be
 updated to note the actual date and time of release.</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">artifact-root</code>, <code class="highlighter-rouge">checksum-root</code>, and <code class="highlighter-rouge">download-path</code> must be updated
+    <p>The <code class="language-plaintext highlighter-rouge">artifact-url</code>, <code class="language-plaintext highlighter-rouge">checksum-url</code>, and <code class="language-plaintext highlighter-rouge">download-path</code> must be updated
 to use the release directory (rather than the RC directory) and to <em>not</em>
-use <code class="highlighter-rouge">dist.apache.org</code>.</p>
+use <code class="language-plaintext highlighter-rouge">dist.apache.org</code>.</p>
   </li>
 </ol>
 
@@ -450,12 +450,12 @@ as a placeholder:</p>
 
 <h2 id="email-announce">Email announcement</h2>
 
-<p>Finally, send an email with the subject <code class="highlighter-rouge">[ANNOUNCE] Apache Guacamole [VERSION]
+<p>Finally, send an email with the subject <code class="language-plaintext highlighter-rouge">[ANNOUNCE] Apache Guacamole [VERSION]
 released</code> to <a href="mailto:announce@apache.org">announce@apache.org</a>, <a href="mailto:dev@guacamole.apache.org">dev@guacamole.apache.org</a>, and
 <a href="mailto:user@guacamole.apache.org">user@guacamole.apache.org</a>. <strong>This email MUST be sent from an apache.org
 email address</strong>, and should contain an announcement like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The Apache Guacamole community is proud to announce the release of Apache
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The Apache Guacamole community is proud to announce the release of Apache
 Guacamole [VERSION].
 
 Apache Guacamole is a clientless remote desktop gateway which supports standard
@@ -479,7 +479,7 @@ Thanks!
 The Apache Guacamole Community
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">[VERSION]</code> is the version that was just released and <code class="highlighter-rouge">[RELEASE
+<p>Where <code class="language-plaintext highlighter-rouge">[VERSION]</code> is the version that was just released and <code class="language-plaintext highlighter-rouge">[RELEASE
 HIGHLIGHTS]</code> is a brief description of the key features, improvements, and bug
 fixes of the release.</p>
 

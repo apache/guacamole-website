@@ -423,11 +423,11 @@ the pull request as merged.</p>
   <li>Your personal fork of the GitHub mirror</li>
 </ol>
 
-<p>For the sake of simplicity, these will be referred to here as <code class="highlighter-rouge">upstream</code>,
-<code class="highlighter-rouge">mirror</code>, and <code class="highlighter-rouge">origin</code>, respectively. For example, the recommended
-configuration for <code class="highlighter-rouge">guacamole-server</code> would be:</p>
+<p>For the sake of simplicity, these will be referred to here as <code class="language-plaintext highlighter-rouge">upstream</code>,
+<code class="language-plaintext highlighter-rouge">mirror</code>, and <code class="language-plaintext highlighter-rouge">origin</code>, respectively. For example, the recommended
+configuration for <code class="language-plaintext highlighter-rouge">guacamole-server</code> would be:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote -v
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote -v
 mirror git@github.com:apache/guacamole-server.git
 origin git@github.com:mike-jumper/guacamole-server.git
 upstream https://git-wip-us.apache.org/repos/asf/guacamole-server.git
@@ -442,17 +442,17 @@ to:</p>
     <p>Manually fetch the contents of the pull request to a new branch via the
 command line:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch mirror pull/NUMBER/head:some-branch
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch mirror pull/NUMBER/head:some-branch
 </code></pre></div>    </div>
 
-    <p>where <code class="highlighter-rouge">NUMBER</code> is the pull request number and <code class="highlighter-rouge">some-branch</code> is a sensible
+    <p>where <code class="language-plaintext highlighter-rouge">NUMBER</code> is the pull request number and <code class="language-plaintext highlighter-rouge">some-branch</code> is a sensible
 branch name of your choice.</p>
   </li>
   <li>
-    <p>Ensure your copy of the base branch is up to date, whether that be <code class="highlighter-rouge">master</code>
+    <p>Ensure your copy of the base branch is up to date, whether that be <code class="language-plaintext highlighter-rouge">master</code>
 or the staging branch for an upcoming release:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch upstream
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git fetch upstream
 $ git checkout master
 $ git merge --ff-only upstream/master
 $ git push origin
@@ -461,23 +461,23 @@ $ git push origin
   <li>
     <p>Merge the branch containing the changes from the pull request:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git merge --no-ff some-branch
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git merge --no-ff some-branch
 </code></pre></div>    </div>
 
-    <p><strong>Be sure to specify <code class="highlighter-rouge">--no-ff</code>!</strong> Merges of pull requests must have
+    <p><strong>Be sure to specify <code class="language-plaintext highlighter-rouge">--no-ff</code>!</strong> Merges of pull requests must have
 corresponding merge commits, and the messages of those merge commits must
 properly tag the associated JIRA issue (just like all other commits).</p>
   </li>
   <li>
     <p>Confirm that the changes look as expected:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git diff upstream/master
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git diff upstream/master
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Push the merge result to the ASF repository:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push upstream master
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push upstream master
 </code></pre></div>    </div>
 
     <p>You will be prompted for your username (Apache ID) and password. It is
@@ -512,10 +512,10 @@ for the issue in JIRA.</p>
   <li>
     <p>Merging the pull request to the <strong>staging branch</strong>. The steps for doing this
 are exactly as described above, except you will need to specify
-<code class="highlighter-rouge">staging/VERSION</code> instead of <code class="highlighter-rouge">master</code>.</p>
+<code class="language-plaintext highlighter-rouge">staging/VERSION</code> instead of <code class="language-plaintext highlighter-rouge">master</code>.</p>
   </li>
   <li>
-    <p>Merging the <strong>staging branch</strong> to <strong><code class="highlighter-rouge">master</code></strong>. Doing this is largely the
+    <p>Merging the <strong>staging branch</strong> to <strong><code class="language-plaintext highlighter-rouge">master</code></strong>. Doing this is largely the
 same as described above, except that there is inherently no JIRA issue to
 tag in the commit message. A message like “Merging 0.9.10 changes back to
 master.” is pretty sensible.</p>
@@ -523,7 +523,7 @@ master.” is pretty sensible.</p>
     <p><strong>DO NOT MERGE THE PULL REQUEST TO MASTER DIRECTLY!</strong> The point of merging
 the staging branch to master rather than the pull request is to ensure that
 the git history reflects that all commits to the staging branch are present
-on <code class="highlighter-rouge">master</code>. If the pull request is merged to master directly, then the git
+on <code class="language-plaintext highlighter-rouge">master</code>. If the pull request is merged to master directly, then the git
 history ends up with two distinct merges and two distinct sets of commits,
 and final release sanity checks performed prior to deleting the staging
 branch will fail.</p>

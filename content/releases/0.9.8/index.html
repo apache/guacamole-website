@@ -608,9 +608,9 @@
 
 <h2 id="support-for-telnet-break">Support for telnet break</h2>
 
-<p>The telnet protocol provides for sending a “break” to the remote end, but it was previously impossible to send this signal using Guacamole. Unlike <code class="highlighter-rouge">Ctrl</code>+<code class="highlighter-rouge">C</code> and similar keyboard shortcuts, which actually result in <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29">control codes</a>, <a href="https://en.wikipedia.org/wiki/Break_key">“break”</a> is more low-level and is commonly necessary to control running processes within a telnet session to a network appliance.</p>
+<p>The telnet protocol provides for sending a “break” to the remote end, but it was previously impossible to send this signal using Guacamole. Unlike <code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">C</code> and similar keyboard shortcuts, which actually result in <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C0_.28ASCII_and_derivatives.29">control codes</a>, <a href="https://en.wikipedia.org/wiki/Break_key">“break”</a> is more low-level and is commonly necessary to control running processes within a telnet session to a network appliance.</p>
 
-<p>To send “break” over telnet within Guacamole, you can press either <code class="highlighter-rouge">Pause</code>, <code class="highlighter-rouge">Break</code>, or <code class="highlighter-rouge">Ctrl</code>+<code class="highlighter-rouge">0</code>.</p>
+<p>To send “break” over telnet within Guacamole, you can press either <code class="language-plaintext highlighter-rouge">Pause</code>, <code class="language-plaintext highlighter-rouge">Break</code>, or <code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">0</code>.</p>
 
 <ul>
   <li>[<a href="https://glyptodon.org/jira/browse/GUAC-1296">GUAC-1296</a>] - Add support for IAC BRK</li>

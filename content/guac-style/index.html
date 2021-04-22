@@ -444,8 +444,8 @@ all styles have merit. This is simply the style we prefer, for our own reasons.<
 
 <p><strong>When in doubt, follow the style around you.</strong> If you see that the code uses a
 4-space indent and no tabs, then obviously you should not use tabs. If you see
-the code uses <code class="highlighter-rouge">variables_named_like_this</code>, then your code should not suddenly
-start <code class="highlighter-rouge">namingThingsLikeThis</code>.</p>
+the code uses <code class="language-plaintext highlighter-rouge">variables_named_like_this</code>, then your code should not suddenly
+start <code class="language-plaintext highlighter-rouge">namingThingsLikeThis</code>.</p>
 
 <p>That said, these style guidelines are intended to be adopted going forward. We
 develop according to these guidelines, but definitely may not have done so in
@@ -468,7 +468,7 @@ logical blocks. Yes, HTML should be commented, too.</li>
 members must be documented with JavaDoc/Doxygen, wrapping lines as necessary
 to fit the 80 column maximum:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /**
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /**
   * High-level function description. Implementation details if
   * appropriate (it's usually not).
   *
@@ -486,7 +486,7 @@ to fit the 80 column maximum:</p>
   int fun(int var1, int var2);
 </code></pre></div>    </div>
   </li>
-  <li>Do not use the <code class="highlighter-rouge">@author</code> tag (or similar). The authors of various parts of
+  <li>Do not use the <code class="language-plaintext highlighter-rouge">@author</code> tag (or similar). The authors of various parts of
 the codebase should be tracked by git, not by the code itself.</li>
   <li>There must be no undocumented behavior of functions.</li>
   <li>If changes you are making will make parts of the existing manual incorrect,
@@ -500,13 +500,13 @@ appropriate header file, and documented within the header file.</li>
 <h2 id="braces">Braces</h2>
 
 <ol>
-  <li>Avoid braces when unnecessary (single statement <code class="highlighter-rouge">if</code>’s, for example) unless
+  <li>Avoid braces when unnecessary (single statement <code class="language-plaintext highlighter-rouge">if</code>’s, for example) unless
 it significantly increases readability. There is no hard rule here - use
 your own best judgment.</li>
   <li>
-    <p>Do not cuddle the <code class="highlighter-rouge">else</code>, etc.</p>
+    <p>Do not cuddle the <code class="language-plaintext highlighter-rouge">else</code>, etc.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /* Do this */
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /* Do this */
  if (thing) {
  }
  else {
@@ -518,9 +518,9 @@ your own best judgment.</li>
  }
 </code></pre></div>    </div>
 
-    <p>The only exception here is <code class="highlighter-rouge">do</code>/<code class="highlighter-rouge">while</code>:</p>
+    <p>The only exception here is <code class="language-plaintext highlighter-rouge">do</code>/<code class="language-plaintext highlighter-rouge">while</code>:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> do {
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> do {
  } while (thing);
 </code></pre></div>    </div>
   </li>
@@ -530,13 +530,13 @@ your own best judgment.</li>
 
 <ol>
   <li>Variables, functions, and datatypes in C should use the standard C
-convention of <code class="highlighter-rouge">words_separated_by_underscores</code>. Functions must have an
+convention of <code class="language-plaintext highlighter-rouge">words_separated_by_underscores</code>. Functions must have an
 appropriate namespace.</li>
   <li>Variables and functions in Java and JavaScript should use
-<code class="highlighter-rouge">headlessCamelCase</code>. Classes in Java and JavaScript should use <code class="highlighter-rouge">CamelCase</code>.</li>
+<code class="language-plaintext highlighter-rouge">headlessCamelCase</code>. Classes in Java and JavaScript should use <code class="language-plaintext highlighter-rouge">CamelCase</code>.</li>
   <li>Constants and enums (or variables which are intended to be constant) in all
-languages should use <code class="highlighter-rouge">UPPERCASE_WORDS_SEPARATED_BY_UNDERSCORES</code>.</li>
-  <li>Prefer <code class="highlighter-rouge">'single quotes'</code> over <code class="highlighter-rouge">"double quotes"</code> for strings in JavaScript.</li>
+languages should use <code class="language-plaintext highlighter-rouge">UPPERCASE_WORDS_SEPARATED_BY_UNDERSCORES</code>.</li>
+  <li>Prefer <code class="language-plaintext highlighter-rouge">'single quotes'</code> over <code class="language-plaintext highlighter-rouge">"double quotes"</code> for strings in JavaScript.</li>
 </ol>
 
 <h2 id="error-handling">Error Handling</h2>

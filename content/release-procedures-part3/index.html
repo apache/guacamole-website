@@ -421,13 +421,13 @@
 <p>Once <a href="/release-procedures-part2/#pmc-vote">the PMC vote</a> for the release has
 passed, the release branches <a href="/release-procedures-part1/#release-branch">which were created
 previously</a> must be deleted.
-Assuming they were properly merged back to <code class="highlighter-rouge">master</code> as release-specific changes
-were made, deleting these branches with <code class="highlighter-rouge">git branch -d</code> will succeed without
+Assuming they were properly merged back to <code class="language-plaintext highlighter-rouge">master</code> as release-specific changes
+were made, deleting these branches with <code class="language-plaintext highlighter-rouge">git branch -d</code> will succeed without
 warnings. If git refuses to delete the branches because commits are missing
-from <code class="highlighter-rouge">master</code>, <strong>something is horribly wrong, and the release needs to be
+from <code class="language-plaintext highlighter-rouge">master</code>, <strong>something is horribly wrong, and the release needs to be
 rechecked</strong>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout master
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout master
 $ git branch -d staging/0.9.11
 $ git push upstream :staging/0.9.11
 </code></pre></div></div>
@@ -437,16 +437,16 @@ $ git push upstream :staging/0.9.11
 <p>The specific point in the git history that the release was made must be marked
 with a new tag, pointing to the exact same commit as the last <a href="/release-procedures-part2/#tag-rc">tagged release
 candidate</a>. This tag must be made in the
-format <code class="highlighter-rouge">[VERSION]</code>, where <code class="highlighter-rouge">[VERSION]</code> is the version of the release:</p>
+format <code class="language-plaintext highlighter-rouge">[VERSION]</code>, where <code class="language-plaintext highlighter-rouge">[VERSION]</code> is the version of the release:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11." 0.9.11
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git tag -m "Release 0.9.11." 0.9.11
 $ git push upstream 0.9.11
 </code></pre></div></div>
 
 <p>Just as with release candidates, each repository relevant to the release must
 be tagged. This will be every repository that had a release branch (the release
 branch having been <a href="#delete-branch">deleted earlier</a>) and <em>never</em> includes
-<code class="highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
+<code class="language-plaintext highlighter-rouge">guacamole-website</code>, which is not part of the release.</p>
 
 <p>Example: <a href="https://git1-us-west.apache.org/repos/asf?p=guacamole-server.git;a=tag;h=0875ca8f4e86b942b466cfebf84cc33c47095130">the “0.9.10-incubating” tag on
 guacamole-server</a></p>
@@ -457,12 +457,12 @@ guacamole-server</a></p>
 
 <p>The release artifacts and their signatures come from the release candidate
 which was approved via the VOTE. These artifacts are already present in the SVN
-dist area under <code class="highlighter-rouge">dev/</code>, and need to be moved to the analogous area under
-<code class="highlighter-rouge">release/</code>. <em>This must be done using <code class="highlighter-rouge">svn mv</code></em>, with the directory containing
-the artifacts and signatures being renamed from <code class="highlighter-rouge">[VERSION]-RC[N]</code> to
-<code class="highlighter-rouge">[VERSION</code>] in the process.</p>
+dist area under <code class="language-plaintext highlighter-rouge">dev/</code>, and need to be moved to the analogous area under
+<code class="language-plaintext highlighter-rouge">release/</code>. <em>This must be done using <code class="language-plaintext highlighter-rouge">svn mv</code></em>, with the directory containing
+the artifacts and signatures being renamed from <code class="language-plaintext highlighter-rouge">[VERSION]-RC[N]</code> to
+<code class="language-plaintext highlighter-rouge">[VERSION</code>] in the process.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ svn mv dev/guacamole/0.9.11-RC1 release/guacamole/0.9.11
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ svn mv dev/guacamole/0.9.11-RC1 release/guacamole/0.9.11
 $ svn commit -m "Promote Apache Guacamole 0.9.11-RC1 artifacts to 0.9.11 release."
 </code></pre></div></div>
 
@@ -488,17 +488,17 @@ present on <a href="https://repository.apache.org/">https://repository.apache.or
 
 <h3 id="docker-images">Docker images</h3>
 
-<p>Both the <code class="highlighter-rouge">guacamole/guacamole</code> and <code class="highlighter-rouge">guacamole/guacd</code> images should now be
-updated with a new version-specific tag, duplicated to the <code class="highlighter-rouge">latest</code> tag. Since
+<p>Both the <code class="language-plaintext highlighter-rouge">guacamole/guacamole</code> and <code class="language-plaintext highlighter-rouge">guacamole/guacd</code> images should now be
+updated with a new version-specific tag, duplicated to the <code class="language-plaintext highlighter-rouge">latest</code> tag. Since
 the images deployed for past release candidates were first cleaned with
-<code class="highlighter-rouge">git clean</code>, nothing should be actually rebuilt as a consequence of running
-<code class="highlighter-rouge">docker build</code> unless something has gone wrong and source changes were made
+<code class="language-plaintext highlighter-rouge">git clean</code>, nothing should be actually rebuilt as a consequence of running
+<code class="language-plaintext highlighter-rouge">docker build</code> unless something has gone wrong and source changes were made
 in the absence of an RC.</p>
 
-<p>For example, to build the <code class="highlighter-rouge">guacamole/guacamole</code> Docker image for the current
-release candidate, from within the top-level <code class="highlighter-rouge">guacamole-client</code> directory:</p>
+<p>For example, to build the <code class="language-plaintext highlighter-rouge">guacamole/guacamole</code> Docker image for the current
+release candidate, from within the top-level <code class="language-plaintext highlighter-rouge">guacamole-client</code> directory:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clean -xfd .
 $ sudo docker build -t guacamole/guacamole:0.9.11 .
 $ sudo docker build -t guacamole/guacamole:latest .
 </code></pre></div></div>
@@ -507,7 +507,7 @@ $ sudo docker build -t guacamole/guacamole:latest .
 hash of the built images should match each other and the previous RC. Assuming
 all looks well, it should be safe to push the images:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo docker push guacamole/guacamole:0.9.11
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo docker push guacamole/guacamole:0.9.11
 $ sudo docker push guacamole/guacamole:latest
 </code></pre></div></div>
 

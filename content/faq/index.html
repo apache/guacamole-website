@@ -439,7 +439,7 @@
     </ul>
   </li>
   <li><a href="#development" id="markdown-toc-development">Development / integration</a>    <ul>
-      <li><a href="#iframes" id="markdown-toc-iframes">I want to put Guacamole in an <code class="highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</a></li>
+      <li><a href="#iframes" id="markdown-toc-iframes">I want to put Guacamole in an <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</a></li>
       <li><a href="#integrate-auth" id="markdown-toc-integrate-auth">I want to integrate Guacamole into my application, so I’ve written a script which updates the database / XML / …</a></li>
       <li><a href="#disable-auth" id="markdown-toc-disable-auth">My application already does authentication. How do I disable authentication within Guacamole?</a></li>
     </ul>
@@ -458,12 +458,12 @@ Guacamole itself is the <em>only</em> factor affecting whether things work corre
 <ul>
   <li>Check Guacamole’s logs for errors or warnings related to your configuration.
 These logs are within the logs of your servlet container, such as Apache
-Tomcat. Common locations are <code class="highlighter-rouge">/var/log/tomcat/catalina.out</code> or within the
-systemd journal (accessed via <code class="highlighter-rouge">journalctl</code>).</li>
+Tomcat. Common locations are <code class="language-plaintext highlighter-rouge">/var/log/tomcat/catalina.out</code> or within the
+systemd journal (accessed via <code class="language-plaintext highlighter-rouge">journalctl</code>).</li>
   <li>Check guacd’s logs for errors or warnings and and verify that guacd is
 actually running. Messages from guacd are logged to syslog, commonly located
-at <code class="highlighter-rouge">/var/log/syslog</code>, <code class="highlighter-rouge">/var/log/messages</code>, or within the systemd journal
-(accessed via <code class="highlighter-rouge">journalctl</code>).</li>
+at <code class="language-plaintext highlighter-rouge">/var/log/syslog</code>, <code class="language-plaintext highlighter-rouge">/var/log/messages</code>, or within the systemd journal
+(accessed via <code class="language-plaintext highlighter-rouge">journalctl</code>).</li>
   <li>Verify that your remote desktop server is actually accessible from the
 Guacamole server using a different remote desktop client.</li>
   <li>Verify that the configuration parameters given for the remote desktop
@@ -521,8 +521,8 @@ which actually handles the low-level connections to remote desktops. Check
 guacd’s logs for errors or warnings and verify that guacd is actually running.</p>
 
 <p>Messages from guacd are logged to syslog, which is commonly located at
-<code class="highlighter-rouge">/var/log/syslog</code>, <code class="highlighter-rouge">/var/log/messages</code>, or within the systemd journal (accessed
-via <code class="highlighter-rouge">journalctl</code>). You should also verify that your remote desktop server is
+<code class="language-plaintext highlighter-rouge">/var/log/syslog</code>, <code class="language-plaintext highlighter-rouge">/var/log/messages</code>, or within the systemd journal (accessed
+via <code class="language-plaintext highlighter-rouge">journalctl</code>). You should also verify that your remote desktop server is
 actually accessible from the Guacamole server (using a different remote desktop
 client), and that the configuration parameters given for the remote desktop
 connection are correct (even if you are positive that you typed them
@@ -709,14 +709,14 @@ under development which achieves the same goal (see above).</p>
 
 <h2 id="development">Development / integration</h2>
 
-<h3 id="iframes">I want to put Guacamole in an <code class="highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</h3>
+<h3 id="iframes">I want to put Guacamole in an <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> but keyboard doesn’t work correctly.</h3>
 
-<p>It is generally not recommended to rely on <code class="highlighter-rouge">&lt;iframe&gt;</code> to integrate Guacamole
+<p>It is generally not recommended to rely on <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> to integrate Guacamole
 for precisely this reason. Browser keyboard focus is problematic if an
-<code class="highlighter-rouge">&lt;iframe&gt;</code> is used, as once focus has been lost, clicking within the <code class="highlighter-rouge">&lt;iframe&gt;</code>
+<code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> is used, as once focus has been lost, clicking within the <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code>
 will not necessarily return keyboard focus to Guacamole.</p>
 
-<p>Rather than use an <code class="highlighter-rouge">&lt;iframe&gt;</code>, you should instead look into leveraging
+<p>Rather than use an <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code>, you should instead look into leveraging
 Guacamole’s JavaScript API,
 <a href="/doc/gug/guacamole-common-js.html">guacamole-common-js</a>, thus integrating
 Guacamole into your page directly. You might even consider building your own
@@ -724,13 +724,13 @@ web application from Guacamole’s core Java API,
 <a href="/doc/gug/guacamole-common.html">guacamole-common</a>, if that would provide a
 better experience.</p>
 
-<p>If an <code class="highlighter-rouge">&lt;iframe&gt;</code> is really the only feasible solution, you can work around
-keyboard focus issues by automatically refocusing the <code class="highlighter-rouge">&lt;iframe&gt;</code> whenever focus
+<p>If an <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> is really the only feasible solution, you can work around
+keyboard focus issues by automatically refocusing the <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> whenever focus
 is not explicitly on some other part of the page.  For example, assuming the
-variable <code class="highlighter-rouge">iframe</code> points to the DOM element of the <code class="highlighter-rouge">&lt;iframe&gt;</code> containing
+variable <code class="language-plaintext highlighter-rouge">iframe</code> points to the DOM element of the <code class="language-plaintext highlighter-rouge">&lt;iframe&gt;</code> containing
 Guacamole, you could refocus Guacamole by default with something like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
  * Refocuses the iframe containing Guacamole if the user is not already
  * focusing another non-body element on the page.
  */

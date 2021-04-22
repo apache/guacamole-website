@@ -409,9 +409,9 @@
   <li><a href="#discuss-thread" id="markdown-toc-discuss-thread">Create a discussion thread for the release</a></li>
   <li><a href="#release-branch" id="markdown-toc-release-branch">Create the release branch</a></li>
   <li><a href="#bump-version" id="markdown-toc-bump-version">Bump version numbers</a>    <ul>
-      <li><a href="#bumping-the-version-of-guacamole-server" id="markdown-toc-bumping-the-version-of-guacamole-server">Bumping the version of <code class="highlighter-rouge">guacamole-server</code></a></li>
-      <li><a href="#bumping-the-version-of-guacamole-client" id="markdown-toc-bumping-the-version-of-guacamole-client">Bumping the version of <code class="highlighter-rouge">guacamole-client</code></a></li>
-      <li><a href="#updating-guacamole-manual-accordingly" id="markdown-toc-updating-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">guacamole-manual</code> accordingly</a></li>
+      <li><a href="#bumping-the-version-of-guacamole-server" id="markdown-toc-bumping-the-version-of-guacamole-server">Bumping the version of <code class="language-plaintext highlighter-rouge">guacamole-server</code></a></li>
+      <li><a href="#bumping-the-version-of-guacamole-client" id="markdown-toc-bumping-the-version-of-guacamole-client">Bumping the version of <code class="language-plaintext highlighter-rouge">guacamole-client</code></a></li>
+      <li><a href="#updating-guacamole-manual-accordingly" id="markdown-toc-updating-guacamole-manual-accordingly">Updating <code class="language-plaintext highlighter-rouge">guacamole-manual</code> accordingly</a></li>
     </ul>
   </li>
 </ul>
@@ -420,7 +420,7 @@
 
 <p>Beginning a new release candidate should not be a unilateral decision. There is
 no requirement that an official vote be held prior to starting a release
-candidate, but there needs to be some discussion via a <code class="highlighter-rouge">[DISCUSS]</code> thread on
+candidate, but there needs to be some discussion via a <code class="language-plaintext highlighter-rouge">[DISCUSS]</code> thread on
 <a href="mailto:dev@guacamole.apache.org">dev@guacamole.apache.org</a> to gauge whether the time is right for a release.</p>
 
 <p>Development of Apache Guacamole is not halted when a release is being prepared,
@@ -443,29 +443,29 @@ JIRA (their “Fix Version” field should point to the release).</p>
 <h2 id="release-branch">Create the release branch</h2>
 
 <p>When a release has been decided, release-specific branches need to be created
-to isolate the development line of the release from that of the main <code class="highlighter-rouge">master</code>
-branch. This allows development on <code class="highlighter-rouge">master</code> to continue, while allowing the
+to isolate the development line of the release from that of the main <code class="language-plaintext highlighter-rouge">master</code>
+branch. This allows development on <code class="language-plaintext highlighter-rouge">master</code> to continue, while allowing the
 contents of the release to remain within the agreed scope.</p>
 
-<p>Create a new <code class="highlighter-rouge">staging/[VERSION]</code> branch for each of the following repositories,
-where <code class="highlighter-rouge">[VERSION]</code> is the version of the upcoming release, such as
+<p>Create a new <code class="language-plaintext highlighter-rouge">staging/[VERSION]</code> branch for each of the following repositories,
+where <code class="language-plaintext highlighter-rouge">[VERSION]</code> is the version of the upcoming release, such as
 “0.9.11”:</p>
 
 <ul>
-  <li><a href="https://github.com/apache/guacamole-client"><code class="highlighter-rouge">guacamole-client</code></a></li>
-  <li><a href="https://github.com/apache/guacamole-server"><code class="highlighter-rouge">guacamole-server</code></a></li>
-  <li><a href="https://github.com/apache/guacamole-manual"><code class="highlighter-rouge">guacamole-manual</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-client"><code class="language-plaintext highlighter-rouge">guacamole-client</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-server"><code class="language-plaintext highlighter-rouge">guacamole-server</code></a></li>
+  <li><a href="https://github.com/apache/guacamole-manual"><code class="language-plaintext highlighter-rouge">guacamole-manual</code></a></li>
 </ul>
 
 <p>Note that <em>the
-<a href="https://github.com/apache/guacamole-website"><code class="highlighter-rouge">guacamole-website</code></a>
+<a href="https://github.com/apache/guacamole-website"><code class="language-plaintext highlighter-rouge">guacamole-website</code></a>
 repository does not get a release branch</em>. The website points to release
 artifacts, etc. but is not itself part of the release.</p>
 
 <p>Once the release branch is made, all release-specific changes must be made
 against the release branch <em>only</em>. Pull requests for changes related to the
 release must be merged directly to the release branch, with the release branch
-continually merged back to <code class="highlighter-rouge">master</code> with each such change.</p>
+continually merged back to <code class="language-plaintext highlighter-rouge">master</code> with each such change.</p>
 
 <h2 id="bump-version">Bump version numbers</h2>
 
@@ -480,48 +480,48 @@ bumping the version numbers of some components will result in their
 dependencies being modified, and thus bumped as well. For example:</p>
 
 <ul>
-  <li>If <code class="highlighter-rouge">guacamole-ext</code> is modified, all extensions and <code class="highlighter-rouge">guacamole</code> itself will
-need to depend on the new version of <code class="highlighter-rouge">guacamole-ext</code>.</li>
-  <li>If <code class="highlighter-rouge">guacamole</code> is modified (this has been the case for all past releases),
+  <li>If <code class="language-plaintext highlighter-rouge">guacamole-ext</code> is modified, all extensions and <code class="language-plaintext highlighter-rouge">guacamole</code> itself will
+need to depend on the new version of <code class="language-plaintext highlighter-rouge">guacamole-ext</code>.</li>
+  <li>If <code class="language-plaintext highlighter-rouge">guacamole</code> is modified (this has been the case for all past releases),
 all extensions will need to be modified to specify the correct version
-number in their <code class="highlighter-rouge">guac-manifest.json</code>.</li>
+number in their <code class="language-plaintext highlighter-rouge">guac-manifest.json</code>.</li>
 </ul>
 
-<h3 id="bumping-the-version-of-guacamole-server">Bumping the version of <code class="highlighter-rouge">guacamole-server</code></h3>
+<h3 id="bumping-the-version-of-guacamole-server">Bumping the version of <code class="language-plaintext highlighter-rouge">guacamole-server</code></h3>
 
-<p>The main locations which need modification within <code class="highlighter-rouge">guacamole-server</code>
+<p>The main locations which need modification within <code class="language-plaintext highlighter-rouge">guacamole-server</code>
 are:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">configure.ac</code></li>
-  <li><code class="highlighter-rouge">doc/Doxyfile</code> (if libguac has been modified)</li>
-  <li>libtool version-info within <code class="highlighter-rouge">src/libguac/Makefile.am</code> (if libguac has been 
+  <li><code class="language-plaintext highlighter-rouge">configure.ac</code></li>
+  <li><code class="language-plaintext highlighter-rouge">doc/Doxyfile</code> (if libguac has been modified)</li>
+  <li>libtool version-info within <code class="language-plaintext highlighter-rouge">src/libguac/Makefile.am</code> (if libguac has been 
 modified)</li>
-  <li><code class="highlighter-rouge">bin/guacctl</code></li>
-  <li>The manpages for <code class="highlighter-rouge">guacd</code>, <code class="highlighter-rouge">guacenc</code>, and <code class="highlighter-rouge">guacd.conf</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bin/guacctl</code></li>
+  <li>The manpages for <code class="language-plaintext highlighter-rouge">guacd</code>, <code class="language-plaintext highlighter-rouge">guacenc</code>, and <code class="language-plaintext highlighter-rouge">guacd.conf</code>.</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/guacamole-server/pull/34">the pull request for bumping <code class="highlighter-rouge">guacamole-server</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-server/pull/34">the pull request for bumping <code class="language-plaintext highlighter-rouge">guacamole-server</code> to 0.9.11-incubating</a></p>
 
-<h3 id="bumping-the-version-of-guacamole-client">Bumping the version of <code class="highlighter-rouge">guacamole-client</code></h3>
+<h3 id="bumping-the-version-of-guacamole-client">Bumping the version of <code class="language-plaintext highlighter-rouge">guacamole-client</code></h3>
 
-<p>The main locations which need modification within <code class="highlighter-rouge">guacamole-client</code>
+<p>The main locations which need modification within <code class="language-plaintext highlighter-rouge">guacamole-client</code>
 are:</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">pom.xml</code> of any modified project, as well as any project which depends
+  <li>The <code class="language-plaintext highlighter-rouge">pom.xml</code> of any modified project, as well as any project which depends
 on a modified project (and is thus modified itself). <strong>Don’t forget the
-example project in <code class="highlighter-rouge">doc/guacamole-example</code>!</strong></li>
-  <li>The <code class="highlighter-rouge">guac-manifest.json</code> of any extension.</li>
-  <li>The <code class="highlighter-rouge">Guacamole.API_VERSION</code> value declared within <code class="highlighter-rouge">Version.js</code> (if
-<code class="highlighter-rouge">guacamole-common-js</code> has been modified).</li>
+example project in <code class="language-plaintext highlighter-rouge">doc/guacamole-example</code>!</strong></li>
+  <li>The <code class="language-plaintext highlighter-rouge">guac-manifest.json</code> of any extension.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">Guacamole.API_VERSION</code> value declared within <code class="language-plaintext highlighter-rouge">Version.js</code> (if
+<code class="language-plaintext highlighter-rouge">guacamole-common-js</code> has been modified).</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/guacamole-client/pull/103">the pull request for bumping <code class="highlighter-rouge">guacamole-client</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-client/pull/103">the pull request for bumping <code class="language-plaintext highlighter-rouge">guacamole-client</code> to 0.9.11-incubating</a></p>
 
-<h3 id="updating-guacamole-manual-accordingly">Updating <code class="highlighter-rouge">guacamole-manual</code> accordingly</h3>
+<h3 id="updating-guacamole-manual-accordingly">Updating <code class="language-plaintext highlighter-rouge">guacamole-manual</code> accordingly</h3>
 
-<p>The manual (<code class="highlighter-rouge">guacamole-manual</code>) will also need to be updated to point
+<p>The manual (<code class="language-plaintext highlighter-rouge">guacamole-manual</code>) will also need to be updated to point
 to the latest versions of everything. In most cases, this involves simply
 replacing the old version number with the new version number wherever it
 occurs, but the process needs to be selective if not all components have been
@@ -533,7 +533,7 @@ modified. In particular, watch out for:</p>
 tutorials.</li>
 </ul>
 
-<p>Example: <a href="https://github.com/apache/guacamole-manual/pull/23">the pull request for bumping <code class="highlighter-rouge">guacamole-manual</code> to 0.9.11-incubating</a></p>
+<p>Example: <a href="https://github.com/apache/guacamole-manual/pull/23">the pull request for bumping <code class="language-plaintext highlighter-rouge">guacamole-manual</code> to 0.9.11-incubating</a></p>
 
 
 
