@@ -23,7 +23,7 @@ updated:
    in the [release archives](/releases/). The `date` field should also be
    updated to note the actual date and time of release.
 
-3. The `artifact-root`, `checksum-root`, and `download-path` must be updated
+3. The `artifact-url`, `checksum-url`, and `download-path` must be updated
    to use the release directory (rather than the RC directory) and to *not*
    use `dist.apache.org`.
 

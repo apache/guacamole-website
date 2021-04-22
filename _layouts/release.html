@@ -47,8 +47,8 @@ Checksums of each released file are also provided.</p>
 <!-- Source archives -->
 <div class="release-downloads">
     {% include download-list.html
-        artifact-root=page.artifact-root
-        checksum-root=page.checksum-root
+        artifact-url=page.artifact-url
+        checksum-url=page.checksum-url
         checksum-suffixes=page.checksum-suffixes
         path=page.download-path
         files=page.source-dist %}
@@ -62,8 +62,8 @@ still be built and installed from source.</strong></p>
 <!-- All binaries -->
 <div class="release-downloads">
     {% include download-list.html
-        artifact-root=page.artifact-root
-        checksum-root=page.checksum-root
+        artifact-url=page.artifact-url
+        checksum-url=page.checksum-url
         checksum-suffixes=page.checksum-suffixes
         path=page.download-path
         files=page.binary-dist %}

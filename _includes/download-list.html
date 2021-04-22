@@ -1,11 +1,11 @@
 {% if include.files != empty %}
     <table>
+        {% assign filename_token = "{}" %}
         {% for file in include.files %}
             <tr>
-                {% assign mirror = include.artifact-root | append: include.path %}
-                {% assign dist = include.checksum-root | append: include.path %}
+                {% assign filename = include.path | append: file %}
                 {% assign basename = file | split: "/" | last %}
-                <td><a href="{{ mirror | append: file }}"
+                <td><a href="{{ include.artifact-url | replace: filename_token, filename }}"
                        onclick="trackDownload(
                            'click',
                            '{{ basename }}'
@@ -15,7 +15,8 @@
                            '{{ basename }}'
                        )">{{ basename }}</a></td>
                 {% for checksum in include.checksum-suffixes %}
-                    <td>[ <a href="{{ dist | append: file | append: checksum[1] }}">{{ checksum[0] }}</a> ]</td>
+                    {% assign checksum_filename = include.path | append:file | append: checksum[1] %}
+                    <td>[ <a href="{{ include.checksum-url | replace: filename_token, checksum_filename }}">{{ checksum[0] }}</a> ]</td>
                 {% endfor %}
             </tr>
         {% endfor %}
