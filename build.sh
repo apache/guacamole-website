@@ -76,7 +76,7 @@ assert_directory() {
 ##
 assert_program() {
     NAME="$1"
-    if ! which "$NAME" &> /dev/null; then
+    if ! which "$NAME" 2>&1 > /dev/null; then
         log "FATAL: \"$NAME\" is not installed."
         exit 1
     fi
