@@ -15,23 +15,6 @@ companies](#commercial-support) providing commercial support. If you provide
 commercial support and would like your company to be listed, please send us an
 email, and we will work with you to do so.
 
-Forums
-------
-
-While the Guacamole project does not provide its own forums, **you can use the
-general/users list as if it were a forum via the [forum interface provided by
-Nabble](http://apache-guacamole-incubating-users.2363388.n4.nabble.com/)**.
-Nabble provides a familiar forum interface wrapped around a mailing list
-archive, allowing forum users and mailing list users to communicate
-transparently.
-
-The Guacamole project did historically use the [SourceForge
-forums](https://sourceforge.net/p/guacamole/discussion/) prior to its
-acceptance into the Apache Incubator, so it may be worth searching through past
-threads there to see if your question has been asked and answered, but these
-forums have since been closed in favor of the project's official communication
-channels: the mailing lists.
-
 Mailing Lists
 -------------
 
@@ -55,10 +38,6 @@ Guacamole prior to its acceptance into the Apache Incubator.
 * [Subscribe](mailto:user-subscribe@guacamole.apache.org)
 * [Unsubscribe](mailto:user-unsubscribe@guacamole.apache.org)
 * [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-user/)
-
-Alternatively, the general/users list can also be used via the [forum hosted
-on Nabble](http://apache-guacamole-incubating-users.2363388.n4.nabble.com/),
-as described above.
 
 ### Development ([dev@guacamole.apache.org](mailto:dev@guacamole.apache.org))
 
