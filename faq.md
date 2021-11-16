@@ -262,6 +262,15 @@ method for X11, which is too complex. This is not necessary, though - as far as
 performance is concerned, there is an X.Org driver for Guacamole currently
 under development which achieves the same goal (see above).
 
+### I would like to access web pages via Guacamole. Can you add support for HTTP(s)? {#support-http}
+No. Guacamole is designed to be a remote desktop client, and the goal is not
+to provide a complete remote access solution (VPN, Proxy, Zero-Trust, etc.). There
+are many existing services available for VPN, Reverse Proxy, and the like, and Guacamole
+can complement these solutions by providing a remote desktop component to those
+systems, either operating alongside it or by using the API and common code to build
+a custom solution. However, adding VPN or (Reverse) Proxy components to Guacamole
+is outside the scope of the project.
+
 Development / integration {#development}
 ----------------------------------------
 
