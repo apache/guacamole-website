@@ -21,6 +21,12 @@ mailing list of the [ASF Security Team](https://www.apache.org/security/) or
 the <security@guacamole.apache.org> mailing list, before disclosing or
 discussing the issue in a public forum.
 
+Is Apache Guacamole affected by CVE-2021-44228? {#not-affected-by-cve-2021-44228}
+-----------------------------------------------
+
+No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
+[Logback](http://logback.qos.ch/) as its logging backend, not Log4j.
+
 {% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' %}
 {% for release in releases reversed %}
 
