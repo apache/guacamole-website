@@ -337,6 +337,10 @@ p {
     max-width: 80%;
 }
 
+#content p img {
+    max-width: 100%;
+}
+
 div#footer {
     font-size: 0.9em;
     border-top: 1px solid silver;
