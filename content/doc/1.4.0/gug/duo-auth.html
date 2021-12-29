@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Duo two-factor authentication &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TOTP two-factor authentication" href="totp-auth.html" />
+    <link rel="prev" title="LDAP authentication" href="ldap-auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Duo two-factor authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-duo-works-with-guacamole">How Duo works with Guacamole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-duo-extension">Downloading the Duo extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-duo-authentication">Installing Duo authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-guacamole-to-duo">Adding Guacamole to Duo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-guacamole-for-duo">Configuring Guacamole for Duo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#completing-the-installation">Completing the installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Duo two-factor authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/duo-auth.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="duo-two-factor-authentication">
+<h1>Duo two-factor authentication<a class="headerlink" href="#duo-two-factor-authentication" title="Permalink to this headline">¶</a></h1>
+<p>Guacamole supports Duo as a second authentication factor, layered on top
+of any other authentication extension, including those available from
+the main project website. The Duo authentication extension allows users
+to be additionally verified against the Duo service before the
+authentication process is allowed to succeed.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This chapter involves modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> - the
+Guacamole configuration directory. If you are unsure where <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> is
+located on your system, please consult <a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a> before
+proceeding.</p>
+</div>
+<div class="section" id="how-duo-works-with-guacamole">
+<span id="duo-architecture"></span><h2>How Duo works with Guacamole<a class="headerlink" href="#how-duo-works-with-guacamole" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole provides support for Duo as a second authentication factor. To
+make use of the Duo authentication extension, some other authentication
+mechanism will need be configured, as well. When a user attempts to log
+into Guacamole, other installed authentication methods will be queried
+first:</p>
+<p><img alt="" src="_images/duo-auth-factor-1.png" /></p>
+<p>Only after authentication has succeeded with one of those methods will
+Guacamole reach out to Duo to obtain additional verification of user
+identity:</p>
+<p><img alt="" src="_images/duo-auth-factor-2.png" /></p>
+<p>If both the initial authentication attempt and verification through Duo
+succeed, the user will be allowed in. If either mechanism fails, access
+to Guacamole is denied.</p>
+</div>
+<div class="section" id="downloading-the-duo-extension">
+<span id="duo-downloading"></span><h2>Downloading the Duo extension<a class="headerlink" href="#downloading-the-duo-extension" title="Permalink to this headline">¶</a></h2>
+<p>The Duo authentication extension is available separately from the main
+<code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code>. The link for this and all other officially-supported
+and compatible extensions for a particular version of Guacamole are
+provided on the release notes for that version. You can find the release
+notes for current versions of Guacamole here:
+http://guacamole.apache.org/releases/.</p>
+<p>The Duo authentication extension is packaged as a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file
+containing only the extension itself, <code class="docutils literal notranslate"><span class="pre">guacamole-auth-duo-1.4.0.jar</span></code>,
+which must ultimately be placed in <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p>
+</div>
+<div class="section" id="installing-duo-authentication">
+<span id="installing-duo-auth"></span><h2>Installing Duo authentication<a class="headerlink" href="#installing-duo-authentication" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole extensions are self-contained <code class="docutils literal notranslate"><span class="pre">.jar</span></code> files which are located
+within the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory. To install the Duo
+authentication extension, you must:</p>
+<ol class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">guacamole-auth-duo-1.4.0.jar</span></code> within <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p></li>
+<li><p>Configure Guacamole to use Duo authentication, as described below.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You will need to restart Guacamole by restarting your servlet container in
+order to complete the installation. Doing this will disconnect all active
+users, so be sure that it is safe to do so prior to attempting installation. If
+you do not configure the Duo authentication properly, Guacamole will not start
+up again until the configuration is fixed.</p>
+</div>
+<div class="section" id="adding-guacamole-to-duo">
+<h3>Adding Guacamole to Duo<a class="headerlink" href="#adding-guacamole-to-duo" title="Permalink to this headline">¶</a></h3>
+<p>Duo does not provide a specific integration option for Guacamole, but
+Guacamole’s Duo extension uses Duo’s generic authentication API which
+they refer to as the “Web SDK”. To use Guacamole with Duo, you will need
+to add it as a new “Web SDK” application from within the “Applications”
+tab of the admin panel of your Duo account:</p>
+<p><img alt="" src="_images/duo-add-guacamole.png" /></p>
+<p>Within the settings of the newly-added application, rename the
+application to something more representative than “Web SDK”. This
+application name is what will be presented to your users when they are
+prompted by Duo for additional authentication:</p>
+<p><img alt="" src="_images/duo-rename-guacamole.png" /></p>
+<p>Once you’ve finished adding Guacamole as an “Web SDK” application, the
+configuration information required to configure Guacamole is listed
+within the application’s “Details” section. You will need to copy the
+integration key, secret key, and API hostname - they will later be
+specified within <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>:</p>
+<p><img alt="" src="_images/duo-copy-details.png" /></p>
+</div>
+<div class="section" id="configuring-guacamole-for-duo">
+<span id="guac-duo-config"></span><h3>Configuring Guacamole for Duo<a class="headerlink" href="#configuring-guacamole-for-duo" title="Permalink to this headline">¶</a></h3>
+<p>The application-specific configuration information retrieved from Duo
+must be added to <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> to describe how Guacamole
+should connect to the Duo service:</p>
+<dl class="simple myst">
+<dt>duo-api-hostname</dt><dd><p>The hostname of the Duo API endpoint to be used to verify user identities.
+This will usually be in the form <code class="docutils literal notranslate"><span class="pre">api-XXXXXXXX.duosecurity.com</span></code>, where
+“XXXXXXXX” is some arbitrary alphanumeric value assigned by Duo. This
+value will have been generated by Duo when you added Guacamole as an “Web
+SDK” application, and can be found within the application details in the
+“API hostname” field. <em>This value is required.</em></p>
+</dd>
+<dt>duo-integration-key</dt><dd><p>The integration key provided for Guacamole by Duo. This value will
+have been generated by Duo when you added Guacamole as an “Web SDK”
+application, and can be found within the application details in the
+“Integration key” field. <em>This value is required and must be EXACTLY
+20 characters.</em></p>
+</dd>
+<dt>duo-secret-key</dt><dd><p>The secret key provided for Guacamole by Duo. This value will have
+been generated by Duo when you added Guacamole as an “Web SDK”
+application, and can be found within the application details in the
+“Secret key” field. <em>This value is required and must be EXACTLY 40
+characters.</em></p>
+</dd>
+</dl>
+<p>In addition to the above, <em>you must also manually generate an
+“application key”</em>. The application key is required by Duo’s
+authentication API, but is not provided by Duo. It is an arbitrary value
+meant to be unique to each deployment of an application using their API.</p>
+<dl class="simple myst">
+<dt>duo-application-key</dt><dd><p>An arbitrary, random key which you manually generated for Guacamole.
+<em>This value is required and must be AT LEAST 40 characters.</em></p>
+</dd>
+</dl>
+<p>The application key can be generated with any method as long as it is
+sufficiently random. There exist utilities which will do this for you, like
+<code class="docutils literal notranslate"><span class="pre">pwgen</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pwgen <span class="m">40</span> <span class="m">1</span>
+<span class="go">em1io4zievohneeseiwah0zie2raQuoo2ci5oBoo</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Alternatively, one quick and fairly portable way to do this is to use the <code class="docutils literal notranslate"><span class="pre">dd</span></code>
+utility to copy random bytes from the secure random device <code class="docutils literal notranslate"><span class="pre">/dev/random</span></code>,
+sending the data through a cryptographic hash tool with a sufficiently-long
+result, like <code class="docutils literal notranslate"><span class="pre">sha256sum</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> dd <span class="k">if</span><span class="o">=</span>/dev/random <span class="nv">count</span><span class="o">=</span><span class="m">1</span> <span class="p">|</span> sha256sum
+<span class="go">5d16d6bb86da73e7d1abd3286b21dcf3b3e707532e64ceebc7a008350d0d485d -</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="completing-the-installation">
+<span id="completing-duo-install"></span><h3>Completing the installation<a class="headerlink" href="#completing-the-installation" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole will only reread <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> and load newly-installed
+extensions during startup, so your servlet container will need to be restarted
+before Duo authentication will take effect.  Restart your servlet container and
+give the new authentication a try.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You only need to restart your servlet container. <em>You do not need to restart
+guacd</em>.</p>
+<p>guacd is completely independent of the web application and does not deal with
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> or the authentication system in any way. Since you are
+already restarting the servlet container, restarting guacd as well technically
+won’t hurt anything, but doing so is completely pointless.</p>
+</div>
+<p>If Guacamole does not come back online after restarting your servlet
+container, check the logs. Problems in the configuration of the Duo
+extension may prevent Guacamole from starting up, and any such errors
+will be recorded in the logs of your servlet container.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="totp-auth.html" class="btn btn-neutral float-right" title="TOTP two-factor authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ldap-auth.html" class="btn btn-neutral float-left" title="LDAP authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

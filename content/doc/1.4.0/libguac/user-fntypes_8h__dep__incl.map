@@ -1,0 +1,8 @@
+<map id="guacamole/user&#45;fntypes.h" name="guacamole/user&#45;fntypes.h">
+<area shape="rect" id="node1" title="Function type definitions related to the guac_user object." alt="" coords="319,5,511,32"/>
+<area shape="rect" id="node2" href="$argv_8h.html" title="Convenience functions for processing parameter values that are submitted dynamically using &quot;argv&quot; ins..." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node3" href="$client_8h.html" title="Functions and structure contents for the Guacamole proxy client." alt="" coords="168,80,315,107"/>
+<area shape="rect" id="node4" href="$object_8h.html" title="Provides functions and structures required for allocating and using objects." alt="" coords="339,80,490,107"/>
+<area shape="rect" id="node5" href="$stream_8h.html" title="Provides functions and structures required for allocating and using streams." alt="" coords="514,80,670,107"/>
+<area shape="rect" id="node6" href="$user_8h.html" title="Defines the guac_user object, which represents a physical connection within a larger,..." alt="" coords="694,80,831,107"/>
+</map>

@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Ad-hoc Connections &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Guacamole" href="using-guacamole.html" />
+    <link rel="prev" title="RADIUS Authentication" href="radius-auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ad-hoc Connections</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-quickconnect-extension">Downloading the quickconnect extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-quickconnect-extension">Installing the quickconnect extension</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-guacamole-for-the-quickconnect-extension">Configuring Guacamole for the quickconnect extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#completing-the-installation">Completing the installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-quickconnect-extension">Using the quickconnect extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Ad-hoc Connections</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/adhoc-connections.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ad-hoc-connections">
+<h1>Ad-hoc Connections<a class="headerlink" href="#ad-hoc-connections" title="Permalink to this headline">¶</a></h1>
+<p>The quickconnect extension provides a connection bar on the Guacamole Client
+home page that allows users to type in the URI of a server to which they want
+to connect and the client will parse the URI and immediately establish the
+connection. The purpose of the extension is to allow situations where
+administrators want to allow users the flexibility of establishing their own
+connections without having to grant them access to edit connections or even to
+have to create the connections at all, aside from typing the URI.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>There are several implications of using this extension that should be
+well-understood by administrators prior to implementing it:</p>
+<ul class="simple">
+<li><p>Connections established with this extension are created in-memory and only
+persist until the Guacamole session ends.</p></li>
+<li><p>Connections created with this extension are not accessible to other users,
+and cannot be shared with other users.</p></li>
+<li><p>This extension provides no functionality for authenticating users - it does
+not allow anonymous logins, and requires that users are successfully
+authenticated by another authentication module before it can be used.</p></li>
+<li><p>The extension provides users the ability not only to establish connections,
+but also to set any of the parameters for a connection. There are security
+implications for this - for example, RDP file sharing can be used to pass
+through any directory available on the server running guacd to the remote
+desktop. This should be taken into consideration when enabling this extension
+and making sure that guacd is configured in a way that does not compromise
+sensitive system files by allowing access to them.</p></li>
+</ul>
+</div>
+<div class="section" id="downloading-the-quickconnect-extension">
+<span id="quickconnect-downloading"></span><h2>Downloading the quickconnect extension<a class="headerlink" href="#downloading-the-quickconnect-extension" title="Permalink to this headline">¶</a></h2>
+<p>The quickconnect extension is available separately from the main
+<code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code>. The link for this and all other officially-supported and
+compatible extensions for a particular version of Guacamole are provided in the
+release notes for that version. You can find the release notes for current
+versions of Guacamole here: <a class="reference external" href="http://guacamole.apache.org/releases/">http://guacamole.apache.org/releases/</a>.</p>
+<p>The quickconnect extension is packaged as a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file containing only the
+extension itself, <code class="docutils literal notranslate"><span class="pre">guacamole-auth-quickconnect-1.4.0.jar</span></code>, which must
+ultimately be placed in <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p>
+</div>
+<div class="section" id="installing-the-quickconnect-extension">
+<span id="installing-quickconnect"></span><h2>Installing the quickconnect extension<a class="headerlink" href="#installing-the-quickconnect-extension" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole extensions are self-contained <code class="docutils literal notranslate"><span class="pre">.jar</span></code> files which are located within
+the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory. <em>If you are unsure where
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> is located on your system, please consult
+<a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a> before proceeding.</em></p>
+<p>To install the extension, you must:</p>
+<ol class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Place the <code class="docutils literal notranslate"><span class="pre">guacamole-auth-quickconnect-1.4.0.jar</span></code> file in the
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory.</p></li>
+</ol>
+<div class="section" id="configuring-guacamole-for-the-quickconnect-extension">
+<span id="guac-quickconnect-config"></span><h3>Configuring Guacamole for the quickconnect extension<a class="headerlink" href="#configuring-guacamole-for-the-quickconnect-extension" title="Permalink to this headline">¶</a></h3>
+<p>The quickconnect extension has two configuration properties that allow for
+controlling what connection parameters can be used in the URIs that are opened
+with the quickconnect extension:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">quickconnect-allowed-parameters</span></code></dt><dd><p>An optional list of parameters that are allowed to be used by connections
+that are created and accessed via the quickconnect extension. If this
+property is present, only parameters in this list will be allowed. If this
+property is absent, any/all parameters will be allowed unless explicitly
+denied using the <code class="docutils literal notranslate"><span class="pre">quickconnect-denied-parameters</span></code> property.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">quickconnect-denied-parameters</span></code></dt><dd><p>An optional list of parameters that are explicitly denied from being used by
+connections created and accessed via the quickconnect extension. If this
+property is present, any parameters in this list will be removed from the
+connection configuration when it is created, <em>even if those parameter are
+listed above in the <code class="docutils literal notranslate"><span class="pre">quickconnect-allowed-parameters</span></code> property.</em> If this
+property is not present, no connection parameters will be explicitly denied.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="completing-the-installation">
+<span id="completing-quickconnect-install"></span><h3>Completing the installation<a class="headerlink" href="#completing-the-installation" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole will only load newly-installed extensions during startup, so your
+servlet container will need to be restarted before the quickconnect extension
+can be used. <em>Doing this will disconnect all active users, so be sure that it
+is safe to do so prior to attempting installation.</em> When ready, restart your
+servlet container and give the extension a try.</p>
+</div>
+</div>
+<div class="section" id="using-the-quickconnect-extension">
+<span id="using-quickconnect"></span><h2>Using the quickconnect extension<a class="headerlink" href="#using-the-quickconnect-extension" title="Permalink to this headline">¶</a></h2>
+<p>The quickconnect extension provides a field on the home page that allows you to
+enter a Uniform Resource Identifier (URI) to create a connection. A URI is in
+the form:</p>
+<p><code class="samp docutils literal notranslate"><em><span class="pre">protocol</span></em><span class="pre">://</span><em><span class="pre">username</span></em><span class="pre">:</span><em><span class="pre">password</span></em><span class="pre">&#64;</span><em><span class="pre">host</span></em><span class="pre">:</span><em><span class="pre">port</span></em><span class="pre">/?</span><em><span class="pre">parameters</span></em></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">protocol</span></code> field can have any of the protocols supported by Guacamole, as
+documented in <a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a>. Many of the protocols define a default
+<code class="docutils literal notranslate"><span class="pre">port</span></code> value, with the exception of VNC. The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> field can specify any
+of the protocol-specific parameters as documented on the configuration page.</p>
+<p>To establish a connection, simply type in a valid URI and either press “Enter”
+or click the connect button. This extension will parse the URI and create a new
+connection, and immediately start that connection in the current browser.</p>
+<p>Here are a few examples of URIs:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ssh://linux1.example.com/</span></code></dt><dd><p>Connect to the server linux1.example.com using the SSH protocol on the
+default SSH port (22). This will result in prompting for both username and
+password.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vnc://linux1.example.com:5900/</span></code></dt><dd><p>Connect to the server linux1.example.com using the VNC protocol and
+specifying the port as 5900.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rdp://localuser&#64;windows1.example.com/?security=rdp&amp;ignore-cert=true&amp;disable-audio=true&amp;enable-drive=true&amp;drive-path=/mnt/usb</span></code></dt><dd><p>Connect to the server windows1.example.com using the RDP protocol and the
+user “localuser”. This URI also specifies several RDP-specific parameters on
+the connection, including forcing security mode to RDP (security=rdp), ignoring
+any certificate errors (ignore-cert=true), disabling audio pass-through
+(disable-audio=true), and enabling filesystem redirection (enable-drive=true)
+to the /mnt/usb folder on the system running guacd (drive-path=/mnt/usb).</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="using-guacamole.html" class="btn btn-neutral float-right" title="Using Guacamole" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="radius-auth.html" class="btn btn-neutral float-left" title="RADIUS Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

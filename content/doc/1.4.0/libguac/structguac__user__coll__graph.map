@@ -1,0 +1,6 @@
+<map id="guac_user" name="guac_user">
+<area shape="rect" id="node1" title="Representation of a physical connection within a larger logical connection which may be shared." alt="" coords="110,184,198,211"/>
+<area shape="rect" id="node2" href="$structguac__client.html" title="Guacamole proxy client." alt="" coords="106,95,202,121"/>
+<area shape="rect" id="node3" href="$structguac__socket.html" title="The core I/O object of Guacamole." alt="" coords="5,5,108,32"/>
+<area shape="rect" id="node4" href="$structguac__user__info.html" title="Information exposed by the remote client during the connection handshake which can be used by a clien..." alt="" coords="226,95,346,121"/>
+</map>

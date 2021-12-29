@@ -1,0 +1,1028 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Adding new protocols &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Custom authentication" href="custom-auth.html" />
+    <link rel="prev" title="guacamole-ext" href="guacamole-ext.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adding new protocols</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#minimal-skeleton-client">Minimal skeleton client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initializing-the-remote-display">Initializing the remote display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-the-ball">Adding the ball</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#making-the-ball-bounce">Making the ball bounce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-prettier-ball">A prettier ball</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-the-passage-of-time">Handling the passage of time</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Adding new protocols</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/custom-protocols.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adding-new-protocols">
+<h1>Adding new protocols<a class="headerlink" href="#adding-new-protocols" title="Permalink to this headline">¶</a></h1>
+<p>Guacamole’s support for multiple remote desktop protocols is provided through
+plugins which guacd loads dynamically. The Guacamole API has been designed such
+that protocol support is easy to create, especially when a C library exists
+providing a basic client implementation.</p>
+<p>In this tutorial, we will implement a simple “client” which renders a bouncing
+ball using the Guacamole protocol. After completing the tutorial and installing
+the result, you will be able to add a connection to your Guacamole
+configuration using the “ball” protocol, and any users using that connection
+will see a bouncing ball.</p>
+<p>This example client plugin doesn’t actually act as a client, but this isn’t
+important. The Guacamole client is really just a remote display, and this
+client plugin functions as a simple example application which renders to this
+display, just as Guacamole’s own VNC or RDP plugins function as VNC or RDP
+clients which render to the remote display.</p>
+<p>Each step of this tutorial is intended to exercise a new concept, while also
+progressing towards the goal of a nifty bouncing ball. At the end of each step,
+you will have a buildable and working client plugin.</p>
+<p>This tutorial will use the GNU Automake build system, which is the build system
+used by Guacamole for libguac, guacd, etc. There will be four files involved:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">configure.ac</span></code></dt><dd><p>Used by GNU Automake to generate the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script which ultimately
+serves to generate the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> which <strong class="command">make</strong> will use when
+building.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code></dt><dd><p>Used by GNU Automake and the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script to generate the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>
+which <strong class="command">make</strong> will use when building.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">src/ball.c</span></code></dt><dd><p>The main body of code defining the bouncing ball “client”.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">src/ball.h</span></code></dt><dd><p>A header file defining the structure representing the state of the bouncing
+ball (once it becomes necessary to do so).</p>
+</dd>
+</dl>
+<p>All source files will be within the <code class="docutils literal notranslate"><span class="pre">src</span></code> subdirectory, as is common with C
+projects, with build files being at the root level directory. The main
+<code class="docutils literal notranslate"><span class="pre">src/ball.c</span></code> and the build-related <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> and <code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code> files will
+be created first, with each successive step building upon those files
+iteratively, with <code class="docutils literal notranslate"><span class="pre">src/ball.h</span></code> being added when it becomes necessary. After
+each step, you can build/rebuild the plugin by running <strong class="command">make</strong>, and
+then install it (such that guacd can find the plugin) by running {command}<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> and <strong class="command">ldconfig</strong> as root:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> make
+<span class="go">  CC       src/ball.lo</span>
+<span class="go">  CCLD     libguac-client-ball.la</span>
+<span class="gp">#</span> make install
+<span class="go">make[1]: Entering directory &#39;/home/user/libguac-client-ball&#39;</span>
+<span class="go"> /usr/bin/mkdir -p &#39;/usr/local/lib&#39;</span>
+<span class="go"> /bin/sh ./libtool   --mode=install /usr/bin/install -c   libguac-client-ball.la &#39;/usr/local/lib&#39;</span>
+<span class="go">...</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Libraries have been installed in:</span>
+<span class="go">   /usr/local/lib</span>
+
+<span class="go">If you ever happen to want to link against installed libraries</span>
+<span class="go">in a given directory, LIBDIR, you must either use libtool, and</span>
+<span class="go">specify the full pathname of the library, or use the &#39;-LLIBDIR&#39;</span>
+<span class="go">flag during linking and do at least one of the following:</span>
+<span class="go">   - add LIBDIR to the &#39;LD_LIBRARY_PATH&#39; environment variable</span>
+<span class="go">     during execution</span>
+<span class="go">   - add LIBDIR to the &#39;LD_RUN_PATH&#39; environment variable</span>
+<span class="go">     during linking</span>
+<span class="go">   - use the &#39;-Wl,-rpath -Wl,LIBDIR&#39; linker flag</span>
+<span class="go">   - have your system administrator add LIBDIR to &#39;/etc/ld.so.conf&#39;</span>
+
+<span class="go">See any operating system documentation about shared libraries for</span>
+<span class="go">more information, such as the ld(1) and ld.so(8) manual pages.</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">make[1]: Nothing to be done for &#39;install-data-am&#39;.</span>
+<span class="go">make[1]: Leaving directory &#39;/home/user/libguac-client-ball&#39;</span>
+<span class="gp">#</span> ldconfig
+</pre></div>
+</div>
+<p>Prior to the first time <strong class="command">make</strong> is invoked, you will need to run the
+<code class="docutils literal notranslate"><span class="pre">configure</span></code> script, which will first need to be generated using
+<strong class="command">autoreconf</strong>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> autoreconf -fi
+<span class="go">libtoolize: putting auxiliary files in &#39;.&#39;.</span>
+<span class="go">libtoolize: copying file &#39;./ltmain.sh&#39;</span>
+<span class="go">libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, &#39;m4&#39;.</span>
+<span class="go">libtoolize: copying file &#39;m4/libtool.m4&#39;</span>
+<span class="go">libtoolize: copying file &#39;m4/ltoptions.m4&#39;</span>
+<span class="go">libtoolize: copying file &#39;m4/ltsugar.m4&#39;</span>
+<span class="go">libtoolize: copying file &#39;m4/ltversion.m4&#39;</span>
+<span class="go">libtoolize: copying file &#39;m4/lt~obsolete.m4&#39;</span>
+<span class="go">configure.ac:10: installing &#39;./compile&#39;</span>
+<span class="go">configure.ac:4: installing &#39;./missing&#39;</span>
+<span class="go">Makefile.am: installing &#39;./depcomp&#39;</span>
+<span class="gp">$</span> ./configure
+<span class="go">checking for a BSD-compatible install... /usr/bin/install -c</span>
+<span class="go">checking whether build environment is sane... yes</span>
+<span class="go">...</span>
+<span class="go">configure: creating ./config.status</span>
+<span class="go">config.status: creating Makefile</span>
+<span class="go">config.status: executing depfiles commands</span>
+<span class="go">config.status: executing libtool commands</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>This process is almost identical to that of building guacamole-server from git,
+as documented in <a class="reference internal" href="installing-guacamole.html#building-guacamole-server"><span class="std std-ref">Building guacamole-server</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The libguac library which is part of guacamole-server is a required dependency
+of this project. <em>You must first install libguac, guacd, etc. by <a class="reference internal" href="installing-guacamole.html#building-guacamole-server"><span class="std std-ref">building and
+installing guacamole-server</span></a></em>. If guacamole-server
+has not been installed, and libguac is thus not present, the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script
+will fail with an error indicating that it could not find libguac:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ./configure
+<span class="go">checking for a BSD-compatible install... /usr/bin/install -c</span>
+<span class="go">checking whether build environment is sane... yes</span>
+<span class="go">...</span>
+<span class="go">checking for guac_client_stream_png in -lguac... no</span>
+<span class="go">configure: error: &quot;libguac is required for communication via &quot;</span>
+<span class="go">                   &quot;the Guacamole protocol&quot;</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>You will need to install guacamole-server and then rerun <code class="docutils literal notranslate"><span class="pre">configure</span></code>.</p>
+</div>
+<div class="section" id="minimal-skeleton-client">
+<span id="libguac-client-ball-skeleton"></span><h2>Minimal skeleton client<a class="headerlink" href="#minimal-skeleton-client" title="Permalink to this headline">¶</a></h2>
+<p>Very little needs to be done to implement the most basic client plugin
+possible. We begin with <code class="docutils literal notranslate"><span class="pre">src/ball.c</span></code>, containing the absolute minimum required
+for a client plugin:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;guacamole/client.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="cm">/* Client plugin arguments (empty) */</span>
+<span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">TUTORIAL_ARGS</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">NULL</span> <span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">guac_client_init</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* This example does not implement any arguments */</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">args</span> <span class="o">=</span> <span class="n">TUTORIAL_ARGS</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Notice the structure of this file. There is exactly one function,
+<code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code>, which is the entry point for all Guacamole client plugins.
+Just as a typical C program has a main function which is executed when the
+program is run, a Guacamole client plugin has <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> which is
+called when guacd loads the plugin when a new connection is made and your
+protocol is selected.</p>
+<p><code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> receives a single <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> which it must initialize.
+Part of this initialization process involves declaring the list of arguments
+that joining users can specify. While we won’t be using arguments in this
+tutorial, and thus the arguments assigned above are simply an empty list, a
+typical client plugin implementation would register arguments which define the
+remote desktop connection and its behavior. Examples of such parameters can be
+seen in the connection parameters for the protocols supported by Guacamole
+out-of-the-box (see <a class="reference internal" href="configuring-guacamole.html#connection-configuration"><span class="std std-ref">Configuring connections</span></a>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> instance given to <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> will be shared by the
+user that starts the connection, and any users which join the connection via
+screen sharing. It lives until the connection is explicitly closed, or until
+all users leave the connection.</p>
+<p>For this project to build with GNU Automake, we a <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> file which
+describes the name of the project and what it needs configuration-wise.  In
+this case, the project is “libguac-client-ball”, and it depends on the
+“libguac” library used by guacd and all client plugins:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Project information
+AC_PREREQ([2.61])
+AC_INIT([libguac-client-ball], [0.1.0])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+AM_SILENT_RULES([yes])
+
+AC_CONFIG_MACRO_DIRS([m4])
+
+# Check for required build tools
+AC_PROG_CC
+AC_PROG_CC_C99
+AC_PROG_LIBTOOL
+
+# Check for libguac
+AC_CHECK_LIB([guac], [guac_client_stream_png],,
+      AC_MSG_ERROR(&quot;libguac is required for communication via &quot;
+                   &quot;the Guacamole protocol&quot;))
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+</pre></div>
+</div>
+<p>We also need a <code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code>, describing which files should be built and how
+when building libguac-client-ball:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>AUTOMAKE_OPTIONS = foreign
+
+ACLOCAL_AMFLAGS = -I m4
+AM_CFLAGS = -Werror -Wall -pedantic
+
+lib_LTLIBRARIES = libguac-client-ball.la
+
+# All source files of libguac-client-ball
+libguac_client_ball_la_SOURCES = src/ball.c
+
+# libtool versioning information
+libguac_client_ball_la_LDFLAGS = -version-info 0:0:0
+</pre></div>
+</div>
+<p>The GNU Automake files will remain largely unchanged throughout the rest of the
+tutorial.</p>
+<p>Once you have created all of the above files, you will have a functioning
+client plugin. It doesn’t do anything yet, and any connection will be extremely
+short-lived (the lack of any data sent by the server will lead to the client
+disconnecting under the assumption that the connection has stopped responding),
+but it does technically work.</p>
+</div>
+<div class="section" id="initializing-the-remote-display">
+<span id="libguac-client-ball-display-init"></span><h2>Initializing the remote display<a class="headerlink" href="#initializing-the-remote-display" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a basic functioning skeleton, we need to actually do something
+with the remote display. A good first step would be simply initializing the
+display - setting the remote display size and providing a basic background.</p>
+<p>In this case, we’ll set the display to a nice default of 1024x768, and fill the
+background with gray. Though the size of the display <em>can</em> be chosen based on
+the size of the user’s browser window (which is provided by the user during the
+<a class="reference internal" href="guacamole-protocol.html#guacamole-protocol-handshake"><span class="std std-ref">Guacamole protocol handshake</span></a>, or even updated
+when the window size changes (provided by the user via <a class="reference internal" href="protocol-reference.html#client-size-instruction" title="size"><span class="xref myst guac guac-instruction">“size”
+instructions</span></a>), we won’t be doing that here for
+simplicity’s sake:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;guacamole/client.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/protocol.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/socket.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/user.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span> <span class="n">ball_join_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* Get client associated with user */</span>
+    <span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span> <span class="o">=</span> <span class="n">user</span><span class="o">-&gt;</span><span class="n">client</span><span class="p">;</span>
+
+    <span class="cm">/* Get user-specific socket */</span>
+    <span class="n">guac_socket</span><span class="o">*</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">user</span><span class="o">-&gt;</span><span class="n">socket</span><span class="p">;</span>
+
+    <span class="cm">/* Send the display size */</span>
+    <span class="n">guac_protocol_send_size</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">);</span>
+
+    <span class="cm">/* Prepare a curve which covers the entire layer */</span>
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">);</span>
+
+    <span class="cm">/* Fill curve with solid color */</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span>
+            <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span>
+            <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+    <span class="cm">/* Mark end-of-frame */</span>
+    <span class="n">guac_protocol_send_sync</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">last_sent_timestamp</span><span class="p">);</span>
+
+    <span class="cm">/* Flush buffer */</span>
+    <span class="n">guac_socket_flush</span><span class="p">(</span><span class="n">socket</span><span class="p">);</span>
+
+    <span class="cm">/* User successfully initialized */</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">guac_client_init</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* This example does not implement any arguments */</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">args</span> <span class="o">=</span> <span class="n">TUTORIAL_ARGS</span><span class="p">;</span>
+
+    <span class="cm">/* Client-level handlers */</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">join_handler</span> <span class="o">=</span> <span class="n">ball_join_handler</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The most important thing to notice here is the new <code class="docutils literal notranslate"><span class="pre">ball_join_handler()</span></code>
+function. As it is assigned to <code class="docutils literal notranslate"><span class="pre">join_handler</span></code> of the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> given to
+<code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code>, users which join the connection (including the user that
+opened the connection in the first place) will be passed to this function. It
+is the duty of the join handler to initialize the provided <code class="docutils literal notranslate"><span class="pre">guac_user</span></code>, taking
+into account any arguments received from the user during the connection
+handshake (exposed through <code class="docutils literal notranslate"><span class="pre">argc</span></code> and <code class="docutils literal notranslate"><span class="pre">argv</span></code> to the join handler). We aren’t
+implementing any arguments, so these values are simply ignored, but we do need
+to initialize the user with respect to display state. In this case, we:</p>
+<ol class="simple">
+<li><p>Send a <a class="reference internal" href="protocol-reference.html#size-instruction" title="size"><span class="xref myst guac guac-instruction">“size” instruction</span></a>, initializing the display size
+to 1024x768.</p></li>
+<li><p>Draw a 1024x768 gray rectangle over the display using the
+<a class="reference internal" href="protocol-reference.html#rect-instruction" title="rect"><span class="xref myst guac guac-instruction">“rect”</span></a> and <a class="reference internal" href="protocol-reference.html#cfill-instruction" title="cfill"><span class="xref myst guac guac-instruction">“cfill”</span></a> instructions.</p></li>
+<li><p>Send a <a class="reference internal" href="protocol-reference.html#sync-instruction" title="sync"><span class="xref myst guac guac-instruction">“sync” instruction</span></a>, informing the remote display
+that a frame has been completed.</p></li>
+<li><p>Flush the socket, ensuring that all data written to the socket thus far is
+immediately sent to the user.</p></li>
+</ol>
+<p>At this point, if you build, install, and connect using the plugin, you will
+see a gray screen. The connection will still be extremely short-lived, however,
+since the only data ever sent by the plugin is sent when the user first joins.
+The lack of any data sent by the server over the remaining life of the
+connection will lead to the client disconnecting under the assumption that the
+connection has stopped responding. This will be rectified shortly once we add
+the bouncing ball.</p>
+</div>
+<div class="section" id="adding-the-ball">
+<span id="libguac-client-ball-layer"></span><h2>Adding the ball<a class="headerlink" href="#adding-the-ball" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is about making a bouncing ball “client”, so naturally we need a
+ball to bounce. While we could repeatedly draw and erase a ball on the remote
+display, a more efficient technique would be to leverage Guacamole’s layers.</p>
+<p>The remote display has a single root layer, <code class="docutils literal notranslate"><span class="pre">GUAC_DEFAULT_LAYER</span></code>, but there can
+be infinitely many other child layers, which can themselves have child layers,
+and so on. Each layer can be dynamically repositioned within and relative to
+another layer. Because the compositing of these layers is handled by the remote
+display, and is likely hardware-accelerated, this is a much better way to
+repeatedly reposition something we expect to move a lot.</p>
+<p>Since we’re finally adding the ball, and there needs to be some structure which
+maintains the state of the ball, we must create a header file,
+<code class="docutils literal notranslate"><span class="pre">src/ball.h</span></code>, to define this:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef BALL_H</span>
+<span class="cp">#define BALL_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/layer.h&gt;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">ball_client_data</span> <span class="p">{</span>
+
+    <span class="n">guac_layer</span><span class="o">*</span> <span class="n">ball</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ball_client_data</span><span class="p">;</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>To make the build system aware of the existence of the new <code class="docutils literal notranslate"><span class="pre">src/ball.h</span></code> header
+file, <code class="docutils literal notranslate"><span class="pre">Makefile.am</span></code> must be updated as well:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>...
+
+# All source files of libguac-client-ball
+noinst_HEADERS = src/ball.h
+libguac_client_ball_la_SOURCES = src/ball.c
+
+...
+</pre></div>
+</div>
+<p>This new structure is intended to house the client-level state of the ball,
+independent of any users which join or leave the connection. The structure must
+be allocated when the client begins (within <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code>), freed when the
+client terminates (via a new client free handler), and must contain the layer
+which represents the ball within the remote display. As this layer is part of
+the remote display state, it must additionally be initialized when a user
+joins, in the same way that the display overall was initialized in earlier
+steps:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;ball.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/client.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/layer.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/protocol.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/socket.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/user.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span> <span class="n">ball_join_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* Get client associated with user */</span>
+    <span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span> <span class="o">=</span> <span class="n">user</span><span class="o">-&gt;</span><span class="n">client</span><span class="p">;</span>
+
+    <span class="cm">/* Get ball layer from client data */</span>
+    <span class="n">ball_client_data</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ball_client_data</span><span class="o">*</span><span class="p">)</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+    <span class="n">guac_layer</span><span class="o">*</span> <span class="n">ball</span> <span class="o">=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">;</span>
+
+    <span class="p">...</span>
+
+    <span class="cm">/* Set up ball layer */</span>
+    <span class="n">guac_protocol_send_size</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">ball</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+
+    <span class="cm">/* Prepare a curve which covers the entire layer */</span>
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">ball</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+
+    <span class="cm">/* Fill curve with solid color */</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span>
+            <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">ball</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+    <span class="cm">/* Mark end-of-frame */</span>
+    <span class="n">guac_protocol_send_sync</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">last_sent_timestamp</span><span class="p">);</span>
+
+    <span class="cm">/* Flush buffer */</span>
+    <span class="n">guac_socket_flush</span><span class="p">(</span><span class="n">socket</span><span class="p">);</span>
+
+    <span class="cm">/* User successfully initialized */</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">ball_free_handler</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">ball_client_data</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ball_client_data</span><span class="o">*</span><span class="p">)</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/* Free client-level ball layer */</span>
+    <span class="n">guac_client_free_layer</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">);</span>
+
+    <span class="cm">/* Free client-specific data */</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="cm">/* Data successfully freed */</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">guac_client_init</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* Allocate storage for client-specific data */</span>
+    <span class="n">ball_client_data</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ball_client_data</span><span class="p">));</span>
+
+    <span class="cm">/* Set up client data and handlers */</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/* Allocate layer at the client level */</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span> <span class="o">=</span> <span class="n">guac_client_alloc_layer</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+
+    <span class="p">...</span>
+
+    <span class="cm">/* Client-level handlers */</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">join_handler</span> <span class="o">=</span> <span class="n">ball_join_handler</span><span class="p">;</span>
+    <span class="n">client</span><span class="o">-&gt;</span><span class="n">free_handler</span> <span class="o">=</span> <span class="n">ball_free_handler</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The allocate/free pattern for the client-specific data and layers should be
+pretty straightforward - the allocation occurs when the objects (the layer and
+the structure housing it) are first needed, and the allocated objects are freed
+once they are no longer needed (when the client terminates) to avoid leaking
+memory. The initialization of the ball layer using the Guacamole protocol
+should be familiar as well - it’s identical to the way the screen was
+initialized, and involves the same instructions.</p>
+<p>Beyond layers, Guacamole has the concept of buffers, which are identical in use
+to layers except they are invisible. Buffers are used to store image data for
+the sake of caching or drawing operations. We will use them later when we try
+to make this tutorial prettier. If you build and install the ball client as-is
+now, you will see a large gray rectangle (the root layer) with a small blue
+square in the upper left corner (the ball layer).</p>
+</div>
+<div class="section" id="making-the-ball-bounce">
+<span id="libguac-client-ball-bounce"></span><h2>Making the ball bounce<a class="headerlink" href="#making-the-ball-bounce" title="Permalink to this headline">¶</a></h2>
+<p>To make the ball bounce, we need to track the ball’s state, including current
+position and velocity, as well as a thread which updates the ball’s state (and
+the remote display) as time progresses. The ball state and thread can be stored
+alongside the ball layer in the existing client-level data structure:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/layer.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">ball_client_data</span> <span class="p">{</span>
+
+    <span class="n">guac_layer</span><span class="o">*</span> <span class="n">ball</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">ball_x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ball_y</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">ball_velocity_x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ball_velocity_y</span><span class="p">;</span>
+
+    <span class="n">pthread_t</span> <span class="n">render_thread</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="n">ball_client_data</span><span class="p">;</span>
+
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>The contents of the thread will update these values at a pre-defined rate,
+changing ball position with respect to velocity, and changing velocity with
+respect to collisions with the display boundaries:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;ball.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/client.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/layer.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/protocol.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/socket.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/user.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span>
+
+<span class="kt">void</span><span class="o">*</span> <span class="n">ball_render_thread</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="cm">/* Get data */</span>
+    <span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span> <span class="o">=</span> <span class="p">(</span><span class="n">guac_client</span><span class="o">*</span><span class="p">)</span> <span class="n">arg</span><span class="p">;</span>
+    <span class="n">ball_client_data</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ball_client_data</span><span class="o">*</span><span class="p">)</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/* Update ball position as long as client is running */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">GUAC_CLIENT_RUNNING</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="cm">/* Sleep a bit */</span>
+        <span class="n">usleep</span><span class="p">(</span><span class="mi">30000</span><span class="p">);</span>
+
+        <span class="cm">/* Update position */</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">+=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">+=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+
+        <span class="cm">/* Bounce if necessary */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span><span class="p">;</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">&gt;=</span> <span class="mi">1024</span> <span class="o">-</span> <span class="mi">128</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">-</span> <span class="mi">128</span><span class="p">))</span> <span class="o">-</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span><span class="p">;</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span><span class="p">;</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">&gt;=</span> <span class="mi">768</span> <span class="o">-</span> <span class="mi">128</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">768</span> <span class="o">-</span> <span class="mi">128</span><span class="p">))</span> <span class="o">-</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span><span class="p">;</span>
+            <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span> <span class="o">=</span> <span class="o">-</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">guac_protocol_send_move</span><span class="p">(</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">socket</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">,</span>
+                <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="cm">/* End frame and flush socket */</span>
+        <span class="n">guac_client_end_frame</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+        <span class="n">guac_socket_flush</span><span class="p">(</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">socket</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Just as with the join handler, this thread sends a “sync” instruction to denote
+the end of each frame, though here this is accomplished with
+<code class="docutils literal notranslate"><span class="pre">guac_client_end_frame()</span></code>. This function sends a “sync” containing the current
+timestamp, and updates the properties of the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> with the last-sent
+timestamp (the value that our join handler uses to send <em>its</em> sync). Note that
+we don’t redraw the whole display with each frame - we simply update the
+position of the ball layer using a <a class="reference internal" href="protocol-reference.html#move-instruction" title="move"><span class="xref myst guac guac-instruction">“move” instruction</span></a>, and
+rely on the remote display to handle compositing on its own.</p>
+<p>We now need to update <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> to actually create this thread,
+initialize the ball state within the structure, and store the thread for future
+cleanup when the client terminates:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+
+<span class="kt">int</span> <span class="n">ball_free_handler</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">ball_client_data</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ball_client_data</span><span class="o">*</span><span class="p">)</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="cm">/* Wait for render thread to terminate */</span>
+    <span class="n">pthread_join</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">render_thread</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="p">...</span>
+
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">guac_client_init</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">...</span>
+
+    <span class="cm">/* Start ball at upper left */</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="cm">/* Move at a reasonable pace to the lower right */</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="cm">/* pixels per second */</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span> <span class="cm">/* pixels per second */</span>
+
+    <span class="cm">/* Start render thread */</span>
+    <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">render_thread</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">ball_render_thread</span><span class="p">,</span> <span class="n">client</span><span class="p">);</span>
+
+    <span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The thread contains a render loop which continually checks the state property
+of the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>. This property is set to <code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_RUNNING</span></code> when the
+connection begins, and remains that way for the duration of the connection.
+When guacd needs to terminate the connection (such as when the last user
+leaves), the value will change to <code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_STOPPING</span></code>. The free handler
+we’ve written can thus rely on <code class="docutils literal notranslate"><span class="pre">pthread_join()</span></code> to block until the data
+previously used by the plugin is no longer being used and can safely be freed.</p>
+<p>Once built and installed, our ball client now has a bouncing ball, albeit a
+very square and plain one. Now that the display is continually updating, and
+data is being continually received from the server, connected clients will no
+longer automatically disconnect.</p>
+</div>
+<div class="section" id="a-prettier-ball">
+<span id="libguac-client-ball-pretty"></span><h2>A prettier ball<a class="headerlink" href="#a-prettier-ball" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our ball bouncing, we might as well try to make it actually
+look like a ball, and try applying some of the fancier graphics features that
+Guacamole offers. Guacamole provides instructions common to most 2D drawing
+APIs, including HTML5’s canvas and Cairo. This means you can draw arcs, curves,
+apply fill and stroke, and even use the contents of another layer or buffer as
+the pattern for a fill or stroke.  In complex cases involving many draw
+operations, it will actually be more efficient to render to a server-side Cairo
+surface and send only image data to the client, but it’s perfect for relatively
+simple cases like our ball.</p>
+<p>We will try creating a simple gray checkerboard pattern in a buffer, using that
+for the background instead of the previous gray rectangle, and will modify the
+ball by replacing the rectangle with an arc, in this case a full circle,
+complete with stroke (border) and translucent-blue fill:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">ball_join_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">...</span>
+
+    <span class="cm">/* Create background tile */</span>
+    <span class="n">guac_layer</span><span class="o">*</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">guac_client_alloc_buffer</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span>
+            <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span>
+            <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span>
+            <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+
+    <span class="cm">/* Prepare a curve which covers the entire layer */</span>
+    <span class="n">guac_protocol_send_rect</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">);</span>
+
+     <span class="cm">/* Fill curve with texture */</span>
+    <span class="n">guac_protocol_send_lfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span>
+            <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span>
+            <span class="n">texture</span><span class="p">);</span>
+
+    <span class="cm">/* Set up ball layer */</span>
+    <span class="n">guac_protocol_send_size</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">ball</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">);</span>
+
+    <span class="cm">/* Prepare a circular curve */</span>
+    <span class="n">guac_protocol_send_arc</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">,</span>
+            <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">6.28</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">guac_protocol_send_close</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">);</span>
+
+    <span class="cm">/* Draw a 4-pixel black border */</span>
+    <span class="n">guac_protocol_send_cstroke</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span>
+            <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">,</span>
+            <span class="n">GUAC_LINE_CAP_ROUND</span><span class="p">,</span> <span class="n">GUAC_LINE_JOIN_ROUND</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+    <span class="cm">/* Fill the circle with color */</span>
+    <span class="n">guac_protocol_send_cfill</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span>
+            <span class="n">GUAC_COMP_OVER</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">);</span>
+
+    <span class="cm">/* Free texture (no longer needed) */</span>
+    <span class="n">guac_client_free_buffer</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">texture</span><span class="p">);</span>
+
+    <span class="cm">/* Mark end-of-frame */</span>
+    <span class="n">guac_protocol_send_sync</span><span class="p">(</span><span class="n">socket</span><span class="p">,</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">last_sent_timestamp</span><span class="p">);</span>
+
+    <span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Again, because we put the ball in its own layer, we don’t have to worry about
+compositing it ourselves. The remote display will handle this, and will likely
+do so with hardware acceleration, even though the ball is now translucent.
+Build and install the ball client after this step, and you will have a rather
+nice-looking bouncing ball.</p>
+</div>
+<div class="section" id="handling-the-passage-of-time">
+<span id="libguac-client-ball-time"></span><h2>Handling the passage of time<a class="headerlink" href="#handling-the-passage-of-time" title="Permalink to this headline">¶</a></h2>
+<p>There are never any guarantees when it comes to timing, threads, and network
+performance. We cannot necessarily rely on the remote display to handle updates
+in a timely manner (it may be slow), nor can we rely on the network or server
+to give priority to communication from guacd.</p>
+<p>The render thread needs to be modified to take this into account, by tracking
+the actual time spent within each frame, and estimating the amount of time the
+client spends rendering each frame:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;ball.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/client.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/layer.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/protocol.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/socket.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/timestamp.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;guacamole/user.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="p">...</span>
+
+<span class="kt">void</span><span class="o">*</span> <span class="n">ball_render_thread</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">...</span>
+
+    <span class="cm">/* Init time of last frame to current time */</span>
+    <span class="n">guac_timestamp</span> <span class="n">last_frame</span> <span class="o">=</span> <span class="n">guac_timestamp_current</span><span class="p">();</span>
+
+    <span class="cm">/* Update ball position as long as client is running */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">CLIENT_RUNNING</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="cm">/* Default to 30ms frames */</span>
+        <span class="kt">int</span> <span class="n">frame_duration</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+
+        <span class="cm">/* Lengthen frame duration if client is lagging */</span>
+        <span class="kt">int</span> <span class="n">processing_lag</span> <span class="o">=</span> <span class="n">guac_client_get_processing_lag</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">processing_lag</span> <span class="o">&gt;</span> <span class="n">frame_duration</span><span class="p">)</span>
+            <span class="n">frame_duration</span> <span class="o">=</span> <span class="n">processing_lag</span><span class="p">;</span>
+
+        <span class="cm">/* Sleep for duration of frame, then get timestamp */</span>
+        <span class="n">usleep</span><span class="p">(</span><span class="n">frame_duration</span><span class="p">);</span>
+        <span class="n">guac_timestamp</span> <span class="n">current</span> <span class="o">=</span> <span class="n">guac_timestamp_current</span><span class="p">();</span>
+
+        <span class="cm">/* Calculate change in time */</span>
+        <span class="kt">int</span> <span class="n">delta_t</span> <span class="o">=</span> <span class="n">current</span> <span class="o">-</span> <span class="n">last_frame</span><span class="p">;</span>
+
+        <span class="cm">/* Update position */</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_x</span> <span class="o">+=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_x</span> <span class="o">*</span> <span class="n">delta_t</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_y</span> <span class="o">+=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">ball_velocity_y</span> <span class="o">*</span> <span class="n">delta_t</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+
+        <span class="p">...</span>
+
+        <span class="cm">/* Update timestamp */</span>
+        <span class="n">last_frame</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The calculations are pretty simple. Rather than hard-code the duration of each
+frame, we us a default of 30 milliseconds, lengthening the frame if Guacamole’s
+built-in lag estimation determines that the client is having trouble. The
+physics portion of the update no longer assumes that the frame will be exactly
+30 milliseconds, instead relying on the actual time elapsed since the previous
+frame.</p>
+<p>At this point, we now have a robust Guacamole client plugin. It handles
+joining/leaving users correctly, continually updates the remote display state
+while taking into account variable network/server/client conditions, and cleans
+up after itself when the connection finally terminates.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="custom-auth.html" class="btn btn-neutral float-right" title="Custom authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="guacamole-ext.html" class="btn btn-neutral float-left" title="guacamole-ext" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

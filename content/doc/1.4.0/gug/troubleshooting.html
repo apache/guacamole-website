@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Troubleshooting &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Guacamole protocol" href="guacamole-protocol.html" />
+    <link rel="prev" title="Administration" href="administration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#it-isnt-working">It isn’t working</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#no-graphics-appear">No graphics appear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connections-involving-unicode-dont-work">Connections involving Unicode don’t work</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#syslog">syslog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#guacd-errors">guacd errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-bind-socket-to-any-addresses">Unable to bind socket to any addresses.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-start-input-thread">Unable to start input thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-finished-abnormally">Client finished abnormally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#could-not-fork-parent">Could not fork() parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-change-working-directory-to">Unable to change working directory to /</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-redirect-standard-file-descriptors-to-dev-null">Unable to redirect standard file descriptors to /dev/null</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-parsing-given-address-or-port-hostname">Error parsing given address or port: HOSTNAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-opening-socket">Error opening socket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unable-to-resolve-host">Unable to resolve host</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#could-not-become-a-daemon">Could not become a daemon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#could-not-write-pid-file">Could not write PID file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#could-not-listen-on-socket">Could not listen on socket</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#could-not-accept-client-connection">Could not accept client connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-forking-child-process">Error forking child process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-closing-daemon-reference-to-child-descriptor">Error closing daemon reference to child descriptor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-sending-sync-instruction">Error sending “sync” instruction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-flushing-output">Error flushing output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling-server-messages">Error handling server messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-reading-instruction">Error reading instruction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-instruction-handler-error">Client instruction handler error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-reading-opcode">Error reading OPCODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-sending-args">Error sending “args”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-loading-client-plugin">Error loading client plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-instantiating-client">Error instantiating client</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libguac-client-vnc-errors">libguac-client-vnc errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#error-waiting-for-vnc-message">Error waiting for VNC message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling-vnc-server-message">Error handling VNC server message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wrong-argument-count-received">Wrong argument count received</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libguac-client-rdp-errors">libguac-client-rdp errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#invalid-parameter">Invalid PARAMETER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#support-for-the-cliprdr-channel-clipboard-redirection-could-not-be-loaded">Support for the CLIPRDR channel (clipboard redirection) could not be loaded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cannot-create-static-channel-name-failed-to-load-guac-common-svc-plugin-for-freerdp">Cannot create static channel “NAME”: failed to load “guac-common-svc” plugin for FreeRDP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-requested-unsupported-clipboard-data-type">Server requested unsupported clipboard data type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clipboard-data-missing-null-terminator">Clipboard data missing null terminator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#servlet-container-logs">Servlet container logs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-mapping-xml-errors"><code class="docutils literal notranslate"><span class="pre">user-mapping.xml</span></code> errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#attribute-name-required-for-connection-tag">Attribute “name” required for connection tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attribute-name-required-for-param-tag">Attribute “name” required for param tag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unexpected-character-data">Unexpected character data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invalid-encoding-type">Invalid encoding type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-mapping-could-not-be-read">User mapping could not be read</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#guacamole-properties-errors"><code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#property-property-is-required">Property PROPERTY is required</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-errors">Authentication errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cannot-connect-user-not-logged-in">Cannot connect - user not logged in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requested-configuration-is-not-authorized">Requested configuration is not authorized</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-has-no-session">User has no session</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tunnel-errors">Tunnel errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#no-such-tunnel">No such tunnel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#no-tunnel-created">No tunnel created</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#no-query-string-provided">No query string provided</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tunnel-reached-end-of-stream">Tunnel reached end of stream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tunnel-is-closed">Tunnel is closed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#end-of-stream-during-initial-handshake">End of stream during initial handshake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#element-terminator-of-instruction-was-not-nor">Element terminator of instruction was not ‘;’ nor ‘,’</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-numeric-character-in-element-length">Non-numeric character in element length</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Troubleshooting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/troubleshooting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="it-isnt-working">
+<span id="not-working"></span><h2>It isn’t working<a class="headerlink" href="#it-isnt-working" title="Permalink to this headline">¶</a></h2>
+<p>If Guacamole isn’t working, chances are something isn’t configured properly, or
+something is wrong with the network. Thankfully, Guacamole and all its
+components log errors thoroughly, so the problem can usually be traced down
+fairly easily if you know where to look. Troubleshooting Guacamole usually
+boils down to checking either syslog or your servlet container’s logs (likely
+Tomcat).</p>
+<p>Failing all that, you can always post a question on <a class="reference external" href="http://guacamole.apache.org/support/#mailing-lists">one of the project mailing
+lists</a>, or if you truly
+feel you’ve discovered a bug, you can <a class="reference external" href="https://issues.apache.org/jira/browse/GUACAMOLE/">create a new ticket in
+JIRA</a>. Beware that if
+something isn’t working, and there are errors in the logs describing the
+problem, <a class="reference external" href="http://guacamole.apache.org/faq/#probably-not-a-bug">it is usually not a
+bug</a>, and the best place
+to handle such things is through consulting this guide or the mailing lists.</p>
+<div class="section" id="no-graphics-appear">
+<h3>No graphics appear<a class="headerlink" href="#no-graphics-appear" title="Permalink to this headline">¶</a></h3>
+<p>If you <em>never</em> see any graphics appear, or you see “Connecting, waiting for
+first update…” for a while and then are disconnected, the most likely cause
+is a proxy.</p>
+<p>Guacamole relies on streaming data to you over a persistent connection.  If
+software between Guacamole and your browser is buffering all incoming data,
+such as a proxy, this data never makes it to your browser, and you will just
+see it wait indefinitely. Eventually, thinking the client has disconnected,
+Guacamole closes the connection, at which point the proxy finally flushes its
+buffer and you see graphics! … just in time to see it disconnect.</p>
+<p>The solution here is to either modify your proxy settings to flush packets
+immediately as they are received, or to use HTTPS. Proxies are required to pass
+HTTPS through untouched, and this usually solves the problem.</p>
+<p>Even if you aren’t aware of any proxy, there may be one in place.  Corporate
+firewalls very often incorporate proxies. Antivirus software may buffer
+incoming data until the connection is closed and the data is scanned for
+viruses. Virtualization software may detect HTTP data and buffer the connection
+just like a proxy. If all else fails, try HTTPS - it’s the only secure way to
+do this anyway.</p>
+</div>
+<div class="section" id="connections-involving-unicode-dont-work">
+<h3>Connections involving Unicode don’t work<a class="headerlink" href="#connections-involving-unicode-dont-work" title="Permalink to this headline">¶</a></h3>
+<p>If you are using Tomcat, beware that you <em>must</em> set the <code class="docutils literal notranslate"><span class="pre">URIEncoding=&quot;UTF-8&quot;</span></code>
+attribute on all connectors in your <code class="docutils literal notranslate"><span class="pre">server.xml</span></code>. If you are using a different
+servlet container, you need to find out whether it requires special options to
+support UTF-8 in URIs, and change the required settings to enable such support.</p>
+<p>Without UTF-8 support enabled for URIs, Unicode characters in connection names
+will not be received properly when connecting, and Guacamole will think the
+connection you requested does not exist. Similarly, if you are using the
+built-in administration interface, parameters involving Unicode characters will
+not save properly without these options enabled.</p>
+</div>
+</div>
+<div class="section" id="syslog">
+<h2>syslog<a class="headerlink" href="#syslog" title="Permalink to this headline">¶</a></h2>
+<p>guacd and libguac-based programs (such as all client plugins) log informational
+messages and errors to syslog. Specifically, guacd uses syslog, and it exposes
+this logging facility to everything it loads (client plugins), thus if the VNC
+or RDP support plugins encounter errors, they log those errors over the logging
+facilities exposed by guacd, in this case syslog.</p>
+<p>Once you guacd is started, you’ll see entries like the following in syslog:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>guacd[19663]: Guacamole proxy daemon (guacd) version 0.7.0
+guacd[19663]: Unable to bind socket to host ::1, port 4823: Address family
+              not supported by protocol
+guacd[19663]: Successfully bound socket to host 127.0.0.1, port 4823
+guacd[19663]: Exiting and passing control to PID 19665
+guacd[19665]: Exiting and passing control to PID 19666
+guacd[19666]: Listening on host 127.0.0.1, port 4823
+</pre></div>
+</div>
+<p>Each entry relevant to Guacamole has the prefix “guacd”, denoting the program
+that produced the entry, followed by the process ID, followed by the message.
+The entries above show guacamole starting successfully and listening on a
+non-default port 4823.</p>
+<div class="section" id="guacd-errors">
+<h3>guacd errors<a class="headerlink" href="#guacd-errors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="unable-to-bind-socket-to-any-addresses">
+<h4>Unable to bind socket to any addresses.<a class="headerlink" href="#unable-to-bind-socket-to-any-addresses" title="Permalink to this headline">¶</a></h4>
+<p>This means that guacd failed to start up at all because the port it wants to
+listen on is already taken at all addresses attempted. The details of what
+guacd tried will be listed in the log entries above this. To solve the problem,
+find what port guacd was trying to listen on (the default is 4822) and check if
+any other service is listening on that port.</p>
+<p>If another service is listening on the default port, you can always specify a
+non-standard port for guacd by using the <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">PORT</span></code> option (that’s a lowercase
+“L”, not a number “1”), where <PORT> is the number of the port to listen on.
+Beware that you will likely have to modify <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> so that
+Guacamole knows how to connect to guacd.</p>
+</div>
+<div class="section" id="unable-to-start-input-thread">
+<h4>Unable to start input thread<a class="headerlink" href="#unable-to-start-input-thread" title="Permalink to this headline">¶</a></h4>
+<p>guacd creates two threads for each connection: one that receives input from the
+connected client, and the other that produces output for the client. If either
+of these fails to start, the above error will be logged along with the cause.</p>
+<p>If it is the output thread that fails to start, the message will instead read:
+“Unable to start output thread”.</p>
+</div>
+<div class="section" id="client-finished-abnormally">
+<h4>Client finished abnormally<a class="headerlink" href="#client-finished-abnormally" title="Permalink to this headline">¶</a></h4>
+<p>If the client plugin ever returns an error code, this will cause the connection
+to immediately terminate, with the cause of the error specific to the plugin in
+use. The cause should be detailed in the log messages above the error. If those
+log messages don’t make sense, you may have found a bug.</p>
+</div>
+<div class="section" id="could-not-fork-parent">
+<h4>Could not fork() parent<a class="headerlink" href="#could-not-fork-parent" title="Permalink to this headline">¶</a></h4>
+<p>When guacd starts up, it immediately attempts to “fork” into the background
+(unless instructed otherwise). The word “fork()” above is a reference to the C
+function call that does this. There are several calls to this function, each of
+which might fail if system resources are lacking or something went wrong at a
+low level. If you see this message, it is probably not a bug in Guacamole, but
+rather a problem with the load level of your system.</p>
+<p>This message may also appear as “Could not fork() group leader”.</p>
+</div>
+<div class="section" id="unable-to-change-working-directory-to">
+<h4>Unable to change working directory to /<a class="headerlink" href="#unable-to-change-working-directory-to" title="Permalink to this headline">¶</a></h4>
+<p>One of the duties of guacd as it starts up is to change its working directory
+to the root directory. This is to prevent locking the current directory in case
+it needs to be unmounted, etc. If guacd cannot do this, this error will be
+logged, along with the cause.</p>
+</div>
+<div class="section" id="unable-to-redirect-standard-file-descriptors-to-dev-null">
+<h4>Unable to redirect standard file descriptors to /dev/null<a class="headerlink" href="#unable-to-redirect-standard-file-descriptors-to-dev-null" title="Permalink to this headline">¶</a></h4>
+<p>As guacd starts, it also has to redirect STDOUT, STDERR, and STDIN to
+<code class="docutils literal notranslate"><span class="pre">/dev/null</span></code> such that attempts to use these output mechanisms do not pollute
+the active console. Though guacd and client plugins will use the exposed
+logging facilities (and thus syslog) rather than STDOUT or STDERR, libraries
+used by client plugins are often written only from the mindset of a typical
+client, and use standard output mechanisms for debug logging. Not redirecting
+these would result in undesired output to the console.</p>
+<p>If guacd cannot redirect these file descriptors for any reason, this error will
+be logged, along with the cause.</p>
+</div>
+<div class="section" id="error-parsing-given-address-or-port-hostname">
+<h4>Error parsing given address or port: HOSTNAME<a class="headerlink" href="#error-parsing-given-address-or-port-hostname" title="Permalink to this headline">¶</a></h4>
+<p>If you specified a host or port to listen on via commandline options, and that
+host or port is actually invalid, you will see this error. Fix the
+corresponding option and try again.</p>
+</div>
+<div class="section" id="error-opening-socket">
+<h4>Error opening socket<a class="headerlink" href="#error-opening-socket" title="Permalink to this headline">¶</a></h4>
+<p>When guacd starts up, it needs to open a socket and then listen on that socket.
+If it can’t even open the socket, this error will be logged, and guacd will
+exit. The cause is most likely related to permissions, and is logged along with
+the error.</p>
+</div>
+<div class="section" id="unable-to-resolve-host">
+<h4>Unable to resolve host<a class="headerlink" href="#unable-to-resolve-host" title="Permalink to this headline">¶</a></h4>
+<p>If the hostname you specified on the commandline cannot be found, you will see
+this error. Note that this error is from guacd, and does not relate to whatever
+remote desktop servers you may be trying to use; it relates only to the host
+guacd is trying to listen on. Check the hostname or IP address specified on the
+commandline. If that checks out, there may be a problem with your DNS or your
+network.</p>
+</div>
+<div class="section" id="could-not-become-a-daemon">
+<h4>Could not become a daemon<a class="headerlink" href="#could-not-become-a-daemon" title="Permalink to this headline">¶</a></h4>
+<p>In order to become a “daemon” (that is, in order to run in the background as a
+system process), guacd must create and exit from several processes, redirect
+file descriptors, etc. If any of these steps fails, guacd will not become a
+daemon, and it will log this message and exit.  The reason guacd could not
+become a daemon will be in the previous error message in the logs.</p>
+</div>
+<div class="section" id="could-not-write-pid-file">
+<h4>Could not write PID file<a class="headerlink" href="#could-not-write-pid-file" title="Permalink to this headline">¶</a></h4>
+<p>guacd offers a commandline option that lets you specify a file that it should
+write its process ID into, which is useful for init scripts. If you see this
+error, it likely means the user guacd is running as does not have permission to
+write this file. The true cause of the error will be logged in the same entry.
+Check which user guacd is running as, and then check that it has write
+permission to the file in question.</p>
+</div>
+<div class="section" id="could-not-listen-on-socket">
+<h4>Could not listen on socket<a class="headerlink" href="#could-not-listen-on-socket" title="Permalink to this headline">¶</a></h4>
+<p>When guacd starts up, it needs to listen on the socket it just opened in order
+to accept connections. If it cannot listen on the socket, clients will be
+unable to connect. If, for any reason, guacd is unable to listen on the socket,
+guacd will exit and log this message along with the cause, which is most likely
+a low-level system resource problem.</p>
+</div>
+<div class="section" id="could-not-accept-client-connection">
+<h4>Could not accept client connection<a class="headerlink" href="#could-not-accept-client-connection" title="Permalink to this headline">¶</a></h4>
+<p>When a client connects to guacd, it must accept the connection in order for
+communication to ensue. If it cannot even accept the connection, no
+communication between server and client will happen, and this error will be
+logged. The cause of the error will be logged in the same entry.  Possible
+causes include permissions problems, or lack of server resources.</p>
+</div>
+<div class="section" id="error-forking-child-process">
+<h4>Error forking child process<a class="headerlink" href="#error-forking-child-process" title="Permalink to this headline">¶</a></h4>
+<p>When a client connects to guacd, it must create a new process to handle the
+connection while the old guacd process continues to listen for new connections.
+If, for any reason, guacd cannot create this process, the connection from that
+client will be denied, and the cause of the error will be logged. Possible
+causes include permissions problems, or lack of server resources.</p>
+</div>
+<div class="section" id="error-closing-daemon-reference-to-child-descriptor">
+<h4>Error closing daemon reference to child descriptor<a class="headerlink" href="#error-closing-daemon-reference-to-child-descriptor" title="Permalink to this headline">¶</a></h4>
+<p>When guacd receives a connection, and it creates a new process to handle that
+connection, it gains a copy of the file descriptor that the client will use for
+communication. As this connection can never be closed unless all references to
+the descriptor are closed, the server must close its copy such that the client
+is the only remaining holder of the file descriptor. If the server cannot close
+the descriptor, it will log this error message along with the cause.</p>
+</div>
+<div class="section" id="error-sending-sync-instruction">
+<h4>Error sending “sync” instruction<a class="headerlink" href="#error-sending-sync-instruction" title="Permalink to this headline">¶</a></h4>
+<p>During the course of a Guacamole session, guacd must occasionally “ping” the
+client to make sure it is still alive. This ping takes the form of a “sync”
+instruction, which the client is obligated to respond to as soon as it is
+received. If guacd cannot send this instruction, this error will be logged,
+along with the cause. Chances are the connection has simply been closed, and
+this error can be ignored.</p>
+</div>
+<div class="section" id="error-flushing-output">
+<h4>Error flushing output<a class="headerlink" href="#error-flushing-output" title="Permalink to this headline">¶</a></h4>
+<p>After the client plugin is finished (for the time being) with handling server
+messages, the socket is automatically flushed. If the server cannot flush this
+socket for some reason, such as the connection already being closed, you will
+see this error. Normally, this error does not indicate a problem, but rather
+that the client has simply closed the connection.</p>
+</div>
+<div class="section" id="error-handling-server-messages">
+<h4>Error handling server messages<a class="headerlink" href="#error-handling-server-messages" title="Permalink to this headline">¶</a></h4>
+<p>While the client plugin is running, guacd will occasionally ask the plugin to
+check and handle any messages that it may have received from the server it
+connected to. If the client plugin fails for some reason while doing this, this
+error will be logged, and the cause of the error will likely be logged in
+previous log entries by the client plugin.</p>
+</div>
+<div class="section" id="error-reading-instruction">
+<h4>Error reading instruction<a class="headerlink" href="#error-reading-instruction" title="Permalink to this headline">¶</a></h4>
+<p>During the course of a Guacamole session, instructions are sent from client to
+server which are to be handled by the client plugin. If an instruction cannot
+be read, this error will be logged. Usually this means simply that the
+connection was closed, but it could also indicate that the version of the
+client in use is so old that it doesn’t support the current Guacamole protocol
+at all. If the cause looks like the connection was closed (end of stream
+reached, etc.), this log entry can be ignored. Otherwise, if the first two
+numbers of the version numbers of all Guacamole components match, you have
+probably found a bug.</p>
+</div>
+<div class="section" id="client-instruction-handler-error">
+<h4>Client instruction handler error<a class="headerlink" href="#client-instruction-handler-error" title="Permalink to this headline">¶</a></h4>
+<p>This error indicates that a client plugin failed inside the handler for a
+specific instruction. When the server receives instructions from the client, it
+then invokes specific instruction handlers within the client plugin. In
+general, this error is not useful to a user or system administrator. If the
+cause looks benign, such as reaching the end of a stream (the connection
+closed), it can be ignored as normal. Otherwise, this error can indicate a bug
+either in the client plugin or in a library used by the client plugin.</p>
+<p>It can also indicate a problem in the remote desktop server which is causing
+the client plugin to fail while communicating with it.</p>
+</div>
+<div class="section" id="error-reading-opcode">
+<h4>Error reading OPCODE<a class="headerlink" href="#error-reading-opcode" title="Permalink to this headline">¶</a></h4>
+<p>During the handshake of the Guacamole protocol, the server expects a very
+specific sequence of instructions to be received. If the wrong instructions are
+received, or the connection is abruptly closed during the handshake, the above
+error will occur.</p>
+<p>In the case that the cause is the connection closing, this is normal, and
+probably just means that the client disconnected before the initial handshake
+completed.</p>
+<p>If the connection was not closed abruptly, but instead the wrong instruction
+was received, this could mean either that the connecting client is from an
+incompatible version of Guacamole (and thus does not know the proper handshake
+procedure) or you have found a bug. Check whether all installed components came
+from the same upstream release bundle.</p>
+</div>
+<div class="section" id="error-sending-args">
+<h4>Error sending “args”<a class="headerlink" href="#error-sending-args" title="Permalink to this headline">¶</a></h4>
+<p>During the handshake of the Guacamole protocol, the server must expose all
+parameters used by the client plugin via the args instruction. If this cannot
+be sent, you will see this error in the logs. The cause will be included in the
+error message, and usually just indicates that the connection was closed during
+the handshake, and thus the handshake cannot continue.</p>
+</div>
+<div class="section" id="error-loading-client-plugin">
+<h4>Error loading client plugin<a class="headerlink" href="#error-loading-client-plugin" title="Permalink to this headline">¶</a></h4>
+<p>When the client connects, it sends an instruction to guacd informing it what
+protocol it wishes to use. If the corresponding client plugin cannot be found
+or used for any reason, this message will appear in the logs. Normally this
+indicates that the corresponding client plugin is not actually installed. The
+cause listed after the error message will indicate whether this is the case.</p>
+</div>
+<div class="section" id="error-instantiating-client">
+<h4>Error instantiating client<a class="headerlink" href="#error-instantiating-client" title="Permalink to this headline">¶</a></h4>
+<p>After the client plugin is loaded, an initialization function provided by the
+client plugin is invoked. If this function fails, then the client itself cannot
+be created, and this error will be logged. Usually this indicates that one or
+more of the parameters given to the client plugin are incorrect or malformed.
+Check the configuration of the connection in use at the time.</p>
+</div>
+</div>
+<div class="section" id="libguac-client-vnc-errors">
+<h3>libguac-client-vnc errors<a class="headerlink" href="#libguac-client-vnc-errors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="error-waiting-for-vnc-message">
+<h4>Error waiting for VNC message<a class="headerlink" href="#error-waiting-for-vnc-message" title="Permalink to this headline">¶</a></h4>
+<p>The VNC client plugin must wait for messages sent by the VNC server, and handle
+them when they arrive. If there was an error while waiting for a message from
+the VNC server, this error message will be displayed.  Usually this means that
+the VNC server closed the connection, or there is a problem with the VNC server
+itself, but the true cause of the error will be logged.</p>
+</div>
+<div class="section" id="error-handling-vnc-server-message">
+<h4>Error handling VNC server message<a class="headerlink" href="#error-handling-vnc-server-message" title="Permalink to this headline">¶</a></h4>
+<p>When messages are received from the VNC server, libvncclient must handle them
+and then invoke the functions of libguac-client-vnc as necessary.  If
+libvncclient fails during the handling of a received message, this error will
+be logged, along with (hopefully) the cause. This may indicate a problem with
+the VNC server, or a lack of support within libvncclient.</p>
+</div>
+<div class="section" id="wrong-argument-count-received">
+<h4>Wrong argument count received<a class="headerlink" href="#wrong-argument-count-received" title="Permalink to this headline">¶</a></h4>
+<p>The connecting client is required to send exactly the same number of arguments
+as requested by the client plugin. If you see this message, it means there is a
+bug in the client connecting to guacd, most likely the web application.</p>
+</div>
+</div>
+<div class="section" id="libguac-client-rdp-errors">
+<h3>libguac-client-rdp errors<a class="headerlink" href="#libguac-client-rdp-errors" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="invalid-parameter">
+<h4>Invalid PARAMETER<a class="headerlink" href="#invalid-parameter" title="Permalink to this headline">¶</a></h4>
+<p>If one of the parameters given, such as “width”, “height”, or “color-depth”, is
+invalid (not an integer, for example), you will receive this error. Check the
+parameters of the connection in use and try again.</p>
+</div>
+<div class="section" id="support-for-the-cliprdr-channel-clipboard-redirection-could-not-be-loaded">
+<h4>Support for the CLIPRDR channel (clipboard redirection) could not be loaded<a class="headerlink" href="#support-for-the-cliprdr-channel-clipboard-redirection-could-not-be-loaded" title="Permalink to this headline">¶</a></h4>
+<p>FreeRDP provides a plugin which provides clipboard support for RDP. This plugin
+is typically built into FreeRDP, but some distributions may bundle this
+separately. libguac-client-rdp loads this plugin in order to support clipboard,
+as well. If this plugin could not be loaded, then clipboard support will not be
+available, and the reason will be logged.</p>
+</div>
+<div class="section" id="cannot-create-static-channel-name-failed-to-load-guac-common-svc-plugin-for-freerdp">
+<h4>Cannot create static channel “NAME”: failed to load “guac-common-svc” plugin for FreeRDP<a class="headerlink" href="#cannot-create-static-channel-name-failed-to-load-guac-common-svc-plugin-for-freerdp" title="Permalink to this headline">¶</a></h4>
+<p>RDP provides support for much of its feature set through static virtual
+channels. Sound support, for example is provided through the “RDPSND” channel.
+Device redirection for printers and drives is provided through “RDPDR”. To
+support these and other static virtual channels, libguac-client-rdp builds a
+plugin for FreeRDP called “guac-common-svc” which allows Guacamole to hook into
+the parts of FreeRDP that support virtual channels.</p>
+<p>If libguac-client-rdp cannot load this plugin, support for any features which
+leverage static virtual channels will not work, and the reason will be logged.
+A likely explanation is that libguac-client-rdp was built from source, and the
+directory specified for FreeRDP’s installation location was incorrect. For
+FreeRDP to be able to find plugins, those plugins must be placed in the
+<code class="docutils literal notranslate"><span class="pre">freerdp2/</span></code> subdirectory of whichever directory contains the <code class="docutils literal notranslate"><span class="pre">libfreerdp2.so</span></code>
+library.</p>
+</div>
+<div class="section" id="server-requested-unsupported-clipboard-data-type">
+<h4>Server requested unsupported clipboard data type<a class="headerlink" href="#server-requested-unsupported-clipboard-data-type" title="Permalink to this headline">¶</a></h4>
+<p>When clipboard support is loaded, libguac-client-rdp informs the RDP server of
+all supported clipboard data types. The RDP server is required to send only
+those types supported by the client. If the server decides to send an
+unsupported type anyway, libguac-client-rdp ignores the data sent, and logs
+this message.</p>
+</div>
+<div class="section" id="clipboard-data-missing-null-terminator">
+<h4>Clipboard data missing null terminator<a class="headerlink" href="#clipboard-data-missing-null-terminator" title="Permalink to this headline">¶</a></h4>
+<p>When text is sent via a clipboard message, it is required to have a terminating
+null byte. If this is not the case, the clipboard data is invalid, and
+libguac-client-rdp ignores it, logging this error message.</p>
+</div>
+</div>
+</div>
+<div class="section" id="servlet-container-logs">
+<h2>Servlet container logs<a class="headerlink" href="#servlet-container-logs" title="Permalink to this headline">¶</a></h2>
+<p>Your servlet container will have logs which the web application side of
+Guacamole will log errors to. In the case of Tomcat, this is usually
+<code class="docutils literal notranslate"><span class="pre">catalina.out</span></code> or <code class="docutils literal notranslate"><span class="pre">HOSTNAME.log</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">localhost.log</span></code>).</p>
+<div class="section" id="user-mapping-xml-errors">
+<span id="id1"></span><h3><code class="docutils literal notranslate"><span class="pre">user-mapping.xml</span></code> errors<a class="headerlink" href="#user-mapping-xml-errors" title="Permalink to this headline">¶</a></h3>
+<p>Errors in the relating to the <code class="docutils literal notranslate"><span class="pre">user-mapping.xml</span></code> file usually indicate that
+either the XML is malformed, or the file itself cannot be found.</p>
+<div class="section" id="attribute-name-required-for-connection-tag">
+<h4>Attribute “name” required for connection tag<a class="headerlink" href="#attribute-name-required-for-connection-tag" title="Permalink to this headline">¶</a></h4>
+<p>If you specify a connection with a <code class="docutils literal notranslate"><span class="pre">&lt;connection&gt;</span></code> tag, it must have a
+corresponding name set via the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute. If it does not, then the XML
+is malformed, and this error will be logged. No users will be able to login.</p>
+</div>
+<div class="section" id="attribute-name-required-for-param-tag">
+<h4>Attribute “name” required for param tag<a class="headerlink" href="#attribute-name-required-for-param-tag" title="Permalink to this headline">¶</a></h4>
+<p>Each parameter specified with a <code class="docutils literal notranslate"><span class="pre">&lt;param&gt;</span></code> tag must have a corresponding name
+set via the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute. If it does not, then the XML is malformed, and
+this error will be logged. No users will be able to login.</p>
+</div>
+<div class="section" id="unexpected-character-data">
+<h4>Unexpected character data<a class="headerlink" href="#unexpected-character-data" title="Permalink to this headline">¶</a></h4>
+<p>Character data (text not within angle brackets) can only exist within the
+<code class="docutils literal notranslate"><span class="pre">&lt;param&gt;</span></code> tag. If it exists elsewhere, then the XML is malformed, and this
+error will be logged. No users will be able to login.</p>
+</div>
+<div class="section" id="invalid-encoding-type">
+<h4>Invalid encoding type<a class="headerlink" href="#invalid-encoding-type" title="Permalink to this headline">¶</a></h4>
+<p>There are only two legal values for the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> attribute of the
+<code class="docutils literal notranslate"><span class="pre">&lt;authorize&gt;</span></code> tag: <code class="docutils literal notranslate"><span class="pre">plain</span></code> (indicating plain text) and <code class="docutils literal notranslate"><span class="pre">md5</span></code> (indicating a
+value hashed with the MD5 digest). If any other value is used, then the XML is
+malformed, and this error will be logged. No users will be able to login.</p>
+</div>
+<div class="section" id="user-mapping-could-not-be-read">
+<h4>User mapping could not be read<a class="headerlink" href="#user-mapping-could-not-be-read" title="Permalink to this headline">¶</a></h4>
+<p>If for any reason the user mapping file cannot be read (the servlet container
+lacks read permission for the file, the file does not exist, etc.), this error
+will be logged. Check <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> to see where the user mapping file
+is specified to exist, and then check that is both exists and is readable by
+your servlet container.</p>
+</div>
+</div>
+<div class="section" id="guacamole-properties-errors">
+<span id="id2"></span><h3><code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> errors<a class="headerlink" href="#guacamole-properties-errors" title="Permalink to this headline">¶</a></h3>
+<p>If a property is malformed or a required property is missing, an error
+describing the problem will be logged.</p>
+<div class="section" id="property-property-is-required">
+<h4>Property PROPERTY is required<a class="headerlink" href="#property-property-is-required" title="Permalink to this headline">¶</a></h4>
+<p>If Guacamole or an extension of Guacamole requires a specific property in
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>, but this property is not defined, this error will be
+logged. Check which properties are required by the authentication provider (or
+other extensions) in use, and then compare that against the properties within
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>.</p>
+</div>
+</div>
+<div class="section" id="authentication-errors">
+<span id="guacamole-auth-errors"></span><h3>Authentication errors<a class="headerlink" href="#authentication-errors" title="Permalink to this headline">¶</a></h3>
+<p>If someone attempts to login with invalid credentials, or someone attempts to
+access a resource or connection that does not exist or they do not have access
+to, errors regarding the invalid attempt will be logged.</p>
+<div class="section" id="cannot-connect-user-not-logged-in">
+<h4>Cannot connect - user not logged in<a class="headerlink" href="#cannot-connect-user-not-logged-in" title="Permalink to this headline">¶</a></h4>
+<p>A user attempted to connect using the HTTP tunnel, and while the tunnel does
+exist and is attached to their session, they are not actually logged in.
+Normally, this isn’t strictly possible, as a user has to have logged in for a
+tunnel to be attached to their session, but as it isn’t an impossibility, this
+error does exist. If you see this error, it could mean that the user logged out
+at the same time that they made a connection attempt.</p>
+</div>
+<div class="section" id="requested-configuration-is-not-authorized">
+<h4>Requested configuration is not authorized<a class="headerlink" href="#requested-configuration-is-not-authorized" title="Permalink to this headline">¶</a></h4>
+<p>A user attempted to connect to a configuration with a given ID, and while that
+configuration does exist, they are not authorized to use it.  This could mean
+that the user is trying to access things they have no privileges for, or that
+they are trying to access configurations they legitimately should, but are
+actually logged out.</p>
+</div>
+<div class="section" id="user-has-no-session">
+<h4>User has no session<a class="headerlink" href="#user-has-no-session" title="Permalink to this headline">¶</a></h4>
+<p>A user attempted to access a page that needs data from their session, but their
+session does not actually exist. This usually means the user has not logged in,
+as sessions are created through the login process.</p>
+</div>
+</div>
+<div class="section" id="tunnel-errors">
+<span id="guacamole-tunnel-errors"></span><h3>Tunnel errors<a class="headerlink" href="#tunnel-errors" title="Permalink to this headline">¶</a></h3>
+<p>The tunnel frequently returns errors if guacd is killed, the connection is
+closed, or the client abruptly closes the connection.</p>
+<div class="section" id="no-such-tunnel">
+<h4>No such tunnel<a class="headerlink" href="#no-such-tunnel" title="Permalink to this headline">¶</a></h4>
+<p>An attempt was made to use a tunnel which does not actually exist. This is
+usually just the JavaScript client sending a leftover message or two while it
+hasn’t realized that the server has disconnected. If this error happens
+consistently and is associated with Guacamole generally not working, it could
+be a bug.</p>
+</div>
+<div class="section" id="no-tunnel-created">
+<h4>No tunnel created<a class="headerlink" href="#no-tunnel-created" title="Permalink to this headline">¶</a></h4>
+<p>A connection attempt for a specific configuration was made, but the connection
+failed, and no tunnel was created. This is usually because the user was not
+authorized to use that connection, and thus no tunnel was created for access to
+that connection.</p>
+</div>
+<div class="section" id="no-query-string-provided">
+<h4>No query string provided<a class="headerlink" href="#no-query-string-provided" title="Permalink to this headline">¶</a></h4>
+<p>When the JavaScript client is communicating with the HTTP tunnel, it <em>must</em>
+provide data in the query string describing whether it wants to connect, read,
+or write. If this data is missing as the error indicates, there is a bug in the
+HTTP tunnel.</p>
+</div>
+<div class="section" id="tunnel-reached-end-of-stream">
+<h4>Tunnel reached end of stream<a class="headerlink" href="#tunnel-reached-end-of-stream" title="Permalink to this headline">¶</a></h4>
+<p>An attempt to read from the tunnel was made, but the tunnel in question has
+already reached the end of stream (the connection is closed). This is mostly an
+informative error, and can be ignored.</p>
+</div>
+<div class="section" id="tunnel-is-closed">
+<h4>Tunnel is closed<a class="headerlink" href="#tunnel-is-closed" title="Permalink to this headline">¶</a></h4>
+<p>An attempt to read from the tunnel was made, but the tunnel in question is
+already closed. This can happen if the client or guacd have closed the
+connection, but the client has not yet settled down and is still making read
+attempts. As there can be lags between when connections close and when the
+client realizes it, this can be safely ignored.</p>
+</div>
+<div class="section" id="end-of-stream-during-initial-handshake">
+<h4>End of stream during initial handshake<a class="headerlink" href="#end-of-stream-during-initial-handshake" title="Permalink to this headline">¶</a></h4>
+<p>If guacd closes the connection suddenly without allowing the client to complete
+the initial handshake required by the Guacamole protocol, this error will
+appear in the logs. If you see this error, you should check syslog for any
+errors logged by guacd to determine why it closed the connection so early.</p>
+</div>
+<div class="section" id="element-terminator-of-instruction-was-not-nor">
+<h4>Element terminator of instruction was not ‘;’ nor ‘,’<a class="headerlink" href="#element-terminator-of-instruction-was-not-nor" title="Permalink to this headline">¶</a></h4>
+<p>The Guacamole protocol imposes a strict format which requires individual parts
+of instructions (called “elements”) to end with either a “;” or “,” character.
+If they do not, then something has gone wrong during transmission. This usually
+indicates a bug in the client plugin in use, guacd, or libguac.</p>
+</div>
+<div class="section" id="non-numeric-character-in-element-length">
+<h4>Non-numeric character in element length<a class="headerlink" href="#non-numeric-character-in-element-length" title="Permalink to this headline">¶</a></h4>
+<p>The Guacamole protocol imposes a strict format which requires each element of
+an instruction to have a length prefix, which must be composed entirely of
+numeric characters (digits 0 through 9). If a non-numeric character is read,
+then something has gone wrong during transmission. This usually indicates a bug
+in the client plugin in use, guacd, or libguac.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="guacamole-protocol.html" class="btn btn-neutral float-right" title="The Guacamole protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="administration.html" class="btn btn-neutral float-left" title="Administration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<map id="guacamole/protocol.h" name="guacamole/protocol.h">
+<area shape="rect" id="node1" title="Provides functions and structures required for communicating using the Guacamole protocol over a guac..." alt="" coords="585,5,747,32"/>
+<area shape="rect" id="node2" href="$layer-types_8h.html" title="Type definitions related to Guacamole layers." alt="" coords="5,80,113,107"/>
+<area shape="rect" id="node3" href="$object-types_8h.html" title="Type definitions related to Guacamole protocol objects." alt="" coords="138,80,253,107"/>
+<area shape="rect" id="node4" href="$protocol-constants_8h.html" title="Constants related to the Guacamole protocol." alt="" coords="277,80,431,107"/>
+<area shape="rect" id="node5" href="$protocol-types_8h.html" title="Type definitions related to the Guacamole protocol." alt="" coords="455,80,583,107"/>
+<area shape="rect" id="node6" href="$socket-types_8h.html" title="Type definitions related to the guac_socket object." alt="" coords="607,80,725,107"/>
+<area shape="rect" id="node7" href="$stream-types_8h.html" title="Type definitions related to Guacamole protocol streams." alt="" coords="749,80,871,107"/>
+<area shape="rect" id="node8" href="$timestamp-types_8h.html" title="Type definitions related to Guacamole protocol timestamps." alt="" coords="895,80,1042,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1067,80,1169,107"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1194,80,1269,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="933,155,1004,181"/>
+</map>

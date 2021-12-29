@@ -1,0 +1,6665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: VisibleLayer</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: VisibleLayer</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Guacamole.html">Guacamole</a><a href="Guacamole.Display.html">.Display</a>.</span>VisibleLayer<span class="signature">(width<span class="signature-attributes">non-null</span>, height<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="VisibleLayer"><span class="type-signature"></span>new VisibleLayer<span class="signature">(width<span class="signature-attributes">non-null</span>, height<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Simple container for Guacamole.Layer, allowing layers to be easily
+repositioned and nested. This allows certain operations to be accelerated
+through DOM manipulation, rather than raster operations.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the Layer, in pixels. The canvas element backing this Layer
+    will be given this width.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the Layer, in pixels. The canvas element backing this
+    Layer will be given this height.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1514">line 1514</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Guacamole.Layer.html">Guacamole.Layer</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="alpha"><span class="type-signature">(non-null) </span>alpha<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    The opacity of the layer container, where 255 is fully opaque and 0 is
+fully transparent.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1542">line 1542</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="autosize"><span class="type-signature">(non-null) </span>autosize<span class="type-signature"> :boolean</span></h4>
+
+
+
+
+<div class="description">
+    Set to true if this Layer should resize itself to accomodate the
+dimensions of any drawing operation, and false (the default) otherwise.
+
+Note that setting this property takes effect immediately, and thus may
+take effect on operations that were started in the past but have not
+yet completed. If you wish the setting of this flag to only modify
+future operations, you will need to make the setting of this flag an
+operation with sync().
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#autosize">Guacamole.Layer#autosize</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>false</li>
+        </ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line273">line 273</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Set autosize to true for all future operations
+layer.sync(function() {
+    layer.autosize = true;
+});</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="children"><span class="type-signature">(non-null) </span>children<span class="type-signature"> :Object.&lt;number, <a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a>></span></h4>
+
+
+
+
+<div class="description">
+    Set of all children of this layer, indexed by layer index. This object
+will have one property per child.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object.&lt;number, <a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1589">line 1589</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="height"><span class="type-signature">(non-null) </span>height<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    The current height of this layer.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#height">Guacamole.Layer#height</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line287">line 287</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="matrix"><span class="type-signature">(non-null) </span>matrix<span class="type-signature"> :Array.&lt;number></span></h4>
+
+
+
+
+<div class="description">
+    The affine transformation applied to this layer container. Each element
+corresponds to a value from the transformation matrix, with the first
+three values being the first row, and the last three values being the
+second row. There are six values total.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;number></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1575">line 1575</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="parent"><span class="type-signature"></span>parent<span class="type-signature"> :<a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></span></h4>
+
+
+
+
+<div class="description">
+    The parent layer container of this layer, if any.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1581">line 1581</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="width"><span class="type-signature">(non-null) </span>width<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    The current width of this layer.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#width">Guacamole.Layer#width</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line280">line 280</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="x"><span class="type-signature">(non-null) </span>x<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    X coordinate of the upper-left corner of this layer container within
+its parent, in pixels.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1550">line 1550</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="y"><span class="type-signature">(non-null) </span>y<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    Y coordinate of the upper-left corner of this layer container within
+its parent, in pixels.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1558">line 1558</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="z"><span class="type-signature">(non-null) </span>z<span class="type-signature"> :number</span></h4>
+
+
+
+
+<div class="description">
+    Z stacking order of this layer relative to other sibling layers.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1565">line 1565</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="arc"><span class="type-signature"></span>arc<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>, radius<span class="signature-attributes">non-null</span>, startAngle<span class="signature-attributes">non-null</span>, endAngle<span class="signature-attributes">non-null</span>, negative<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add the specified arc to the current path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the center of the circle which will contain the
+    arc.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the center of the circle which will contain the
+    arc.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>radius</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The radius of the circle.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startAngle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The starting angle of the arc, in radians.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>endAngle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The ending angle of the arc, in radians.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>negative</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the arc should be drawn in order of decreasing angle.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#arc">Guacamole.Layer#arc</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line629">line 629</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="clip"><span class="type-signature"></span>clip<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Clip all future drawing operations by the current path. The current path
+is implicitly closed. The current path can continue to be reused
+for other operations (such as fillColor()) but a new path will be started
+once a path drawing operation (path() or rect()) is used.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#clip">Guacamole.Layer#clip</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line719">line 719</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="close"><span class="type-signature"></span>close<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Closes the current path by connecting the end point with the start
+point (if any) with a straight line.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#close">Guacamole.Layer#close</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line680">line 680</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="copy"><span class="type-signature"></span>copy<span class="signature">(srcLayer<span class="signature-attributes">non-null</span>, srcx<span class="signature-attributes">non-null</span>, srcy<span class="signature-attributes">non-null</span>, srcw<span class="signature-attributes">non-null</span>, srch<span class="signature-attributes">non-null</span>, x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Copy a rectangle of image data from one Layer to this Layer. This
+operation will copy exactly the image data that will be drawn once all
+operations of the source Layer that were pending at the time this
+function was called are complete. This operation will not alter the
+size of the source Layer even if its autosize property is set to true.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>srcLayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Layer to copy image data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcw</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination X coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination Y coordinate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#copy">Guacamole.Layer#copy</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line539">line 539</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="curveTo"><span class="type-signature"></span>curveTo<span class="signature">(cp1x<span class="signature-attributes">non-null</span>, cp1y<span class="signature-attributes">non-null</span>, cp2x<span class="signature-attributes">non-null</span>, cp2y<span class="signature-attributes">non-null</span>, x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Starts a new path at the specified point.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cp1x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the first control point.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cp1y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the first control point.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cp2x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the second control point.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cp2y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the second control point.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the endpoint of the curve.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the endpoint of the curve.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#curveTo">Guacamole.Layer#curveTo</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line663">line 663</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dispose"><span class="type-signature"></span>dispose<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes this layer container entirely, such that it is no longer
+contained within its parent layer, if any.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1738">line 1738</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="distort"><span class="type-signature"></span>distort<span class="signature">(a<span class="signature-attributes">non-null</span>, b<span class="signature-attributes">non-null</span>, c<span class="signature-attributes">non-null</span>, d<span class="signature-attributes">non-null</span>, e<span class="signature-attributes">non-null</span>, f<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies the given affine transform (defined with six values from the
+transform's matrix).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The third value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fourth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fifth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sixth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1774">line 1774</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="drawImage"><span class="type-signature"></span>drawImage<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>, image<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Draws the specified image at the given coordinates. The image specified
+must already be loaded.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination X coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination Y coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CanvasImageSource</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The image to draw. Note that this is not a URL.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#drawImage">Guacamole.Layer#drawImage</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line354">line 354</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="fillColor"><span class="type-signature"></span>fillColor<span class="signature">(r<span class="signature-attributes">non-null</span>, g<span class="signature-attributes">non-null</span>, b<span class="signature-attributes">non-null</span>, a<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fills the current path with the specified color. The current path
+is implicitly closed. The current path can continue to be reused
+for other operations (such as clip()) but a new path will be started
+once a path drawing operation (path() or rect()) is used.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>r</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The red component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>g</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The green component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The blue component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The alpha component of the color to fill.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#fillColor">Guacamole.Layer#fillColor</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line789">line 789</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="fillLayer"><span class="type-signature"></span>fillLayer<span class="signature">(srcLayer<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fills the current path with the image within the specified layer. The
+image data will be tiled infinitely within the stroke. The current path
+is implicitly closed. The current path can continue to be reused
+for other operations (such as clip()) but a new path will be started
+once a path drawing operation (path() or rect()) is used.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>srcLayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The layer to use as a repeating pattern within the fill.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#fillLayer">Guacamole.Layer#fillLayer</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line848">line 848</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getCanvas"><span class="type-signature"></span>getCanvas<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {HTMLCanvasElement}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the canvas element backing this Layer. Note that the dimensions
+of the canvas may not exactly match those of the Layer, as resizing a
+canvas while maintaining its state is an expensive operation.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#getCanvas">Guacamole.Layer#getCanvas</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line297">line 297</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The canvas element backing this Layer.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">HTMLCanvasElement</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getElement"><span class="type-signature"></span>getElement<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the element containing the canvas and any other elements
+associated with this layer.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1630">line 1630</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The element containing this layer's canvas.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="lineTo"><span class="type-signature"></span>lineTo<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add the specified line to the current path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the endpoint of the line to draw.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the endpoint of the line to draw.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#lineTo">Guacamole.Layer#lineTo</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line593">line 593</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="move"><span class="type-signature"></span>move<span class="signature">(parent<span class="signature-attributes">non-null</span>, x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>, z<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Moves the upper-left corner of this VisibleLayer to the given X and Y
+coordinate, sets the Z stacking order, and reparents this VisibleLayer
+to the given VisibleLayer.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The parent to set.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate to move to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate to move to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>z</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Z coordinate to move to.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1698">line 1698</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="moveTo"><span class="type-signature"></span>moveTo<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Starts a new path at the specified point.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the point to draw.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the point to draw.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#moveTo">Guacamole.Layer#moveTo</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line571">line 571</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pop"><span class="type-signature"></span>pop<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Pop layer state off stack.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#pop">Guacamole.Layer#pop</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line877">line 877</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="push"><span class="type-signature"></span>push<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Push current layer state onto stack.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#push">Guacamole.Layer#push</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line866">line 866</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="put"><span class="type-signature"></span>put<span class="signature">(srcLayer<span class="signature-attributes">non-null</span>, srcx<span class="signature-attributes">non-null</span>, srcy<span class="signature-attributes">non-null</span>, srcw<span class="signature-attributes">non-null</span>, srch<span class="signature-attributes">non-null</span>, x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Put a rectangle of image data from one Layer to this Layer directly
+without performing any alpha blending. Simply copy the data.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>srcLayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Layer to copy image data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcw</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination X coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination Y coordinate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#put">Guacamole.Layer#put</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line481">line 481</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="rect"><span class="type-signature"></span>rect<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>, w<span class="signature-attributes">non-null</span>, h<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add the specified rectangle to the current path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the upper-left corner of the rectangle to draw.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the upper-left corner of the rectangle to draw.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>w</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the rectangle to draw.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>h</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the rectangle to draw.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#rect">Guacamole.Layer#rect</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line700">line 700</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Reset the layer, clearing the stack, the current path, and any transform
+matrix.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#reset">Guacamole.Layer#reset</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line891">line 891</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resize"><span class="type-signature"></span>resize<span class="signature">(newWidth<span class="signature-attributes">non-null</span>, newHeight<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Changes the size of this Layer to the given width and height. Resizing
+is only attempted if the new size provided is actually different from
+the current size.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>newWidth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new width to assign to this Layer.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newHeight</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new height to assign to this Layer.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#resize">Guacamole.Layer#resize</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setChannelMask"><span class="type-signature"></span>setChannelMask<span class="signature">(mask<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the channel mask for future operations on this Layer.
+
+The channel mask is a Guacamole-specific compositing operation identifier
+with a single bit representing each of four channels (in order): source
+image where destination transparent, source where destination opaque,
+destination where source transparent, and destination where source
+opaque.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mask</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The channel mask for future operations on this Layer.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#setChannelMask">Guacamole.Layer#setChannelMask</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line981">line 981</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setMiterLimit"><span class="type-signature"></span>setMiterLimit<span class="signature">(limit<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the miter limit for stroke operations using the miter join. This
+limit is the maximum ratio of the size of the miter join to the stroke
+width. If this ratio is exceeded, the miter will not be drawn for that
+joint of the path.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The miter limit for stroke operations using the miter join.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#setMiterLimit">Guacamole.Layer#setMiterLimit</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line994">line 994</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setTransform"><span class="type-signature"></span>setTransform<span class="signature">(a<span class="signature-attributes">non-null</span>, b<span class="signature-attributes">non-null</span>, c<span class="signature-attributes">non-null</span>, d<span class="signature-attributes">non-null</span>, e<span class="signature-attributes">non-null</span>, f<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the given affine transform (defined with six values from the
+transform's matrix).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The third value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fourth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fifth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sixth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#setTransform">Guacamole.Layer#setTransform</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line931">line 931</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="shade"><span class="type-signature"></span>shade<span class="signature">(a<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sets the opacity of this layer to the given value, where 255 is fully
+opaque and 0 is fully transparent.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The opacity to set.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1729">line 1729</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="strokeColor"><span class="type-signature"></span>strokeColor<span class="signature">(cap<span class="signature-attributes">non-null</span>, join<span class="signature-attributes">non-null</span>, thickness<span class="signature-attributes">non-null</span>, r<span class="signature-attributes">non-null</span>, g<span class="signature-attributes">non-null</span>, b<span class="signature-attributes">non-null</span>, a<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stroke the current path with the specified color. The current path
+is implicitly closed. The current path can continue to be reused
+for other operations (such as clip()) but a new path will be started
+once a path drawing operation (path() or rect()) is used.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line cap style. Can be "round", "square", or "butt".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>join</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line join style. Can be "round", "bevel", or "miter".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>thickness</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line thickness in pixels.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>r</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The red component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>g</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The green component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The blue component of the color to fill.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The alpha component of the color to fill.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#strokeColor">Guacamole.Layer#strokeColor</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line756">line 756</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="strokeLayer"><span class="type-signature"></span>strokeLayer<span class="signature">(cap<span class="signature-attributes">non-null</span>, join<span class="signature-attributes">non-null</span>, thickness<span class="signature-attributes">non-null</span>, srcLayer<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stroke the current path with the image within the specified layer. The
+image data will be tiled infinitely within the stroke. The current path
+is implicitly closed. The current path can continue to be reused
+for other operations (such as clip()) but a new path will be started
+once a path drawing operation (path() or rect()) is used.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line cap style. Can be "round", "square", or "butt".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>join</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line join style. Can be "round", "bevel", or "miter".</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>thickness</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The line thickness in pixels.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcLayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The layer to use as a repeating pattern within the stroke.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#strokeLayer">Guacamole.Layer#strokeLayer</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line820">line 820</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toCanvas"><span class="type-signature"></span>toCanvas<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {HTMLCanvasElement}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns a new canvas element containing the same image as this Layer.
+Unlike getCanvas(), the canvas element returned is guaranteed to have
+the exact same dimensions as the Layer.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#toCanvas">Guacamole.Layer#toCanvas</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line310">line 310</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new canvas element containing a copy of the image content this
+    Layer.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">HTMLCanvasElement</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="transfer"><span class="type-signature"></span>transfer<span class="signature">(srcLayer<span class="signature-attributes">non-null</span>, srcx<span class="signature-attributes">non-null</span>, srcy<span class="signature-attributes">non-null</span>, srcw<span class="signature-attributes">non-null</span>, srch<span class="signature-attributes">non-null</span>, x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>, transferFunction<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Transfer a rectangle of image data from one Layer to this Layer using the
+specified transfer function.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>srcLayer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Guacamole.Layer.html">Guacamole.Layer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Layer to copy image data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate of the upper-left corner of the rectangle within
+    the source Layer's coordinate space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srcw</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The width of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>srch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The height of the rectangle within the source Layer's coordinate
+    space to copy data from.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination X coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The destination Y coordinate.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>transferFunction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The transfer function to use to transfer data from source to
+    destination.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#transfer">Guacamole.Layer#transfer</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line393">line 393</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="transform"><span class="type-signature"></span>transform<span class="signature">(a<span class="signature-attributes">non-null</span>, b<span class="signature-attributes">non-null</span>, c<span class="signature-attributes">non-null</span>, d<span class="signature-attributes">non-null</span>, e<span class="signature-attributes">non-null</span>, f<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies the given affine transform (defined with six values from the
+transform's matrix).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The first value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The second value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The third value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fourth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The fifth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The sixth value in the affine transform's matrix.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Guacamole.Layer.html#transform">Guacamole.Layer#transform</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Layer.js.html">main/webapp/modules/Layer.js</a>, <a href="main_webapp_modules_Layer.js.html#line961">line 961</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x<span class="signature-attributes">non-null</span>, y<span class="signature-attributes">non-null</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Moves the upper-left corner of this layer to the given X and Y
+coordinate.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The X coordinate to move to.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Y coordinate to move to.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_Display.js.html">main/webapp/modules/Display.js</a>, <a href="main_webapp_modules_Display.js.html#line1660">line 1660</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Guacamole.html">Guacamole</a></li><li><a href="Guacamole.AudioContextFactory.html">Guacamole.AudioContextFactory</a></li></ul><h3>Classes</h3><ul><li><a href="Guacamole.ArrayBufferReader.html">Guacamole.ArrayBufferReader</a></li><li><a href="Guacamole.ArrayBufferWriter.html">Guacamole.ArrayBufferWriter</a></li><li><a href="Guacamole.AudioPlayer.html">Guacamole.AudioPlayer</a></li><li><a href="Guacamole.AudioRecorder.html">Guacamole.AudioRecorder</a></li><li><a href="Guacamole.BlobReader.html">Guacamole.BlobReader</a></li><li><a href="Guacamole.BlobWriter.html">Guacamole.BlobWriter</a></li><li><a href="Guacamole.ChainedTunnel.html">Guacamole.ChainedTunnel</a></li><li><a href="Guacamole.Client.html">Guacamole.Client</a></li><li><a href="Guacamole.DataURIReader.html">Guacamole.DataURIReader</a></li><li><a href="Guacamole.Display.html">Guacamole.Display</a></li><li><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></li><li><a href="Guacamole.Event.html">Guacamole.Event</a></li><li><a href="Guacamole.Event.DOMEvent.html">Guacamole.Event.DOMEvent</a></li><li><a href="Guacamole.Event.Target.html">Guacamole.Event.Target</a></li><li><a href="Guacamole.HTTPTunnel.html">Guacamole.HTTPTunnel</a></li><li><a href="Guacamole.InputSink.html">Guacamole.InputSink</a></li><li><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></li><li><a href="Guacamole.IntegerPool.html">Guacamole.IntegerPool</a></li><li><a href="Guacamole.JSONReader.html">Guacamole.JSONReader</a></li><li><a href="Guacamole.Keyboard.html">Guacamole.Keyboard</a></li><li><a href="Guacamole.Keyboard.ModifierState.html">Guacamole.Keyboard.ModifierState</a></li><li><a href="Guacamole.Layer.html">Guacamole.Layer</a></li><li><a href="Guacamole.Layer.Pixel.html">Guacamole.Layer.Pixel</a></li><li><a href="Guacamole.Mouse.html">Guacamole.Mouse</a></li><li><a href="Guacamole.Mouse.Event.html">Guacamole.Mouse.Event</a></li><li><a href="Guacamole.Mouse.Event.Target.html">Guacamole.Mouse.Event.Target</a></li><li><a href="Guacamole.Mouse.State.html">Guacamole.Mouse.State</a></li><li><a href="Guacamole.Mouse.Touchpad.html">Guacamole.Mouse.Touchpad</a></li><li><a href="Guacamole.Mouse.Touchscreen.html">Guacamole.Mouse.Touchscreen</a></li><li><a href="Guacamole.Object.html">Guacamole.Object</a></li><li><a href="Guacamole.OnScreenKeyboard.html">Guacamole.OnScreenKeyboard</a></li><li><a href="Guacamole.OnScreenKeyboard.Key.html">Guacamole.OnScreenKeyboard.Key</a></li><li><a href="Guacamole.OnScreenKeyboard.Layout.html">Guacamole.OnScreenKeyboard.Layout</a></li><li><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></li><li><a href="Guacamole.Parser.html">Guacamole.Parser</a></li><li><a href="Guacamole.Position.html">Guacamole.Position</a></li><li><a href="Guacamole.RawAudioFormat.html">Guacamole.RawAudioFormat</a></li><li><a href="Guacamole.RawAudioPlayer.html">Guacamole.RawAudioPlayer</a></li><li><a href="Guacamole.RawAudioRecorder.html">Guacamole.RawAudioRecorder</a></li><li><a href="Guacamole.SessionRecording.html">Guacamole.SessionRecording</a></li><li><a href="Guacamole.StaticHTTPTunnel.html">Guacamole.StaticHTTPTunnel</a></li><li><a href="Guacamole.Status.html">Guacamole.Status</a></li><li><a href="Guacamole.StringReader.html">Guacamole.StringReader</a></li><li><a href="Guacamole.StringWriter.html">Guacamole.StringWriter</a></li><li><a href="Guacamole.Touch.html">Guacamole.Touch</a></li><li><a href="Guacamole.Touch.Event.html">Guacamole.Touch.Event</a></li><li><a href="Guacamole.Touch.State.html">Guacamole.Touch.State</a></li><li><a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a></li><li><a href="Guacamole.VideoPlayer.html">Guacamole.VideoPlayer</a></li><li><a href="Guacamole.WebSocketTunnel.html">Guacamole.WebSocketTunnel</a></li></ul><h3>Events</h3><ul><li><a href="Guacamole.ArrayBufferReader.html#event:ondata">Guacamole.ArrayBufferReader#ondata</a></li><li><a href="Guacamole.ArrayBufferReader.html#event:onend">Guacamole.ArrayBufferReader#onend</a></li><li><a href="Guacamole.ArrayBufferWriter.html#event:onack">Guacamole.ArrayBufferWriter#onack</a></li><li><a href="Guacamole.AudioRecorder.html#event:onclose">Guacamole.AudioRecorder#onclose</a></li><li><a href="Guacamole.AudioRecorder.html#event:onerror">Guacamole.AudioRecorder#onerror</a></li><li><a href="Guacamole.BlobReader.html#event:onend">Guacamole.BlobReader#onend</a></li><li><a href="Guacamole.BlobReader.html#event:onprogress">Guacamole.BlobReader#onprogress</a></li><li><a href="Guacamole.BlobWriter.html#event:onack">Guacamole.BlobWriter#onack</a></li><li><a href="Guacamole.BlobWriter.html#event:oncomplete">Guacamole.BlobWriter#oncomplete</a></li><li><a href="Guacamole.BlobWriter.html#event:onerror">Guacamole.BlobWriter#onerror</a></li><li><a href="Guacamole.BlobWriter.html#event:onprogress">Guacamole.BlobWriter#onprogress</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onerror">Guacamole.ChainedTunnel#onerror</a></li><li><a href="Guacamole.ChainedTunnel.html#event:oninstruction">Guacamole.ChainedTunnel#oninstruction</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onstatechange">Guacamole.ChainedTunnel#onstatechange</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onuuid">Guacamole.ChainedTunnel#onuuid</a></li><li><a href="Guacamole.Client.html#event:onargv">Guacamole.Client#onargv</a></li><li><a href="Guacamole.Client.html#event:onaudio">Guacamole.Client#onaudio</a></li><li><a href="Guacamole.Client.html#event:onclipboard">Guacamole.Client#onclipboard</a></li><li><a href="Guacamole.Client.html#event:onerror">Guacamole.Client#onerror</a></li><li><a href="Guacamole.Client.html#event:onfile">Guacamole.Client#onfile</a></li><li><a href="Guacamole.Client.html#event:onfilesystem">Guacamole.Client#onfilesystem</a></li><li><a href="Guacamole.Client.html#event:onmultitouch">Guacamole.Client#onmultitouch</a></li><li><a href="Guacamole.Client.html#event:onname">Guacamole.Client#onname</a></li><li><a href="Guacamole.Client.html#event:onpipe">Guacamole.Client#onpipe</a></li><li><a href="Guacamole.Client.html#event:onrequired">Guacamole.Client#onrequired</a></li><li><a href="Guacamole.Client.html#event:onstatechange">Guacamole.Client#onstatechange</a></li><li><a href="Guacamole.Client.html#event:onsync">Guacamole.Client#onsync</a></li><li><a href="Guacamole.Client.html#event:onvideo">Guacamole.Client#onvideo</a></li><li><a href="Guacamole.DataURIReader.html#event:onend">Guacamole.DataURIReader#onend</a></li><li><a href="Guacamole.Display.html#event:oncursor">Guacamole.Display#oncursor</a></li><li><a href="Guacamole.Display.html#event:onresize">Guacamole.Display#onresize</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onerror">Guacamole.HTTPTunnel#onerror</a></li><li><a href="Guacamole.HTTPTunnel.html#event:oninstruction">Guacamole.HTTPTunnel#oninstruction</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onstatechange">Guacamole.HTTPTunnel#onstatechange</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onuuid">Guacamole.HTTPTunnel#onuuid</a></li><li><a href="Guacamole.InputStream.html#event:onblob">Guacamole.InputStream#onblob</a></li><li><a href="Guacamole.InputStream.html#event:onend">Guacamole.InputStream#onend</a></li><li><a href="Guacamole.JSONReader.html#event:onend">Guacamole.JSONReader#onend</a></li><li><a href="Guacamole.JSONReader.html#event:onprogress">Guacamole.JSONReader#onprogress</a></li><li><a href="Guacamole.Keyboard.html#event:onkeydown">Guacamole.Keyboard#onkeydown</a></li><li><a href="Guacamole.Keyboard.html#event:onkeyup">Guacamole.Keyboard#onkeyup</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mousedown">Guacamole.Mouse.Event.Target#mousedown</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mousemove">Guacamole.Mouse.Event.Target#mousemove</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mouseout">Guacamole.Mouse.Event.Target#mouseout</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mouseup">Guacamole.Mouse.Event.Target#mouseup</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mousedown">Guacamole.Mouse.Touchpad#mousedown</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mousemove">Guacamole.Mouse.Touchpad#mousemove</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mouseup">Guacamole.Mouse.Touchpad#mouseup</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mousedown">Guacamole.Mouse.Touchscreen#mousedown</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mousemove">Guacamole.Mouse.Touchscreen#mousemove</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mouseup">Guacamole.Mouse.Touchscreen#mouseup</a></li><li><a href="Guacamole.Mouse.html#event:mousedown">Guacamole.Mouse#mousedown</a></li><li><a href="Guacamole.Mouse.html#event:mousemove">Guacamole.Mouse#mousemove</a></li><li><a href="Guacamole.Mouse.html#event:mouseout">Guacamole.Mouse#mouseout</a></li><li><a href="Guacamole.Mouse.html#event:mouseup">Guacamole.Mouse#mouseup</a></li><li><a href="Guacamole.Object.html#event:onbody">Guacamole.Object#onbody</a></li><li><a href="Guacamole.Object.html#event:onundefine">Guacamole.Object#onundefine</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeydown">Guacamole.OnScreenKeyboard#onkeydown</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeyup">Guacamole.OnScreenKeyboard#onkeyup</a></li><li><a href="Guacamole.OutputStream.html#event:onack">Guacamole.OutputStream#onack</a></li><li><a href="Guacamole.Parser.html#event:oninstruction">Guacamole.Parser#oninstruction</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onclose">Guacamole.RawAudioRecorder#onclose</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onerror">Guacamole.RawAudioRecorder#onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onerror">Guacamole.SessionRecording._PlaybackTunnel#onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:oninstruction">Guacamole.SessionRecording._PlaybackTunnel#oninstruction</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onstatechange">Guacamole.SessionRecording._PlaybackTunnel#onstatechange</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onuuid">Guacamole.SessionRecording._PlaybackTunnel#onuuid</a></li><li><a href="Guacamole.SessionRecording.html#event:onpause">Guacamole.SessionRecording#onpause</a></li><li><a href="Guacamole.SessionRecording.html#event:onplay">Guacamole.SessionRecording#onplay</a></li><li><a href="Guacamole.SessionRecording.html#event:onprogress">Guacamole.SessionRecording#onprogress</a></li><li><a href="Guacamole.SessionRecording.html#event:onseek">Guacamole.SessionRecording#onseek</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onerror">Guacamole.StaticHTTPTunnel#onerror</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:oninstruction">Guacamole.StaticHTTPTunnel#oninstruction</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onstatechange">Guacamole.StaticHTTPTunnel#onstatechange</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onuuid">Guacamole.StaticHTTPTunnel#onuuid</a></li><li><a href="Guacamole.StringReader.html#event:onend">Guacamole.StringReader#onend</a></li><li><a href="Guacamole.StringReader.html#event:ontext">Guacamole.StringReader#ontext</a></li><li><a href="Guacamole.StringWriter.html#event:onack">Guacamole.StringWriter#onack</a></li><li><a href="Guacamole.Touch.html#event:touchend">Guacamole.Touch#touchend</a></li><li><a href="Guacamole.Touch.html#event:touchmove">Guacamole.Touch#touchmove</a></li><li><a href="Guacamole.Touch.html#event:touchstart">Guacamole.Touch#touchstart</a></li><li><a href="Guacamole.Tunnel.html#event:onerror">Guacamole.Tunnel#onerror</a></li><li><a href="Guacamole.Tunnel.html#event:oninstruction">Guacamole.Tunnel#oninstruction</a></li><li><a href="Guacamole.Tunnel.html#event:onstatechange">Guacamole.Tunnel#onstatechange</a></li><li><a href="Guacamole.Tunnel.html#event:onuuid">Guacamole.Tunnel#onuuid</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onerror">Guacamole.WebSocketTunnel#onerror</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:oninstruction">Guacamole.WebSocketTunnel#oninstruction</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onstatechange">Guacamole.WebSocketTunnel#onstatechange</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onuuid">Guacamole.WebSocketTunnel#onuuid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Dec 29 2021 00:01:55 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>
