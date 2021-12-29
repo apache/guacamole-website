@@ -1,0 +1,6 @@
+<map id="guacamole/parser.h" name="guacamole/parser.h">
+<area shape="rect" id="node1" title="Provides functions and structures for parsing the Guacamole protocol." alt="" coords="141,5,292,32"/>
+<area shape="rect" id="node2" href="$parser-types_8h.html" title="Type definitions related to parsing the Guacamole protocol." alt="" coords="5,80,121,107"/>
+<area shape="rect" id="node3" href="$parser-constants_8h.html" title="Constants related to the Guacamole protocol parser." alt="" coords="145,80,288,107"/>
+<area shape="rect" id="node4" href="$socket-types_8h.html" title="Type definitions related to the guac_socket object." alt="" coords="313,80,430,107"/>
+</map>

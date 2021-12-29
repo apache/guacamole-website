@@ -1,0 +1,7 @@
+<map id="guacamole/layer&#45;types.h" name="guacamole/layer&#45;types.h">
+<area shape="rect" id="node1" title="Type definitions related to Guacamole layers." alt="" coords="244,5,428,32"/>
+<area shape="rect" id="node2" href="$client_8h.html" title="Functions and structure contents for the Guacamole proxy client." alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node3" href="$layer_8h.html" title="Provides functions and structures required for allocating and using layers." alt="" coords="177,80,319,107"/>
+<area shape="rect" id="node4" href="$protocol_8h.html" title="Provides functions and structures required for communicating using the Guacamole protocol over a guac..." alt="" coords="344,80,507,107"/>
+<area shape="rect" id="node5" href="$user_8h.html" title="Defines the guac_user object, which represents a physical connection within a larger,..." alt="" coords="531,80,669,107"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="guacamole/wol.h" name="guacamole/wol.h">
+<area shape="rect" id="node1" title="Header that provides functions and structures related to Wake&#45;on&#45;LAN support in libguac." alt="" coords="5,5,139,32"/>
+<area shape="rect" id="node2" href="$wol-constants_8h.html" title="Header file that provides constants and defaults related to libguac Wake&#45;on&#45;LAN support." alt="" coords="9,80,135,107"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="guacamole/timestamp&#45;types.h" name="guacamole/timestamp&#45;types.h">
+<area shape="rect" id="node1" title="Type definitions related to Guacamole protocol timestamps." alt="" coords="522,5,691,47"/>
+<area shape="rect" id="node2" href="$user-fntypes_8h.html" title="Function type definitions related to the guac_user object." alt="" coords="319,95,511,121"/>
+<area shape="rect" id="node4" href="$client_8h.html" title="Functions and structure contents for the Guacamole proxy client." alt="" coords="5,169,152,196"/>
+<area shape="rect" id="node7" href="$user_8h.html" title="Defines the guac_user object, which represents a physical connection within a larger,..." alt="" coords="694,169,831,196"/>
+<area shape="rect" id="node8" href="$protocol_8h.html" title="Provides functions and structures required for communicating using the Guacamole protocol over a guac..." alt="" coords="585,95,748,121"/>
+<area shape="rect" id="node9" href="$socket_8h.html" title="Defines the guac_socket object and functionss for using and manipulating it." alt="" coords="772,95,924,121"/>
+<area shape="rect" id="node10" href="$timestamp_8h.html" title="Provides functions and structures for creating timestamps." alt="" coords="948,95,1129,121"/>
+<area shape="rect" id="node3" href="$argv_8h.html" title="Convenience functions for processing parameter values that are submitted dynamically using &quot;argv&quot; ins..." alt="" coords="176,169,315,196"/>
+<area shape="rect" id="node5" href="$object_8h.html" title="Provides functions and structures required for allocating and using objects." alt="" coords="339,169,490,196"/>
+<area shape="rect" id="node6" href="$stream_8h.html" title="Provides functions and structures required for allocating and using streams." alt="" coords="514,169,670,196"/>
+</map>

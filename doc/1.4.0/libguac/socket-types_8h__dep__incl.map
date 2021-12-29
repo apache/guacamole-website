@@ -1,0 +1,11 @@
+<map id="guacamole/socket&#45;types.h" name="guacamole/socket&#45;types.h">
+<area shape="rect" id="node1" title="Type definitions related to the guac_socket object." alt="" coords="617,5,810,32"/>
+<area shape="rect" id="node2" href="$client_8h.html" title="Functions and structure contents for the Guacamole proxy client." alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node3" href="$parser_8h.html" title="Provides functions and structures for parsing the Guacamole protocol." alt="" coords="177,80,327,107"/>
+<area shape="rect" id="node4" href="$protocol_8h.html" title="Provides functions and structures required for communicating using the Guacamole protocol over a guac..." alt="" coords="352,80,515,107"/>
+<area shape="rect" id="node5" href="$socket-fntypes_8h.html" title="Function type definitions related to the guac_socket object." alt="" coords="539,80,746,107"/>
+<area shape="rect" id="node6" href="$socket_8h.html" title="Defines the guac_socket object and functionss for using and manipulating it." alt="" coords="637,155,789,181"/>
+<area shape="rect" id="node7" href="$socket-ssl_8h.html" title="Provides an SSL/TLS implementation of guac_socket." alt="" coords="822,80,997,107"/>
+<area shape="rect" id="node8" href="$socket-wsa_8h.html" title="Provides an implementation of guac_socket specific to the Windows Socket API (aka WSA or &quot;winsock&quot;)." alt="" coords="1021,80,1203,107"/>
+<area shape="rect" id="node9" href="$user_8h.html" title="Defines the guac_user object, which represents a physical connection within a larger,..." alt="" coords="1227,80,1365,107"/>
+</map>

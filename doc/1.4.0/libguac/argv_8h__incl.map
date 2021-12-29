@@ -1,0 +1,12 @@
+<map id="guacamole/argv.h" name="guacamole/argv.h">
+<area shape="rect" id="node1" title="Convenience functions for processing parameter values that are submitted dynamically using &quot;argv&quot; ins..." alt="" coords="197,5,336,32"/>
+<area shape="rect" id="node2" href="$argv-constants_8h.html" title="Constants related to automatic handling of received &quot;argv&quot; instructions." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node3" href="$argv-fntypes_8h.html" title="Function type definitions related to automatic handling of received &quot;argv&quot; instructions." alt="" coords="160,80,277,107"/>
+<area shape="rect" id="node5" href="$stream-types_8h.html" title="Type definitions related to Guacamole protocol streams." alt="" coords="254,155,375,181"/>
+<area shape="rect" id="node6" href="$user-fntypes_8h.html" title="Function type definitions related to the guac_user object." alt="" coords="375,80,491,107"/>
+<area shape="rect" id="node4" href="$user-types_8h.html" title="Type definitions related to the guac_user object." alt="" coords="127,155,230,181"/>
+<area shape="rect" id="node7" href="$object-types_8h.html" title="Type definitions related to Guacamole protocol objects." alt="" coords="400,155,515,181"/>
+<area shape="rect" id="node8" href="$protocol-types_8h.html" title="Type definitions related to the Guacamole protocol." alt="" coords="539,155,667,181"/>
+<area shape="rect" id="node9" href="$timestamp-types_8h.html" title="Type definitions related to Guacamole protocol timestamps." alt="" coords="691,155,837,181"/>
+<area shape="rect" id="node10" title=" " alt="" coords="729,229,799,256"/>
+</map>

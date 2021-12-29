@@ -1,0 +1,5 @@
+<map id="guacamole/pool.h" name="guacamole/pool.h">
+<area shape="rect" id="node1" title="Provides functions and structures for maintaining dynamically allocated and freed pools of integers." alt="" coords="46,5,185,32"/>
+<area shape="rect" id="node2" href="$pool-types_8h.html" title="Type definitions related to the guac_pool pool of unique integers." alt="" coords="5,80,108,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="132,80,216,107"/>
+</map>

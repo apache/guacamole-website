@@ -1,0 +1,10 @@
+<map id="guacamole/object.h" name="guacamole/object.h">
+<area shape="rect" id="node1" title="Provides functions and structures required for allocating and using objects." alt="" coords="135,5,286,32"/>
+<area shape="rect" id="node2" href="$object-types_8h.html" title="Type definitions related to Guacamole protocol objects." alt="" coords="5,155,120,181"/>
+<area shape="rect" id="node3" href="$user-fntypes_8h.html" title="Function type definitions related to the guac_user object." alt="" coords="225,80,341,107"/>
+<area shape="rect" id="node4" href="$protocol-types_8h.html" title="Type definitions related to the Guacamole protocol." alt="" coords="144,155,272,181"/>
+<area shape="rect" id="node5" href="$stream-types_8h.html" title="Type definitions related to Guacamole protocol streams." alt="" coords="297,155,418,181"/>
+<area shape="rect" id="node6" href="$timestamp-types_8h.html" title="Type definitions related to Guacamole protocol timestamps." alt="" coords="443,155,589,181"/>
+<area shape="rect" id="node8" href="$user-types_8h.html" title="Type definitions related to the guac_user object." alt="" coords="614,155,717,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="481,229,551,256"/>
+</map>

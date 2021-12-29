@@ -1,0 +1,11 @@
+<map id="guacamole/socket.h" name="guacamole/socket.h">
+<area shape="rect" id="node1" title="Defines the guac_socket object and functionss for using and manipulating it." alt="" coords="399,5,551,32"/>
+<area shape="rect" id="node2" href="$client-types_8h.html" title="Type definitions related to the Guacamole client structure, guac_client." alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node3" href="$socket-constants_8h.html" title="Constants related to the guac_socket object." alt="" coords="141,80,285,107"/>
+<area shape="rect" id="node4" href="$socket-fntypes_8h.html" title="Function type definitions related to the guac_socket object." alt="" coords="359,80,490,107"/>
+<area shape="rect" id="node5" href="$socket-types_8h.html" title="Type definitions related to the guac_socket object." alt="" coords="285,155,402,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="447,155,522,181"/>
+<area shape="rect" id="node7" href="$timestamp-types_8h.html" title="Type definitions related to Guacamole protocol timestamps." alt="" coords="565,80,711,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="657,155,728,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="787,80,871,107"/>
+</map>

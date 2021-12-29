@@ -1,0 +1,8 @@
+<map id="guacamole/audio.h" name="guacamole/audio.h">
+<area shape="rect" id="node1" title="Provides functions and structures used for providing simple streaming audio." alt="" coords="158,5,305,32"/>
+<area shape="rect" id="node2" href="$audio-fntypes_8h.html" title="Function type definitions related to simple streaming audio." alt="" coords="99,80,223,107"/>
+<area shape="rect" id="node3" href="$audio-types_8h.html" title="Type definitions related to simple streaming audio." alt="" coords="5,155,116,181"/>
+<area shape="rect" id="node5" href="$client-types_8h.html" title="Type definitions related to the Guacamole client structure, guac_client." alt="" coords="247,80,357,107"/>
+<area shape="rect" id="node6" href="$stream-types_8h.html" title="Type definitions related to Guacamole protocol streams." alt="" coords="381,80,503,107"/>
+<area shape="rect" id="node4" href="$user-types_8h.html" title="Type definitions related to the guac_user object." alt="" coords="140,155,243,181"/>
+</map>
