@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Installing Guacamole natively &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing Guacamole with Docker" href="guacamole-docker.html" />
+    <link rel="prev" title="Implementation and architecture" href="guacamole-architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing Guacamole natively</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-guacamole-server">Building guacamole-server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-dependencies">Required dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-dependencies">Optional dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-the-source-code">Obtaining the source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-build-process">The build process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#guacamole-client">guacamole-client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploying-guacamole">Deploying Guacamole</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-about-websocket">What about WebSocket?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installing Guacamole natively</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/installing-guacamole.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-guacamole-natively">
+<h1>Installing Guacamole natively<a class="headerlink" href="#installing-guacamole-natively" title="Permalink to this headline">¶</a></h1>
+<p>Guacamole is separated into two pieces: guacamole-server, which provides the
+guacd proxy and related libraries, and guacamole-client, which provides the
+client to be served by your servlet container, usually <a class="reference external" href="http://tomcat.apache.org/">Apache
+Tomcat</a>.</p>
+<p>guacamole-client is available in binary form, but guacamole-server must be
+built from source. Don’t be discouraged: building the components of Guacamole
+from source is <em>not</em> as difficult as it sounds, and the build process is
+automated. You just need to be sure you have the necessary tools installed
+ahead of time. With the necessary dependencies in place, building Guacamole
+only takes a few minutes.</p>
+<div class="section" id="building-guacamole-server">
+<span id="id1"></span><h2>Building guacamole-server<a class="headerlink" href="#building-guacamole-server" title="Permalink to this headline">¶</a></h2>
+<p>guacamole-server contains all the native, server-side components required by
+Guacamole to connect to remote desktops. It provides a common C library,
+libguac, which all other native components depend on, as well as separate
+libraries for each supported protocol, and guacd, the heart of Guacamole.</p>
+<p>guacd is the proxy daemon that runs on your Guacamole server, accepts users’
+connections that are tunneled through the Guacamole web application, and then
+connects to remote desktops on their behalf. Building guacd creates an
+executable called <strong class="program">guacd</strong> which can be run manually or, if you wish,
+automatically when your computer starts up.</p>
+<p>To build guacamole-server, you will need a C compiler (such as gcc) and the
+libraries that guacamole-server depends on. Some dependencies are absolutely
+required, while others are optional. The presence of optional dependencies
+enables additional features.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Many Linux distributions separate library packages into binary and
+“development” packages; <em>you will need to install the development packages</em>.
+These will usually end in a “-dev” or “-devel” suffix.</p>
+</div>
+<div class="section" id="required-dependencies">
+<h3>Required dependencies<a class="headerlink" href="#required-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>In order to build guacamole-server, you will need Cairo, libjpeg (or
+libjpeg-turbo), libpng, and libuuid (or the OSSP UUID library). These libraries
+are strictly required <em>in all cases</em> - Guacamole cannot be built without them.</p>
+<dl class="simple myst">
+<dt><a class="reference external" href="http://cairographics.org/">Cairo</a></dt><dd><p>Cairo is used by libguac for graphics rendering.  Guacamole cannot function
+without Cairo installed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libcairo2-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">cairo-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://libjpeg-turbo.virtualgl.org/">libjpeg-turbo</a></dt><dd><p>libjpeg-turbo is used by libguac to provide JPEG support. Guacamole will not
+build without this library present:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libjpeg62-turbo-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libjpeg-turbo8-dev</span></code></p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libjpeg-turbo-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>If libjpeg-turbo is unavailable on your platform, and you do not wish to
+build it from source, <a class="reference external" href="http://www.ijg.org/">libjpeg</a> will work as well,
+though it will not be quite as fast:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libjpeg62-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libjpeg-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://www.libpng.org/pub/png/libpng.html">libpng</a></dt><dd><p>libpng is used by libguac to write PNG images, the core image type used by
+the Guacamole protocol. Guacamole cannot function without libpng.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libpng12-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libpng-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="https://www.gnu.org/software/libtool/manual/libtool.html">libtool</a></dt><dd><p>libtool is used during the build process. libtool creates compiled libraries
+needed for Guacamole.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libtool-bin</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libtool</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>libuuid (part of <a class="reference external" href="https://www.kernel.org/pub/linux/utils/util-linux/">util-linux</a>)</dt><dd><p>libuuid is used by libguac to assign unique, internal IDs to each Guacamole
+user and connection. These unique IDs are the basis for connection sharing
+support.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">uuid-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libuuid-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>If libuuid is unavailable, the <a class="reference external" href="http://www.ossp.org/pkg/lib/uuid/">OSSP UUID</a>
+library may also be used:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libossp-uuid-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">uuid-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="section" id="optional-dependencies">
+<h3>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>The optional dependencies of Guacamole dictate which parts of guacamole-server
+will be built. This includes the support for various remote desktop protocols,
+as well as any additional features of those protocols:</p>
+<ul class="simple">
+<li><p>VNC support depends on the libvncclient library, which is part of
+libVNCServer.</p></li>
+<li><p>RDP support depends on a recent version of FreeRDP (2.0.0 or higher, but
+please <em>not a non-release version from git</em>).</p></li>
+<li><p>SSH support depends on libssh2, OpenSSL and Pango (a font rendering and text
+layout library, used by Guacamole’s built-in terminal emulator).</p></li>
+<li><p>Telnet depends on libtelnet and Pango.</p></li>
+<li><p>Kubernetes support depends on libwebsockets, OpenSSL, and Pango.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">guacenc</span></code> utility, provided by guacamole-server to translate screen
+recordings into video, depends on FFmpeg, and will only be built if at least
+the libavcodec, libavformat, libavutil, and libswscale libraries provided by
+FFmpeg are installed.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you lack these dependencies, <em>then the features or protocols which
+depend on them will not be enabled</em>. Please read this section
+carefully before deciding not to install an optional dependency.</p>
+</div>
+<dl class="simple myst">
+<dt><a class="reference external" href="https://ffmpeg.org/">FFmpeg</a></dt><dd><p>The libavcodec, libavformat, libavutil, and libswscale libraries provided by
+FFmpeg are used by <code class="docutils literal notranslate"><span class="pre">guacenc</span></code> to encode video streams when translating
+recordings of Guacamole sessions. Without FFmpeg, the <code class="docutils literal notranslate"><span class="pre">guacenc</span></code> utility will
+simply not be built.</p>
+<p>If you do not wish to make graphical recordings of Guacamole sessions, or do
+not wish to translate such recordings into video, then FFmpeg is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libavcodec-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libavformat-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libavutil-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">libswsccale-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">ffmpeg-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://www.freerdp.com/">FreeRDP</a></dt><dd><p>FreeRDP 2.0.0 or later is required for RDP support. If you do not wish to
+build RDP support, this library is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">freerdp2-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">freerdp-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://www.pango.org/">Pango</a></dt><dd><p>Pango is a text layout library which Guacamole uses to render text for
+protocols that require a terminal (Kubernetes, SSH, and telnet). If you do
+not wish to build any terminal-based protocol support, this library is not
+needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libpango1.0-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">pango-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://www.libssh2.org/">libssh2</a></dt><dd><p>libssh2 is required for SSH and SFTP support. If you do not wish to build SSH
+or SFTP support, this library is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssh2-1-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssh2-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="https://github.com/seanmiddleditch/libtelnet">libtelnet</a></dt><dd><p>libtelnet is required for telnet support. If you do not wish to build telnet
+support, this library is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libtelnet-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libtelnet-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://libvnc.github.io/">libVNCServer</a></dt><dd><p>libVNCServer provides libvncclient, which is required for VNC support. If you
+do not wish to build VNC support, this library is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libvncserver-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libvncserver-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="https://libwebsockets.org/">libwebsockets</a></dt><dd><p>libwebsockets is required for Kubernetes support. If you do not wish to build
+Kubernetes support, this library is not needed.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libwebsockets-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libwebsockets-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://www.freedesktop.org/wiki/Software/PulseAudio/">PulseAudio</a></dt><dd><p>PulseAudio provides libpulse, which is used by Guacamole’s VNC support to
+provide experimental audio support. If you are not going to be using the
+experimental audio support for VNC, you do not need this library.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libpulse-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">pulseaudio-libs-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="https://www.openssl.org/">OpenSSL</a></dt><dd><p>OpenSSL provides support for SSL and TLS - two common encryption schemes that
+make up the majority of encrypted web traffic.</p>
+<p>If you have libssl installed, guacd will be built with SSL support, allowing
+communication between the web application and guacd to be encrypted. This
+library is also required for SSH support, for manipulating public/private keys,
+and for Kubernetes support, for SSL/TLS connections to the Kubernetes server.</p>
+<p>Without SSL support, there will be no option to encrypt communication to
+guacd, and support for SSH and Kubernetes cannot be built.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libssl-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">openssl-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="http://xiph.org/vorbis/">libvorbis</a></dt><dd><p>libvorbis provides support for Ogg Vorbis - a free and open standard for
+sound compression. If installed, libguac will be built with support for Ogg
+Vorbis, and protocols supporting audio will use Ogg Vorbis compression when
+possible.</p>
+<p>Otherwise, sound will only be encoded as WAV (uncompressed), and will only be
+available if your browser also supports WAV.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libvorbis-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libvorbis-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a class="reference external" href="https://developers.google.com/speed/webp/">libwebp</a></dt><dd><p>libwebp is used by libguac to write WebP images.  Though support for WebP is
+not mandated by the Guacamole protocol, WebP images will be used if supported
+by both the browser and by libguac.</p>
+<p>Lacking WebP support, Guacamole will simply use JPEG in cases that it would
+have preferred WebP.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p>Debian / Ubuntu package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libwebp-dev</span></code></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Fedora / CentOS / RHEL package</p></th>
+<td><p><code class="docutils literal notranslate"><span class="pre">libwebp-devel</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="section" id="obtaining-the-source-code">
+<span id="guacamole-server-source"></span><h3>Obtaining the source code<a class="headerlink" href="#obtaining-the-source-code" title="Permalink to this headline">¶</a></h3>
+<p>You can obtain a copy of the guacamole-server source from the Guacamole project
+web site. These releases are stable snapshots of the latest code which have
+undergone enough testing that the Guacamole team considers them fit for public
+consumption. Source downloaded from the project web site will take the form of
+a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> archive which you can extract
+from the command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tar -xzf guacamole-server-1.4.0.tar.gz
+<span class="gp">$</span> <span class="nb">cd</span> guacamole-server-1.4.0/
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>If you want the absolute latest code, and don’t care that the code hasn’t been
+as rigorously tested as the code in stable releases, you can also clone the
+Guacamole team’s git repository on GitHub:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone git://github.com/apache/guacamole-server.git
+<span class="go">Cloning into &#39;guacamole-server&#39;...</span>
+<span class="go">remote: Counting objects: 6769, done.</span>
+<span class="go">remote: Compressing objects: 100% (2244/2244), done.</span>
+<span class="go">remote: Total 6769 (delta 3058), reused 6718 (delta 3008)</span>
+<span class="go">Receiving objects: 100% (6769/6769), 2.32 MiB | 777 KiB/s, done.</span>
+<span class="go">Resolving deltas: 100% (3058/3058), done.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-build-process">
+<span id="guacamole-server-build-process"></span><h3>The build process<a class="headerlink" href="#the-build-process" title="Permalink to this headline">¶</a></h3>
+<p>Once the guacamole-server source has been downloaded and extracted, you need to
+run <code class="docutils literal notranslate"><span class="pre">configure</span></code>. This is a shell script automatically generated by GNU
+Autotools, a popular build system used by the Guacamole project for
+guacamole-server. Running <code class="docutils literal notranslate"><span class="pre">configure</span></code> will determine which libraries are
+available on your system and will select the appropriate components for
+building depending on what you actually have installed.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Source downloaded directly from git will not contain this <code class="docutils literal notranslate"><span class="pre">configure</span></code> script,
+as autogenerated code is not included in the project’s repositories. If you
+downloaded the code from the project’s git repositories directly, you will need
+to generate <code class="docutils literal notranslate"><span class="pre">configure</span></code> manually:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> guacamole-server/
+<span class="gp">$</span> autoreconf -fi
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Doing this requires GNU Autotools to be installed.</p>
+<p>Source archives downloaded from the project website contain the <code class="docutils literal notranslate"><span class="pre">configure</span></code>
+script and all other necessary build files, and thus do not require GNU
+Autotools to be installed on the build machine.</p>
+</div>
+<p>Once you run <code class="docutils literal notranslate"><span class="pre">configure</span></code>, you can see what a listing of what libraries were
+found and what it has determined should be built:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ./configure --with-init-dir<span class="o">=</span>/etc/init.d
+<span class="go">checking for a BSD-compatible install... /usr/bin/install -c</span>
+<span class="go">checking whether build environment is sane... yes</span>
+<span class="go">...</span>
+
+<span class="go">------------------------------------------------</span>
+<span class="go">guacamole-server version 1.4.0</span>
+<span class="go">------------------------------------------------</span>
+
+<span class="go">   Library status:</span>
+
+<span class="go">     freerdp2 ............ yes</span>
+<span class="go">     pango ............... yes</span>
+<span class="go">     libavcodec .......... yes</span>
+<span class="go">     libavformat ......... yes</span>
+<span class="go">     libavutil ........... yes</span>
+<span class="go">     libssh2 ............. yes</span>
+<span class="go">     libssl .............. yes</span>
+<span class="go">     libswscale .......... yes</span>
+<span class="go">     libtelnet ........... yes</span>
+<span class="go">     libVNCServer ........ yes</span>
+<span class="go">     libvorbis ........... yes</span>
+<span class="go">     libpulse ............ yes</span>
+<span class="go">     libwebsockets ....... yes</span>
+<span class="go">     libwebp ............. yes</span>
+<span class="go">     wsock32 ............. no</span>
+
+<span class="go">   Protocol support:</span>
+
+<span class="go">      Kubernetes .... yes</span>
+<span class="go">      RDP ........... yes</span>
+<span class="go">      SSH ........... yes</span>
+<span class="go">      Telnet ........ yes</span>
+<span class="go">      VNC ........... yes</span>
+
+<span class="go">   Services / tools:</span>
+
+<span class="go">      guacd ...... yes</span>
+<span class="go">      guacenc .... yes</span>
+<span class="go">      guaclog .... yes</span>
+
+<span class="go">   Init scripts: /etc/init.d</span>
+<span class="go">   Systemd units: no</span>
+
+<span class="go">Type &quot;make&quot; to compile guacamole-server.</span>
+
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--with-init-dir=/etc/init.d</span></code> shown above prepares the build to install a
+startup script for guacd into the <code class="docutils literal notranslate"><span class="pre">/etc/init.d</span></code> directory, such that we can
+later easily configure guacd to start automatically on boot. If you do not wish
+guacd to start automatically at boot, leave off the <code class="docutils literal notranslate"><span class="pre">--with-init-dir</span></code> option.
+If the directory containing your distribution’s startup scripts differs from
+the common <code class="docutils literal notranslate"><span class="pre">/etc/init.d</span></code>, replace <code class="docutils literal notranslate"><span class="pre">/etc/init.d</span></code> with the proper directory here.
+You may need to consult your distribution’s documentation, or do a little
+digging in <code class="docutils literal notranslate"><span class="pre">/etc</span></code>, to determine the proper location.</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">configure</span></code> has found everything, including all optional libraries, and
+will build all protocol support, even support for Ogg Vorbis sound in RDP. If
+you are missing some libraries, some of the “<code class="docutils literal notranslate"><span class="pre">yes</span></code>” answers above will read
+“<code class="docutils literal notranslate"><span class="pre">no</span></code>”. If a library which is strictly required is missing, the script will
+fail outright, and you will need to install the missing dependency. If, after
+running <code class="docutils literal notranslate"><span class="pre">configure</span></code>, you find support for something you wanted is missing,
+simply install the corresponding dependencies and run <code class="docutils literal notranslate"><span class="pre">configure</span></code> again.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>All protocols that require a terminal (Kubernetes, SSH, and telnet) require
+that fonts are installed on the Guacamole server in order to function, as
+output from the terminal cannot be rendered otherwise. Support for these
+protocols will build just fine if fonts are not installed, but it will fail to
+connect when used:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Aug 23 14:09:45 my-server guacd[5606]: Unable to get font &quot;monospace&quot;
+</pre></div>
+</div>
+<p>If terminal-based connections are not working and you see such a message in
+syslog, you should make sure fonts are installed and try again.</p>
+</div>
+<p>Once <code class="docutils literal notranslate"><span class="pre">configure</span></code> is finished, just type “<code class="docutils literal notranslate"><span class="pre">make</span></code>”, and it will guacamole-server
+will compile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> make
+<span class="go">Making all in src/libguac</span>
+<span class="go">make[1]: Entering directory `/home/mjumper/guacamole/guacamole-server/src/libguac&#39;</span>
+<span class="go">...</span>
+<span class="go">make[1]: Leaving directory `/home/mjumper/guacamole/guacamole-server/src/protocols/vnc&#39;</span>
+<span class="go">make[1]: Entering directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="go">make[1]: Nothing to be done for `all-am&#39;.</span>
+<span class="go">make[1]: Leaving directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Quite a bit of output will scroll up the screen as all the components are
+compiled.</p>
+</div>
+<div class="section" id="installation">
+<span id="guacamole-server-installation"></span><h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>Once everything finishes, all you have left to do is type “<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code>” to
+install the components that were built, and then “<code class="docutils literal notranslate"><span class="pre">ldconfig</span></code>” to update your
+system’s cache of installed libraries:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> make install
+<span class="go">Making install in src/libguac</span>
+<span class="go">make[1]: Entering directory `/home/mjumper/guacamole/guacamole-server/src/libguac&#39;</span>
+<span class="go">make[2]: Entering directory `/home/mjumper/guacamole/guacamole-server/src/libguac&#39;</span>
+<span class="go">...</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">Libraries have been installed in:</span>
+<span class="go">   /usr/local/lib</span>
+
+<span class="go">If you ever happen to want to link against installed libraries</span>
+<span class="go">in a given directory, LIBDIR, you must either use libtool, and</span>
+<span class="go">specify the full pathname of the library, or use the `-LLIBDIR&#39;</span>
+<span class="go">flag during linking and do at least one of the following:</span>
+<span class="go">   - add LIBDIR to the `LD_LIBRARY_PATH&#39; environment variable</span>
+<span class="go">     during execution</span>
+<span class="go">   - add LIBDIR to the `LD_RUN_PATH&#39; environment variable</span>
+<span class="go">     during linking</span>
+<span class="go">   - use the `-Wl,-rpath -Wl,LIBDIR&#39; linker flag</span>
+<span class="go">   - have your system administrator add LIBDIR to `/etc/ld.so.conf&#39;</span>
+
+<span class="go">See any operating system documentation about shared libraries for</span>
+<span class="go">more information, such as the ld(1) and ld.so(8) manual pages.</span>
+<span class="go">----------------------------------------------------------------------</span>
+<span class="go">make[2]: Nothing to be done for `install-data-am&#39;.</span>
+<span class="go">make[2]: Leaving directory `/home/mjumper/guacamole/guacamole-server/src/protocols/vnc&#39;</span>
+<span class="go">make[1]: Leaving directory `/home/mjumper/guacamole/guacamole-server/src/protocols/vnc&#39;</span>
+<span class="go">make[1]: Entering directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="go">make[2]: Entering directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="go">make[2]: Nothing to be done for `install-exec-am&#39;.</span>
+<span class="go">make[2]: Nothing to be done for `install-data-am&#39;.</span>
+<span class="go">make[2]: Leaving directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="go">make[1]: Leaving directory `/home/mjumper/guacamole/guacamole-server&#39;</span>
+<span class="gp">#</span> ldconfig
+<span class="gp">#</span>
+</pre></div>
+</div>
+<p>At this point, everything is installed, but guacd is not running. You will need
+to run guacd in order to use Guacamole once the client components are installed
+as well.</p>
+<p>Beware that even after installing guacd and its startup script, you will likely
+still have to activate the service for it to start automatically.  Doing this
+varies by distribution, but each distribution will have documentation
+describing how to do so.</p>
+</div>
+</div>
+<div class="section" id="guacamole-client">
+<span id="building-guacamole-client"></span><h2>guacamole-client<a class="headerlink" href="#guacamole-client" title="Permalink to this headline">¶</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Normally, you don’t need to build guacamole-client, as it is written in Java
+and is cross-platform. You can easily obtain the latest version of
+guacamole-client from the release archives of the Guacamole project web site,
+including all supported extensions, without having to build it yourself.</p>
+<p>If you do not want to build guacamole-client from source, just download
+<code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code> from the project web site, along with any desired extensions,
+and skip ahead to <a class="reference internal" href="#deploying-guacamole"><span class="std std-ref">Deploying Guacamole</span></a>.</p>
+</div>
+<p>guacamole-client contains all Java and JavaScript components of Guacamole
+(guacamole, guacamole-common, guacamole-ext, and guacamole-common-js). These
+components ultimately make up the web application that will serve the HTML5
+Guacamole client to users that connect to your server. This web application
+will then connect to guacd, part of guacamole-server, on behalf of connected
+users in order to serve them any remote desktop they are authorized to access.</p>
+<p>To compile guacamole-client, all you need is Apache Maven and a copy of the
+Java JDK. Most, if not all, Linux distributions will provide packages for
+these.</p>
+<p>You can obtain a copy of the guacamole-client source from the Guacamole project
+web site. These releases are stable snapshots of the latest code which have
+undergone enough testing that the Guacamole team considers them fit for public
+consumption. Source downloaded from the project web site will take the form of
+a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> archive which you can extract from the command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tar -xzf guacamole-client-1.4.0.tar.gz
+<span class="gp">$</span> <span class="nb">cd</span> guacamole-client-1.4.0/
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>As with guacamole-server, if you want the absolute latest code, and don’t care
+that the code hasn’t been as rigorously tested as the code in stable releases,
+you can also clone the Guacamole team’s git repository on GitHub:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone git://github.com/apache/guacamole-client.git
+<span class="go">Cloning into &#39;guacamole-client&#39;...</span>
+<span class="go">remote: Counting objects: 12788, done.</span>
+<span class="go">remote: Compressing objects: 100% (4183/4183), done.</span>
+<span class="go">remote: Total 12788 (delta 3942), reused 12667 (delta 3822)</span>
+<span class="go">Receiving objects: 100% (12788/12788), 3.23 MiB | 799 KiB/s, done.</span>
+<span class="go">Resolving deltas: 100% (3942/3942), done.</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Unlike guacamole-server, even if you grab the code from the git repositories,
+you won’t need to run anything before building. There are no scripts that need
+to be generated before building - all Maven needs is the <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> file
+provided with the source.</p>
+<p>To build guacamole-client, just run “<code class="docutils literal notranslate"><span class="pre">mvn</span> <span class="pre">package</span></code>”. This will invoke Maven
+to automatically build and package all components, producing a single <code class="docutils literal notranslate"><span class="pre">.war</span></code>
+file, which contains the entire web application:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mvn package
+<span class="go">[INFO] Scanning for projects...</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Reactor Build Order:</span>
+<span class="go">[INFO] </span>
+<span class="go">[INFO] guacamole-common</span>
+<span class="go">[INFO] guacamole-ext</span>
+<span class="go">[INFO] guacamole-common-js</span>
+<span class="go">[INFO] guacamole</span>
+<span class="go">[INFO] guacamole-auth-cas</span>
+<span class="go">[INFO] guacamole-auth-duo</span>
+<span class="go">[INFO] guacamole-auth-header</span>
+<span class="go">[INFO] guacamole-auth-jdbc</span>
+<span class="go">[INFO] guacamole-auth-jdbc-base</span>
+<span class="go">[INFO] guacamole-auth-jdbc-mysql</span>
+<span class="go">[INFO] guacamole-auth-jdbc-postgresql</span>
+<span class="go">[INFO] guacamole-auth-jdbc-sqlserver</span>
+<span class="go">[INFO] guacamole-auth-jdbc-dist</span>
+<span class="go">[INFO] guacamole-auth-ldap</span>
+<span class="go">[INFO] guacamole-auth-openid</span>
+<span class="go">[INFO] guacamole-auth-quickconnect</span>
+<span class="go">[INFO] guacamole-auth-totp</span>
+<span class="go">[INFO] guacamole-example</span>
+<span class="go">[INFO] guacamole-playback-example</span>
+<span class="go">[INFO] guacamole-client</span>
+<span class="go">...</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Reactor Summary:</span>
+<span class="go">[INFO] </span>
+<span class="go">[INFO] guacamole-common ................................... SUCCESS [ 21.852 s]</span>
+<span class="go">[INFO] guacamole-ext ...................................... SUCCESS [  9.055 s]</span>
+<span class="go">[INFO] guacamole-common-js ................................ SUCCESS [  1.988 s]</span>
+<span class="go">[INFO] guacamole .......................................... SUCCESS [ 18.040 s]</span>
+<span class="go">[INFO] guacamole-auth-cas ................................. SUCCESS [  4.203 s]</span>
+<span class="go">[INFO] guacamole-auth-duo ................................. SUCCESS [  2.251 s]</span>
+<span class="go">[INFO] guacamole-auth-header .............................. SUCCESS [  1.399 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc ................................ SUCCESS [  1.396 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-base ........................... SUCCESS [  3.266 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-mysql .......................... SUCCESS [  4.665 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-postgresql ..................... SUCCESS [  3.764 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-sqlserver ...................... SUCCESS [  3.738 s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-dist ........................... SUCCESS [  1.214 s]</span>
+<span class="go">[INFO] guacamole-auth-ldap ................................ SUCCESS [  1.991 s]</span>
+<span class="go">[INFO] guacamole-auth-openid .............................. SUCCESS [  2.204 s]</span>
+<span class="go">[INFO] guacamole-auth-quickconnect ........................ SUCCESS [  2.983 s]</span>
+<span class="go">[INFO] guacamole-auth-totp ................................ SUCCESS [  8.154 s]</span>
+<span class="go">[INFO] guacamole-example .................................. SUCCESS [  0.895 s]</span>
+<span class="go">[INFO] guacamole-playback-example ......................... SUCCESS [  0.795 s]</span>
+<span class="go">[INFO] guacamole-client ................................... SUCCESS [  7.478 s]</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] BUILD SUCCESS</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Total time: 01:41 min</span>
+<span class="go">[INFO] Finished at: 2018-10-15T17:08:29-07:00</span>
+<span class="go">[INFO] Final Memory: 42M/379M</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Once the Guacamole web application is built, there will be a .war file in the
+<code class="docutils literal notranslate"><span class="pre">guacamole/target/</span></code> subdirectory of the current directory (the directory you
+were in when you ran mvn), ready to be deployed to a servlet container like
+Tomcat.</p>
+</div>
+<div class="section" id="deploying-guacamole">
+<span id="id2"></span><h2>Deploying Guacamole<a class="headerlink" href="#deploying-guacamole" title="Permalink to this headline">¶</a></h2>
+<p>The web application portion of Guacamole is packaged as a fully self-contained
+<code class="docutils literal notranslate"><span class="pre">.war</span></code> file. If you downloaded Guacamole from the main project web site, this
+file will be called <code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code>. Deploying this involves copying the file
+into the directory your servlet container uses for <code class="docutils literal notranslate"><span class="pre">.war</span></code> files. In the case of
+Tomcat, this will be <code class="docutils literal notranslate"><span class="pre">CATALINA_HOME/webapps/</span></code>. The location of <code class="docutils literal notranslate"><span class="pre">CATALINA_HOME</span></code>
+will vary by how Tomcat was installed, but is commonly <code class="docutils literal notranslate"><span class="pre">/var/lib/tomcat</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/var/lib/tomcat7</span></code>, or similar:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> cp guacamole.war /var/lib/tomcat/webapps
+<span class="gp">#</span>
+</pre></div>
+</div>
+<p>If you have built guacamole-client from source, the required <code class="docutils literal notranslate"><span class="pre">.war</span></code> file will
+be within the <code class="docutils literal notranslate"><span class="pre">guacamole/target/</span></code> directory and will contain an additional
+version suffix. As Tomcat will determine the location of the web application
+from the name of the <code class="docutils literal notranslate"><span class="pre">.war</span></code> file, you will likely want to rename this to simply
+<code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code> while copying:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> cp guacamole/target/guacamole-1.4.0.war /var/lib/tomcat/webapps/guacamole.war
+<span class="gp">#</span>
+</pre></div>
+</div>
+<p>Again, if you are using a different servlet container or if Tomcat is installed
+to a different location, you will need to check the documentation of your
+servlet container, distribution, or both to determine the proper location for
+deploying <code class="docutils literal notranslate"><span class="pre">.war</span></code> files like <code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code>.</p>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">.war</span></code> file is in place, you may need to restart Tomcat to force
+Tomcat to deploy the new web application, and the guacd daemon must be started
+if it isn’t running already. The command to restart Tomcat and guacd will vary
+by distribution. Typically, you can do this by running the corresponding init
+scripts with the “restart” option:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> /etc/init.d/tomcat7 restart
+<span class="go">Stopping Tomcat... OK</span>
+<span class="go">Starting Tomcat... OK</span>
+<span class="gp">#</span> /etc/init.d/guacd start
+<span class="go">Starting guacd: SUCCESS</span>
+<span class="go">guacd[6229]: INFO:  Guacamole proxy daemon (guacd) version 1.4.0 started</span>
+<span class="gp">#</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you want Guacamole to start on boot, you will need to configure
+the Tomcat and guacd services to run automatically. Your distribution
+will provide documentation for doing this.</p>
+</div>
+<p>After restarting Tomcat and starting guacd, Guacamole is successfully
+installed, though it will not be fully running. In its current state, it is
+completely unconfigured, and further steps are required to add at least one
+Guacamole user and a few connections. This is covered in
+<a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a>.</p>
+<div class="section" id="what-about-websocket">
+<h3>What about WebSocket?<a class="headerlink" href="#what-about-websocket" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole will use WebSocket automatically if supported by the browser and your
+servlet container. In the event that Guacamole cannot connect using WebSocket,
+it will immediately and transparently fall back to using HTTP.</p>
+<p>WebSocket is supported in Guacamole for Tomcat 7.0.37 or higher, Jetty 8 or
+higher, and any servlet container supporting JSR 356, the standardized Java API
+for WebSocket.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="guacamole-docker.html" class="btn btn-neutral float-right" title="Installing Guacamole with Docker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="guacamole-architecture.html" class="btn btn-neutral float-left" title="Implementation and architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

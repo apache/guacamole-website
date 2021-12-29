@@ -1,0 +1,7 @@
+<map id="guac_audio_stream" name="guac_audio_stream">
+<area shape="rect" id="node1" title="Basic audio stream." alt="" coords="107,184,257,211"/>
+<area shape="rect" id="node2" href="$structguac__client.html" title="Guacamole proxy client." alt="" coords="9,95,105,121"/>
+<area shape="rect" id="node3" href="$structguac__socket.html" title="The core I/O object of Guacamole." alt="" coords="5,5,108,32"/>
+<area shape="rect" id="node4" href="$structguac__stream.html" title="Represents a single stream within the Guacamole protocol." alt="" coords="129,95,235,121"/>
+<area shape="rect" id="node5" href="$structguac__audio__encoder.html" title="Arbitrary audio codec encoder." alt="" coords="259,95,414,121"/>
+</map>

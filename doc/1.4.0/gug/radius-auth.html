@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>RADIUS Authentication &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ad-hoc Connections" href="adhoc-connections.html" />
+    <link rel="prev" title="SAML Authentication" href="saml-auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RADIUS Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-radius-authentication-extension">Downloading the RADIUS authentication extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-radius-authentication">Installing RADIUS authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-guacamole-for-radius-authentication">Configuring Guacamole for RADIUS authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#completing-the-installation">Completing the installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>RADIUS Authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/radius-auth.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="radius-authentication">
+<h1>RADIUS Authentication<a class="headerlink" href="#radius-authentication" title="Permalink to this headline">¶</a></h1>
+<p>Guacamole supports delegating authentication to a RADIUS service, such as
+FreeRADIUS, to validate username and password combinations, and to support
+multi-factor authentication. This authentication method must be layered on top
+of some other authentication extension, such as those available from the main
+project website, in order to provide access to actual connections.</p>
+<div class="section" id="downloading-the-radius-authentication-extension">
+<span id="radius-downloading"></span><h2>Downloading the RADIUS authentication extension<a class="headerlink" href="#downloading-the-radius-authentication-extension" title="Permalink to this headline">¶</a></h2>
+<p>The RADIUS extension depends on software that is covered by a LGPL license,
+which is incompatible with the Apache 2.0 license under which Guacamole is
+licensed. Due to this dependency, the Guacamole project cannot distribute
+binary versions of the RADIUS extension. If you want to use this extension you
+will need to build the code - or at least the RADIUS extension yourself. Build
+instructions can be found in the section <a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">Installing Guacamole natively</span></a>.</p>
+</div>
+<div class="section" id="installing-radius-authentication">
+<span id="installing-radius-auth"></span><h2>Installing RADIUS authentication<a class="headerlink" href="#installing-radius-authentication" title="Permalink to this headline">¶</a></h2>
+<p>The RADIUS extension must be explicitly enabled during build time in order to
+generate the binaries and resulting JAR file. This is done by adding the flag
+<code class="docutils literal notranslate"><span class="pre">-Plgpl-extensions</span></code> to the Maven command line during the build, and should
+result in the output below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mvn clean package -Plgpl-extensions
+<span class="go">[INFO] --- maven-assembly-plugin:2.5.3:single (make-source-archive) @ guacamole-client ---</span>
+<span class="go">[INFO] Reading assembly descriptor: project-assembly.xml</span>
+<span class="go">[INFO] Building tar: /home/guac/guacamole-client/target/guacamole-client-1.4.0.tar.gz</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Reactor Summary:</span>
+<span class="go">[INFO] </span>
+<span class="go">[INFO] guacamole-common .................................. SUCCESS [6.037s]</span>
+<span class="go">[INFO] guacamole-ext ..................................... SUCCESS [5.382s]</span>
+<span class="go">[INFO] guacamole-common-js ............................... SUCCESS [0.751s]</span>
+<span class="go">[INFO] guacamole ......................................... SUCCESS [9.767s]</span>
+<span class="go">[INFO] guacamole-auth-cas ................................ SUCCESS [2.811s]</span>
+<span class="go">[INFO] guacamole-auth-duo ................................ SUCCESS [2.441s]</span>
+<span class="go">[INFO] guacamole-auth-header ............................. SUCCESS [1.875s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc ............................... SUCCESS [0.277s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-base .......................... SUCCESS [2.144s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-mysql ......................... SUCCESS [5.637s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-postgresql .................... SUCCESS [5.465s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-sqlserver ..................... SUCCESS [5.398s]</span>
+<span class="go">[INFO] guacamole-auth-jdbc-dist .......................... SUCCESS [0.824s]</span>
+<span class="go">[INFO] guacamole-auth-ldap ............................... SUCCESS [2.743s]</span>
+<span class="go">[INFO] guacamole-auth-noauth ............................. SUCCESS [0.964s]</span>
+<span class="go">[INFO] guacamole-auth-openid ............................. SUCCESS [2.533s]</span>
+<span class="go">[INFO] guacamole-example ................................. SUCCESS [0.888s]</span>
+<span class="go">[INFO] guacamole-playback-example ........................ SUCCESS [0.628s]</span>
+<span class="go">[INFO] guacamole-auth-radius ............................. SUCCESS [17.729s]</span>
+<span class="go">[INFO] guacamole-client .................................. SUCCESS [5.645s]</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] BUILD SUCCESS</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Total time: 1:20.134s</span>
+<span class="go">[INFO] Finished at: Wed Jan 31 09:45:41 EST 2018</span>
+<span class="go">[INFO] Final Memory: 47M/749M</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>After the build completes successfully, the extension will be in the
+<code class="docutils literal notranslate"><span class="pre">extensions/guacamole-auth-radius/target/</span></code> directory, and will be called
+guacamole-auth-radius-1.4.0.jar. This extension file can be copied to the
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory. <em>If you are unsure where
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> is located on your system, please consult
+<a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a> before proceeding.</em></p>
+<p>Extensions are loaded in alphabetical order, and authentication is performed in
+the order in which the extensions were loaded. If you are stacking the RADIUS
+extension with another extension, like the JDBC extension, in order to store
+connection information, you may need to change the name of the RADIUS extension
+such that it is evaluated prior to the JDBC extension - otherwise an
+authentication failure in one of the previous modules may block the RADIUS
+module from ever being evaluated.</p>
+<p>To install the RADIUS authentication extension, you must:</p>
+<ol class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">guacamole-auth-radius-1.4.0.jar</span></code> into <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p></li>
+<li><p>Configure Guacamole to use RADIUS authentication, as described below.</p></li>
+</ol>
+</div>
+<div class="section" id="configuring-guacamole-for-radius-authentication">
+<span id="guac-radius-config"></span><h2>Configuring Guacamole for RADIUS authentication<a class="headerlink" href="#configuring-guacamole-for-radius-authentication" title="Permalink to this headline">¶</a></h2>
+<p>This extension provides several configuration properties in order to
+communicate properly with the RADIUS server to which it needs to authenticate.
+It is important that you know several key pieces of information about the
+RADIUS server - at a minimum, the server name or IP, the authentication port,
+the authentication protocol in use by the server, and the shared secret for the
+RADIUS client. If you are responsible for the RADIUS server, you’ll need to
+properly configure these items to get Guacamole to authenticate properly. If
+you’re not responsible for the RADIUS server you will need to work with the
+administrator to get all of the necessary configuration items for the server.
+These items will need to be configured in the
+<a class="reference internal" href="configuring-guacamole.html#initial-setup"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code></span></a> file.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">radius-hostname</span></code></dt><dd><p>The RADIUS server to authenticate against. If not specified, localhost will
+be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-auth-port</span></code></dt><dd><p>The RADIUS authentication port on which the RADIUS service is is listening.
+If not specified, the default of 1812 will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-shared-secret</span></code></dt><dd><p>The shared secret to use when talking to the RADIUS server. This parameter is
+required and the extension will not load if this is not specified.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-auth-protocol</span></code></dt><dd><p>The authentication protocol to use when talking to the RADIUS server. This
+parameter is required for the extension to operate. Supported values are:
+pap, chap, mschapv1, mschapv2, eap-md5, eap-tls, and eap-ttls. Support for
+PEAP is implemented inside the extension, but, due to a regression in the
+JRadius implementation, it is currently broken. Also, if you specify eap-ttls
+you will also need to specify the <code class="docutils literal notranslate"><span class="pre">radius-eap-ttls-inner-protocol</span></code> parameter
+in order to properly configure the protocol used inside the EAP TTLS tunnel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-key-file</span></code></dt><dd><p>The combination certificate and private key pair to use for TLS-based RADIUS
+protocols that require a client-side certificate. This parameter should specify
+the absolute path to the file. By default the extension will look for a file
+called <code class="docutils literal notranslate"><span class="pre">radius.key</span></code> in the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> directory.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-key-type</span></code></dt><dd><p>The file type of the keystore specified by the <code class="docutils literal notranslate"><span class="pre">radius-key-file</span></code> parameter.
+Valid keystore types are pem, jceks, jks, and pkcs12. If not specified, this
+defaults to pkcs12, the default used by the JRadius library.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-key-password</span></code></dt><dd><p>The password of the private key specified in the <code class="docutils literal notranslate"><span class="pre">radius-key-file</span></code> parameter.
+By default the extension will not use any password when trying to open the
+key file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-ca-file</span></code></dt><dd><p>The absolute path to the file that stores the certificate authority
+certificates for encrypted connections to the RADIUS server. By default a
+file with the name ca.crt in the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> directory will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-ca-type</span></code></dt><dd><p>The file type of keystore used for the certificate authority. Valid formats
+are pem, jceks, jks, and pkcs12. If not specified this defaults to pem.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-ca-password</span></code></dt><dd><p>The password used to protect the certificate authority store, if any.  If
+unspecified the extension will attempt to read the CA store without any
+password.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-trust-all</span></code></dt><dd><p>This parameter controls whether or not the RADIUS extension should trust all
+certificates or verify them against known good certificate authorities. Set
+to true to allow the RADIUS server to connect without validating
+certificates. The default is false, which causes certificates to be
+validated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-retries</span></code></dt><dd><p>The number of times the client will retry the connection to the RADIUS server
+and not receive a response before giving up. By default the client will try
+the connection at most 5 times.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-timeout</span></code></dt><dd><p>The timeout for a RADIUS connection in seconds. By default the client will
+wait for a response from the server for at most 60 seconds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-eap-ttls-inner-protocol</span></code></dt><dd><p>When EAP-TTLS is used, this parameter specifies the inner (tunneled) protocol
+to use talking to the RADIUS server. It is required when the
+<code class="docutils literal notranslate"><span class="pre">radius-auth-protocol</span></code> parameter is set to eap-ttls. If the
+<code class="docutils literal notranslate"><span class="pre">radius-auth-protocol</span></code> value is set to something other than eap-ttls, this
+parameter has no effect and will be ignored. Valid options for this are any of
+the values for <code class="docutils literal notranslate"><span class="pre">radius-auth-protocol</span></code>, except for eap-ttls.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">radius-nas-ip</span></code></dt><dd><p>This property allows the server administrator to manually set an IP address
+that will be sent to the RADIUS server to identify this RADIUS client, known
+as the “Network Access Server” (NAS) IP address. When this property is not
+specified, the RADIUS extension attempts to automatically determine the IP
+address of the system on which Guacamole is running and uses that value.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="completing-the-installation">
+<span id="completing-radius-install"></span><h2>Completing the installation<a class="headerlink" href="#completing-the-installation" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole will only reread <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> and load newly-installed
+extensions during startup, so your servlet container will need to be restarted
+before HTTP header authentication can be used.  <em>Doing this will disconnect all
+active users, so be sure that it is safe to do so prior to attempting
+installation.</em> When ready, restart your servlet container and give the new
+authentication a try.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="adhoc-connections.html" class="btn btn-neutral float-right" title="Ad-hoc Connections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="saml-auth.html" class="btn btn-neutral float-left" title="SAML Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

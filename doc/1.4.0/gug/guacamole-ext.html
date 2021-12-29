@@ -1,0 +1,869 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>guacamole-ext &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Adding new protocols" href="custom-protocols.html" />
+    <link rel="prev" title="guacamole-common-js" href="guacamole-common-js.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">guacamole-ext</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#guacamole-extension-format">Guacamole extension format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#extension-manifest">Extension manifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-existing-html">Updating existing HTML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-the-server-configuration">Accessing the server configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-properties">Custom properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-configuration">Advanced configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication-providers">Authentication providers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simpleauthenticationprovider"><code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-usercontext">The <code class="docutils literal notranslate"><span class="pre">UserContext</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-classes"><code class="docutils literal notranslate"><span class="pre">Directory</span></code> classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rest-resources">REST resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permissions">Permissions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-permissions">System permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-permissions">Object permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connections">Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-sharing-active-connections">Managing/sharing active connections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>guacamole-ext</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/guacamole-ext.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="guacamole-ext">
+<h1>guacamole-ext<a class="headerlink" href="#guacamole-ext" title="Permalink to this headline">¶</a></h1>
+<p>While not strictly part of the Java API provided by the Guacamole project,
+guacamole-ext is an API exposed by the Guacamole web application within a
+separate project such that extensions, specifically authentication providers,
+can be written to tweak Guacamole to fit well in existing deployments.</p>
+<p>Extensions to Guacamole can:</p>
+<ol class="simple">
+<li><p>Provide alternative authentication methods and sources of connection/user
+data.</p></li>
+<li><p>Provide event listeners that will be notified as Guacamole performs tasks
+such as authentication and tunnel connection.</p></li>
+<li><p>Theme or brand Guacamole through additional CSS files and static resources.</p></li>
+<li><p>Extend Guacamole’s JavaScript code by providing JavaScript that will be
+loaded automatically.</p></li>
+<li><p>Add additional display languages, or alter the translation strings of
+existing languages.</p></li>
+</ol>
+<div class="section" id="guacamole-extension-format">
+<span id="ext-file-format"></span><h2>Guacamole extension format<a class="headerlink" href="#guacamole-extension-format" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole extensions are standard Java <code class="docutils literal notranslate"><span class="pre">.jar</span></code> files which contain all classes
+and resources required by the extension, as well as the Guacamole extension
+manifest. There is no set structure to an extension except that the manifest
+must be in the root of the archive. Java classes and packages, if any, will be
+read from the <code class="docutils literal notranslate"><span class="pre">.jar</span></code> relative to the root, as well.</p>
+<p>Beyond this, the semantics and locations associated with all other resources
+within the extension are determined by the extension manifest alone.</p>
+<div class="section" id="extension-manifest">
+<span id="ext-manifest"></span><h3>Extension manifest<a class="headerlink" href="#extension-manifest" title="Permalink to this headline">¶</a></h3>
+<p>The Guacamole extension manifest is a single JSON file, <code class="docutils literal notranslate"><span class="pre">guac-manifest.json</span></code>,
+which describes the location of each resource, the type of each resource, and
+the version of Guacamole that the extension was built for. The manifest can
+contain the following properties:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">guacamoleVersion</span></code></dt><dd><p>The version string of the Guacamole release that this extension is written
+for. <em>This property is required for all extensions.</em> The special version
+string <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> can be used if the extension does not depend on a particular
+version of Guacamole, but be careful - this will bypass version compatibility
+checks, and should never be used if the extension does more than basic
+theming or branding.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code></dt><dd><p>A human-readable name for the extension. <em>This property is required for all
+extensions.</em> When your extension is successfully loaded, a message
+acknowledging the successful loading of your extension by name will be
+logged.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">namespace</span></code></dt><dd><p>A unique string which identifies your extension. <em>This property is required
+for all extensions.</em> This string should be unique enough that it is unlikely
+to collide with the namespace of any other extension.</p>
+<p>If your extension contains static resources, those resources will be served
+at a path derived from the namespace provided here.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">authProviders</span></code></dt><dd><p>An array of the classnames of all <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code> subclasses
+provided by this extension.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">listeners</span></code></dt><dd><p>An array of the classnames of all <code class="docutils literal notranslate"><span class="pre">Listener</span></code> subclasses provided by this
+extension.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">js</span></code></dt><dd><p>An array of all JavaScript files within the extension. All paths within this
+array must be relative paths, and will be interpreted relative to the root of
+the archive.</p>
+<p>JavaScript files declared here will be automatically loaded when the web
+application loads within the user’s browser.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">css</span></code></dt><dd><p>An array of all CSS files within the extension. All paths within this array
+must be relative paths, and will be interpreted relative to the root of the
+archive.</p>
+<p>CSS files declared here will be automatically applied when the web
+application loads within the user’s browser.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">html</span></code></dt><dd><p>An array of all HTML files within the extension that should be used to update
+or replace existing HTML within the Guacamole interface. All paths within
+this array must be relative paths, and will be interpreted relative to the
+root of the archive.</p>
+<p>HTML files declared here will be automatically applied to other HTML within
+the Guacamole interface when the web application loads within the user’s
+browser. The manner in which the files are applied is dictated by
+<code class="docutils literal notranslate"><span class="pre">&lt;meta</span> <span class="pre">...&gt;</span></code> tags within those same files.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">translations</span></code></dt><dd><p>An array of all translation files within the extension. All paths within this
+array must be relative paths, and will be interpreted relative to the root of
+the archive.</p>
+<p>Translation files declared here will be automatically added to the available
+languages. If a translation file provides a language that already exists
+within Guacamole, its strings will override the strings of the existing
+translation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">resources</span></code></dt><dd><p>An object where each property name is the name of a web resource file, and
+each value is the mimetype for that resource. All paths within this object
+must be relative paths, and will be interpreted relative to the root of the
+archive.</p>
+<p>Web resources declared here will be made available to the application at
+<code class="samp docutils literal notranslate"><span class="pre">app/ext/</span><em><span class="pre">NAMESPACE</span></em><span class="pre">/</span><em><span class="pre">PATH</span></em></code>, where <code class="docutils literal notranslate"><span class="pre">NAMESPACE</span></code> is the value of the
+namespace property, and <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is the declared web resource filename.</p>
+</dd>
+</dl>
+<p>The only absolutely required properties are <code class="docutils literal notranslate"><span class="pre">guacamoleVersion</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">namespace</span></code>, as they are used to identify the extension and for compatibility
+checks. The most minimal <code class="docutils literal notranslate"><span class="pre">guac-manifest.json</span></code> will look something like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;guacamoleVersion&quot;</span> <span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;My Extension&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;namespace&quot;</span> <span class="p">:</span> <span class="s2">&quot;my-extension&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will allow the extension to load, but does absolutely nothing otherwise.
+Lacking the semantic information provided by the other properties, no other
+files within the extension will be used. A typical <code class="docutils literal notranslate"><span class="pre">guac-manifest.json</span></code> for an
+extension providing theming or branding would be more involved:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+
+    <span class="nt">&quot;guacamoleVersion&quot;</span> <span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
+
+    <span class="nt">&quot;name&quot;</span>      <span class="p">:</span> <span class="s2">&quot;My Extension&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;namespace&quot;</span> <span class="p">:</span> <span class="s2">&quot;my-extension&quot;</span><span class="p">,</span>
+
+    <span class="nt">&quot;css&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;theme.css&quot;</span> <span class="p">],</span>
+
+    <span class="nt">&quot;html&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;loginDisclaimer.html&quot;</span> <span class="p">],</span>
+
+    <span class="nt">&quot;resources&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;images/logo.png&quot;</span>   <span class="p">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;images/cancel.png&quot;</span> <span class="p">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;images/delete.png&quot;</span> <span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating-existing-html">
+<span id="ext-patch-html"></span><h3>Updating existing HTML<a class="headerlink" href="#updating-existing-html" title="Permalink to this headline">¶</a></h3>
+<p>The existing HTML structure of Guacamole’s interface can be modified by
+extensions through special “patch” HTML files declared by the html property in
+<code class="docutils literal notranslate"><span class="pre">guac-manifest.json</span></code>. These files are HTML fragments and are identical to any
+other HTML file except that they contain Guacamole-specific meta tags that
+instruct Guacamole to modify its own HTML in a particular way. Each meta tag
+takes the following form:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;NAME&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;SELECTOR&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">SELECTOR</span></code> is a CSS selector that matches the elements within the
+Guacamole interface that serve as a basis for the modification, and <code class="docutils literal notranslate"><span class="pre">NAME</span></code> is
+any one of the following defined modifications:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">before</span></code></dt><dd><p>Inserts the specified HTML immediately before any element matching the CSS
+selector.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">after</span></code></dt><dd><p>Inserts the specified HTML immediately after any element matching the CSS
+selector.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">replace</span></code></dt><dd><p>Replaces any element matching the CSS selector with the specified HTML.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">before-children</span></code></dt><dd><p>Inserts the specified HTML immediately before the first child (if any) of any
+element matching the CSS selector. If a matching element has no children, the
+HTML simply becomes the entire contents of the matching element.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">after-children</span></code></dt><dd><p>Inserts the specified HTML immediately after the last child (if any) of any
+element matching the CSS selector. If a matching element has no children, the
+HTML simply becomes the entire contents of the matching element.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">replace-children</span></code></dt><dd><p>Replaces the entire contents of any element matching the CSS selector with
+the specified HTML.</p>
+</dd>
+</dl>
+<p>For example, to add a welcome message and link to some corporate privacy policy
+(a fairly common need), you would add an HTML file like the following:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;after&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;.login-ui .login-dialog&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;welcome&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Welcome to our Guacamole server!<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        Please be sure to read our <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/path/to/some/privacy.html&quot;</span><span class="p">&gt;</span>privacy
+        policy<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> before continuing.
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>After the extension is installed and Guacamole is restarted, the “welcome” div
+and its contents will automatically be inserted directly below the login dialog
+(the only element that would match <code class="docutils literal notranslate"><span class="pre">.login-ui</span> <span class="pre">.login-dialog</span></code>) as if they were
+part of Guacamole’s HTML in the first place.</p>
+<p>An example of an extension that modifies style and HTML components for the
+purpose of providing custom “branding” of the Guacamole interface can be found
+in the <code class="docutils literal notranslate"><span class="pre">doc/guacamole-branding-example</span></code> directory of the guacamole-client
+source code, which can be found here:
+<a class="reference external" href="https://github.com/apache/guacamole-client/tree/master/doc/guacamole-branding-example">https://github.com/apache/guacamole-client/tree/master/doc/guacamole-branding-example</a></p>
+</div>
+</div>
+<div class="section" id="accessing-the-server-configuration">
+<span id="ext-environment"></span><h2>Accessing the server configuration<a class="headerlink" href="#accessing-the-server-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The configuration of the Guacamole server is exposed through the <code class="docutils literal notranslate"><span class="pre">Environment</span></code>
+interface, specifically the <code class="docutils literal notranslate"><span class="pre">LocalEnvironment</span></code> implementation of this
+interface. Through <code class="docutils literal notranslate"><span class="pre">Environment</span></code>, you can access all properties declared within
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>, determine the proper hostname/port of guacd, and access
+the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>.</p>
+<div class="section" id="custom-properties">
+<span id="ext-simple-config"></span><h3>Custom properties<a class="headerlink" href="#custom-properties" title="Permalink to this headline">¶</a></h3>
+<p>If your extension requires generic, unstructured configuration parameters,
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> is a reasonable and simple location for them. The
+<code class="docutils literal notranslate"><span class="pre">Environment</span></code> interface provides direct access to <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> and
+simple mechanisms for reading and parsing the properties therein. The value of
+a property can be retrieved by calling <code class="docutils literal notranslate"><span class="pre">getProperty()</span></code>, which will return
+<code class="docutils literal notranslate"><span class="pre">null</span></code> or a default value for undefined properties, or <code class="docutils literal notranslate"><span class="pre">getRequiredProperty()</span></code>,
+which will throw an exception for undefined properties.</p>
+<p>For convenience, guacamole-ext contains several pre-defined property base
+classes for common types:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">BooleanGuacamoleProperty</span></code></dt><dd><p>The values “true” and “false” are parsed as their corresponding <code class="docutils literal notranslate"><span class="pre">Boolean</span></code>
+values. Any other value results in a parse error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">IntegerGuacamoleProperty</span></code></dt><dd><p>Numeric strings are parsed as <code class="docutils literal notranslate"><span class="pre">Integer</span></code> values. Non-numeric strings will
+result in a parse error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LongGuacamoleProperty</span></code></dt><dd><p>Numeric strings are parsed as <code class="docutils literal notranslate"><span class="pre">Long</span></code> values. Non-numeric strings will result
+in a parse error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">StringGuacamoleProperty</span></code></dt><dd><p>The property value is returned as an untouched <code class="docutils literal notranslate"><span class="pre">String</span></code>. No parsing is
+performed, and parse errors cannot occur.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FileGuacamoleProperty</span></code></dt><dd><p>The property is interpreted as a filename, and a new <code class="docutils literal notranslate"><span class="pre">File</span></code> pointing to that
+filename is returned. If the filename is invalid, a parse error will be
+thrown. Note that the file need not exist or be accessible for the filename
+to be valid.</p>
+</dd>
+</dl>
+<p>To use these types, you must extend the base class, implementing the
+<code class="docutils literal notranslate"><span class="pre">getName()</span></code> function to identify your property. Typically, you would declare
+these properties as static members of some class containing all properties
+relevant to your extension:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyProperties</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">MY_PROPERTY</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntegerGuacamoleProperty</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="s">&quot;my-property&quot;</span><span class="o">;</span> <span class="o">}</span>
+
+    <span class="o">};</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Your property can then be retrieved with <code class="docutils literal notranslate"><span class="pre">getProperty()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">getRequiredProperty()</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Integer</span> <span class="n">value</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="n">MyProperties</span><span class="o">.</span><span class="na">MY_PROPERTY</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>If you need more sophisticated parsing, you can also implement your own
+property types by implementing the <code class="docutils literal notranslate"><span class="pre">GuacamoleProperty</span></code> interface. The only
+functions to implement are <code class="docutils literal notranslate"><span class="pre">getName()</span></code>, which returns the name of the property,
+and <code class="docutils literal notranslate"><span class="pre">parseValue()</span></code>, which parses a given string and returns its value.</p>
+</div>
+<div class="section" id="advanced-configuration">
+<span id="ext-advanced-config"></span><h3>Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Permalink to this headline">¶</a></h3>
+<p>If you need more structured data than provided by simple properties, you can
+place completely arbitrary files in a hierarchy of your choosing anywhere
+within <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> as long as you avoid placing your files in directories
+reserved for other purposes as described above.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Environment</span></code> interface exposes the location of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> through
+the <code class="docutils literal notranslate"><span class="pre">getGuacamoleHome()</span></code> function. This function returns a standard Java <code class="docutils literal notranslate"><span class="pre">File</span></code>
+which can then be used to locate other files or directories within
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">myConfigFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">environment</span><span class="o">.</span><span class="na">getGuacamoleHome</span><span class="o">(),</span> <span class="s">&quot;my-config.xml&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>There is no guarantee that <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> or your file will exist, and you
+should verify this before proceeding further in your extension’s configuration
+process, but once this is done you can simply parse your file as you see fit.</p>
+</div>
+</div>
+<div class="section" id="authentication-providers">
+<span id="ext-auth-providers"></span><h2>Authentication providers<a class="headerlink" href="#authentication-providers" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole’s authentication system is driven by authentication providers, which
+are classes which implement the <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code> interface defined by
+guacamole-ext. When any page within Guacamole is visited, the following process
+occurs:</p>
+<ol>
+<li><p>All currently installed extensions are polled, in lexicographic order of
+their filenames, by invoking the <code class="docutils literal notranslate"><span class="pre">getAuthenticatedUser()</span></code> function with a
+<code class="docutils literal notranslate"><span class="pre">Credentials</span></code> object constructed with the contents of the HTTP request.</p>
+<p>The credentials given are abstract. While the <code class="docutils literal notranslate"><span class="pre">Credentials</span></code> object provides
+convenience access to a traditional username and password, <em>implementations
+are not required to use usernames and passwords</em>. The entire contents of
+the HTTP request is at your disposal, including parameters, cookies, and SSL
+information.</p>
+</li>
+<li><p>If an authentication attempt fails, the extension throws either a
+<code class="docutils literal notranslate"><span class="pre">GuacamoleInsufficientCredentialsException</span></code> (if more credentials are needed
+before validity can be determined) or <code class="docutils literal notranslate"><span class="pre">GuacamoleInvalidCredentialsException</span></code>
+(if the credentials are technically sufficient, but are invalid as
+provided). If all extensions fail to authenticate the user, the contents of
+the exception thrown by the first extension to fail are used to produce the
+user login prompt.</p>
+<p><em>Note that this means there is no “login screen” in Guacamole per se; the
+prompt for credentials for unauthenticated users is determined purely based
+on the needs of the extension as declared within the authentication failure
+itself.</em></p>
+<p>If an authentication attempt succeeds, the extension returns an instance of
+<code class="docutils literal notranslate"><span class="pre">AuthenticatedUser</span></code> describing the identity of the user that just
+authenticated, and no further extensions are polled.</p>
+</li>
+<li><p>If authentication has succeeded, and thus an <code class="docutils literal notranslate"><span class="pre">AuthenticatedUser</span></code> is
+available, that <code class="docutils literal notranslate"><span class="pre">AuthenticatedUser</span></code> is passed to the <code class="docutils literal notranslate"><span class="pre">getUserContext()</span></code>
+function of all extensions’ authentication providers. Each extension now has
+the opportunity to provide access to data for a user, even if that extension
+did not originally authenticate the user. If no <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> is returned
+for the given <code class="docutils literal notranslate"><span class="pre">AuthenticatedUser</span></code>, then that extension has simply refused to
+provide data for that user.</p>
+<p>The Guacamole interface will transparently unify the data from each
+extension, providing the user with a view of all available connections. If
+the user has permission to modify or administer any objects associated with
+an extension, access to the administrative interface will be exposed as
+well, again with a unified view of all applicable objects.</p>
+</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Because authentication is decoupled from data storage/access, <em>you do not need
+to implement full-blown data storage if you only wish to provide an additional
+authentication mechanism</em>. You can instead implement only the authentication
+portion of an <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code>, and otherwise rely on the storage and
+features provided by other extensions, such as the <a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">database authentication
+extension</span></a>.</p>
+</div>
+<p>The Guacamole web application includes a basic authentication provider
+implementation which parses an XML file to determine which users exist, their
+corresponding passwords, and what configurations those users have access to.
+This is the part of Guacamole that reads the <code class="docutils literal notranslate"><span class="pre">user-mapping.xml</span></code> file. If you
+use a custom authentication provider for your authentication, this file will
+probably not be required.</p>
+<p>The community has implemented authentication providers which access databases,
+use LDAP, or even perform no authentication at all, redirecting all users to a
+single configuration specified in <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>.</p>
+<p>A minimal authentication provider is implemented in the tutorials later, and
+the upstream authentication provider implemented within Guacamole, as well as
+the authentication providers implemented by the community, are good examples
+for how authentication can be extended without having to implement a whole new
+web application.</p>
+<div class="section" id="simpleauthenticationprovider">
+<span id="ext-simple-auth"></span><h3><code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code><a class="headerlink" href="#simpleauthenticationprovider" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code> class provides a much simpler means of
+implementing authentication when you do not require the ability to add and
+remove users and connections. It is an abstract class and requires only one
+function implementation: <code class="docutils literal notranslate"><span class="pre">getAuthorizedConfigurations()</span></code>.</p>
+<p>This function is required to return a <code class="docutils literal notranslate"><span class="pre">Map</span></code> of unique IDs to configurations,
+where these configurations are all configurations accessible with the provided
+credentials. As before, the credentials given are abstract. You are not
+required to use usernames and passwords.</p>
+<p>The configurations referred to by the function name are instances of
+<code class="docutils literal notranslate"><span class="pre">GuacamoleConfiguration</span></code> (part of guacamole-common), which is just a wrapper
+around a protocol name and set of parameter name/value pairs. The name of the
+protocol to use and a set of parameters is the minimum information required for
+other parts of the Guacamole API to complete the handshake required by the
+Guacamole protocol.</p>
+<p>When a class that extends <code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code> is asked for more
+advanced operations by the web application, <code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code>
+simply returns that there is no permission to do so. This effectively disables
+all administrative functionality within the web interface.</p>
+<p>If you choose to go the simple route, most of the rest of this chapter is
+irrelevant. Permissions, security model, and various classes will be discussed
+that are all handled for you automatically by <code class="docutils literal notranslate"><span class="pre">SimpleAuthenticationProvider</span></code>.</p>
+</div>
+</div>
+<div class="section" id="the-usercontext">
+<span id="ext-user-context"></span><h2>The <code class="docutils literal notranslate"><span class="pre">UserContext</span></code><a class="headerlink" href="#the-usercontext" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> is the root of all data-related operations. It is used to
+list, create, modify, or delete users and connections, as well as to query
+available permissions. If an extension is going to provide access to data of
+any sort, it must do so through the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>.</p>
+<p>The Guacamole web application uses permissions queries against the
+<code class="docutils literal notranslate"><span class="pre">UserContext</span></code> to determine what operations to present, but <em>beware that it is
+up to the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> to actually enforce these restrictions</em>. The Guacamole
+web application will not enforce restrictions on behalf of the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> is the sole means of entry and the sole means of modification
+available to a logged-in user. If the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> refuses to perform an
+operation (by throwing an exception), the user cannot perform the operation at
+all.</p>
+</div>
+<div class="section" id="directory-classes">
+<span id="ext-object-directories"></span><h2><code class="docutils literal notranslate"><span class="pre">Directory</span></code> classes<a class="headerlink" href="#directory-classes" title="Permalink to this headline">¶</a></h2>
+<p>Access to objects beneath the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> is given through <code class="docutils literal notranslate"><span class="pre">Directory</span></code>
+classes. These <code class="docutils literal notranslate"><span class="pre">Directory</span></code> classes are similar to Java collections, but they
+also embody update and batching semantics. Objects can be retrieved from a
+<code class="docutils literal notranslate"><span class="pre">Directory</span></code> using its <code class="docutils literal notranslate"><span class="pre">get()</span></code> function and added or removed with <code class="docutils literal notranslate"><span class="pre">add()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">remove()</span></code> respectively, but objects already in the set can also be updated by
+passing an updated object to its <code class="docutils literal notranslate"><span class="pre">update()</span></code> function.</p>
+<p>An implementation of a <code class="docutils literal notranslate"><span class="pre">Directory</span></code> can rely on these functions to define the
+semantics surrounding all operations. The <code class="docutils literal notranslate"><span class="pre">add()</span></code> function is called only when
+creating new objects, the <code class="docutils literal notranslate"><span class="pre">update()</span></code> function is called only when updating an
+object previously retrieved with <code class="docutils literal notranslate"><span class="pre">get()</span></code>, and <code class="docutils literal notranslate"><span class="pre">remove()</span></code> is called only when
+removing an existing object by its identifier.</p>
+<p>When implementing an <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code>, you must ensure that the
+<code class="docutils literal notranslate"><span class="pre">UserContext</span></code> will only return <code class="docutils literal notranslate"><span class="pre">Directory</span></code> classes that automatically enforce
+the permissions associated with all objects and the associated user.</p>
+</div>
+<div class="section" id="rest-resources">
+<span id="ext-rest-resources"></span><h2>REST resources<a class="headerlink" href="#rest-resources" title="Permalink to this headline">¶</a></h2>
+<p>Arbitrary REST resources may be exposed by extensions at the
+<code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code> level, if the resource does not require an associated
+authenticated user, or at the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> level, if the resource should be
+available to authenticated users only. In both cases, the REST resource is
+provided through implementing the <code class="docutils literal notranslate"><span class="pre">getResource()</span></code> function, returning an object
+which is annotated with JAX-RS annotations (JSR 311).</p>
+<p>The resource returned by <code class="docutils literal notranslate"><span class="pre">getResource()</span></code> functions as the root resource,
+providing access to other resources beneath itself. The root resource for the
+<code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code> is exposed at <code class="samp docutils literal notranslate"><em><span class="pre">PATH</span></em><span class="pre">/api/ext/</span><em><span class="pre">IDENTIFIER</span></em></code>, and
+the root resource for the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> is exposed at
+<code class="samp docutils literal notranslate"><em><span class="pre">PATH</span></em><span class="pre">/api/session/ext/</span><em><span class="pre">IDENTIFIER</span></em></code>, where <code class="docutils literal notranslate"><span class="pre">PATH</span></code> is the path to which
+Guacamole has been deployed (typically <code class="docutils literal notranslate"><span class="pre">/guacamole/</span></code>) and <code class="docutils literal notranslate"><span class="pre">IDENTIFIER</span></code> is the
+unique identifier for the <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code>, as returned by
+<code class="docutils literal notranslate"><span class="pre">getIdentifier()</span></code>.</p>
+<p>The behavior of extension REST resources is generally left entirely to the
+implementation, with the exception that the “token” request parameter is
+reserved for use by Guacamole. This parameter contains the user’s
+authentication token when the user is logged in, and must be present on all
+requests which require authentication. Though not relevant to REST resources
+exposed at the <code class="docutils literal notranslate"><span class="pre">AuthenticationProvider</span></code> level, resources exposed at the
+<code class="docutils literal notranslate"><span class="pre">UserContext</span></code> level inherently require the “token” parameter to be present, as
+it is the sole means of locating the user’s session.</p>
+</div>
+<div class="section" id="permissions">
+<span id="ext-permissions"></span><h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
+<p>The permissions system within guacamole-ext is an advisory system. It is the
+means by which an authentication module describes to the web application what a
+user is allowed to do. The body of permissions granted to a user describes
+which objects that user can see and what they can do to those objects, and thus
+suggests how the Guacamole interface should appear to that user.</p>
+<p><em>Permissions are not the means by which access is restricted</em>; they are purely
+a means of describing access level. An implementation may internally use the
+permission objects to define restrictions, but this is not required. It is up
+to the implementation to enforce its own restrictions by throwing exceptions
+when an operation is not allowed, and to correctly communicate the abilities of
+individual users through these permissions.</p>
+<p>The permissions available to a user are exposed through the
+<code class="docutils literal notranslate"><span class="pre">SystemPermissionSet</span></code> and <code class="docutils literal notranslate"><span class="pre">ObjectPermissionSet</span></code> classes which are accessible
+through the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>. These classes also serve as the means for
+manipulating the permissions granted to a user.</p>
+<div class="section" id="system-permissions">
+<h3>System permissions<a class="headerlink" href="#system-permissions" title="Permalink to this headline">¶</a></h3>
+<p>System permissions describe access to operations that manipulate the system as
+a whole, rather than specific objects. This includes the creation of new
+objects, as object creation directly affects the system, and per-object
+controls cannot exist before the object is actually created.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ADMINISTER</span></code></dt><dd><p>The user is a super-user - the Guacamole equivalent of root. They are allowed
+to manipulate of system-level permissions and all other objects. This
+permission implies all others.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CREATE_CONNECTION</span></code></dt><dd><p>The user is allowed to create new connections. If a user has this permission,
+the management interface will display components related to connection
+creation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CREATE_CONNECTION_GROUP</span></code></dt><dd><p>The user is allowed to create new connection groups. If a user has this
+permission, the management interface will display components related to
+connection group creation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CREATE_SHARING_PROFILE</span></code></dt><dd><p>The user is allowed to create new sharing profiles. If a user has this
+permission, the management interface will display components related to
+sharing profile creation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CREATE_USER</span></code></dt><dd><p>The user is allowed to create other users. If a user has this permission, the
+management interface will display components related to user creation.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="object-permissions">
+<h3>Object permissions<a class="headerlink" href="#object-permissions" title="Permalink to this headline">¶</a></h3>
+<p>Object permissions describe access to operations that affect a particular
+object. Guacamole currently defines four types of objects which can be
+associated with permissions: users, connections, connection groups, and sharing
+profiles. Each object permission associates a single user with an action that
+may be performed on a single object.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ADMINISTER</span></code></dt><dd><p>The user may grant or revoke permissions involving this object. “Involving”,
+in this case, refers to either side of the permission association, and
+includes both the user to whom the permission is granted and the object the
+permission affects.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DELETE</span></code></dt><dd><p>The user may delete this object. This is distinct from the <code class="docutils literal notranslate"><span class="pre">ADMINISTER</span></code>
+permission which deals only with permissions. A user with this permission
+will see the “Delete” button when applicable.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">READ</span></code></dt><dd><p>The user may see that this object exists and read the properties of that
+object.</p>
+<p>Note that the implementation is <em>not required to divulge the true underlying
+properties of any object</em>. The parameters of a connection or sharing profile,
+the type or contents of a connection group, the password of a user, etc. all
+need not be exposed.</p>
+<p>This is particularly important from the perspective of security when it comes
+to connections, as the parameters of a connection are only truly needed when
+a connection is being modified, and likely should not be exposed otherwise.
+The actual connection operation is always performed internally by the
+authentication provider, and thus does not require client-side knowledge of
+anything beyond the connection’s existence.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UPDATE</span></code></dt><dd><p>The user may change the properties of this object.</p>
+<p>In the case of users, this means the user’s password can be altered.
+<em>Permissions are not considered properties of a user</em>, nor objects in their
+own right, but rather associations between a user and an action which may
+involve another object.</p>
+<p>The properties of a connection include its name, protocol, parent connection
+group, and parameters. The properties of a connection group include its name,
+type, parent connection group, and children. The properties of a sharing
+profile include its name, primary connection, and parameters.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="connections">
+<span id="ext-connections"></span><h2>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole connections are organized in a hierarchy made up of connection
+groups, which each act as folders organizing the connections themselves. The
+hierarchy is accessed through the root-level connection group, exposed by
+<code class="docutils literal notranslate"><span class="pre">getRootConnectionGroup()</span></code> by the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>. The connections and connection
+groups exposed beneath the root connection group must also be accessible
+directly through the connection and connection group directories exposed by
+<code class="docutils literal notranslate"><span class="pre">getConnectionDirectory()</span></code> and <code class="docutils literal notranslate"><span class="pre">getConnectionGroupDirectory()</span></code> of the
+<code class="docutils literal notranslate"><span class="pre">UserContext</span></code>.</p>
+<p>When a user attempts to use a connection the <code class="docutils literal notranslate"><span class="pre">connect()</span></code> of the associated
+<code class="docutils literal notranslate"><span class="pre">Connection</span></code> object will be invoked. It is then up to the implementation of
+this function to establish the TCP connection to guacd, perform the connection
+handshake (most likely via an <code class="docutils literal notranslate"><span class="pre">InetGuacamoleSocket</span></code> wrapped within a
+<code class="docutils literal notranslate"><span class="pre">ConfiguredGuacamoleSocket</span></code>), and then return a <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code> which
+controls access to the established socket.</p>
+<p>Extensions may maintain historical record of connection use via
+<code class="docutils literal notranslate"><span class="pre">ConnectionRecord</span></code> objects, which are exposed both at the <code class="docutils literal notranslate"><span class="pre">Connection</span></code> level
+and across all connections via the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>. Such record maintenance is
+optional, and it is expected that most implementations will simply return empty
+lists.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If connection state will not be tracked by the extension, and the parameters
+associated with the connection will be known at the time the connection object
+is created, the <code class="docutils literal notranslate"><span class="pre">SimpleConnection</span></code> implementation of <code class="docutils literal notranslate"><span class="pre">Connection</span></code> can be used
+to make life easier.</p>
+</div>
+</div>
+<div class="section" id="managing-sharing-active-connections">
+<span id="ext-active-connections"></span><h2>Managing/sharing active connections<a class="headerlink" href="#managing-sharing-active-connections" title="Permalink to this headline">¶</a></h2>
+<p>After a connection has been established, its underlying <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code> can
+be exposed by a <code class="docutils literal notranslate"><span class="pre">UserContext</span></code> through the <code class="docutils literal notranslate"><span class="pre">Directory</span></code> returned by
+getActiveConnectionDirectory(). The <code class="docutils literal notranslate"><span class="pre">ActiveConnection</span></code> objects accessible
+through this <code class="docutils literal notranslate"><span class="pre">Directory</span></code> are the means by which an administrator may monitor or
+forcibly terminate another user’s connection, ultimately resulting in Guacamole
+invoking the <code class="docutils literal notranslate"><span class="pre">close()</span></code> function of the underlying <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>, and also
+serve as the basis for screen sharing.</p>
+<p>Screen sharing is implemented through the use of <code class="docutils literal notranslate"><span class="pre">SharingProfile</span></code> objects,
+exposed through yet another <code class="docutils literal notranslate"><span class="pre">Directory</span></code> beneath the <code class="docutils literal notranslate"><span class="pre">UserContext</span></code>. Each sharing
+profile is associated with a single connection that it can be used to share,
+referred to as the “primary connection”. If a user has read access to a sharing
+profile associated with their current connection, that sharing profile will be
+displayed as an option within <a class="reference internal" href="using-guacamole.html#client-share-menu"><span class="std std-ref">the share menu of the Guacamole
+menu</span></a>.</p>
+<p>The overall sharing process is as follows:</p>
+<ol class="simple">
+<li><p>A user, having access to a sharing profile associated with their current
+active connection, clicks its option within the <a class="reference internal" href="using-guacamole.html#client-share-menu"><span class="std std-ref">share menu</span></a>.</p></li>
+<li><p>Guacamole locates the <code class="docutils literal notranslate"><span class="pre">ActiveConnection</span></code> and invokes its
+<code class="docutils literal notranslate"><span class="pre">getSharingCredentials()</span></code> function with the identifier of the sharing
+profile. The contents of the returned <code class="docutils literal notranslate"><span class="pre">UserCredentials</span></code> object is used by
+Guacamole to generate a sharing link which can be given to other users.</p></li>
+<li><p>When another user visits the sharing link, the credentials embedded in the
+link are passed to the authentication providers associated with each
+installed extension. <em>It is up to the extension that originally provided
+those credentials to authenticate the user and provide them with access to
+the shared connection.</em></p></li>
+<li><p>When the user attempts to connect to the shared connection, the extension
+establishes the connection using the ID of the connection being joined.
+<em>This is not the connection identifier as dictated by guacamole-ext, but
+rather <a class="reference internal" href="guacamole-protocol.html#guacamole-protocol-joining"><span class="std std-ref">the unique ID assigned by guacd as required by the Guacamole
+protocol</span></a>.</em> This ID can be retrieved from a
+<code class="docutils literal notranslate"><span class="pre">ConfiguredGuacamoleSocket</span></code> via <code class="docutils literal notranslate"><span class="pre">getConnectionID()</span></code>, and can be passed
+through a <code class="docutils literal notranslate"><span class="pre">GuacamoleConfiguration</span></code> through <code class="docutils literal notranslate"><span class="pre">setConnectionID()</span></code> (instead of
+specifying a protocol, as would be done for a brand new connection).</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="custom-protocols.html" class="btn btn-neutral float-right" title="Adding new protocols" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="guacamole-common-js.html" class="btn btn-neutral float-left" title="guacamole-common-js" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

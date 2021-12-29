@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Introduction &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Implementation and architecture" href="guacamole-architecture.html" />
+    <link rel="prev" title="Apache Guacamole Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-guacamole">What is Guacamole?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-use-guacamole">Why use Guacamole?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-your-computers-from-any-device">Access your computers from any device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keep-a-computer-in-the-cloud">Keep a computer in the “cloud”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#provide-easy-access-to-a-group">Provide easy access to a group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-html5-remote-access-to-your-existing-infrastructure">Adding HTML5 remote access to your existing infrastructure</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/introduction.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This book is the official Apache Guacamole manual, written by the upstream
+developers of the Guacamole project. It is also the official general
+documentation, with an online version available at
+<a class="reference external" href="http://guacamole.apache.org/">http://guacamole.apache.org/</a>. It is a work in progress which will be
+continuously updated as Guacamole changes with each release.</p>
+<p>We decided to maintain the documentation for Guacamole as a book, as there is
+an awful lot that can be done with the Guacamole web application, and even more
+that can be done with the API. This book is intended to explore the
+possibilities of Guacamole as an application, and to provide documentation
+necessary to install, maintain, and use Guacamole.</p>
+<p>For the sake of users and administrators, we have provided a high-level
+overview of Guacamole’s architecture and technical design, as well as basic
+usage instructions and installation instructions for common platforms.</p>
+<p>For the sake of developers, we have provided a protocol reference and tutorials
+for common tasks (implementing protocol support, integrating Guacamole into
+your own application, etc.) to give a good starting point beyond simply looking
+at the Guacamole codebase.</p>
+<p>This particular edition of the Guacamole Manual covers Guacamole version
+1.4.0. New releases which create new features or break compatibility
+will result in new editions of the user’s guide, as will any necessary
+corrections.  As the official documentation for the project, this book will
+always be freely available in its entirety online.</p>
+<div class="section" id="what-is-guacamole">
+<span id="what-is-guac"></span><h2>What is Guacamole?<a class="headerlink" href="#what-is-guacamole" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole is an HTML5 web application that provides access to desktop
+environments using remote desktop protocols (such as VNC or RDP).
+Guacamole is also the project that produces this web application, and
+provides an API that drives it. This API can be used to power other
+similar applications or services.</p>
+<p>“Guacamole” is most commonly used to refer to the web application
+produced by the Guacamole project using their API. This web application
+is part of a stack that provides a protocol-agnostic remote desktop
+gateway. Written in JavaScript and using only HTML5 and other standards,
+the client part of Guacamole requires nothing more than a modern web
+browser or web-enabled device when accessing any of the desktops served.</p>
+<p>Historically, Guacamole was an HTML5 VNC client, and before that, a
+JavaScript Telnet client called RealMint (“RealMint” is an anagram for
+“terminal”), but this is no longer the case. Guacamole’s architecture
+has grown to encompass remote desktop in general, and can be used as a
+gateway for any number of computers. Originally a proof-of-concept,
+Guacamole is now performant enough for daily use, and all Guacamole
+development is done over Guacamole.</p>
+<p>As an API, Guacamole provides a common and efficient means of streaming
+text data over a JavaScript-based tunnel using either HTTP or WebSocket,
+and a client implementation which supports the Guacamole protocol and
+renders the remote display when combined with a Guacamole protocol
+stream from the tunnel.</p>
+<p>It provides cross-browser mouse and keyboard events, an XML-driven
+on-screen keyboard, and synchronized nestable layers with
+hardware-accelerated compositing. Projects that wish to provide remote
+desktop support over HTML5 can leverage the years of research and
+development that went into Guacamole by incorporating the API into their
+application or service.</p>
+</div>
+<div class="section" id="why-use-guacamole">
+<span id="access-from-anywhere"></span><h2>Why use Guacamole?<a class="headerlink" href="#why-use-guacamole" title="Permalink to this headline">¶</a></h2>
+<p>The principle reason to use Guacamole is constant, world-wide,
+unfettered access to your computers.</p>
+<p>Guacamole allows access one or more desktops from anywhere remotely,
+without having to install a client, particularly when installing a
+client is not possible. By setting up a Guacamole server, you can
+provide access to any other computer on the network from virtually any
+other computer on the internet, anywhere in the world. Even mobile
+phones or tablets can be used, without having to install anything.</p>
+<p>As a true web application whose communication is over HTTP or HTTPS
+only, Guacamole allows you to access your machines from anywhere without
+violating the policy of your workplace, and without requiring the
+installation of special clients. The presence of a proxy or corporate
+firewall does not prevent Guacamole use.</p>
+</div>
+<div class="section" id="access-your-computers-from-any-device">
+<span id="access-from-anything"></span><h2>Access your computers from any device<a class="headerlink" href="#access-your-computers-from-any-device" title="Permalink to this headline">¶</a></h2>
+<p>As Guacamole requires only a reasonably-fast, standards-compliant
+browser, Guacamole will run on many devices, including mobile phones and
+tablets.</p>
+<p>Guacamole is specifically designed to not care whether you have a mouse,
+keyboard, touchscreen, or any combination of those.</p>
+<p>One of the major design philosophies behind Guacamole is that it should
+never assume you have a particular device (ie: a mobile phone) just
+because your browser has or is missing a specific feature (ie: touch
+events or a smallish screen). Guacamole’s codebase provides support for
+both mouse and touch events simultaneously, without choosing one over
+the other, while the interface is intended to be usable regardless of
+screen size.</p>
+<p>Barring bugs, you should be able to use Guacamole on just about any
+modern device with a web browser.</p>
+</div>
+<div class="section" id="keep-a-computer-in-the-cloud">
+<span id="non-physical-computer"></span><h2>Keep a computer in the “cloud”<a class="headerlink" href="#keep-a-computer-in-the-cloud" title="Permalink to this headline">¶</a></h2>
+<p>Ignoring the buzzword, it’s often useful to have a computer that has no
+dedicated physical hardware, where its processing and storage power are
+handled transparently by redundant systems in some remote datacenter.</p>
+<p>Computers hosted on virtualized hardware are more resilient to failures,
+and with so many companies now offering on-demand computing resources,
+Guacamole is a perfect way to access several machines that are only
+accessible over the internet.</p>
+<p>In fact, all Guacamole development is done on computers like this. This
+is partly because we like the mobility, and partly because we want to
+ensure Guacamole is always performant enough for daily use.</p>
+</div>
+<div class="section" id="provide-easy-access-to-a-group">
+<span id="group-access"></span><h2>Provide easy access to a group<a class="headerlink" href="#provide-easy-access-to-a-group" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole allows you to centralize access to a large group of machines,
+and specify on a per-user basis which machines are accessible. Rather
+than remember a list of machines and credentials, users need only log
+into a central server and click on one of the connections listed.</p>
+<p>If you have multiple computers which you would like to access remotely,
+or you are part of a group where each person has a set of machines that
+they need remote access to, Guacamole is a good way to provide that
+access while also ensuring that access is available from anywhere.</p>
+</div>
+<div class="section" id="adding-html5-remote-access-to-your-existing-infrastructure">
+<span id="adding-remote-access"></span><h2>Adding HTML5 remote access to your existing infrastructure<a class="headerlink" href="#adding-html5-remote-access-to-your-existing-infrastructure" title="Permalink to this headline">¶</a></h2>
+<p>As Guacamole is an API, not just a web application, the core components
+and libraries provided by the Guacamole project can be used to add HTML5
+remote access features to an existing application. You need not use the
+main Guacamole web application; you can write (or integrate with) your
+own rather easily.</p>
+<p>If you host an on-demand computing service, adding HTML5-based remote
+access allows users of your service more broad access; users need
+nothing more than a web browser to see their computers’ screens.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="guacamole-architecture.html" class="btn btn-neutral float-right" title="Implementation and architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Apache Guacamole Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

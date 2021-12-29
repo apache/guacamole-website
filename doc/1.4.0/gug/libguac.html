@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>libguac &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="guacamole-common" href="guacamole-common.html" />
+    <link rel="prev" title="The Guacamole protocol" href="guacamole-protocol.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libguac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling">Error handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-plugins">Client plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#entry-point">Entry point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joining-leaving-a-connection">Joining/leaving a connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#termination">Termination</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#layers-and-buffers">Layers and buffers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#streams">Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-instructions">Sending instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-handling">Event handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-events">Key events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mouse-events">Mouse events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clipboard-file-and-other-stream-events">Clipboard, file, and other stream events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>libguac</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/libguac.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libguac">
+<h1>libguac<a class="headerlink" href="#libguac" title="Permalink to this headline">¶</a></h1>
+<p>The C API for extending and developing with Guacamole is libguac. All native
+components produced by the Guacamole project link with this library, and this
+library provides the common basis for extending the native functionality of
+those native components (by implementing client plugins).</p>
+<p>libguac is used mainly for developing client plugins like libguac-client-vnc or
+libguac-client-rdp, or for developing a proxy supporting the Guacamole protocol
+like guacd. This chapter is intended to give an overview of how libguac is
+used, and how to use it for general communication with the Guacamole protocol.</p>
+<div class="section" id="error-handling">
+<span id="libguac-error-handling"></span><h2>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>Most functions within libguac handle errors by returning a zero or non-zero
+value, whichever is appropriate for the function at hand. If an error is
+encountered, the <code class="docutils literal notranslate"><span class="pre">guac_error</span></code> variable is set appropriately, and
+<code class="docutils literal notranslate"><span class="pre">guac_error_message</span></code> contains a statically-allocated human-readable string
+describing the context of the error. These variables intentionally mimic the
+functionality provided by <code class="docutils literal notranslate"><span class="pre">errno</span></code> and <code class="docutils literal notranslate"><span class="pre">errno.h</span></code>.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">guac_error</span></code> and <code class="docutils literal notranslate"><span class="pre">guac_error_message</span></code> are defined within <code class="docutils literal notranslate"><span class="pre">error.h</span></code>. A
+human-readable string describing the error indicated by <code class="docutils literal notranslate"><span class="pre">guac_error</span></code> can be
+retrieved using <code class="docutils literal notranslate"><span class="pre">guac_status_string()</span></code>, which is also statically allocated.</p>
+<p>If functions defined within client plugins set <code class="docutils literal notranslate"><span class="pre">guac_error</span></code> and
+<code class="docutils literal notranslate"><span class="pre">guac_error_message</span></code> appropriately when errors are encountered, the messages
+logged to syslog by guacd will be more meaningful for both users and
+developers.</p>
+</div>
+<div class="section" id="client-plugins">
+<span id="libguac-client-plugins"></span><h2>Client plugins<a class="headerlink" href="#client-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Client plugins are libraries which follow specific conventions such that they
+can be loaded dynamically by guacd. All client plugins <em>must</em>:</p>
+<ol class="simple">
+<li><p>Follow a naming convention, where the name of the library is
+<code class="samp docutils literal notranslate"><span class="pre">libguac-client-</span><em><span class="pre">PROTOCOL</span></em></code>. <em>This is necessary for guacd to locate
+the library for a requested protocol.</em></p></li>
+<li><p>Be linked against libguac, the library used by guacd to handle the Guacamole
+protocol. The structures which are given to functions invoked by guacd are
+defined by libguac, and are expected to be manipulated via the functions
+provided by libguac or as otherwise documented within the structure itself.
+<em>Communication between guacd and client plugins is only possible if they
+share the same core structural and functional definitions provided by
+libguac.</em></p></li>
+<li><p>Implement the standard entry point for client plugins, <code class="docutils literal notranslate"><span class="pre">guac_client_init()</span></code>,
+described in more detail below. It is this function which initializes the
+structures provided by guacd such that users can join and interact with the
+connection.</p></li>
+</ol>
+<div class="section" id="entry-point">
+<span id="libguac-lifecycle-entry"></span><h3>Entry point<a class="headerlink" href="#entry-point" title="Permalink to this headline">¶</a></h3>
+<p>All client plugins must provide a function named <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> which
+accepts, as its sole argument, a pointer to a <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> structure.  This
+function is similar in principle to the main() function of a C program, and it
+is the responsibility of this function to initialize the provided structure as
+necessary to begin the actual remote desktop connection, allow users to
+join/leave, etc.</p>
+<p>The provided <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> will already have been initialized with handlers for
+logging, the broadcast socket, etc. The absolutely critical pieces which must
+be provided by <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> are:</p>
+<ol class="simple">
+<li><p>A handler for users which join the connection (<code class="docutils literal notranslate"><span class="pre">join_handler</span></code>). The join
+handler is also usually the most appropriate place for the actual remote
+desktop connection to be established.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">NULL</span></code>-terminated set of argument names which the client plugin accepts,
+assigned to the args property of the given <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>.  As the handshake
+procedure is completed for each connecting user, these argument names will
+be presented as part of the handshake, and the values for those arguments
+will be passed to the join handler once the handshake completes.</p></li>
+<li><p>A handler for users leaving the connection (<code class="docutils literal notranslate"><span class="pre">leave_handler</span></code>), if any
+cleanup, updates, etc. are required.</p></li>
+<li><p>A handler for freeing the data associated with the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> after the
+connection has terminated (<code class="docutils literal notranslate"><span class="pre">free_handler</span></code>). If your plugin will allocate any
+data at all, implementing the free handler is necessary to avoid memory leaks.</p></li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">guac_client_init</span></code> returns successfully, guacd will proceed with allowing
+the first use to join the connection, and the rest of the plugin lifecycle
+commences.</p>
+</div>
+<div class="section" id="joining-leaving-a-connection">
+<span id="libguac-lifecycle-users"></span><h3>Joining/leaving a connection<a class="headerlink" href="#joining-leaving-a-connection" title="Permalink to this headline">¶</a></h3>
+<p>Whenever a user joins a connection, including the very first user of a
+connection (the user which is establishing the remote desktop connection in the
+first place), the join handler of the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> will be invoked. This
+handler is provided with the <code class="docutils literal notranslate"><span class="pre">guac_user</span></code> structure representing the user that
+just joined, along with the arguments provided during the handshake procedure:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">join_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Synchronize display state, init the user, etc. */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within guac_client_init  */</span>
+<span class="n">client</span><span class="o">-&gt;</span><span class="n">join_handler</span> <span class="o">=</span> <span class="n">join_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>As the parameters and user information provided during the Guacamole protocol
+handshake are often required to be known before the remote desktop connection
+can be established, the join handler is usually the best place to create a
+thread which establishes the remote desktop connection and updates the display
+accordingly.</p>
+<p>If necessary, the user which first established the connection can be
+distinguished from all other users by the owner flag of <code class="docutils literal notranslate"><span class="pre">guac_user</span></code>, which will
+be set to a non-zero value.</p>
+<p>Once a user has disconnected, the leave handler of <code class="docutils literal notranslate"><span class="pre">guac_client</span></code> will be
+invoked. Just as with the join handler, this handler is provided the
+<code class="docutils literal notranslate"><span class="pre">guac_user</span></code> structure of the user that disconnected. The <code class="docutils literal notranslate"><span class="pre">guac_user</span></code> structure
+will be freed immediately after the handler completes:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">leave_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Free user-specific data and clean up */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within guac_client_init  */</span>
+<span class="n">client</span><span class="o">-&gt;</span><span class="n">leave_handler</span> <span class="o">=</span> <span class="n">leave_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="termination">
+<span id="libguac-lifecycle-termination"></span><h3>Termination<a class="headerlink" href="#termination" title="Permalink to this headline">¶</a></h3>
+<p>Once the last user of a connection has left, guacd will begin freeing resources
+allocated to that connection, invoking the free handler of the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>.
+At this point, the “leave” handler has been invoked for all previous users. All
+that remains is for the client plugin to free any remaining data that it
+allocated, such that guacd can clean up the rest:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">free_handler</span><span class="p">(</span><span class="n">guac_client</span><span class="o">*</span> <span class="n">client</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Disconnect, free client-specific data, etc. */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within guac_client_init  */</span>
+<span class="n">client</span><span class="o">-&gt;</span><span class="n">free_handler</span> <span class="o">=</span> <span class="n">free_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="layers-and-buffers">
+<span id="libguac-layers"></span><h2>Layers and buffers<a class="headerlink" href="#layers-and-buffers" title="Permalink to this headline">¶</a></h2>
+<p>The main operand of all drawing instructions is the layer, represented within
+libguac by the <code class="docutils literal notranslate"><span class="pre">guac_layer</span></code> structure. Each <code class="docutils literal notranslate"><span class="pre">guac_layer</span></code> is normally allocated
+using <code class="docutils literal notranslate"><span class="pre">guac_client_alloc_layer()</span></code> or <code class="docutils literal notranslate"><span class="pre">guac_client_alloc_buffer()</span></code>, depending on
+whether a layer or buffer is desired, and freed with <code class="docutils literal notranslate"><span class="pre">guac_client_free_layer()</span></code>
+or <code class="docutils literal notranslate"><span class="pre">guac_client_free_buffer()</span></code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Care must be taken to invoke the allocate and free pairs of each type of layer
+correctly. <code class="docutils literal notranslate"><span class="pre">guac_client_free_layer()</span></code> should only be used to free layers
+allocated with <code class="docutils literal notranslate"><span class="pre">guac_client_alloc_layer()</span></code>, and <code class="docutils literal notranslate"><span class="pre">guac_client_free_buffer()</span></code>
+should only be used to free layers allocated with <code class="docutils literal notranslate"><span class="pre">guac_client_alloc_buffer()</span></code>,
+all called using the same instance of <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>.</p>
+<p>If these restrictions are not observed, the effect of invoking these functions
+is undefined.</p>
+</div>
+<p>Using these layer management functions allows you to reuse existing layers or
+buffers after their original purpose has expired, thus conserving resources on
+the client side, as allocation of new layers within the remote client is a
+relatively expensive operation.</p>
+<p>It is through layers and buffers that Guacamole provides support for
+hardware-accelerated compositing and cached updates. Creative use of layers and
+buffers leads to efficient updates on the client side, which usually translates
+into speed and responsiveness.</p>
+<p>Regardless of whether you allocate new layers or buffers, there is always one
+layer guaranteed to be present: the default layer, represented by libguac as
+<code class="docutils literal notranslate"><span class="pre">GUAC_DEFAULT_LAYER</span></code>. If you only wish to affect the main display of the
+connected client somehow, this is the layer you want to use as the operand of
+your drawing instruction.</p>
+</div>
+<div class="section" id="streams">
+<span id="libguac-streams"></span><h2>Streams<a class="headerlink" href="#streams" title="Permalink to this headline">¶</a></h2>
+<p>In addition to drawing, the Guacamole protocol supports streaming of arbitrary
+data. The main operand of all streaming instructions is the stream, represented
+within libguac by the <code class="docutils literal notranslate"><span class="pre">guac_stream</span></code> structure.  Each <code class="docutils literal notranslate"><span class="pre">guac_stream</span></code> exists
+either at the user or client levels, depending on whether the stream is
+intended to be broadcast to all users or just one, and is thus allocated using
+either <code class="docutils literal notranslate"><span class="pre">guac_client_alloc_stream()</span></code> or <code class="docutils literal notranslate"><span class="pre">guac_user_alloc_stream()</span></code>.
+Explicitly-allocated streams must eventually be freed with
+<code class="docutils literal notranslate"><span class="pre">guac_client_free_stream()</span></code> or <code class="docutils literal notranslate"><span class="pre">guac_user_free_stream()</span></code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Just as with layers, care must be taken to invoke the allocate and free pairs
+correctly for each explicitly-allocated stream.  <code class="docutils literal notranslate"><span class="pre">guac_client_free_stream()</span></code>
+should only be used to free streams allocated with
+<code class="docutils literal notranslate"><span class="pre">guac_client_alloc_stream()</span></code>, and <code class="docutils literal notranslate"><span class="pre">guac_user_free_stream()</span></code> should only be used
+to free streams allocated with <code class="docutils literal notranslate"><span class="pre">guac_user_alloc_stream()</span></code>.</p>
+<p>If these restrictions are not observed, the effect of invoking these functions
+is undefined.</p>
+</div>
+<p>Streams are the means by which data is transmitted for clipboard (via the
+<a class="reference internal" href="protocol-reference.html#clipboard-instruction" title="clipboard"><span class="xref myst guac guac-instruction">“clipboard” instruction</span></a>), audio (via the <a class="reference internal" href="protocol-reference.html#audio-instruction" title="audio"><span class="xref myst guac guac-instruction">“audio”
+instruction</span></a>), and even the images which make up typical
+drawing operations (via the <a class="reference internal" href="protocol-reference.html#img-instruction" title="img"><span class="xref myst guac guac-instruction">“img” instruction</span></a>). They will
+either be allocated for you, when an inbound stream is received from a user, or
+allocated manually, when an outbound stream needs to be sent to a user. As with
+<code class="docutils literal notranslate"><span class="pre">guac_client</span></code> and <code class="docutils literal notranslate"><span class="pre">guac_user</span></code>, each <code class="docutils literal notranslate"><span class="pre">guac_stream</span></code> has a set of handlers which
+correspond to instructions received related to streams.  These instructions are
+documented in more detail in <a class="reference internal" href="guacamole-protocol.html#guacamole-protocol-streaming"><span class="std std-ref">Streams and objects</span></a> and
+<a class="reference internal" href="protocol-reference.html"><span class="doc std std-doc">Guacamole protocol reference</span></a>.</p>
+</div>
+<div class="section" id="sending-instructions">
+<span id="libguac-sending-instructions"></span><h2>Sending instructions<a class="headerlink" href="#sending-instructions" title="Permalink to this headline">¶</a></h2>
+<p>All drawing in Guacamole is accomplished through the sending of instructions to
+the connected client using the Guacamole protocol. The same goes for streaming
+audio, video, or file content. All features and content supported by Guacamole
+ultimately reduce to one or more instructions which are part of the documented
+protocol.</p>
+<p>Most drawing using libguac is done using Cairo functions on a <code class="docutils literal notranslate"><span class="pre">cairo_surface_t</span></code>
+(see the Cairo API documentation) which is later streamed to the client using
+an img instruction and subsequent blob instructions, sent via
+<code class="docutils literal notranslate"><span class="pre">guac_client_stream_png()</span></code>. Cairo was chosen as a dependency of libguac to
+provide developers an existing and stable means of drawing to image buffers
+which will ultimately be sent as easy-to-digest PNG images.</p>
+<p>The Guacamole protocol also supports drawing primitives similar to those
+present in the Cairo API and HTML5’s canvas tag. These instructions are
+documented individually in the Guacamole Protocol Reference in a section
+dedicated to drawing instructions, and like all Guacamole protocol
+instructions, each instruction has a corresponding function in libguac
+following the naming convention <code class="samp docutils literal notranslate"><span class="pre">guac_protocol_send_</span><em><span class="pre">OPCODE</span></em><span class="pre">()</span></code>.</p>
+<p>Each protocol function takes a <code class="docutils literal notranslate"><span class="pre">guac_socket</span></code> as an argument, which is the
+buffered I/O object used by libguac. For each active connection, there are two
+important types of <code class="docutils literal notranslate"><span class="pre">guac_socket</span></code> instance: the broadcast socket, which exists
+at the client level within the <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>, and the per-user socket, which is
+accessible within each <code class="docutils literal notranslate"><span class="pre">guac_user</span></code>. Data sent along the client-level broadcast
+socket will be sent to all connected users beneath that <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>, while
+data sent along a user-level socket will be sent only to that user.</p>
+<p>For example, to send a “size” instruction to all connected users via the
+client-level broadcast socket, you could invoke:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">guac_protocol_send_size</span><span class="p">(</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or, if the instruction is only relevant to a particular user, the socket
+associated with that user can be used instead:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">guac_protocol_send_size</span><span class="p">(</span><span class="n">user</span><span class="o">-&gt;</span><span class="n">socket</span><span class="p">,</span> <span class="n">GUAC_DEFAULT_LAYER</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The sockets provided by libguac are threadsafe at the protocol level.
+Instructions written to a socket by multiple threads are guaranteed to be
+written atomically with respect to that socket.</p>
+</div>
+<div class="section" id="event-handling">
+<span id="libguac-event-handling"></span><h2>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this headline">¶</a></h2>
+<p>Generally, as guacd receives instructions from the connected client, it invokes
+event handlers if set within the associated <code class="docutils literal notranslate"><span class="pre">guac_user</span></code> or <code class="docutils literal notranslate"><span class="pre">guac_client</span></code>,
+depending on the nature of the event. Most events are user-specific, and thus
+the event handlers reside within the <code class="docutils literal notranslate"><span class="pre">guac_user</span></code> structure, but there are
+client-specific events as well, such as a user joining or leaving the current
+connection. Event handlers typically correspond to Guacamole protocol
+instructions received over the socket by a connected user, which in turn
+correspond to events which occur on the client side.</p>
+<div class="section" id="key-events">
+<span id="libguac-key-events"></span><h3>Key events<a class="headerlink" href="#key-events" title="Permalink to this headline">¶</a></h3>
+<p>When keys are pressed or released on the client side, the client sends key
+instructions to the server. These instructions are parsed and handled by
+calling the key event handler installed in the <code class="docutils literal notranslate"><span class="pre">key_handler</span></code> member of the
+<code class="docutils literal notranslate"><span class="pre">guac_user</span></code>. This key handler is given the keysym of the key that was changed,
+and a boolean value indicating whether the key was pressed or released.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">key_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">keysym</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pressed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Do something */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within the &quot;join&quot; handler of guac_client */</span>
+<span class="n">user</span><span class="o">-&gt;</span><span class="n">key_handler</span> <span class="o">=</span> <span class="n">key_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mouse-events">
+<span id="libguac-mouse-events"></span><h3>Mouse events<a class="headerlink" href="#mouse-events" title="Permalink to this headline">¶</a></h3>
+<p>When the mouse is moved, and buttons are pressed or released, the client sends
+mouse instructions to the server. These instructions are parsed and handled by
+calling the mouse event handler installed in the <code class="docutils literal notranslate"><span class="pre">mouse_handler</span></code> member of the
+<code class="docutils literal notranslate"><span class="pre">guac_user</span></code>. This mouse handler is given the current X and Y coordinates of the
+mouse pointer, as well as a mask indicating which buttons are pressed and which
+are released.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">mouse_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">button_mask</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Do something */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within the &quot;join&quot; handler of guac_client */</span>
+<span class="n">user</span><span class="o">-&gt;</span><span class="n">mouse_handler</span> <span class="o">=</span> <span class="n">mouse_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The file <code class="docutils literal notranslate"><span class="pre">client.h</span></code> also defines the mask of each button for convenience:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_MOUSE_LEFT</span></code></dt><dd><p>The left mouse button, set when pressed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_MOUSE_MIDDLE</span></code></dt><dd><p>The middle mouse button, set when pressed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_MOUSE_RIGHT</span></code></dt><dd><p>The right mouse button, set when pressed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_MOUSE_UP</span></code></dt><dd><p>The button corresponding to one scroll in the upwards direction of the mouse
+scroll wheel, set when scrolled.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GUAC_CLIENT_MOUSE_DOWN</span></code></dt><dd><p>The button corresponding to one scroll in the downwards direction of the
+mouse scroll wheel, set when scrolled.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="clipboard-file-and-other-stream-events">
+<span id="libguac-clipboard-events"></span><h3>Clipboard, file, and other stream events<a class="headerlink" href="#clipboard-file-and-other-stream-events" title="Permalink to this headline">¶</a></h3>
+<p>If a connected user sends data which should be sent to the clipboard of the
+remote desktop, guacd will trigger the clipboard handler installed in the
+<code class="docutils literal notranslate"><span class="pre">clipboard_handler</span></code> member of the <code class="docutils literal notranslate"><span class="pre">guac_user</span></code> associated with that user.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">clipboard_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="n">guac_stream</span><span class="o">*</span> <span class="n">stream</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">mimetype</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Do something */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within the &quot;join&quot; handler of guac_client */</span>
+<span class="n">user</span><span class="o">-&gt;</span><span class="n">clipboard_handler</span> <span class="o">=</span> <span class="n">clipboard_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The handler is expected to assign further handlers to the provided
+<code class="docutils literal notranslate"><span class="pre">guac_stream</span></code> as necessary, such that the <a class="reference internal" href="protocol-reference.html#blob-instruction" title="blob"><span class="xref myst guac guac-instruction">“blob”</span></a> and
+<a class="reference internal" href="protocol-reference.html#end-instruction" title="end"><span class="xref myst guac guac-instruction">“end”</span></a> instructions received along the stream can be handled.
+A similar handler is provided for received files:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">file_handler</span><span class="p">(</span><span class="n">guac_user</span><span class="o">*</span> <span class="n">user</span><span class="p">,</span> <span class="n">guac_stream</span><span class="o">*</span> <span class="n">stream</span><span class="p">,</span>
+        <span class="kt">char</span><span class="o">*</span> <span class="n">mimetype</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Do something */</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="cm">/* Within the &quot;join&quot; handler of guac_client */</span>
+<span class="n">user</span><span class="o">-&gt;</span><span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This pattern continues for all other types of streams which can be received
+from a user. The instruction which begins the stream has a corresponding
+handler within <code class="docutils literal notranslate"><span class="pre">guac_user</span></code>, and the metadata describing that stream and
+provided with the instruction is included within the parameters passed to that
+handler.</p>
+<p>These handlers are, of course, optional. If any type of stream lacks a
+corresponding handler, guacd will automatically close the stream and respond
+with an <a class="reference internal" href="protocol-reference.html#ack-instruction" title="ack"><span class="xref myst guac guac-instruction">“ack” instruction</span></a> and appropriate error code,
+informing the user’s Guacamole client that the stream is unsupported.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="guacamole-common.html" class="btn btn-neutral float-right" title="guacamole-common" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="guacamole-protocol.html" class="btn btn-neutral float-left" title="The Guacamole protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

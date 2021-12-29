@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>guacamole-common &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="guacamole-common-js" href="guacamole-common-js.html" />
+    <link rel="prev" title="libguac" href="libguac.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">guacamole-common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#http-tunnel">HTTP tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-guacamole-protocol">Using the Guacamole protocol</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#guacamolereader"><code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#guacamolewriter"><code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>guacamole-common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/guacamole-common.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="guacamole-common">
+<h1>guacamole-common<a class="headerlink" href="#guacamole-common" title="Permalink to this headline">¶</a></h1>
+<p>The Java API provided by the Guacamole project is called guacamole-common. It
+provides a basic means of tunneling data between the JavaScript client provided
+by guacamole-common-js and the native proxy daemon, guacd, and for dealing with
+the Guacamole protocol. The purpose of this library is to facilitate the
+creation of custom tunnels between the JavaScript client and guacd, allowing
+your Guacamole-driven web application to enforce its own security model, if
+any, and dictate exactly what connections are established.</p>
+<div class="section" id="http-tunnel">
+<span id="java-http-tunnel"></span><h2>HTTP tunnel<a class="headerlink" href="#http-tunnel" title="Permalink to this headline">¶</a></h2>
+<p>The Guacamole Java API implements the HTTP tunnel using a servlet called
+<code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code>. This servlet handles all requests coming to it
+over HTTP from the JavaScript client, and translates them into connect, read,
+or write requests, which each get dispatched to the <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code>, <code class="docutils literal notranslate"><span class="pre">doRead()</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">doWrite()</span></code> functions accordingly.</p>
+<p>Normally, you wouldn’t touch the <code class="docutils literal notranslate"><span class="pre">doRead()</span></code> and <code class="docutils literal notranslate"><span class="pre">doWrite()</span></code> functions, as these
+have already been written to properly handle the requests of the JavaScript
+tunnel, and if you feel the need to touch these functions, you are probably
+better off writing your own tunnel implementation, although such a thing is
+difficult to do in a performant way.</p>
+<p>When developing an application based on the Guacamole API, you should use
+<code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> by extending it, implementing your own version of
+<code class="docutils literal notranslate"><span class="pre">doConnect()</span></code>, which is the only abstract function it defines. The tutorial
+later in this book demonstrating how to write a Guacamole-based web application
+shows the basics of doing this, but generally, <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code> is an excellent
+place for authentication or other validation, as it is the responsibility of
+<code class="docutils literal notranslate"><span class="pre">doConnect()</span></code> to create (or not create) the actual tunnel. If <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code>
+does not create the tunnel, communication between the JavaScript client and
+guacd cannot take place, which is an ideal power to have as an authenticator.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code> function is expected to return a new <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>, but
+it is completely up to the implementation to decide how that tunnel is to be
+created. The already-implemented parts of <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> then
+return the unique identifier of this tunnel to the JavaScript client, allowing
+its own tunnel implementation to continue to communicate with the tunnel
+existing on the Java side.</p>
+<p>Instances of <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code> are associated with a <code class="docutils literal notranslate"><span class="pre">GuacamoleSocket</span></code>, which
+is the abstract interface surrounding the low-level connection to guacd.
+Overall, there is a socket (<code class="docutils literal notranslate"><span class="pre">GuacamoleSocket</span></code>) which provides a TCP connection
+to guacd. This socket is exposed to <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>, which provides abstract
+protocol access around what is actually (but secretly, through the abstraction
+of the API) a TCP socket.</p>
+<p>The Guacamole web application extends this tunnel servlet in order to implement
+authentication at the lowest possible level, effectively prohibiting
+communication between the client and any remote desktops unless they have
+properly authenticated. Your own implementation can be considerably simpler,
+especially if you don’t need authentication:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyGuacamoleTunnelServlet</span>
+    <span class="kd">extends</span> <span class="n">GuacamoleHTTPTunnelServlet</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="n">GuacamoleTunnel</span> <span class="nf">doConnect</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">GuacamoleException</span> <span class="o">{</span>
+
+        <span class="c1">// Connect to guacd here (this is a STUB)</span>
+        <span class="n">GuacamoleSocket</span> <span class="n">socket</span><span class="o">;</span>
+
+        <span class="c1">// Return a new tunnel which uses the connected socket</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">SimpleGuacamoleTunnel</span><span class="o">(</span><span class="n">socket</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-guacamole-protocol">
+<span id="java-protocol-usage"></span><h2>Using the Guacamole protocol<a class="headerlink" href="#using-the-guacamole-protocol" title="Permalink to this headline">¶</a></h2>
+<p>guacamole-common provides basic low-level support for the Guacamole protocol.
+This low-level support is leveraged by the HTTP tunnel implementation to
+satisfy the requirements of the JavaScript client implementation, as the
+JavaScript client expects the handshake procedure to have already taken place.
+This support exists through the <code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code> and <code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code>
+classes, which are similar to Java’s <code class="docutils literal notranslate"><span class="pre">Reader</span></code> and <code class="docutils literal notranslate"><span class="pre">Writer</span></code> classes, except that
+they deal with the Guacamole protocol specifically, and thus have slightly
+different contracts.</p>
+<div class="section" id="guacamolereader">
+<span id="java-reading-protocol"></span><h3><code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code><a class="headerlink" href="#guacamolereader" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code> provides a very basic <code class="docutils literal notranslate"><span class="pre">read()</span></code> function which is required to
+return one or more complete instructions in a <code class="docutils literal notranslate"><span class="pre">char</span></code> array. It also provides
+the typical <code class="docutils literal notranslate"><span class="pre">available()</span></code> function, which informs you whether <code class="docutils literal notranslate"><span class="pre">read()</span></code> is
+likely to block the next time it is called, and an even more abstract version
+of <code class="docutils literal notranslate"><span class="pre">read()</span></code> called <code class="docutils literal notranslate"><span class="pre">readInstruction()</span></code> which returns one instruction at a time,
+wrapped within a <code class="docutils literal notranslate"><span class="pre">GuacamoleInstruction</span></code> instance.</p>
+<p>Normally, you would not need to use this class yourself. It is used by
+<code class="docutils literal notranslate"><span class="pre">ConfiguredGuacamoleSocket</span></code> to complete the Guacamole protocol handshake
+procedure, and it is used by <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> within <code class="docutils literal notranslate"><span class="pre">doRead()</span></code> to
+implement the reading half of the tunnel.</p>
+<p>The only concrete implementation of <code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code> is
+<code class="docutils literal notranslate"><span class="pre">ReaderGuacamoleReader</span></code>, which wraps a Java <code class="docutils literal notranslate"><span class="pre">Reader</span></code>, using that as the source
+for data to parse into Guacamole instructions. Again, you would not normally
+directly use this class, nor instantiate it yourself.  A working, concrete
+instance of <code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code> can be retrieved from any <code class="docutils literal notranslate"><span class="pre">GuacamoleSocket</span></code> or
+<code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>.</p>
+</div>
+<div class="section" id="guacamolewriter">
+<span id="java-writing-protocol"></span><h3><code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code><a class="headerlink" href="#guacamolewriter" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code> provides a very basic <code class="docutils literal notranslate"><span class="pre">write()</span></code> function and a more abstract
+version called <code class="docutils literal notranslate"><span class="pre">writeInstruction()</span></code> which writes instances of
+<code class="docutils literal notranslate"><span class="pre">GuacamoleInstruction</span></code>. These functions are analogous to the <code class="docutils literal notranslate"><span class="pre">read()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">readInstruction()</span></code> functions provided by <code class="docutils literal notranslate"><span class="pre">GuacamoleReader</span></code>, and have similar
+restrictions: the contract imposed by <code class="docutils literal notranslate"><span class="pre">write()</span></code> requires that written
+instructions be complete.</p>
+<p>The only concrete implementation of <code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code> is
+<code class="docutils literal notranslate"><span class="pre">WriterGuacamoleWriter</span></code>, which wraps a Java <code class="docutils literal notranslate"><span class="pre">Writer</span></code>, using that as the
+destination for Guacamole instruction data, but you would not normally directly
+use this class, nor instantiate it yourself. It is used by
+<code class="docutils literal notranslate"><span class="pre">ConfiguredGuacamoleSocket</span></code> to complete the Guacamole protocol handshake
+procedure, and it is used by <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> within <code class="docutils literal notranslate"><span class="pre">doWrite()</span></code> to
+implement the writing half of the tunnel.</p>
+<p>If necessary, a <code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code> can be retrieved from any <code class="docutils literal notranslate"><span class="pre">GuacamoleSocket</span></code>
+or <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>, but in most cases, the classes provided by the Guacamole
+Java API which already use <code class="docutils literal notranslate"><span class="pre">GuacamoleWriter</span></code> will be sufficient.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="guacamole-common-js.html" class="btn btn-neutral float-right" title="guacamole-common-js" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="libguac.html" class="btn btn-neutral float-left" title="libguac" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

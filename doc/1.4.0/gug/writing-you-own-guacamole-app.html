@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Writing your own Guacamole application &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guacamole protocol reference" href="protocol-reference.html" />
+    <link rel="prev" title="Event listeners" href="event-listeners.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing your own Guacamole application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-basics">The basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web-application-skeleton">Web application skeleton</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pom-xml"><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-inf-web-xml"><code class="docutils literal notranslate"><span class="pre">WEB-INF/web.xml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#index-html"><code class="docutils literal notranslate"><span class="pre">index.html</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-skeleton">Building the skeleton</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-guacamole">Adding Guacamole</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#updating-pom-xml">Updating <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-simplest-tunnel-possible">The simplest tunnel possible</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-the-client">Adding the client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-go-from-here">Where to go from here</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Writing your own Guacamole application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/writing-you-own-guacamole-app.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-your-own-guacamole-application">
+<h1>Writing your own Guacamole application<a class="headerlink" href="#writing-your-own-guacamole-application" title="Permalink to this headline">¶</a></h1>
+<p>As Guacamole is an API, one of the best ways to put Guacamole to use is by
+building your own Guacamole-driven web application, integrating HTML5 remote
+desktop into whatever you think needs it.</p>
+<p>The Guacamole project provides an example of doing this called
+“guacamole-example”, but this example is already completed for you, and from a
+quick glance at this example, it may not be obvious just how easy it is to
+integrate remote access into a web application. This tutorial will walk you
+through the basic steps of building an HTML5 remote desktop application using
+the Guacamole API and Maven.</p>
+<div class="section" id="the-basics">
+<span id="basic-guacamole-architecture"></span><h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole’s architecture is made up of many components, but it’s actually
+straightforward, especially from the perspective of the web application.</p>
+<p>Guacamole has a proxy daemon, guacd, which handles communication using remote
+desktop protocols, exposing those to whatever connects to it (in this case, the
+web application) using the Guacamole protocol. From where the web application
+is standing, it doesn’t really matter that guacd dynamically loads protocol
+plugins or that it shares a common library allowing this; all that matters is
+that the web application just has to connect to port 4822 (where guacd listens
+by default) and use the Guacamole protocol. The architecture will take care of
+the rest.</p>
+<p>Thankfully, the Java side of the Guacamole API provides simple classes which
+already implement the Guacamole protocol with the intent of tunneling it
+between guacd and the JavaScript half of your web application. A typical web
+application leveraging these classes needs
+only the following:</p>
+<ol>
+<li><p>A class which extends <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code>, providing the tunnel
+between the JavaScript client (presumably using guacamole-common-js) and
+guacd.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> is an abstract class which is provided by the
+Guacamole API and already implements a fully functional, HTTP-based tunnel
+which the tunneling objects already part of guacamole-common-js are written
+to connect to. This class exists to make it easy for you to use Guacamole’s
+existing and robust HTTP tunnel implementation.</p>
+<p>If you want to not use this class and instead use your own tunneling
+mechanism, perhaps WebSocket, this is fine; the JavaScript object mentioned
+above implements a common interface which you can also implement, and the
+Guacamole JavaScript client which is also part of guacamole-common-js will
+happily use your implementation as long as it provides that interface.</p>
+</li>
+<li><p>A web page which includes JavaScript files from guacamole-common-js and uses
+the client and tunnel objects to connect back to the web application.</p>
+<p>The JavaScript API provided by the Guacamole project includes a full
+implementation of the Guacamole protocol as a client, implementations of
+HTTP and WebSocket-based tunnels, and mouse/keyboard/touch input
+abstraction. Again, as the Guacamole protocol and all parts of the
+architecture are documented here, you don’t absolutely need to use these
+objects, but it will make your life easier. Mouse and keyboard support in
+JavaScript is finicky business, and the Guacamole client provided is
+well-known to work with other components in the API, being the official
+client of the project.</p>
+</li>
+</ol>
+<p>That’s really all there is to it.</p>
+<p>If you want authentication, the place to implement that would be in your
+extended version of <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code>; this is what the Guacamole
+web application does. Besides authentication, there are many other things you
+could wrap around your remote desktop application, but ultimately the base of
+all this is simple: you have a tunnel which allows the JavaScript client to
+communicate with guacd, and you have the JavaScript client itself, with the
+hard part already provided within guacamole-common-js.</p>
+</div>
+<div class="section" id="web-application-skeleton">
+<span id="web-app-skeleton"></span><h2>Web application skeleton<a class="headerlink" href="#web-application-skeleton" title="Permalink to this headline">¶</a></h2>
+<p>As with most tutorials, this tutorial begins with creating a project skeleton
+that establishes a minimal base for the tutorial to enhance in subsequent
+steps.</p>
+<p>This tutorial will use Maven, which is the same build system used by the
+upstream Guacamole project. As the Guacamole project has a Maven repository for
+both the Java and JavaScript APIs, writing a Guacamole-based application using
+Maven is much easier; Maven will download and use the Guacamole API
+automatically.</p>
+<div class="section" id="pom-xml">
+<h3><code class="docutils literal notranslate"><span class="pre">pom.xml</span></code><a class="headerlink" href="#pom-xml" title="Permalink to this headline">¶</a></h3>
+<p>All Maven projects must have a project descriptor, the <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> file, in the
+root directory of the project. This file describes project dependencies and
+specific build requirements. Unlike other build tools like Apache Ant or GNU
+Autotools, Maven chooses convention over configuration: files within the
+project must be placed in specific locations, and the project dependencies must
+be fully described in the pom.xml. If this is done, the build will be handled
+automatically.</p>
+<p>The basis of this Guacamole-driven web application will be a simple HTML file
+which will ultimately become the client. While the finished product will have
+an HTTP tunnel written in Java, we don’t need this yet for our skeleton. We
+will create a very basic, barebones Maven project containing only <code class="docutils literal notranslate"><span class="pre">index.html</span></code>
+and a web application descriptor file, <code class="docutils literal notranslate"><span class="pre">web.xml</span></code>. Once these files are in
+place, the project can be packaged into a <code class="docutils literal notranslate"><span class="pre">.war</span></code> file which can be deployed to
+your servlet container of choice (such as Apache Tomcat).</p>
+<p>As this skeleton will contain no Java code, it has no dependencies, and
+no build requirements beyond the metadata common to any Maven project.
+The <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> is thus very simple for the time being:
+i</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 </span>
+<span class="s">                             http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.guacamole<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>guacamole-tutorial<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;name&gt;</span>guacamole-tutorial<span class="nt">&lt;/name&gt;</span>
+
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="web-inf-web-xml">
+<h3><code class="docutils literal notranslate"><span class="pre">WEB-INF/web.xml</span></code><a class="headerlink" href="#web-inf-web-xml" title="Permalink to this headline">¶</a></h3>
+<p>Before the project will build, there needs to be a web application deployment
+descriptor, <code class="docutils literal notranslate"><span class="pre">web.xml</span></code>. This file is required by the Java EE standard for
+building the <code class="docutils literal notranslate"><span class="pre">.war</span></code> file which will contain the web application, and will be
+read by the servlet container when the application is actually deployed. For
+Maven to find and use this file when building the <code class="docutils literal notranslate"><span class="pre">.war</span></code>, it must be placed in
+the <code class="docutils literal notranslate"><span class="pre">src/main/webapp/WEB-INF/</span></code> directory.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="nt">&lt;web-app</span> <span class="na">version=</span><span class="s">&quot;2.5&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee </span>
+<span class="s">                        http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- Basic config --&gt;</span>
+    <span class="nt">&lt;welcome-file-list&gt;</span>
+        <span class="nt">&lt;welcome-file&gt;</span>index.html<span class="nt">&lt;/welcome-file&gt;</span>
+    <span class="nt">&lt;/welcome-file-list&gt;</span>
+
+<span class="nt">&lt;/web-app&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="index-html">
+<h3><code class="docutils literal notranslate"><span class="pre">index.html</span></code><a class="headerlink" href="#index-html" title="Permalink to this headline">¶</a></h3>
+<p>With the <code class="docutils literal notranslate"><span class="pre">web.xml</span></code> file in place and the skeleton <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> written, the web
+application will now build successfully. However, as the <code class="docutils literal notranslate"><span class="pre">web.xml</span></code> refers to a
+“welcome file” called <code class="docutils literal notranslate"><span class="pre">index.html</span></code> (which will ultimately contain our client),
+we need to put this in place so the servlet container will have something to
+serve. This file, as well as any other future static files, belongs within
+<code class="docutils literal notranslate"><span class="pre">src/main/webapp</span></code>.</p>
+<p>For now, this file can contain anything, since the other parts of our
+Guacamole-driven web application are not written yet. It is a placeholder which
+we will replace later:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Guacamole Tutorial<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello World<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-skeleton">
+<h3>Building the skeleton<a class="headerlink" href="#building-the-skeleton" title="Permalink to this headline">¶</a></h3>
+<p>Once all three of the above files are in place, the web application will build,
+and can even be deployed to your servlet container. It won’t do anything yet
+other than serve the <code class="docutils literal notranslate"><span class="pre">index.html</span></code> file, but it’s good to at least try building
+the web application to make sure nothing is missing and all steps were followed
+correctly before proceeding:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mvn package
+<span class="go">[INFO] Scanning for projects...</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Building guacamole-tutorial</span>
+<span class="go">[INFO]    task-segment: [package]</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">...</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] BUILD SUCCESSFUL</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="go">[INFO] Total time: 4 seconds</span>
+<span class="go">[INFO] Finished at: Fri Jan 11 13:04:11 PST 2013</span>
+<span class="go">[INFO] Final Memory: 18M/128M</span>
+<span class="go">[INFO] ------------------------------------------------------------------------</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>Assuming you see the “<code class="docutils literal notranslate"><span class="pre">BUILD</span> <span class="pre">SUCCESSFUL</span></code>” message when you build the web
+application, there will be a new file, <code class="docutils literal notranslate"><span class="pre">target/guacamole-tutorial-1.4.0.war</span></code>,
+which can be deployed to your servlet container and tested. If you changed the
+name or version of the project in the <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> file, the name of this new
+<code class="docutils literal notranslate"><span class="pre">.war</span></code> file will be different, but it can still be found within <code class="docutils literal notranslate"><span class="pre">target/</span></code>.</p>
+</div>
+</div>
+<div class="section" id="adding-guacamole">
+<span id="guacamole-skeleton"></span><h2>Adding Guacamole<a class="headerlink" href="#adding-guacamole" title="Permalink to this headline">¶</a></h2>
+<p>Once we have a functional web application built, the next step is to actually
+add the references to the Guacamole API and integrate a Guacamole client into
+the application.</p>
+<div class="section" id="updating-pom-xml">
+<span id="adding-guac-to-pom"></span><h3>Updating <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code><a class="headerlink" href="#updating-pom-xml" title="Permalink to this headline">¶</a></h3>
+<p>Now that we’re adding Guacamole components to our project, we need to modify
+<code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> to specify which components are being used, and where they can be
+obtained. With this information in place, Maven will automatically resolve
+dependencies and download them as necessary during the build.</p>
+<p>Regarding the build process itself, there are two main changes: we are now
+going to be using Java, and we need the JavaScript files from
+guacamole-common-js included automatically inside the <code class="docutils literal notranslate"><span class="pre">.war</span></code>.</p>
+<p>Guacamole requires at least Java 8, thus we must add a section to the
+<code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> which describes the source and target Java versions:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>    ...
+
+    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+
+            <span class="c">&lt;!-- Compile using Java 8 --&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>3.3<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+                    <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+
+        <span class="nt">&lt;/plugins&gt;</span>
+
+    <span class="nt">&lt;/build&gt;</span>
+
+    ...
+</pre></div>
+</div>
+<p>Including the JavaScript files from an external project like
+guacamole-common-js requires using a feature of the maven war plugin called
+overlays. To add an overlay containing guacamole-common-js, we add a section
+describing the configuration of the Maven war plugin, listing
+guacamole-common-js as an overlay:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>    ...
+
+    <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+
+            ...
+
+            <span class="c">&lt;!-- Overlay guacamole-common-js (zip) --&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-war-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;version&gt;</span>2.6<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;overlays&gt;</span>
+                        <span class="nt">&lt;overlay&gt;</span>
+                            <span class="nt">&lt;groupId&gt;</span>org.apache.guacamole<span class="nt">&lt;/groupId&gt;</span>
+                            <span class="nt">&lt;artifactId&gt;</span>guacamole-common-js<span class="nt">&lt;/artifactId&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>zip<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/overlay&gt;</span>
+                    <span class="nt">&lt;/overlays&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+
+        <span class="nt">&lt;/plugins&gt;</span>
+
+    <span class="nt">&lt;/build&gt;</span>
+
+    ...
+</pre></div>
+</div>
+<p>With the build now configured, we still need to add dependencies and list the
+repositories those dependencies can be downloaded from.</p>
+<p>As this is a web application which will use the Java Servlet API, we must
+explicitly include this as a dependency, as well as the Guacamole Java and
+JavaScript APIs:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>    ...
+
+    <span class="nt">&lt;dependencies&gt;</span>
+
+        <span class="c">&lt;!-- Servlet API --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.5<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!-- Main Guacamole library --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.guacamole<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>guacamole-common<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!-- Guacamole JavaScript library --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.guacamole<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>guacamole-common-js<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.4.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>zip<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="nt">&lt;/dependencies&gt;</span>
+
+    ...
+</pre></div>
+</div>
+<p>The Java Servlet API will be provided by your servlet container, so Maven does
+not need to download it during the build, and it need not exist in any Maven
+repository.</p>
+<p>With these changes, the web application will still build at this point, even
+though no Java code has been written yet. You may wish to verify that
+everything still works.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">pom.xml</span></code> was updated properly as described above, the web application
+should build successfully, and the Guacamole JavaScript API should be
+accessible in the <code class="docutils literal notranslate"><span class="pre">guacamole-common-js/</span></code> subdirectory of your web application
+after it is deployed. A quick check that you can access
+<code class="docutils literal notranslate"><span class="pre">/guacamole-tutorial-1.4.0/guacamole-common-js/all.min.js</span></code> is probably worth
+the effort.</p>
+</div>
+<div class="section" id="the-simplest-tunnel-possible">
+<span id="simple-tunnel"></span><h3>The simplest tunnel possible<a class="headerlink" href="#the-simplest-tunnel-possible" title="Permalink to this headline">¶</a></h3>
+<p>As with the other tutorials in this book, we will keep this simple for the sake
+of demonstrating the principles behind a Guacamole-based web application, and
+to give developers a good idea of where to start looking when it’s time to
+consult the API documentation.</p>
+<p>It is the duty of the class extending <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> to implement
+a function called <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code>. This is the only function required to be
+implemented, and in general it is the only function you should implement; the
+other functions involved are already optimized for tunneling the Guacamole
+protocol.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">doConnect()</span></code> function returns a <code class="docutils literal notranslate"><span class="pre">GuacamoleTunnel</span></code>, which provides a
+persistent communication channel for <code class="docutils literal notranslate"><span class="pre">GuacamoleHTTPTunnelServlet</span></code> to use when
+talking with guacd and initiating a connection with some arbitrary remote
+desktop using some arbitrary remote desktop protocol.  In our simple tunnel,
+this configuration will be hard-coded, and no authentication will be attempted.
+Any user accessing this web application will be immediately given a functional
+remote desktop, no questions asked.</p>
+<p>Create a new file, <code class="docutils literal notranslate"><span class="pre">TutorialGuacamoleTunnelServlet.java</span></code>, defining a basic
+implementation of a tunnel servlet class:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">org.apache.guacamole.net.example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.GuacamoleException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.net.GuacamoleSocket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.net.GuacamoleTunnel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.net.InetGuacamoleSocket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.net.SimpleGuacamoleTunnel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.protocol.ConfiguredGuacamoleSocket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.protocol.GuacamoleConfiguration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.guacamole.servlet.GuacamoleHTTPTunnelServlet</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TutorialGuacamoleTunnelServlet</span>
+    <span class="kd">extends</span> <span class="n">GuacamoleHTTPTunnelServlet</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="n">GuacamoleTunnel</span> <span class="nf">doConnect</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">GuacamoleException</span> <span class="o">{</span>
+
+        <span class="c1">// Create our configuration</span>
+        <span class="n">GuacamoleConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GuacamoleConfiguration</span><span class="o">();</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setProtocol</span><span class="o">(</span><span class="s">&quot;vnc&quot;</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">&quot;hostname&quot;</span><span class="o">,</span> <span class="s">&quot;localhost&quot;</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="s">&quot;5901&quot;</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="s">&quot;potato&quot;</span><span class="o">);</span>
+
+        <span class="c1">// Connect to guacd - everything is hard-coded here.</span>
+        <span class="n">GuacamoleSocket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConfiguredGuacamoleSocket</span><span class="o">(</span>
+                <span class="k">new</span> <span class="n">InetGuacamoleSocket</span><span class="o">(</span><span class="s">&quot;localhost&quot;</span><span class="o">,</span> <span class="mi">4822</span><span class="o">),</span>
+                <span class="n">config</span>
+        <span class="o">);</span>
+
+        <span class="c1">// Return a new tunnel which uses the connected socket</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">SimpleGuacamoleTunnel</span><span class="o">(</span><span class="n">socket</span><span class="o">);;</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Place this file in the <code class="docutils literal notranslate"><span class="pre">src/main/java/org/apache/guacamole/net/example</span></code>
+subdirectory of the project. The initial part of this subdirectory,
+<code class="docutils literal notranslate"><span class="pre">src/main/java</span></code>, is the path required by Maven, while the rest is the directory
+required by Java based on the package associated with the class.</p>
+<p>Once the class defining our tunnel is created, it must be added to the
+<code class="docutils literal notranslate"><span class="pre">web.xml</span></code> such that the servlet container knows which URL maps to it.  This URL
+will later be given to the JavaScript client to establish the connection back
+to the Guacamole server:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>    ...
+
+    <span class="c">&lt;!-- Guacamole Tunnel Servlet --&gt;</span>
+    <span class="nt">&lt;servlet&gt;</span>
+        <span class="nt">&lt;description&gt;</span>Tunnel servlet.<span class="nt">&lt;/description&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>Tunnel<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;servlet-class&gt;</span>
+            org.apache.guacamole.net.example.TutorialGuacamoleTunnelServlet
+        <span class="nt">&lt;/servlet-class&gt;</span>
+    <span class="nt">&lt;/servlet&gt;</span>
+
+    <span class="nt">&lt;servlet-mapping&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>Tunnel<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>/tunnel<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/servlet-mapping&gt;</span>
+
+    ...
+</pre></div>
+</div>
+<p>The first section assigns a unique name, “Tunnel”, to the servlet class we just
+defined. The second section maps the servlet class by it’s servlet name
+(“Tunnel”) to the URL we wish to use when making HTTP requests to the servlet:
+<code class="docutils literal notranslate"><span class="pre">/tunnel</span></code>. This URL is relative to the context root of the web application. In
+the case of this web application, the final absolute URL will be
+<code class="docutils literal notranslate"><span class="pre">/guacamole-tutorial-1.4.0/tunnel</span></code>.</p>
+</div>
+<div class="section" id="adding-the-client">
+<span id="simple-client"></span><h3>Adding the client<a class="headerlink" href="#adding-the-client" title="Permalink to this headline">¶</a></h3>
+<p>As the Guacamole JavaScript API already provides functional client and tunnel
+implementations, as well as mouse and keyboard input objects, the coding
+required for the “web” side of the web application is very minimal.</p>
+<p>We must create a <code class="docutils literal notranslate"><span class="pre">Guacamole.HTTPTunnel</span></code>, connect it to our
+previously-implemented tunnel servlet, and pass that tunnel to a new
+<code class="docutils literal notranslate"><span class="pre">Guacamole.Client</span></code>. Once that is done, and the <code class="docutils literal notranslate"><span class="pre">connect()</span></code> function of the
+client is called, communication will immediately ensue, and your remote desktop
+will be visible:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>    ...
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+        <span class="c">&lt;!-- Guacamole --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span>
+            <span class="na">src</span><span class="o">=</span><span class="s">&quot;guacamole-common-js/all.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+        <span class="c">&lt;!-- Display --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;display&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="c">&lt;!-- Init --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span> <span class="cm">/* &lt;![CDATA[ */</span>
+
+            <span class="c1">// Get display div from document</span>
+            <span class="kd">var</span> <span class="nx">display</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">);</span>
+
+            <span class="c1">// Instantiate client, using an HTTP tunnel for communications.</span>
+            <span class="kd">var</span> <span class="nx">guac</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Guacamole</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span>
+                <span class="k">new</span> <span class="nx">Guacamole</span><span class="p">.</span><span class="nx">HTTPTunnel</span><span class="p">(</span><span class="s2">&quot;tunnel&quot;</span><span class="p">)</span>
+            <span class="p">);</span>
+
+            <span class="c1">// Add client to display div</span>
+            <span class="nx">display</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">guac</span><span class="p">.</span><span class="nx">getDisplay</span><span class="p">().</span><span class="nx">getElement</span><span class="p">());</span>
+            
+            <span class="c1">// Error handler</span>
+            <span class="nx">guac</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+            <span class="p">};</span>
+
+            <span class="c1">// Connect</span>
+            <span class="nx">guac</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+
+            <span class="c1">// Disconnect on close</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">onunload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">guac</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+            <span class="p">}</span>
+
+        <span class="cm">/* ]]&gt; */</span> <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    ...
+</pre></div>
+</div>
+<p>If you build and deploy the web application now, it will work, but mouse and
+keyboard input will not. This is because input is not implemented by the client
+directly. The <code class="docutils literal notranslate"><span class="pre">Guacamole.Client</span></code> object only decodes the Guacamole protocol and
+handles the display, providing an element which you can add manually to the
+DOM. While it will also send keyboard and mouse events for you, you need to
+call the respective functions manually. The Guacamole API provides keyboard and
+mouse abstraction objects which make this easy.</p>
+<p>We need only create a <code class="docutils literal notranslate"><span class="pre">Guacamole.Mouse</span></code> and <code class="docutils literal notranslate"><span class="pre">Guacamole.Keyboard</span></code>, and add event
+handlers to handle their corresponding input events, calling whichever function
+of the Guacamole client is appropriate to send the input event through the
+tunnel to guacd:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>        ...
+
+        <span class="c">&lt;!-- Init --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span> <span class="cm">/* &lt;![CDATA[ */</span>
+
+            <span class="p">...</span>
+
+            <span class="c1">// Mouse</span>
+            <span class="kd">var</span> <span class="nx">mouse</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Guacamole</span><span class="p">.</span><span class="nx">Mouse</span><span class="p">(</span><span class="nx">guac</span><span class="p">.</span><span class="nx">getDisplay</span><span class="p">().</span><span class="nx">getElement</span><span class="p">());</span>
+
+            <span class="nx">mouse</span><span class="p">.</span><span class="nx">onmousedown</span> <span class="o">=</span> 
+            <span class="nx">mouse</span><span class="p">.</span><span class="nx">onmouseup</span>   <span class="o">=</span>
+            <span class="nx">mouse</span><span class="p">.</span><span class="nx">onmousemove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mouseState</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">guac</span><span class="p">.</span><span class="nx">sendMouseState</span><span class="p">(</span><span class="nx">mouseState</span><span class="p">);</span>
+            <span class="p">};</span>
+
+            <span class="c1">// Keyboard</span>
+            <span class="kd">var</span> <span class="nx">keyboard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Guacamole</span><span class="p">.</span><span class="nx">Keyboard</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+
+            <span class="nx">keyboard</span><span class="p">.</span><span class="nx">onkeydown</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">keysym</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">guac</span><span class="p">.</span><span class="nx">sendKeyEvent</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">keysym</span><span class="p">);</span>
+            <span class="p">};</span>
+
+            <span class="nx">keyboard</span><span class="p">.</span><span class="nx">onkeyup</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">keysym</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">guac</span><span class="p">.</span><span class="nx">sendKeyEvent</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">keysym</span><span class="p">);</span>
+            <span class="p">};</span>
+
+        <span class="cm">/* ]]&gt; */</span> <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+        ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="where-to-go-from-here">
+<span id="next-steps"></span><h2>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">¶</a></h2>
+<p>At this point, we now have a fully functional Guacamole-based web application.
+This web application inherits all the core functionality present in the
+official Guacamole web application, including sound and video, without very
+much coding.</p>
+<p>Extending this application to provide authentication, multiple connections per
+user, or a spiffy interface which is compatible with mobile is not too much of
+a stretch. This is exactly how the Guacamole web application is written.
+Integrating Guacamole into an existing application would be similar.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="protocol-reference.html" class="btn btn-neutral float-right" title="Guacamole protocol reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="event-listeners.html" class="btn btn-neutral float-left" title="Event listeners" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

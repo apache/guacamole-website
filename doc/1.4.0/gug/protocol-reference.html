@@ -1,0 +1,1388 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Guacamole protocol reference &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Writing your own Guacamole application" href="writing-you-own-guacamole-app.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guacamole protocol reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#drawing-instructions">Drawing instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#streaming-instructions">Streaming instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#object-instructions">Object instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-handshake-instructions">Client handshake instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-handshake-instructions">Server handshake instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-instructions">Control instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-control-instructions">Server control instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-event-instructions">Input/Event instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#status-codes">Status codes</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Guacamole protocol reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/protocol-reference.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="guacamole-protocol-reference">
+<h1>Guacamole protocol reference<a class="headerlink" href="#guacamole-protocol-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="drawing-instructions">
+<h2>Drawing instructions<a class="headerlink" href="#drawing-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="arc-instruction">
+<span class="sig-name descname"><span class="pre">arc</span></span><a class="headerlink" href="#arc-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The arc instruction adds the specified arc subpath to the existing path,
+creating a new path if no path exists. The path created can be modified further
+by other path-type instructions, and finally stroked, filled, and/or closed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer which should have the specified arc subpath added.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the center of the circle containing the arc to be
+drawn.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the center of the circle containing the arc to be
+drawn.</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – The radius of the circle containing the arc to be drawn, in pixels.</p></li>
+<li><p><strong>start</strong> (<em>float</em>) – The starting angle of the arc to be drawn, in radians.</p></li>
+<li><p><strong>end</strong> (<em>float</em>) – The ending angle of the arc to be drawn, in radians.</p></li>
+<li><p><strong>negative</strong> (<em>integer</em>) – Non-zero if the arc should be drawn from START to END in order of
+decreasing angle, zero otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="cfill-instruction">
+<span class="sig-name descname"><span class="pre">cfill</span></span><a class="headerlink" href="#cfill-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the current path with the specified color. This instruction completes
+the current path. Future path instructions will begin a new path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when filling the current path in the
+specified layer.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose path should be filled.</p></li>
+<li><p><strong>r</strong> (<em>integer</em>) – The red component of the color to use to fill the current path in the
+specified layer.</p></li>
+<li><p><strong>g</strong> (<em>integer</em>) – The green component of the color to use to fill the current path in the
+specified layer.</p></li>
+<li><p><strong>b</strong> (<em>integer</em>) – The blue component of the color to use to fill the current path in the
+specified layer.</p></li>
+<li><p><strong>a</strong> (<em>integer</em>) – The alpha component of the color to use to fill the current path in the
+specified layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="clip-instruction">
+<span class="sig-name descname"><span class="pre">clip</span></span><a class="headerlink" href="#clip-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the current path as the clipping path. Future operations will only
+draw within the current path. Note that future clip instructions will also
+be limited by this path. To set a completely new clipping path, you must
+first reset the layer with a reset instruction. If you wish to only reset
+the clipping path, but preserve the current transform matrix, push the
+layer state before setting the clipping path, and pop the layer state to
+reset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose clipping path should be set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="close-instruction">
+<span class="sig-name descname"><span class="pre">close</span></span><a class="headerlink" href="#close-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the current path by connecting the start and end points with a
+straight line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose path should be closed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="copy-instruction">
+<span class="sig-name descname"><span class="pre">copy</span></span><a class="headerlink" href="#copy-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies image data from the specified rectangle of the specified layer or
+buffer to a different location of another specified layer or buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srclayer</strong> (<em>integer</em>) – The index of the layer to copy image data from.</p></li>
+<li><p><strong>srcx</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcy</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcwidth</strong> (<em>integer</em>) – The width of the source rectangle within the source layer.</p></li>
+<li><p><strong>srcheight</strong> (<em>integer</em>) – The height of the source rectangle within the source layer.</p></li>
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when drawing the image data on the
+destination layer.</p></li>
+<li><p><strong>dstlayer</strong> (<em>integer</em>) – The index of the layer to draw the image data to.</p></li>
+<li><p><strong>dstx</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+<li><p><strong>dsty</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="cstroke-instruction">
+<span class="sig-name descname"><span class="pre">cstroke</span></span><a class="headerlink" href="#cstroke-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strokes the current path with the specified color. This instruction
+completes the current path. Future path instructions will begin a new path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when stroking the current path in the
+specified layer.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose path should be stroked.</p></li>
+<li><p><strong>cap</strong> (<em>integer</em>) – The index of the line cap style to use. This can be either butt (0),
+round (1), or square (2).</p></li>
+<li><p><strong>join</strong> (<em>integer</em>) – The index of the line join style to use. This can be either bevel
+(0), miter (1), or round (2).</p></li>
+<li><p><strong>thickness</strong> (<em>integer</em>) – The thickness of the stroke to draw, in pixels.</p></li>
+<li><p><strong>r</strong> (<em>integer</em>) – The red component of the color to use to stroke the current path in
+the specified layer.</p></li>
+<li><p><strong>g</strong> (<em>integer</em>) – The green component of the color to use to stroke the current path in
+the specified layer.</p></li>
+<li><p><strong>b</strong> (<em>integer</em>) – The blue component of the color to use to stroke the current path in
+the specified layer.</p></li>
+<li><p><strong>a</strong> (<em>integer</em>) – The alpha component of the color to use to stroke the current path in
+the specified layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="cursor-instruction">
+<span class="sig-name descname"><span class="pre">cursor</span></span><a class="headerlink" href="#cursor-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the client’s cursor to the image data from the specified rectangle of
+a layer, with the specified hotspot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the cursor’s hotspot.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the cursor’s hotspot.</p></li>
+<li><p><strong>srclayer</strong> (<em>integer</em>) – The index of the layer to copy image data from.</p></li>
+<li><p><strong>srcx</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcy</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcwidth</strong> (<em>integer</em>) – The width of the source rectangle within the source layer.</p></li>
+<li><p><strong>srcheight</strong> (<em>integer</em>) – The height of the source rectangle within the source layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="curve-instruction">
+<span class="sig-name descname"><span class="pre">curve</span></span><a class="headerlink" href="#curve-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the specified cubic bezier curve subpath.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer which should have the specified curve subpath added.</p></li>
+<li><p><strong>cp1x</strong> (<em>integer</em>) – The X coordinate of the first control point of the curve.</p></li>
+<li><p><strong>cp1y</strong> (<em>integer</em>) – The Y coordinate of the first control point of the curve.</p></li>
+<li><p><strong>cp2x</strong> (<em>integer</em>) – The X coordinate of the second control point of the curve.</p></li>
+<li><p><strong>cp2y</strong> (<em>integer</em>) – The Y coordinate of the second control point of the curve.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the endpoint of the curve.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the endpoint of the curve.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="dispose-instruction">
+<span class="sig-name descname"><span class="pre">dispose</span></span><a class="headerlink" href="#dispose-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the specified layer. The specified layer will be recreated as a new
+layer if it is referenced again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="distort-instruction">
+<span class="sig-name descname"><span class="pre">distort</span></span><a class="headerlink" href="#distort-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the given affine transformation matrix to the layer. Unlike transform,
+this operation is independent of any previously sent transformation matrix.
+This operation can be undone by setting the layer’s transformation matrix
+to the identity matrix using distort</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer to distort.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – The matrix value in row 1, column 1.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – The matrix value in row 2, column 1.</p></li>
+<li><p><strong>c</strong> (<em>float</em>) – The matrix value in row 1, column 2.</p></li>
+<li><p><strong>d</strong> (<em>float</em>) – The matrix value in row 2, column 2.</p></li>
+<li><p><strong>e</strong> (<em>float</em>) – The matrix value in row 1, column 3.</p></li>
+<li><p><strong>f</strong> (<em>float</em>) – The matrix value in row 2, column 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="identity-instruction">
+<span class="sig-name descname"><span class="pre">identity</span></span><a class="headerlink" href="#identity-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the transform matrix of the specified layer to the identity matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose transform matrix should be reset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="img-instruction">
+<span class="sig-name descname"><span class="pre">img</span></span><a class="headerlink" href="#img-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the metadata of an image
+update, including the image type, the destination layer, and destination
+coordinates. The contents of the image will later be sent along the stream
+with blob instructions. The full size of the image need not be known ahead
+of time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the image being sent.</p></li>
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when drawing the image data.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The destination layer.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="lfill-instruction">
+<span class="sig-name descname"><span class="pre">lfill</span></span><a class="headerlink" href="#lfill-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the current path with a tiled pattern of the image data from the
+specified layer. This instruction completes the current path. Future path
+instructions will begin a new path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when filling the current path in the
+specified layer.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose path should be filled.</p></li>
+<li><p><strong>srclayer</strong> (<em>integer</em>) – The layer to use as the pattern.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="line-instruction">
+<span class="sig-name descname"><span class="pre">line</span></span><a class="headerlink" href="#line-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the specified line subpath.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer which should have the specified line subpath added.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the endpoint of the line.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the endpoint of the line.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="lstroke-instruction">
+<span class="sig-name descname"><span class="pre">lstroke</span></span><a class="headerlink" href="#lstroke-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strokes the current path with a tiled pattern of the image data from the
+specified layer. This instruction completes the current path. Future path
+instructions will begin a new path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when filling the current path in the
+specified layer.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose path should be filled.</p></li>
+<li><p><strong>cap</strong> (<em>integer</em>) – The index of the line cap style to use. This can be either butt (0),
+round (1), or square (2).</p></li>
+<li><p><strong>join</strong> (<em>integer</em>) – The index of the line join style to use. This can be either bevel
+(0), miter (1), or round (2).</p></li>
+<li><p><strong>thickness</strong> (<em>integer</em>) – The thickness of the stroke to draw, in pixels.</p></li>
+<li><p><strong>srclayer</strong> (<em>integer</em>) – The layer to use as the pattern.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="move-instruction">
+<span class="sig-name descname"><span class="pre">move</span></span><a class="headerlink" href="#move-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the given layer to the given location within the specified parent
+layer. This operation is applicable only to layers, and cannot be applied
+to buffers (layers with negative indices). Applying this operation to the
+default layer (layer 0) also has no effect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer to move.</p></li>
+<li><p><strong>parent</strong> (<em>integer</em>) – The layer that should be the parent of the given layer.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate to move the layer to.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate to move the layer to.</p></li>
+<li><p><strong>z</strong> (<em>integer</em>) – The relative Z-ordering of this layer. Layers with larger values will
+appear above layers with smaller values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="pop-instruction">
+<span class="sig-name descname"><span class="pre">pop</span></span><a class="headerlink" href="#pop-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restores the previous state of the specified layer from the stack. The
+state restored includes the transformation matrix and clipping path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose state should be restored.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="push-instruction">
+<span class="sig-name descname"><span class="pre">push</span></span><a class="headerlink" href="#push-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the current state of the specified layer to the stack. The state
+saved includes the current transformation matrix and clipping path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose state should be saved.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="rect-instruction">
+<span class="sig-name descname"><span class="pre">rect</span></span><a class="headerlink" href="#rect-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a rectangular path to the specified layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mask</strong> (<em>integer</em>) – The channel mask to apply when drawing the image data.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The destination layer.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the rectangle to draw.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the rectangle to draw.</p></li>
+<li><p><strong>width</strong> (<em>integer</em>) – The width of the rectangle to draw.</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The width of the rectangle to draw.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="reset-instruction">
+<span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="#reset-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the transformation and clip state of the layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>layer</strong> (<em>integer</em>) – The layer whose state should be reset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="set-instruction">
+<span class="sig-name descname"><span class="pre">set</span></span><a class="headerlink" href="#set-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the given client-side property to the specified value. Currently there
+is only one property: miter-limit, the maximum distance between the inner
+and outer points of a miter joint, proportional to stroke width (if
+miter-limit is set to 10.0, the default, then the maximum distance between
+the points of the joint is 10 times the stroke width).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose property should be set.</p></li>
+<li><p><strong>property</strong> (<em>string</em>) – The name of the property to set.</p></li>
+<li><p><strong>value</strong> (<em>string</em>) – The value to set the given property to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="shade-instruction">
+<span class="sig-name descname"><span class="pre">shade</span></span><a class="headerlink" href="#shade-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the opacity of the given layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer whose opacity should be set.</p></li>
+<li><p><strong>opacity</strong> (<em>integer</em>) – The opacity of the layer, where 0 is completely transparent, and 255
+is completely opaque.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="size-instruction">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#size-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the size of the specified layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer to resize.</p></li>
+<li><p><strong>width</strong> (<em>integer</em>) – The new width of the layer</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The new height of the layer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="start-instruction">
+<span class="sig-name descname"><span class="pre">start</span></span><a class="headerlink" href="#start-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts a new subpath at the specified point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer which should start a new subpath.</p></li>
+<li><p><strong>x</strong> (<em>integer</em>) – The X coordinate of the first point of the new subpath.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The Y coordinate of the first point of the new subpath.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="transfer-instruction">
+<span class="sig-name descname"><span class="pre">transfer</span></span><a class="headerlink" href="#transfer-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfers image data from the specified rectangle of the specified layer or
+buffer to a different location of another specified layer or buffer, using
+the specified transfer function.</p>
+<p>For a list of available functions, see the definition of
+<code class="docutils literal notranslate"><span class="pre">guac_transfer_function</span></code> within the <a class="reference external" href="https://github.com/apache/guacamole-server/blob/master/src/libguac/guacamole/protocol-types.h">guacamole/protocol-types.h</a>
+header included with libguac.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srclayer</strong> (<em>integer</em>) – The index of the layer to transfer image data from.</p></li>
+<li><p><strong>srcx</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcy</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the source rectangle
+within the source layer.</p></li>
+<li><p><strong>srcwidth</strong> (<em>integer</em>) – The width of the source rectangle within the source layer.</p></li>
+<li><p><strong>srcheight</strong> (<em>integer</em>) – The height of the source rectangle within the source layer.</p></li>
+<li><p><strong>function</strong> (<em>integer</em>) – <p>The index of the transfer function to use.</p>
+<p>For a list of available functions, see the definition of
+<code class="docutils literal notranslate"><span class="pre">guac_transfer_function</span></code> within the <a class="reference external" href="https://github.com/apache/guacamole-server/blob/master/src/libguac/guacamole/protocol-types.h">guacamole/protocol-types.h</a>
+header included with libguac.</p>
+</p></li>
+<li><p><strong>dstlayer</strong> (<em>integer</em>) – The index of the layer to draw the image data to.</p></li>
+<li><p><strong>dstx</strong> (<em>integer</em>) – The X coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+<li><p><strong>dsty</strong> (<em>integer</em>) – The Y coordinate of the upper-left corner of the destination within
+the destination layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="transform-instruction">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#transform-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the specified transformation matrix to future operations. Unlike
+distort, this operation is dependent on any previously sent transformation
+matrices, and only affects future operations. This operation can be undone
+by setting the layer’s transformation matrix to the identity matrix using
+identity, but image data already drawn will not be affected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layer</strong> (<em>integer</em>) – The layer to apply the given transformation matrix to.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – The matrix value in row 1, column 1.</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – The matrix value in row 2, column 1.</p></li>
+<li><p><strong>c</strong> (<em>float</em>) – The matrix value in row 1, column 2.</p></li>
+<li><p><strong>d</strong> (<em>float</em>) – The matrix value in row 2, column 2.</p></li>
+<li><p><strong>e</strong> (<em>float</em>) – The matrix value in row 1, column 3.</p></li>
+<li><p><strong>f</strong> (<em>float</em>) – The matrix value in row 2, column 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="streaming-instructions">
+<h2>Streaming instructions<a class="headerlink" href="#streaming-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="ack-instruction">
+<span class="sig-name descname"><span class="pre">ack</span></span><a class="headerlink" href="#ack-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ack instruction acknowledges a received data blob, providing a status
+code and message indicating whether the operation associated with the blob
+succeeded or failed. A status code other than 0 (<code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code>) implicitly
+ends the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream the corresponding blob was received on.</p></li>
+<li><p><strong>message</strong> (<em>string</em>) – A human-readable error message. This typically is not exposed within
+any user interface, and mainly helps with debugging.</p></li>
+<li><p><strong>status</strong> (<em>integer</em>) – The Guacamole status code denoting success or failure. For a list of status
+codes, see the table in <a class="reference external" href="#status-codes">Status codes</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="argv-instruction">
+<span class="sig-name descname"><span class="pre">argv</span></span><a class="headerlink" href="#argv-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given argument (connection
+parameter) metadata. The relevant connection parameter data will later be
+sent along the stream with blob instructions. If sent by the client, this
+data will be the desired new value of the connection parameter being
+changed, and will be applied if the server supports changing that
+connection parameter while the connection is active. If sent by the server,
+this data will be the current value of a connection parameter being exposed
+to the client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the connection parameter being sent. In most cases,
+this will be “text/plain”.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The name of the connection parameter whose value is being sent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="audio-instruction">
+<span class="sig-name descname"><span class="pre">audio</span></span><a class="headerlink" href="#audio-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given audio metadata.
+Audio data will later be sent along the stream with blob instructions.  The
+mimetype given must be a mimetype previously specified by the client during
+the handshake procedure. Playback will begin immediately and will continue
+as long as blobs are received along the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the audio data being sent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="blob-instruction">
+<span class="sig-name descname"><span class="pre">blob</span></span><a class="headerlink" href="#blob-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a blob of data along the given stream. This blob of data is
+arbitrary, base64-encoded data, and only has meaning to the Guacamole
+client or server through the metadata assigned to the stream when the
+stream was allocated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream along which the given data should be sent.</p></li>
+<li><p><strong>data</strong> (<em>string</em>) – The base64-encoded data to send.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="clipboard-instruction">
+<span class="sig-name descname"><span class="pre">clipboard</span></span><a class="headerlink" href="#clipboard-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given clipboard metadata.
+The clipboard data will later be sent along the stream with blob
+instructions. If sent by the client, this data will be the contents of the
+client-side clipboard. If sent by the server, this data will be the
+contents of the clipboard within the remote desktop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the clipboard data being sent. In most cases, this
+will be “text/plain”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="end-instruction">
+<span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#end-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The end instruction terminates an open stream, freeing any client-side or
+server-side resources. Data sent to a terminated stream will be ignored.
+Terminating a stream with the end instruction only denotes the end of the
+stream and does not imply an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>stream</strong> (<em>integer</em>) – The index of the stream the corresponding blob was received on.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="file-instruction">
+<span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#file-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given arbitrary file
+metadata. The contents of the file will later be sent along the stream with
+blob instructions. The full size of the file need not be known ahead of
+time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the file being sent.</p></li>
+<li><p><strong>filename</strong> (<em>string</em>) – The name of the file, as it would be saved on a filesystem.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="pipe-instruction">
+<span class="sig-name descname"><span class="pre">pipe</span></span><a class="headerlink" href="#pipe-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given arbitrary named pipe
+metadata. The contents of the pipe will later be sent along the stream with
+blob instructions. Pipes in the Guacamole protocol are unidirectional,
+named pipes, very similar to a UNIX FIFO or pipe. It is up to client-side
+code to handle pipe data appropriately, likely based upon the name of the
+pipe, which is arbitrary. Pipes may be opened by either the client or the
+server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the data being sent along the pipe.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The arbitrary name of the pipe, which may have special meaning to
+client-side code.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="video-instruction">
+<span class="sig-name descname"><span class="pre">video</span></span><a class="headerlink" href="#video-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given video metadata.
+Video data will later be sent along the stream with blob instructions.  The
+mimetype given must be a mimetype previously specified by the client during
+the handshake procedure. Playback will begin immediately and will continue
+as long as blobs are received along the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>layer</strong> (<em>integer</em>) – The index of the layer to stream the video data into. The effect of
+other drawing operations on this layer during playback is undefined,
+as the client codec implementation may leverage any rendering
+mechanism it sees fit, including hardware decoding.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the video data being sent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="object-instructions">
+<h2>Object instructions<a class="headerlink" href="#object-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="body-instruction">
+<span class="sig-name descname"><span class="pre">body</span></span><a class="headerlink" href="#body-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the name of a stream previously
+requested by a get instruction. The contents of the stream will be sent
+later with blob instructions. The full size of the stream need not be known
+ahead of time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object</strong> (<em>integer</em>) – The index of the object associated with this stream.</p></li>
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the data being sent.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The name of the stream associated with the object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="filesystem-instruction">
+<span class="sig-name descname"><span class="pre">filesystem</span></span><a class="headerlink" href="#filesystem-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new object, associating it with the given arbitrary filesystem
+metadata. The contents of files and directories within the filesystem will
+later be sent along streams requested with get instructions or created with
+put instructions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object</strong> (<em>integer</em>) – The index of the object to allocate.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The name of the filesystem.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="get-instruction">
+<span class="sig-name descname"><span class="pre">get</span></span><a class="headerlink" href="#get-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests that a new stream be created, providing read access to the object
+stream having the given name. The requested stream will be created, in
+response, with a body instruction.</p>
+<p>Stream names are arbitrary and dictated by the object from which they are
+requested, with the exception of the root stream of the object itself,
+which has the reserved name “<code class="docutils literal notranslate"><span class="pre">/</span></code>”. The root stream of the object has the
+mimetype “<code class="docutils literal notranslate"><span class="pre">application/vnd.glyptodon.guacamole.stream-index+json</span></code>”, and
+provides a simple JSON map of available stream names to their corresponding
+mimetypes. If the object contains a hierarchy of streams, some of these
+streams may also be
+“<code class="docutils literal notranslate"><span class="pre">application/vnd.glyptodon.guacamole.stream-index+json</span></code>”.</p>
+<p>For example, the ultimate content of the body stream provided in response
+to a get request for the root stream of an object containing two text
+streams, “A” and “B”, would be the following:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;A&quot;</span> <span class="p">:</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;B&quot;</span> <span class="p">:</span> <span class="s2">&quot;text/plain&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object</strong> (<em>integer</em>) – The index of the object to request a stream from.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The name of the stream being requested from the given object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="put-instruction">
+<span class="sig-name descname"><span class="pre">put</span></span><a class="headerlink" href="#put-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates a new stream, associating it with the given arbitrary object and
+stream name. The contents of the stream will later be sent with blob
+instructions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object</strong> (<em>integer</em>) – The index of the object associated with this stream.</p></li>
+<li><p><strong>stream</strong> (<em>integer</em>) – The index of the stream to allocate.</p></li>
+<li><p><strong>mimetype</strong> (<em>string</em>) – The mimetype of the data being sent.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – The name of the stream within the given object to which data is being
+sent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="undefine-instruction">
+<span class="sig-name descname"><span class="pre">undefine</span></span><a class="headerlink" href="#undefine-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undefines an existing object, allowing its index to be reused by another
+future object. The resource associated with the original object may or may
+not continue to exist - it simply no longer has an associated object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>object</strong> (<em>integer</em>) – The index of the object to undefine.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="client-handshake-instructions">
+<h2>Client handshake instructions<a class="headerlink" href="#client-handshake-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-audio-handshake-instruction">
+<span class="sig-name descname"><span class="pre">audio</span></span><a class="headerlink" href="#client-audio-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies which audio mimetypes are supported by the client. Each parameter
+must be a single mimetype, listed in order of client preference, with the
+optimal mimetype being the first parameter.</p>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-connect-handshake-instruction">
+<span class="sig-name descname"><span class="pre">connect</span></span><a class="headerlink" href="#client-connect-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begins the connection using the previously specified protocol with the
+given arguments. This is the last instruction sent during the handshake
+phase.</p>
+<p>The parameters of this instruction correspond exactly to the parameters of
+the received args instruction. If the received args instruction has, for
+example, three parameters, the responding connect instruction must also
+have three parameters.</p>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-image-handshake-instruction">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#client-image-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies which image mimetypes are supported by the client. Each parameter
+must be a single mimetype, listed in order of client preference, with the
+optimal mimetype being the first parameter.</p>
+<p>It is expected that the supported mimetypes will include at least
+“image/png” and “image/jpeg”, and the server <em>may</em> safely assume that these
+mimetypes are supported, even if they are absent from the handshake.</p>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-select-handshake-instruction">
+<span class="sig-name descname"><span class="pre">select</span></span><a class="headerlink" href="#client-select-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests that the connection be made using the specified protocol, or to
+the specified existing connection. Whether a new connection is established
+or an existing connection is joined depends on whether the ID of an active
+connection is provided. The Guacamole protocol dictates that the IDs
+generated for active connections (provided during the handshake of those
+connections via the <a class="reference external" href="#ready-instruction">ready instruction</a>) must not
+collide with any supported protocols.</p>
+<p>This is the first instruction sent during the handshake phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>identifier</strong> (<em>string</em>) – The name of the protocol to use, such as “vnc” or “rdp”, or the ID of
+the active connection to be joined, as returned via the <a class="reference external" href="#ready-instruction">ready
+instruction</a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-size-handshake-instruction">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#client-size-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the client’s optimal screen size and resolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>integer</em>) – The optimal screen width.</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The optimal screen height.</p></li>
+<li><p><strong>dpi</strong> (<em>integer</em>) – The optimal screen resolution, in approximate DPI.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-timezone-handshake-instruction">
+<span class="sig-name descname"><span class="pre">timezone</span></span><a class="headerlink" href="#client-timezone-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the timezone of the client system, in IANA zone key format.  This
+is a single-value parameter, and may be used by protocols to set the
+timezone on the remote computer, if the remote system allows the timezone
+to be configured. This instruction is optional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>timezone</strong> (<em>string</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-video-handshake-instruction">
+<span class="sig-name descname"><span class="pre">video</span></span><a class="headerlink" href="#client-video-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies which video mimetypes are supported by the client. Each parameter
+must be a single mimetype, listed in order of client preference, with the
+optimal mimetype being the first parameter.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="server-handshake-instructions">
+<h2>Server handshake instructions<a class="headerlink" href="#server-handshake-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="args-handshake-instruction">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#args-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports the expected format of the argument list for the protocol requested
+by the client. This message can be sent by the server during the handshake
+phase only.</p>
+<p>The first parameter of this instruction will be the protocol version
+supported by the server. This is used to negotiate protocol compatibility
+between the client and the server, with the highest supported protocol by
+both sides being chosen. Versions of Guacamole prior to 1.1.0 do not
+support protocol version negotiation, and will silently ignore this
+instruction.</p>
+<p>The remaining parameters of the args instruction are the names of all
+connection parameters accepted by the server for the protocol selected by
+the client, in order. The client’s responding connect instruction must
+contain the values of each of these parameters in the same order.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="control-instructions">
+<h2>Control instructions<a class="headerlink" href="#control-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="disconnect-instruction">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><a class="headerlink" href="#disconnect-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the client or server that the connection is about to be closed.
+This message can be sent during any phase, and takes no parameters.</p>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="nop-instruction">
+<span class="sig-name descname"><span class="pre">nop</span></span><a class="headerlink" href="#nop-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The “nop” instruction does absolutely nothing, has no parameters, and is
+universally ignored by both Guacamole clients and servers. Its main use is
+as a keep-alive signal, and may be sent by guacd, client plugins, or web
+applications when there is no activity to ensure the socket is not closed
+due to timeout.</p>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="sync-instruction">
+<span class="sig-name descname"><span class="pre">sync</span></span><a class="headerlink" href="#sync-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that all operations as of the given server-relative timestamp have
+been completed. Both client and server are expected to occasionally send
+sync to report on current operation execution state, with the server using
+sync to denote the end of a logical frame.</p>
+<p>If a sync is received from the server, the client must respond with a
+corresponding sync once all previous operations have been completed, or the
+server may stop sending updates until the client catches up. For the
+client, sending a sync with a timestamp newer than any timestamp received
+from the server is an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>timestamp</strong> (<em>integer</em>) – A valid server-relative timestamp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="server-control-instructions">
+<h2>Server control instructions<a class="headerlink" href="#server-control-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="error-instruction">
+<span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#error-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies the client that the connection is about to be closed due to the
+specified error. This message can be sent by the server during any phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<em>string</em>) – An arbitrary message describing the error</p></li>
+<li><p><strong>status</strong> (<em>integer</em>) – The Guacamole status code describing the error. For a list of status
+codes, see the table in <a class="reference external" href="#status-codes">Status codes</a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="log-instruction">
+<span class="sig-name descname"><span class="pre">log</span></span><a class="headerlink" href="#log-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The log instruction sends an arbitrary string for debugging purposes.  This
+instruction will be ignored by Guacamole clients, but can be seen in
+protocol dumps if such dumps become necessary. Sending a log instruction
+can help add context when searching for the cause of a fault in protocol
+support.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>message</strong> (<em>string</em>) – An arbitrary, human-readable message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="mouse-instruction">
+<span class="sig-name descname"><span class="pre">mouse</span></span><a class="headerlink" href="#mouse-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports that a user on the current connection has moved the mouse to the
+given coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>integer</em>) – The current X coordinate of the mouse pointer.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The current Y coordinate of the mouse pointer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="ready-handshake-instruction">
+<span class="sig-name descname"><span class="pre">ready</span></span><a class="headerlink" href="#ready-handshake-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ready instruction sends the ID of a new connection and marks the
+beginning of the interactive phase of a new, successful connection. The ID
+sent is a completely arbitrary string, and has no standard format. It must
+be unique from all existing and future connections and may not match the
+name of any installed protocol support.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p><strong>identifier</strong> (<em>string</em>) – An arbitrary, unique identifier for the current connection. This
+identifier must be unique from all existing and future connections,
+and may not match the name of any installed protocol support (such as
+“vnc” or “rdp”).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="input-event-instructions">
+<h2>Input/Event instructions<a class="headerlink" href="#input-event-instructions" title="Permalink to this headline">¶</a></h2>
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-key-instruction">
+<span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#client-key-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the specified key press or release event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keysym</strong> (<em>integer</em>) – The <a class="reference external" href="http://www.x.org/wiki/KeySyms">X11 keysym</a> of the key being
+pressed or released.</p></li>
+<li><p><strong>pressed</strong> (<em>integer</em>) – 0 if the key is not pressed, 1 if the key is pressed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-mouse-instruction">
+<span class="sig-name descname"><span class="pre">mouse</span></span><a class="headerlink" href="#client-mouse-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the specified mouse movement or button press or release event (or
+combination thereof).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>integer</em>) – The current X coordinate of the mouse pointer.</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – The current Y coordinate of the mouse pointer.</p></li>
+<li><p><strong>mask</strong> (<em>integer</em>) – The button mask, representing the pressed or released status of each
+mouse button.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="guac instruction">
+<dt class="sig sig-object guac" id="client-size-instruction">
+<span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#client-size-instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies that the client’s optimal screen size has changed from what was
+specified during the handshake, or from previously-sent “size”
+instructions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>integer</em>) – The new, optimal screen width.</p></li>
+<li><p><strong>height</strong> (<em>integer</em>) – The new, optimal screen height.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="status-codes">
+<h2>Status codes<a class="headerlink" href="#status-codes" title="Permalink to this headline">¶</a></h2>
+<p>Several Guacamole instructions, and various other internals of the Guacamole
+core, use a common set of numeric status codes. These codes denote success or
+failure of operations, and can be rendered by user interfaces in a
+human-readable way.</p>
+<dl class="simple">
+<dt>0 (<code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code>)</dt><dd><p>The operation succeeded. No error.</p>
+</dd>
+<dt>256 (<code class="docutils literal notranslate"><span class="pre">UNSUPPORTED</span></code>)</dt><dd><p>The requested operation is unsupported.</p>
+</dd>
+<dt>512 (<code class="docutils literal notranslate"><span class="pre">SERVER_ERROR</span></code>)</dt><dd><p>An internal error occurred, and the operation could not be performed.</p>
+</dd>
+<dt>513 (<code class="docutils literal notranslate"><span class="pre">SERVER_BUSY</span></code>)</dt><dd><p>The operation could not be performed because the server is busy.</p>
+</dd>
+<dt>514 (<code class="docutils literal notranslate"><span class="pre">UPSTREAM_TIMEOUT</span></code>)</dt><dd><p>The upstream server is not responding. In most cases, the upstream server
+is the remote desktop server.</p>
+</dd>
+<dt>515 (<code class="docutils literal notranslate"><span class="pre">UPSTREAM_ERROR</span></code>)</dt><dd><p>The upstream server encountered an error. In most cases, the upstream
+server is the remote desktop server.</p>
+</dd>
+<dt>516 (<code class="docutils literal notranslate"><span class="pre">RESOURCE_NOT_FOUND</span></code>)</dt><dd><p>An associated resource, such as a file or stream, could not be found, and
+thus the operation failed.</p>
+</dd>
+<dt>517 (<code class="docutils literal notranslate"><span class="pre">RESOURCE_CONFLICT</span></code>)</dt><dd><p>A resource is already in use or locked, preventing the requested operation.</p>
+</dd>
+<dt>518 (<code class="docutils literal notranslate"><span class="pre">RESOURCE_CLOSED</span></code>)</dt><dd><p>The requested operation cannot continue because the associated resource has
+been closed.</p>
+</dd>
+<dt>519 (<code class="docutils literal notranslate"><span class="pre">UPSTREAM_NOT_FOUND</span></code>)</dt><dd><p>The upstream server does not appear to exist, or cannot be reached over the
+network. In most cases, the upstream server is the remote desktop server.</p>
+</dd>
+<dt>520 (<code class="docutils literal notranslate"><span class="pre">UPSTREAM_UNAVAILABLE</span></code>)</dt><dd><p>The upstream server is refusing to service connections. In most cases, the
+upstream server is the remote desktop server.</p>
+</dd>
+<dt>521 (<code class="docutils literal notranslate"><span class="pre">SESSION_CONFLICT</span></code>)</dt><dd><p>The session within the upstream server has ended because it conflicts with
+another session. In most cases, the upstream server is the remote desktop
+server.</p>
+</dd>
+<dt>522 (<code class="docutils literal notranslate"><span class="pre">SESSION_TIMEOUT</span></code>)</dt><dd><p>The session within the upstream server has ended because it appeared to be
+inactive. In most cases, the upstream server is the remote desktop server.</p>
+</dd>
+<dt>523 (<code class="docutils literal notranslate"><span class="pre">SESSION_CLOSED</span></code>)</dt><dd><p>The session within the upstream server has been forcibly closed. In most
+cases, the upstream server is the remote desktop server.</p>
+</dd>
+<dt>768 (<code class="docutils literal notranslate"><span class="pre">CLIENT_BAD_REQUEST</span></code>)</dt><dd><p>The parameters of the request are illegal or otherwise invalid.</p>
+</dd>
+<dt>769 (<code class="docutils literal notranslate"><span class="pre">CLIENT_UNAUTHORIZED</span></code>)</dt><dd><p>Permission was denied, because the user is not logged in. Note that the
+user may be logged into Guacamole, but still not logged in with respect to
+the remote desktop server.</p>
+</dd>
+<dt>771 (<code class="docutils literal notranslate"><span class="pre">CLIENT_FORBIDDEN</span></code>)</dt><dd><p>Permission was denied, and logging in will not solve the problem.</p>
+</dd>
+<dt>776 (<code class="docutils literal notranslate"><span class="pre">CLIENT_TIMEOUT</span></code>)</dt><dd><p>The client (usually the user of Guacamole or their browser) is taking too
+long to respond.</p>
+</dd>
+<dt>781 (<code class="docutils literal notranslate"><span class="pre">CLIENT_OVERRUN</span></code>)</dt><dd><p>The client has sent more data than the protocol allows.</p>
+</dd>
+<dt>783 (<code class="docutils literal notranslate"><span class="pre">CLIENT_BAD_TYPE</span></code>)</dt><dd><p>The client has sent data of an unexpected or illegal type.</p>
+</dd>
+<dt>797 (<code class="docutils literal notranslate"><span class="pre">CLIENT_TOO_MANY</span></code>)</dt><dd><p>The client is already using too many resources. Existing resources must be
+freed before further requests are allowed.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="writing-you-own-guacamole-app.html" class="btn btn-neutral float-left" title="Writing your own Guacamole application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

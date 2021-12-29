@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Using Guacamole &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Administration" href="administration.html" />
+    <link rel="prev" title="Ad-hoc Connections" href="adhoc-connections.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="saml-auth.html">SAML Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Guacamole</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#home-screen">Home screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#user-menu">User menu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#client-screen">Client screen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-guacamole-menu">The Guacamole menu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#copying-pasting-text">Copying/pasting text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#switching-and-tiling-connections">Switching and tiling connections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-connection-to-the-current-view">Adding a connection to the current view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#typing-with-multiple-connections">Typing with multiple connections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#disconnecting-and-navigation">Disconnecting and navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sharing-the-connection">Sharing the connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transferring-files">Transferring files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-file-browser">Using the file browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-rdp-virtual-drive">The RDP virtual drive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#guacctl-guacget"><strong class="program">guacctl</strong> / <strong class="program">guacget</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#on-screen-keyboard">On-screen keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scaling-the-display">Scaling the display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mobile-or-touch-devices">Mobile or touch devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mouse-emulation">Mouse emulation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#absolute-mode-touchscreen">Absolute mode (touchscreen)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relative-mode-touchpad">Relative mode (touchpad)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#typing-without-a-physical-keyboard">Typing without a physical keyboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-preferences">Changing preferences</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#display-language">Display language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-your-password">Changing your password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-input-settings">Default input settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Using Guacamole</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/using-guacamole.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-guacamole">
+<h1>Using Guacamole<a class="headerlink" href="#using-guacamole" title="Permalink to this headline">¶</a></h1>
+<p>Guacamole provides access to much of the functionality of a desktop from within
+your web browser. Although most people use remote desktop tools only when
+absolutely necessary, we believe that Guacamole must be aimed at becoming a
+primary means of accessing desktops, and the interface is thus intended to be
+as seamless and unobtrusive as possible.</p>
+<div class="section" id="home-screen">
+<h2>Home screen<a class="headerlink" href="#home-screen" title="Permalink to this headline">¶</a></h2>
+<p>Once you have successfully logged in, you will be taken to either the Guacamole
+home screen, where all available connections are listed, or directly to a
+connection, if you only have access to one connection.</p>
+<p>The home screen will contain a list of all connections to which you have
+access, along with thumbnails of any recently used or active connections. If
+you have access to a large number of connections and wish to quickly locate a
+specific connection, you can also enter search terms within the “Filter” field
+to filter the list of connections by name.</p>
+<p><img alt="The Guacamole home screen. The user menu and several recently-usedconnections are visible, along with one active connection." src="_images/guacamole-home-screen.png" /></p>
+<p>Clicking on any connection will open that connection within the current window
+or tab, but multiple connections can be used simultaneously. You can easily
+navigate back to the home screen without disconnecting by using your browsers
+back button or the “Home” button in the Guacamole menu. Each connection you use
+will remain active until explicitly disconnected, or until you navigate away
+from Guacamole entirely. Active connections can be seen as thumbnails updating
+in real-time on the home screen.</p>
+<div class="section" id="user-menu">
+<h3>User menu<a class="headerlink" href="#user-menu" title="Permalink to this headline">¶</a></h3>
+<p>With the exception of the client screen discussed below, all Guacamole screens
+contain a menu in the upper-right corner called the “user menu”.  This menu
+displays your username and contains several options which depend on your user’s
+level of access:</p>
+<dl class="simple myst">
+<dt>Home</dt><dd><p>Navigates back to the home screen, if you are not already there. If you only
+have access to one connection, this will be replaced with a link to that
+connection.</p>
+</dd>
+<dt>Settings</dt><dd><p>Navigates to the settings interface, which provides access to user
+preferences such as display language. If you have access to administrative
+functions, those are found within the settings interface, as well, and are
+discussed in more detail in <a class="reference internal" href="administration.html"><span class="doc std std-doc">Administration</span></a>.</p>
+</dd>
+<dt>Logout</dt><dd><p>Logs out of Guacamole completely, closing all current connections and ending
+the Guacamole session.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="client-screen">
+<h2>Client screen<a class="headerlink" href="#client-screen" title="Permalink to this headline">¶</a></h2>
+<p>Once you open a connection, you will see a real-time view of the remote
+display. You can interact with this display just as you would your normal
+desktop. Your mouse and keyboard will function as if they were connected
+directly to the remote machine.</p>
+<p><img alt="Guacamole client interface, with the Guacamole menuopen." src="_images/guacamole-client-interface.png" /></p>
+<p>The remote display will take up the entire browser window, with no buttons or
+menus to disturb the view. With the intent of providing a seamless experience,
+options specific to remote desktop are hidden within the Guacamole menu, which
+can be opened as needed.</p>
+<div class="section" id="the-guacamole-menu">
+<span id="guacamole-menu"></span><h3>The Guacamole menu<a class="headerlink" href="#the-guacamole-menu" title="Permalink to this headline">¶</a></h3>
+<p>The Guacamole menu is a sidebar which is hidden until explicitly shown.  On a
+desktop or other device which has a hardware keyboard, you can show this menu
+by pressing <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd>+<kbd class="kbd docutils literal notranslate">Alt</kbd>+<kbd class="kbd docutils literal notranslate">Shift</kbd></kbd>. If you are using a mobile or touchscreen
+device that lacks a keyboard, you can also show the menu by swiping right from
+the left edge of the screen. To hide the menu, you press <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd>+<kbd class="kbd docutils literal notranslate">Alt</kbd>+<kbd class="kbd docutils literal notranslate">Shift</kbd></kbd>
+again or swipe left across the screen.</p>
+<p>The Guacamole menu provides options for:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#using-the-clipboard"><span class="std std-ref">Reading from (and writing to) the clipboard of the remote
+desktop</span></a></p></li>
+<li><p><a class="reference internal" href="#client-connection-menu"><span class="std std-ref">Switching between active connections and displaying multiple connections at
+once</span></a></p></li>
+<li><p><a class="reference internal" href="#client-user-menu"><span class="std std-ref">Navigating back to the home screen</span></a></p></li>
+<li><p><a class="reference internal" href="#client-user-menu"><span class="std std-ref">Disconnecting from the current connection entirely</span></a></p></li>
+<li><p><a class="reference internal" href="#client-share-menu"><span class="std std-ref">Sharing the current connection</span></a></p></li>
+<li><p><a class="reference internal" href="#file-transfer"><span class="std std-ref">Uploading and downloading files</span></a></p></li>
+<li><p><a class="reference internal" href="#scaling-display"><span class="std std-ref">Zooming in and out of the remote display</span></a></p></li>
+<li><p><a class="reference internal" href="#touch-devices"><span class="std std-ref">Selecting alternative methods of typing or controlling the mouse,
+particularly for use on mobile or touchscreen devices</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="copying-pasting-text">
+<span id="using-the-clipboard"></span><h2>Copying/pasting text<a class="headerlink" href="#copying-pasting-text" title="Permalink to this headline">¶</a></h2>
+<p>At the top of the Guacamole menu is a text area labeled “clipboard”
+along with some basic instructions:</p>
+<blockquote>
+<div><p>Text copied/cut within Guacamole will appear here. Changes to the text below
+will affect the remote clipboard.</p>
+</div></blockquote>
+<p>The text area functions as an interface between the remote clipboard and the
+local clipboard. Text from the local clipboard can be pasted into the text
+area, causing that text to be sent to the clipboard of the remote desktop.
+Similarly, if you copy or cut text within the remote desktop, you will see that
+text within the text area, and can manually copy it into the local clipboard if
+desired.</p>
+</div>
+<div class="section" id="switching-and-tiling-connections">
+<span id="client-connection-menu"></span><h2>Switching and tiling connections<a class="headerlink" href="#switching-and-tiling-connections" title="Permalink to this headline">¶</a></h2>
+<p>If you have access to more than one connection, clicking the current connection
+name at the top of the Guacamole menu will open a drop-down menu containing a
+list of your other available connections:</p>
+<p><img alt="Connection menu with one connection selected" src="_images/client-connection-menu.png" /></p>
+<p>Clicking on the name of another connection in this drop-down menu will
+immediately switch to that connection. The previous connection will remain
+running as a thumbnail within a panel attached to the lower-right corner of the
+screen. This panel updates in real-time and remains visible as long as you have
+multiple active connections, even if you navigate away to another part of the
+Guacamole application:</p>
+<p><img alt="Active connection panel" src="_images/client-panel.png" /></p>
+<p>Clicking on any connection within the panel will navigate back to that
+connection, while clicking the “X” icon in the upper-right corner of the
+connection thumbnail will immediately close the connection.</p>
+<div class="section" id="adding-a-connection-to-the-current-view">
+<span id="client-tiling"></span><h3>Adding a connection to the current view<a class="headerlink" href="#adding-a-connection-to-the-current-view" title="Permalink to this headline">¶</a></h3>
+<p>Multiple connections may also be opened simultaneously within the same view by
+clicking the checkboxes next to the names of those connections in the
+connection menu:</p>
+<p><img alt="Connection menu with two connections selected" src="_images/client-connection-menu-multiple.png" /></p>
+<p>All connections opened in this way are automatically arranged in equally-sized
+tiles to fill the available area:</p>
+<p><img alt="Multiple client displays in a tiled arrangement" src="_images/client-tiled.png" /></p>
+<p>With multiple connections displayed as tiles, keyboard interaction and the
+Guacamole menu will only affect the currently focused connection, as indicated
+by the blue title and border. Clicking or tapping within another connection
+will change the focus and allow keyboard interaction with <em>that</em> connection.</p>
+</div>
+<div class="section" id="typing-with-multiple-connections">
+<span id="client-broadcast-keyboard"></span><h3>Typing with multiple connections<a class="headerlink" href="#typing-with-multiple-connections" title="Permalink to this headline">¶</a></h3>
+<p>By holding down <kbd class="kbd docutils literal notranslate">Ctrl</kbd> (to select an individual connection) or
+<kbd class="kbd docutils literal notranslate">Shift</kbd> (to select a rectangle of connections), multiple connection may be
+focused at the same time. While multiple connections are focused, each key
+pressed will be broadcast across each focused connection:</p>
+<p><img alt="Multiple focused client displays in a tiled arrangement" src="_images/client-tiled-multi-focus.png" /></p>
+<p>This is particularly useful for running the same series of commands on multiple
+computers. Further, since Guacamole automatically translates between the user’s
+local keyboard layout and the keyboard layout of the remote server, <em>this will
+work as expected even if the keyboard layouts of focused connections do not
+match</em>.</p>
+</div>
+</div>
+<div class="section" id="disconnecting-and-navigation">
+<span id="client-user-menu"></span><h2>Disconnecting and navigation<a class="headerlink" href="#disconnecting-and-navigation" title="Permalink to this headline">¶</a></h2>
+<p>When you are done using the current connection, or you wish to navigate
+elsewhere temporarily, options to do so are within the user menu inside the
+Guacamole menu:</p>
+<p><img alt="The user menu within the Guacamole menu." src="_images/guac-menu-disconnect.png" /></p>
+<p>The user menu within the Guacamole menu provides an additional “Disconnect”
+option that allows you to explicitly close the current connection only.
+Clicking “Logout” will also implicitly disconnect all active connections,
+including the current connection.</p>
+<p>Navigating back to the home screen or to the settings screen will not
+disconnect you: your connection will continue running in the background while
+you change settings or initiate another connection, and you can resume any
+active connection by clicking on it within the home screen.</p>
+</div>
+<div class="section" id="sharing-the-connection">
+<span id="client-share-menu"></span><h2>Sharing the connection<a class="headerlink" href="#sharing-the-connection" title="Permalink to this headline">¶</a></h2>
+<p>If the Guacamole server is configured to allow connection sharing, and you have
+been granted permission to share the current connection, an additional “Share”
+menu will appear next to your username in the Guacamole menu. Clicking on this
+menu opens a list of options for sharing the current connection.</p>
+<p><img alt="" src="_images/guac-menu-share.png" /></p>
+<p>Clicking any of the options within the “Share” menu will immediately generate a
+unique share link which can be distributed to anyone, even to users which do
+not otherwise have accounts within the same Guacamole system.</p>
+<p><img alt="" src="_images/guac-menu-share-link.png" /></p>
+<p>When the link is visited, that user will be given temporary access to your
+connection, restricted according to the sharing option chosen. This access, and
+the validity of the link overall, lasts only until you disconnect. Once the
+connection is closed, the link ceases to be valid, and any users sharing the
+connection with you will be disconnected.</p>
+</div>
+<div class="section" id="transferring-files">
+<span id="file-transfer"></span><h2>Transferring files<a class="headerlink" href="#transferring-files" title="Permalink to this headline">¶</a></h2>
+<p>You can transfer files back and forth between your local computer and the
+remote desktop if it is supported by the underlying protocol and enabled on the
+connection. Currently, Guacamole supports file transfer for VNC, RDP, and SSH,
+using either the native file transfer support of the protocol or SFTP.</p>
+<p>Files can be transferred to the remote computer by dragging and dropping the
+files into your browser window, or through using the file browser located in
+the Guacamole menu.</p>
+<div class="section" id="using-the-file-browser">
+<span id="file-browser"></span><h3>Using the file browser<a class="headerlink" href="#using-the-file-browser" title="Permalink to this headline">¶</a></h3>
+<p>If file transfer is enabled on the connection, you will see one or more
+filesystem devices listed within the Guacamole menu. Clicking on one of the
+filesystems opens a file browser which lists the files and directories within
+that filesystem.</p>
+<p><img alt="The file browser within the Guacamole menu." src="_images/file-browser.png" /></p>
+<p>Double-clicking on any directory will change the current location of the file
+browser to that directory, updating the list of files shown as well as the
+“breadcrumbs” at the top of the file browser. Clicking on any of the directory
+names listed in the breadcrumbs will bring you back to that directory, and
+clicking on the drive icon on the far left will bring you all the way back to
+the root level.</p>
+<p>Downloads are initiated by double-clicking on any file shown, while uploads are
+initiated by clicking the “Upload Files” button. Clicking “Upload Files” will
+open a file browsing dialog where you can choose one or more files from your
+local computer, ultimately uploading the selected files to the directory
+currently displayed within the file browser.</p>
+<p>The state of all file uploads can be observed within the notification dialog
+that appears once an upload begins, and can be cleared once completed by
+clicking the “Clear” button. Downloads are tracked through your browser’s own
+download notification system.</p>
+<p><img alt="In-progress and completed file transfers." src="_images/file-transfers.png" /></p>
+<p>When you are done browsing the filesystem and transferring files, click “Back”
+to return to the Guacamole menu.</p>
+</div>
+<div class="section" id="the-rdp-virtual-drive">
+<span id="rdp-virtual-drive"></span><h3>The RDP virtual drive<a class="headerlink" href="#the-rdp-virtual-drive" title="Permalink to this headline">¶</a></h3>
+<p>RDP provides its own native support for file transfer called “drive
+redirection” or “RDPDR”. Guacamole provides support for this mechanism by
+emulating a virtual drive. Typically, this virtual drive will appear as a
+network drive within the RDP session. Files uploaded and downloaded will be
+preserved within this drive, even after disconnecting.</p>
+<p><img alt="The Guacamole drive within a Windows RDP session." src="_images/guacamole-drive.png" /></p>
+<p>Files can be downloaded from this drive using the file browser in the Guacamole
+menu or using the special “Download” folder within the virtual drive. All files
+dropped into this folder will automatically begin uploading to the client, and
+thus downloading through the browser.</p>
+<p><img alt="The Guacamole drive's &quot;Download&quot; folder." src="_images/guacamole-drive-download.png" /></p>
+</div>
+<div class="section" id="guacctl-guacget">
+<span id="guacctl"></span><h3><strong class="program">guacctl</strong> / <strong class="program">guacget</strong><a class="headerlink" href="#guacctl-guacget" title="Permalink to this headline">¶</a></h3>
+<p>In addition to traditional drag-and-drop and the file browser, Guacamole’s SSH
+support can be used with the <strong class="program">guacctl</strong> utility. The <strong class="program">guacctl</strong>
+utility is a simple shell script <a class="reference external" href="https://raw.githubusercontent.com/apache/guacamole-server/master/bin/guacctl">included with Guacamole</a> which
+allows you to use and configure file transfer directly from the command line
+within the SSH session:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> guacctl
+<span class="go">guacctl 0.8.0, Guacamole SSH session control utility.</span>
+<span class="go">Usage: guacctl [OPTION] [FILE]...</span>
+
+<span class="go">    -d, --download         download each of the files listed.</span>
+<span class="go">    -s, --set-directory    set the destination directory for future uploaded </span>
+<span class="go">                           files.</span>
+<span class="gp">$</span> guacctl -d FILENAME
+<span class="gp">$</span> guacctl -s DIRECTORY
+<span class="gp">$</span>
+</pre></div>
+</div>
+<p>For convenience, you may also create a symbolic link or alias to
+<strong class="program">guacctl</strong> called <strong class="program">guacget</strong>. When run as <strong class="program">guacget</strong>,
+the utility behaves as if the <code class="docutils literal notranslate"><span class="pre">--download</span></code> option were supplied and initiates a
+download for each file specified on the command line.</p>
+</div>
+</div>
+<div class="section" id="on-screen-keyboard">
+<span id="using-the-osk"></span><h2>On-screen keyboard<a class="headerlink" href="#on-screen-keyboard" title="Permalink to this headline">¶</a></h2>
+<p>Certain key combinations are impossible to press within a web application like
+Guacamole because they are reserved by the operating system
+(<kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd>+<kbd class="kbd docutils literal notranslate">Alt</kbd>+<kbd class="kbd docutils literal notranslate">Del</kbd></kbd> or <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Alt</kbd>+<kbd class="kbd docutils literal notranslate">Tab</kbd></kbd>, for example) or by the web browser. If
+you press one of these reserved combinations, the effect will be observed
+locally, not remotely, and the remote desktop will receive only some of the
+keys.</p>
+<p>Guacamole provides its own, built-in on-screen keyboard which allows keys to be
+sent to the remote desktop without affecting the local system. If the device
+you’re using does not have certain keys which the remote desktop depends on,
+such as the arrow keys or <kbd class="kbd docutils literal notranslate">Ctrl</kbd>, you can use the on-screen keyboard for
+this, too. You can show the on-screen keyboard by selecting the “On-screen
+keyboard” option from the menu.</p>
+<p>Clicking (or tapping) the buttons of the on-screen keyboard has the same effect
+as pressing the same buttons on a real keyboard, except that the operating
+system and browser will not intercept these keypresses; they will only be sent
+to the remote desktop.</p>
+</div>
+<div class="section" id="scaling-the-display">
+<span id="scaling-display"></span><h2>Scaling the display<a class="headerlink" href="#scaling-the-display" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole will default to shrinking or expanding the remote display to fit the
+browser window exactly, but this is not necessarily ideal. If the remote
+display is much larger than your local display, the screen may be impossible to
+see or interact with. This is especially true for mobile phones, whose screens
+need to be small enough to fit in the average hand.</p>
+<p>You can scale the display on touch devices by using the familiar pinch gesture.
+Place two fingers on the screen and bring them closer together to zoom out or
+further apart to zoom in.</p>
+<p>If your device lacks a touch screen, you can also control the zoom level
+through the menu. The controls for zooming in and out are located at the bottom
+of the menu. The current zoom level is displayed between two “-” and “+”
+buttons which control the zoom level in 10% increments.</p>
+</div>
+<div class="section" id="mobile-or-touch-devices">
+<span id="touch-devices"></span><h2>Mobile or touch devices<a class="headerlink" href="#mobile-or-touch-devices" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole is designed to work equally well across all HTML5 browsers, including
+those of mobile devices. It will automatically handle input from a touch screen
+or a traditional mouse (or both, if you happen to have such a gifted computer),
+and provides alternative input methods for devices which lack a physical
+keyboard.</p>
+<div class="section" id="mouse-emulation">
+<span id="touch-mouse"></span><h3>Mouse emulation<a class="headerlink" href="#mouse-emulation" title="Permalink to this headline">¶</a></h3>
+<p>In the case that your device has a touchscreen and lacks a mouse, Guacamole
+will emulate a mouse for the sake of interacting with remote desktops that
+expect mouse input. By default, Guacamole uses “absolute” mouse emulation. This
+means that the mouse pointer is positioned at the location of each tap on the
+screen.</p>
+<p>In both absolute and relative modes, you can click-and-drag by tapping the
+screen and then quickly placing your finger back down. This gesture only causes
+the mouse button to press down, but does not release it again until you lift
+your finger back up.</p>
+<div class="section" id="absolute-mode-touchscreen">
+<span id="absolute-mouse-emulation"></span><h4>Absolute mode (touchscreen)<a class="headerlink" href="#absolute-mode-touchscreen" title="Permalink to this headline">¶</a></h4>
+<p>Absolute mouse emulation is the default as it tends to be what people expect
+when using a touch device to interact with applications designed for mouse
+input.</p>
+<p>Each tap on the screen is translated into a left-click at that position.
+Right-clicking is accomplished through pressing and holding your finger on the
+screen. If parts of the remote display are off-screen, you can drag your finger
+around the screen to pan the off-screen parts back into view.</p>
+<p>Although absolute mouse emulation works generally well, a finger makes for a
+very inaccurate pointing device. To address this, Guacamole also provides
+“relative” mouse emulation. Relative mouse emulation provides a way to deal
+with the need for accurate pointer control, when a true pointer device is not
+present.</p>
+<p><img alt="" src="_images/touchscreen.png" /></p>
+</div>
+<div class="section" id="relative-mode-touchpad">
+<span id="relative-mouse-emulation"></span><h4>Relative mode (touchpad)<a class="headerlink" href="#relative-mode-touchpad" title="Permalink to this headline">¶</a></h4>
+<p>Guacamole’s relative mouse emulation behaves similarly to the touchpad present
+on most modern laptops. You drag your finger across the display to move the
+mouse pointer, and tap the display to left-click. The pointer moves relative to
+the motion of your finger. Right-clicking is accomplished with a two-finger
+tap, and middle-clicking with a three-finger tap. The mouse scroll wheel can be
+operated by dragging two fingers up or down.</p>
+<p>Because the relative mouse emulation reserves so many gestures for the
+different mouse buttons and actions, common touch gestures like panning and
+pinch-to-zoom will not work while relative mouse emulation is enabled. Instead,
+the screen will automatically pan to keep the mouse pointer in view, and you
+can zoom through the buttons in the menu.</p>
+<p><img alt="" src="_images/touchpad.png" /></p>
+</div>
+</div>
+<div class="section" id="typing-without-a-physical-keyboard">
+<span id="text-input"></span><h3>Typing without a physical keyboard<a class="headerlink" href="#typing-without-a-physical-keyboard" title="Permalink to this headline">¶</a></h3>
+<p>Many mobile devices lack a physical keyboard entirely, and instead provide
+their own on-screen keyboards. As these are not true keyboards per se and do
+not produce key presses, Guacamole’s text input mode is required for typing on
+these platforms.</p>
+<p>“Text input” allows input of keystrokes based on the input of text.  Choosing
+“Text input” tells Guacamole to infer keystrokes by tracking text entered,
+rather than relying on actual key presses. Guacamole will instead determine the
+combination of keypresses necessary to produce the same pattern of input,
+including deletions.</p>
+<p>If you wish to type via an IME (input method editor), such as those required
+for Chinese, Japanese, or Korean, text input mode is required for this as well.
+Such IMEs function through the explicit insertion of text and do not send
+traditional key presses. Using text input mode within Guacamole thus allows you
+to use a locally-installed IME, without requiring the IME to be installed on
+the remote desktop.</p>
+</div>
+</div>
+<div class="section" id="changing-preferences">
+<span id="preferences"></span><h2>Changing preferences<a class="headerlink" href="#changing-preferences" title="Permalink to this headline">¶</a></h2>
+<p>User preferences can be changed within the settings screen. These preferences
+are stored locally within the browser, so if you use multiple computers to
+access Guacamole, you can have different settings for each location. The
+settings screen allows users to change the language of the Guacamole interface,
+to change the default input method used by Guacamole connections, and to change
+the default mouse emulation mode for if a touch device is used. If you have
+sufficient permissions, you may also change your password, or administer the
+system.</p>
+<p><img alt="Guacamole preferences screen." src="_images/guacamole-preferences.png" /></p>
+<div class="section" id="display-language">
+<h3>Display language<a class="headerlink" href="#display-language" title="Permalink to this headline">¶</a></h3>
+<p>The Guacamole interface is currently available in English, Dutch, French,
+German, Italian, and Russian. By default, Guacamole will attempt to determine
+the appropriate display language by checking the language preferences of the
+browser in use. If this fails, or the browser is using a language not yet
+available within Guacamole, English will be used as a fallback.</p>
+<p>If you wish to override the current display language, you can do so by
+selecting a different language within the “Display language” field. The change
+will take effect immediately.</p>
+</div>
+<div class="section" id="changing-your-password">
+<span id="changing-password"></span><h3>Changing your password<a class="headerlink" href="#changing-your-password" title="Permalink to this headline">¶</a></h3>
+<p>System administrators can restrict the ability of individual users to change
+their own passwords, so this section may not always be available.  If your
+account <em>does</em> have permission, the preferences screen will contain a “Change
+Password” section.</p>
+<p>To change your password, you must provide your current password, enter the
+desired new password, and click “Update Password”. You will remain logged in,
+and the change will affect any future login attempt.</p>
+</div>
+<div class="section" id="default-input-settings">
+<h3>Default input settings<a class="headerlink" href="#default-input-settings" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole provides multiple keyboard input methods and multiple mouse emulation
+modes. Many of these settings are specifically useful for touch devices, while
+others are aimed mainly at traditional desktop use.  By default, Guacamole will
+use the keyboard and mouse modes most commonly preferred by users, but you can
+change these defaults if they do not fit your tastes or your current device.</p>
+<p>The choices available mirror those within the Guacamole menu discussed earlier
+in this chapter, and changing these settings will affect the default values
+selected within the Guacamole menu of future connections.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="administration.html" class="btn btn-neutral float-right" title="Administration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="adhoc-connections.html" class="btn btn-neutral float-left" title="Ad-hoc Connections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>

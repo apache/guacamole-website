@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SAML Authentication &mdash; Apache Guacamole Manual v1.4.0</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gug.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/tabs.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RADIUS Authentication" href="radius-auth.html" />
+    <link rel="prev" title="OpenID Connect Authentication" href="openid-auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Apache Guacamole
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User's Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole natively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-docker.html">Installing Guacamole with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reverse-proxy.html">Proxying Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuring Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth.html">Database authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">LDAP authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duo-auth.html">Duo two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="totp-auth.html">TOTP two-factor authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="header-auth.html">HTTP header authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json-auth.html">Encrypted JSON authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cas-auth.html">CAS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openid-auth.html">OpenID Connect Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SAML Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-saml-authentication-extension">Downloading the SAML authentication extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-saml-authentication">Installing SAML authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-guacamole-for-saml-authentication">Configuring Guacamole for SAML Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controlling-login-behavior">Controlling login behavior</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#automatically-redirecting-all-unauthenticated-users">Automatically redirecting all unauthenticated users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#presenting-unauthenticated-users-with-a-login-screen">Presenting unauthenticated users with a login screen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#completing-the-installation">Completing the installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">Using Guacamole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="administration.html">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Apache Guacamole</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>SAML Authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/saml-auth.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="saml-authentication">
+<h1>SAML Authentication<a class="headerlink" href="#saml-authentication" title="Permalink to this headline">¶</a></h1>
+<p>SAML is a widely implemented and used Single Sign On (SSO) provider that allows
+applications and services to authenticate in a standard way, and brokers those
+authentication requests to one or more back-end authentication providers. The
+SAML authentication extension allows Guacamole to redirect to a SAML Identity
+Provider (IdP) for authentication and user services. This module does not
+provide any capability for storing or retrieving connections, and must be
+layered with other authentication extensions that provide connection
+management.</p>
+<div class="section" id="downloading-the-saml-authentication-extension">
+<span id="saml-downloading"></span><h2>Downloading the SAML authentication extension<a class="headerlink" href="#downloading-the-saml-authentication-extension" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole’s SSO extensions are available separately from the main
+<code class="docutils literal notranslate"><span class="pre">guacamole.war</span></code>. The link for this and all other officially-supported and
+compatible extensions for a particular version of Guacamole are provided on the
+release notes for that version. You can find the release notes for current
+versions of Guacamole here: <a class="reference external" href="http://guacamole.apache.org/releases/">http://guacamole.apache.org/releases/</a>.</p>
+<p>The SSO extensions are packaged together in a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file containing one
+extension for each supported SSO method:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>SSO Method</p></th>
+<th class="head"><p>Extension</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="cas-auth.html"><span class="doc std std-doc">CAS</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cas/guacamole-auth-sso-cas-1.4.0.jar</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="openid-auth.html"><span class="doc std std-doc">OpenID Connect</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">openid/guacamole-auth-sso-openid-1.4.0.jar</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#"><span class="doc std std-doc">SAML</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">saml/guacamole-auth-sso-saml-1.4.0.jar</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The extension for the desired SSO method, in this case
+<code class="docutils literal notranslate"><span class="pre">guacamole-auth-sso-saml-1.4.0.jar</span></code> from within the <code class="docutils literal notranslate"><span class="pre">saml/</span></code> subdirectory,
+must ultimately be placed in <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p>
+</div>
+<div class="section" id="installing-saml-authentication">
+<span id="installing-saml-auth"></span><h2>Installing SAML authentication<a class="headerlink" href="#installing-saml-authentication" title="Permalink to this headline">¶</a></h2>
+<p>Guacamole extensions are self-contained <code class="docutils literal notranslate"><span class="pre">.jar</span></code> files which are located within
+the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory. <em>If you are unsure where
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> is located on your system, please consult
+<a class="reference internal" href="configuring-guacamole.html"><span class="doc std std-doc">Configuring Guacamole</span></a> before proceeding.</em></p>
+<p>To install the SAML authentication extension, you must:</p>
+<ol class="simple">
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">guacamole-auth-sso-saml-1.4.0.jar</span></code> within <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p></li>
+<li><p>Configure Guacamole to use SAML authentication, as described below.</p></li>
+</ol>
+<div class="section" id="configuring-guacamole-for-saml-authentication">
+<span id="guac-saml-config"></span><h3>Configuring Guacamole for SAML Authentication<a class="headerlink" href="#configuring-guacamole-for-saml-authentication" title="Permalink to this headline">¶</a></h3>
+<p>The SAML authentication extension provides several configuration properties to
+set it up to talk to the IdP. The SAML IdP also must be configured with
+Guacamole as a Service Provider (SP). Configuration of the SAML IdP is beyond
+the scope of this document, and will vary widely based on the IdP in use.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">saml-idp-metadata-url</span></code></dt><dd><p>The URI of the XML metadata file that from the SAML Identity Provider that
+contains all of the information the SAML extension needs in order to know how
+to authenticate with the IdP. This URI can either be a remote server (e.g.
+<code class="docutils literal notranslate"><span class="pre">https://</span></code>) or a local file on the filesystem (e.g. <code class="docutils literal notranslate"><span class="pre">file://</span></code>). Often the
+metadata file contains most of the required properties for SAML
+authentication and the other parameters are not required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-idp-url</span></code></dt><dd><p>The base URL of the SAML IdP. This is the URL that the SAML authentication
+extension will use to redirect when requesting SAML authentication. If the
+<code class="docutils literal notranslate"><span class="pre">saml-idp-metadata-url</span></code> property is provided, this parameter will be ignored.
+If the metadata file is not provided this property is required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-entity-id</span></code></dt><dd><p>The entity ID of the Guacamole SAML client, which is generally the URL of the
+Guacamole server, but is not required to be so. This property is required if
+either the <code class="docutils literal notranslate"><span class="pre">saml-idp-metadata-url</span></code> property is not specified, or if the
+provided metadata file does not contain the SAML SP Entity ID for Guacamole
+Client.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-callback-url</span></code></dt><dd><p>The URL that the IdP will use once authentication has succeeded to return to
+the Guacamole web application and provide the authentication details to the
+SAML extension. The SAML extension currently only supports callback as a POST
+operation to this callback URL. This property is required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-strict</span></code></dt><dd><p>Require strict security checks during SAML logins. This will insure that
+valid certificates are present for all interactions with SAML servers and
+fail SAML authentication if security restrictions are violated. This property
+is optional, and will default to true, requiring strict security checks. This
+property should only be set to false in non-production environments during
+testing of SAML authentication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-debug</span></code></dt><dd><p>Enable additional logging within the supporting SAML library that can assist
+in tracking down issues during SAML logins. This property is optional, and
+will default to false (no debugging).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-compress-request</span></code></dt><dd><p>Enable compression of the HTTP requests sent to the SAML IdP. This property
+is optional and will default to true (compression enabled).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-compress-response</span></code></dt><dd><p>Request that the SAML response returned by the IdP be compressed. This
+property is optional and will default to true (compression will be
+requested).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">saml-group-attribute</span></code></dt><dd><p>The name of the attribute provided by the SAML IdP that contains group
+membership of the user. These groups will be parsed and used to map group
+membership of the user logging in, which can be used for permissions
+management within Guacamole Client, particularly when layered with other
+authentication modules. This property is optional, and defaults to “groups”.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="controlling-login-behavior">
+<h3>Controlling login behavior<a class="headerlink" href="#controlling-login-behavior" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole loads authentication extensions in order of priority, and evaluates
+authentication attempts in this same order. This has implications for how the
+Guacamole login process behaves when an SSO extension is present:</p>
+<dl class="simple myst">
+<dt>If the SSO extension has priority:</dt><dd><p>Users that are not yet authenticated
+will be immediately redirected to the configured identity provider. They will
+not see a Guacamole login screen.</p>
+</dd>
+<dt>If a non-SSO extension has priority:</dt><dd><p>Users that are not yet authenticated
+will be presented with a Guacamole login screen. Additionally, links to the
+configured identity provider(s) will be available for users that wish to log
+in using SSO.</p>
+</dd>
+</dl>
+<p>The default priority of extensions is dictated by their filenames, with
+extensions that sort earlier alphabetically having higher priority than others.
+This can be overridden <a class="reference internal" href="configuring-guacamole.html#initial-setup"><span class="std std-ref">by setting the <code class="docutils literal notranslate"><span class="pre">extension-priority</span></code> property within
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code></span></a>.</p>
+<div class="section" id="automatically-redirecting-all-unauthenticated-users">
+<h4>Automatically redirecting all unauthenticated users<a class="headerlink" href="#automatically-redirecting-all-unauthenticated-users" title="Permalink to this headline">¶</a></h4>
+<p>To ensure users are redirected to the SAML identity provider immediately
+(without a Guacamole login screen), ensure the SAML extension has priority over
+all others:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>extension-priority: saml
+</pre></div>
+</div>
+</div>
+<div class="section" id="presenting-unauthenticated-users-with-a-login-screen">
+<h4>Presenting unauthenticated users with a login screen<a class="headerlink" href="#presenting-unauthenticated-users-with-a-login-screen" title="Permalink to this headline">¶</a></h4>
+<p>To ensure users are given a normal Guacamole login screen and have the option
+to log in with traditional credentials <em>or</em> with SAML, ensure the SAML
+extension does not have priority:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>extension-priority: *, saml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="completing-the-installation">
+<span id="completing-saml-install"></span><h3>Completing the installation<a class="headerlink" href="#completing-the-installation" title="Permalink to this headline">¶</a></h3>
+<p>Guacamole will only reread <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> and load newly-installed
+extensions during startup, so your servlet container will need to be restarted
+before SAML authentication can be used. <em>Doing this will disconnect all active
+users, so be sure that it is safe to do so prior to attempting installation.</em>
+When ready, restart your servlet container and give the new authentication a
+try.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="radius-auth.html" class="btn btn-neutral float-right" title="RADIUS Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="openid-auth.html" class="btn btn-neutral float-left" title="OpenID Connect Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2021 <a href="http://www.apache.org/">The Apache Software Foundation</a>,
+    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.
+    Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the Apache Guacamole project logo are
+    trademarks of The Apache Software Foundation.</p>
+
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+</body>
+</html>
