@@ -337,6 +337,10 @@ p {
     max-width: 80%;
 }
 
+#content p img {
+    max-width: 100%;
+}
+
 div#footer {
     font-size: 0.9em;
     border-top: 1px solid silver;
@@ -519,7 +523,7 @@ div#links ul {
     margin: 0.25em 0;
 }
 
-table.releases {
+#content table.releases {
     background: #FFFFFA;
     border-collapse: collapse;
     border: 1px solid rgba(0, 0, 0, 0.5);
@@ -527,9 +531,10 @@ table.releases {
     margin-right: auto;
     margin-top: 0.25in;
     margin-bottom: 4em;
+    width: 10.5in;
 }
 
-table.releases th {
+#content table.releases th {
     margin: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -538,15 +543,23 @@ table.releases th {
     font-size: 1em;
     font-weight: normal;
     font-style: oblique;
+    text-align: left;
     background: #304730;
     color: white;
 }
 
-table.releases tr:nth-child(even) {
+#content table.releases tr th:first-child,
+#content table.releases tr td:first-child,
+#content table.releases tr th:last-child,
+#content table.releases tr td:last-child {
+    white-space: nowrap;
+}
+
+#content table.releases tr:nth-child(even) {
     background: rgba(0, 0, 0, 0.1);
 }
 
-table.releases td {
+#content table.releases td {
     margin: 0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
