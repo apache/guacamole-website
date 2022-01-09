@@ -146,7 +146,7 @@ network connection information yourself using additional environment variables:
 : The hostname of the guacd instance to use to establish remote desktop
   connections. *This is required if you are not using Docker to provide guacd.*
 
-`GUACD_POST`
+`GUACD_PORT`
 : The port that Guacamole should use when connecting to guacd. This environment
   variable is optional. If not provided, the standard guacd port of 4822 will
   be used.
