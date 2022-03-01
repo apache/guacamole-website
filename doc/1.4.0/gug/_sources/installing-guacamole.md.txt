@@ -174,7 +174,7 @@ carefully before deciding not to install an optional dependency.
   :::{list-table}
   :stub-columns: 1
   * - Debian / Ubuntu package
-    - `libavcodec-dev`, `libavformat-dev`, `libavutil-dev`, `libswsccale-dev`
+    - `libavcodec-dev`, `libavformat-dev`, `libavutil-dev`, `libswscale-dev`
   * - Fedora / CentOS / RHEL package
     - `ffmpeg-devel`
   :::
