@@ -34,6 +34,7 @@ licensed project, the repository contains the following critical files:
 | `add-tracking.pl` | Utility script which edits specified HTML files in-place, adding the project's Google Analytics tracking code at the end of the `<body>` (requires Perl).
 | `build.sh`    | The website build script (usage documented below).
 | `doc/`        | Per-release documentation for Apache Guacamole. This directory contains one subdirectory per release, where each subdirectory contains the overall manual (`.../gug/`) API documentation for each part of the Guacamole core (`.../libguac/`, `.../guacamole-common/`, etc.). Files in this directory are not interpreted by Jekyll, as there are far too many files for this to be reasonable. They are instead copied into place by the `build.sh` script.
+| `Dockerfile`  | A docker file that can be used to build and serve the website.
 | `images/`     | Images which are referenced within the website HTML and CSS.
 | `pub/`        | Miscellaneous public files, such as test scripts. The test scripts in this directory have historically been shared to users to help with debugging.
 | `styles/`     | All CSS files referenced by the website HTML.
@@ -87,6 +88,16 @@ To test your changes to the website, you can either invoke `./build.sh` to build
 
 When done testing your local changes, press `Ctrl`&nbsp;+&nbsp;`C` to stop the
 web server and return to the shell.
+
+Build and serve using docker
+-----------------------
+
+Alternatively, as opposed to installing Jekyll locally, the website can be built and served locally using the provided `Dockerfile`. To build and serve the website locally, simply build a Docker container containing the current website and run the container, as below.
+
+1. Build a new docker image: `docker build . -tag some-website`.
+2. Run the docker image at a configured port: `docker run -e PORT=8080 -p 8080:8080 -it --rm some-website`
+
+The website will be served just as when `build.sh` is invoked directly. Press `Ctrl`&nbsp;+&nbsp;`C` to stop the docker container. 
 
 Publishing changes
 ------------------
