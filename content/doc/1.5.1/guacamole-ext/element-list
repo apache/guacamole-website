@@ -1,0 +1,13 @@
+org.apache.guacamole.environment
+org.apache.guacamole.form
+org.apache.guacamole.language
+org.apache.guacamole.net.auth
+org.apache.guacamole.net.auth.credentials
+org.apache.guacamole.net.auth.permission
+org.apache.guacamole.net.auth.simple
+org.apache.guacamole.net.event
+org.apache.guacamole.net.event.listener
+org.apache.guacamole.properties
+org.apache.guacamole.protocols
+org.apache.guacamole.token
+org.apache.guacamole.xml
