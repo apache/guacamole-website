@@ -1,0 +1,66 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/* Do not include border/background around code literals */
+.rst-content code {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+/* Use header font size for code literals in headers */
+.rst-content h1 code.literal,
+.rst-content h2 code.literal,
+.rst-content h3 code.literal,
+.rst-content h4 code.literal,
+.rst-content h5 code.literal,
+.rst-content h6 code.literal {
+    font-size: 100%;
+}
+
+/* Add border/background around replacable parts of code literals */
+.rst-content code.samp em {
+    background: #fff;
+    border: 1px solid #e1e4e5;
+    padding: 2px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+/* Allow links containing code to be differentiated from normal text containing
+ * code */
+.rst-content a[href] code.literal {
+    color: inherit;
+}
+
+/* Allow text within tables to wrap across multiple lines, rather than
+ * potentially require horizontal scrolling */
+.wy-table-responsive table td {
+    white-space: normal;
+}
+
+/* Align table content with top of cell, rather than middle, so that it's
+ * easier to see the text of adjacent table cells when one or more cells are
+ * taller than the rest (due to word wrapping) */
+.rst-content table.docutils td,
+.rst-content table.field-list td,
+.wy-table td {
+    vertical-align:top
+}
+
