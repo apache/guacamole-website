@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    <link rel="stylesheet" href="/styles/main.css?s=2e802ec8ebf673f18506558bd1588311">
+    <link rel="icon" type="image/png" href="/images/guacamole-logo-64.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+    <meta charset="UTF-8"/>
+    <title>Apache Guacamole™: 1.5.2</title>
+</head>
+
+
+    <body>
+
+        <!-- Header -->
+<div id="header">
+    <h1><a href="/">Apache Guacamole™</a></h1>
+    <ul id="navigation" class="menu">
+        
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/releases/"
+                        
+                            class="download"
+                            >Downloads</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Docs</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+        
+            
+                <li>
+                    <a href="/faq/"
+                        >FAQ</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/api-documentation/"
+                        >API / Development</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/doc/gug/"
+                        >Guacamole Manual</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle "
+                       href="#">Community</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://github.com/search?utf8=%E2%9C%93&q=repo%3Aapache%2Fguacamole-server+repo%3Aapache%2Fguacamole-client+repo%3Aapache%2Fguacamole-website&type=Repositories&ref=searchresults"
+                        >GitHub</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/open-source/"
+                        >Contributing</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/support/"
+                        >Help / Support</a>
+                </li>
+            
+        
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="https://issues.apache.org/jira/browse/GUACAMOLE/"
+                        >JIRA</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="/security/"
+                        >Security Reports</a>
+                </li>
+            
+        
+    
+
+    
+    
+        
+            
+                <li class="dropdown">
+                    
+                    <a class="dropdown-toggle apache"
+                       href="#">Apache Software Foundation</a>
+                    <ul class="dropdown-menu">
+                        
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/"
+                        >ASF Homepage</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/licenses/"
+                        >License</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/thanks.html"
+                        >Thanks</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/sponsorship.html"
+                        >Sponsorship</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+        
+            
+                <li>
+                    <a href="http://www.apache.org/foundation/policies/conduct.html"
+                        >Code of Conduct</a>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+                    </ul>
+                </li>
+            
+        
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+
+    </ul>
+</div>
+
+
+        <!-- Content -->
+        <div id="page">
+            <div id="content">
+                
+    <div class="draft-disclaimer">
+        <p><strong>Apache Guacamole 1.5.2 has not yet been
+        released!</strong> The artifacts and release notes below are drafts for
+        a proposed release of Apache Guacamole which has not yet occurred.</p>
+    </div>
+
+
+
+
+<h1>Apache Guacamole 1.5.2</h1>
+
+<div id="links">
+
+    
+    
+        <h2>Release documentation</h2>
+    
+    <ul>
+        
+            <li><a href="/doc/1.5.2/gug">Manual</a></li>
+        
+            <li><a href="/doc/1.5.2/guacamole-common">guacamole-common</a></li>
+        
+            <li><a href="/doc/1.5.2/guacamole-common-js">guacamole-common-js</a></li>
+        
+            <li><a href="/doc/1.5.2/guacamole-ext">guacamole-ext</a></li>
+        
+            <li><a href="/doc/1.5.2/libguac">libguac</a></li>
+        
+            <li><a href="/doc/1.5.2/libguac-terminal">libguac-terminal</a></li>
+        
+    </ul>
+
+
+
+</div>
+
+<p>Apache Guacamole is split into two subprojects: "guacamole-client", the
+HTML5 web application which serves the Guacamole client to users, and
+"guacamole-server", the remote desktop proxy which the web application
+communicates with. The source code for each of these may be downloaded
+below.</p>
+
+<p>You <strong>must</strong> <a href="https://www.apache.org/info/verification.html">
+verify the integrity of any downloaded files</a> using the OpenPGP signatures
+we provide with each release. The signatures should be verified against the
+<a href="https://downloads.apache.org/guacamole/KEYS">KEYS</a>
+file, which contains the OpenPGP keys of Apache Guacamole's Release Managers.
+Checksums of each released file are also provided.</p>
+
+<!-- Source archives -->
+<div class="release-downloads">
+    
+    <table>
+        
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-client-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-client-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-client-1.5.2.tar.gz'
+                       )">guacamole-client-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-client-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-client-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-server-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-server-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-server-1.5.2.tar.gz'
+                       )">guacamole-server-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-server-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/source/guacamole-server-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<p>If you do not wish to build Apache Guacamole entirely from source, pre-built
+versions of the web application (.war) and all extensions are provided here in
+binary form for convenience.  <strong>Please note that guacamole-server must
+still be built and installed from source.</strong></p>
+
+<!-- All binaries -->
+<div class="release-downloads">
+    
+    <table>
+        
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-1.5.2.war"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-1.5.2.war'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-1.5.2.war'
+                       )">guacamole-1.5.2.war</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-1.5.2.war.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-1.5.2.war.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-duo-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-duo-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-duo-1.5.2.tar.gz'
+                       )">guacamole-auth-duo-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-duo-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-duo-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-header-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-header-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-header-1.5.2.tar.gz'
+                       )">guacamole-auth-header-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-header-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-header-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-jdbc-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-jdbc-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-jdbc-1.5.2.tar.gz'
+                       )">guacamole-auth-jdbc-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-jdbc-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-jdbc-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-json-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-json-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-json-1.5.2.tar.gz'
+                       )">guacamole-auth-json-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-json-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-json-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-ldap-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-ldap-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-ldap-1.5.2.tar.gz'
+                       )">guacamole-auth-ldap-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-ldap-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-ldap-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-quickconnect-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-quickconnect-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-quickconnect-1.5.2.tar.gz'
+                       )">guacamole-auth-quickconnect-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-quickconnect-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-quickconnect-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-sso-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-sso-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-sso-1.5.2.tar.gz'
+                       )">guacamole-auth-sso-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-sso-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-sso-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-totp-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-auth-totp-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-auth-totp-1.5.2.tar.gz'
+                       )">guacamole-auth-totp-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-totp-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-auth-totp-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-history-recording-storage-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-history-recording-storage-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-history-recording-storage-1.5.2.tar.gz'
+                       )">guacamole-history-recording-storage-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-history-recording-storage-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-history-recording-storage-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+            <tr>
+                
+                
+                <td><a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-vault-1.5.2.tar.gz"
+                       onclick="trackDownload(
+                           'click',
+                           'guacamole-vault-1.5.2.tar.gz'
+                       )"
+                       oncontextmenu="trackDownload(
+                           'menu',
+                           'guacamole-vault-1.5.2.tar.gz'
+                       )">guacamole-vault-1.5.2.tar.gz</a></td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-vault-1.5.2.tar.gz.asc">PGP</a> ]</td>
+                
+                    
+                    <td>[ <a href="https://dist.apache.org/repos/dist/dev/guacamole/1.5.2-RC1/binary/guacamole-vault-1.5.2.tar.gz.sha256">SHA-256</a> ]</td>
+                
+            </tr>
+        
+    </table>
+
+
+</div>
+
+<!-- Release notes -->
+<div id="release-notes">
+    <h1>Release notes</h1>
+    <p>The 1.5.2 release is a bugfix release that addresses a number of miscellaneous
+issues, including issues with the Docker images, web application UI, and
+systems in FIPS mode. For a full list of all changes in this release, please
+see the <a href="#changelog">changelog</a> below.</p>
+
+<p><strong>The 1.5.2 release is compatible with older 1.x components.</strong> You should
+upgrade older components to 1.5.2 when possible, however things should continue
+to work correctly in the interim:</p>
+
+<ul>
+  <li>Extensions written for older 1.x releases can be used by 1.5.2.</li>
+  <li>Components written for the version of the Guacamole protocol used by older
+1.x releases can be used with components of the 1.5.2 release.</li>
+</ul>
+
+<p>Regardless of inter-component compatibility, <strong>some Docker environment
+variables are now deprecated as of 1.5.2</strong>. Please see the <a href="#deprecation--compatibility-notes">deprecation /
+compatibility notes</a> section for more
+information.</p>
+
+<h1 id="changelog">Changelog</h1>
+
+<h3 id="user-interface--platform">User interface / platform</h3>
+
+<ul>
+  <li class="bug">Error handling issues in stream processing code in Angular frontend (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1571">GUACAMOLE-1571</a>)</li>
+  <li class="bug">Connections in background tabs may disconnect if throttled by Chrome/Safari (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1687">GUACAMOLE-1687</a>)</li>
+  <li class="bug">User “Account Restrictions” time zone cannot be cleared (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1728">GUACAMOLE-1728</a>)</li>
+  <li class="bug">Scope watches on session storage may trigger AngularJS “infdig” error (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1745">GUACAMOLE-1745</a>)</li>
+  <li class="bug">Authentication rejections without an interactive login result in a white screen (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1756">GUACAMOLE-1756</a>)</li>
+</ul>
+
+<h3 id="docker-images">Docker images</h3>
+
+<ul>
+  <li class="bug">Typo on specified environment variable postgres_auto_create_accounts (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1572">GUACAMOLE-1572</a>)</li>
+  <li class="bug">Docker image of guacamole client is missing unzip (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1628">GUACAMOLE-1628</a>)</li>
+  <li class="bug">Docker build cannot download from libwebsockets.org (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1791">GUACAMOLE-1791</a>)</li>
+</ul>
+
+<h3 id="authentication-integration-and-storage">Authentication, integration, and storage</h3>
+
+<ul>
+  <li class="bug">Hitting 2100 SQLServer query parameter limit with large user base (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1253">GUACAMOLE-1253</a>)</li>
+  <li class="bug">UserGroup Attributes not getting picked from the ModelUserGroup instead is picked from Model User (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1606">GUACAMOLE-1606</a>)</li>
+  <li class="bug">KsmRecordService.getField() may throw a NullPointerException if getCustom() returns null (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1769">GUACAMOLE-1769</a>)</li>
+</ul>
+
+<h3 id="protocol-support--guacd">Protocol support / guacd</h3>
+
+<ul>
+  <li class="bug">Self built guacd, Release 1.4.0 segfaults on RDP-Disconnect (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1505">GUACAMOLE-1505</a>)</li>
+  <li class="bug">SSH Connections not working when FIPS mode is enabled on guacd host (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1669">GUACAMOLE-1669</a>)</li>
+  <li class="bug">RDP NLA security mode incompatible with FIPS  (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1674">GUACAMOLE-1674</a>)</li>
+  <li class="bug">Cursor Improperly Initialized when Connecting to Gnome Remote Desktop via RDP (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1717">GUACAMOLE-1717</a>)</li>
+</ul>
+
+<h3 id="internationalization">Internationalization</h3>
+
+<ul>
+  <li class="bug">Incorrect ‘i’ character in hungarian keymap (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1761">GUACAMOLE-1761</a>)</li>
+</ul>
+
+<h3 id="documentation">Documentation</h3>
+
+<ul>
+  <li class="bug">Document Dependency Package Error (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1662">GUACAMOLE-1662</a>)</li>
+  <li class="bug">Documentation: Link to PostgreSQL JDBC drvier is not correct any more (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1727">GUACAMOLE-1727</a>)</li>
+  <li class="bug">X11 Keysym docs in protocol reference section of GUG points to dead page (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1787">GUACAMOLE-1787</a>)</li>
+</ul>
+
+<h3 id="general-housekeeping-and-cleanup">General housekeeping and cleanup</h3>
+
+<ul>
+  <li class="bug">Incorrect instruction element length handle because of Java’s char type (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-615">GUACAMOLE-615</a>)</li>
+  <li class="bug">Missing winpr/file.h includes (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1436">GUACAMOLE-1436</a>)</li>
+  <li class="bug">“uuid” property of Guacamole.ChainedTunnel may not be initialized (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1562">GUACAMOLE-1562</a>)</li>
+  <li class="bug">The frontend unnecessarily sends the auth token to the /api/patches endpoint (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1579">GUACAMOLE-1579</a>)</li>
+  <li class="bug">mouse_mask not properly initialized within guac_terminal (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1595">GUACAMOLE-1595</a>)</li>
+  <li class="bug">Typo mistake: Some wrong comments (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1636">GUACAMOLE-1636</a>)</li>
+  <li class="bug">Auth token as a parameter in “session/tunnels/&lt;tunnel ID&gt;/protocol” request (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1775">GUACAMOLE-1775</a>)</li>
+  <li class="bug">guac_user instances must only be referenced from user callbacks (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1784">GUACAMOLE-1784</a>)</li>
+  <li class="bug">Build fails against Maven 3.9.x (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1788">GUACAMOLE-1788</a>)</li>
+  <li>Update webapp dependencies to latest stable and compatible versions (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1786">GUACAMOLE-1786</a>)</li>
+</ul>
+
+<h1 id="deprecation--compatibility-notes">Deprecation / Compatibility notes</h1>
+
+<p>Each 1.x release of Apache Guacamole should be compatible with components of
+older 1.x releases. This compatibility is intended at the Guacamole protocol
+level and at the extension level, but not necessarily at the API level. This
+means:</p>
+
+<ul>
+  <li>Extensions from older 1.x releases should still work in binary form, but may
+need code changes before their source will build against a newer version of
+guacamole-ext.</li>
+  <li>Software which uses the Guacamole protocol of an older 1.x release should
+still work.</li>
+  <li>Software which uses libguac from an older 1.x release should still work by
+continuing to use the libguac from that release, as newer versions of
+libguac may not be API/ABI compatible. In the case of third-party protocol
+support plugins for guacd, this means that the guacd from that release must
+also be used. Compatibility with respect to libguac is represented by the
+<a href="https://en.wikipedia.org/wiki/Soname">soname</a>.</li>
+  <li>You should update to newer versions where applicable and when possible.</li>
+</ul>
+
+<p>As of 1.5.2, the following changes have been made which affect compatibility
+with past releases:</p>
+
+<h2 id="postgres_-renamed-to-postgresql_"><code class="language-plaintext highlighter-rouge">POSTGRES_*</code> renamed to <code class="language-plaintext highlighter-rouge">POSTGRESQL_*</code></h2>
+
+<p>All Docker environment variables used by the <code class="language-plaintext highlighter-rouge">guacamole/guacamole</code> image that
+relate to PostgreSQL have historically been named with the prefix
+“<code class="language-plaintext highlighter-rouge">POSTGRES_</code>”.  As of 1.5.2, these variables now use the prefix “<code class="language-plaintext highlighter-rouge">POSTGRESQL_</code>”
+for consistency with <code class="language-plaintext highlighter-rouge">guacamole.properties</code>.</p>
+
+<p>Continued usage of the old <code class="language-plaintext highlighter-rouge">POSTGRES_*</code> variables will still work, however a
+warning will be printed in the Docker logs regarding their deprecation.
+Existing deployments that still use <code class="language-plaintext highlighter-rouge">POSTGRES_*</code> should be migrated to
+<code class="language-plaintext highlighter-rouge">POSTGRESQL_*</code> when possible.</p>
+
+<ul>
+  <li class="bug">Typo on specified environment variable postgres_auto_create_accounts (<a href="https://issues.apache.org/jira/browse/GUACAMOLE-1572">GUACAMOLE-1572</a>)</li>
+</ul>
+
+
+</div>
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<div id="footer">
+
+    <!-- Copyrights -->
+    <p class="copyright">
+        Copyright &copy; 2020 <a href="http://www.apache.org/">The Apache
+            Software Foundation</a>, Licensed under the <a
+        href="http://www.apache.org/licenses/LICENSE-2.0">Apache License,
+        Version 2.0</a>. The HTML5 shield logo has been modified from the
+        original work of the <a
+            href="http://www.w3.org/">World Wide Web Constortium (W3C)</a>,
+        which is licensed under the <a
+            href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons Attribution 3.0</a> license.
+    </p>
+
+    <!-- Trademarks -->
+    <p class="trademarks">
+        Apache Guacamole, Guacamole, Apache, the Apache feather logo, and the
+        Apache Guacamole project logo are trademarks of The Apache Software
+        Foundation.
+    </p>
+
+</div>
+
+
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-75289145-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Download tracking helper function -->
+        <script type="text/javascript">
+
+            /**
+             * Signals Google Analytics that a file is being downloaded (or, at
+             * least, we expect that it is). Note that it is not possible to
+             * determine this with 100% certainty without grepping server logs,
+             * but this should still at least help gauge interest/usage.
+             *
+             * @param {String} action
+             *     A human-readable string describing the user event which
+             *     occurred to initiate the download.
+             *
+             * @param {String} filename
+             *     The filename of the file being downloaded.
+             */
+            function trackDownload(action, filename) {
+                ga('send', 'event', {
+                    eventCategory : 'Download',
+                    eventAction   : action,
+                    eventLabel    : filename,
+                    transport     : 'beacon'
+                });
+            }
+
+        </script>
+
+        <!-- jQuery -->
+        <script src="/scripts/jquery.min.js" type="text/javascript"></script>
+
+        <!-- Dropdown toggle -->
+        <script src="/scripts/dropdown.js" type="text/javascript"></script>
+
+    </body>
+</html>
