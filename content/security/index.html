@@ -426,6 +426,42 @@ discussing the issue in a public forum.</p>
 <p>No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 <a href="http://logback.qos.ch/">Logback</a> as its logging backend, not Log4j.</p>
 
+<h2 id="fixed-in-apache-guacamole-152">Fixed in Apache Guacamole 1.5.2</h2>
+<ul>
+    
+        <li>
+            <h3 id="CVE-2023-30575">
+                Incorrect calculation of Guacamole protocol element lengths
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-30575">CVE-2023-30575</a>)
+            </h3>
+            <p>Apache Guacamole 1.5.1 and older may incorrectly calculate the lengths of
+instruction elements sent during the Guacamole protocol handshake, potentially
+allowing an attacker to inject Guacamole instructions during the handshake
+through specially-crafted data.</p>
+
+<p>Acknowledgements: We would like to thank Stefan Schiller (Sonar) for reporting
+this issue.</p>
+
+
+        </li>
+    
+        <li>
+            <h3 id="CVE-2023-30576">
+                Use-after-free in handling of RDP audio input buffer
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-30576">CVE-2023-30576</a>)
+            </h3>
+            <p>Apache Guacamole 0.9.10 through 1.5.1 may continue to reference a freed RDP
+audio input buffer. Depending on timing, this may allow an attacker to execute
+arbitrary code with the privileges of the guacd process.</p>
+
+<p>Acknowledgements: We would like to thank Stefan Schiller (Sonar) for reporting
+this issue.</p>
+
+
+        </li>
+    
+</ul>
+
 <h2 id="fixed-in-apache-guacamole-140">Fixed in Apache Guacamole 1.4.0</h2>
 <ul>
     
