@@ -47,12 +47,13 @@ GIT_GUAC.COMMIT = (function getRequestedCommit() {
  */
 GIT_GUAC.loadModule = function loadModule(filename) {
 
-    // Construct URL pointing to guacamole-common-js module within ASF git
-    var url = 'https://gitbox.apache.org/repos/asf?'
-        + 'p=guacamole-client.git;'
-        + 'a=blob_plain;'
-        + 'f=guacamole-common-js/src/main/webapp/modules/' + encodeURIComponent(filename) + ';'
-        + 'hb=' + encodeURIComponent(GIT_GUAC.COMMIT);
+    // Construct URL pointing to guacamole-common-js module via GitHub and
+    // jsDelivr (ASF gitbox now just redirects to GitHub, which does not serve
+    // executable JavaScript)
+    var url = 'https://cdn.jsdelivr.net/gh'
+        + '/apache/guacamole-client'
+        + '@' + encodeURIComponent(GIT_GUAC.COMMIT)
+        + '/guacamole-common-js/src/main/webapp/modules/' + encodeURIComponent(filename);
 
     // Dynamically load module
     var script = document.createElement('script');
