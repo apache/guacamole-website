@@ -98,6 +98,13 @@
         <release>
             <Version>
                 <name>Apache Guacamole</name>
+                <created>2023-07-31</created>
+                <revision>1.5.3</revision>
+            </Version>
+        </release>
+        <release>
+            <Version>
+                <name>Apache Guacamole</name>
                 <created>2023-05-25</created>
                 <revision>1.5.2</revision>
             </Version>
