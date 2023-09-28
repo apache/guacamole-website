@@ -1,11 +1,8 @@
 ---
-title: Arcisphere LLC
-logo: /images/companies/arcisphere-llc.png
-location: http://arcisphere.com/
+title: Rampart AI™
+logo: /images/companies/2023RampartLogo.png
+location: https://www.rampart-ai.com/free-hardened-and-minimized-apache-guacamole
 ---
 
-Arcisphere is a software engineering firm which started working with Guacamole
-to provide product training. They continue to provide assistance with Guacamole
-installation and general product usage, and love to share the success they have
-had with both commercial and open software products.
+Rampart AI™ is an application security company that provides security solutions directly to your DevOps pipeline. Part of Rampart AI™ protection protocol is our Bloat Harness. With this harness, we have fortified Apache Guacamole for FREE, and anyone who wants to use it can reach out.
 
