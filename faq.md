@@ -126,7 +126,8 @@ the clipboard under very strict circumstances.
 
 The following browsers are known to support clipboard access:
 
- * Google Chrome version 66 and later (via the [Asynchronous Clipboard API](https://www.w3.org/TR/clipboard-apis/#async-clipboard-api))
+ * Google Chrome version 66 and later, Microsoft Edge version 79 or later (via the [Asynchronous Clipboard API](https://www.w3.org/TR/clipboard-apis/#async-clipboard-api))
+ * Mozilla Firefox 63 or later (write to clipboard only)
  * Older versions of Google Chrome using the third-party [Clipboard Permission Manager extension](https://chrome.google.com/webstore/detail/clipboard-permission-mana/ipbhneeanpgkaleihlknhjiaamobkceh)
  * IE10 and IE11 (via the older, synchronous version of the API)
 
