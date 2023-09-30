@@ -21,8 +21,21 @@ mailing list of the [ASF Security Team](https://www.apache.org/security/) or
 the <security@guacamole.apache.org> mailing list, before disclosing or
 discussing the issue in a public forum.
 
-Is Apache Guacamole affected by CVE-2021-44228? {#not-affected-by-cve-2021-44228}
------------------------------------------------
+Vulnerabilities in dependencies
+-------------------------------
+
+### Is Apache Guacamole affected by CVE-2023-5129? {#not-affected-by-cve-2023-5129}
+
+No. CVE-2023-5129 (aka CVE-2023-4863) deals specifically with decoding
+WebP images, not encoding.
+
+You would also receive updates to libwebp from your distribution as the
+library itself is not bundled within Guacamole. If using our Docker
+images, the images are automatically rebuilt nightly to bring in updates
+from the maintainer of the base image (Alpine Linux), and a pull of the
+latest would give you an updated image.
+
+### Is Apache Guacamole affected by CVE-2021-44228? {#not-affected-by-cve-2021-44228}
 
 No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 [Logback](http://logback.qos.ch/) as its logging backend, not Log4j.
