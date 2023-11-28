@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: SessionRecording</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: SessionRecording</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Guacamole.html">Guacamole</a>.</span>SessionRecording<span class="signature">(source)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="SessionRecording"><span class="type-signature"></span>new SessionRecording<span class="signature">(source)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    A recording of a Guacamole session. Given a <a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a> or Blob,
+the Guacamole.SessionRecording automatically parses Guacamole instructions
+within the recording source as it plays back the recording. Playback of the
+recording may be controlled through function calls to the
+Guacamole.SessionRecording, even while the recording has not yet finished
+being created or downloaded. Parsing of the contents of the recording will
+begin immediately and automatically after this constructor is invoked.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>source</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Blob</span>
+|
+
+<span class="param-type"><a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Blob from which the instructions of the recording should
+    be read.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="abort"><span class="type-signature"></span>abort<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Aborts the loading process, stopping further processing of the
+provided data. If the underlying recording source is a Guacamole tunnel,
+it will be disconnected.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line808">line 808</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="cancel"><span class="type-signature"></span>cancel<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Cancels the current seek operation, setting the current frame of the
+recording to wherever the seek operation was able to reach prior to
+being cancelled. If a callback was provided to seek(), that callback
+is invoked. If a seek operation is not currently underway, this
+function has no effect.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line972">line 972</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="connect"><span class="type-signature"></span>connect<span class="signature">(data<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Connects the underlying tunnel, beginning download of the Guacamole
+session. Playback of the Guacamole session cannot occur until at least
+one frame worth of instructions has been downloaded. If the underlying
+recording source is a Blob, this function has no effect.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The data to send to the tunnel when connecting.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line788">line 788</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disconnect"><span class="type-signature"></span>disconnect<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Disconnects the underlying tunnel, stopping further download of the
+Guacamole session. If the underlying recording source is a Blob, this
+function has no effect.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line798">line 798</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDisplay"><span class="type-signature"></span>getDisplay<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {<a href="Guacamole.Display.html">Guacamole.Display</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the underlying display of the Guacamole.Client used by this
+Guacamole.SessionRecording for playback. The display contains an Element
+which can be added to the DOM, causing the display (and thus playback of
+the recording) to become visible.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line831">line 831</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The underlying display of the Guacamole.Client used by this
+    Guacamole.SessionRecording for playback.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Guacamole.Display.html">Guacamole.Display</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDuration"><span class="type-signature"></span>getDuration<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the duration of this recording, in milliseconds. If the
+recording is still being downloaded, this value will gradually increase.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line871">line 871</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The duration of this recording, in milliseconds.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getPosition"><span class="type-signature"></span>getPosition<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the current playback position within the recording, in
+milliseconds, where zero is the start of the recording.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line852">line 852</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The current playback position within the recording, in milliseconds.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isPlaying"><span class="type-signature"></span>isPlaying<span class="signature">()</span><span class="type-signature"> &rarr; (non-null) {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns whether playback is currently in progress.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line841">line 841</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    true if playback is currently in progress, false otherwise.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pause"><span class="type-signature"></span>pause<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Pauses playback of the recording, if playback is currently in progress.
+If playback is not in progress, this function has no effect. If a seek
+operation is in progress, the seek is aborted. Playback is initially
+paused when a Guacamole.SessionRecording is created, and must be
+explicitly started through a call to play().
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line986">line 986</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="play"><span class="type-signature"></span>play<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Begins continuous playback of the recording downloaded thus far.
+Playback of the recording will continue until pause() is invoked or
+until no further frames exist. Playback is initially paused when a
+Guacamole.SessionRecording is created, and must be explicitly started
+through a call to this function. If playback is already in progress,
+this function has no effect. If a seek operation is in progress,
+playback resumes at the current position, and the seek is aborted as if
+completed.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line892">line 892</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="seek"><span class="type-signature"></span>seek<span class="signature">(position<span class="signature-attributes">non-null</span>, callback<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Seeks to the given position within the recording. If the recording is
+currently being played back, playback will continue after the seek is
+performed. If the recording is currently paused, playback will be
+paused after the seek is performed. If a seek operation is already in
+progress, that seek is first aborted. The seek operation will proceed
+asynchronously.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>position</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The position within the recording to seek to, in milliseconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The callback to invoke once the seek operation has completed.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line929">line 929</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onabort">onabort</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when further loading of this recording has been explicitly
+aborted through a call to abort().
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line728">line 728</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onerror">onerror</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when an error occurs which prevents the recording from being
+played back.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A human-readable message describing the error that occurred.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line720">line 720</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onload">onload</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when loading of this recording has completed and all frames
+are available.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line710">line 710</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onpause">onpause</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired whenever playback of the recording has been paused. This may
+happen when playback is explicitly paused with a call to pause(), or
+when playback is implicitly paused due to reaching the end of the
+recording.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line758">line 758</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onplay">onplay</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired whenever playback of the recording has started.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line748">line 748</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onprogress">onprogress</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when new frames have become available while the recording is
+being downloaded.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new duration of the recording, in milliseconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parsedSize</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of bytes that have been loaded/parsed.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line741">line 741</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:onseek">onseek</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired whenever the playback position within the recording changes.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>position</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The new position within the recording, in milliseconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>current</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of frames that have been seeked through. If not
+    seeking through multiple frames due to a call to seek(), this
+    will be 1.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>total</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of frames that are being seeked through in the
+    current seek operation. If not seeking through multiple frames
+    due to a call to seek(), this will be 1.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main_webapp_modules_SessionRecording.js.html">main/webapp/modules/SessionRecording.js</a>, <a href="main_webapp_modules_SessionRecording.js.html#line777">line 777</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Guacamole.html">Guacamole</a></li><li><a href="Guacamole.AudioContextFactory.html">Guacamole.AudioContextFactory</a></li></ul><h3>Classes</h3><ul><li><a href="Guacamole.ArrayBufferReader.html">Guacamole.ArrayBufferReader</a></li><li><a href="Guacamole.ArrayBufferWriter.html">Guacamole.ArrayBufferWriter</a></li><li><a href="Guacamole.AudioPlayer.html">Guacamole.AudioPlayer</a></li><li><a href="Guacamole.AudioRecorder.html">Guacamole.AudioRecorder</a></li><li><a href="Guacamole.BlobReader.html">Guacamole.BlobReader</a></li><li><a href="Guacamole.BlobWriter.html">Guacamole.BlobWriter</a></li><li><a href="Guacamole.ChainedTunnel.html">Guacamole.ChainedTunnel</a></li><li><a href="Guacamole.Client.html">Guacamole.Client</a></li><li><a href="Guacamole.DataURIReader.html">Guacamole.DataURIReader</a></li><li><a href="Guacamole.Display.html">Guacamole.Display</a></li><li><a href="Guacamole.Display.VisibleLayer.html">Guacamole.Display.VisibleLayer</a></li><li><a href="Guacamole.Event.html">Guacamole.Event</a></li><li><a href="Guacamole.Event.DOMEvent.html">Guacamole.Event.DOMEvent</a></li><li><a href="Guacamole.Event.Target.html">Guacamole.Event.Target</a></li><li><a href="Guacamole.HTTPTunnel.html">Guacamole.HTTPTunnel</a></li><li><a href="Guacamole.InputSink.html">Guacamole.InputSink</a></li><li><a href="Guacamole.InputStream.html">Guacamole.InputStream</a></li><li><a href="Guacamole.IntegerPool.html">Guacamole.IntegerPool</a></li><li><a href="Guacamole.JSONReader.html">Guacamole.JSONReader</a></li><li><a href="Guacamole.Keyboard.html">Guacamole.Keyboard</a></li><li><a href="Guacamole.Keyboard.ModifierState.html">Guacamole.Keyboard.ModifierState</a></li><li><a href="Guacamole.Layer.html">Guacamole.Layer</a></li><li><a href="Guacamole.Layer.Pixel.html">Guacamole.Layer.Pixel</a></li><li><a href="Guacamole.Mouse.html">Guacamole.Mouse</a></li><li><a href="Guacamole.Mouse.Event.html">Guacamole.Mouse.Event</a></li><li><a href="Guacamole.Mouse.Event.Target.html">Guacamole.Mouse.Event.Target</a></li><li><a href="Guacamole.Mouse.State.html">Guacamole.Mouse.State</a></li><li><a href="Guacamole.Mouse.Touchpad.html">Guacamole.Mouse.Touchpad</a></li><li><a href="Guacamole.Mouse.Touchscreen.html">Guacamole.Mouse.Touchscreen</a></li><li><a href="Guacamole.Object.html">Guacamole.Object</a></li><li><a href="Guacamole.OnScreenKeyboard.html">Guacamole.OnScreenKeyboard</a></li><li><a href="Guacamole.OnScreenKeyboard.Key.html">Guacamole.OnScreenKeyboard.Key</a></li><li><a href="Guacamole.OnScreenKeyboard.Layout.html">Guacamole.OnScreenKeyboard.Layout</a></li><li><a href="Guacamole.OutputStream.html">Guacamole.OutputStream</a></li><li><a href="Guacamole.Parser.html">Guacamole.Parser</a></li><li><a href="Guacamole.Position.html">Guacamole.Position</a></li><li><a href="Guacamole.RawAudioFormat.html">Guacamole.RawAudioFormat</a></li><li><a href="Guacamole.RawAudioPlayer.html">Guacamole.RawAudioPlayer</a></li><li><a href="Guacamole.RawAudioRecorder.html">Guacamole.RawAudioRecorder</a></li><li><a href="Guacamole.SessionRecording.html">Guacamole.SessionRecording</a></li><li><a href="Guacamole.StaticHTTPTunnel.html">Guacamole.StaticHTTPTunnel</a></li><li><a href="Guacamole.Status.html">Guacamole.Status</a></li><li><a href="Guacamole.StringReader.html">Guacamole.StringReader</a></li><li><a href="Guacamole.StringWriter.html">Guacamole.StringWriter</a></li><li><a href="Guacamole.Touch.html">Guacamole.Touch</a></li><li><a href="Guacamole.Touch.Event.html">Guacamole.Touch.Event</a></li><li><a href="Guacamole.Touch.State.html">Guacamole.Touch.State</a></li><li><a href="Guacamole.Tunnel.html">Guacamole.Tunnel</a></li><li><a href="Guacamole.UTF8Parser.html">Guacamole.UTF8Parser</a></li><li><a href="Guacamole.VideoPlayer.html">Guacamole.VideoPlayer</a></li><li><a href="Guacamole.WebSocketTunnel.html">Guacamole.WebSocketTunnel</a></li></ul><h3>Events</h3><ul><li><a href="Guacamole.ArrayBufferReader.html#event:ondata">Guacamole.ArrayBufferReader#ondata</a></li><li><a href="Guacamole.ArrayBufferReader.html#event:onend">Guacamole.ArrayBufferReader#onend</a></li><li><a href="Guacamole.ArrayBufferWriter.html#event:onack">Guacamole.ArrayBufferWriter#onack</a></li><li><a href="Guacamole.AudioRecorder.html#event:onclose">Guacamole.AudioRecorder#onclose</a></li><li><a href="Guacamole.AudioRecorder.html#event:onerror">Guacamole.AudioRecorder#onerror</a></li><li><a href="Guacamole.BlobReader.html#event:onend">Guacamole.BlobReader#onend</a></li><li><a href="Guacamole.BlobReader.html#event:onprogress">Guacamole.BlobReader#onprogress</a></li><li><a href="Guacamole.BlobWriter.html#event:onack">Guacamole.BlobWriter#onack</a></li><li><a href="Guacamole.BlobWriter.html#event:oncomplete">Guacamole.BlobWriter#oncomplete</a></li><li><a href="Guacamole.BlobWriter.html#event:onerror">Guacamole.BlobWriter#onerror</a></li><li><a href="Guacamole.BlobWriter.html#event:onprogress">Guacamole.BlobWriter#onprogress</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onerror">Guacamole.ChainedTunnel#onerror</a></li><li><a href="Guacamole.ChainedTunnel.html#event:oninstruction">Guacamole.ChainedTunnel#oninstruction</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onstatechange">Guacamole.ChainedTunnel#onstatechange</a></li><li><a href="Guacamole.ChainedTunnel.html#event:onuuid">Guacamole.ChainedTunnel#onuuid</a></li><li><a href="Guacamole.Client.html#event:onargv">Guacamole.Client#onargv</a></li><li><a href="Guacamole.Client.html#event:onaudio">Guacamole.Client#onaudio</a></li><li><a href="Guacamole.Client.html#event:onclipboard">Guacamole.Client#onclipboard</a></li><li><a href="Guacamole.Client.html#event:onerror">Guacamole.Client#onerror</a></li><li><a href="Guacamole.Client.html#event:onfile">Guacamole.Client#onfile</a></li><li><a href="Guacamole.Client.html#event:onfilesystem">Guacamole.Client#onfilesystem</a></li><li><a href="Guacamole.Client.html#event:onjoin">Guacamole.Client#onjoin</a></li><li><a href="Guacamole.Client.html#event:onleave">Guacamole.Client#onleave</a></li><li><a href="Guacamole.Client.html#event:onmsg">Guacamole.Client#onmsg</a></li><li><a href="Guacamole.Client.html#event:onmultitouch">Guacamole.Client#onmultitouch</a></li><li><a href="Guacamole.Client.html#event:onname">Guacamole.Client#onname</a></li><li><a href="Guacamole.Client.html#event:onpipe">Guacamole.Client#onpipe</a></li><li><a href="Guacamole.Client.html#event:onrequired">Guacamole.Client#onrequired</a></li><li><a href="Guacamole.Client.html#event:onstatechange">Guacamole.Client#onstatechange</a></li><li><a href="Guacamole.Client.html#event:onsync">Guacamole.Client#onsync</a></li><li><a href="Guacamole.Client.html#event:onvideo">Guacamole.Client#onvideo</a></li><li><a href="Guacamole.DataURIReader.html#event:onend">Guacamole.DataURIReader#onend</a></li><li><a href="Guacamole.Display.html#event:oncursor">Guacamole.Display#oncursor</a></li><li><a href="Guacamole.Display.html#event:onresize">Guacamole.Display#onresize</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onerror">Guacamole.HTTPTunnel#onerror</a></li><li><a href="Guacamole.HTTPTunnel.html#event:oninstruction">Guacamole.HTTPTunnel#oninstruction</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onstatechange">Guacamole.HTTPTunnel#onstatechange</a></li><li><a href="Guacamole.HTTPTunnel.html#event:onuuid">Guacamole.HTTPTunnel#onuuid</a></li><li><a href="Guacamole.InputStream.html#event:onblob">Guacamole.InputStream#onblob</a></li><li><a href="Guacamole.InputStream.html#event:onend">Guacamole.InputStream#onend</a></li><li><a href="Guacamole.JSONReader.html#event:onend">Guacamole.JSONReader#onend</a></li><li><a href="Guacamole.JSONReader.html#event:onprogress">Guacamole.JSONReader#onprogress</a></li><li><a href="Guacamole.Keyboard.html#event:onkeydown">Guacamole.Keyboard#onkeydown</a></li><li><a href="Guacamole.Keyboard.html#event:onkeyup">Guacamole.Keyboard#onkeyup</a></li><li><a href="Guacamole.Mouse.html#event:mousedown">Guacamole.Mouse#mousedown</a></li><li><a href="Guacamole.Mouse.html#event:mousemove">Guacamole.Mouse#mousemove</a></li><li><a href="Guacamole.Mouse.html#event:mouseout">Guacamole.Mouse#mouseout</a></li><li><a href="Guacamole.Mouse.html#event:mouseup">Guacamole.Mouse#mouseup</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mousedown">Guacamole.Mouse.Event.Target#mousedown</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mousemove">Guacamole.Mouse.Event.Target#mousemove</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mouseout">Guacamole.Mouse.Event.Target#mouseout</a></li><li><a href="Guacamole.Mouse.Event.Target.html#event:mouseup">Guacamole.Mouse.Event.Target#mouseup</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mousedown">Guacamole.Mouse.Touchpad#mousedown</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mousemove">Guacamole.Mouse.Touchpad#mousemove</a></li><li><a href="Guacamole.Mouse.Touchpad.html#event:mouseup">Guacamole.Mouse.Touchpad#mouseup</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mousedown">Guacamole.Mouse.Touchscreen#mousedown</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mousemove">Guacamole.Mouse.Touchscreen#mousemove</a></li><li><a href="Guacamole.Mouse.Touchscreen.html#event:mouseup">Guacamole.Mouse.Touchscreen#mouseup</a></li><li><a href="Guacamole.Object.html#event:onbody">Guacamole.Object#onbody</a></li><li><a href="Guacamole.Object.html#event:onundefine">Guacamole.Object#onundefine</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeydown">Guacamole.OnScreenKeyboard#onkeydown</a></li><li><a href="Guacamole.OnScreenKeyboard.html#event:onkeyup">Guacamole.OnScreenKeyboard#onkeyup</a></li><li><a href="Guacamole.OutputStream.html#event:onack">Guacamole.OutputStream#onack</a></li><li><a href="Guacamole.Parser.html#event:oninstruction">Guacamole.Parser#oninstruction</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onclose">Guacamole.RawAudioRecorder#onclose</a></li><li><a href="Guacamole.RawAudioRecorder.html#event:onerror">Guacamole.RawAudioRecorder#onerror</a></li><li><a href="Guacamole.SessionRecording.html#event:onabort">Guacamole.SessionRecording#onabort</a></li><li><a href="Guacamole.SessionRecording.html#event:onerror">Guacamole.SessionRecording#onerror</a></li><li><a href="Guacamole.SessionRecording.html#event:onload">Guacamole.SessionRecording#onload</a></li><li><a href="Guacamole.SessionRecording.html#event:onpause">Guacamole.SessionRecording#onpause</a></li><li><a href="Guacamole.SessionRecording.html#event:onplay">Guacamole.SessionRecording#onplay</a></li><li><a href="Guacamole.SessionRecording.html#event:onprogress">Guacamole.SessionRecording#onprogress</a></li><li><a href="Guacamole.SessionRecording.html#event:onseek">Guacamole.SessionRecording#onseek</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onerror">Guacamole.SessionRecording._PlaybackTunnel#onerror</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:oninstruction">Guacamole.SessionRecording._PlaybackTunnel#oninstruction</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onstatechange">Guacamole.SessionRecording._PlaybackTunnel#onstatechange</a></li><li><a href="Guacamole.SessionRecording._PlaybackTunnel.html#event:onuuid">Guacamole.SessionRecording._PlaybackTunnel#onuuid</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onerror">Guacamole.StaticHTTPTunnel#onerror</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:oninstruction">Guacamole.StaticHTTPTunnel#oninstruction</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onstatechange">Guacamole.StaticHTTPTunnel#onstatechange</a></li><li><a href="Guacamole.StaticHTTPTunnel.html#event:onuuid">Guacamole.StaticHTTPTunnel#onuuid</a></li><li><a href="Guacamole.StringReader.html#event:onend">Guacamole.StringReader#onend</a></li><li><a href="Guacamole.StringReader.html#event:ontext">Guacamole.StringReader#ontext</a></li><li><a href="Guacamole.StringWriter.html#event:onack">Guacamole.StringWriter#onack</a></li><li><a href="Guacamole.Touch.html#event:touchend">Guacamole.Touch#touchend</a></li><li><a href="Guacamole.Touch.html#event:touchmove">Guacamole.Touch#touchmove</a></li><li><a href="Guacamole.Touch.html#event:touchstart">Guacamole.Touch#touchstart</a></li><li><a href="Guacamole.Tunnel.html#event:onerror">Guacamole.Tunnel#onerror</a></li><li><a href="Guacamole.Tunnel.html#event:oninstruction">Guacamole.Tunnel#oninstruction</a></li><li><a href="Guacamole.Tunnel.html#event:onstatechange">Guacamole.Tunnel#onstatechange</a></li><li><a href="Guacamole.Tunnel.html#event:onuuid">Guacamole.Tunnel#onuuid</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onerror">Guacamole.WebSocketTunnel#onerror</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:oninstruction">Guacamole.WebSocketTunnel#oninstruction</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onstatechange">Guacamole.WebSocketTunnel#onstatechange</a></li><li><a href="Guacamole.WebSocketTunnel.html#event:onuuid">Guacamole.WebSocketTunnel#onuuid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Nov 28 2023 12:21:47 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
