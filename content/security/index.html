@@ -439,6 +439,28 @@ latest would give you an updated image.</p>
 <p>No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 <a href="http://logback.qos.ch/">Logback</a> as its logging backend, not Log4j.</p>
 
+<h2 id="fixed-in-apache-guacamole-154">Fixed in Apache Guacamole 1.5.4</h2>
+<ul>
+    
+        <li>
+            <h3 id="CVE-2023-43826">
+                Integer overflow in handling of VNC image buffers
+                (<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-43826">CVE-2023-43826</a>)
+            </h3>
+            <p>Apache Guacamole 1.5.3 and older do not consistently ensure that values
+received from a VNC server will not result in integer overflow. If a user
+connects to a malicious or compromised VNC server, specially crafted data could
+result in memory corruption, possibly allowing arbitrary code to be executed
+with the privileges of the running guacd process.</p>
+
+<p>Acknowledgements: We would like to thank Joseph Surin and Matt Jones (Elttam)
+for reporting this issue.</p>
+
+
+        </li>
+    
+</ul>
+
 <h2 id="fixed-in-apache-guacamole-152">Fixed in Apache Guacamole 1.5.2</h2>
 <ul>
     
