@@ -4,15 +4,7 @@
     {% endif %}
     <ul>
         {% for entry in include.entries %}
-            <li><a href="{{ entry[1] | prepend: site.baseurl }}"
-                   onclick="trackDownload(
-                       'click',
-                       '{{ entry[1] | split: "/" | last }}'
-                   )"
-                   oncontextmenu="trackDownload(
-                       'menu',
-                       '{{ entry[1] | split: "/" | last }}'
-                   )">{{ entry[0] }}</a></li>
+            <li><a href="{{ entry[1] | prepend: site.baseurl }}">{{ entry[0] }}</a></li>
         {% endfor %}
     </ul>
 {% endif %}
