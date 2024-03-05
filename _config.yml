@@ -37,7 +37,12 @@ collections:
         output: true
         permalink: /releases/:title/
 
-    # All Guacamole releases from prior to the Apache Incubator
+    # All Guacamole releases prior to graduation from the Apache Incubator
+    incubator-releases:
+        output: true
+        permalink: /releases/:title/
+
+    # All Guacamole releases from prior to entering the Apache Incubator
     legacy-releases:
         output: true
         permalink: /releases/:title/
@@ -62,6 +67,8 @@ defaults:
       values: { layout: legacy-release }
 
     # All other releases should use the "release" layout
+    - scope:  { type: incubator-releases }
+      values: { layout: release }
     - scope:  { type: releases }
       values: { layout: release }
 

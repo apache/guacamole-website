@@ -1,77 +1,90 @@
 ---
-layout: default
+layout: fullwidth
 permalink: /release/release-notes-:title
 ---
 
-{% unless page.released %}
-    <div class="draft-disclaimer">
-        <p><strong>Apache Guacamole {{ page.title }} has not yet been
-        released!</strong> The artifacts and release notes below are drafts for
-        a proposed release of Apache Guacamole which has not yet occurred.</p>
+<h1 class="title">
+    Apache Guacamole {{ page.title }}
+    <span class="release-type">
+        {% unless page.released %}
+            (Draft)
+        {% endunless %}
+        {% if page.archived %}
+            (Archived)
+        {% endif %}
+    </span>
+</h1>
+
+<div class="readable-content">
+
+    {% unless page.released %}
+        <div class="note">
+            <p><strong>Apache Guacamole {{ page.title }} has not yet been
+            released!</strong> The artifacts and release notes below are drafts for
+            a proposed release of Apache Guacamole which has not yet occurred.</p>
+        </div>
+    {% endunless %}
+
+    {% if page.archived %}
+        {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
+        <div class="note">
+            <p>Apache Guacamole {{ page.title }} is an archived release, and was
+            originally released on {{ page.date | date: "%Y-%m-%d" }}. <strong>The
+            latest release of Apache Guacamole is <a href="{{ latest.url }}">{{
+                latest.title }}</a>.</strong></p>
+        </div>
+    {% endif %}
+
+    <div id="links">
+
+        {% include link-list.html
+            title="Release documentation"
+            entries=page.documentation %}
+
     </div>
-{% endunless %}
 
-{% if page.archived %}
-    {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
-    <div class="archive-disclaimer">
-        <p>Apache Guacamole {{ page.title }} is an archived release, and was
-        originally released on {{ page.date | date: "%Y-%m-%d" }}. <strong>The
-        latest release of Apache Guacamole is <a href="{{ latest.url }}">{{
-            latest.title }}</a>.</strong></p>
+    <p>Apache Guacamole is split into two subprojects: "guacamole-client", the
+    HTML5 web application which serves the Guacamole client to users, and
+    "guacamole-server", the remote desktop proxy which the web application
+    communicates with. The source code for each of these may be downloaded
+    below.</p>
+
+    <p>You <strong>must</strong> <a href="https://www.apache.org/info/verification.html">
+    verify the integrity of any downloaded files</a> using the OpenPGP signatures
+    we provide with each release. The signatures should be verified against the
+    <a href="https://downloads.apache.org/guacamole/KEYS">KEYS</a>
+    file, which contains the OpenPGP keys of Apache Guacamole's Release Managers.
+    Checksums of each released file are also provided.</p>
+
+    <!-- Source archives -->
+    <div class="release-downloads">
+        {% include download-list.html
+            artifact-url=page.artifact-url
+            checksum-url=page.checksum-url
+            checksum-suffixes=page.checksum-suffixes
+            path=page.download-path
+            files=page.source-dist %}
     </div>
-{% endif %}
 
-<h1>Apache Guacamole {{ page.title }}</h1>
+    <p>If you do not wish to build Apache Guacamole entirely from source, pre-built
+    versions of the web application (.war) and all extensions are provided here in
+    binary form for convenience.  <strong>Please note that guacamole-server must
+    still be built and installed from source.</strong></p>
 
-<div id="links">
+    <!-- All binaries -->
+    <div class="release-downloads">
+        {% include download-list.html
+            artifact-url=page.artifact-url
+            checksum-url=page.checksum-url
+            checksum-suffixes=page.checksum-suffixes
+            path=page.download-path
+            files=page.binary-dist %}
+    </div>
 
-    {% include link-list.html
-        title="Release documentation"
-        entries=page.documentation %}
+    <!-- Release notes -->
+    <div id="release-notes">
+        <h1>Release notes</h1>
+        {{ content }}
+    </div>
 
 </div>
-
-<p>Apache Guacamole is split into two subprojects: "guacamole-client", the
-HTML5 web application which serves the Guacamole client to users, and
-"guacamole-server", the remote desktop proxy which the web application
-communicates with. The source code for each of these may be downloaded
-below.</p>
-
-<p>You <strong>must</strong> <a href="https://www.apache.org/info/verification.html">
-verify the integrity of any downloaded files</a> using the OpenPGP signatures
-we provide with each release. The signatures should be verified against the
-<a href="https://downloads.apache.org/guacamole/KEYS">KEYS</a>
-file, which contains the OpenPGP keys of Apache Guacamole's Release Managers.
-Checksums of each released file are also provided.</p>
-
-<!-- Source archives -->
-<div class="release-downloads">
-    {% include download-list.html
-        artifact-url=page.artifact-url
-        checksum-url=page.checksum-url
-        checksum-suffixes=page.checksum-suffixes
-        path=page.download-path
-        files=page.source-dist %}
-</div>
-
-<p>If you do not wish to build Apache Guacamole entirely from source, pre-built
-versions of the web application (.war) and all extensions are provided here in
-binary form for convenience.  <strong>Please note that guacamole-server must
-still be built and installed from source.</strong></p>
-
-<!-- All binaries -->
-<div class="release-downloads">
-    {% include download-list.html
-        artifact-url=page.artifact-url
-        checksum-url=page.checksum-url
-        checksum-suffixes=page.checksum-suffixes
-        path=page.download-path
-        files=page.binary-dist %}
-</div>
-
-<!-- Release notes -->
-<div id="release-notes">
-    <h1>Release notes</h1>
-    {{ content }}
-</div>
-

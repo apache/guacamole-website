@@ -1,0 +1,21 @@
+{% if include.releases != empty %}
+    <li class="{{ include.class }}">
+        <h3 class="release-section">{{ include.title }}</h3>
+        {% if include.description %}
+            <div class="release-section-description">{{ include.description }}</div>
+        {% endif %}
+    </li>
+    {% for release in include.releases %}
+        {% if release.title %}
+            <li class="{{ include.class }}">
+                <a class="release-version" href="{{ release.url | prepend: site.baseurl }}">
+                    <p class="release-tag">
+                        <span class="release-version">{{ release.title }}</span>
+                        <span class="release-date">{{ release.date | date: "%Y-%m-%d" }}</span>
+                    </p>
+                    <p class="release-summary">{{ release.summary }}</p>
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endif %}
