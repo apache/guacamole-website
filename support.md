@@ -10,10 +10,10 @@ subscribe to these lists, and members of the community are encouraged to do the
 same.
 
 We also consider the availability of commercial support to be crucial to the
-success of Apache Guacamole, and thus maintain a list of [third party
-companies](#commercial-support) providing commercial support. If you provide
-commercial support and would like your company to be listed, please send us an
-email, and we will work with you to do so.
+success of Apache Guacamole, and thus maintain [a list of third party
+companies providing commercial support](#commercial-support). If you represent
+a company that provides commercial support for Apache Guacamole, you may also
+[request to be listed here](#requesting-to-be-listed).
 
 Mailing Lists
 -------------
@@ -72,13 +72,18 @@ Commercial Support
 As some of the main target audiences for Apache Guacamole are enterprises and
 companies that need to provide access to many computers (hence its design as a
 gateway), we consider the availability of commercial support crucial to
-Guacamole's success. If you provide commercial support and would like your
-company to be listed, please send us an email, and we will work with you to do
-so.
+Guacamole's success. The companies listed below have requested to be listed as
+commercial support providers. If you represent a company that provides
+commercial support for Apache Guacamole, you may also [request to be listed
+here](#requesting-to-be-listed).
 
-Companies providing support for Apache Guacamole are not endorsed by the Apache
-Software Foundation, though some such companies do employ committers of the
-Apache Guacamole project.
+<div class="note">
+    <p>Companies providing support for Apache Guacamole are <strong>not
+endorsed nor vetted</strong> by the Apache Software Foundation, though some
+such companies do employ committers of the Apache Guacamole project. The links,
+logos, names, and descriptions below were provided by their respective
+companies.</p>
+</div>
 
 <ul class="company-list">
     {% for company in site.companies %}
@@ -93,4 +98,17 @@ Apache Guacamole project.
         </li>
     {% endfor %}
 </ul>
+
+### Requesting to be listed
+
+If you provide commercial support and would like your company to be listed,
+please [open a pull request against the Apache Guacamole website](https://github.com/apache/guacamole-website)
+and we will work with you to add your company to the list. The criteria to be
+listed are:
+
+1. Your company appears to exist.
+2. Your company's website publicly lists that you provide support for Apache Guacamole in some capacity.
+3. You provide a short blurb describing your company (no more than 50 words). The blurb must
+   be written in a neutral and factual manner (avoid subjective assertions).
+4. You provide a PNG or JPEG logo no more than 144x144 pixels in size.
 
