@@ -89,10 +89,10 @@ companies.</p>
     {% for company in site.companies %}
         <li class="company">
             {% if company.logo %}
-                <div class="company-logo"><a href="{{ company.location }}"><img src="{{ company.logo }}"/></a></div>
+                <div class="company-logo"><a href="{{ company.location }}" rel="nofollow"><img src="{{ company.logo }}" alt="Logo for {{ company.title }}"/></a></div>
             {% endif %}
             <div class="company-description">
-                <h3><a href="{{ company.location }}">{{ company.title }}</a></h3>
+                <h3><a href="{{ company.location }}" rel="nofollow">{{ company.title }}</a></h3>
                 {{ company.content }}
             </div>
         </li>
