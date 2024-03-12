@@ -28,6 +28,18 @@ will need to subscribe prior to sending email to any list.** All mailing lists
 are actively filtered for spam, and any email not originating from a subscriber
 will bounce.
 
+<div class="note">
+    <p>Before posting to any Apache Guacamole mailing list, please remember to
+be respectful and considerate of the community that subscribes to that
+list:</p>
+    <ul>
+        <li>Abide by <a href="https://www.apache.org/foundation/policies/conduct.html">the ASF's Code of Conduct</a>.</li>
+        <li><strong>DO NOT</strong> send unsolicited messages advertising a product or service.</li>
+        <li><strong>DO NOT</strong> use the mailing lists to promote proprietary enhancements.</li>
+    </ul>
+    <p>Thank you!</p>
+</div>
+
 ### General Discussion / Questions ([user@guacamole.apache.org](mailto:user@guacamole.apache.org))
 
 The general/users list is intended for general questions and discussions which
