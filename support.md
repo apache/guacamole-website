@@ -40,26 +40,8 @@ list:</p>
     <p>Thank you!</p>
 </div>
 
-### General Discussion / Questions ([user@guacamole.apache.org](mailto:user@guacamole.apache.org))
-
-The general/users list is intended for general questions and discussions which
-do not necessarily pertain to development. This list replaces the old
-[SourceForge forums](https://sourceforge.net/p/guacamole/discussion/) used by
-Guacamole prior to its acceptance into the Apache Incubator.
-
-* [Subscribe](mailto:user-subscribe@guacamole.apache.org)
-* [Unsubscribe](mailto:user-unsubscribe@guacamole.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-user/)
-
-### Development ([dev@guacamole.apache.org](mailto:dev@guacamole.apache.org))
-
-The development list is for development-related discussion involving people who
-are contributors to the Apache Guacamole project (or who wish to become
-contributors).
-
-* [Subscribe](mailto:dev-subscribe@guacamole.apache.org)
-* [Unsubscribe](mailto:dev-unsubscribe@guacamole.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-dev/)
+{% assign lists = site.mailing-lists | where: 'category', 'primary' %}
+{% include mailing-list-list.html mailing-lists=lists %}
 
 [The Guacamole Manual](/doc/gug/)
 ---------------------------------

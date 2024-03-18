@@ -1,0 +1,32 @@
+{% for list in include.mailing-lists | sort: 'title' | sort: 'order', 'last' %}
+<h3 class="mailing-list-title">{{ list.title }}</h3>
+
+{{ list.content }}
+
+<table class="mailing-list-instructions">
+
+    <tr>
+        <th>Subscribing</th>
+        <td>Send a blank email to
+            <a class="email" href="mailto:{{ list.name }}-subscribe@guacamole.apache.org">{{ list.name }}-subscribe@guacamole.apache.org</a>.</td>
+    </tr>
+
+    {% unless list.read-only %}
+    <tr>
+        <th>Posting</th>
+        <td>Send an email to
+            <a class="email" href="mailto:{{ list.name }}@guacamole.apache.org">{{ list.name }}@guacamole.apache.org</a>.
+            <strong>Be sure to subscribe first.</strong></td>
+    </tr>
+    {% endunless %}
+
+    <tr>
+        <th>Unsubscribing</th>
+        <td>Send a blank email to
+            <a class="email" href="mailto:{{ list.name }}-unsubscribe@guacamole.apache.org">{{ list.name }}-unsubscribe@guacamole.apache.org</a>.</td>
+    </tr>
+
+</table>
+
+<p class="mailing-list-archive"><a href="https://lists.apache.org/list.html?{{ list.name }}@guacamole.apache.org">View Archives</a></p>
+{% endfor %}

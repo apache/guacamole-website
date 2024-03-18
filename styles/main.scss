@@ -33,6 +33,11 @@ a[href]:visited { color: #12551f; }
 #footer a[href]         { color: #ccc; }
 #footer a[href]:visited { color: #ccc; }
 
+a[href].email {
+    font-family: 'Inconsolata', monospace;
+    font-weight: normal;
+}
+
 div#header {
     color: white;
     background: #102510;
@@ -482,6 +487,17 @@ li {
     line-height: 1.5;
 }
 
+dt {
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+dd {
+  line-height: 1.5;
+  margin: 1em 2em;
+  margin-top: 0.5em;
+}
+
 .readable-content {
     width: 100%;
     max-width: 1366px;
@@ -878,6 +894,48 @@ ul.releases li.incubator .release-tag .release-version {
     margin-right: 0.25em;
     border-radius: 3px;
     font-size: 0.75em;
+}
+
+.mailing-list-title {
+  margin-bottom: 0;
+}
+
+p.mailing-list-archive a[href] {
+  border: 3px solid #12551f;
+  text-decoration: none;
+  border-radius: 3px;
+  padding: 0.25em 0.5em;
+}
+
+p.mailing-list-archive a[href]:hover {
+  text-decoration: underline;
+  background: #12551f;
+  color: white;
+}
+
+table.mailing-list-instructions,
+p.mailing-list-archive {
+  margin-left: 1em;
+}
+
+table.mailing-list-instructions {
+  border-collapse: collapse;
+}
+
+table.mailing-list-instructions th:after {
+  display: inline-block;
+  content: ' ';
+  border-bottom: 1.5pt dotted;
+  flex: 1;
+  min-width: 3em;
+  margin-left: 0.125em;
+  height: 1em;
+  margin-top: -1.5pt;
+}
+
+table.mailing-list-instructions th {
+  display: flex;
+  text-align: left;
 }
 
 /* Style appropriately for printing */

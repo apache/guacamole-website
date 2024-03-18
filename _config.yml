@@ -55,6 +55,10 @@ collections:
     companies:
         output: false
 
+    # Pseudo-pages describing public mailing lists
+    mailing-lists:
+        output: false
+
     # Public security vulnerabilities
     security:
         output: false
