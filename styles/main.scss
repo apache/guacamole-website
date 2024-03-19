@@ -677,6 +677,15 @@ div#links ul li a[href] {
   text-decoration: underline;
 }
 
+ul.cve-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.cve-list li p {
+  margin-left: 1em;
+}
+
 ul.company-list {
     padding: 0;
     list-style: none;
