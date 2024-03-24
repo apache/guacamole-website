@@ -66,7 +66,7 @@ greater good. It is thus important to remember:
    naive copies of entire files cannot be accepted as they lack context and
    are likely out of date.
 4. Code must follow consistent style or it will become unreadable and
-   unmaintainable. Please read through our [style guidelines](/guac-style/) and,
+   unmaintainable. Please read through our [style guidelines](https://cwiki.apache.org/confluence/display/GUAC/Contribution+and+Style+Guidelines) and,
    when in doubt, follow the style of the code you are modifying.
 
 Our full contribution guidelines can be found in the `CONTRIBUTING` file in any
@@ -85,7 +85,7 @@ offered committership.
 
 Committers have write access to Apache Guacamole's git repositories, but do not
 make direct changes on their own behalf. Code changes are made only through
-[pull requests](/pull-requests/), and are merged only after code review by
+[pull requests](https://cwiki.apache.org/confluence/display/GUAC/Managing+Pull+Requests), and are merged only after code review by
 a committer not otherwise directly involved in those changes.
 
 ### Resources for committers:
@@ -93,15 +93,15 @@ a committer not otherwise directly involved in those changes.
 * [Committers' FAQ](http://www.apache.org/dev/committers.html)
 * [Guide for new committers](http://www.apache.org/dev/new-committers-guide.html)
 * [Maintaining the website](https://github.com/apache/guacamole-website/blob/master/README.md)
-* [Managing pull requests](/pull-requests/)
-* [Style guidelines](/guac-style/)
+* [Managing pull requests](https://cwiki.apache.org/confluence/display/GUAC/Managing+Pull+Requests)
+* [Style guidelines](https://cwiki.apache.org/confluence/display/GUAC/Contribution+and+Style+Guidelines)
 
 ### Release procedures:
 
-* [Beginning the release process](/release-procedures-part1/)
-* [Producing a release candidate](/release-procedures-part2/)
-* [Promoting a release candidate to release](/release-procedures-part3/)
-* [Announcing the release](/release-procedures-part4/)
+* [Beginning the release process](https://cwiki.apache.org/confluence/display/GUAC/Beginning+the+release+process)
+* [Producing a release candidate](https://cwiki.apache.org/confluence/display/GUAC/Producing+a+release+candidate)
+* [Promoting a release candidate to release](https://cwiki.apache.org/confluence/display/GUAC/Promoting+a+release+candidate+to+release)
+* [Announcing the release](https://cwiki.apache.org/confluence/display/GUAC/Announcing+the+release)
 
 PMC members
 -----------
