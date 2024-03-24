@@ -1,0 +1,49 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/*
+ * Colors for general typography.
+ */
+
+$text-color: black;
+$background-color: white;
+$link-text-color: #12551f;
+
+/*
+ * Header section (common to all pages).
+ */
+
+$header-background-color: #102510;
+
+/*
+ * Footer section (common to all pages).
+ */
+
+$footer-background-color: $header-background-color;
+$footer-text-color: #ccc;
+$footer-link-text-color: $footer-text-color;
+
+/*
+ * Callouts (ie: sections that begin with a "note", "warning", "important", or
+ * similar header).
+ */
+
+$note-heading-background-color: #87dc8d;
+$note-background-color: #e1ffe3;
+

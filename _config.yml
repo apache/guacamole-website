@@ -29,6 +29,10 @@ exclude:
     - content
     - doc
 
+# Minify output from SASS
+sass:
+  style: compressed
+
 # Custom collections
 collections:
 

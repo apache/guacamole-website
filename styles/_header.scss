@@ -1,0 +1,201 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@use 'colors';
+
+div#header {
+    color: white;
+    background: colors.$header-background-color;
+    display: table;
+    width: 100%;
+}
+
+#header h1 {
+    text-align: left;
+    font-size: 1.75em;
+    margin: 0.25em 0;
+    white-space: nowrap;
+}
+
+#header .readable-content {
+    display: flex;
+    align-items: center;
+}
+
+#header .readable-content h1 {
+    flex: 1;
+}
+
+#header h1 a[href] {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#header h1 a[href]:before {
+    display: inline-block;
+    content: ' ';
+    width: 2em;
+    height: 2em;
+    vertical-align: middle;
+    margin-right: 0.25em;
+    background-image: url('/images/guac-tricolor-logo.svg');
+    background-repeat: no-repeat;
+    background-size:         cover;
+    background-position:         center;
+}
+
+ul#navigation {
+    text-align: right;
+    font-size: 0.9em;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+}
+
+#navigation li a[href="#download"],
+#navigation li a[href="/faq/"] {
+    font-weight: bold;
+}
+
+#navigation li {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    border-radius: 3px;
+}
+
+#navigation a[href] {
+    color: inherit;
+    text-decoration: none;
+}
+
+#navigation li a {
+    display: block;
+    padding: 0.5em;
+    border-radius: 3px;
+}
+
+#navigation .dropdown-menu a {
+    font-weight: normal;
+}
+
+#navigation li a:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+#navigation a.apache,
+#navigation a.download,
+#navigation a.github {
+    padding-left: 2em;
+    font-weight: bold;
+
+    background-position: 0.5em center;
+    background-size: 1em;
+    background-repeat: no-repeat;
+}
+
+#navigation a.apache {
+    background-image: url('/images/feather.png');
+    padding-left: 1.5em;
+    background-size: 0.7em;
+}
+
+#navigation a.github {
+    background-image: url('/images/github-mark.png');
+}
+
+#navigation li.dropdown .dropdown-menu {
+    display: none;
+    overflow: hidden;
+}
+
+#navigation li.dropdown.open {
+    background: rgba(255, 255, 255, 0.25);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#navigation li.dropdown.open .dropdown-menu {
+    position: absolute;
+    left: 0;
+    display: block;
+    padding: 0.5em;
+    text-align: left;
+    min-width: 100%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    background: colors.$header-background-color;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+}
+
+#navigation li.dropdown .dropdown-menu li {
+    display: block;
+}
+
+#navigation li.dropdown .dropdown-toggle::after {
+    display: inline-block;
+    content: ' ';
+    width: 0;
+    height: 0;
+    border-left: 0.25em solid transparent;
+    border-right: 0.25em solid transparent;
+    border-top: 0.25em solid;
+    vertical-align: middle;
+    margin-left: 0.25em;
+}
+
+/* Style appropriately for printing */
+@media print {
+    div#header {
+        background: none;
+        display: none;
+    }
+
+    #header h1 {
+        text-align: right;
+        margin: 1em 0;
+        font-size: 1em;
+    }
+
+    #header h1 {
+        background: none;
+        color: black;
+        padding: 0;
+    }
+
+    #navigation {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #header .readable-content {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #header #navigation {
+        display: none;
+    }
+}
+

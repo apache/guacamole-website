@@ -1,0 +1,153 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ul.releases {
+    display: table;
+    margin: 0;
+    padding: 0;
+}
+
+ul.releases li {
+    display: table-row-group;
+}
+
+ul.releases li > a[href] {
+    display: table-row;
+    text-decoration: none;
+    position: relative;
+    z-index: 0;
+}
+
+ul.releases li > a[href] .release-date,
+ul.releases li > a[href] .release-summary {
+    font-weight: normal;
+    color: black;
+    padding-left: 0.75em;
+}
+
+ul.releases li > a[href]:hover {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+ul.releases li > a[href]:hover .release-summary {
+    text-decoration: underline;
+}
+
+ul.releases li .release-tag,
+ul.releases li .release-summary {
+    display: table-cell;
+    padding: 0.25em 0.5em;
+    vertical-align: middle;
+    border: 1px solid transparent;
+}
+
+ul.releases li .release-summary {
+    border-left: none;
+}
+
+ul.releases li > a[href]:hover .release-tag,
+ul.releases li > a[href]:hover .release-summary {
+    border-color: black;
+}
+
+ul.releases li .release-date {
+    display: block;
+    opacity: 0.6;
+    font-family: 'Inconsolata';
+    font-size: 0.75em;
+}
+
+ul.releases li .release-tag {
+    font-size: 1.5em;
+    text-align: right;
+    white-space: nowrap;
+    background: #eaeaea;
+    position: relative;
+    border-right: none;
+}
+
+ul.releases li .release-tag .release-version {
+    text-decoration: underline;
+}
+
+ul.releases li .release-tag:after {
+    display: block;
+    content: ' ';
+    background: black;
+    width: 11px;
+    height: 11px;
+    border-radius: 11px;
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+    right: -4px;
+}
+
+ul.releases li .release-tag:before {
+    display: block;
+    content: ' ';
+    background: black;
+    width: 3px;
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    right: 0;
+}
+
+ul.releases li .release-section {
+    display: table-cell;
+    border-right: 3px dotted black;
+    height: 3em;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+ul.releases li .release-section-description {
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0.75em;
+}
+
+ul.releases li.current .release-tag {
+    background: #dfffdf;
+}
+
+ul.releases li.current .release-tag:before {
+    top: 50%;
+}
+
+ul.releases li.current .release-section {
+    border-right-color: transparent;
+}
+
+ul.releases li:last-child .release-tag:before {
+    bottom: 50%;
+}
+
+ul.releases li.incubator .release-tag .release-version {
+    font-size: 0.75em;
+    max-width: 25vw;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
