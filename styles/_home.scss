@@ -44,28 +44,27 @@ ul.features li::before {
     background-repeat: no-repeat;
     background-size: 75%;
     background-position: center;
-    filter: invert(1);
 }
 
 ul.features li.apache::before {
-    background-image: url('/images/feather.png');
+    background-image: url('/images/feather-black.png');
     background-size: 40%;
 }
 
 ul.features li.html5::before {
-    background-image: url('/images/html5-white.png');
+    background-image: url('/images/html5-black.png');
 }
 
 ul.features li.cloud-desktop::before {
-    background-image: url('/images/cloud-desktop.png');
+    background-image: url('/images/cloud-desktop-black.png');
 }
 
 ul.features li.documented-api::before {
-    background-image: url('/images/code.png');
+    background-image: url('/images/code-black.png');
 }
 
 ul.features li.commercially-supported::before {
-    background-image: url('/images/business.png');
+    background-image: url('/images/business-black.png');
 }
 
 ul.features li h2 {
