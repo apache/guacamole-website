@@ -22,16 +22,15 @@
 }
 
 p.mailing-list-archive a[href] {
-    border: 3px solid #12551f;
+    border: 1px solid #12551f;
     text-decoration: none;
     border-radius: 3px;
     padding: 0.25em 0.5em;
+    font-weight: normal;
 }
 
 p.mailing-list-archive a[href]:hover {
     text-decoration: underline;
-    background: #12551f;
-    color: white;
 }
 
 table.mailing-list-instructions,
