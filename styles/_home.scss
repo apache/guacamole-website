@@ -35,7 +35,6 @@ ul.features li::before {
     content: ' ';
     height: 1in;
     width: 1in;
-    border-radius: 1in;
     display: block;
     position: absolute;
     left: 0;
@@ -47,24 +46,23 @@ ul.features li::before {
 }
 
 ul.features li.apache::before {
-    background-image: url('/images/feather-black.png');
-    background-size: 40%;
+    background-image: url('/images/feature-open-source.svg');
 }
 
 ul.features li.html5::before {
-    background-image: url('/images/html5-black.png');
+    background-image: url('/images/feature-access-anywhere.svg');
 }
 
 ul.features li.cloud-desktop::before {
-    background-image: url('/images/cloud-desktop-black.png');
+    background-image: url('/images/feature-cloud-desktop.svg');
 }
 
 ul.features li.documented-api::before {
-    background-image: url('/images/code-black.png');
+    background-image: url('/images/feature-well-documented.svg');
 }
 
 ul.features li.commercially-supported::before {
-    background-image: url('/images/business-black.png');
+    background-image: url('/images/feature-supported.svg');
 }
 
 ul.features li h2 {
