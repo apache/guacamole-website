@@ -94,3 +94,5 @@ listed are:
    be written in a neutral and factual manner (avoid subjective assertions).
 4. You provide a PNG or JPEG logo no more than 144x144 pixels in size.
 
+For examples of this in practice, please look at [previous pull requests
+submitted by other companies](https://github.com/apache/guacamole-website/pull/96).
