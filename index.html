@@ -1,44 +1,50 @@
 ---
-layout: default
+layout: fullwidth
+class: home
 ---
 
 <!-- Prominent software description/demo -->
 <div class="hook">
+    <div class="readable-content">
 
-    <!-- Demo Video -->
-    <div class="demo">
-        <img class="thumbnail" src="/images/demo-thumbnail.jpg"
-             alt="Screenshot of Guacamole 0.9.4"/>
-         <iframe
-            src="//player.vimeo.com/video/116207678?title=0&amp;byline=0&amp;portrait=0"
-            frameborder="0" webkitallowfullscreen mozallowfullscreen
-            allowfullscreen></iframe>
+        <!-- Demo Video -->
+        <div class="demo">
+            <img class="thumbnail" src="/images/home/demo-thumbnail.jpg"
+                 alt="Screenshot of Guacamole 0.9.4"/>
+             <iframe
+                src="//player.vimeo.com/video/116207678?title=0&amp;byline=0&amp;portrait=0"
+                frameborder="0" webkitallowfullscreen mozallowfullscreen
+                allowfullscreen></iframe>
+        </div>
+
+        <!-- High-level description -->
+        <div class="description">
+            <p>Apache Guacamole is a <strong>clientless remote desktop
+            gateway</strong>. It supports standard protocols like VNC, RDP, and
+            SSH.</p>
+
+            <p>We call it <em>clientless</em> because no plugins or client software
+            are required.</p>
+
+            <p>Thanks to HTML5, once Guacamole is installed on a server, all you
+            need to access your desktops is a web browser.</p>
+
+            <!-- Link to latest release -->
+            {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
+            <a href="{{ latest.url }}" class="latest-release">
+                <span class="action">Download
+                    <span class="release-title">Apache Guacamole {{ latest.title }}</span>
+                </span>
+                <span class="release-date">Released on {{ latest.date | date: "%Y-%m-%d" }}</span>
+            </a>
+
+        </div>
+
     </div>
-
-    <!-- High-level description -->
-    <div class="description">
-        <p>Apache Guacamole is a <strong>clientless remote desktop
-        gateway</strong>. It supports standard protocols like VNC, RDP, and
-        SSH.</p>
-
-        <p>We call it <em>clientless</em> because no plugins or client software
-        are required.</p>
-
-        <p>Thanks to HTML5, once Guacamole is installed on a server, all you
-        need to access your desktops is a web browser.</p>
-    </div>
-
-</div>
-
-<!-- Link to latest release -->
-<div class="latest-release">
-    {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
-    Latest release: <a href="{{ latest.url }}"
-       class="version">{{ latest.title }}</a> (released on {{ latest.date }})
 </div>
 
 <!-- List of features -->
-<ul class="features">
+<ul class="features readable-content">
     <li class="html5">
         <h2>Access your computers from <em>anywhere</em></h2>
         <p>Because the Guacamole client is an HTML5 web application, use of your computers is not tied to any one device or location. <strong>As long as you have access to a web browser, you have access to your machines.</strong></p>
@@ -57,8 +63,8 @@ layout: default
         <p>Apache Guacamole is built on its own stack of core APIs which are <a href="/api-documentation/">thoroughly documented</a>, including basic tutorials and conceptual overviews in the <a href="/doc/gug/">online manual</a>. These APIs allow Guacamole to be tightly integrated into other applications, whether they be open source or proprietary.</p>
     </li>
     <li class="commercially-supported">
-        <h2>Commercially supported</h2>
-        <p>For enterprises, dedicated commercial support is also available through <a href="/support/#commercial-support">third party companies</a>.</p>
+        <h2>Community and commercially supported</h2>
+        <p>Community support for Apache Guacamole is available through <a href="/support/#mailing-lists">the project's public mailing lists</a>. Dedicated commercial support is also available through <a href="/support/#commercial-support">third party companies</a>.</p>
     </li>
 </ul>
 

@@ -1,5 +1,5 @@
 ---
 menu-title:  Security Reports
-menu-weight: 4
+menu-weight: 3
 location:    /security/
 ---

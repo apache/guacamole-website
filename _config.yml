@@ -29,6 +29,10 @@ exclude:
     - content
     - doc
 
+# Minify output from SASS
+sass:
+  style: compressed
+
 # Custom collections
 collections:
 
@@ -37,7 +41,12 @@ collections:
         output: true
         permalink: /releases/:title/
 
-    # All Guacamole releases from prior to the Apache Incubator
+    # All Guacamole releases prior to graduation from the Apache Incubator
+    incubator-releases:
+        output: true
+        permalink: /releases/:title/
+
+    # All Guacamole releases from prior to entering the Apache Incubator
     legacy-releases:
         output: true
         permalink: /releases/:title/
@@ -48,6 +57,10 @@ collections:
 
     # Pseudo-pages describing third-party support companies
     companies:
+        output: false
+
+    # Pseudo-pages describing public mailing lists
+    mailing-lists:
         output: false
 
     # Public security vulnerabilities
@@ -62,6 +75,8 @@ defaults:
       values: { layout: legacy-release }
 
     # All other releases should use the "release" layout
+    - scope:  { type: incubator-releases }
+      values: { layout: release }
     - scope:  { type: releases }
       values: { layout: release }
 

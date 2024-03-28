@@ -1,5 +1,5 @@
 ---
-menu-title:  Apache Software Foundation
+menu-title:  ASF
 menu-class:  apache
 menu-weight: 5
 ---
