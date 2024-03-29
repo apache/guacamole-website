@@ -172,34 +172,6 @@
                 <revision>0.9.14</revision>
             </Version>
         </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2017-07-30</created>
-                <revision>0.9.13-incubating</revision>
-            </Version>
-        </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2017-04-01</created>
-                <revision>0.9.12-incubating</revision>
-            </Version>
-        </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2017-02-02</created>
-                <revision>0.9.11-incubating</revision>
-            </Version>
-        </release>
-        <release>
-            <Version>
-                <name>Apache Guacamole</name>
-                <created>2016-12-29</created>
-                <revision>0.9.10-incubating</revision>
-            </Version>
-        </release>
 
     </Project>
 </rdf:RDF>
