@@ -1,43 +1,51 @@
 ---
-layout: default
+layout: fullwidth
 permalink: /release/release-notes-:title
 ---
 
-{% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
-<div class="legacy-release-note">
-    <p><strong>The release below is from prior to Guacamole's acceptance into
-        the Apache Incubator.</strong> It is not an Apache Software Foundation
-        release, and is licensed under the <a
-     href="https://opensource.org/licenses/MIT">MIT license</a>. The latest
-     release of Apache Guacamole is <a href="{{ latest.url }}">{{
-         latest.title }}</a>.</p>
+<h1 class="title">
+    Guacamole {{ page.title }}
+    <span class="release-type">
+        (Legacy)
+    </span>
+</h1>
+
+<div class="readable-content">
+
+    {% assign latest = site.releases | where: 'released', 'true' | sort: 'date'  | last %}
+    <div class="note">
+        <p><strong>The release below is from prior to Guacamole's acceptance into
+            the Apache Incubator.</strong> It is not an Apache Software Foundation
+            release, and is licensed under the <a
+         href="https://opensource.org/licenses/MIT">MIT license</a>. The latest
+         release of Apache Guacamole is <a href="{{ latest.url }}">{{
+             latest.title }}</a>.</p>
+    </div>
+
+    <div id="links">
+
+        <!-- Compatible extensions -->
+        {% include legacy-download-list.html
+            title="Compatible extensions"
+            entries=page.extensions %}
+
+        <!-- Binary .war -->
+        {% include legacy-download-list.html
+            title="Web application (.war)"
+            entries=page.binary-war %}
+
+        <!-- Source archives -->
+        {% include legacy-download-list.html
+            title="Source"
+            entries=page.source-archives %}
+
+        <!-- Documentation -->
+        {% include link-list.html
+            title="Release documentation"
+            entries=page.documentation %}
+
+    </div>
+
+    {{ content }}
+
 </div>
-
-<div id="links">
-
-    <!-- Compatible extensions -->
-    {% include legacy-download-list.html
-        title="Compatible extensions"
-        entries=page.extensions %}
-
-    <!-- Binary .war -->
-    {% include legacy-download-list.html
-        title="Web application (.war)"
-        entries=page.binary-war %}
-
-    <!-- Source archives -->
-    {% include legacy-download-list.html
-        title="Source"
-        entries=page.source-archives %}
-
-    <!-- Documentation -->
-    {% include link-list.html
-        title="Release documentation"
-        entries=page.documentation %}
-
-</div>
-
-<h1>Guacamole {{ page.title }}</h1>
-
-{{ content }}
-

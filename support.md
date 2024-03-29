@@ -10,10 +10,10 @@ subscribe to these lists, and members of the community are encouraged to do the
 same.
 
 We also consider the availability of commercial support to be crucial to the
-success of Apache Guacamole, and thus maintain a list of [third party
-companies](#commercial-support) providing commercial support. If you provide
-commercial support and would like your company to be listed, please send us an
-email, and we will work with you to do so.
+success of Apache Guacamole, and thus maintain [a list of third party
+companies providing commercial support](#commercial-support). If you represent
+a company that provides commercial support for Apache Guacamole, you may also
+[request to be listed here](#requesting-to-be-listed).
 
 Mailing Lists
 -------------
@@ -28,26 +28,20 @@ will need to subscribe prior to sending email to any list.** All mailing lists
 are actively filtered for spam, and any email not originating from a subscriber
 will bounce.
 
-### General Discussion / Questions ([user@guacamole.apache.org](mailto:user@guacamole.apache.org))
+<div class="note">
+    <p>Before posting to any Apache Guacamole mailing list, please remember to
+be respectful and considerate of the community that subscribes to that
+list:</p>
+    <ul>
+        <li>Abide by <a href="https://www.apache.org/foundation/policies/conduct.html">the ASF's Code of Conduct</a>.</li>
+        <li><strong>DO NOT</strong> send unsolicited messages advertising a product or service.</li>
+        <li><strong>DO NOT</strong> use the mailing lists to promote proprietary enhancements.</li>
+    </ul>
+    <p>Thank you!</p>
+</div>
 
-The general/users list is intended for general questions and discussions which
-do not necessarily pertain to development. This list replaces the old
-[SourceForge forums](https://sourceforge.net/p/guacamole/discussion/) used by
-Guacamole prior to its acceptance into the Apache Incubator.
-
-* [Subscribe](mailto:user-subscribe@guacamole.apache.org)
-* [Unsubscribe](mailto:user-unsubscribe@guacamole.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-user/)
-
-### Development ([dev@guacamole.apache.org](mailto:dev@guacamole.apache.org))
-
-The development list is for development-related discussion involving people who
-are contributors to the Apache Guacamole project (or who wish to become
-contributors).
-
-* [Subscribe](mailto:dev-subscribe@guacamole.apache.org)
-* [Unsubscribe](mailto:dev-unsubscribe@guacamole.apache.org)
-* [Archives](http://mail-archives.apache.org/mod_mbox/guacamole-dev/)
+{% assign lists = site.mailing-lists | where: 'category', 'primary' %}
+{% include mailing-list-list.html mailing-lists=lists %}
 
 [The Guacamole Manual](/doc/gug/)
 ---------------------------------
@@ -60,25 +54,45 @@ Commercial Support
 As some of the main target audiences for Apache Guacamole are enterprises and
 companies that need to provide access to many computers (hence its design as a
 gateway), we consider the availability of commercial support crucial to
-Guacamole's success. If you provide commercial support and would like your
-company to be listed, please send us an email, and we will work with you to do
-so.
+Guacamole's success. The companies listed below have requested to be listed as
+commercial support providers. If you represent a company that provides
+commercial support for Apache Guacamole, you may also [request to be listed
+here](#requesting-to-be-listed).
 
-Companies providing support for Apache Guacamole are not endorsed by the Apache
-Software Foundation, though some such companies do employ committers of the
-Apache Guacamole project.
+<div class="note">
+    <p>Companies providing support for Apache Guacamole are <strong>not
+endorsed nor vetted</strong> by the Apache Software Foundation, though some
+such companies do employ committers of the Apache Guacamole project. The links,
+logos, names, and descriptions below were provided by their respective
+companies.</p>
+</div>
 
 <ul class="company-list">
     {% for company in site.companies %}
         <li class="company">
             {% if company.logo %}
-                <div class="company-logo"><a href="{{ company.location }}"><img src="{{ company.logo }}"/></a></div>
+                <div class="company-logo"><a href="{{ company.location }}" rel="nofollow"><img src="{{ company.logo }}" alt="Logo for {{ company.title }}"/></a></div>
             {% endif %}
             <div class="company-description">
-                <h3><a href="{{ company.location }}">{{ company.title }}</a></h3>
+                <h3><a href="{{ company.location }}" rel="nofollow">{{ company.title }}</a></h3>
                 {{ company.content }}
             </div>
         </li>
     {% endfor %}
 </ul>
 
+### Requesting to be listed
+
+If you provide commercial support and would like your company to be listed,
+please [open a pull request against the Apache Guacamole website](https://github.com/apache/guacamole-website)
+and we will work with you to add your company to the list. The criteria to be
+listed are:
+
+1. Your company appears to exist.
+2. Your company's website publicly lists that you provide support for Apache Guacamole in some capacity.
+3. You provide a short blurb describing your company (no more than 50 words). The blurb must
+   be written in a neutral and factual manner (avoid subjective assertions).
+4. You provide a PNG or JPEG logo no more than 144x144 pixels in size.
+
+For examples of this in practice, please look at [previous pull requests
+submitted by other companies](https://github.com/apache/guacamole-website/pull/96).

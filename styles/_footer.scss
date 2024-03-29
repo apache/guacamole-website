@@ -1,0 +1,78 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@use 'colors';
+
+#footer a[href],
+#footer a[href]:visited {
+    color: colors.$footer-link-text-color;
+}
+
+div#footer {
+    font-size: 0.9em;
+    border-top: 1px solid silver;
+    margin-top: 3em;
+    padding: 1em;
+    background: colors.$footer-background-color;
+    color: colors.$footer-text-color;
+}
+
+#footer .block-menu {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    width: 6cm;
+    max-width: 30%;
+    padding: 0.5cm;
+}
+
+#footer .block-menu h2 {
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+#footer .block-menu {
+    display: inline-block;
+}
+
+#footer ul {
+    text-align: left;
+    min-width: 10%;
+    padding: 0;
+}
+
+#footer li {
+    list-style-type: none;
+}
+
+/* Style appropriately for printing */
+@media print {
+    div#footer {
+        border: none;
+        color: black;
+        background: transparent;
+        font-size: 0.75em;
+    }
+
+    #footer a[href] {
+        color: black;
+    }
+}
+

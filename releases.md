@@ -1,6 +1,6 @@
 ---
 layout: page 
-title: Release Archive
+title: Release Archives
 permalink: /releases/
 ---
 
@@ -15,49 +15,32 @@ Which version should I download?
 
 Unless you already know that you need a *very* specific version (your custom or third-party extensions use an older version of the Guacamole API, for example), **you should always download the most recent release**. Guacamole development is very active, and recent releases will contain bug fixes and performance improvements that will be absent in older releases.
 
-<table class="releases">
-    <tr>
-        <th>Version</th>
-        <th>Summary</th>
-        <th>Release Date</th>
-    </tr>
-    {% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' %}
-    {% for release in releases reversed %}
-        {% if release.title %}
-            <tr>
-                <td><a href="{{ release.url | prepend: site.baseurl }}">{{ release.title }}</a></td>
-                <td>{{ release.summary }}</td>
-                <td>{{ release.date | date: "%Y-%m-%d" }}</td>
-            </tr>
-        {% endif %}
-    {% endfor %}
-</table>
+<ul class="releases ">
 
-Pre-Apache releases
--------------------
+    <!-- Current Release -->
+    {% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' | reverse | slice: 0 %}
+    {% include release-list.html class="current" title="Current Release" releases=releases %}
 
-<div class="legacy-release-note">
-    <p><strong>All releases below are from prior to Guacamole's acceptance into
-    the Incubator.</strong> They are not Apache Software Foundation releases,
-    and are licensed under the <a
-        href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
-</div>
+    <!-- Archived Releases -->
+    {% assign releases = site.releases | where: 'released', 'true' | sort: 'date' | reverse | slice: 1, site.releases.size %}
+    {% include release-list.html class="archived" title="Archived Releases" releases=releases %}
 
-<table class="releases">
-    <tr>
-        <th>Version</th>
-        <th>Summary</th>
-        <th>Release Date</th>
-    </tr>
-    {% assign releases = site.legacy-releases | sort: 'date' %}
-    {% for release in releases reversed %}
-        {% if release.title %}
-            <tr>
-                <td><a href="{{ release.url | prepend: site.baseurl }}">{{ release.title }}</a></td>
-                <td>{{ release.summary }}</td>
-                <td>{{ release.date | date: "%Y-%m-%d" }}</td>
-            </tr>
-        {% endif %}
-    {% endfor %}
-</table>
+    <!-- Incubator Releases -->
+    {% assign releases = site.incubator-releases | where: 'released', 'true' | sort: 'date' | reverse %}
+    {% include release-list.html class="incubator" title="Incubator Releases" releases=releases %}
+
+    <!-- Pre-Apache Releases -->
+    {% assign releases = site.legacy-releases | sort: 'date' | reverse %}
+    {% capture pre_apache_description %}
+        <div class="note">
+            <p><strong>All releases below are from prior to Guacamole's
+            acceptance into the Incubator.</strong> They are not Apache
+            Software Foundation releases, and are licensed under the
+            <a href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+        </div>
+    {% endcapture %}
+    {% include release-list.html class="pre-apache" title="Pre-Apache Releases"
+        description=pre_apache_description releases=releases %}
+
+</ul>
 

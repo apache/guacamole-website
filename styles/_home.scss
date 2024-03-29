@@ -1,0 +1,258 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ul.features {
+    list-style: none;
+}
+
+ul.features li {
+    padding-left: 1.25in;
+    position: relative;
+}
+
+ul.features li > * {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ul.features li::before {
+    content: ' ';
+    height: 1in;
+    width: 1in;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -0.5in;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: center;
+}
+
+ul.features li.apache::before {
+    background-image: url('/images/home/feature-open-source.svg');
+}
+
+ul.features li.html5::before {
+    background-image: url('/images/home/feature-access-anywhere.svg');
+}
+
+ul.features li.cloud-desktop::before {
+    background-image: url('/images/home/feature-cloud-desktop.svg');
+}
+
+ul.features li.documented-api::before {
+    background-image: url('/images/home/feature-well-documented.svg');
+}
+
+ul.features li.commercially-supported::before {
+    background-image: url('/images/home/feature-supported.svg');
+}
+
+ul.features li h2 {
+    font-weight: bold;
+    border-left: none;
+    padding: 0;
+    margin: 2em 0;
+    margin-bottom: 0.5em;
+    background: transparent;
+}
+
+.hook {
+
+    position: relative;
+    overflow: hidden;
+    background: #003c2b;
+    padding: 3em 0;
+    color: white;
+    text-align: center;
+
+    background-image:
+        linear-gradient(-20deg, #002d20 70%, #00553c 70%),
+        linear-gradient(-176deg, #003c2b 70%, #002017 70%);
+
+    background-blend-mode: color-dodge;
+    background-repeat: no-repeat;
+
+}
+
+.hook:before {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -1px; /* Some browsers show subpixel rounding error when
+        scaling/positioning this element, allowing some background to peek
+        through as a hair-thin line at the bottom of the container unless we
+        add some overflow */
+
+    display: block;
+    content: ' ';
+
+    background: transparent;
+    background-image: url('/images/backgrounds/bowl-clip-bottom.svg');
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-position: bottom;
+
+    z-index: 0;
+
+}
+
+.hook * {
+    z-index: 1;
+}
+
+.hook .description {
+    text-align: center;
+    margin: 2em;
+    font-size: 1.25em;
+}
+
+.hook .description p {
+    text-align: left;
+}
+
+.hook .readable-content {
+    display: flex;
+    align-items: center;
+}
+
+body.home .fullwidth-content {
+    position: relative;
+}
+
+body.home .fullwidth-content:before {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20%;
+    height: 20vw;
+    min-height: 128px;
+    max-height: 800px;
+
+    display: block;
+    content: ' ';
+
+    background: #e3f6ff;
+    background-image:
+        url('/images/backgrounds/bowl-clip-top.svg'),
+        url('/images/backgrounds/bowl-clip-bottom.svg');
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-position: center top -5em, bottom;
+
+}
+
+.latest-release {
+    display: inline-block;
+    color: white;
+    background: #003c2b;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    padding: 1em;
+    text-align: left;
+}
+
+.latest-release:before {
+    display: inline-block;
+    content: ' ';
+    background: url('/images/home/guac-download.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 32px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+    float: left;
+}
+
+a[href].latest-release,
+a[href].latest-release:visited {
+    color: white;
+    margin: 0.25em 0;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a[href].latest-release:hover {
+    border-color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.latest-release .release-title {
+    font-weight: bold;
+}
+
+a[href].latest-release:hover .action {
+    text-decoration: underline;
+}
+
+.latest-release .release-date {
+    display: block;
+    font-size: 0.6em;
+    font-style: italic;
+    opacity: 0.65;
+}
+
+/* Demo video */
+.demo {
+    display: inline-block;
+    position: relative;
+    width: 1366px;
+    max-width: 50%;
+}
+
+.demo img.thumbnail {
+    width: 600px;
+    max-width: 100%;
+}
+
+.demo iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .hook .readable-content {
+        display: block;
+    }
+
+    .hook .readable-content .demo {
+        float: right;
+        margin: 0.5em 1em;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .hook .readable-content .demo {
+        float: none;
+        max-width: 100%;
+    }
+
+    .hook .readable-content .demo,
+    .hook .readable-content .description {
+        margin: 0;
+    }
+}

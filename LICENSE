@@ -200,3 +200,39 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+==============================================================================
+
+APACHE GUACAMOLE WEBSITE SUBCOMPONENTS
+
+The Apache Guacamole website includes a number of subcomponents with separate
+copyright notices and license terms. Your use of these subcomponents is
+subject to the terms and conditions of the following licenses.
+
+
+Inconsolata (https://levien.com/type/myfonts/inconsolata.html)
+--------------------------------------------------------------
+
+    Version: N/A
+    From: 'The Inconsolata Project Authors'
+    License(s):
+        SIL Open Font (fonts/inconsolata/OFL.txt)
+
+
+Inter (https://rsms.me/inter/)
+------------------------------
+
+    Version: N/A
+    From: 'The Inter Project Authors' (https://github.com/rsms/inter)
+    License(s):
+        SIL Open Font (fonts/inter/OFL.txt)
+
+
+Rubik (https://github.com/googlefonts/Rubik)
+--------------------------------------------
+
+    Version: N/A
+    From: 'The Rubik Project Authors' (https://github.com/googlefonts/rubik)
+    License(s):
+        SIL Open Font (bundled/rubik/OFL.txt)
+
