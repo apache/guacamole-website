@@ -54,7 +54,7 @@ are strictly required *in all cases* - Guacamole cannot be built without them.
   :stub-columns: 1
   * - Debian / Ubuntu package
     - `libcairo2-dev`
-  * - Fedora / CentOS / RHEL package
+  * - Fedora / CentOS / RHEL package / Oracle Linux
     - `cairo-devel`
   :::
 
@@ -68,7 +68,7 @@ are strictly required *in all cases* - Guacamole cannot be built without them.
     - `libjpeg62-turbo-dev`
   * - Ubuntu package
     - `libjpeg-turbo8-dev`
-  * - Fedora / CentOS / RHEL package
+  * - Fedora / CentOS / RHEL package / Oracle Linux
     - `libjpeg-turbo-devel`
   :::
 
@@ -92,7 +92,7 @@ are strictly required *in all cases* - Guacamole cannot be built without them.
   :stub-columns: 1
   * - Debian / Ubuntu package
     - `libpng-dev`
-  * - Fedora / CentOS / RHEL package
+  * - Fedora / CentOS / RHEL package / Oracle Linux
     - `libpng-devel`
   :::
 
@@ -113,7 +113,7 @@ are strictly required *in all cases* - Guacamole cannot be built without them.
   :stub-columns: 1
   * - Debian / Ubuntu package
     - `libtool-bin`
-  * - Fedora / CentOS / RHEL package
+  * - Fedora / CentOS / RHEL package / Oracle Linux
     - `libtool`
   :::
 
