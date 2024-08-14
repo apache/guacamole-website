@@ -1,6 +1,6 @@
 ---
 title: ETES GmbH
-logo: https://www.etes.de/files/etes/ETES_Logo_200px.png
+logo: /images/companies/etes-gmbh.png
 location: https://www.etes.de/guacamole/
 ---
 
