@@ -1,5 +1,5 @@
 ---
-title: eThorp Technology.
+title: eThorp Technology
 logo: /images/companies/ethorp.png
 location: https://ethorp.com
 ---
