@@ -40,6 +40,15 @@ latest would give you an updated image.
 No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 [Logback](http://logback.qos.ch/) as its logging backend, not Log4j.
 
+### Is Apache Guacamole affected by AngularJS vulnerabilities? {#not-affected-angularjs}
+
+No. Apache Guacamole does currently rely on AngularJS, which has gone
+end-of-life and is no longer being actively developed or supported. While
+AngularJS has several vulnerabilities, we have verified that Guacamole
+is not impacted by any current known vulnerabilities, either because
+the affected component is not in use in Guacamole, or because there is
+no known exploitation path.
+
 {% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' %}
 {% for release in releases reversed %}
 
