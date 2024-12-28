@@ -47,7 +47,7 @@ verify that Guacamole is not impacted by each.
 
 **If you believe a new vulnerability in AngularJS may require specific
 remediation within Guacamole, please reach out to us by sending an email to
-security@guacamole.apache.org and we will investigate promptly.** If a
+<security@guacamole.apache.org> and we will investigate promptly.** If a
 potential vulnerability in AngularJS _does_ need to be addressed, we will work
 with you to issue a release of Guacamole that addresses it.
 
