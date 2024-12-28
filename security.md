@@ -42,12 +42,18 @@ No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 
 ### Is Apache Guacamole affected by AngularJS vulnerabilities? {#not-affected-angularjs}
 
-No. Apache Guacamole does currently rely on AngularJS, which has gone
-end-of-life and is no longer being actively developed or supported. While
-AngularJS has several vulnerabilities, we have verified that Guacamole
-is not impacted by any current known vulnerabilities, either because
-the affected component is not in use in Guacamole, or because there is
-no known exploitation path.
+No. We routinely check for known vulnerabilities in AngularJS and manually
+verify that Guacamole is not impacted by each.
+
+**If you believe a new vulnerability in AngularJS may require specific
+remediation within Guacamole, please reach out to us by sending an email to
+security@guacamole.apache.org and we will investigate promptly.** If a
+potential vulnerability in AngularJS _does_ need to be addressed, we will work
+with you to issue a release of Guacamole that addresses it.
+
+Releases of Guacamole 1.x will continue to use AngularJS for compatibility,
+while Guacamole 2.0.0 onward is planned to use Angular (the TypeScript-based
+framework that supersedes AngularJS).
 
 {% assign releases = site.releases  | where: 'released', 'true' | sort: 'date' %}
 {% for release in releases reversed %}
