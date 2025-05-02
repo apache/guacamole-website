@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HTTP header authentication &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'header-auth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RADIUS authentication" href="radius-auth.html" />
+    <link rel="prev" title="Encrypted JSON authentication" href="json-auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>HTTP header authentication</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-http-header-authentication">Installing/Enabling HTTP header authentication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="http-header-authentication">
+<h1>HTTP header authentication<a class="headerlink" href="#http-header-authentication" title="Link to this heading">#</a></h1>
+<p>Guacamole supports delegating authentication to an arbitrary external service,
+relying on the presence of an HTTP header which contains the username of the
+authenticated user. This authentication method must be layered on top of some
+other authentication extension, such as those available from the main project
+website, in order to provide access to actual connections.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><strong>All external requests must be properly sanitized if this extension is used.</strong>
+The chosen HTTP header must be stripped from untrusted requests, such that the
+authentication service is the <em>only</em> possible source of that header.</p>
+<p><strong>If such sanitization is not performed, it will be trivial for malicious users
+to add this header manually, and thus gain unrestricted access.</strong></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="installing-enabling-http-header-authentication">
+<span id="header-downloading"></span><h2>Installing/Enabling HTTP header authentication<a class="headerlink" href="#installing-enabling-http-header-authentication" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-header-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-header-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">guacamole-auth-header-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">HTTP_AUTH_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">HTTP_AUTH_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">HTTP_AUTH_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">HTTP_AUTH_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">HTTP_AUTH_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+</section>
+<section id="configuration-optional">
+<span id="guac-header-config"></span><h2>Configuration (optional)<a class="headerlink" href="#configuration-optional" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>This extension has no required properties. So long as you are satisfied
+with the default behavior/values noted below, this extension requires no
+configuration beyond installation.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">http-auth-header</span></code></dt><dd><p>The HTTP header containing the username of the authenticated user.</p>
+<p>This property is optional. If not specified, <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> will be used by
+default. If your authentication system uses a different HTTP header you can
+use this option to override it and specify the header for Guacamole to
+expect.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>This extension has no required environment variables. So long as you are satisfied
+with the default behavior/values noted below, this extension requires no
+configuration beyond installation.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">HTTP_AUTH_HEADER</span></code></dt><dd><p>The HTTP header containing the username of the authenticated user.</p>
+<p>This property is optional. If not specified, <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> will be used by
+default. If your authentication system uses a different HTTP header you can
+use this option to override it and specify the header for Guacamole to
+expect.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="completing-installation">
+<span id="completing-header-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="json-auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Encrypted JSON authentication</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="radius-auth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">RADIUS authentication</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-http-header-authentication">Installing/Enabling HTTP header authentication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

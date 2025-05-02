@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using CAS for single sign-on &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cas-auth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using OpenID Connect for single sign-on" href="openid-auth.html" />
+    <link rel="prev" title="Authenticating with Guacamole using single sign-on" href="sso.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Using CAS for single sign-on</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-cas-authentication-extension">Installing/Enabling the CAS authentication extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-login-behavior">Controlling login behavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automatically-redirecting-all-unauthenticated-users">Automatically redirecting all unauthenticated users</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#presenting-unauthenticated-users-with-a-login-screen">Presenting unauthenticated users with a login screen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cas-clearpass">Using CAS ClearPass</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="using-cas-for-single-sign-on">
+<h1>Using CAS for single sign-on<a class="headerlink" href="#using-cas-for-single-sign-on" title="Link to this heading">#</a></h1>
+<p>CAS is an open-source Single Sign On (SSO) provider that allows multiple
+applications and services to authenticate against it and brokers those
+authentication requests to a back-end authentication provider. This module
+allows Guacamole to redirect to CAS for authentication and user services. This
+module must be layered on top of other authentication extensions that provide
+connection information, as it only provides user authentication.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="installing-enabling-the-cas-authentication-extension">
+<span id="cas-downloading"></span><h2>Installing/Enabling the CAS authentication extension<a class="headerlink" href="#installing-enabling-the-cas-authentication-extension" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-sso-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-sso-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">cas/guacamole-auth-sso-cas-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">CAS_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">CAS_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">CAS_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">CAS_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">CAS_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+</section>
+<section id="required-configuration">
+<h2>Required configuration<a class="headerlink" href="#required-configuration" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole’s CAS support requires specifying two properties that
+describe the CAS authentication server and the Guacamole deployment.
+These properties are <em>absolutely required in all cases</em>, as they
+dictate how Guacamole should connect to CAS and how CAS should redirect users
+back to Guacamole once their identity has been confirmed.</p>
+<p>If deploying Guacamole natively, you will need to add a section to your
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> that looks like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">cas-authorization-endpoint</span><span class="o">:</span><span class="w"> </span><span class="s">https://cas.example.net</span>
+<span class="na">cas-redirect-uri</span><span class="o">:</span><span class="w"> </span><span class="s">https://guac.example.net</span>
+</pre></div>
+</div>
+<p>The properties that must be set in all cases for any Guacamole installation
+using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">cas-authorization-endpoint</span></code></dt><dd><p>The URL of the CAS authentication server. This should be the full path to the
+base of the CAS installation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cas-redirect-uri</span></code></dt><dd><p>The URI to redirect back to upon successful authentication. Normally this
+will be the full URL of your Guacamole installation.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Guacamole’s CAS support requires specifying two environment variables that
+describe the CAS authentication server and the Guacamole deployment.
+These environment variables are <em>absolutely required in all cases</em>, as they
+dictate how Guacamole should connect to CAS and how CAS should redirect users
+back to Guacamole once their identity has been confirmed.</p>
+<p>If deploying Guacamole using Docker Compose, you will need to add a set of
+environment variables to the <code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your
+<code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container that looks like the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">CAS_AUTHORIZATION_ENDPOINT</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://cas.example.net&#39;</span>
+<span class="nt">CAS_REDIRECT_URI</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://guac.example.net&#39;</span>
+</pre></div>
+</div>
+<p>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually, these same
+environment variables will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.  For
+example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">CAS_AUTHORIZATION_ENDPOINT</span><span class="o">=</span><span class="s2">&quot;https://cas.example.net&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">CAS_REDIRECT_URI</span><span class="o">=</span><span class="s2">&quot;https://guac.example.net&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+<p>The environment variables that must be set in all cases for any Docker-based
+Guacamole installation using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_AUTHORIZATION_ENDPOINT</span></code></dt><dd><p>The URL of the CAS authentication server. This should be the full path to the
+base of the CAS installation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_REDIRECT_URI</span></code></dt><dd><p>The URI to redirect back to upon successful authentication. Normally this
+will be the full URL of your Guacamole installation.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="additional-configuration-optional">
+<h2>Additional configuration (optional)<a class="headerlink" href="#additional-configuration-optional" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Additional optional properties are available to control how
+CAS-related data is processed, including whether <a class="reference internal" href="#cas-clearpass"><span class="std std-ref">CAS ClearPass</span></a>
+should be used and how user group memberships should be derived:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">cas-clearpass-key</span></code></dt><dd><p>If using CAS ClearPass to pass the SSO password to Guacamole, this parameter
+specifies the private key file to use to decrypt the password. See <a class="reference internal" href="#cas-clearpass"><span class="std std-ref">the section
+on ClearPass</span></a> below.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cas-group-attribute</span></code></dt><dd><p>The CAS attribute that determines group membership, typically “memberOf”.
+This parameter is only required if using CAS to define user group memberships.
+If omitted, groups aren’t retrieved from CAS, and all other group-related
+properties for CAS are ignored.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cas-group-format</span></code></dt><dd><p>The format that CAS will use for its group names. Possible values are
+<code class="docutils literal notranslate"><span class="pre">plain</span></code>, for groups that are simple text names, or <code class="docutils literal notranslate"><span class="pre">ldap</span></code>, for groups that are
+represented as LDAP DNs. If set to <code class="docutils literal notranslate"><span class="pre">ldap</span></code>, group names are always determined
+from the last (leftmost) attribute of the DN. If omitted, <code class="docutils literal notranslate"><span class="pre">plain</span></code> is used by
+default.</p>
+<p>This property has no effect if cas-group-attribute is not set.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cas-group-ldap-base-dn</span></code></dt><dd><p>The base DN to require for LDAP-formatted CAS groups. If specified, only CAS
+groups beneath this DN will be included, and all other CAS groups will be
+ignored.</p>
+<p>This property has no effect if cas-group-format is not <code class="docutils literal notranslate"><span class="pre">ldap</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cas-group-ldap-attribute</span></code></dt><dd><p>The LDAP attribute to require for LDAP-formatted CAS groups. If specified,
+only CAS groups that use this attribute for the name of the group will be
+included. Note that LDAP group names are <em>always determined from the last
+(leftmost) attribute of the DN</em>. Specifying this property will only have the
+effect of ignoring any groups that do not use the specified attribute to
+represent the group name.</p>
+<p>This property has no effect if cas-group-format is not <code class="docutils literal notranslate"><span class="pre">ldap</span></code>.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Additional optional environment variables are available to control how
+CAS-related data is processed, including whether <a class="reference internal" href="#cas-clearpass"><span class="std std-ref">CAS ClearPass</span></a>
+should be used and how user group memberships should be derived:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_CLEARPASS_KEY</span></code></dt><dd><p>If using CAS ClearPass to pass the SSO password to Guacamole, this parameter
+specifies the private key file to use to decrypt the password. See <a class="reference internal" href="#cas-clearpass"><span class="std std-ref">the section
+on ClearPass</span></a> below.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_GROUP_ATTRIBUTE</span></code></dt><dd><p>The CAS attribute that determines group membership, typically “memberOf”.
+This parameter is only required if using CAS to define user group memberships.
+If omitted, groups aren’t retrieved from CAS, and all other group-related
+properties for CAS are ignored.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_GROUP_FORMAT</span></code></dt><dd><p>The format that CAS will use for its group names. Possible values are
+<code class="docutils literal notranslate"><span class="pre">plain</span></code>, for groups that are simple text names, or <code class="docutils literal notranslate"><span class="pre">ldap</span></code>, for groups that are
+represented as LDAP DNs. If set to <code class="docutils literal notranslate"><span class="pre">ldap</span></code>, group names are always determined
+from the last (leftmost) attribute of the DN. If omitted, <code class="docutils literal notranslate"><span class="pre">plain</span></code> is used by
+default.</p>
+<p>This property has no effect if cas-group-attribute is not set.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_GROUP_LDAP_BASE_DN</span></code></dt><dd><p>The base DN to require for LDAP-formatted CAS groups. If specified, only CAS
+groups beneath this DN will be included, and all other CAS groups will be
+ignored.</p>
+<p>This property has no effect if cas-group-format is not <code class="docutils literal notranslate"><span class="pre">ldap</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">CAS_GROUP_LDAP_ATTRIBUTE</span></code></dt><dd><p>The LDAP attribute to require for LDAP-formatted CAS groups. If specified,
+only CAS groups that use this attribute for the name of the group will be
+included. Note that LDAP group names are <em>always determined from the last
+(leftmost) attribute of the DN</em>. Specifying this property will only have the
+effect of ignoring any groups that do not use the specified attribute to
+represent the group name.</p>
+<p>This property has no effect if cas-group-format is not <code class="docutils literal notranslate"><span class="pre">ldap</span></code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<section id="controlling-login-behavior">
+<h3>Controlling login behavior<a class="headerlink" href="#controlling-login-behavior" title="Link to this heading">#</a></h3>
+<p>Guacamole loads authentication extensions in order of priority, and evaluates
+authentication attempts in this same order. This has implications for how the
+Guacamole login process behaves when an SSO extension is present:</p>
+<dl class="simple myst">
+<dt>If the SSO extension has priority:</dt><dd><p>Users that are not yet authenticated
+will be immediately redirected to the configured identity provider. They will
+not see a Guacamole login screen.</p>
+</dd>
+<dt>If a non-SSO extension has priority:</dt><dd><p>Users that are not yet authenticated
+will be presented with a Guacamole login screen. Additionally, links to the
+configured identity provider(s) will be available for users that wish to log
+in using SSO.</p>
+</dd>
+</dl>
+<p>The default priority of extensions is dictated by their filenames, with
+extensions that sort earlier alphabetically having higher priority than others.
+This can be overridden by <a class="reference internal" href="configuring-guacamole.html#initial-setup"><span class="std std-ref">explicitly setting the extension
+priority</span></a>.</p>
+<section id="automatically-redirecting-all-unauthenticated-users">
+<h4>Automatically redirecting all unauthenticated users<a class="headerlink" href="#automatically-redirecting-all-unauthenticated-users" title="Link to this heading">#</a></h4>
+<p>To ensure users are redirected to the CAS identity provider immediately
+(without a Guacamole login screen), ensure the CAS extension has priority over
+all others:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>extension-priority: cas
+</pre></div>
+</div>
+</section>
+<section id="presenting-unauthenticated-users-with-a-login-screen">
+<h4>Presenting unauthenticated users with a login screen<a class="headerlink" href="#presenting-unauthenticated-users-with-a-login-screen" title="Link to this heading">#</a></h4>
+<p>To ensure users are given a normal Guacamole login screen and have the option
+to log in with traditional credentials <em>or</em> with CAS, ensure the CAS extension
+does not have priority:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>extension-priority: *, cas
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="completing-installation">
+<span id="completing-cas-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-cas-clearpass">
+<span id="cas-clearpass"></span><h2>Using CAS ClearPass<a class="headerlink" href="#using-cas-clearpass" title="Link to this heading">#</a></h2>
+<p>CAS has a function called ClearPass that can be used to cache the password used
+for SSO authentication and make that available to services at a later time.
+Configuring the CAS server for ClearPass is beyond the scope of this article -
+more information can be found on the Apereo CAS wiki at the following URL:
+<a class="reference external" href="https://apereo.github.io/cas">https://apereo.github.io/cas</a>.</p>
+<p>Once you have CAS configured for credential caching, you need to configure the
+service with a keypair for passing the credential securely. The public key gets
+installed on the CAS server, while the private key gets configured with the
+<code class="docutils literal notranslate"><span class="pre">cas-clearpass-key</span> <span class="pre">property</span></code>. The private key file needs to be in RSA PKCS8
+format.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sso.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Authenticating with Guacamole using single sign-on</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="openid-auth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using OpenID Connect for single sign-on</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-cas-authentication-extension">Installing/Enabling the CAS authentication extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-login-behavior">Controlling login behavior</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#automatically-redirecting-all-unauthenticated-users">Automatically redirecting all unauthenticated users</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#presenting-unauthenticated-users-with-a-login-screen">Presenting unauthenticated users with a login screen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cas-clearpass">Using CAS ClearPass</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Using TOTP for multi-factor authentication &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'totp-auth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Authenticating with Guacamole using single sign-on" href="sso.html" />
+    <link rel="prev" title="Using Duo for multi-factor authentication" href="duo-auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Using TOTP for multi-factor authentication</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-totp-works-with-guacamole">How TOTP works with Guacamole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enrollment">Enrollment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseting-totp-data">Reseting TOTP Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disabling-totp-for-users-or-groups">Disabling TOTP for users or groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-totp-extension">Installing/Enabling the TOTP extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bypass-enforce-totp-for-specific-hosts">Bypass/Enforce TOTP for Specific Hosts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="using-totp-for-multi-factor-authentication">
+<h1>Using TOTP for multi-factor authentication<a class="headerlink" href="#using-totp-for-multi-factor-authentication" title="Link to this heading">#</a></h1>
+<p>Guacamole supports TOTP as a second authentication factor, layered on top of
+any other authentication extension, including those available from the main
+project website, providing <a class="reference internal" href="#totp-prerequisites"><span class="std std-ref">base requirements for key storage and
+enrollment</span></a> are met. The TOTP authentication extension
+allows users to be additionally verified against a user-specific and secret key
+generated during <a class="reference internal" href="#totp-enrollment"><span class="std std-ref">enrollment of their authentication device</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="prerequisites">
+<span id="totp-prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>The enrollment process used by Guacamole’s TOTP support needs to be able
+to store an automatically-generated key within the user’s account.
+Another extension must be installed which supports storage of arbitrary
+data from other extensions. <em>Currently the only extensions provided with
+Guacamole which support this kind of storage are the <a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">database
+authentication extensions</span></a>.</em></p>
+<p>It is thus recommended that authentication against a database be fully
+configured prior to setting up TOTP. Instructions walking through the setup of
+database authentication for Guacamole are provided in <a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">Database authentication</span></a>.</p>
+</section>
+<section id="how-totp-works-with-guacamole">
+<span id="totp-architecture"></span><h2>How TOTP works with Guacamole<a class="headerlink" href="#how-totp-works-with-guacamole" title="Link to this heading">#</a></h2>
+<p>Guacamole provides support for TOTP as a second authentication factor.  To make
+use of the TOTP authentication extension, some other authentication mechanism
+will need be configured, as well. When a user attempts to log into Guacamole,
+other installed authentication methods will be queried first:</p>
+<p><img alt="" src="_images/totp-auth-factor-1.png" /></p>
+<p>Only after authentication has succeeded with one of those methods will
+Guacamole prompt the user to further verify their identity with an
+authentication code:</p>
+<p><img alt="" src="_images/totp-auth-factor-2.png" /></p>
+<p>If both the initial authentication attempt and verification using TOTP succeed,
+the user will be allowed in. If either mechanism fails, access to Guacamole is
+denied.</p>
+<section id="enrollment">
+<span id="totp-enrollment"></span><h3>Enrollment<a class="headerlink" href="#enrollment" title="Link to this heading">#</a></h3>
+<p>If the user does not yet have a TOTP key associated with their account (they
+have not yet completed enrollment), they will be required to enroll an
+authentication device after passing the first authentication factor. A QR code
+containing an automatically-generated key will be presented to the user to be
+scanned by their authentication app or device:</p>
+<p><img alt="" src="_images/totp-enroll.png" /></p>
+<p>If the authentication device does not support scanning QR codes for enrollment,
+the details within the QR code can be revealed by clicking the “Show” link next
+to the “Details” header. These values can then be entered manually:</p>
+<p><img alt="" src="_images/totp-enroll-detail.png" /></p>
+<p>Enrollment is completed once the user enters a valid authentication code
+generated by their device using the provided key.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the user does not confirm/complete the enrollment process, the next time the
+user logs in they will be asked to go through the enrollment process, again, and
+the TOTP data will be regenerated. This means the previously-scanned QR code
+and TOTP codes generated with the use of that code will be invalid.</p>
+</div>
+</section>
+<section id="reseting-totp-data">
+<span id="totp-reset-data"></span><h3>Reseting TOTP Data<a class="headerlink" href="#reseting-totp-data" title="Link to this heading">#</a></h3>
+<p>It may become necessary for certain users to clear their TOTP key and/or force
+them to re-confirm enrollment, such as in situations where a user loses their
+phone and needs to reconfigure TOTP. The user’s existing TOTP key can be cleared
+by checking the “Clear TOTP secret” box in the user interface and then saving the
+user configuration. The next time that the user logs in, they will be given a new
+key (QR code) and forced to re-enroll.</p>
+<p>If you simply want a user to be able to re-configure an existing key, without
+resetting the secret, you can un-check the box marked “TOTP key confirmed” and
+save the user configuration, and the user will be presented with the QR code
+at next login and asked to confirm it.</p>
+</section>
+<section id="disabling-totp-for-users-or-groups">
+<span id="totp-disable-user-group"></span><h3>Disabling TOTP for users or groups<a class="headerlink" href="#disabling-totp-for-users-or-groups" title="Link to this heading">#</a></h3>
+<p>In versions of Guacamole prior to 1.6.0, installing and configuring the TOTP
+module meant that all Guacamole users would be required to enroll in and
+successfully authenticate via the TOTP factor. Starting with 1.6.0 the TOTP
+requirement can be disabled on a per-user or per-group basis, allowing
+administrators more flexibility in configuring the TOTP requirement.</p>
+<p>By default all users will still be required to authenticate with TOTP, however
+the requirement can be disabled by checking the “Disable TOTP” checkbox. This
+can be done for an individual user account, but it can also be disabled for a
+group resulting in the TOTP requirement being disabled for any members of the
+group.</p>
+<p><img alt="" src="_images/totp-user-config.png" /></p>
+<p><img alt="" src="_images/totp-group-config.png" /></p>
+</section>
+</section>
+<section id="installing-enabling-the-totp-extension">
+<span id="totp-downloading"></span><h2>Installing/Enabling the TOTP extension<a class="headerlink" href="#installing-enabling-the-totp-extension" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-totp-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-totp-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">guacamole-auth-totp-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">TOTP_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">TOTP_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">TOTP_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">TOTP_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">TOTP_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+</section>
+<section id="configuration-optional">
+<span id="guac-totp-config"></span><h2>Configuration (optional)<a class="headerlink" href="#configuration-optional" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>With the exception of <a class="reference internal" href="#totp-prerequisites"><span class="std std-ref">the storage and permission requirements described
+above</span></a>, the TOTP extension should work out-of-the-box
+without any additional configuration. Defaults have been chosen for all
+configuration parameters such that the TOTP extension will be compatible with
+Google Authenticator and similar, popular TOTP implementations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some TOTP applications <em>assume these defaults</em> and <em>silently ignore any other
+values</em>. <strong>Google Authenticator is such an application.</strong> Be sure your
+authenticator application supports the values you intend to use before
+overriding the defaults.</p>
+</div>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">totp-issuer</span></code></dt><dd><p>The human-readable name of the entity issuing user accounts. If not
+specified, “Apache Guacamole” will be used by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">totp-digits</span></code></dt><dd><p>The number of digits which should be included in each generated TOTP code.
+Legal values are 6, 7, or 8. By default, 6-digit codes are generated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">totp-period</span></code></dt><dd><p>The duration that each generated code should remain valid, in seconds. By
+default, each code remains valid for 30 seconds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">totp-mode</span></code></dt><dd><p>The hash algorithm that should be used to generate TOTP codes. Legal values
+are “sha1”, “sha256”, and “sha512”. By default, “sha1” is used.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>With the exception of <a class="reference internal" href="#totp-prerequisites"><span class="std std-ref">the storage and permission requirements described
+above</span></a>, the TOTP extension should work out-of-the-box
+without any additional configuration. Defaults have been chosen for all
+configuration parameters such that the TOTP extension will be compatible with
+Google Authenticator and similar, popular TOTP implementations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some TOTP applications <em>assume these defaults</em> and <em>silently ignore any other
+values</em>. <strong>Google Authenticator is such an application.</strong> Be sure your
+authenticator application supports the values you intend to use before
+overriding the defaults.</p>
+</div>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_ISSUER</span></code></dt><dd><p>The human-readable name of the entity issuing user accounts. If not
+specified, “Apache Guacamole” will be used by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_DIGITS</span></code></dt><dd><p>The number of digits which should be included in each generated TOTP code.
+Legal values are 6, 7, or 8. By default, 6-digit codes are generated.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_PERIOD</span></code></dt><dd><p>The duration that each generated code should remain valid, in seconds. By
+default, each code remains valid for 30 seconds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_MODE</span></code></dt><dd><p>The hash algorithm that should be used to generate TOTP codes. Legal values
+are “sha1”, “sha256”, and “sha512”. By default, “sha1” is used.</p>
+</dd>
+</dl>
+</div>
+</div>
+<section id="bypass-enforce-totp-for-specific-hosts">
+<h3>Bypass/Enforce TOTP for Specific Hosts<a class="headerlink" href="#bypass-enforce-totp-for-specific-hosts" title="Link to this heading">#</a></h3>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>By default, when the TOTP module is enabled, TOTP-based MFA will be enforced for
+all users that attempt to log in to Guacamole, regardless of where they are
+connecting from. Depending on your use case, it may be necessary to narrow this
+behavior and only enforce TOTP-based MFA for certain hosts and bypass it for
+others.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you will be configuring Guacamole to consider users’ IP addresses, <strong>it is
+important to make sure that Guacamole is receiving correct IP address
+information for all clients</strong>.</p>
+<p>If Guacamole is behind a reverse proxy, such as for SSL termination, the IP
+addresses of all users will appear to be the IP address of the proxy unless
+additional configuration steps are taken. <strong>Be sure to follow <a class="reference internal" href="reverse-proxy.html"><span class="doc std std-doc">the
+documentation for configuring forwarding of client IP
+information</span></a>!</strong></p>
+</div>
+<p>TOTP-based MFA can be explicitly bypassed or enforced on a per-host basis by
+providing the relevant, exhaustive list of addresses/networks using either
+of the following properties:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">totp-bypass-hosts</span></code></dt><dd><p>A comma-separated list of all IP addresses and/or subnets (in CIDR notation)
+that SHOULD NOT be required to verify themselves using TOTP when
+authenticating. All other hosts in this list will required to verify with
+TOTP.</p>
+<p><strong>If both bypass and enforce lists are provided, the enforce list takes
+priority and this property is effectively ignored.</strong></p>
+<p>This property is optional. By default, verification will be required for all
+users regardless of their IP address (TOTP is not bypassed for any
+addresses).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">totp-enforce-hosts</span></code></dt><dd><p>A comma-separated list of all IP addresses and/or subnets (in CIDR notation)
+that SHOULD be required to verify themselves using TOTP when authenticating.
+All other hosts will not be required to verify with TOTP.</p>
+<p><strong>If both bypass and enforce lists are provided, the enforce list takes
+priority and the bypass list is effectively ignored.</strong></p>
+<p>This property is optional. By default, verification will be required for all
+users regardless of their IP address (TOTP is enforced for all addresses).</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>By default, when the TOTP module is enabled, TOTP-based MFA will be enforced for
+all users that attempt to log in to Guacamole, regardless of where they are
+connecting from. Depending on your use case, it may be necessary to narrow this
+behavior and only enforce TOTP-based MFA for certain hosts and bypass it for
+others.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you will be configuring Guacamole to consider users’ IP addresses, <strong>it is
+important to make sure that Guacamole is receiving correct IP address
+information for all clients</strong>.</p>
+<p>If Guacamole is behind a reverse proxy, such as for SSL termination, the IP
+addresses of all users will appear to be the IP address of the proxy unless
+additional configuration steps are taken. <strong>Be sure to follow <a class="reference internal" href="reverse-proxy.html"><span class="doc std std-doc">the
+documentation for configuring forwarding of client IP
+information</span></a>!</strong></p>
+</div>
+<p>TOTP-based MFA can be explicitly bypassed or enforced on a per-host basis by
+providing the relevant, exhaustive list of addresses/networks using either
+of the following environment variables:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_BYPASS_HOSTS</span></code></dt><dd><p>A comma-separated list of all IP addresses and/or subnets (in CIDR notation)
+that SHOULD NOT be required to verify themselves using TOTP when
+authenticating. All other hosts in this list will required to verify with
+TOTP.</p>
+<p><strong>If both bypass and enforce lists are provided, the enforce list takes
+priority and this property is effectively ignored.</strong></p>
+<p>This property is optional. By default, verification will be required for all
+users regardless of their IP address (TOTP is not bypassed for any
+addresses).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">TOTP_ENFORCE_HOSTS</span></code></dt><dd><p>A comma-separated list of all IP addresses and/or subnets (in CIDR notation)
+that SHOULD be required to verify themselves using TOTP when authenticating.
+All other hosts will not be required to verify with TOTP.</p>
+<p><strong>If both bypass and enforce lists are provided, the enforce list takes
+priority and the bypass list is effectively ignored.</strong></p>
+<p>This property is optional. By default, verification will be required for all
+users regardless of their IP address (TOTP is enforced for all addresses).</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+</section>
+<section id="completing-installation">
+<span id="completing-totp-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="duo-auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using Duo for multi-factor authentication</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sso.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Authenticating with Guacamole using single sign-on</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-totp-works-with-guacamole">How TOTP works with Guacamole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enrollment">Enrollment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reseting-totp-data">Reseting TOTP Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disabling-totp-for-users-or-groups">Disabling TOTP for users or groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-totp-extension">Installing/Enabling the TOTP extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bypass-enforce-totp-for-specific-hosts">Bypass/Enforce TOTP for Specific Hosts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

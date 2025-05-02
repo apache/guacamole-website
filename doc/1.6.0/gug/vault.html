@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Retrieving secrets from a vault &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vault';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="External authentication" href="external-auth.html" />
+    <link rel="prev" title="Signing in with smart cards or certificates" href="ssl-auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Retrieving secrets from a vault</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-vault-extension">Installing/Enabling the vault extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-guacamole-to-ksm">Adding Guacamole to KSM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-vaults-for-users-and-connection-groups">Additional vaults for users and connection groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priorities-of-multiple-vaults">Priorities of multiple vaults</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-options">Additional Configuration Options</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-connection-secrets-from-a-vault">Retrieving connection secrets from a vault</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-injection-of-secrets-based-on-connection-parameters">Automatic injection of secrets based on connection parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-definition-of-secrets">Manual definition of secrets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-configuration-properties-from-a-vault">Retrieving configuration properties from a vault</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="retrieving-secrets-from-a-vault">
+<h1>Retrieving secrets from a vault<a class="headerlink" href="#retrieving-secrets-from-a-vault" title="Link to this heading">#</a></h1>
+<p>Guacamole supports reading secrets such as connection-specific passwords from a
+key vault, automatically injecting those secrets into connection configurations
+using <a class="reference internal" href="configuring-guacamole.html#parameter-tokens"><span class="std std-ref">parameter tokens</span></a> or Guacamole configuration
+properties via an additional, vault-specific configuration file analogous to
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code>. This support is intended with multiple vault providers
+in mind and currently supports <a class="reference external" href="https://www.keepersecurity.com/secrets-manager.html">Keeper Secrets Manager (KSM)</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="installing-enabling-the-vault-extension">
+<span id="vault-downloading"></span><h2>Installing/Enabling the vault extension<a class="headerlink" href="#installing-enabling-the-vault-extension" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-vault-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-vault-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">ksm/guacamole-vault-ksm-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">KSM_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">KSM_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">KSM_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">KSM_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">KSM_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+<section id="adding-guacamole-to-ksm">
+<span id="adding-guac-to-ksm"></span><h3>Adding Guacamole to KSM<a class="headerlink" href="#adding-guacamole-to-ksm" title="Link to this heading">#</a></h3>
+<p>Allowing an application like Guacamole to access secrets via KSM involves
+creating an application in KSM. A KSM application is simply a means of
+assigning permissions, narrowing exactly which secrets the application in
+question should be able to access.</p>
+<ol class="arabic">
+<li><p>Log into your vault via the Keeper Security website and create at least one
+shared folder to house any secrets that should be made available to Apache
+Guacamole. These folders will be used when registering Apache Guacamole with
+KSM and functions to define exactly which secrets the application may access.
+<strong>Secrets that are not within these shared folders will not be accessible by
+Guacamole.</strong></p>
+<p>The option for creating a shared folder is within a submenu that appears
+when you click on “Create New”:</p>
+<p><img alt="Submenu for creating new objects, including shared folders." src="_images/vault-ksm-001a-create-shared-folder.png" /></p>
+<p>No special options need to be selected for the shared folder except for
+providing a reasonable name for the folder:</p>
+<p><img alt="Shared folder creation dialog." src="_images/vault-ksm-001b-create-shared-folder.png" /></p>
+</li>
+<li><p>Navigate to KSM by selecting the “Secrets Manager” tab in the navigation
+sidebar on the left side of the screen:</p>
+<p><img alt="&quot;Secrets Manager&quot; selected within the navigation sidebar." src="_images/vault-ksm-002-select-ksm.png" /></p>
+</li>
+<li><p>Click “Create Application” on the right ride of the toolbar near the top of
+the screen:</p>
+<p><img alt="&quot;Create Application&quot; button in the KSM toolbar." src="_images/vault-ksm-003a-create-application.png" /></p>
+<p>The dialog that appears will prompt you to provide a name for the
+application that will access the vault, as well as the shared folder(s) that
+this application will have access to. Enter a reasonable name for the
+application, such as “Apache Guacamole”, and select the shared folder(s) you
+created for Guacamole to access:</p>
+<p><img alt="KSM application creation dialog." src="_images/vault-ksm-003b-create-application.png" /></p>
+<p>Guacamole only needs read-only access permissions to secrets, which should
+already be selected by default.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should only check the “Lock external WAN IP” box if your Guacamole
+server has a static IP <em>and</em> you will be using the KSM CLI tool directly on
+that server. <strong>If you will be running the KSM CLI tool on a separate machine
+with a different public IP address, you must not check this box.</strong></p>
+</div>
+</li>
+<li><p>Once satisfied with the application name and parameters, click “Generate
+Token” to generate a one-time token:</p>
+<p><img alt="Application creation confirmation dialog showing the generated one-time token." src="_images/vault-ksm-004-generate-token.png" /></p>
+<p>This token can be used to generate a base64-encoded configuration blob as
+described in the following step, or it can be used directly to set a KSM
+config for a user or connection, as described in <a class="reference internal" href="#guac-vault-config"><span class="std std-ref">the following section</span></a>.</p>
+</li>
+<li><p>Copy the provided one-time token using <a class="reference external" href="https://docs.keeper.io/secrets-manager/secrets-manager/secrets-manager-command-line-interface/init-command">the KSM CLI tool</a>
+to obtain the base64-encoded configuration that must be provided to
+Guacamole with <a class="reference internal" href="#guac-vault-config"><span class="std std-ref">the <code class="docutils literal notranslate"><span class="pre">ksm-config</span></code> property</span></a>. <strong>This token
+can only be used once, but the base64 configuration can be used indefinitely
+unless manually revoked within KSM:</strong></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./ksm<span class="w"> </span>init<span class="w"> </span>default<span class="w"> </span>US:_-L2NIxWdMatbyYwBnYROLlJVjeg4BzO3xZWoiDkh4U
+
+<span class="go">ewogICJjbGllbnRJZCI6ICJTR1ZzYkc4Z2RHaGxjbVVoSUZSb1pYTmxJSEJ5YjNCbGNuUnBaWE1n</span>
+<span class="go">YUdGMlpTQmlaV1Z1SUcxaGJuVmhiR3g1SUhKbFpHRmpkR1ZrTGlCWGFIay9Qdz09IiwKICAicHJp</span>
+<span class="go">dmF0ZUtleSI6ICJWRzhnWlc1emRYSmxJSFJvWVhRZ1lXTjBkV0ZzSUhObGJuTnBkR2wyWlNCMllX</span>
+<span class="go">eDFaWE1nWVhKbElHNXZkQ0JsZUhCdmMyVmtJSFpwWVNCdmRYSWdiV0Z1ZFdGc0xpQlVhR1Y1SUcx</span>
+<span class="go">aGVTQnViM1FnUVV4TUlHSmxJSE5sYm5OcGRHbDJaU0IyWVd4MVpYTXNJR0oxZENCaGRDQnNaV0Z6</span>
+<span class="go">ZENCdmJtVWdjMlZsYlhNZ2RHOGdZbVV1IiwKICAiYXBwS2V5IjogIlYyVnNZMjl0WlNFZ1JXNXFi</span>
+<span class="go">M2tnUVhCaFkyaGxJRWQxWVdOaGJXOXNaU0U9IiwKICAiaG9zdG5hbWUiOiAia2VlcGVyc2VjdXJp</span>
+<span class="go">dHkuY29tIiwKICAic2VydmVyUHVibGljS2V5SWQiOiAiMTAiCn0K</span>
+<span class="gp">$   </span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="required-configuration">
+<span id="guac-vault-config"></span><h2>Required configuration<a class="headerlink" href="#required-configuration" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole requires only a single configuration property to configure secret
+retrieval from KSM, <code class="docutils literal notranslate"><span class="pre">ksm-config</span></code>, which must be provided the base64
+configuration value retrieved from KSM using the one-time token <a class="reference internal" href="#adding-guac-to-ksm"><span class="std std-ref">obtained when
+Guacamole was registered with KSM as an application as described above</span></a>.
+All other properties are optional.</p>
+<p>If deploying Guacamole natively, you will need to add a section to your
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> that looks like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">ksm-config</span><span class="o">:</span><span class="w"> </span><span class="s">ewogICJjbGllbnRJZCI6ICJTR1ZzYkc4Z2RHaGxjbVVoSUZSb1pYTmxJSEJ5YjNC...</span>
+</pre></div>
+</div>
+<p>The properties that must be set in all cases for any Guacamole installation
+using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ksm-config</span></code></dt><dd><p>The base64-encoded configuration information generated for the application
+you created within KSM to represent Apache Guacamole. The easiest way to
+obtain this value is using <a class="reference external" href="https://docs.keeper.io/secrets-manager/secrets-manager/secrets-manager-command-line-interface/init-command">the KSM CLI tool</a>.
+as described above. <em>This value is required.</em></p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Guacamole requires only a single configuration property to configure secret
+retrieval from KSM, <code class="docutils literal notranslate"><span class="pre">ksm-config</span></code>, which must be provided the base64
+configuration value retrieved from KSM using the one-time token <a class="reference internal" href="#adding-guac-to-ksm"><span class="std std-ref">obtained when
+Guacamole was registered with KSM as an application as described above</span></a>.
+All other environment variables are optional.</p>
+<p>If deploying Guacamole using Docker Compose, you will need to add a set of
+environment variables to the <code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your
+<code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container that looks like the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">KSM_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ewogICJjbGllbnRJZCI6ICJTR1ZzYkc4Z2RHaGxjbVVoSUZSb1pYTmxJSEJ5YjNC...&#39;</span>
+</pre></div>
+</div>
+<p>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually, these same
+environment variables will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.  For
+example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">KSM_CONFIG</span><span class="o">=</span><span class="s2">&quot;ewogICJjbGllbnRJZCI6ICJTR1ZzYkc4Z2RHaGxjbVVoSUZSb1pYTmxJSEJ5YjNC...&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+<p>The environment variables that must be set in all cases for any Docker-based
+Guacamole installation using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">KSM_CONFIG</span></code></dt><dd><p>The base64-encoded configuration information generated for the application
+you created within KSM to represent Apache Guacamole. The easiest way to
+obtain this value is using <a class="reference external" href="https://docs.keeper.io/secrets-manager/secrets-manager/secrets-manager-command-line-interface/init-command">the KSM CLI tool</a>.
+as described above. <em>This value is required.</em></p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="additional-vaults-for-users-and-connection-groups">
+<h2>Additional vaults for users and connection groups<a class="headerlink" href="#additional-vaults-for-users-and-connection-groups" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>In addition to the required, application-wide vault, Guacamole can be
+configured to pull secrets from separate vaults that are declared at the user
+or connection group level. The configuration information for these vaults can
+be set directly in the webapp, on the <a class="reference internal" href="administration.html#connection-group-management"><span class="std std-ref">connection group edit
+page</span></a> and on the <a class="reference internal" href="using-guacamole.html#preferences"><span class="std std-ref">user preferences
+page</span></a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Unlike the application-wide vault (which must always be configured using a
+lengthy blob of base64-encoded data), a one-time token obtained from KSM can be
+used in these cases.</p>
+</div>
+<p>Because it is not necessarily desirable that users be able to provide their own
+secrets for use within connections, administrators must explicitly enable this
+functionality by:</p>
+<ol class="arabic simple">
+<li><p>Setting the relevant property to <code class="docutils literal notranslate"><span class="pre">true</span></code>, as described below.</p></li>
+<li><p>Checking the “Allow user-provided KSM configuration” box on any connection
+that should be allowed to consume user-specific secrets.</p></li>
+</ol>
+<p><strong>Secrets from a user-specific vault will not be used unless both of the above
+conditions are true.</strong></p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ksm-allow-user-config</span></code></dt><dd><p>Whether or not users should be allowed to set their own KSM configuration,
+which will be used to pull secrets <em>only</em> when not already provided by the
+global or connection-group-level KSM configuration. A user-level KSM
+configuration will never be used if a matching secret is otherwise available.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>In addition to the required, application-wide vault, Guacamole can be
+configured to pull secrets from separate vaults that are declared at the user
+or connection group level. The configuration information for these vaults can
+be set directly in the webapp, on the <a class="reference internal" href="administration.html#connection-group-management"><span class="std std-ref">connection group edit
+page</span></a> and on the <a class="reference internal" href="using-guacamole.html#preferences"><span class="std std-ref">user preferences
+page</span></a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Unlike the application-wide vault (which must always be configured using a
+lengthy blob of base64-encoded data), a one-time token obtained from KSM can be
+used in these cases.</p>
+</div>
+<p>Because it is not necessarily desirable that users be able to provide their own
+secrets for use within connections, administrators must explicitly enable this
+functionality by:</p>
+<ol class="arabic simple">
+<li><p>Setting the relevant property to <code class="docutils literal notranslate"><span class="pre">true</span></code>, as described below.</p></li>
+<li><p>Checking the “Allow user-provided KSM configuration” box on any connection
+that should be allowed to consume user-specific secrets.</p></li>
+</ol>
+<p><strong>Secrets from a user-specific vault will not be used unless both of the above
+conditions are true.</strong></p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">KSM_ALLOW_USER_CONFIG</span></code></dt><dd><p>Whether or not users should be allowed to set their own KSM configuration,
+which will be used to pull secrets <em>only</em> when not already provided by the
+global or connection-group-level KSM configuration. A user-level KSM
+configuration will never be used if a matching secret is otherwise available.</p>
+</dd>
+</dl>
+</div>
+</div>
+<section id="priorities-of-multiple-vaults">
+<h3>Priorities of multiple vaults<a class="headerlink" href="#priorities-of-multiple-vaults" title="Link to this heading">#</a></h3>
+<p>When multiple vaults apply to any connection attempt, secrets are pulled and
+applied in a specific order of priority that is intended to ensure the
+administrator always has ultimate control over the behavior of a connection:</p>
+<ol class="arabic simple">
+<li><p><strong>Application-wide vault:</strong> Secrets are always pulled from the
+application-wide vault first (the vault provided with the <code class="docutils literal notranslate"><span class="pre">ksm-config</span></code>
+property).</p></li>
+<li><p><strong>Connection group vault:</strong> If a particular secret is not available within
+the application-wide vault, but the connection is within a connection group
+that has been configured with a KSM vault, the vault configured for that
+connection group is used to reattempt retrieving the secret.</p></li>
+<li><p><strong>User-specific vault:</strong> If a particular secret is not available within
+any other administator-controlled vault, the connection in question has
+been configured to allow user-specific vault use, and the current user has
+configured such a vault, that vault will be used to reattempt retrieving the
+secret.</p></li>
+</ol>
+<p>By design, the application-wide vault always has the highest priority, and any
+administrator-controlled vault always has priority over user-controlled vaults.</p>
+</section>
+<section id="additional-configuration-options">
+<h3>Additional Configuration Options<a class="headerlink" href="#additional-configuration-options" title="Link to this heading">#</a></h3>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>The following additional, optional properties may be set as desired
+to tailor the behavior of the KSM support:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ksm-allow-unverified-cert</span></code></dt><dd><p>Whether unverified server certificates should be accepted. If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>,
+the server certificate for connections to the KSM service will be accepted even
+if they cannot be verified. <strong>Unless you are a developer testing changes to
+the KSM vault support itself, it is unlikely that you need to set this
+property.</strong></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ksm-api-call-interval</span></code></dt><dd><p>Specify the minimum number of milliseconds between calls to the KSM API. The
+API allows a limited number of calls per month, and calls over the included
+amount generate additional cost. Setting this property allows you to
+limit Guacamole’s impact on that cost.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ksm-strip-windows-domains</span></code></dt><dd><p>Whether or not the Windows domain should be stripped off of the username
+when usernames are retrieved from the KSM vault and placed into its own
+secret. This is optional, and by default it is false - domains will
+not be stripped from the username.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The following additional, optional environment variables may be set as desired
+to tailor the behavior of the KSM support:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">KSM_ALLOW_UNVERIFIED_CERT</span></code></dt><dd><p>Whether unverified server certificates should be accepted. If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>,
+the server certificate for connections to the KSM service will be accepted even
+if they cannot be verified. <strong>Unless you are a developer testing changes to
+the KSM vault support itself, it is unlikely that you need to set this
+property.</strong></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">KSM_API_CALL_INTERVAL</span></code></dt><dd><p>Specify the minimum number of milliseconds between calls to the KSM API. The
+API allows a limited number of calls per month, and calls over the included
+amount generate additional cost. Setting this property allows you to
+limit Guacamole’s impact on that cost.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">KSM_STRIP_WINDOWS_DOMAINS</span></code></dt><dd><p>Whether or not the Windows domain should be stripped off of the username
+when usernames are retrieved from the KSM vault and placed into its own
+secret. This is optional, and by default it is false - domains will
+not be stripped from the username.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+</section>
+<section id="completing-installation">
+<span id="completing-vault-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--4-input--2" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="retrieving-connection-secrets-from-a-vault">
+<span id="vault-connection-secrets"></span><h2>Retrieving connection secrets from a vault<a class="headerlink" href="#retrieving-connection-secrets-from-a-vault" title="Link to this heading">#</a></h2>
+<p>Secrets for connection parameters are provided using <a class="reference internal" href="configuring-guacamole.html#parameter-tokens"><span class="std std-ref">parameter
+tokens</span></a> that can be either automatically or manually defined.
+Automatic tokens are <a class="reference internal" href="#vault-dynamic-secrets"><span class="std std-ref">defined dynamically by Guacamole when the connection is
+used</span></a> based on other configuration values within the
+connection, such as the connection’s <code class="docutils literal notranslate"><span class="pre">hostname</span></code> or <code class="docutils literal notranslate"><span class="pre">username</span></code>. Manual tokens
+are injected by Guacamole based on secrets that are <a class="reference internal" href="#vault-static-secrets"><span class="std std-ref">statically mapped using an
+additional configuration file</span></a>.</p>
+<section id="automatic-injection-of-secrets-based-on-connection-parameters">
+<span id="vault-dynamic-secrets"></span><h3>Automatic injection of secrets based on connection parameters<a class="headerlink" href="#automatic-injection-of-secrets-based-on-connection-parameters" title="Link to this heading">#</a></h3>
+<p>Parameter tokens containing the values of secrets within a record are
+automatically injected for connections whose parameter values match specific
+criteria, such as having a particular <code class="docutils literal notranslate"><span class="pre">username</span></code> or <code class="docutils literal notranslate"><span class="pre">hostname</span></code>. This happens
+whenever a connection is used and is fully dynamic, affecting only the state of
+the connection from the perspective of the user accessing it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>There are limitations to the degree that secrets can be automatically applied
+based on connection parameters:</p>
+<ul class="simple">
+<li><p>In all cases, only unique records are considered. If multiple records match
+the criteria that applies to a particular token in the context of a
+connection, the token will not be injected for that connection.</p></li>
+<li><p>Automatic injection of secrets cannot currently be used with balancing
+connection groups, as the underlying connection that the balancing
+implementation will choose cannot be known before token values must be made
+available.</p></li>
+</ul>
+<p>If automatic injection of secrets cannot work for your use case, consider using
+<a class="reference internal" href="#vault-static-secrets"><span class="std std-ref">manually-specified secrets via <code class="docutils literal notranslate"><span class="pre">ksm-token-mapping.yml</span></code></span></a>.</p>
+</div>
+<p>Parameter tokens injected from KSM records take the form
+<code class="samp docutils literal notranslate"><span class="pre">${KEEPER_</span><em><span class="pre">CRITERIA</span></em><span class="pre">_</span><em><span class="pre">SECRET</span></em><span class="pre">}</span></code>, where <code class="docutils literal notranslate"><span class="pre">CRITERIA</span></code> determines how the
+applicable record is located based on the connection’s parameters and <code class="docutils literal notranslate"><span class="pre">SECRET</span></code>
+determines what value is retrieved from that record.</p>
+<p>The following <code class="docutils literal notranslate"><span class="pre">CRITERIA</span></code> names are supported:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">USER</span></code></dt><dd><p>The record whose “login” field contains a username that matches the value of
+the <code class="docutils literal notranslate"><span class="pre">username</span></code> parameter of the connection. If the record has no “login” field,
+a “text” or “password” custom field will be used if the label of that field
+contains the word “username” (case-insensitive).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SERVER</span></code></dt><dd><p>The record whose “login” field contains a hostname that matches the value of
+the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> parameter of the connection. If the record has no “login” field,
+a “text” or “password” custom field will be used if the label of that field
+contains the word “hostname”, “address”, or “IP address” (case-insensitive,
+ignoring any spaces between “IP” and “address”).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GATEWAY</span></code></dt><dd><p>Identical to <code class="docutils literal notranslate"><span class="pre">SERVER</span></code>, except that the value of the <code class="docutils literal notranslate"><span class="pre">gateway-hostname</span></code>
+parameter is used. This is only applicable to RDP connections.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GATEWAY_USER</span></code></dt><dd><p>Identical to <code class="docutils literal notranslate"><span class="pre">USER</span></code>, except that the value of the <code class="docutils literal notranslate"><span class="pre">gateway-username</span></code>
+parameter is used. This is only applicable to RDP connections.</p>
+</dd>
+</dl>
+<p>The following <code class="docutils literal notranslate"><span class="pre">SECRET</span></code> types are supported:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">USERNAME</span></code></dt><dd><p>The username specified by the record’s “login” field. If the field is a
+custom field, the label must contain the word “username” (case-insensitive)
+and must be a “text” or “hidden” field.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">DOMAIN</span></code></dt><dd><p>The domain name of the record, either retrieved directly from the vault, or
+split out from the username if so configured in the vault. Typically this
+will apply when the username is associated with an Active Directory
+domain.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code></dt><dd><p>The password specified by the record’s “password” or “hidden” field. If the
+field is a custom field, the label must contain the word “password”
+(case-insensitive).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">KEY</span></code></dt><dd><p>The private key associated with the record. If the record has a dedicated
+key pair field, the private key from this field is used. If not, and the
+record has a single <code class="docutils literal notranslate"><span class="pre">.pem</span></code> file attached, the content of that attachment is
+used. Lacking any key pair field or attachment, any custom field that is a
+“password” or “hidden” field will be used as long as it contains the phrase
+“private key” in its label (case-insensitive, ignoring any space(s) between
+“private” and “key”).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PASSPHRASE</span></code></dt><dd><p>The passphrase associated with the record’s private key, if the record type
+has dedicated fields for these. If the record has no dedicated passphrase
+field, a “password” or “hidden” custom field will be used as long as it
+has the word “passphrase” in its label (case-insensitive).</p>
+</dd>
+</dl>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">${KEEPER_USER_PASSWORD}</span></code> token would retrieve the password
+for the user specified by the <code class="docutils literal notranslate"><span class="pre">username</span></code> parameter, and <code class="docutils literal notranslate"><span class="pre">${KEEPER_SERVER_KEY}</span></code>
+would retrieve the private key for the server specified by the <code class="docutils literal notranslate"><span class="pre">hostname</span></code>
+parameter.</p>
+</section>
+<section id="manual-definition-of-secrets">
+<span id="vault-static-secrets"></span><h3>Manual definition of secrets<a class="headerlink" href="#manual-definition-of-secrets" title="Link to this heading">#</a></h3>
+<p>Parameter tokens can be manually defined by placing a YAML file within
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> called <code class="docutils literal notranslate"><span class="pre">ksm-token-mapping.yml</span></code>. This file must contain a set
+of name/value pairs where each name is the name of a token to define and each
+value is <a class="reference external" href="https://docs.keeper.io/secrets-manager/secrets-manager/about/keeper-notation">a reference to a secret in KSM using “Keeper Notation”</a>.</p>
+<p>For example, the following <code class="docutils literal notranslate"><span class="pre">ksm-token-mapping.yml</span></code> defines two parameter
+tokens, <code class="docutils literal notranslate"><span class="pre">${WINDOWS_ADMIN_PASSWORD}</span></code> and <code class="docutils literal notranslate"><span class="pre">${LINUX_SERVER_KEY}</span></code>, each pulling
+their values from different parts of different records in KSM:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WINDOWS_ADMIN_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keeper://odei1zeejoL7Ceiv3eig0a/field/password</span>
+<span class="nt">LINUX_SERVER_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keeper://Chah0VuPh0ohyeuL4che1o/file/idrsa.pem</span>
+</pre></div>
+</div>
+<p>Token substitution of other parameter tokens like <code class="docutils literal notranslate"><span class="pre">${GUAC_USERNAME}</span></code> is
+performed <em>on the reference to the secret</em> to allow the reference to vary by
+values that may be relevant to the connection. The values of substituted tokens
+are URL-encoded before being placed into the reference in “Keeper Notation”. In
+addition, the following tokens are available for use within the secret
+reference:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_GROUP_NAME}</span></code></dt><dd><p>The human-readable name of the connection group being used. Secrets using
+this token are only available if a user is directly connecting to a balancing
+connection group, not manually connecting to a connection within a group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_GROUP_ID}</span></code></dt><dd><p>The unique identifier of the connection group being used. Secrets using this
+token are only available if a user is directly connecting to a balancing
+connection group, not manually connecting to a connection within a group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_NAME}</span></code></dt><dd><p>The human-readable name of the connection being used. Secrets using this
+token are only available if a user is directly connecting to a connection, not
+connecting via a balancing group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_ID}</span></code></dt><dd><p>The unique identifier of the connection being used. Secrets using this token
+are only available if a user is directly connecting to a connection, not
+connecting via a balancing group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_HOSTNAME}</span></code></dt><dd><p>The value of the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> parameter of the connection being used. Secrets
+using this token are only available if a user is directly connecting to a
+connection, not connecting via a balancing group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${CONNECTION_USERNAME}</span></code></dt><dd><p>The value of the <code class="docutils literal notranslate"><span class="pre">username</span></code> parameter of the connection being used. Secrets
+using this token are only available if a user is directly connecting to a
+connection, not connecting via a balancing group.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">${USERNAME}</span></code></dt><dd><p>The username of the current user, as stored with the user object representing
+that user in the system storing the relevant connection or connection group.
+This is not necessarily the same as <code class="docutils literal notranslate"><span class="pre">${GUAC_USERNAME}</span></code>, which is the username
+provided by the user as part of their credentials when they authenticated.</p>
+</dd>
+</dl>
+<p>For example, to automatically define a token called <code class="docutils literal notranslate"><span class="pre">${LINUX_SERVER_KEY}</span></code> that
+selects a private key from among several within the same record by searching
+for a file named after the current user, the following YAML could be used:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">LINUX_SERVER_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keeper://Chah0VuPh0ohyeuL4che1o/file/${USERNAME}.pem</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="retrieving-configuration-properties-from-a-vault">
+<span id="guacamole-properties-ksm"></span><h2>Retrieving configuration properties from a vault<a class="headerlink" href="#retrieving-configuration-properties-from-a-vault" title="Link to this heading">#</a></h2>
+<p>Secrets for Guacamole configuration properties are provided through <a class="reference internal" href="#guacamole-properties-ksm"><span class="std std-ref">an
+additional file within <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> called <code class="docutils literal notranslate"><span class="pre">guacamole.properties.ksm</span></code></span></a>.
+This file is <em>identical</em> to <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> except that the values of properties
+are <a class="reference external" href="https://docs.keeper.io/secrets-manager/secrets-manager/about/keeper-notation">references to KSM secrets in “Keeper Notation”</a>.
+Secrets can be used for any Guacamole configuration property that isn’t
+required to configure the KSM support.</p>
+<p>For example, the following <code class="docutils literal notranslate"><span class="pre">guacamole.properties.ksm</span></code> defines both the
+<code class="docutils literal notranslate"><span class="pre">mysql-username</span></code> and <code class="docutils literal notranslate"><span class="pre">mysql-password</span></code> properties using values from a single
+record in KSM that contains a username/password pair:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mysql-username: keeper://iel4yeic5ahxae7Eereec7/field/login
+mysql-password: keeper://iel4yeic5ahxae7Eereec7/field/password
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ssl-auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Signing in with smart cards or certificates</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="external-auth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">External authentication</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-vault-extension">Installing/Enabling the vault extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-guacamole-to-ksm">Adding Guacamole to KSM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-vaults-for-users-and-connection-groups">Additional vaults for users and connection groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#priorities-of-multiple-vaults">Priorities of multiple vaults</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-options">Additional Configuration Options</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-connection-secrets-from-a-vault">Retrieving connection secrets from a vault</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-injection-of-secrets-based-on-connection-parameters">Automatic injection of secrets based on connection parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-definition-of-secrets">Manual definition of secrets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-configuration-properties-from-a-vault">Retrieving configuration properties from a vault</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
