@@ -1,0 +1,1382 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Database setup for MariaDB / MySQL &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mysql-auth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database setup for PostgreSQL" href="postgresql-auth.html" />
+    <link rel="prev" title="Database authentication" href="jdbc-auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Database setup for MariaDB / MySQL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-database-for-guacamole">Creating a new database for Guacamole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#granting-guacamole-access-to-the-database">Granting Guacamole access to the database</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-an-existing-guacamole-database">Upgrading an existing Guacamole database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-support-for-mariadb-mysql">Installing/Enabling support for MariaDB/MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-password-policies">Enforcing password policies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#password-complexity">Password complexity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#password-age-expiration">Password age / expiration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preventing-password-reuse">Preventing password reuse</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrent-use-of-guacamole-connections">Concurrent use of Guacamole connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#external-users-and-connections">External users and connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-window-enforcment">Access window enforcment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging in</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="database-setup-for-mariadb-mysql">
+<h1>Database setup for MariaDB / MySQL<a class="headerlink" href="#database-setup-for-mariadb-mysql" title="Link to this heading">#</a></h1>
+<p>To use Guacamole with a MariaDB or MySQL database, you will need:</p>
+<ol class="arabic simple">
+<li><p>An instance of the MariaDB or MySQL database server.</p></li>
+<li><p>Sufficient permission to create new databases, to create new users, and to
+grant those users permissions.</p></li>
+<li><p>Network access to the database from the Guacamole server.</p></li>
+</ol>
+<p>If this is not the case, install your database of choice now. Most
+distributions will provide a convenient MariaDB or MySQL package which will set
+up everything for you. If you prefer Docker, the <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a>
+and <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> Docker images are also
+reasonable options. If you don’t wish to use MariaDB or MySQL, Guacamole
+additionally supports:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="postgresql-auth.html"><span class="doc std std-doc">PostgreSQL</span></a></p></li>
+<li><p><a class="reference internal" href="sqlserver-auth.html"><span class="doc std std-doc">SQL Server</span></a></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="creating-a-new-database-for-guacamole">
+<span id="mysql-auth-database-creation"></span><h2>Creating a new database for Guacamole<a class="headerlink" href="#creating-a-new-database-for-guacamole" title="Link to this heading">#</a></h2>
+<p>It is best practice to use a dedicated database and user for the Guacamole web
+application, and these instructions cover only this method.</p>
+<dl class="simple myst">
+<dt>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images:</dt><dd><p>Set the <code class="docutils literal notranslate"><span class="pre">MARIADB_DATABASE</span></code> or <code class="docutils literal notranslate"><span class="pre">MYSQL_DATABASE</span></code> environment variables
+respectively to the desired name of the database. The Docker image will
+automatically create this database when the container starts for the first
+time.</p>
+</dd>
+<dt>If using a native installation of MariaDB or MySQL:</dt><dd><p>Manually create a database for MySQL and MariaDB by executing a
+<code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">DATABASE</span></code> query with the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">guacamole_db</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<section id="initializing-the-database">
+<h3>Initializing the database<a class="headerlink" href="#initializing-the-database" title="Link to this heading">#</a></h3>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>The schema scripts necessary to initialize the MySQL version of Guacamole’s
+database are provided within the <code class="docutils literal notranslate"><span class="pre">mysql/schema/</span></code> directory of <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-jdbc-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-jdbc-1.6.0.tar.gz</span></code></a>,
+which must be downloaded from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for Apache Guacamole 1.6.0</a>
+and extracted first.</p>
+<p>Running each of these scripts against the newly created database will
+initialize it with Guacamole’s schema. You can run these scripts using the
+standard <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client, but the method of running <code class="docutils literal notranslate"><span class="pre">mysql</span></code> varies depending on
+whether you are using Docker to provide your database.</p>
+<dl class="simple myst">
+<dt>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images:</dt><dd><p>The schema initialization scripts should be run against the newly created
+database by running the standard <code class="docutils literal notranslate"><span class="pre">mysql</span></code> command-line client <em>within the
+container</em>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>schema/*.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>some-mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;mysql -u root -p&quot;$MYSQL_ROOT_PASSWORD&quot; guacamole_db&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If using a native installation of MariaDB or MySQL:</dt><dd><p>The schema initialization scripts should be run against the newly created
+database using the standard <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client directly from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cat<span class="w"> </span>schema/*.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>guacamole_db
+<span class="go">Enter password:</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The schema scripts necessary to initialize the MySQL version of Guacamole’s
+database are provided within the <code class="docutils literal notranslate"><span class="pre">/opt/guacamole/extensions/guacamole-auth-jdbc/mysql/schema</span></code>
+directory of the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image.</p>
+<p>Additionally, an <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script is provided at <code class="docutils literal notranslate"><span class="pre">/opt/guacamole/bin/initdb.sh</span></code>
+that can be used to extract the required schema initialization script:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initdb.sh<span class="w"> </span>--mysql<span class="w"> </span>&gt;<span class="w"> </span>initdb.sql
+</pre></div>
+</div>
+<p>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images via Docker Compose:
+:
+The easiest way to initialize Guacamole’s database is to use a volume mount to
+map the bundled schema initialization scripts from the Guacamole container into
+the database container. For example, if using Docker Compose:</p>
+<ol class="arabic">
+<li><p>Declare a named volume at the root level of your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">initdb</span><span class="p">:</span>
+</pre></div>
+</div>
+</li>
+<li><p>Reference the named volume within your Guacamole service, effectively
+pulling the schema initialization scripts from that container and into the
+volume:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;initdb:/opt/guacamole/extensions/guacamole-auth-jdbc/mysql/schema:ro&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Reference the named volume within your database service, bringing the
+schema initialization scripts into the directory used by the database
+image for one-time initialization:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;initdb:/docker-entrypoint-initdb.d:ro&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<dl class="simple myst">
+<dt>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images <em>without</em> Docker Compose:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
+send the required initialization script to the standard <code class="docutils literal notranslate"><span class="pre">mysql</span></code> command-line
+client <em>within the database container</em>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>some-mysql<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;mysql -u root -p&quot;$MYSQL_ROOT_PASSWORD&quot; guacamole_db&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If using a native installation of MariaDB or MySQL:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
+automatically produce the SQL required to initialize an existing database:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>guacamole_db
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="granting-guacamole-access-to-the-database">
+<h3>Granting Guacamole access to the database<a class="headerlink" href="#granting-guacamole-access-to-the-database" title="Link to this heading">#</a></h3>
+<p>For Guacamole to be able to execute queries against the database, you must
+create a new user for the database and grant that user sufficient privileges to
+manage the contents of all tables in the database.</p>
+<dl class="simple myst">
+<dt>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images:</dt><dd><p>Set the <code class="docutils literal notranslate"><span class="pre">MARIADB_USER</span></code> or <code class="docutils literal notranslate"><span class="pre">MYSQL_USER</span></code> environment variables respectively to
+the desired name of the dedicated user, and the <code class="docutils literal notranslate"><span class="pre">MARIADB_PASSWORD</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">MYSQL_PASSWORD</span></code>) environment variable to the desired password. The Docker
+image will automatically create this user when the container starts and grant
+them full access to the Guacamole database.</p>
+</dd>
+<dt>If using a native installation of MariaDB or MySQL:</dt><dd><p>The dedicated user for Guacamole must be manually created and granted
+sufficient privileges. The user created for Guacamole needs only <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UPDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">INSERT</span></code>, and <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> permissions on all tables in the Guacamole
+database.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;guacamole_user&#39;</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;some_password&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="k">INSERT</span><span class="p">,</span><span class="k">UPDATE</span><span class="p">,</span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">guacamole_db</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;guacamole_user&#39;</span><span class="p">;</span>
+<span class="k">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="upgrading-an-existing-guacamole-database">
+<span id="mysql-auth-installation"></span><h2>Upgrading an existing Guacamole database<a class="headerlink" href="#upgrading-an-existing-guacamole-database" title="Link to this heading">#</a></h2>
+<p>If you are upgrading from a version of Guacamole older than 1.6.0, you
+may need to run one or more database schema upgrade scripts located within the
+<code class="docutils literal notranslate"><span class="pre">mysql/schema/upgrade/</span></code> directory of <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-jdbc-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-jdbc-1.6.0.tar.gz</span></code></a>
+(available from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for Apache Guacamole
+1.6.0</a>).</p>
+<p>Each of these scripts is named <code class="samp docutils literal notranslate"><span class="pre">upgrade-pre-</span><em><span class="pre">VERSION</span></em><span class="pre">.sql</span></code> where
+<code class="docutils literal notranslate"><span class="pre">VERSION</span></code> is the version of Guacamole where those changes were introduced. They
+need to be run when you are upgrading from a version of Guacamole older than
+<code class="docutils literal notranslate"><span class="pre">VERSION</span></code>.</p>
+<p>If there are no <code class="samp docutils literal notranslate"><span class="pre">upgrade-pre-</span><em><span class="pre">VERSION</span></em><span class="pre">.sql</span></code> scripts present in the
+<code class="docutils literal notranslate"><span class="pre">schema/upgrade/</span></code> directory which apply to your existing Guacamole database,
+then the schema has not changed between your version and the version your are
+installing, and there is no need to run any database upgrade scripts.</p>
+<p>These scripts are incremental and, when relevant, <em>must be run in order</em>. For
+example, if you are upgrading an existing database from version
+0.9.13-incubating to version 1.0.0, you would need to run the
+<code class="docutils literal notranslate"><span class="pre">upgrade-pre-0.9.14.sql</span></code> script (because 0.9.13-incubating is older than
+0.9.14), followed by the <code class="docutils literal notranslate"><span class="pre">upgrade-pre-1.0.0.sql</span></code> script (because
+0.9.13-incubating is also older than 1.0.0).</p>
+</section>
+<section id="installing-enabling-support-for-mariadb-mysql">
+<h2>Installing/Enabling support for MariaDB/MySQL<a class="headerlink" href="#installing-enabling-support-for-mariadb-mysql" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic">
+<li><p>You should have a copy of <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-jdbc-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-jdbc-1.6.0.tar.gz</span></code></a> from
+earlier when you <a class="reference internal" href="#mysql-auth-database-creation"><span class="std std-ref">created and initialized the database</span></a>.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> and <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/lib</span></code> directories,
+if they do not already exist.</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">mysql/guacamole-auth-jdbc-mysql-1.6.0.jar</span></code>
+within <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code>.</p></li>
+<li><p>Copy the JDBC driver for your database to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/lib</span></code>.
+Either of the following MySQL-compatible JDBC drivers are supported
+for connecting Guacamole with MariaDB or MySQL:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mariadb.com/kb/en/about-mariadb-connector-j/">MariaDB Connector/J</a></p></li>
+<li><p><a class="reference external" href="http://dev.mysql.com/downloads/connector/j/">MySQL Connector/J</a> (the required <code class="docutils literal notranslate"><span class="pre">.jar</span></code> will be within a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> archive)</p></li>
+</ul>
+<p>If you do not have a specific reason to use one driver over the other, it’s
+recommended that you use the JDBC driver provided by your database vendor.</p>
+</li>
+<li><p>Configure Guacamole to use database authentication, as described below.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">MYSQL_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MYSQL_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">MYSQL_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">MYSQL_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Older versions of MySQL Connector/J have known issues with SSL
+verification.</strong> If you experience problems connecting to SSL-secured MySQL
+databases, it is recommended that you update to a current version of the
+driver.</p>
+</div>
+</section>
+<section id="required-configuration">
+<span id="mysql-auth-configuration"></span><h2>Required configuration<a class="headerlink" href="#required-configuration" title="Link to this heading">#</a></h2>
+<p>Additional configuration options must be specified for Guacamole to properly
+connect to your database. These options are specific to the database being
+used, and must be set correctly for authentication to work.</p>
+<p>The options absolutely required by the database authentication extension are
+relatively few and self-explanatory, describing only which database will be
+used and how Guacamole will authenticate when querying that database:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>If deploying Guacamole natively, you will need to add a section to your
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> that looks like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">mysql-database</span><span class="o">:</span><span class="w"> </span><span class="s">guacamole_db</span>
+<span class="na">mysql-username</span><span class="o">:</span><span class="w"> </span><span class="s">guacamole_user</span>
+<span class="na">mysql-password</span><span class="o">:</span><span class="w"> </span><span class="s">some_password</span>
+</pre></div>
+</div>
+<p>The properties that must be set in all cases for any Guacamole installation
+using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-database</span></code></dt><dd><p>The name of the database that you created for Guacamole. This is given as
+“guacamole_db” in the examples given in this chapter.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-username</span></code></dt><dd><p>The username of the user that Guacamole should use to connect to the
+database.  This is given as “guacamole_user” in the examples given in this
+chapter.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-password</span></code></dt><dd><p>The password Guacamole should provide when authenticating with the database.
+This is given as “some_password” in the examples given in this chapter.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>If deploying Guacamole using Docker Compose, you will need to add a set of
+environment variables to the <code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your
+<code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container that looks like the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;guacamole_db&#39;</span>
+<span class="nt">MYSQL_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;guacamole_user&#39;</span>
+<span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;some_password&#39;</span>
+</pre></div>
+</div>
+<p>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually, these same
+environment variables will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.  For
+example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_DATABASE</span><span class="o">=</span><span class="s2">&quot;guacamole_db&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_USERNAME</span><span class="o">=</span><span class="s2">&quot;guacamole_user&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_PASSWORD</span><span class="o">=</span><span class="s2">&quot;some_password&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+<p>The environment variables that must be set in all cases for any Docker-based
+Guacamole installation using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DATABASE</span></code></dt><dd><p>The name of the database that you created for Guacamole. This is given as
+“guacamole_db” in the examples given in this chapter.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USERNAME</span></code></dt><dd><p>The username of the user that Guacamole should use to connect to the
+database.  This is given as “guacamole_user” in the examples given in this
+chapter.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_PASSWORD</span></code></dt><dd><p>The password Guacamole should provide when authenticating with the database.
+This is given as “some_password” in the examples given in this chapter.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><strong>Double-check these values.</strong> You will not be able to sign into Guacamole
+after installation if these parameters do not match the correct database name,
+username, and password.</p>
+</div>
+</section>
+<section id="additional-configuration-optional">
+<h2>Additional configuration (optional)<a class="headerlink" href="#additional-configuration-optional" title="Link to this heading">#</a></h2>
+<p>Additional options are available to control how Guacamole connects to the
+database server:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-hostname</span></code></dt><dd><p>The hostname or IP address of the server hosting your database. If not
+specified, “localhost” will be used by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-port</span></code></dt><dd><p>The port number of the MySQL or MariaDB database to connect to. If not
+specified, the standard MySQL / MariaDB port 3306 will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-driver</span></code></dt><dd><p>Controls which JDBC driver the extension attempts to load. By default, the
+installed JDBC driver will be automatically detected. Possible values are:</p>
+<dl class="simple myst">
+<dt>mysql</dt><dd><p><a class="reference external" href="https://dev.mysql.com/downloads/connector/j/">The <strong>MySQL</strong> Connector/J JDBC driver</a>.</p>
+</dd>
+<dt>mariadb</dt><dd><p><a class="reference external" href="https://mariadb.com/kb/en/about-mariadb-connector-j/">The <strong>MariaDB</strong> Connector/J JDBC driver</a>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-server-timezone</span></code></dt><dd><p>Specifies the timezone the MySQL server is configured to run in. While the
+MySQL driver attempts to auto-detect the timezone in use by the server, there
+are many cases where the timezone provided by the operating system is either
+unknown by Java, or matches multiple timezones. In these cases MySQL may
+either complain or refuse the connection unless the timezone is specified as
+part of the connection. This property allows the timezone of the server to be
+specified so that the connection can continue and the JDBC driver can
+properly translate timestamps.  The property accepts timezones in the
+following formats:</p>
+<dl class="simple myst">
+<dt>Region/Locale</dt><dd><p>Well-known time zone identifiers, in the Region/Locale format, as defined
+by the <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone database</a>,
+such as <code class="docutils literal notranslate"><span class="pre">America/Los_Angeles</span></code>, <code class="docutils literal notranslate"><span class="pre">Africa/Johannesburg</span></code>, or <code class="docutils literal notranslate"><span class="pre">China/Shanghai</span></code>.</p>
+</dd>
+<dt>GMT+/-HH:MM</dt><dd><p>GMT or custom timezones specified by GMT offset, such as <code class="docutils literal notranslate"><span class="pre">GMT</span></code>, <code class="docutils literal notranslate"><span class="pre">GMT+0130</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GMT+06:00</span></code>, or <code class="docutils literal notranslate"><span class="pre">GMT-9</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-ssl-mode</span></code></dt><dd><p>This property sets the SSL mode that the JDBC driver will attempt to use when
+communicating with the remote MySQL server. The values for this property
+match the standard values supported by the MySQL and MariaDB JDBC drivers:</p>
+<dl class="simple myst">
+<dt>disabled</dt><dd><p>Do not use SSL, and fail if the server requires it. For compatibility this
+will also set the legacy JDBC driver property useSSL to false.</p>
+</dd>
+<dt>preferred</dt><dd><p>Prefer SSL, but fall back to plain-text if an SSL connection cannot be
+negotiated. This is the default.</p>
+</dd>
+<dt>required</dt><dd><p>Require SSL connections, and fail if SSL cannot be negotiated. This mode
+does not perform any validition checks on the certificate in use by the
+server, the issuer, etc.</p>
+</dd>
+<dt>verify-ca</dt><dd><p>Require SSL connections, and check to make sure that the certificate issuer
+is known to be valid.</p>
+</dd>
+<dt>verify-identity</dt><dd><p>Require SSL connections, and check to make sure that the server certificate
+is issued by a known authority, and that the identity of the server
+matches the identity on the certificate.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-ssl-trust-store</span></code></dt><dd><p>The file that will store trusted SSL certificates for the JDBC driver to use
+when validating CA and server certificates. This should be a JKS-formatted
+certificate store. This property is optional and defaults to Java’s normal
+trusted certificate locations, which vary based on the version of Java in
+use.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-ssl-trust-password</span></code></dt><dd><p>The password to use to access the SSL trusted certificate store, if one is
+required. By default no password will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-ssl-client-store</span></code></dt><dd><p>The file that contains the client certificate to use when making SSL
+connections to the MySQL server. This should be a JKS-formatted certificate
+store that contains a private key and certificate pair. This property is
+optional, and by default no client certificate will be used for the SSL
+connection.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-ssl-client-password</span></code></dt><dd><p>The password to use to access the client certificate store, if one is
+required. By default no password will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-batch-size</span></code></dt><dd><p>Controls how many objects may be retrieved from the database in a single
+query. If more objects than this number are requested, retrieval of those
+objects will be automatically and transparently split across multiple
+queries.</p>
+<p>By default, MySQL/MariaDB queries will retrieve no more than 1000 objects.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_HOSTNAME</span></code></dt><dd><p>The hostname or IP address of the server hosting your database. If not
+specified, “localhost” will be used by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_PORT</span></code></dt><dd><p>The port number of the MySQL or MariaDB database to connect to. If not
+specified, the standard MySQL / MariaDB port 3306 will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DRIVER</span></code></dt><dd><p>Controls which JDBC driver the extension attempts to load. By default, the
+installed JDBC driver will be automatically detected. Possible values are:</p>
+<dl class="simple myst">
+<dt>mysql</dt><dd><p><a class="reference external" href="https://dev.mysql.com/downloads/connector/j/">The <strong>MySQL</strong> Connector/J JDBC driver</a>.</p>
+</dd>
+<dt>mariadb</dt><dd><p><a class="reference external" href="https://mariadb.com/kb/en/about-mariadb-connector-j/">The <strong>MariaDB</strong> Connector/J JDBC driver</a>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SERVER_TIMEZONE</span></code></dt><dd><p>Specifies the timezone the MySQL server is configured to run in. While the
+MySQL driver attempts to auto-detect the timezone in use by the server, there
+are many cases where the timezone provided by the operating system is either
+unknown by Java, or matches multiple timezones. In these cases MySQL may
+either complain or refuse the connection unless the timezone is specified as
+part of the connection. This property allows the timezone of the server to be
+specified so that the connection can continue and the JDBC driver can
+properly translate timestamps.  The property accepts timezones in the
+following formats:</p>
+<dl class="simple myst">
+<dt>Region/Locale</dt><dd><p>Well-known time zone identifiers, in the Region/Locale format, as defined
+by the <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone database</a>,
+such as <code class="docutils literal notranslate"><span class="pre">America/Los_Angeles</span></code>, <code class="docutils literal notranslate"><span class="pre">Africa/Johannesburg</span></code>, or <code class="docutils literal notranslate"><span class="pre">China/Shanghai</span></code>.</p>
+</dd>
+<dt>GMT+/-HH:MM</dt><dd><p>GMT or custom timezones specified by GMT offset, such as <code class="docutils literal notranslate"><span class="pre">GMT</span></code>, <code class="docutils literal notranslate"><span class="pre">GMT+0130</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GMT+06:00</span></code>, or <code class="docutils literal notranslate"><span class="pre">GMT-9</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SSL_MODE</span></code></dt><dd><p>This property sets the SSL mode that the JDBC driver will attempt to use when
+communicating with the remote MySQL server. The values for this property
+match the standard values supported by the MySQL and MariaDB JDBC drivers:</p>
+<dl class="simple myst">
+<dt>disabled</dt><dd><p>Do not use SSL, and fail if the server requires it. For compatibility this
+will also set the legacy JDBC driver property useSSL to false.</p>
+</dd>
+<dt>preferred</dt><dd><p>Prefer SSL, but fall back to plain-text if an SSL connection cannot be
+negotiated. This is the default.</p>
+</dd>
+<dt>required</dt><dd><p>Require SSL connections, and fail if SSL cannot be negotiated. This mode
+does not perform any validition checks on the certificate in use by the
+server, the issuer, etc.</p>
+</dd>
+<dt>verify-ca</dt><dd><p>Require SSL connections, and check to make sure that the certificate issuer
+is known to be valid.</p>
+</dd>
+<dt>verify-identity</dt><dd><p>Require SSL connections, and check to make sure that the server certificate
+is issued by a known authority, and that the identity of the server
+matches the identity on the certificate.</p>
+</dd>
+</dl>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SSL_TRUST_STORE</span></code></dt><dd><p>The file that will store trusted SSL certificates for the JDBC driver to use
+when validating CA and server certificates. This should be a JKS-formatted
+certificate store. This property is optional and defaults to Java’s normal
+trusted certificate locations, which vary based on the version of Java in
+use.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SSL_TRUST_PASSWORD</span></code></dt><dd><p>The password to use to access the SSL trusted certificate store, if one is
+required. By default no password will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SSL_CLIENT_STORE</span></code></dt><dd><p>The file that contains the client certificate to use when making SSL
+connections to the MySQL server. This should be a JKS-formatted certificate
+store that contains a private key and certificate pair. This property is
+optional, and by default no client certificate will be used for the SSL
+connection.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_SSL_CLIENT_PASSWORD</span></code></dt><dd><p>The password to use to access the client certificate store, if one is
+required. By default no password will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_BATCH_SIZE</span></code></dt><dd><p>Controls how many objects may be retrieved from the database in a single
+query. If more objects than this number are requested, retrieval of those
+objects will be automatically and transparently split across multiple
+queries.</p>
+<p>By default, MySQL/MariaDB queries will retrieve no more than 1000 objects.</p>
+</dd>
+</dl>
+</div>
+</div>
+<section id="enforcing-password-policies">
+<h3>Enforcing password policies<a class="headerlink" href="#enforcing-password-policies" title="Link to this heading">#</a></h3>
+<p>Configuration options are available for enforcing rules intended to encourage
+password complexity and regular changing of passwords. None of these options
+are enabled by default, but can be selectively enabled as needed.</p>
+<section id="password-complexity">
+<h4>Password complexity<a class="headerlink" href="#password-complexity" title="Link to this heading">#</a></h4>
+<p>Administrators can require that passwords have a certain level of complexity,
+such as having both uppercase and lowercase letters (“multiple case”), at least
+one digit, or at least one symbol, and can prohibit passwords from containing
+the user’s own username.</p>
+<p>With respect to password content, the database authentication defines a “digit”
+as any numeric character and a “symbol” is any non-alphanumeric character. This
+takes non-English languages into account, thus a digit is not simply “0”
+through “9” but rather <a class="reference external" href="https://en.wikipedia.org/wiki/Numerals_in_Unicode">any character defined in Unicode as
+numeric</a>, and a symbol is
+any character which Unicode does not define as alphabetic or numeric.</p>
+<p>The check for whether a password contains the user’s own username is performed
+in a case-insensitive manner. For example, if the user’s username is “phil”,
+the passwords “ch!0roPhil” and “PHIL-o-dendr0n” would still be prohibited.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-min-length</span></code></dt><dd><p>The minimum length required of all user passwords, in characters. By default,
+password length is not enforced.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-require-multiple-case</span></code></dt><dd><p>Whether all user passwords must have at least one lowercase character and one
+uppercase character. By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-require-symbol</span></code></dt><dd><p>Whether all user passwords must have at least one non-alphanumeric character
+(symbol). By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-require-digit</span></code></dt><dd><p>Whether all user passwords must have at least one numeric character (digit).
+By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-prohibit-username</span></code></dt><dd><p>Whether users are prohibited from including their own username in their
+password. By default, no such restriction is imposed.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--4-input--2" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_MIN_LENGTH</span></code></dt><dd><p>The minimum length required of all user passwords, in characters. By default,
+password length is not enforced.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_REQUIRE_MULTIPLE_CASE</span></code></dt><dd><p>Whether all user passwords must have at least one lowercase character and one
+uppercase character. By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_REQUIRE_SYMBOL</span></code></dt><dd><p>Whether all user passwords must have at least one non-alphanumeric character
+(symbol). By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_REQUIRE_DIGIT</span></code></dt><dd><p>Whether all user passwords must have at least one numeric character (digit).
+By default, no such restriction is imposed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_PROHIBIT_USERNAME</span></code></dt><dd><p>Whether users are prohibited from including their own username in their
+password. By default, no such restriction is imposed.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="password-age-expiration">
+<h4>Password age / expiration<a class="headerlink" href="#password-age-expiration" title="Link to this heading">#</a></h4>
+<p>“Password age” refers to two separate concepts:</p>
+<ol class="arabic simple">
+<li><p>Requiring users to change their password after a certain amount of time has
+elapsed since the last password change (maximum password age).</p></li>
+<li><p>Preventing users from changing their password too frequently (minimum
+password age).</p></li>
+</ol>
+<p>While it may seem strange to prevent users from changing their password too
+frequently, it does make sense if you are concerned that rapid password changes
+may defeat password expiration (users could immediately change the password
+back) or tracking of password history (users could cycle through passwords
+until the history is exhausted and their old password is usable again).</p>
+<p>By default, the database authentication does not apply any limits to password
+age, and users with permission to change their passwords may do so as
+frequently or infrequently as they wish. Password age limits can be enabled
+using a pair of configuration options, each accepting values given in units of
+days:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-min-age</span></code></dt><dd><p>The minimum number of days which must elapse before a user may reset their
+password, where zero represents no limit. By default, no minimum number of
+days is required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-max-age</span></code></dt><dd><p>The maximum number of days which may elapse before a user is automatically
+required to reset their password, where zero represents no limit. By default,
+users are not automatically required to reset their password based on
+password age.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--5-input--2" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_MIN_AGE</span></code></dt><dd><p>The minimum number of days which must elapse before a user may reset their
+password, where zero represents no limit. By default, no minimum number of
+days is required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_MAX_AGE</span></code></dt><dd><p>The maximum number of days which may elapse before a user is automatically
+required to reset their password, where zero represents no limit. By default,
+users are not automatically required to reset their password based on
+password age.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>So that administrators can always intervene in the case that a password needs
+to be reset despite restrictions, the minimum age restriction does not apply to
+any user with permission to administer the system.</p>
+</div>
+</section>
+<section id="preventing-password-reuse">
+<h4>Preventing password reuse<a class="headerlink" href="#preventing-password-reuse" title="Link to this heading">#</a></h4>
+<p>If desired, Guacamole can keep track of each user’s most recently used
+passwords, and will prohibit reuse of those passwords until the password has
+been changed sufficiently many times. By default, Guacamole will not keep track
+of old passwords.</p>
+<p>Note that these passwords are hashed in the same manner as each user’s current
+password. When a user’s password is changed, the hash, salt, etc. currently
+stored for that user is actually just copied verbatim (along with a timestamp)
+into a list of historical passwords, with older entries from this list being
+automatically deleted.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--6-input--1" name="tab-set--6" type="radio"><label class="tab-label" for="tab-set--6-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-password-history-size</span></code></dt><dd><p>The number of previous passwords remembered for each user, where zero
+represents no history. If set to a non-zero value, users will be restricted
+from reusing any password in their password history. Passwords are remembered
+only in hashed and salted form. By default, previous passwords are not
+remembered and no such restriction is enforced.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--6-input--2" name="tab-set--6" type="radio"><label class="tab-label" for="tab-set--6-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_PASSWORD_HISTORY_SIZE</span></code></dt><dd><p>The number of previous passwords remembered for each user, where zero
+represents no history. If set to a non-zero value, users will be restricted
+from reusing any password in their password history. Passwords are remembered
+only in hashed and salted form. By default, previous passwords are not
+remembered and no such restriction is enforced.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+</section>
+<section id="concurrent-use-of-guacamole-connections">
+<span id="mysql-auth-concurrency"></span><h3>Concurrent use of Guacamole connections<a class="headerlink" href="#concurrent-use-of-guacamole-connections" title="Link to this heading">#</a></h3>
+<p>The database authentication module provides configuration options to restrict
+concurrent use of connections and connection groups. Concurrent use can be
+restricted broadly or to ensure that each individual user may only maintain a
+limited number of active connections to any one connection or group.</p>
+<p>By default, concurrent usage is unrestricted except that each user may only
+have a single active connection to each connection group. This is intended to
+avoid the case that a single user is able to exhaust the contents of a
+connection group and effectively block others from using the same resources.</p>
+<p>If you wish to impose an absolute limit on the number of active connections
+that can be established through Guacamole, ignoring which users or connections
+are involved, this can be done as well.</p>
+<p>The default policy set through these options can be overridden later on a
+per-connection basis using the administrative interface.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--7-input--1" name="tab-set--7" type="radio"><label class="tab-label" for="tab-set--7-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-default-max-connections</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection,
+regardless of which user is accessing the connection, where zero denotes
+unlimited. By default, overall concurrent access to individual connections is
+not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-default-max-group-connections</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+group, regardless of which user is accessing the connection group, where zero
+denotes unlimited. By default, overall concurrent access to individual
+connection groups is not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-default-max-connections-per-user</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+by the same user, where zero denotes unlimited. By default, per-user
+concurrent access to individual connections is not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-default-max-group-connections-per-user</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+group by the same user, where zero denotes unlimited. By default, per-user
+concurrent access to connection groups is limited to one user.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-absolute-max-connections</span></code></dt><dd><p>The maximum number of concurrent connections to allow overall, regardless of
+which connection or connection group is used and regardless of which user is
+accessing the connection/group, where zero denotes unlimited. By default,
+overall concurrent access to Guacamole is not limited.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--7-input--2" name="tab-set--7" type="radio"><label class="tab-label" for="tab-set--7-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DEFAULT_MAX_CONNECTIONS</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection,
+regardless of which user is accessing the connection, where zero denotes
+unlimited. By default, overall concurrent access to individual connections is
+not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DEFAULT_MAX_GROUP_CONNECTIONS</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+group, regardless of which user is accessing the connection group, where zero
+denotes unlimited. By default, overall concurrent access to individual
+connection groups is not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DEFAULT_MAX_CONNECTIONS_PER_USER</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+by the same user, where zero denotes unlimited. By default, per-user
+concurrent access to individual connections is not limited.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_DEFAULT_MAX_GROUP_CONNECTIONS_PER_USER</span></code></dt><dd><p>The maximum number of concurrent connections to allow to any one connection
+group by the same user, where zero denotes unlimited. By default, per-user
+concurrent access to connection groups is limited to one user.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_ABSOLUTE_MAX_CONNECTIONS</span></code></dt><dd><p>The maximum number of concurrent connections to allow overall, regardless of
+which connection or connection group is used and regardless of which user is
+accessing the connection/group, where zero denotes unlimited. By default,
+overall concurrent access to Guacamole is not limited.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="external-users-and-connections">
+<span id="mysql-auth-restrict"></span><h3>External users and connections<a class="headerlink" href="#external-users-and-connections" title="Link to this heading">#</a></h3>
+<p>When <a class="reference internal" href="ldap-auth.html#ldap-and-database"><span class="std std-ref">combining LDAP with a database</span></a>, or using a single
+sign-on system like <a class="reference internal" href="openid-auth.html"><span class="doc std std-doc">OpenID Connect</span></a> or <a class="reference internal" href="saml-auth.html"><span class="doc std std-doc">SAML</span></a>, user
+accounts are not purely defined by Guacamole’s database. They are additionally
+defined by the relevant external system. In some cases, such as the <a class="reference internal" href="ldap-auth.html#ldap-schema-changes"><span class="std std-ref">LDAP
+extension’s capability to retrieve connection information from the LDAP
+directory</span></a>, connections are not purely defined by
+Guacamole’s database either.</p>
+<p>In these cases, it may be desirable to:</p>
+<ul class="simple">
+<li><p>Limit use of Guacamole to only those users that <em>do</em> already exist in the
+database.</p></li>
+<li><p>Automatically create users in the database when they have successfully
+authenticated through other means, such that extensions requiring storage
+like TOTP can be used alongside SSO solutions.</p></li>
+<li><p>Control whether the database logs connection usage history for connections
+that are not maintained by the database.</p></li>
+</ul>
+<p>By default, users will be allowed access to Guacamole as long as they are
+authenticated by at least one extension, no extension denies/vetoes access, and
+the database will record connection history entries for all connections
+regardless of whether they are maintained by the database.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In all cases, users will only be able to see or interact with resources that
+they have been given permission to access. This is true whether those
+permissions are granted explicitly or through inheritance (from user groups).</p>
+</div>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--8-input--1" name="tab-set--8" type="radio"><label class="tab-label" for="tab-set--8-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-user-required</span></code></dt><dd><p>Whether a user account within the database is required for authentication to
+succeed, even if the user has been authenticated via another extension. By
+default, successful authentication via any extension is sufficient, and
+database user accounts are not strictly required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-auto-create-accounts</span></code></dt><dd><p>Whether to automatically create user accounts in the database for users who
+have successfully authenticate through another extension. Users that are
+automatically created are granted <code class="docutils literal notranslate"><span class="pre">READ</span></code> permission on their own user account
+and no other explicit permissions. By default users will not be automatically
+created.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-track-external-connection-history</span></code></dt><dd><p>Whether connection history records should be created for connections not
+defined in the database. By default, external connection history will be
+tracked unless this is explicitly disabled by setting this to “false”.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--8-input--2" name="tab-set--8" type="radio"><label class="tab-label" for="tab-set--8-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_USER_REQUIRED</span></code></dt><dd><p>Whether a user account within the database is required for authentication to
+succeed, even if the user has been authenticated via another extension. By
+default, successful authentication via any extension is sufficient, and
+database user accounts are not strictly required.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_AUTO_CREATE_ACCOUNTS</span></code></dt><dd><p>Whether to automatically create user accounts in the database for users who
+have successfully authenticate through another extension. Users that are
+automatically created are granted <code class="docutils literal notranslate"><span class="pre">READ</span></code> permission on their own user account
+and no other explicit permissions. By default users will not be automatically
+created.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_TRACK_EXTERNAL_CONNECTION_HISTORY</span></code></dt><dd><p>Whether connection history records should be created for connections not
+defined in the database. By default, external connection history will be
+tracked unless this is explicitly disabled by setting this to “false”.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="access-window-enforcment">
+<h3>Access window enforcment<a class="headerlink" href="#access-window-enforcment" title="Link to this heading">#</a></h3>
+<p>Guacamole supports the use of access windows to limit the time periods during
+which users are allowed to access the system. By default, users will be
+forcibly logged out from Guacamole as soon as the access window expires,
+disconnecting them from any active connections.</p>
+<p>If you would prefer users to be allowed to remain logged in, this behavior can
+be overridden using the configuration option below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Prior to <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache Guacamole 1.6.0</a>,
+access windows were enforced only during the login process. Access windows
+restricted only when a user could log in, not whether they could remain logged
+in.</p>
+</div>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--9-input--1" name="tab-set--9" type="radio"><label class="tab-label" for="tab-set--9-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">mysql-enforce-access-windows-for-active-sessions</span></code></dt><dd><p>Whether time-based access windows should be enforced for active user sessions.
+By default, users will be logged out when an access window closes, even if
+they are currently logged in. To allow logged-in users to continue to use the
+application after an access window closes, set this to “false”. Users will
+always be prevented from logging in outside of access windows regardless of
+this setting.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--9-input--2" name="tab-set--9" type="radio"><label class="tab-label" for="tab-set--9-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">MYSQL_ENFORCE_ACCESS_WINDOWS_FOR_ACTIVE_SESSIONS</span></code></dt><dd><p>Whether time-based access windows should be enforced for active user sessions.
+By default, users will be logged out when an access window closes, even if
+they are currently logged in. To allow logged-in users to continue to use the
+application after an access window closes, set this to “false”. Users will
+always be prevented from logging in outside of access windows regardless of
+this setting.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+</section>
+<section id="completing-installation">
+<h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--10-input--1" name="tab-set--10" type="radio"><label class="tab-label" for="tab-set--10-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--10-input--2" name="tab-set--10" type="radio"><label class="tab-label" for="tab-set--10-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="logging-in">
+<span id="mysql-auth-default-user"></span><h2>Logging in<a class="headerlink" href="#logging-in" title="Link to this heading">#</a></h2>
+<p>The default Guacamole user created by the provided SQL scripts is
+“<code class="docutils literal notranslate"><span class="pre">guacadmin</span></code>”, with a default password of “<code class="docutils literal notranslate"><span class="pre">guacadmin</span></code>”. Once you have verified
+that the database authentication is working, <strong>you should <a class="reference internal" href="using-guacamole.html#changing-password"><span class="std std-ref">change your password
+immediately</span></a></strong>.</p>
+<p>Once you have successfully logged in and changed your password, you can begin
+using the web UI to create other users, groups, and connections. More detailed
+instructions for doing this are given in <a class="reference internal" href="administration.html"><span class="doc std std-doc">Guacamole’s administrative interface</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="jdbc-auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Database authentication</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="postgresql-auth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Database setup for PostgreSQL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-database-for-guacamole">Creating a new database for Guacamole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#granting-guacamole-access-to-the-database">Granting Guacamole access to the database</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-an-existing-guacamole-database">Upgrading an existing Guacamole database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-support-for-mariadb-mysql">Installing/Enabling support for MariaDB/MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-password-policies">Enforcing password policies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#password-complexity">Password complexity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#password-age-expiration">Password age / expiration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preventing-password-reuse">Preventing password reuse</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concurrent-use-of-guacamole-connections">Concurrent use of Guacamole connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#external-users-and-connections">External users and connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-window-enforcment">Access window enforcment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging in</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,778 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Viewing session recordings in-browser &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'recording-playback';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Guacamole protocol" href="guacamole-protocol.html" />
+    <link rel="prev" title="Enforcing advanced login and connection restrictions" href="auth-restrict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Viewing session recordings in-browser</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-recording-storage-and-playback-works">How recording storage and playback works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-recording-storage-extension">Installing/Enabling the recording storage extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-a-directory-for-recording-storage">Preparing a directory for recording storage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-connections-to-use-recording-storage">Configuring connections to use recording storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-using-a-subdirectory-named-with-the-history-uuid-recommended">Option 1: Using a subdirectory named with the history UUID (RECOMMENDED)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-naming-the-recording-with-the-history-uuid">Option 2: Naming the recording with the history UUID</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="viewing-session-recordings-in-browser">
+<h1>Viewing session recordings in-browser<a class="headerlink" href="#viewing-session-recordings-in-browser" title="Link to this heading">#</a></h1>
+<p>Guacamole supports <a class="reference internal" href="configuring-guacamole.html#graphical-recording"><span class="std std-ref">recording activity within remote desktop sessions</span></a>
+such that it can be played back and reviewed later. Graphical recordings can be
+converted to video <a class="reference internal" href="configuring-guacamole.html#graphical-recording"><span class="std std-ref">using the <code class="docutils literal notranslate"><span class="pre">guacenc</span></code> tool</span></a> (part of
+<a class="reference internal" href="guacamole-native.html#building-guacamole-server"><span class="std std-ref">guacamole-server</span></a>) or can be played back directly
+in the browser in their native format using Guacamole itself. This has several
+benefits:</p>
+<ul class="simple">
+<li><p>Recordings can be played back while the session is underway.</p></li>
+<li><p>Recordings need not be re-encoded as traditional video, an
+intensive process that often results in a larger file.</p></li>
+<li><p>It is very easy to locate and play back the recording for a session when
+doing so only involves clicking a button in the connection history.</p></li>
+</ul>
+<p>This chapter of the documentation covers installing and using the extension
+that allows recordings stored on disk to be played back in the browser.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="how-recording-storage-and-playback-works">
+<span id="playback-architecture"></span><h2>How recording storage and playback works<a class="headerlink" href="#how-recording-storage-and-playback-works" title="Link to this heading">#</a></h2>
+<p>The Guacamole web application includes its own support for playing back
+recordings from the history screen in the administration interface, but that
+support cannot automatically know where those recordings are stored nor how
+they are named. The extension documented here provides exactly that missing
+piece, allowing the web application to find recordings on disk so long as they
+are named appropriately and stored in a specific location.</p>
+<p>Each history entry has a deterministic, internal, unique identifier called its
+UUID, and all supported database backends make this UUID available ahead of
+time with the <code class="docutils literal notranslate"><span class="pre">${HISTORY_UUID}</span></code> parameter token. This provides a reliable way
+for data stored <em>outside</em> the database to be associated with history entries
+that are otherwise stored purely <em>inside</em> the database, and it is this UUID
+that the extension searches for when locating the recording for a history entry.</p>
+<p>When a user lists the history of a connection, the recording storage extension
+additionally <a class="reference internal" href="#recording-storage-config"><span class="std std-ref">searches a predetermined location</span></a> for
+session recordings that match either of the following criteria:</p>
+<ul class="simple">
+<li><p>The recording’s filename is <em>identical</em> to the history entry UUID and is
+directly within the search path.</p></li>
+<li><p>The recording has any name at all and is within a directory whose filename is
+identical to the history entry UUID and is directly within the search path.</p></li>
+</ul>
+<p>If such a recording is found, it is made available to any user that can view
+the history entry. The availability of a recording is displayed as a “View”
+link in the “Logs” column of the history table:</p>
+<p><img alt="View link in the history UI" src="_images/history-table-with-recordings.png" /></p>
+<p>Clicking on that link navigates to a screen with a player that loads the
+recording and allows it to be played back:</p>
+<p><img alt="In-browser player interface" src="_images/recording-player-in-use.png" /></p>
+<p>Version 1.6.0 of Guacamole introduces a feature that allows for key events
+in the recording to be displayed in a format similar to the guaclog utility,
+making it easy for administrators to scroll or search through the output
+for key events. The amount and type of data shown in this output will
+depend upon the options selected when recording is enabled - for example,
+keystrokes will not be available if keystroke logging has not been
+enabled for a connection.</p>
+<p>Additionally, heatmaps of screen update activity and key events (if captured)
+will be displayed when the progress bar is hovered.</p>
+<p><img alt="Display and search key events" src="_images/player-key-events.png" /></p>
+</section>
+<section id="installing-enabling-the-recording-storage-extension">
+<span id="playback-installing"></span><h2>Installing/Enabling the recording storage extension<a class="headerlink" href="#installing-enabling-the-recording-storage-extension" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-history-recording-storage-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-history-recording-storage-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">guacamole-history-recording-storage-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">RECORDING_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">RECORDING_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">RECORDING_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">RECORDING_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">RECORDING_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+<section id="preparing-a-directory-for-recording-storage">
+<span id="prepare-recording-storage"></span><h3>Preparing a directory for recording storage<a class="headerlink" href="#preparing-a-directory-for-recording-storage" title="Link to this heading">#</a></h3>
+<p>By default, the recording storage extension will search within
+<code class="docutils literal notranslate"><span class="pre">/var/lib/guacamole/recordings</span></code> for the recordings associated with a
+connection. Unless you or a third-party installation tool have created this
+directory, this directory will not exist and you will need to create it
+manually:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/lib/guacamole/recordings
+</pre></div>
+</div>
+<p>You can also use another directory of your own choosing if you
+<a class="reference internal" href="#recording-storage-config"><span class="std std-ref">override the default location using the <code class="docutils literal notranslate"><span class="pre">recording-search-path</span></code>
+property</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The following steps will use <code class="docutils literal notranslate"><span class="pre">/var/lib/guacamole/recordings</span></code>, as it is a
+sensible location and the default search path. If you are using a different
+path, consider <code class="docutils literal notranslate"><span class="pre">/var/lib/guacamole/recordings</span></code> below to be a placeholder and
+use your own path instead.</p>
+</div>
+<p>Once the path has been created, its permissions and ownerships must be modified
+such that <em>both of the following are true</em>:</p>
+<ul class="simple">
+<li><p>The guacd service can write to the directory.</p></li>
+<li><p>The servlet container (typically Tomcat) can read from the directory, as well
+as read any files that are placed within the directory.</p></li>
+</ul>
+<p>The simplest way to do this is to ensure that:</p>
+<ol class="arabic simple">
+<li><p>The directory is owned by the user that runs the guacd service and the
+<em>group</em> that runs the Tomcat service.</p></li>
+<li><p>The directory has read/write/execute permissions for the user (so that guacd
+can write here), and read/execute/<strong>setgid</strong> permissions for the group (so
+that Tomcat can read here, and so that <a class="reference external" href="https://en.wikipedia.org/wiki/Setuid#When_set_on_a_directory">any files placed here are automatically
+owned by the Tomcat user’s group</a>).</p></li>
+</ol>
+<p>For example, if your guacd service runs as a dedicated <code class="docutils literal notranslate"><span class="pre">guacd</span></code> user, and your
+Tomcat service runs as a user within the <code class="docutils literal notranslate"><span class="pre">tomcat</span></code> group:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>chown<span class="w"> </span>guacd:tomcat<span class="w"> </span>/var/lib/guacamole/recordings
+<span class="gp">$ </span>chmod<span class="w"> </span><span class="m">2750</span><span class="w"> </span>/var/lib/guacamole/recordings
+</pre></div>
+</div>
+<p>If set correctly, the ownerships and permissions should look like:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls<span class="w"> </span>-ld<span class="w"> </span>/var/lib/guacamole/recordings
+<span class="go">drwxr-s---. 1 guacd tomcat 0 Feb  5 05:43 /var/lib/guacamole/recordings/</span>
+<span class="gp">$</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If using this extension within a Docker container, you will need to use volumes
+to make an external directory available to <strong>both</strong> the <code class="docutils literal notranslate"><span class="pre">guacamole/guacd</span></code>
+container and the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container.</p>
+<p>Regardless of what users and groups are already present on the host system, the
+UID and GID values that apply to permissions in this case will be the UIDs and
+GIDs used by the containers. The UIDs and GIDs used by the provided Docker
+images are as follows:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Image name</p></th>
+<th class="head"><p>User</p></th>
+<th class="head"><p>UID</p></th>
+<th class="head"><p>Group</p></th>
+<th class="head"><p>GID</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tomcat</span></code></p></td>
+<td><p>1000</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tomcat</span></code></p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">guacamole/guacd</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">guacd</span></code></p></td>
+<td><p>1001</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">guacd</span></code></p></td>
+<td><p>1001</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The UID and GID values used by the containers will not necessarily align with
+the values already used by your system.</p>
+</div>
+</section>
+</section>
+<section id="configuration-optional">
+<span id="recording-storage-config"></span><h2>Configuration (optional)<a class="headerlink" href="#configuration-optional" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">recording-search-path</span></code></dt><dd><p>The directory to search for associated session recordings. This property is
+optional. By default, <code class="docutils literal notranslate"><span class="pre">/var/lib/guacamole/recordings</span></code> will be used.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">RECORDING_SEARCH_PATH</span></code></dt><dd><p>The directory to search for associated session recordings. This property is
+optional. By default, <code class="docutils literal notranslate"><span class="pre">/var/lib/guacamole/recordings</span></code> will be used.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="completing-installation">
+<span id="completing-recording-storage-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="configuring-connections-to-use-recording-storage">
+<span id="recording-storage-connection-config"></span><h2>Configuring connections to use recording storage<a class="headerlink" href="#configuring-connections-to-use-recording-storage" title="Link to this heading">#</a></h2>
+<p>Recordings of connections can be found by the recording storage extension as
+long as those connections are configured in either of two ways, each involving
+naming a file or directory with the history UUID (<code class="docutils literal notranslate"><span class="pre">${HISTORY_UUID}</span></code>).</p>
+<section id="option-1-using-a-subdirectory-named-with-the-history-uuid-recommended">
+<h3>Option 1: Using a subdirectory named with the history UUID (RECOMMENDED)<a class="headerlink" href="#option-1-using-a-subdirectory-named-with-the-history-uuid-recommended" title="Link to this heading">#</a></h3>
+<p>If the recording path of a connection is set to
+<code class="docutils literal notranslate"><span class="pre">${HISTORY_PATH}/${HISTORY_UUID}</span></code> and “automatically create path” is checked,
+then the recording storage extension will be able to locate the recording by
+recognizing that the directory is named with the UUID:</p>
+<p><img alt="Configuring session recording with the path containing the history UUID" src="_images/recording-storage-connection-config-option1-recommended.png" /></p>
+<p><strong>This is the recommended method of storing recordings.</strong> This method is the
+most flexible in that it allows other recordings like typescripts to be stored
+within the same directory, and it allows recordings to be given <em>any</em> name,
+including names that are more human-readable, contain <a class="reference internal" href="configuring-guacamole.html#parameter-tokens"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">${GUAC_DATE}</span></code> or
+<code class="docutils literal notranslate"><span class="pre">${GUAC_TIME}</span></code> tokens</span></a>, etc.</p>
+<p>Though the web application does not currently support in-browser playback of
+typescripts, server logs, or other files that might be of interest to the
+administrator looking at the history of a connection, it <em>does</em> recognize these
+files. Following this method will allow any future support for playback of
+other types of recordings to work even for old recordings.</p>
+</section>
+<section id="option-2-naming-the-recording-with-the-history-uuid">
+<h3>Option 2: Naming the recording with the history UUID<a class="headerlink" href="#option-2-naming-the-recording-with-the-history-uuid" title="Link to this heading">#</a></h3>
+<p>If the recording path of a connection is set to <code class="docutils literal notranslate"><span class="pre">${HISTORY_PATH}</span></code> and the
+recording name is set to <code class="docutils literal notranslate"><span class="pre">${HISTORY_UUID}</span></code>, the recording storage extension
+will be able to locate the recording by recognizing that its name is identical
+to the UUID:</p>
+<p><img alt="Configuring session recording with the name containing the history UUID" src="_images/recording-storage-connection-config-option2.png" /></p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="auth-restrict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Enforcing advanced login and connection restrictions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="guacamole-protocol.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Guacamole protocol</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-recording-storage-and-playback-works">How recording storage and playback works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-recording-storage-extension">Installing/Enabling the recording storage extension</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-a-directory-for-recording-storage">Preparing a directory for recording storage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-optional">Configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-connections-to-use-recording-storage">Configuring connections to use recording storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-using-a-subdirectory-named-with-the-history-uuid-recommended">Option 1: Using a subdirectory named with the history UUID (RECOMMENDED)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-naming-the-recording-with-the-history-uuid">Option 2: Naming the recording with the history UUID</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

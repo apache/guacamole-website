@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Installing Guacamole with Docker &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guacamole-docker';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database authentication" href="jdbc-auth.html" />
+    <link rel="prev" title="Installing Guacamole natively" href="guacamole-native.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Installing Guacamole with Docker</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-guacd-docker-image">Running the guacd Docker image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacd-for-use-by-the-guacamole-docker-image">Running guacd for use by the Guacamole Docker image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacd-for-use-by-services-outside-docker">Running guacd for use by services outside Docker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-guacamole-docker-image">The Guacamole Docker image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-guacamole-when-using-docker">Configuring Guacamole when using Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-guacamole-to-guacd">Connecting Guacamole to guacd</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacamole-behind-a-proxy">Running Guacamole behind a proxy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-environment-variables">Required environment variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-environment-variables">Optional environment variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-extensions-and-guacamole-home">Custom extensions and <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-the-guacamole-install">Verifying the Guacamole install</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="installing-guacamole-with-docker">
+<h1>Installing Guacamole with Docker<a class="headerlink" href="#installing-guacamole-with-docker" title="Link to this heading">#</a></h1>
+<p>Guacamole can be deployed using Docker, removing the need to build
+guacamole-server from source or configure the web application manually.  The
+Guacamole project provides officially-supported Docker images for both
+Guacamole and guacd which are kept up-to-date with each release.</p>
+<p>A typical Docker deployment of Guacamole will involve three separate
+containers, connected over the network:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">guacamole/guacd</span></code></dt><dd><p>Provides the guacd daemon, built from the released guacamole-server source
+with support for VNC, RDP, SSH, telnet, and Kubernetes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code></dt><dd><p>Provides the Guacamole web application running within Tomcat 9.x with support
+for WebSocket. The configuration necessary to connect to guacd, MySQL,
+PostgreSQL, LDAP, etc. will be read automatically from environment variables
+when the image starts.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mysql</span></code> or <code class="docutils literal notranslate"><span class="pre">postgresql</span></code></dt><dd><p>Provides the database that Guacamole will use for authentication and storage
+of connection configuration data.</p>
+</dd>
+</dl>
+<p>This separation is important, as it facilitates upgrades and maintains proper
+separation of concerns. With the database separate from Guacamole and guacd,
+those containers can be freely destroyed and recreated at will. The only
+container which must persist data through upgrades is the database.</p>
+<section id="running-the-guacd-docker-image">
+<span id="guacd-docker-image"></span><h2>Running the guacd Docker image<a class="headerlink" href="#running-the-guacd-docker-image" title="Link to this heading">#</a></h2>
+<p>The guacd Docker image is built from the released guacamole-server source with
+support for VNC, RDP, SSH, telnet, and Kubernetes. Common pitfalls like
+installing the required dependencies, installing fonts for SSH, telnet, or
+Kubernetes, and ensuring the FreeRDP plugins are installed to the correct
+location are all taken care of. It will simply just work.</p>
+<section id="running-guacd-for-use-by-the-guacamole-docker-image">
+<span id="guacd-docker-guacamole"></span><h3>Running guacd for use by the Guacamole Docker image<a class="headerlink" href="#running-guacd-for-use-by-the-guacamole-docker-image" title="Link to this heading">#</a></h3>
+<p>When running the guacd image with the intent of connecting with a Guacamole
+container, no ports need be exposed on the network. Access to these ports will
+be handled automatically by Docker through the use of an isolated network:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>some-network<span class="w"> </span>--name<span class="w"> </span>some-guacd<span class="w"> </span>-d<span class="w"> </span>guacamole/guacd
+</pre></div>
+</div>
+<p>When run in this manner, guacd will be listening on its default port 4822, but
+this port will only be available via the dedicated Docker network,
+<code class="docutils literal notranslate"><span class="pre">some-network</span></code>.</p>
+<p>The log level of guacd can be controlled with the <code class="docutils literal notranslate"><span class="pre">LOG_LEVEL</span></code> environment
+variable. The default value is <code class="docutils literal notranslate"><span class="pre">info</span></code>, and can be set to any of the valid
+settings for the guacd log flag (<code class="docutils literal notranslate"><span class="pre">-L</span></code>).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>some-network<span class="w"> </span>--name<span class="w"> </span>some-guacd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>debug<span class="w"> </span>-d<span class="w"> </span>guacamole/guacd
+</pre></div>
+</div>
+</section>
+<section id="running-guacd-for-use-by-services-outside-docker">
+<span id="guacd-docker-external"></span><h3>Running guacd for use by services outside Docker<a class="headerlink" href="#running-guacd-for-use-by-services-outside-docker" title="Link to this heading">#</a></h3>
+<p>If you are not going to use the Guacamole image, you can still leverage the
+guacd image for ease of installation and maintenance. By exposing the guacd
+port, 4822, services external to Docker will be able to access guacd.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><em>Take great care when doing this</em> - guacd is a passive proxy and does not
+perform any kind of authentication.</p>
+<p>If you do not properly isolate guacd from untrusted parts of your network,
+malicious users may be able to use guacd as a jumping point to other systems.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacd<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">4822</span>:4822<span class="w"> </span>guacamole/guacd
+</pre></div>
+</div>
+<p>guacd will now be listening on port 4822, and Docker will expose this port on
+the same server hosting Docker. Other services, such as an instance of Tomcat
+running outside of Docker, will be able to connect to guacd directly.</p>
+</section>
+</section>
+<section id="the-guacamole-docker-image">
+<span id="guacamole-docker-image"></span><h2>The Guacamole Docker image<a class="headerlink" href="#the-guacamole-docker-image" title="Link to this heading">#</a></h2>
+<p>The Guacamole Docker image is built on top of a standard Tomcat 9.x image and
+takes care of all configuration automatically. The configuration information
+required for guacd and the various authentication mechanisms are specified with
+environment variables given when the container is created.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If using <a class="reference internal" href="postgresql-auth.html"><span class="doc std std-doc">PostgreSQL</span></a> or <a class="reference internal" href="mysql-auth.html"><span class="doc std std-doc">MySQL</span></a> for
+authentication, <em>you will need to initialize the database manually</em>.  Guacamole
+will not automatically create its own tables, but SQL scripts are provided to
+do this.</p>
+</div>
+<p>Once the Guacamole image is running, Guacamole will be accessible at
+<code class="samp docutils literal notranslate"><span class="pre">http://</span><em><span class="pre">HOSTNAME</span></em><span class="pre">:8080/guacamole/</span></code>, where <code class="docutils literal notranslate"><span class="pre">HOSTNAME</span></code> is the hostname or
+address of the machine hosting Docker. To set the path Guacamole is accessible from,
+use the <code class="docutils literal notranslate"><span class="pre">WEBAPP_CONTEXT</span></code> environment variable:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">WEBAPP_CONTEXT</span></code></dt><dd><p>The path Guacamole should be accessible from. If set to <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> Guacamole
+will accessible from <code class="samp docutils literal notranslate"><span class="pre">http://</span><em><span class="pre">HOSTNAME</span></em><span class="pre">:8080</span></code>.</p>
+</dd>
+</dl>
+<section id="configuring-guacamole-when-using-docker">
+<span id="guacamole-docker-config-via-env"></span><h3>Configuring Guacamole when using Docker<a class="headerlink" href="#configuring-guacamole-when-using-docker" title="Link to this heading">#</a></h3>
+<p>When running Guacamole using Docker, the traditional approach to configuring
+Guacamole by editing <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> is instead primarily accomplished
+using environment variables. For each property that the web application or an
+extension might read, the value of that property is read from a corresponding
+environment variable.</p>
+<p>Each of these environment variables are explicitly documented alongside their
+original properties, but they are named consistently by transforming the
+property into uppercase and replacing all dashes with underscores.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This means that even custom, third-party extensions that leverage properties
+from <code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> are automatically configurable using environment
+variables within the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image.</p>
+</div>
+</section>
+<section id="connecting-guacamole-to-guacd">
+<span id="guacamole-docker-guacd"></span><h3>Connecting Guacamole to guacd<a class="headerlink" href="#connecting-guacamole-to-guacd" title="Link to this heading">#</a></h3>
+<p>The Guacamole Docker image needs to be able to connect to guacd to establish
+remote desktop connections, just like any other Guacamole deployment, however
+the connection information needed by Guacamole will be provided via environment
+variables.</p>
+<p>If you will be using Docker to provide guacd, and you wish to use a dedicated
+network for these services, you can just use the container name as the
+hostname:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--network<span class="o">=</span>some-network<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">GUACD_HOSTNAME</span><span class="o">=</span>some-guacamole<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+<p>The network connection information for guacd is provided using additional
+environment variables:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">GUACD_HOSTNAME</span></code></dt><dd><p>The hostname of the guacd instance to use to establish remote desktop
+connections. <em>This is required if you are not using Docker to provide guacd.</em></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">GUACD_PORT</span></code></dt><dd><p>The port that Guacamole should use when connecting to guacd. This environment
+variable is optional. If not provided, the standard guacd port of 4822 will
+be used.</p>
+</dd>
+</dl>
+<p><em>A connection to guacd is not the only thing required for Guacamole to work</em>;
+some authentication mechanism needs to be configured, as well.
+<a class="reference internal" href="mysql-auth.html"><span class="doc std std-doc">MySQL</span></a>, <a class="reference internal" href="postgresql-auth.html"><span class="doc std std-doc">PostgreSQL</span></a>, and <a class="reference internal" href="ldap-auth.html"><span class="doc std std-doc">LDAP</span></a> are
+supported for this, and are described in more detail in the sections below. If
+the required configuration options for at least one authentication mechanism
+are not provided, the Guacamole image will not be able to start up, and you
+will see an error.</p>
+</section>
+<section id="running-guacamole-behind-a-proxy">
+<span id="guacamole-docker-proxy"></span><h3>Running Guacamole behind a proxy<a class="headerlink" href="#running-guacamole-behind-a-proxy" title="Link to this heading">#</a></h3>
+<p>To run Guacamole behind a reverse proxy, Tomcat’s
+<a class="reference external" href="https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Remote_IP_Valve"><code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code></a>
+must be configured as described in <a class="reference internal" href="reverse-proxy.html#tomcat-remote-ip"><span class="std std-ref">Setting up the Remote IP Valve</span></a> to ensure that the
+user’s IP address can be correctly determined and logged. The Guacamole Docker
+image provides environment variables for configuring this.</p>
+<section id="required-environment-variables">
+<span id="guacamole-docker-tomcat-remote-ip-valve-required-vars"></span><h4>Required environment variables<a class="headerlink" href="#required-environment-variables" title="Link to this heading">#</a></h4>
+<p>The following environment variable must be set in order to configure Tomcat’s
+<a class="reference external" href="https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Remote_IP_Valve"><code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code></a>:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">REMOTE_IP_VALVE_ENABLED</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable Tomcat’s <a class="reference external" href="https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Remote_IP_Valve"><code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code></a>.
+<strong>If this is not set, all other variables related to <code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code> will be
+ignored.</strong></p>
+</dd>
+</dl>
+</section>
+<section id="optional-environment-variables">
+<span id="guacamole-docker-tomcat-remote-ip-valve-optional-vars"></span><h4>Optional environment variables<a class="headerlink" href="#optional-environment-variables" title="Link to this heading">#</a></h4>
+<p>Additional environment variables are available to fine tune the configuration
+of <code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code>. <strong>It is not typically necessary to set these variables.</strong>
+The default values are correct for most deployments.</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">PROXY_ALLOWED_IPS_REGEX</span></code></dt><dd><p>A regular expression matching only the IP addresses that should be trusted to
+send proxy headers, corresponding to the <code class="docutils literal notranslate"><span class="pre">internalProxies</span></code> attribute of
+<code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code>. Proxy headers from other addresses will be ignored. The
+regular expression must conform to the format accepted by <a class="reference external" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java’s <code class="docutils literal notranslate"><span class="pre">Pattern</span></code>
+class</a>,
+which is largely compatible with Perl.</p>
+<p>If omitted, Tomcat’s default which matches private IPv4 and IPv6 addresses
+will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PROXY_BY_HEADER</span></code></dt><dd><p>The HTTP header sent by the proxy that contains the list of proxies that have
+processed the request. This corresponds to the <code class="docutils literal notranslate"><span class="pre">proxiesHeader</span></code> attribute of
+<code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code>. By default, this will be <code class="docutils literal notranslate"><span class="pre">X-Forwarded-By</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PROXY_IP_HEADER</span></code></dt><dd><p>The HTTP header sent by the proxy that contains the user’s browser’s IP
+address. This corresponds to the <code class="docutils literal notranslate"><span class="pre">remoteIpHeader</span></code> attribute of
+<code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code>. By default, this will be <code class="docutils literal notranslate"><span class="pre">X-Forwarded-For</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">PROXY_PROTOCOL_HEADER</span></code></dt><dd><p>The HTTP header sent by the proxy that contains the protocol used by the
+user’s browser to connect to the proxy. This corresponds to the
+<code class="docutils literal notranslate"><span class="pre">protocolHeader</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">RemoteIpValve</span></code>. By default, this will be
+<code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code>.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="custom-extensions-and-guacamole-home">
+<span id="guacamole-docker-guacamole-home"></span><h3>Custom extensions and <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code><a class="headerlink" href="#custom-extensions-and-guacamole-home" title="Link to this heading">#</a></h3>
+<p>If you have your own or third-party extensions for Guacamole which are not
+supported by the Guacamole Docker image, but are compatible with the version of
+Guacamole within the image, you can still use them exactly as you would with a
+native Guacamole installation. The Guacamole web application within the image
+uses the same standard configuration paths and files.</p>
+<p>Additionally, the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image provides some configuration
+mechanisms for convenience:</p>
+<ul class="simple">
+<li><p>Configuration properties that are normally consumed by your extension via
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> can instead be specified with corresponding
+environment variables. Within the Docker image, the Guacamole web application
+will automatically read properties from environment variables that are named
+by transforming the property name into uppercase and replacing all dashes
+with underscores.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> environment variable informs the image where to look for
+your configuration and defaults to <code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code>. If you need to use a
+different location, you can simply point this variable at that location
+instead.</p></li>
+</ul>
+<p>The image is designed to use any provided <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> configuration as a
+template while leaving its contents untouched. The web application will be
+pointed at a temporary location whose contents have been non-destructively
+copied/linked from the files you have provided. <strong>The image does not need write
+access to any custom configuration files/directories.</strong></p>
+</section>
+<section id="verifying-the-guacamole-install">
+<span id="verifying-guacamole-docker"></span><h3>Verifying the Guacamole install<a class="headerlink" href="#verifying-the-guacamole-install" title="Link to this heading">#</a></h3>
+<p>Once the Guacamole image is running, Guacamole should be accessible at
+<code class="samp docutils literal notranslate"><span class="pre">http://</span><em><span class="pre">HOSTNAME</span></em><span class="pre">:8080/guacamole/</span></code> (or the path you set with
+<code class="docutils literal notranslate"><span class="pre">WEBAPP_CONTEXT</span></code>), where <code class="docutils literal notranslate"><span class="pre">HOSTNAME</span></code> is the hostname or address of the machine
+hosting Docker, and you <em>should</em> see a login screen.</p>
+<p>If you cannot access Guacamole, or you do not see a login screen, check
+Docker’s logs using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">logs</span></code> command to determine if something is
+wrong. Configuration parameters may have been given incorrectly, or the
+database may be improperly initialized:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>logs<span class="w"> </span>some-guacamole
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="guacamole-native.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installing Guacamole natively</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="jdbc-auth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Database authentication</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-guacd-docker-image">Running the guacd Docker image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacd-for-use-by-the-guacamole-docker-image">Running guacd for use by the Guacamole Docker image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacd-for-use-by-services-outside-docker">Running guacd for use by services outside Docker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-guacamole-docker-image">The Guacamole Docker image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-guacamole-when-using-docker">Configuring Guacamole when using Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-guacamole-to-guacd">Connecting Guacamole to guacd</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-guacamole-behind-a-proxy">Running Guacamole behind a proxy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-environment-variables">Required environment variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-environment-variables">Optional environment variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-extensions-and-guacamole-home">Custom extensions and <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-the-guacamole-install">Verifying the Guacamole install</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

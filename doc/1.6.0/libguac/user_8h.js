@@ -1,0 +1,28 @@
+var user_8h =
+[
+    [ "guac_user_info", "structguac__user__info.html", "structguac__user__info" ],
+    [ "guac_user", "structguac__user.html", "structguac__user" ],
+    [ "guac_user_abort", "user_8h.html#a0eff54a869374e37237b2006ad77b958", null ],
+    [ "guac_user_alloc", "user_8h.html#a383751a58b70f6c59a6be4c10a6a8dc4", null ],
+    [ "guac_user_alloc_object", "user_8h.html#a59025db48eae31380bd231bfb45dcf86", null ],
+    [ "guac_user_alloc_stream", "user_8h.html#a58c2228a0ad1f7aa6c13b7b4f225f928", null ],
+    [ "guac_user_free", "user_8h.html#a7e0e1220fd00fd769b8e6b731f8c9bf8", null ],
+    [ "guac_user_free_object", "user_8h.html#acf92065fb6bbc92f9794ea50255acdb9", null ],
+    [ "guac_user_free_stream", "user_8h.html#a3b3c740837b8e2cae6a232b45ca362f4", null ],
+    [ "guac_user_handle_connection", "user_8h.html#a28f08ab54f138796dea4655ef54526fe", null ],
+    [ "guac_user_handle_instruction", "user_8h.html#a0303ef487d51b06bb0f007f1a5df0d78", null ],
+    [ "guac_user_log", "user_8h.html#ab19481d0800901190d3d734eae466151", null ],
+    [ "guac_user_parse_args_boolean", "user_8h.html#a5f0bae838d82357e95e98769f7b98cd2", null ],
+    [ "guac_user_parse_args_int", "user_8h.html#a08f6fd4d84de665487a45fb324dc8844", null ],
+    [ "guac_user_parse_args_string", "user_8h.html#a48fa37571297fd9649a6eabd982854ae", null ],
+    [ "guac_user_stop", "user_8h.html#a8216ec7024947564fb4ea6b8b0b07eaf", null ],
+    [ "guac_user_stream_argv", "user_8h.html#aa3f85461f15abfb46fd7c732538b33ea", null ],
+    [ "guac_user_stream_jpeg", "user_8h.html#a6e947ee6996d5711f18d5b785757ccb3", null ],
+    [ "guac_user_stream_png", "user_8h.html#a35e4c7ba75a16c0b512d543ef4fe9630", null ],
+    [ "guac_user_stream_webp", "user_8h.html#af00042d94cb64fb8ac92cd84aff05bf8", null ],
+    [ "guac_user_supports_msg", "user_8h.html#a602117049c9731a0f165a78b2d7dfe17", null ],
+    [ "guac_user_supports_required", "user_8h.html#a0c54aa65599c3d2d6c62c752f850d6a6", null ],
+    [ "guac_user_supports_webp", "user_8h.html#a26d186ee6b669c78278124ece46cc8f7", null ],
+    [ "vguac_user_abort", "user_8h.html#ad8529247b551cb93509236a7f9138dd2", null ],
+    [ "vguac_user_log", "user_8h.html#af15509bcb891932a3fa93a142018b95c", null ]
+];

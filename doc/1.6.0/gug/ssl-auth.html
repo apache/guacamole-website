@@ -1,0 +1,1002 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Signing in with smart cards or certificates &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ssl-auth';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Retrieving secrets from a vault" href="vault.html" />
+    <link rel="prev" title="Using SAML for single sign-on" href="saml-auth.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Signing in with smart cards or certificates</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-ssl-client-authentication-works-with-guacamole">How SSL client authentication works with Guacamole</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-ssl-termination-to-use-client-authentication">Configuring SSL termination to use client authentication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcard-domain-performs-ssl-client-authentication">Wildcard domain (performs SSL client authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-domain-does-not-perform-ssl-client-authentication">Normal domain (does not perform SSL client authentication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-ssl-client-authentication-extension">Installing/Enabling the SSL client authentication extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="signing-in-with-smart-cards-or-certificates">
+<h1>Signing in with smart cards or certificates<a class="headerlink" href="#signing-in-with-smart-cards-or-certificates" title="Link to this heading">#</a></h1>
+<p>Single sign-on using SSL client authentication depends on having a reverse
+proxy configured to provide SSL termination for Guacamole. Unlike a standard
+reverse proxy setup, however, a portion of the requests served through the
+proxy will verify the client’s identity using SSL client authentication and
+pass that information on to Guacamole.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="how-ssl-client-authentication-works-with-guacamole">
+<h2>How SSL client authentication works with Guacamole<a class="headerlink" href="#how-ssl-client-authentication-works-with-guacamole" title="Link to this heading">#</a></h2>
+<p>Using SSL client authentication for Guacamole involves configuring a reverse
+proxy to provide SSL termination for the same instance of Guacamole at two
+different domains or subdomains:</p>
+<ol class="arabic simple">
+<li><p><strong>A wildcard subdomain and certificate</strong> that will be used strictly for
+performing SSL client authentication. The wildcard certificate is necessary
+to allow Guacamole to generate temporary subdomains and avoid browser
+caching of credentials.</p></li>
+<li><p><strong>A normal domain/subdomain (and corresponding certificate)</strong> that will be
+used for Guacamole itself and will not use SSL client authentication.</p></li>
+</ol>
+<p>When Guacamole is configured for single sign-on using SSL client
+authentication, users are presented with an additional “Certificate / Smart
+Card” option at the bottom of the login screen:</p>
+<p><img alt="The Guacamole login screen, showing the &quot;Certificate / Smart Card&quot; prompt added by the SSL client authentication extension." src="_images/ssl-sso-001-link.png" /></p>
+<p>If a user clicks on “Certificate / Smart Card”, Guacamole generates a temporary
+subdomain to handle authentication and redirects the user to that subdomain. As
+the SSL termination is configured to handle these subdomains with SSL client
+authentication, the user is authenticated by the reverse proxy using that
+mechanism:</p>
+<p><img alt="The browser prompt resulting from starting the SSL client authentication process by clicking the &quot;Certificate / Smart Card&quot; link, displayed in front of the Guacamole login screen." src="_images/ssl-sso-002-browser-prompt.png" /></p>
+<p>The reverse proxy notifies Guacamole of the result of authentication using the
+<code class="docutils literal notranslate"><span class="pre">X-Client-Verified</span></code> and <code class="docutils literal notranslate"><span class="pre">X-Client-Certificate</span></code> headers. Once the user is
+authenticated (or fails to authenticate), Guacamole redirects the user back to
+the primary domain and their SSL authentication result is read.</p>
+<p>If the user successfully authenticated, their username is determined from the
+certificate:</p>
+<p><img alt="The Guacamole home screen after successfully signing in using a smart card." src="_images/ssl-sso-003-success.png" /></p>
+<p>If the user <em>did not</em> successfully authenticate, authentication with Guacamole
+fails and the user sees the login screen again.</p>
+</section>
+<section id="configuring-ssl-termination-to-use-client-authentication">
+<span id="ssl-auth-configuring-proxy"></span><h2>Configuring SSL termination to use client authentication<a class="headerlink" href="#configuring-ssl-termination-to-use-client-authentication" title="Link to this heading">#</a></h2>
+<p>There are two separate configurations that will need to be applied to your
+reverse proxy, one for each of the domains noted above. In each case, the proxy
+will need to add headers that will be consumed by Guacamole’s SSL
+authentication integration.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*.auth.guac.example.net</span></code> and <code class="docutils literal notranslate"><span class="pre">guac.example.net</span></code> domains are used
+throughout this documentation as representative placeholders. Your
+configuration will differ depending on the domain your users are using to
+access your instance of Guacamole.</p>
+<p>Both the wildcard domain and normal domain that will be configured here will
+need to be referenced in Guacamole’s configuration. Take note of these domains,
+so that you can provide their values when configuring Guacamole later.</p>
+</div>
+<section id="wildcard-domain-performs-ssl-client-authentication">
+<h3>Wildcard domain (performs SSL client authentication)<a class="headerlink" href="#wildcard-domain-performs-ssl-client-authentication" title="Link to this heading">#</a></h3>
+<p>Since it is the wildcard domain that will actually perform SSL client
+authentication (Guacamole receives the authentication result from your reverse
+proxy via HTTP headers), the configuration for the wildcard domain requires
+several additional changes from <a class="reference internal" href="reverse-proxy.html"><span class="doc std std-doc">the standard reverse proxy configuration for
+Guacamole</span></a>:</p>
+<dl class="simple myst">
+<dt>Enable SSL client authentication in “optional” mode</dt><dd><p>This will result in the reverse proxy requesting authentication, but will
+not prohibit the authentication result from being sent on to Guacamole if
+authentication fails.</p>
+</dd>
+<dt>Pass through the <code class="docutils literal notranslate"><span class="pre">Host</span></code> header received by the reverse proxy</dt><dd><p>It is the <code class="docutils literal notranslate"><span class="pre">Host</span></code> header that determines whether the request is routed to the
+reverse proxy’s handling of wildcard domain vs. normal domain, and Guacamole
+needs this information, as well, to determine context.</p>
+</dd>
+<dt>Include the authentication result as the value of the <code class="docutils literal notranslate"><span class="pre">X-Client-Verified</span></code> header.</dt><dd><p>This header must contain the value <code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code> if authentication succeeded and
+may contain any other value otherwise. If authentication failed, this header
+may contain <code class="docutils literal notranslate"><span class="pre">FAILED:</span></code> followed by a human-readable description of the
+failure, and Guacamole will include that description in its logs.</p>
+<p>Both the Apache HTTP Server and Nginx support this format for passing on the
+result of SSL client authentication.</p>
+</dd>
+<dt>Include the URL-encoded client certificate in PEM format as the value <code class="docutils literal notranslate"><span class="pre">X-Client-Certificate</span></code> header.</dt><dd><p>Here, URL encoding is necessary to allow the certificate to be included as
+the value of an HTTP header. Both the Apache HTTP Server and Nginx support
+URL encoding of this value.</p>
+</dd>
+</dl>
+<p><em>The portions of the reverse proxy configuration which differ from <a class="reference internal" href="reverse-proxy.html"><span class="doc std std-doc">the
+standard configuration</span></a> are highlighted below.</em> Your reverse
+proxy configuration will need to be similarly modified to allow Guacamole to
+receive and process the authentication result.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Apache HTTP Server</label><div class="tab-content docutils">
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span><span class="w"> </span><span class="s">*:443</span><span class="nt">&gt;</span>
+
+<span class="hll"><span class="w">    </span><span class="nb">ServerName</span><span class="w"> </span>x.auth.guac.example.net
+</span><span class="hll"><span class="w">    </span><span class="nb">ServerAlias</span><span class="w"> </span>*.auth.guac.example.net
+</span>
+<span class="w">    </span><span class="nb">SSLEngine</span><span class="w"> </span><span class="k">on</span>
+<span class="w">    </span><span class="nb">SSLCertificateFile</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/_.auth.guac.example.net.crt&quot;</span>
+<span class="w">    </span><span class="nb">SSLCertificateKeyFile</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/private/_.auth.guac.example.net.key&quot;</span>
+
+<span class="hll"><span class="w">    </span><span class="nb">SSLCACertificateFile</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/client-auth-ca-certs.crt&quot;</span>
+</span><span class="hll"><span class="w">    </span><span class="nb">SSLVerifyClient</span><span class="w"> </span>optional
+</span><span class="hll"><span class="w">    </span><span class="nb">SSLVerifyDepth</span><span class="w"> </span><span class="m">2</span>
+</span>
+<span class="w">    </span><span class="nt">&lt;Location</span><span class="w"> </span><span class="s">/guacamole/</span><span class="nt">&gt;</span>
+
+<span class="w">        </span><span class="nb">Order</span><span class="w"> </span>allow,deny
+<span class="w">        </span><span class="nb">Allow</span><span class="w"> </span>from<span class="w"> </span><span class="k">all</span>
+<span class="w">        </span><span class="nb">ProxyPass</span><span class="w"> </span>http://localhost:8080/guacamole/<span class="w"> </span>flushpackets=on
+<span class="w">        </span><span class="nb">ProxyPassReverse</span><span class="w"> </span>http://localhost:8080/guacamole/
+
+<span class="hll"><span class="w">        </span><span class="nb">ProxyPreserveHost</span><span class="w"> </span><span class="k">on</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">RequestHeader</span><span class="w"> </span>set<span class="w"> </span>X-Client-Certificate<span class="w"> </span><span class="s2">&quot;expr=%{escape:%{SSL_CLIENT_CERT}}&quot;</span>
+</span><span class="hll"><span class="w">        </span><span class="nb">RequestHeader</span><span class="w"> </span>set<span class="w"> </span>X-Client-Verified<span class="w"> </span><span class="s2">&quot;%{SSL_CLIENT_VERIFY}s&quot;</span>
+</span>
+<span class="w">    </span><span class="nt">&lt;/Location&gt;</span>
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <a class="reference internal" href="reverse-proxy.html#websocket-and-apache"><span class="std std-ref">typical <code class="docutils literal notranslate"><span class="pre">&lt;Location</span> <span class="pre">/guacamole/websocket-tunnel&gt;</span></code>
+section</span></a> is intentionally omitted above. This is because
+SSL client authentication will be performed only via a specific, dedicated
+endpoint that does not involve any tunnel, let alone the WebSocket tunnel.</p>
+<p>Including a <code class="docutils literal notranslate"><span class="pre">&lt;Location&gt;</span></code> section for the <code class="docutils literal notranslate"><span class="pre">websocket-tunnel</span></code> endpoint beneath
+the wildcard domain will not prevent smart card / certificate authentication
+from working, but it is unnecessary for the wildcard domain.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Nginx</label><div class="tab-content docutils">
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">_.auth.guac.example.net</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/etc/ssl/certs/_.auth.guac.example.net.crt</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/etc/ssl/private/_.auth.guac.example.net.key</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="kn">ssl_client_certificate</span><span class="w"> </span><span class="s">/etc/ssl/certs/client-auth-ca-certs.crt</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kn">ssl_verify_client</span><span class="w"> </span><span class="s">optional</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/guacamole/</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8080</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_buffering</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="nv">$http_connection</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">access_log</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+
+<span class="hll"><span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$http_host</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Client-Verified</span><span class="w"> </span><span class="nv">$ssl_client_verify</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Client-Certificate</span><span class="w"> </span><span class="nv">$ssl_client_escaped_cert</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normal-domain-does-not-perform-ssl-client-authentication">
+<h3>Normal domain (does not perform SSL client authentication)<a class="headerlink" href="#normal-domain-does-not-perform-ssl-client-authentication" title="Link to this heading">#</a></h3>
+<p>Configuration of the non-wildcard, normal domain is simpler than its wildcard
+counterpart, but still requires at least pass-through of the <code class="docutils literal notranslate"><span class="pre">Host</span></code> header
+received by the reverse proxy. As with the wildcard domain, this is necessary
+for Guacamole to determine the context of the request it received.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Apache HTTP Server</label><div class="tab-content docutils">
+<div class="highlight-apache notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span><span class="w"> </span><span class="s">*:443</span><span class="nt">&gt;</span>
+
+<span class="hll"><span class="w">    </span><span class="nb">ServerName</span><span class="w"> </span>guac.example.net
+</span>
+<span class="w">    </span><span class="nb">SSLEngine</span><span class="w"> </span><span class="k">on</span>
+<span class="w">    </span><span class="nb">SSLCertificateFile</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/guac.example.net.crt&quot;</span>
+<span class="w">    </span><span class="nb">SSLCertificateKeyFile</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/private/guac.example.net.key&quot;</span>
+
+<span class="w">    </span><span class="nt">&lt;Location</span><span class="w"> </span><span class="s">/guacamole/</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nb">Order</span><span class="w"> </span>allow,deny
+<span class="w">        </span><span class="nb">Allow</span><span class="w"> </span>from<span class="w"> </span><span class="k">all</span>
+<span class="w">        </span><span class="nb">ProxyPass</span><span class="w"> </span>http://localhost:8080/guacamole/<span class="w"> </span>flushpackets=on
+<span class="w">        </span><span class="nb">ProxyPassReverse</span><span class="w"> </span>http://localhost:8080/guacamole/
+<span class="hll"><span class="w">        </span><span class="nb">ProxyPreserveHost</span><span class="w"> </span><span class="k">on</span>
+</span><span class="w">    </span><span class="nt">&lt;/Location&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;Location</span><span class="w"> </span><span class="s">/guacamole/websocket-tunnel</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nb">Order</span><span class="w"> </span>allow,deny
+<span class="w">        </span><span class="nb">Allow</span><span class="w"> </span>from<span class="w"> </span><span class="k">all</span>
+<span class="w">        </span><span class="nb">ProxyPass</span><span class="w"> </span>ws://localhost:8080/guacamole/websocket-tunnel
+<span class="w">        </span><span class="nb">ProxyPassReverse</span><span class="w"> </span>ws://localhost:8080/guacamole/websocket-tunnel
+<span class="w">    </span><span class="nt">&lt;/Location&gt;</span>
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Nginx</label><div class="tab-content docutils">
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">guac.example.net</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/etc/ssl/certs/guac.example.net.crt</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/etc/ssl/private/guac.example.net.key</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/guacamole/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:8080</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_buffering</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_http_version</span><span class="w"> </span><span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+<span class="hll"><span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$http_host</span><span class="p">;</span>
+</span><span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Upgrade</span><span class="w"> </span><span class="nv">$http_upgrade</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Connection</span><span class="w"> </span><span class="nv">$http_connection</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">access_log</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With both the wildcard and normal domains configured, your reverse proxy should
+be ready to handle SSL client authentication and pass on the results of any
+authentication attempts to Guacamole in the format expected.</p>
+</section>
+</section>
+<section id="installing-enabling-the-ssl-client-authentication-extension">
+<span id="ssl-auth-downloading"></span><h2>Installing/Enabling the SSL client authentication extension<a class="headerlink" href="#installing-enabling-the-ssl-client-authentication-extension" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-sso-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-sso-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">ssl/guacamole-auth-sso-ssl-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">SSL_AUTH_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">SSL_AUTH_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">SSL_AUTH_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">SSL_AUTH_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">SSL_AUTH_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+</section>
+<section id="required-configuration">
+<span id="ssl-auth-config"></span><h2>Required configuration<a class="headerlink" href="#required-configuration" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole’s SSL client authentication support requires two properties which describe the domains that your reverse proxy has been configured to
+use for authentication and for simply accessing Guacamole. These properties
+are <em>absolutely required in all cases</em>:</p>
+<p>If deploying Guacamole natively, you will need to add a section to your
+<code class="docutils literal notranslate"><span class="pre">guacamole.properties</span></code> that looks like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">ssl-auth-uri</span><span class="o">:</span><span class="w"> </span><span class="s">https://*.auth.guac.example.net</span>
+<span class="na">ssl-auth-primary-uri</span><span class="o">:</span><span class="w"> </span><span class="s">https://guac.example.net</span>
+</pre></div>
+</div>
+<p>The properties that must be set in all cases for any Guacamole installation
+using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-uri</span></code></dt><dd><p>The URI that should be used to authenticate users with SSL/TLS client
+authentication. This must be a URI that points to THIS instance of Guacamole,
+but behind SSL termination that requires SSL/TLS client authentication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-primary-uri</span></code></dt><dd><p>The URI of this instance without SSL/TLS client authentication required. This
+must be a URI that points to THIS instance of Guacamole, but behind SSL
+termination that DOES NOT require or request SSL/TLS client authentication.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Guacamole’s SSL client authentication support requires two environment variables which describe the domains that your reverse proxy has been configured to
+use for authentication and for simply accessing Guacamole. These environment variables
+are <em>absolutely required in all cases</em>:</p>
+<p>If deploying Guacamole using Docker Compose, you will need to add a set of
+environment variables to the <code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your
+<code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container that looks like the following:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">SSL_AUTH_URI</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://*.auth.guac.example.net&#39;</span>
+<span class="nt">SSL_AUTH_PRIMARY_URI</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://guac.example.net&#39;</span>
+</pre></div>
+</div>
+<p>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually, these same
+environment variables will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.  For
+example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">SSL_AUTH_URI</span><span class="o">=</span><span class="s2">&quot;https://*.auth.guac.example.net&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">SSL_AUTH_PRIMARY_URI</span><span class="o">=</span><span class="s2">&quot;https://guac.example.net&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+<p>The environment variables that must be set in all cases for any Docker-based
+Guacamole installation using this extension are:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_URI</span></code></dt><dd><p>The URI that should be used to authenticate users with SSL/TLS client
+authentication. This must be a URI that points to THIS instance of Guacamole,
+but behind SSL termination that requires SSL/TLS client authentication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_PRIMARY_URI</span></code></dt><dd><p>The URI of this instance without SSL/TLS client authentication required. This
+must be a URI that points to THIS instance of Guacamole, but behind SSL
+termination that DOES NOT require or request SSL/TLS client authentication.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="additional-configuration-optional">
+<h2>Additional configuration (optional)<a class="headerlink" href="#additional-configuration-optional" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Additional optional properties are available to control how the
+requests received from your reverse proxy are processed, including narrowing
+the distinguished names (DNs) that should be accepted as valid:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-client-certificate-header</span></code></dt><dd><p>The name of the header to use to retrieve the URL-encoded client certificate
+from an HTTP request received from an SSL termination service providing
+SSL/TLS client authentication. The certificate must be in PEM format.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">X-Client-Certificate</span></code> header will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-client-verified-header</span></code></dt><dd><p>The name of the header to use to retrieve the verification status of the
+certificate an HTTP request received from an SSL termination service
+providing SSL/TLS client authentication.</p>
+<p>The value of this header must be “SUCCESS” (all uppercase) if the certificate
+was successfully verified. The full set of accepted values that your reverse
+proxy should submit for this header is:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code></dt><dd><p>Client certificate verification succeeded.</p>
+</dd>
+<dt><code class="samp docutils literal notranslate"><span class="pre">FAILED:</span> <em><span class="pre">reason</span></em></code></dt><dd><p>Client certificate verification failed for the given reason (a
+human-readable description).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NONE</span></code></dt><dd><p>No client certificate was present.</p>
+</dd>
+</dl>
+<p>This matches the values used by both the Apache HTTP Server and Nginx. Any
+value not shown above is interpreted as an authentication failure.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">X-Client-Verified</span></code> header will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-max-token-validity</span></code></dt><dd><p>The amount of time that a temporary authentication token for SSL/TLS
+authentication may remain valid, in minutes.</p>
+<p>This token is used to represent the user’s asserted identity after it has
+been verified by the SSL termination service. This interval must be long
+enough to allow for network delays in receiving the token, but short enough
+that unused tokens do not consume unnecessary server resources and cannot
+potentially be guessed while the token is still valid. These tokens are
+256-bit secure random values.</p>
+<p>By default, tokens are valid for 5 minutes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-subject-username-attribute</span></code></dt><dd><p>The LDAP attribute or attributes that may be used to represent a username
+within the subject DN of a user’s X.509 certificate. If the least-significant
+attribute of the subject DN is not one of these attributes, the certificate
+will be rejected.</p>
+<p>By default, any attribute is accepted (the least-significant attribute of the
+subject DN is used as the username, regardless of what attribute that may
+be).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-subject-base-dn</span></code></dt><dd><p>The base DN containing all valid subject DNs. If specified, only certificates
+asserting subject DNs beneath this base DN will be accepted.</p>
+<p>By default, all DNs are accepted.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssl-auth-max-domain-validity</span></code></dt><dd><p>The amount of time that the temporary, unique subdomain generated for SSL/TLS
+authentication may remain valid, in minutes. This subdomain is used to ensure
+each SSL/TLS authentication attempt is fresh and does not potentially reuse a
+previous authentication attempt that was cached by the browser or OS. This
+interval must be long enough to allow for network delays in authenticating
+the user with the SSL termination service that enforces SSL/TLS client
+authentication, but short enough that an unused domain does not consume
+unnecessary server resources and cannot potentially be guessed while that
+subdomain is still valid. These subdomains are 128-bit secure random values.</p>
+<p>By default, generated domains are valid for 5 minutes.</p>
+</dd>
+</dl>
+</div>
+<input class="tab-input" id="tab-set--4-input--2" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Additional optional environment variables are available to control how the
+requests received from your reverse proxy are processed, including narrowing
+the distinguished names (DNs) that should be accepted as valid:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_CLIENT_CERTIFICATE_HEADER</span></code></dt><dd><p>The name of the header to use to retrieve the URL-encoded client certificate
+from an HTTP request received from an SSL termination service providing
+SSL/TLS client authentication. The certificate must be in PEM format.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">X-Client-Certificate</span></code> header will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_CLIENT_VERIFIED_HEADER</span></code></dt><dd><p>The name of the header to use to retrieve the verification status of the
+certificate an HTTP request received from an SSL termination service
+providing SSL/TLS client authentication.</p>
+<p>The value of this header must be “SUCCESS” (all uppercase) if the certificate
+was successfully verified. The full set of accepted values that your reverse
+proxy should submit for this header is:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code></dt><dd><p>Client certificate verification succeeded.</p>
+</dd>
+<dt><code class="samp docutils literal notranslate"><span class="pre">FAILED:</span> <em><span class="pre">reason</span></em></code></dt><dd><p>Client certificate verification failed for the given reason (a
+human-readable description).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NONE</span></code></dt><dd><p>No client certificate was present.</p>
+</dd>
+</dl>
+<p>This matches the values used by both the Apache HTTP Server and Nginx. Any
+value not shown above is interpreted as an authentication failure.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">X-Client-Verified</span></code> header will be used.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_MAX_TOKEN_VALIDITY</span></code></dt><dd><p>The amount of time that a temporary authentication token for SSL/TLS
+authentication may remain valid, in minutes.</p>
+<p>This token is used to represent the user’s asserted identity after it has
+been verified by the SSL termination service. This interval must be long
+enough to allow for network delays in receiving the token, but short enough
+that unused tokens do not consume unnecessary server resources and cannot
+potentially be guessed while the token is still valid. These tokens are
+256-bit secure random values.</p>
+<p>By default, tokens are valid for 5 minutes.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_SUBJECT_USERNAME_ATTRIBUTE</span></code></dt><dd><p>The LDAP attribute or attributes that may be used to represent a username
+within the subject DN of a user’s X.509 certificate. If the least-significant
+attribute of the subject DN is not one of these attributes, the certificate
+will be rejected.</p>
+<p>By default, any attribute is accepted (the least-significant attribute of the
+subject DN is used as the username, regardless of what attribute that may
+be).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_SUBJECT_BASE_DN</span></code></dt><dd><p>The base DN containing all valid subject DNs. If specified, only certificates
+asserting subject DNs beneath this base DN will be accepted.</p>
+<p>By default, all DNs are accepted.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SSL_AUTH_MAX_DOMAIN_VALIDITY</span></code></dt><dd><p>The amount of time that the temporary, unique subdomain generated for SSL/TLS
+authentication may remain valid, in minutes. This subdomain is used to ensure
+each SSL/TLS authentication attempt is fresh and does not potentially reuse a
+previous authentication attempt that was cached by the browser or OS. This
+interval must be long enough to allow for network delays in authenticating
+the user with the SSL termination service that enforces SSL/TLS client
+authentication, but short enough that an unused domain does not consume
+unnecessary server resources and cannot potentially be guessed while that
+subdomain is still valid. These subdomains are 128-bit secure random values.</p>
+<p>By default, generated domains are valid for 5 minutes.</p>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="completing-installation">
+<span id="ssl-auth-completing"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--5-input--2" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="saml-auth.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using SAML for single sign-on</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="vault.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Retrieving secrets from a vault</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-ssl-client-authentication-works-with-guacamole">How SSL client authentication works with Guacamole</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-ssl-termination-to-use-client-authentication">Configuring SSL termination to use client authentication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wildcard-domain-performs-ssl-client-authentication">Wildcard domain (performs SSL client authentication)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-domain-does-not-perform-ssl-client-authentication">Normal domain (does not perform SSL client authentication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-the-ssl-client-authentication-extension">Installing/Enabling the SSL client authentication extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-configuration">Required configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration-optional">Additional configuration (optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
