@@ -56,6 +56,22 @@ p {
     margin: 1em 0;
 }
 
+p > img:only-child,
+figure {
+    width: 100%;
+    max-width: 600px;
+}
+
+figure img,
+figure video {
+    width: 100%;
+}
+
+figcaption {
+  font-size: 80%;
+  font-style: italic;
+}
+
 li {
     line-height: 1.5;
 }
