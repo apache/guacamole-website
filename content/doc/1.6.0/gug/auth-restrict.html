@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Enforcing advanced login and connection restrictions &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'auth-restrict';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Viewing session recordings in-browser" href="recording-playback.html" />
+    <link rel="prev" title="Creating ad-hoc connections" href="adhoc-connections.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="administration.html">Administration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Enforcing advanced login and connection restrictions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-support-for-advanced-restrictions">Installing/Enabling support for advanced restrictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-advanced-restrictions">Using advanced restrictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-logins">User Logins</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-logins-based-on-day-and-time">Restricting logins based on day and time</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-about-timezones">A note about timezones</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-logins-based-on-host">Restricting logins based on host</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#users-and-user-groups">Users and User Groups</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-connection-groups">Connections and Connection Groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-restrictions-are-processed">How Restrictions are Processed</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="enforcing-advanced-login-and-connection-restrictions">
+<h1>Enforcing advanced login and connection restrictions<a class="headerlink" href="#enforcing-advanced-login-and-connection-restrictions" title="Link to this heading">#</a></h1>
+<p>A feature of Guacamole as of version 1.6.0 is an extension that allows you to
+enforce advanced restrictions on both user logins to Guacamole as well as the
+use of connections and connection groups. The extension,
+<code class="docutils literal notranslate"><span class="pre">guacamole-auth-restrict</span></code>, decorates other authentication extensions that
+contain user, group and/or connection information, and allows you to apply
+restrictions to those objects for the time(s) that users are allowed to log
+in, the hosts from which users may log in, the time(s) that certain
+connections and balancing connection groups may be used, and the hosts from
+which certain connections and balancing connection groups may be used. The
+goal is to give administrators of a Guacamole system additional flexibility in
+restricting when and from where various parts of the system may be used.</p>
+<p>As this extension decorates underlying extensions, it must be used alongside
+one that is capable of storing additional information for users, user groups,
+connections, and connection groups. Currently the only extension provided
+by the Guacamole project that is capable of doing this is the
+<a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">JDBC authentication extension</span></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will need to restart the Guacamole web application in order to complete
+configuration. Doing this will disconnect all active users, so please:</p>
+<ul class="simple">
+<li><p><strong>Do this only at a time that you can tolerate service unavailability</strong>, such
+as a scheduled maintenance window.</p></li>
+<li><p>Keep in mind that <strong>configuration errors may prevent Guacamole from starting
+back up</strong>.</p></li>
+</ul>
+</div>
+<section id="installing-enabling-support-for-advanced-restrictions">
+<span id="installing-auth-restrict"></span><h2>Installing/Enabling support for advanced restrictions<a class="headerlink" href="#installing-enabling-support-for-advanced-restrictions" title="Link to this heading">#</a></h2>
+<p>Guacamole is configured differently depending on whether Guacamole was
+<a class="reference internal" href="installing-guacamole.html"><span class="doc std std-doc">installed natively</span></a> or <a class="reference internal" href="guacamole-docker.html"><span class="doc std std-doc">using the provided Docker
+images</span></a>. The documentation here covers both methods.</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Native installations of Guacamole under <a class="reference external" href="https://tomcat.apache.org/">Apache Tomcat</a>
+or similar are configured by modifying the contents of <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code>
+(<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>), which is located at
+<code class="docutils literal notranslate"><span class="pre">/etc/guacamole</span></code> by default and may need to be created first:</p>
+<ol class="arabic simple">
+<li><p>Download <a class="reference external" href="https://apache.org/dyn/closer.lua/guacamole/1.6.0/binary/guacamole-auth-restrict-1.6.0.tar.gz?action=download"><code class="docutils literal notranslate"><span class="pre">guacamole-auth-restrict-1.6.0.tar.gz</span></code></a> from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">the release page for
+Apache Guacamole 1.6.0</a>
+and extract it.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions</span></code> directory, if it does not already
+exist.</p></li>
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">guacamole-auth-restrict-1.6.0.jar</span></code> file from the contents of the
+archive to <code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME/extensions/</span></code>.</p></li>
+<li><p>Proceed with the configuring Guacamole for the newly installed extension as
+described below. The extension will be loaded after Guacamole has been
+restarted.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Download and documentation links for all officially supported extensions for a
+particular version of Guacamole are always provided in the release notes for
+that version. The copy of the documentation you are reading now is from <a class="reference external" href="https://guacamole.apache.org/releases/1.6.0">Apache
+Guacamole 1.6.0</a>.</p>
+<p><strong>If you are using a different version of Guacamole, please locate that version
+within <a class="reference external" href="https://guacamole.apache.org/releases/">the release archives</a> and
+consult the documentation for that release instead.</strong></p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>Docker installations of Guacamole include a bundled copy of <a class="reference external" href="https://tomcat.apache.org/">Apache
+Tomcat</a> and are configured using environment
+variables. The startup process of the Docker image automatically populates
+<code class="docutils literal notranslate"><span class="pre">GUACAMOLE_HOME</span></code> (<a class="reference internal" href="configuring-guacamole.html#guacamole-home"><span class="std std-ref">Guacamole’s configuration directory</span></a>) based
+on the values of these variables.</p>
+<dl class="simple myst">
+<dt>If deploying Guacamole using Docker Compose:</dt><dd><p>You will need to add at least one relevant environment variable to the
+<code class="docutils literal notranslate"><span class="pre">environment</span></code> section of your <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> container, such as the
+<code class="docutils literal notranslate"><span class="pre">RESTRICT_ENABLED</span></code> environment variable:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">RESTRICT_ENABLED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt>If instead deploying Guacamole by running <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> manually:</dt><dd><p>The same environment variable(s) will need to be provided using the <code class="docutils literal notranslate"><span class="pre">-e</span></code>
+option. For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>some-guacamole<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">RESTRICT_ENABLED</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>guacamole/guacamole
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">RESTRICT_ENABLED</span></code> is set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, the extension will NOT be
+installed, even if other related environment variables have been set. This can
+be used to temporarily disable usage of an extension without needing to remove
+all other related configuration.</p>
+<p>You don’t strictly need to set <code class="docutils literal notranslate"><span class="pre">RESTRICT_ENABLED</span></code> if other related
+environment variables are provided, but the extension will be installed only if
+at least <em>one</em> related environment variable is set.</p>
+</div>
+</div>
+</section>
+<section id="completing-installation">
+<span id="completing-auth-restrict-install"></span><h2>Completing installation<a class="headerlink" href="#completing-installation" title="Link to this heading">#</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Native Webapp (Tomcat)</label><div class="tab-content docutils">
+<p>Guacamole will only reread its configuration and load newly-installed
+extensions during startup, so Tomcat will need to be restarted before these
+changes can take effect. Restart Tomcat and give the new functionality a try.</p>
+<p><em>You do not need to restart guacd</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after restarting Tomcat, <strong>check the
+logs</strong>. Configuration problems may prevent Guacamole from starting up, and any
+such errors will be recorded in Tomcat’s logs.</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Container (Docker)</label><div class="tab-content docutils">
+<p>The environment variables that configure the behavior of Docker can only be set
+at the time the Docker container is created. To apply these configuration
+changes, you will need to recreate the container.</p>
+<dl class="simple myst">
+<dt>If your Guacamole container was deployed using Docker Compose:</dt><dd><p>Simply making the desired changes to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">up</span></code> is sufficient. Docker Compose will automatically
+recognize that the environment variables of the container have changed and
+recreate it.</p>
+</dd>
+<dt>If your Guacamole container was deployed manually (using <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>):</dt><dd><p>You wll need to manually use <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">rm</span></code> to remove the old container and then
+manually recreate it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and the new environment variables.</p>
+</dd>
+</dl>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If Guacamole does not come back online after recreating the container, <strong>check
+the Docker logs</strong>. Configuration problems may prevent Guacamole from starting
+up, and any such errors will be recorded in the Docker logs for the Guacamole
+container.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-advanced-restrictions">
+<span id="using-auth-restrict"></span><h2>Using advanced restrictions<a class="headerlink" href="#using-advanced-restrictions" title="Link to this heading">#</a></h2>
+<p>Once the extension is installed and the web application restarted, an additional
+section of options will appear in the administrative pages of Guacamole that
+will allow administrators to configure the additional restrictions for various
+objects within the Guacamole system. The new section of options looks like this:</p>
+<p><img alt="" src="_images/auth-restrict-options.png" /></p>
+<p>The next sections will cover how each restriction impacts the availability of
+various objects in the system.</p>
+<section id="user-logins">
+<h3>User Logins<a class="headerlink" href="#user-logins" title="Link to this heading">#</a></h3>
+<p>Additional settings can be applied to users and user groups that will restrict
+the ability of those individual users or members of the groups to log in to
+Guacamole.</p>
+<section id="restricting-logins-based-on-day-and-time">
+<h4>Restricting logins based on day and time<a class="headerlink" href="#restricting-logins-based-on-day-and-time" title="Link to this heading">#</a></h4>
+<p>This extension introduces the ability to restrict logins to the Guacamole
+system based on the day of the week and the time of day, and to combine these
+restrictions in a way that allows for flexibility in those schedules.</p>
+<p>As an example, let’s say that you have a user or group of users whose access
+you’d like to restrict to your normal working hours of 9 AM to 5 PM, any day
+of the week. You would add a restriction like so:</p>
+<p><img alt="" src="_images/auth-restrict-login-business-hours.png" /></p>
+<p>However, you’ll notice that this includes all days of the week, so perhaps
+you’d like to limit it to only your normal work-week, which happens to be
+Monday through Friday:</p>
+<p><img alt="" src="_images/auth-restrict-login-work-week.png" /></p>
+<p>In the above image, you can see that we allow 9 to 5 every day of the week, but
+then we specifically prohibit logins on Saturday and Sunday, all day, in order
+to prevent the weekend logins.</p>
+<p>These basic examples demonstrate the ways in which you can combine the allowed
+and denied login times to create a schedule that supports your use case. There
+is <a class="reference internal" href="#how-restrictions-are-processed"><span class="std std-ref">more discussion below</span></a> on the order in which
+rules are processed and which takes precedence.</p>
+<p>If a user attempts to log in at a time not allowed by the time-based
+restrictions that apply to that user, an error will be displayed on the login
+page:</p>
+<p><img alt="" src="_images/auth-restrict-login-failed-time.png" /></p>
+<section id="a-note-about-timezones">
+<h5>A note about timezones<a class="headerlink" href="#a-note-about-timezones" title="Link to this heading">#</a></h5>
+<p>Creating restrictions that involve day and time can be tricky when factoring
+in the timezones of users, particulary if you have users spread out around
+the world. This extension stores the restrictions in UTC, translating them
+from the local timezone of the administrator. When administering these
+restrictions it is important to keep in mind how those restrictions will
+actually impact users.</p>
+<p>Consider the following example that may help to clarify how this works in
+practice:</p>
+<ul class="simple">
+<li><p>An administrator is located in the US Eastern timezone (EDT, UTC - 4).</p></li>
+<li><p>A user is located in the Central European timezone (CEST, UTC + 2).</p></li>
+<li><p>The administrator creates a restriction for the user limiting the ability of
+the user to log in between 09:00 AM and 05:00 PM every day.</p></li>
+<li><p>This restriction is stored in the database to allow logins every day between
+01:00 PM and 09:00 PM UTC.</p></li>
+<li><p>The user in the Central European timezone would actually be allowed to log in
+between 03:00 PM and 11:00 PM.</p></li>
+</ul>
+<p>This is likely not the behavior that you want, so the restrictions entered for
+the users - and connections - should be done with consideration for where the
+users are located and how it will actually apply to those users.</p>
+<p>This is further complicated by Daylight Savings Time, which is still observed
+in a large portion of the world. As the database stores the restrictions in
+UTC, a restriction entered by an administrator in the US Eastern Timezone
+during Daylight Savings Time (Summer Time) for 09:00 AM to 05:00 PM will
+shift back an hour in the non-DST period, and actually apply from 08:00 AM to
+04:00 PM.</p>
+</section>
+</section>
+<section id="restricting-logins-based-on-host">
+<h4>Restricting logins based on host<a class="headerlink" href="#restricting-logins-based-on-host" title="Link to this heading">#</a></h4>
+<p>The ability to restrict logins based on the client from which a user is
+attempting to log in is also provided by this extension. The fields for storing
+these hosts can be filled in using three possible formats for the host:
+resolveable host names, IP addresses, and/or subnets in IP CIDR notation. The
+IP addresses and subnets may be either IPv4 or IPv6.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you will be configuring Guacamole to consider users’ IP addresses, <strong>it is
+important to make sure that Guacamole is receiving correct IP address
+information for all clients</strong>.</p>
+<p>If Guacamole is behind a reverse proxy, such as for SSL termination, the IP
+addresses of all users will appear to be the IP address of the proxy unless
+additional configuration steps are taken. <strong>Be sure to follow <a class="reference internal" href="reverse-proxy.html"><span class="doc std std-doc">the
+documentation for configuring forwarding of client IP
+information</span></a>!</strong></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you use hostnames in this field, the system running Guacamole Client MUST be
+able to resolve those hostnames back to IP addresses in order to verify if the
+IP address from which the user is logging in is allowed. If a hostname is
+entered into either the allow or deny field, and Guacamole cannot resolve the
+hostname, it will deny the login, unless it can match the user’s IP address to
+some other entry in one of the lists. Thus it is very important that, if you use
+hostnames, you make sure that the ability of the Guacamole system to resolve
+those hostnames is consistent.</p>
+</div>
+<p>As an example, suppose that you have a group of users that you’d like to
+restrict logins such that they can only log in from a specific internal
+subnet - let’s say 192.168.123.0/24. You would simply put that subnet in the
+allowed hosts box, and Guacamole would allow access for users to log in from IP
+addresses within that subnet, but block access from all other subnets:</p>
+<p><img alt="" src="_images/auth-restrict-login-local-subnet.png" /></p>
+<p>However, let’s say that you have a router on that subnet, 192.168.123.1, and
+you’d like to make sure that a user attempting to log in from a client that
+appears to be coming from that router will always be denied. You can do this
+like so:</p>
+<p><img alt="" src="_images/auth-restrict-login-block-router.png" /></p>
+<p>Again, as we’ll discuss <a class="reference internal" href="#how-restrictions-are-processed"><span class="std std-ref">later on</span></a>, it’s
+important to understand the order in which these restrictions are processed.</p>
+<p>If a user attempts to log in from a client that is not allowed by the
+host-based restrictions applied to that user, an error will be displayed
+on the login page:</p>
+<p><img alt="" src="_images/auth-restrict-login-failed-host.png" /></p>
+</section>
+<section id="users-and-user-groups">
+<h4>Users and User Groups<a class="headerlink" href="#users-and-user-groups" title="Link to this heading">#</a></h4>
+<p>As has been alluded to a few times, these additional login restrictions can be
+applied either to individual users, or, perhaps more helpfully, to entire
+groups of users. While the
+<a class="reference internal" href="#how-restrictions-are-processed"><span class="std std-ref">processing order of the rules themselves</span></a> is
+important, we’ll take a moment to note, now, how restrictions work when used on
+users and user groups.</p>
+<p>First, if restrictions are applied to both users and a user group of which
+that user is a member, then the restrictions placed on the user will take
+precedence over those on the user group. For example, if you deny login at a
+certain time to a user group, but add a rule to a member of that group to
+allow logins at a time that overlaps with the deny time of the group, the login
+will be allowed. Conversely, if you’ve allowed logins for a group at a
+particular time, but you’ve denied a login for a specific user who is a member
+of that group at a given time, the login will be denied. Similar logic applies
+to the host rules that govern a user’s ability to log in.</p>
+<p>Second, Guacamole attempts to pull all effective user groups of which a user is
+a member and process the restrictions across all of those groups. This
+includes nested groups, as well. The caution, here, is to be aware of what
+groups you’re applying rules on and how those groups relate - if you rely on
+complex group nesting within your Guacamole installation, you can end up with
+very complex restriction scenarios that make it difficult to sort out when a
+user can log in and when they cannot. Keeping your group nesting as simple as
+possible will help avoid these situations.</p>
+</section>
+</section>
+<section id="connections-and-connection-groups">
+<h3>Connections and Connection Groups<a class="headerlink" href="#connections-and-connection-groups" title="Link to this heading">#</a></h3>
+<p>This extension allows for the restricting the use of specific connections and/or
+connection groups (of the balancing variety) based on the same criteria by
+which you can restrict user logins - day/time of week and/or client address.</p>
+<p>The examples given above for user logins can be slightly updated to see some
+use-cases for connections. You might host an application through Guacamole that
+you’d like to make sure is only available during your normal business hours.
+Or, perhaps you have a balancing connection group that you want to make sure
+is only used by users who are logging in from a certain subnet within your
+firewall, and not from any public Internet clients. The user interface for
+these restrictions for Connections and Connection Groups is identical to the
+interface shown above for Users and User Groups.</p>
+<p>If a restriction applies to a Connection or Connection Group that results
+in access being denied to a connection, the user will receive an error
+indicating that they do not have access to the connection:</p>
+<p><img alt="" src="_images/auth-restrict-connection-failed.png" /></p>
+</section>
+<section id="how-restrictions-are-processed">
+<span id="id1"></span><h3>How Restrictions are Processed<a class="headerlink" href="#how-restrictions-are-processed" title="Link to this heading">#</a></h3>
+<p>When dealing with restrictions that add this level of complexity - multiple
+time schedules, user and user groups, and IP addresses and subnets - it’s
+important to understand how the system interprets these restrictions, how
+they relate to one another, and the order in which these restrictions are
+processed.</p>
+<p>Here are a few key items to keep in mind:</p>
+<ul>
+<li><p>System administrators are exempt from login restriction rules. If you apply
+restrictions to either a specific user or a group, but a user who is a
+system administrator attempts to log in, the restrictions will be bypassed
+and a warning will be logged to the Guacamole log file.</p>
+<p>However, restrictions applied to Connection and Connection Group objects
+will apply to anyone who tries to connect, regardless of their status
+as an administrator of the system or the individual connection.</p>
+</li>
+<li><p>When no additional restrictions are present, the login or connection is
+implicitly allowed.</p></li>
+<li><p>If only “allow” rules are added, the login or connection is implicitly
+denied if those rules are not met. For example, if a rule is added to a user
+group allowing logins between 09:00 AM and 05:00 PM, users who are members
+of that group will be allowed during that time, but denied at any other
+time, regardless of the fact that a deny rule has not been created.</p></li>
+<li><p>If only “deny” rules are added, the login or connection is implicitly
+allowed if those rules are not met. For example, if you add a rule to a
+connection to deny access between 06:00 PM and 12:00 AM, access to that
+connection will be allowed at any time that falls outside of the specified
+deny rule.</p></li>
+<li><p>Deny rules always take precedence over allow rules when there is an overlap.
+If you create a time-based login restriction that allows logins at a given
+time, and another restriction that denies logins at a certain time and these
+times overlap, the login will be denied at any time that the Deny rule
+applies, regardless of whether or not the allow rule also applies.</p>
+<p>Similarly, when working with the host-based restrictions, if you allow
+access to a certain IP address, but deny access to a subnet of which that IP
+address is a member, the login (or connection) will be denied.</p>
+</li>
+<li><p>As mentioned above, individual user rules are processed before, and thus take
+precedence over, user group rules. If a user is explicitly allowed or denied,
+that rule will apply regardless of whether a rule on a group of which that
+user is a member would apply.</p></li>
+<li><p>Time-based restrictions are processed prior to host-based restrictions, but
+both will be taken into account. If a user is configured to be allowed at a
+certain time, but denied from a certain host, the login will be allowed if
+both rules allow it and denied if either the time or host rule denies it.
+The order, here, is only an issue in noting what error message the user may
+receive during login or connection attempt - if both a time restriction and
+a host restriction deny the action, then the error the user receives will
+note the time restriction.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="adhoc-connections.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Creating ad-hoc connections</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="recording-playback.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Viewing session recordings in-browser</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-enabling-support-for-advanced-restrictions">Installing/Enabling support for advanced restrictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#completing-installation">Completing installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-advanced-restrictions">Using advanced restrictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-logins">User Logins</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-logins-based-on-day-and-time">Restricting logins based on day and time</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-about-timezones">A note about timezones</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-logins-based-on-host">Restricting logins based on host</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#users-and-user-groups">Users and User Groups</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-connection-groups">Connections and Connection Groups</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-restrictions-are-processed">How Restrictions are Processed</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

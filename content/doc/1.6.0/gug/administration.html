@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guacamole’s administrative interface &#8212; Apache Guacamole Manual v1.6.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/gug.css?v=475feb7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=c136e461"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'administration';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Importing connections from CSV, JSON, or YAML" href="batch-import.html" />
+    <link rel="prev" title="Guacamole’s user interface" href="using-guacamole.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Apache Guacamole Manual v1.6.0</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-architecture.html">Implementation and architecture</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="installing-guacamole.html">Installing Guacamole</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-native.html">Native installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guacamole-docker.html">Containerized (Docker) installation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jdbc-auth.html">Database setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysql-auth.html">MariaDB / MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postgresql-auth.html">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlserver-auth.html">SQL Server</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Securing a Guacamole install</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="reverse-proxy.html">SSL termination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auth-ban.html">Blocking brute-force attacks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Guacamole</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configuring-guacamole.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-guacamole.html">General usage</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Administration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch-import.html">Importing connections</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ldap-auth.html">Active Directory / LDAP</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="mfa.html">Multi-factor authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="duo-auth.html">Duo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="totp-auth.html">TOTP</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sso.html">Single sign-on</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cas-auth.html">CAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openid-auth.html">OpenID Connect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml-auth.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssl-auth.html">Smart cards / Certificates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="vault.html">Retrieving secrets from a vault</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="external-auth.html">External authentication</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="json-auth.html">Encrypted, signed JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="header-auth.html">HTTP header</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="radius-auth.html">RADIUS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adhoc-connections.html">Ad-hoc connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth-restrict.html">Login / Connection restrictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recording-playback.html">Session recording player</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer's Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guacamole-protocol.html">The Guacamole protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libguac.html">libguac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common.html">guacamole-common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-common-js.html">guacamole-common-js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guacamole-ext.html">guacamole-ext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-protocols.html">Adding new protocols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom-auth.html">Custom authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-listeners.html">Event listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing-you-own-guacamole-app.html">Writing your own Guacamole application</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="protocol-reference.html">Guacamole protocol reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jdbc-auth-schema.html">Database schema reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Guacamole’s administrative interface</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-sessions">Managing sessions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-sorting">Filtering and sorting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-history">Connection history</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-history">Filtering and sorting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-management">User management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-group-membership">Editing group membership</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-group-management">User group management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-membership-of-groups">Group membership of groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-connection-groups">Connections and connection groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-organization-and-balancing">Connection organization and balancing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-sharing">Connection sharing</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="guacamoles-administrative-interface">
+<h1>Guacamole’s administrative interface<a class="headerlink" href="#guacamoles-administrative-interface" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Users, user groups, connections, and active sessions can be administered from
+within the web interface if the underlying authentication module supports this.
+The only officially-supported authentication modules supporting this are the
+database extensions, which are documented in <a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">Database authentication</span></a>.</p>
+<p>If you are using the default authentication mechanism, or another
+authentication extension, this chapter probably does not apply to you, and the
+management options will not be visible in the Guacamole interface. If, on the
+other hand, you are using one of the database authentication providers, and you
+are logged in as a user with sufficient privileges, you will see management
+sections listed within the settings screen:</p>
+<p><img alt="Sections within the Guacamole settings screen." src="_images/guacamole-settings-sections.png" /></p>
+<p>Clicking any of these options will take you to a corresponding management
+section where you can perform administrative tasks.</p>
+<section id="managing-sessions">
+<span id="session-management"></span><h2>Managing sessions<a class="headerlink" href="#managing-sessions" title="Link to this heading">#</a></h2>
+<p>Clicking “Active Sessions” navigates to the session management screen.  The
+session management screen displays all active sessions and allows system
+administrators to kill them as needed.</p>
+<p>When any user accesses a particular remote desktop connection, a unique session
+is created and will appear in the list of active sessions in the session
+management screen. Each active session is displayed in a sortable table,
+showing the corresponding user’s username, how long the session has been
+active, the IP address of the machine from which the user is connecting, and
+the name of the connection being used.</p>
+<p><img alt="Session management interface" src="_images/manage-sessions.png" /></p>
+<p>To kill one or more sessions, select the sessions by clicking their checkboxes.
+Once all desired sessions have been selected, clicking “Kill Sessions” will
+immediately disconnect those users from the associated connection.</p>
+<section id="filtering-and-sorting">
+<span id="filtering-sessions"></span><h3>Filtering and sorting<a class="headerlink" href="#filtering-and-sorting" title="Link to this heading">#</a></h3>
+<p>The table can be resorted by clicking on the column headers. Clicking any
+column will resort the table by the values within that column, while clicking a
+column which is already sorted will toggle between ascending and descending
+order.</p>
+<p>The content of the table can be limited through search terms specified in the
+“Filter” field. Entering search terms will limit the table to only sessions
+containing those terms. For example, to list only connections by the user
+“guacadmin” which have been active since March, 2015, you would enter:
+“guacadmin 2015-03”. Beware that if a search term needs to contain spaces, it
+must be enclosed in double quotes to avoid being interpreted as multiple terms.</p>
+<p><img alt="" src="_images/session-filter-example-1.png" /></p>
+<p>If you wish to narrow the content of the table to only those connections which
+originate from a particular block of IP addresses, you can do this by
+specifying the block in standard CIDR notation, such “10.0.0.0/8” or
+“2001:db8:1234::/48”. This will work with both IPv4 and IPv6 addresses.</p>
+<p><img alt="" src="_images/session-filter-example-2.png" /></p>
+</section>
+</section>
+<section id="connection-history">
+<h2>Connection history<a class="headerlink" href="#connection-history" title="Link to this heading">#</a></h2>
+<p>Clicking “History” navigates to the connection history screen. The connection
+history screen displays a table of the most recent connections, including the
+user that used that connection, the time the connection began, how long the
+connection was used, and whether a corresponding recording is available for
+viewing:</p>
+<p><img alt="Connection history interface with recordings" src="_images/history-table-with-recordings.png" /></p>
+<p>Recordings are only made for a connection if an administrator explicitly
+configures the connection to produce recordings, and those recordings are only
+available from this screen if the administrator explicitly configures the
+connection to <a class="reference internal" href="recording-playback.html"><span class="doc std std-doc">store those recordings in a location dedicated for future
+in-browser playback</span></a>.</p>
+<section id="filtering-history">
+<span id="id1"></span><h3>Filtering and sorting<a class="headerlink" href="#filtering-history" title="Link to this heading">#</a></h3>
+<p>Initially, the connection history table will display only the most recent
+history records. You can page through these records to see how and when
+Guacamole has been used.</p>
+<p>Just as with the table of active sessions described earlier, the table of
+history records can be resorted by clicking on the column headers or filtered
+by entering search terms within the “Filter” field.</p>
+<p>The same filtering format applies - a search term containing spaces must be
+enclosed in double quotes to avoid being interpreted as multiple terms, and
+only history records which contain each term will be included in the history
+table. Unlike the table of active sessions, however, the filter will only take
+effect once you click the “Search” button. This is due to the nature of the
+connection history, as the number of records may be quite extensive.</p>
+</section>
+</section>
+<section id="user-management">
+<span id="id2"></span><h2>User management<a class="headerlink" href="#user-management" title="Link to this heading">#</a></h2>
+<p>Clicking “Users” within the list of settings sections will take you to the user
+management screen. Here you can add new users, edit the properties and
+privileges of existing users, and view the times that each user last logged in.
+If you have a large number of users, you can also enter search terms within the
+“Filter” field to filter the list of users by username.</p>
+<p>To add a new user, click the “New User” button. This will take you to a screen
+where you will be allowed to enter the details of the new user, such as the
+password and username. Note that, unless you specify otherwise, the new user
+will have no access to any existing connections, nor any administrative
+privileges, and you will need to manually set the user’s password before they
+will be able to log in.</p>
+<p><img alt="User management interface" src="_images/manage-users.png" /></p>
+<p>To edit a user, just click on the user you wish to edit. You will be taken to a
+screen which allows you to change the user’s password, expire their password
+(such that it must be changed at next login), add or remove administrative
+permissions, and add or remove read access to specific connections, sharing
+profiles, or groups. If you are managing a large number of connections or
+groups and wish to reduce the size of the list displayed, you can do so by
+specifying search terms within the “Filter” field. Groups will be filtered by
+name and connections will be filtered by name or protocol.</p>
+<p>If you have delete permission on the user, you will also see a “Delete” button.
+Clicking this button will permanently delete the user.  Alternatively, if you
+only wish to temporarily disable the account, checking “Login disabled” will
+achieve the same effect while not removing the user entirely. If they attempt
+to log in, the attempt will be rejected as if their account did not exist at
+all.</p>
+<p><img alt="Editing a user" src="_images/edit-user.png" /></p>
+<section id="editing-group-membership">
+<span id="user-group-membership"></span><h3>Editing group membership<a class="headerlink" href="#editing-group-membership" title="Link to this heading">#</a></h3>
+<p>When editing a user, the groups that user is a member of may be modified within
+the “Groups” section. By default, only groups that the user is already a member
+of will be displayed. If you have permission to modify the user’s membership
+within a group, an “X” icon will be available next to that group’s name.
+Clicking the “X” will remove the user from that group, taking effect after the
+user is saved.</p>
+<p>To add users to a group, the arrow next to the list of groups must be clicked
+to expand the section and reveal all available groups. Available groups may
+then be checked/unchecked to modify the user’s membership within those groups:</p>
+<p><img alt="Editing group membership of a user" src="_images/edit-user-membership.png" /></p>
+<p>If you have a large number of available groups, you can also enter search terms
+within the “Filter” field to filter the list of groups by name.</p>
+</section>
+</section>
+<section id="user-group-management">
+<span id="id3"></span><h2>User group management<a class="headerlink" href="#user-group-management" title="Link to this heading">#</a></h2>
+<p>Clicking “Groups” within the list of settings sections will take you to the
+user group management screen. Here you can add new groups and edit the
+properties and privileges of existing groups. If you have a large number of
+user groups, you can also enter search terms within the “Filter” field to
+filter the list of groups by name:</p>
+<p><img alt="User group management interface" src="_images/manage-groups.png" /></p>
+<p>To add a new group, click the “New Group” button. This will take you to a
+screen where you will be allowed to enter the details of the new group,
+including membership and any permissions that members of the group should have.</p>
+<p>To edit a group, just click on the group you wish to edit. You will be taken to
+a screen which allows you to modify membership, add or remove administrative
+permissions, and add or remove read access to specific connections, sharing
+profiles, or connection groups. If you are managing a large number of
+connections or groups and wish to reduce the size of the list displayed, you
+can do so by specifying search terms within the “Filter” field. Connection
+groups will be filtered by name and connections will be filtered by name or
+protocol.</p>
+<p>If you have delete permission on the group, you will also see a “Delete”
+button. Clicking this button will permanently delete the group.  Alternatively,
+if you only wish to temporarily disable the effects of membership in the group,
+checking “Disabled” will achieve the same effect while not removing the group
+entirely.</p>
+<p><img alt="Editing a user group" src="_images/edit-user-group.png" /></p>
+<section id="group-membership-of-groups">
+<h3>Group membership of groups<a class="headerlink" href="#group-membership-of-groups" title="Link to this heading">#</a></h3>
+<p>Managing the group membership of groups is more complex than that of users, as
+groups may contain both users and groups, with permissions from parent groups
+possibly being inherited. Parent groups, member groups, and member users, can
+all be managed identically to the <a class="reference internal" href="#user-group-membership"><span class="std std-ref">group memberships of users</span></a>,
+with a corresponding section dedicated to each within the user group editor:</p>
+<p><img alt="Editing the various membership relations of a user group" src="_images/edit-group-memberships.png" /></p>
+<p>Note that it is ultimately up to the extension providing the group to determine
+how permissions granted to that group are inherited, if at all. The <a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">database
+authentication extension</span></a> implements full recursive inheritance of
+group permissions, with permissions granted to a group being granted to all
+members/descendants of that group, regardless of how deeply those members are
+nested.</p>
+</section>
+</section>
+<section id="connections-and-connection-groups">
+<span id="connection-management"></span><h2>Connections and connection groups<a class="headerlink" href="#connections-and-connection-groups" title="Link to this heading">#</a></h2>
+<p>Clicking “Connections” within the list of settings sections will take you to
+the connection management screen. The connection management screen allows
+administrators to create and edit connections, sharing profiles, and connection
+groups. If you have a large number of connections, you can also enter search
+terms within the “Filter” field to filter the list of connections by name or
+protocol.</p>
+<p>To add a new connection or connection group, click the “New Connection” or “New
+Group” button, or the “New Connection” or “New Group” placeholders which appear
+when you expand an existing connection group.  These options will take you to a
+screen where you will be allowed to enter the details of the new object, such
+as its location, parameters, and name. This name should be descriptive, but
+must also be unique with respect to other objects in the same location.</p>
+<p>Once you click “Save”, the new object will be added, but will initially only be
+usable by administrators and your current user. To grant another user access to
+the new connection or connection group, you must <a class="reference internal" href="#user-management"><span class="std std-ref">edit that user</span></a>
+or <a class="reference internal" href="#user-group-management"><span class="std std-ref">a user group that the user is a member of</span></a>, checking
+the box corresponding to the connection or connection group you created.</p>
+<p>Connections and connection groups can also be imported en masse from files - see
+the documentation for the <a class="reference internal" href="batch-import.html"><span class="doc std std-doc">batch import feature</span></a>.</p>
+<p><img alt="Connection management interface" src="_images/manage-connections.png" /></p>
+<p>Editing connections, sharing profiles, and connection groups works identically
+to editing a user. Click on the object you wish to edit, and you will be taken
+to screen which allows you to edit it. The screen will display all properties
+of the object, including its usage history, if applicable.</p>
+<p>If you have delete permission on the object, you will also see a “Delete”
+button. Clicking this button will permanently delete the object being edited.</p>
+<p><img alt="Editing a connection" src="_images/edit-connection.png" /></p>
+<section id="connection-organization-and-balancing">
+<span id="connection-group-management"></span><h3>Connection organization and balancing<a class="headerlink" href="#connection-organization-and-balancing" title="Link to this heading">#</a></h3>
+<p>Connection groups can be either “organizational” or “balancing”. Each group can
+contain any number of other connections or groups, but the semantics of the
+group change depending on the type.</p>
+<p>An organizational group behaves exactly as a folder or directory in a file
+system. It simply contains connections and other groups, but provides no other
+behavior. Clicking on an organizational group within a connection list will
+expand the group, revealing its contents.</p>
+<p>A balancing group behaves as a connection. It dynamically balances load across
+the connections it contains, choosing the connection with the fewest number of
+active users. Unlike organizational groups, clicking on a balancing group
+causes a new connection to be opened. The actual underlying connection used
+depends on which connection has the least load at the time the group was
+clicked, and whether session affinity is enabled on that group.</p>
+<p>Enabling session affinity for a balancing group ensures that users are
+consistently routed to the same underlying connections until they log out of
+Guacamole. The load balancing behavior of the balancing group will apply only
+for the first time a particular user connects to the group. If your users may
+lose their desktop state if they are routed to a different underlying
+connection, this option should be enabled.</p>
+<p><img alt="Editing a connection group" src="_images/edit-group.png" /></p>
+</section>
+<section id="connection-sharing">
+<h3>Connection sharing<a class="headerlink" href="#connection-sharing" title="Link to this heading">#</a></h3>
+<p>The ability to share a connection is governed through the use of “sharing
+profiles”. If a sharing profile is created for a connection, users with access
+to both that connection and that sharing profile will be able to share the
+connection with other users by <a class="reference internal" href="using-guacamole.html#client-share-menu"><span class="std std-ref">generating connection sharing
+links</span></a>, even if those users do not otherwise have user
+accounts within Guacamole.</p>
+<p>The name of the sharing profile will be presented as an option within the
+<a class="reference internal" href="using-guacamole.html#client-share-menu"><span class="std std-ref">share menu</span></a> for any users with access, while the level of
+access granted to users of generated share links will be dictated by the
+parameters specified for the sharing profile.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><em>The only extension which ships with Guacamole and implements enough of the
+<a class="reference internal" href="guacamole-ext.html"><span class="doc std std-doc">Guacamole extension API</span></a> to share its connections is the
+<a class="reference internal" href="jdbc-auth.html"><span class="doc std std-doc">database authentication extension</span></a>.</em> If you wish to share
+connections (or allow your users to share connections), you will need to use
+the database authentication extension to store those connections.</p>
+<p>If you need to use other authentication schemes, keep in mind that the database
+authentication extension can be used <a class="reference internal" href="ldap-auth.html#ldap-and-database"><span class="std std-ref">alongside other extensions</span></a>,
+with the database handling connection storage and permissions only. Writing
+your own extension which supports sharing is another alternative, though that
+may be overly complicated if everything you need is already provided.</p>
+</div>
+<p>Unlike connections and groups, there is no “New Sharing Profile” button.
+Sharing profiles are created through clicking the “New Sharing Profile”
+placeholders which appear when connections are expanded. Just as
+expanding a connection group reveals the connections or groups therein,
+expanding a connection reveals the sharing profiles associated with that
+connection. This holds true with both <a class="reference internal" href="#connection-management"><span class="std std-ref">the list of connections in the
+connection management screen</span></a> and <a class="reference internal" href="#user-management"><span class="std std-ref">the list of
+connections in the user editor</span></a>.</p>
+<p>Creating or editing a sharing profile is virtually identical to creating or
+editing a connection, with the exception that not all connection parameters are
+available:</p>
+<p><img alt="Editing a sharing profile" src="_images/edit-sharing-profile.png" /></p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="using-guacamole.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Guacamole’s user interface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="batch-import.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Importing connections from CSV, JSON, or YAML</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-sessions">Managing sessions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-and-sorting">Filtering and sorting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-history">Connection history</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-history">Filtering and sorting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-management">User management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-group-membership">Editing group membership</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-group-management">User group management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-membership-of-groups">Group membership of groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-and-connection-groups">Connections and connection groups</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-organization-and-balancing">Connection organization and balancing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-sharing">Connection sharing</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Apache Software Foundation
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 The Apache Software Foundation.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
