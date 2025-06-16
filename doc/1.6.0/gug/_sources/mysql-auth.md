@@ -131,7 +131,7 @@ If using the [`mariadb`](https://hub.docker.com/_/mariadb) or [`mysql`](https://
   client _within the database container_:
 
   ```console
-  $ docker run --rm guacamole/guacamole /opt/guacamole/bin/initd.sh --mysql | \
+  $ docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | \
       docker exec -i some-mysql sh -c 'mysql -u root -p"$MYSQL_ROOT_PASSWORD" guacamole_db'
   ```
 
@@ -140,7 +140,7 @@ If using a native installation of MariaDB or MySQL:
   automatically produce the SQL required to initialize an existing database:
 
   ```console
-  $ docker run --rm guacamole/guacamole /opt/guacamole/bin/initd.sh --mysql | \
+  $ docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --mysql | \
       mysql -u root -p guacamole_db
   ```
 ::::

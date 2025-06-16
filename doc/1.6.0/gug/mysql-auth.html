@@ -480,14 +480,14 @@ image for one-time initialization:</p>
 <dt>If using the <a class="reference external" href="https://hub.docker.com/_/mariadb"><code class="docutils literal notranslate"><span class="pre">mariadb</span></code></a> or <a class="reference external" href="https://hub.docker.com/_/mysql"><code class="docutils literal notranslate"><span class="pre">mysql</span></code></a> Docker images <em>without</em> Docker Compose:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
 send the required initialization script to the standard <code class="docutils literal notranslate"><span class="pre">mysql</span></code> command-line
 client <em>within the database container</em>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initdb.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>some-mysql<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;mysql -u root -p&quot;$MYSQL_ROOT_PASSWORD&quot; guacamole_db&#39;</span>
 </pre></div>
 </div>
 </dd>
 <dt>If using a native installation of MariaDB or MySQL:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
 automatically produce the SQL required to initialize an existing database:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initdb.sh<span class="w"> </span>--mysql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>guacamole_db
 </pre></div>
 </div>

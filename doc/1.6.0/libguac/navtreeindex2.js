@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"socket_8h.html#a1d8c5111a8234c7785ae23f379f7db03":[3,0,0,47,12],
+"socket_8h.html#a1fccad6e6a4f135b4b694b400c768f97":[3,0,0,47,14],
 "socket_8h.html#a2f796129a6bb2b6656070f2066deba9d":[3,0,0,47,2],
 "socket_8h.html#a376df8efcc02a7104504f104433884ed":[3,0,0,47,6],
 "socket_8h.html#a41b0d7a25ccda3d0ae20143880cf53b7":[3,0,0,47,13],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "wol-constants_8h.html#a56fd454b96c02a0780089a65fba2c2c2":[3,0,0,59,0],
 "wol-constants_8h.html#a7fd19bb639955ecb864cc6d25de4f41b":[3,0,0,59,4],
 "wol-constants_8h.html#a8a3ab3403bd4e7295bcc59f9edbcc35f":[3,0,0,59,2],
-"wol-constants_8h.html#a93bd13de95bbdc785737ac23ad965f54":[3,0,0,59,3],
-"wol-constants_8h.html#ae817a8ef08c2d0139e34d63d5cf7809b":[3,0,0,59,1],
-"wol-constants_8h_source.html":[3,0,0,59]
+"wol-constants_8h.html#a93bd13de95bbdc785737ac23ad965f54":[3,0,0,59,3]
 };

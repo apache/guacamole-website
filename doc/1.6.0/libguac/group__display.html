@@ -184,6 +184,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga923b897aa438e4711904bfe52174f3ee" id="r_ga923b897aa438e4711904bfe52174f3ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f">guac_display</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga923b897aa438e4711904bfe52174f3ee">guac_display_alloc</a> (<a class="el" href="structguac__client.html">guac_client</a> *client)</td></tr>
 <tr class="memdesc:ga923b897aa438e4711904bfe52174f3ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a new <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> representing the remote display shared by all connected users of the given <a class="el" href="structguac__client.html" title="Guacamole proxy client.">guac_client</a>.  <br /></td></tr>
 <tr class="separator:ga923b897aa438e4711904bfe52174f3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3805291e3ff540fd20e2361b06e83d89" id="r_ga3805291e3ff540fd20e2361b06e83d89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga3805291e3ff540fd20e2361b06e83d89">guac_display_stop</a> (<a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f">guac_display</a> *display)</td></tr>
+<tr class="memdesc:ga3805291e3ff540fd20e2361b06e83d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops all background processes that may be running beneath the given <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a>, ensuring nothing within <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> will continue to access any memory unless explicitly and externally requested.  <br /></td></tr>
+<tr class="separator:ga3805291e3ff540fd20e2361b06e83d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadf433e204e554b9320a819fc3f4f6746" id="r_gadf433e204e554b9320a819fc3f4f6746"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gadf433e204e554b9320a819fc3f4f6746">guac_display_free</a> (<a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f">guac_display</a> *display)</td></tr>
 <tr class="memdesc:gadf433e204e554b9320a819fc3f4f6746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees all resources associated with the given <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a>.  <br /></td></tr>
 <tr class="separator:gadf433e204e554b9320a819fc3f4f6746"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,6 +280,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga990e387cdd6f83b23604165e58e9117f" id="r_ga990e387cdd6f83b23604165e58e9117f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga990e387cdd6f83b23604165e58e9117f">guac_display_render_thread_notify_frame</a> (<a class="el" href="#gabdc1c935ad46e36470397d248227a114">guac_display_render_thread</a> *render_thread)</td></tr>
 <tr class="memdesc:ga990e387cdd6f83b23604165e58e9117f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies the given render thread that a frame boundary has been reached.  <br /></td></tr>
 <tr class="separator:ga990e387cdd6f83b23604165e58e9117f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab91619fb7e523b4d3e9e6b0301548237" id="r_gab91619fb7e523b4d3e9e6b0301548237"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab91619fb7e523b4d3e9e6b0301548237">guac_display_render_thread_notify_user_moved_mouse</a> (<a class="el" href="#gabdc1c935ad46e36470397d248227a114">guac_display_render_thread</a> *render_thread, <a class="el" href="structguac__user.html">guac_user</a> *user, int x, int y, int mask)</td></tr>
+<tr class="memdesc:gab91619fb7e523b4d3e9e6b0301548237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies the given render thread that a specific user has changed the state of the mouse, such as through moving the pointer or pressing/releasing a mouse button.  <br /></td></tr>
+<tr class="separator:gab91619fb7e523b4d3e9e6b0301548237"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga53d4bdd943a01dcca5cdea218f0de7bb" id="r_ga53d4bdd943a01dcca5cdea218f0de7bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga53d4bdd943a01dcca5cdea218f0de7bb">guac_display_render_thread_destroy</a> (<a class="el" href="#gabdc1c935ad46e36470397d248227a114">guac_display_render_thread</a> *render_thread)</td></tr>
 <tr class="memdesc:ga53d4bdd943a01dcca5cdea218f0de7bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Safely stops and frees all resources associated with the given render thread.  <br /></td></tr>
 <tr class="separator:ga53d4bdd943a01dcca5cdea218f0de7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1213,6 +1219,7 @@ Functions</h2></td></tr>
 
 <p>Notifies the given <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> that a specific user has changed the state of the mouse, such as through moving the pointer or pressing/releasing a mouse button. </p>
 <p>This function automatically invokes <a class="el" href="#ga766cd1b266db5fc556b803c3c4f4f88c" title="Ends the current frame only if the user-visible changes consist purely of updates to the mouse cursor...">guac_display_end_mouse_frame()</a>.</p>
+<p>NOTE: If using <a class="el" href="#gabdc1c935ad46e36470397d248227a114" title="Opaque representation of a thread that continuously renders updated graphical data to the remote disp...">guac_display_render_thread</a>, the <a class="el" href="#gab91619fb7e523b4d3e9e6b0301548237" title="Notifies the given render thread that a specific user has changed the state of the mouse,...">guac_display_render_thread_notify_user_moved_mouse()</a> function should be used instead. If NOT using <a class="el" href="#gabdc1c935ad46e36470397d248227a114" title="Opaque representation of a thread that continuously renders updated graphical data to the remote disp...">guac_display_render_thread</a>, care should be taken in calling this function directly within a mouse_handler, as doing so inherently must lock the <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a>, which can cause delays in handling other received instructions like "sync".</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">display</td><td>The <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> to notify.</td></tr>
@@ -1345,6 +1352,64 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="gab91619fb7e523b4d3e9e6b0301548237" name="gab91619fb7e523b4d3e9e6b0301548237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab91619fb7e523b4d3e9e6b0301548237">&#9670;&#160;</a></span>guac_display_render_thread_notify_user_moved_mouse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void guac_display_render_thread_notify_user_moved_mouse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gabdc1c935ad46e36470397d248227a114">guac_display_render_thread</a> *</td>          <td class="paramname"><span class="paramname"><em>render_thread</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structguac__user.html">guac_user</a> *</td>          <td class="paramname"><span class="paramname"><em>user</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mask</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Notifies the given render thread that a specific user has changed the state of the mouse, such as through moving the pointer or pressing/releasing a mouse button. </p>
+<p>When using <a class="el" href="#gabdc1c935ad46e36470397d248227a114" title="Opaque representation of a thread that continuously renders updated graphical data to the remote disp...">guac_display_render_thread</a>, this function should be preferred to manually invoking <a class="el" href="#ga1823811b4a727721b3498e70c6592d11" title="Notifies the given guac_display that a specific user has changed the state of the mouse,...">guac_display_notify_user_moved_mouse()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">render_thread</td><td>The <a class="el" href="#gabdc1c935ad46e36470397d248227a114" title="Opaque representation of a thread that continuously renders updated graphical data to the remote disp...">guac_display_render_thread</a> to notify.</td></tr>
+    <tr><td class="paramname">user</td><td>The user that moved the mouse or pressed/released a mouse button.</td></tr>
+    <tr><td class="paramname">x</td><td>The X position of the mouse, in pixels.</td></tr>
+    <tr><td class="paramname">y</td><td>The Y position of the mouse, in pixels.</td></tr>
+    <tr><td class="paramname">mask</td><td>An integer value representing the current state of each button, where the Nth bit within the integer is set to 1 if and only if the Nth mouse button is currently pressed. The lowest-order bit is the left mouse button, followed by the middle button, right button, and finally the up and down buttons of the scroll wheel.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="client-constants_8h.html#a4bb4f5b852ac8c3e2d3c89cd5e63efd2" title="The flag set in the mouse button mask when the left mouse button is down.">GUAC_CLIENT_MOUSE_LEFT</a> </dd>
+<dd>
+<a class="el" href="client-constants_8h.html#ad14c5f1800aac863bbebcd676c5c2124" title="The flag set in the mouse button mask when the middle mouse button is down.">GUAC_CLIENT_MOUSE_MIDDLE</a> </dd>
+<dd>
+<a class="el" href="client-constants_8h.html#a88917d2d7143a483c219eee62fd6317f" title="The flag set in the mouse button mask when the right mouse button is down.">GUAC_CLIENT_MOUSE_RIGHT</a> </dd>
+<dd>
+<a class="el" href="client-constants_8h.html#a134afd8a0d8f10a34af51fc70981e39d" title="The flag set in the mouse button mask when the mouse scrollwheel is scrolled up.">GUAC_CLIENT_MOUSE_SCROLL_UP</a> </dd>
+<dd>
+<a class="el" href="client-constants_8h.html#a771231574e9d303aa08fc1cecc9069f0" title="The flag set in the mouse button mask when the mouse scrollwheel is scrolled down.">GUAC_CLIENT_MOUSE_SCROLL_DOWN</a> </dd></dl>
+
+</div>
+</div>
 <a id="ga729a637e6ace63d2cf3b7cfeefc9cae2" name="ga729a637e6ace63d2cf3b7cfeefc9cae2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga729a637e6ace63d2cf3b7cfeefc9cae2">&#9670;&#160;</a></span>guac_display_set_cursor()</h2>
 
@@ -1409,6 +1474,34 @@ Functions</h2></td></tr>
     <tr><td class="paramname">display</td><td>The <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> to set the cursor hotspot of.</td></tr>
     <tr><td class="paramname">x</td><td>The X coordinate of the cursor hotspot, in pixels.</td></tr>
     <tr><td class="paramname">y</td><td>The Y coordinate of the cursor hotspot, in pixels. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga3805291e3ff540fd20e2361b06e83d89" name="ga3805291e3ff540fd20e2361b06e83d89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3805291e3ff540fd20e2361b06e83d89">&#9670;&#160;</a></span>guac_display_stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void guac_display_stop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f">guac_display</a> *</td>          <td class="paramname"><span class="paramname"><em>display</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stops all background processes that may be running beneath the given <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a>, ensuring nothing within <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> will continue to access any memory unless explicitly and externally requested. </p>
+<p>After this function returns, all background threads used by <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> have stopped. This function is threadsafe and may be safely invoked by multiple threads. All concurrent calls to this function will block until all background threads used by the <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> have terminated.</p>
+<p>This function DOES NOT affect the state of a <a class="el" href="#gabdc1c935ad46e36470397d248227a114" title="Opaque representation of a thread that continuously renders updated graphical data to the remote disp...">guac_display_render_thread</a>, which must be similarly stopped and destroyed with a call to <a class="el" href="#ga53d4bdd943a01dcca5cdea218f0de7bb" title="Safely stops and frees all resources associated with the given render thread.">guac_display_render_thread_destroy()</a> before underlying external buffers can be safely freed.</p>
+<p>NOTE: Invoking this function may be necessary to allow external objects to be safely cleaned up, particularly if external buffers have been provided to replace the buffers allocated by <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a>. Doing otherwise would mean that background worker threads used for encoding by <a class="el" href="#gac4d4a05f783f366c9e5541417f548a6f" title="Opaque representation of the remote (client-side) display of a Guacamole connection (guac_client).">guac_display</a> may continue to check the contents of external buffers while those buffers are being freed.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">display</td><td>The display to stop. </td></tr>
   </table>
   </dd>
 </dl>
