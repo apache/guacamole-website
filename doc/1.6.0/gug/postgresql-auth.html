@@ -476,14 +476,14 @@ image for one-time initialization:</p>
 <dt>If using the <a class="reference external" href="https://hub.docker.com/_/postgres"><code class="docutils literal notranslate"><span class="pre">postgres</span></code></a> Docker image <em>without</em> Docker Compose:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
 send the required initialization script to the standard <code class="docutils literal notranslate"><span class="pre">psql</span></code> command-line
 client <em>within the database container</em>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--postgresql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initdb.sh<span class="w"> </span>--postgresql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>some-postgresql<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>guacamole_user<span class="w"> </span>-d<span class="w"> </span>guacamole_db<span class="w"> </span>-f<span class="w"> </span>-
 </pre></div>
 </div>
 </dd>
 <dt>If using a native installation of PostgreSQL:</dt><dd><p>Use the <code class="docutils literal notranslate"><span class="pre">initdb.sh</span></code> script included with the <code class="docutils literal notranslate"><span class="pre">guacamole/guacamole</span></code> image to
 automatically produce the SQL required to initialize an existing database:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initd.sh<span class="w"> </span>--postgresql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>guacamole/guacamole<span class="w"> </span>/opt/guacamole/bin/initdb.sh<span class="w"> </span>--postgresql<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>psql<span class="w"> </span>-d<span class="w"> </span>guacamole_db<span class="w"> </span>-f<span class="w"> </span>-
 </pre></div>
 </div>
