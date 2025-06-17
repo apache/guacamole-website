@@ -32,6 +32,8 @@ var display_8h =
     [ "guac_display_render_thread_destroy", "group__display.html#ga53d4bdd943a01dcca5cdea218f0de7bb", null ],
     [ "guac_display_render_thread_notify_frame", "group__display.html#ga990e387cdd6f83b23604165e58e9117f", null ],
     [ "guac_display_render_thread_notify_modified", "group__display.html#ga2c2652ed6a27efc5dc0c65353f3f1e5d", null ],
+    [ "guac_display_render_thread_notify_user_moved_mouse", "group__display.html#gab91619fb7e523b4d3e9e6b0301548237", null ],
     [ "guac_display_set_cursor", "group__display.html#ga729a637e6ace63d2cf3b7cfeefc9cae2", null ],
-    [ "guac_display_set_cursor_hotspot", "group__display.html#gad028b918879106b23cd04dcff4a3d3eb", null ]
+    [ "guac_display_set_cursor_hotspot", "group__display.html#gad028b918879106b23cd04dcff4a3d3eb", null ],
+    [ "guac_display_stop", "group__display.html#ga3805291e3ff540fd20e2361b06e83d89", null ]
 ];
