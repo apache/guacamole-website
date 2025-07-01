@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
-    <link rel="stylesheet" href="/styles/main.css?s=1750737512">
+    <link rel="stylesheet" href="/styles/main.css?s=1751393659">
     <link rel="icon" type="image/svg+xml" href="/images/logos/guac-classic-logo.svg"/>
     <link rel="icon" type="image/png" href="/images/logos/guac-classic-logo-64.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
@@ -608,6 +608,29 @@ with you to issue a release of Guacamole that addresses it.</p>
 <p>Releases of Guacamole 1.x will continue to use AngularJS for compatibility,
 while Guacamole 2.0.0 onward is planned to use Angular (the TypeScript-based
 framework that supersedes AngularJS).</p>
+
+<h2 id="fixed-in-apache-guacamole-160">Fixed in Apache Guacamole 1.6.0</h2>
+<ul class="cve-list">
+    
+        <li>
+            <h3 id="CVE-2024-35164">
+                <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-35164">CVE-2024-35164</a>:
+                Improper input validation of console codes
+            </h3>
+
+            <p>The terminal emulator of Apache Guacamole 1.5.5 and older does not properly
+validate console codes received from servers via text-based protocols like SSH.
+If a malicious user has access to a text-based connection, a specially-crafted
+sequence of console codes could allow arbitrary code to be executed with the
+privileges of the running guacd process.</p>
+
+
+
+            <p>Acknowledgements: We would like to thank Tizian Seehaus (Tibotix) for reporting this issue.</p>
+
+        </li>
+    
+</ul>
 
 <h2 id="fixed-in-apache-guacamole-154">Fixed in Apache Guacamole 1.5.4</h2>
 <ul class="cve-list">
