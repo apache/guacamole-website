@@ -1,0 +1,13 @@
+{% if include.id %}
+    {% assign figure_id = include.id %}
+{% else %}
+    {% assign figure_id = include.title | slugify %}
+{% endif %}
+<figure class="expandable-figure" aria-labelledby="{{ figure_id }}">
+    {% assign toggle_id = "_expandable-figure-toggle-" + figure_id %}
+    <input class="expandable-figure-state" id="{{ toggle_id }}" type="checkbox">
+    <label class="expandable-figure-toggle" id="{{ figure_id }}" for="{{ toggle_id }}">{{ include.title }}</label>
+    <div class="expandable-figure-content">
+        {{ include.content | markdownify }}
+    </div>
+</figure>

@@ -17,39 +17,51 @@
  * under the License.
  */
 
-.mailing-list-title {
-    margin-bottom: 0;
+@use 'colors';
+
+.expandable-figure-state {
+    display: none;
 }
 
-p.mailing-list-archive a[href] {
-    border: 1px solid #12551f;
-    text-decoration: none;
-    border-radius: 3px;
-    padding: 0.25em 0.5em;
-    font-weight: normal;
-}
-
-p.mailing-list-archive a[href]:hover {
+.expandable-figure-toggle {
+    color: colors.$link-text-color;
     text-decoration: underline;
+    cursor: pointer;
 }
 
-p.mailing-list-archive {
-    margin-left: 1em;
-}
-
-table.mailing-list-instructions th:after {
+.expandable-figure-toggle:before {
     display: inline-block;
-    content: ' ';
-    border-bottom: 1.5pt dotted;
-    flex: 1;
-    min-width: 3em;
-    margin-left: 0.125em;
-    height: 1em;
-    margin-top: -1.5pt;
+    padding-right: 0.25em;
+    text-decoration: none;
 }
 
-table.mailing-list-instructions th {
-    display: flex;
-    text-align: left;
+.expandable-figure-content {
+    margin-left: 0.2em;
+    padding-left: 0.5em;
+    border-left: 2px dotted black;
+}
+
+.expandable-figure-content {
+    display: none;
+}
+
+.expandable-figure-state:checked ~ .expandable-figure-content {
+    display: block;
+}
+
+.expandable-figure-toggle:before {
+    content: "▸";
+}
+
+.expandable-figure-state:checked ~ .expandable-figure-toggle:before {
+    content: "▾";
+}
+
+.expandable-figure-toggle:after {
+    content: " …";
+}
+
+.expandable-figure-state:checked ~ .expandable-figure-toggle:after {
+    content: "";
 }
 

@@ -67,6 +67,10 @@ collections:
     security:
         output: false
 
+    # Known vulnerabilities in AngularJS
+    angularjs-cves:
+        output: false
+
 # Site-wide defaults
 defaults:
 
