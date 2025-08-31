@@ -17,20 +17,6 @@
  * under the License.
  */
 
-.release-downloads table {
-    border-collapse: collapse;
-}
-
-.release-downloads th,
-.release-downloads td {
-    padding: 0.5em;
-}
-
-.release-downloads th {
-    text-align: left;
-    border-bottom: 1px solid silver;
-}
-
 .release-downloads .filename {
     font-family: 'Inconsolata', monospace;
 }
@@ -42,9 +28,5 @@
     border: 1px solid black;
     border-radius: 3px;
     background: #d1e9d9;
-}
-
-.release-downloads tr:nth-child(even) {
-    background: #f9f9f9;
 }
 

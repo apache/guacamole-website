@@ -45,6 +45,33 @@ No, CVE-2021-44228 does not affect Apache Guacamole. Guacamole uses
 No. We routinely check for known vulnerabilities in AngularJS and manually
 verify that Guacamole is not impacted by each.
 
+{% capture angularjs_details %}
+<table>
+    <thead>
+        <tr>
+            <th>CVE ID</th>
+            <th>Analysis</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% assign analyses = site.angularjs-cves | sort: 'cve' %}
+        {% for analysis in analyses %}
+            <tr>
+                <td>
+                    <a id="{{ analysis.cve | escape }}" target="_blank"
+                       href="https://www.cve.org/CVERecord?id={{ analysis.cve | url_encode }}"
+                       title="{{ analysis.title | escape }}">{{ analysis.cve }}</a>
+                </td>
+                <td>{{ analysis.content }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endcapture %}
+{% include expandable-figure.html
+    title="Table of vulnerabilities and corresponding analyses"
+    content=angularjs_details %}
+
 **If you believe a new vulnerability in AngularJS may require specific
 remediation within Guacamole, please reach out to us by sending an email to
 <security@guacamole.apache.org> and we will investigate promptly.** If a
