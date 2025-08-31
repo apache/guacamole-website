@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
-    <link rel="stylesheet" href="/styles/main.css?s=1751393659">
+    <link rel="stylesheet" href="/styles/main.css?s=1756661468">
     <link rel="icon" type="image/svg+xml" href="/images/logos/guac-classic-logo.svg"/>
     <link rel="icon" type="image/png" href="/images/logos/guac-classic-logo-64.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
@@ -598,6 +598,120 @@ latest would give you an updated image.</p>
 
 <p>No. We routinely check for known vulnerabilities in AngularJS and manually
 verify that Guacamole is not impacted by each.</p>
+
+<figure class="expandable-figure" aria-labelledby="table-of-vulnerabilities-and-corresponding-analyses">
+    
+    <input class="expandable-figure-state" id="_expandable-figure-toggle-" type="checkbox" />
+    <label class="expandable-figure-toggle" id="table-of-vulnerabilities-and-corresponding-analyses" for="_expandable-figure-toggle-">Table of vulnerabilities and corresponding analyses</label>
+    <div class="expandable-figure-content">
+        
+<table>
+    <thead>
+        <tr>
+            <th>CVE ID</th>
+            <th>Analysis</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        
+            <tr>
+                <td>
+                    <a id="CVE-2022-25844" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2022-25844" title="Regular Expression Denial of Service (ReDoS)">CVE-2022-25844</a>
+                </td>
+                <td><p>This is a potential regular expression denial of service in AngularJS’ handling
+of locale rules. This cannot affect Guacamole, which does not construct locale
+rules with untrusted data.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2022-25869" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2022-25869" title="Angular (deprecated package) Cross-site Scripting">CVE-2022-25869</a>
+                </td>
+                <td><p>This vulnerability is specific to Internet Explorer and its potentially
+insecure caching of <code class="language-plaintext highlighter-rouge">&lt;textarea&gt;</code> element contents. This cannot affect
+Guacamole, which does not load <code class="language-plaintext highlighter-rouge">&lt;textarea&gt;</code> elements in a way that Internet
+Explorer is capable of caching.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2023-26116" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2023-26116" title="angular vulnerable to regular expression denial of service via the angular.copy() utility">CVE-2023-26116</a>
+                </td>
+                <td><p>This is a potential regular expression denial of service in AngularJS’
+<code class="language-plaintext highlighter-rouge">angular.copy()</code> utility function. This cannot affect Guacamole, which does not
+pass untrusted data to this function.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2023-26117" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2023-26117" title="angular vulnerable to regular expression denial of service via the $resource service">CVE-2023-26117</a>
+                </td>
+                <td><p>This is a potential regular expression denial of service in AngularJS’
+<code class="language-plaintext highlighter-rouge">$resource</code> service. This cannot affect Guacamole, which does not make use of
+the <code class="language-plaintext highlighter-rouge">$resource</code> service, let alone pass untrusted data to it.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2023-26118" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2023-26118" title="angular vulnerable to regular expression denial of service via the &lt;input type=&quot;url&quot;&gt; element">CVE-2023-26118</a>
+                </td>
+                <td><p>This is a potential regular expression denial of service in AngularJS’ handling
+of <code class="language-plaintext highlighter-rouge">&lt;input type="url"&gt;</code> elements. This cannot affect Guacamole, which does not
+use these elements.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2024-21490" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2024-21490" title="angular vulnerable to super-linear runtime due to backtracking">CVE-2024-21490</a>
+                </td>
+                <td><p>This is a potential regular expression denial of service in AngularJS’
+<code class="language-plaintext highlighter-rouge">ng-srcset</code> directive. This cannot affect Guacamole which does not use this
+directive, let alone pass untrusted data to it.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2024-8372" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2024-8372" title="AngularJS improper sanitization in &#39;srcset&#39; attribute">CVE-2024-8372</a>
+                </td>
+                <td><p>This is a potential bypass of AngularJS’ image source restriction capabilities
+specific to the <code class="language-plaintext highlighter-rouge">srcset</code> attribute. This cannot affect Guacamole, which does
+not rely on AngularJS to restrict image sources.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2024-8373" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2024-8373" title="AngularJS improper sanitization in &#39;&lt;source&gt;&#39; element">CVE-2024-8373</a>
+                </td>
+                <td><p>This is a potential bypass of AngularJS’ image source restriction capabilities
+specific to the <code class="language-plaintext highlighter-rouge">srcset</code> attribute of <code class="language-plaintext highlighter-rouge">&lt;source&gt;</code> elements. This cannot affect
+Guacamole, which does not rely on AngularJS to restrict image sources.</p>
+</td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <a id="CVE-2025-0716" target="_blank" href="https://www.cve.org/CVERecord?id=CVE-2025-0716" title="AngularJS improper sanitization in SVG &#39;&lt;image&gt;&#39; element">CVE-2025-0716</a>
+                </td>
+                <td><p>This is a potential bypass of AngularJS’ image source restriction capabilities
+specific to the <code class="language-plaintext highlighter-rouge">href</code> and <code class="language-plaintext highlighter-rouge">xlink:href</code> attributes of <code class="language-plaintext highlighter-rouge">&lt;image&gt;</code> tags within SVG
+content. This cannot affect Guacamole, which does not rely on AngularJS to
+restrict image sources.</p>
+</td>
+            </tr>
+        
+    </tbody>
+</table>
+
+    </div>
+</figure>
 
 <p><strong>If you believe a new vulnerability in AngularJS may require specific
 remediation within Guacamole, please reach out to us by sending an email to
