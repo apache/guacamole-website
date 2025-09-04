@@ -17,6 +17,10 @@
  * under the License.
  */
 
+@use 'sass:color';
+@use 'colors';
+@use 'globals';
+
 ul.releases {
     display: table;
     margin: 0;
@@ -37,12 +41,12 @@ ul.releases li > a[href] {
 ul.releases li > a[href] .release-date,
 ul.releases li > a[href] .release-summary {
     font-weight: normal;
-    color: black;
+    color: colors.$text-color;
     padding-left: 0.75em;
 }
 
 ul.releases li > a[href]:hover {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 5px color.change(colors.$text-color, $alpha: 0.5);
     z-index: 1;
 }
 
@@ -64,7 +68,7 @@ ul.releases li .release-summary {
 
 ul.releases li > a[href]:hover .release-tag,
 ul.releases li > a[href]:hover .release-summary {
-    border-color: black;
+    border-color: colors.$text-color;
 }
 
 ul.releases li .release-date {
@@ -78,7 +82,7 @@ ul.releases li .release-tag {
     font-size: 1.5em;
     text-align: right;
     white-space: nowrap;
-    background: #eaeaea;
+    background: globals.lightdark(#eaeaea, #282828);
     position: relative;
     border-right: none;
 }
@@ -90,7 +94,7 @@ ul.releases li .release-tag .release-version {
 ul.releases li .release-tag:after {
     display: block;
     content: ' ';
-    background: black;
+    background: colors.$text-color;
     width: 11px;
     height: 11px;
     border-radius: 11px;
@@ -103,7 +107,7 @@ ul.releases li .release-tag:after {
 ul.releases li .release-tag:before {
     display: block;
     content: ' ';
-    background: black;
+    background: colors.$text-color;
     width: 3px;
     position: absolute;
     top: -1px;
@@ -113,7 +117,7 @@ ul.releases li .release-tag:before {
 
 ul.releases li .release-section {
     display: table-cell;
-    border-right: 3px dotted black;
+    border-right: 3px dotted colors.$text-color;
     height: 3em;
     vertical-align: middle;
     text-align: center;
@@ -128,8 +132,8 @@ ul.releases li .release-section-description {
 }
 
 ul.releases li.current .release-tag {
-    background: #dfffdf;
-    background-image: url('/images/releases/current-release-star.svg');
+    background: globals.lightdark(#dfffdf, #1d401d);
+    background-image: url('/images/releases/current-release-star-#{globals.$mode}.svg');
     background-position: 16px center;
     background-repeat: no-repeat;
     background-size: 32px;

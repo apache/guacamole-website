@@ -20,7 +20,7 @@
 @use 'colors';
 
 div#header {
-    color: white;
+    color: colors.$header-text-color;
     background: colors.$header-background-color;
     display: table;
     width: 100%;

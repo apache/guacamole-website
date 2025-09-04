@@ -17,6 +17,8 @@
  * under the License.
  */
 
+@use 'globals';
+
 ul.features {
     list-style: none;
 }
@@ -46,23 +48,23 @@ ul.features li::before {
 }
 
 ul.features li.apache::before {
-    background-image: url('/images/home/feature-open-source.svg');
+    background-image: url('/images/home/feature-open-source-#{globals.$mode}.svg');
 }
 
 ul.features li.html5::before {
-    background-image: url('/images/home/feature-access-anywhere.svg');
+    background-image: url('/images/home/feature-access-anywhere-#{globals.$mode}.svg');
 }
 
 ul.features li.cloud-desktop::before {
-    background-image: url('/images/home/feature-cloud-desktop.svg');
+    background-image: url('/images/home/feature-cloud-desktop-#{globals.$mode}.svg');
 }
 
 ul.features li.documented-api::before {
-    background-image: url('/images/home/feature-well-documented.svg');
+    background-image: url('/images/home/feature-well-documented-#{globals.$mode}.svg');
 }
 
 ul.features li.commercially-supported::before {
-    background-image: url('/images/home/feature-supported.svg');
+    background-image: url('/images/home/feature-supported-#{globals.$mode}.svg');
 }
 
 ul.features li h2 {
@@ -107,7 +109,7 @@ ul.features li h2 {
     content: ' ';
 
     background: transparent;
-    background-image: url('/images/backgrounds/bowl-clip-bottom.svg');
+    background-image: url('/images/backgrounds/bowl-clip-bottom-#{globals.$mode}.svg');
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: bottom;
@@ -151,11 +153,10 @@ body.home .fullwidth-content:before {
 
     display: block;
     content: ' ';
-
-    background: #e3f6ff;
+    background: globals.lightdark(#e3f6ff, #141928);
     background-image:
-        url('/images/backgrounds/bowl-clip-top.svg'),
-        url('/images/backgrounds/bowl-clip-bottom.svg');
+        url('/images/backgrounds/bowl-clip-top-#{globals.$mode}.svg'),
+        url('/images/backgrounds/bowl-clip-bottom-#{globals.$mode}.svg');
     background-repeat: no-repeat;
     background-size: 200%;
     background-position: center top -5em, bottom;

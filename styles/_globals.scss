@@ -17,32 +17,10 @@
  * under the License.
  */
 
-@use 'colors';
-@use 'globals';
+/* Light/dark mode. See: _main-common.css */
+$mode: 'light' !default;
 
-div#links {
-    float: right;
-    background: globals.lightdark(#FFFFFA, #282828);
-    margin: 0 2em;
-    width: auto;
-    padding: 1em;
-    border-left: 3px solid colors.$text-color;
-}
-
-div#links h2 {
-    margin-top: 0;
-    font-size: 1.25em;
-    border: none;
-    background: transparent;
-    margin-bottom: 0;
-    font-weight: bold;
-}
-
-div#links ul {
-    margin: 0;
-}
-
-div#links ul li a[href] {
-    font-weight: normal;
+@function lightdark($light, $dark) {
+  @return if($mode == 'light', $light, $dark);
 }
 

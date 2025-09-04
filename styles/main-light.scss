@@ -23,53 +23,5 @@
  * under the License.
  */
 
-/*
- * Fonts shared across website.
- */
-
-@use '_font-inconsolata.css';
-@use '_font-inter.css';
-@use '_font-rubik.css';
-
-/*
- * Base typography and elements with common style, independent of anything
- * page-specific.
- */
-
-@use '_base.scss';
-@use '_callouts.scss';
-@use '_expandable-figure.scss';
-@use '_footer.scss';
-@use '_header.scss';
-@use '_headings.scss';
-@use '_toc.scss';
-
-/*
- * Styles specific to the home page, such as the demo video, large "hook"
- * section, and feature list.
- */
-@use '_home.scss';
-
-/*
- * Styles specific to the support page.
- */
-
-@use '_company-list.scss';
-@use '_mailing-list-list.scss';
-
-/*
- * Styles specific to the release archives and individual releases.
- */
-
-@use '_release-annotations.scss';
-@use '_release-downloads.scss';
-@use '_release-links.scss';
-@use '_release-list.scss';
-@use '_release-media.scss';
-
-/*
- * Styles specific to the security page.
- */
-
-@use '_cve-list.scss';
+@use '_main-common.scss' with ($mode: 'light');
 

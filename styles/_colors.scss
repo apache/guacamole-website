@@ -17,19 +17,28 @@
  * under the License.
  */
 
+@use 'globals';
+
 /*
  * Colors for general typography.
  */
 
-$text-color: black;
-$background-color: white;
-$link-text-color: #12551f;
+$light-text-color: white;
+$dark-text-color: black;
+
+$light-link-color: #99e9a9;
+$dark-link-color: #12551f;
+
+$text-color: globals.lightdark($dark-text-color, $light-text-color);
+$background-color: globals.lightdark(white, black);
+$link-text-color: globals.lightdark($dark-link-color, $light-link-color);
 
 /*
  * Header section (common to all pages).
  */
 
 $header-background-color: #102510;
+$header-text-color: white;
 
 /*
  * Footer section (common to all pages).
@@ -44,6 +53,6 @@ $footer-link-text-color: $footer-text-color;
  * similar header).
  */
 
-$note-heading-background-color: #87dc8d;
-$note-background-color: #e1ffe3;
+$note-heading-background-color: globals.lightdark(#87dc8d, #304d32);
+$note-background-color: globals.lightdark(#e1ffe3, #292f29);
 

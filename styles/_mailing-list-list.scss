@@ -17,12 +17,14 @@
  * under the License.
  */
 
+@use 'colors';
+
 .mailing-list-title {
     margin-bottom: 0;
 }
 
 p.mailing-list-archive a[href] {
-    border: 1px solid #12551f;
+    border: 1px solid colors.$link-text-color;
     text-decoration: none;
     border-radius: 3px;
     padding: 0.25em 0.5em;
