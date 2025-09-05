@@ -17,6 +17,9 @@
  * under the License.
  */
 
+@use 'colors';
+@use 'globals';
+
 .release-downloads .filename {
     font-family: 'Inconsolata', monospace;
 }
@@ -25,8 +28,12 @@
     display: inline-block;
     font-size: 0.75em;
     padding: 0.25em 0.5em;
-    border: 1px solid black;
+    border: 1px solid colors.$text-color;
     border-radius: 3px;
-    background: #d1e9d9;
+    background: globals.lightdark(#d1e9d9, #3b423d);
+}
+
+.release-downloads tr:nth-child(even) {
+    background: globals.lightdark(#f9f9f9, #161616);
 }
 

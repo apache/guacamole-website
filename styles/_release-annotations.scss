@@ -17,10 +17,13 @@
  * under the License.
  */
 
+@use 'colors';
+
 #release-notes li.bug:before {
     content: 'Bug';
     text-transform: uppercase;
     background: #ffa5a5;
+    color: colors.$dark-text-color;
     padding: 0.25em 0.5em;
     margin-right: 0.25em;
     border-radius: 3px;

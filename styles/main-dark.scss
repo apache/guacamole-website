@@ -1,4 +1,10 @@
-/*
+---
+# YAML front matter is required for top-level processing of SCSS files by
+# Jekyll, even if empty. The same is not required for SCSS files that are
+# manually imported with "@use".
+---
+
+/*!
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -17,32 +23,5 @@
  * under the License.
  */
 
-@use 'colors';
-@use 'globals';
-
-div#links {
-    float: right;
-    background: globals.lightdark(#FFFFFA, #282828);
-    margin: 0 2em;
-    width: auto;
-    padding: 1em;
-    border-left: 3px solid colors.$text-color;
-}
-
-div#links h2 {
-    margin-top: 0;
-    font-size: 1.25em;
-    border: none;
-    background: transparent;
-    margin-bottom: 0;
-    font-weight: bold;
-}
-
-div#links ul {
-    margin: 0;
-}
-
-div#links ul li a[href] {
-    font-weight: normal;
-}
+@use '_main-common.scss' with ($mode: 'dark');
 
