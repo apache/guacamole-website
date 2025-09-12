@@ -100,7 +100,11 @@ ul#navigation {
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-#navigation a.apache,
+#navigation a img {
+    height: 2.75em;
+    vertical-align: middle;
+}
+
 #navigation a.download,
 #navigation a.github {
     padding-left: 2em;
@@ -109,12 +113,6 @@ ul#navigation {
     background-position: 0.5em center;
     background-size: 1em;
     background-repeat: no-repeat;
-}
-
-#navigation a.apache {
-    background-image: url('/images/logos/asf-feather.svg');
-    padding-left: 1.5em;
-    background-size: 0.7em;
 }
 
 #navigation li.dropdown .dropdown-menu {
