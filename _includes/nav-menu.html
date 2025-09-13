@@ -8,7 +8,13 @@
                     <a href="{{ menu_page.location }}"
                         {% if menu_page.menu-class %}
                             class="{{ menu_page.menu-class }}"
-                            {% endif %}>{{ menu_page.menu-title }}</a>
+                        {% endif %}>
+                        {% if menu_page.menu-image %}
+                            <img src="{{ menu_page.menu-image }}" alt="{{ menu_page.menu-title }}">
+                        {% else %}
+                            {{ menu_page.menu-title }}
+                        {% endif %}
+                    </a>
                 </li>
             {% else %}
                 <li class="dropdown">
@@ -16,8 +22,13 @@
                                           | split: '.'
                                           | pop
                                           | join: '.' %}
-                    <a class="dropdown-toggle {{ menu_page.menu-class }}"
-                       href="#">{{ menu_page.menu-title }}</a>
+                    <a class="dropdown-toggle {{ menu_page.menu-class }}" href="#">
+                        {% if menu_page.menu-image %}
+                            <img src="{{ menu_page.menu-image }}" alt="{{ menu_page.menu-title }}">
+                        {% else %}
+                            {{ menu_page.menu-title }}
+                        {% endif %}
+                    </a>
                     <ul class="dropdown-menu">
                         {% include nav-menu.html path=submenu %}
                     </ul>
