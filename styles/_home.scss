@@ -249,4 +249,26 @@ a[href].latest-release:hover .action {
     .hook .readable-content .description {
         margin: 0;
     }
+
+    ul.features{
+        padding-top: 2em;
+    }
+
+    ul.features li{
+        padding-left: 0;
+    }
+
+    ul.features li::before {
+        position: static;
+        margin: 0;
+        display: block;
+    }
+
+    ul.features li h2 {
+        margin:0;
+        font-size: 1.8em;
+    }
+      ul.features li p {
+        margin-bottom: 3.5em;
+    }
 }
