@@ -22,7 +22,7 @@ github:
   description: >-
     The source and content of the public website of the Apache Guacamole
     project.
- 
+
   homepage: https://guacamole.apache.org/
 
   # Disable GitHub features we don't use
@@ -37,8 +37,6 @@ github:
 
   # Automatically link/update JIRA when referenced
   autolink_jira: GUACAMOLE
-  notifications:
-    jira_options: link label
 
   # Require merge commits for all PR merges
   enabled_merge_buttons:
@@ -50,3 +48,6 @@ github:
   # Disallow force push to the primary development branches
   protected_branches:
     main: {}
+
+notifications:
+  jira_options: link label
