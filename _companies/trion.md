@@ -1,7 +1,7 @@
 ---
 title: trion development GmbH
 logo: /images/companies/trion.png
-location: https://www.trion.de/beratung/apache-guacamole
+location: https://www.trion.de/beratung/apache-guacamole.html
 ---
 
 trion development GmbH is a software development and consulting company based in Münster, Germany.
